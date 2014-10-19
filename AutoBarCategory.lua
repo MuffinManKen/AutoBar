@@ -51,13 +51,10 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Disorienting Roar"] = AutoBar:LoggedGetSpellInfo(99)
 	spellNameList["Faerie Fire"], _, spellIconList["Faerie Fire"] = AutoBar:LoggedGetSpellInfo(770)
 	spellNameList["Mark of the Wild"], _, spellIconList["Mark of the Wild"] = AutoBar:LoggedGetSpellInfo(1126)
-	spellNameList["Nature's Grasp"] = AutoBar:LoggedGetSpellInfo(16689)
 	spellNameList["Ironbark"] = AutoBar:LoggedGetSpellInfo(102342)
-	spellNameList["Heart of the Wild"] = AutoBar:LoggedGetSpellInfo(108288)
 
 	--Hunter
-	spellNameList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
-	spellNameList["Aspect of the Hawk"], _, spellIconList["Aspect of the Hawk"] = AutoBar:LoggedGetSpellInfo(13165)
+	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
 	spellNameList["Aspect of the Pack"] = AutoBar:LoggedGetSpellInfo(13159)
 	spellNameList["Aspect of the Iron Hawk"] = AutoBar:LoggedGetSpellInfo(109260)
 	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
@@ -80,7 +77,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
 	spellNameList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
 	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
-	spellNameList["Conjure Mana Gem"] = AutoBar:LoggedGetSpellInfo(759)
 
 	--Monk
 	spellNameList["Legacy of the Emperor"] = AutoBar:LoggedGetSpellInfo(115921)
@@ -102,8 +98,6 @@ AutoBar.categoryValidateList = {}
 
 	--Priest
 	spellNameList["Fear Ward"] = AutoBar:LoggedGetSpellInfo(6346)
-	spellNameList["Inner Fire"] = AutoBar:LoggedGetSpellInfo(588)
-	spellNameList["Inner Will"] = AutoBar:LoggedGetSpellInfo(73413)
 	spellNameList["Power Word: Fortitude"] = AutoBar:LoggedGetSpellInfo(13864)
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
 	
@@ -111,8 +105,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
 	spellNameList["Deadly Poison"], _, spellIconList["Deadly Poison"] = AutoBar:LoggedGetSpellInfo(2823)
 	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
-	spellNameList["Crippling Poison"] = AutoBar:LoggedGetSpellInfo(3408)
-	spellNameList["Mind-numbing Poison"], _, spellIconList["Mind-numbing Poison"] = AutoBar:LoggedGetSpellInfo(5761)
+	spellNameList["Crippling Poison"], _, spellIconList["Crippling Poison"]  = AutoBar:LoggedGetSpellInfo(3408)
 	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
 
 	--Shaman
@@ -1263,17 +1256,11 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellNameList["Conjure Refreshment Table"],
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
---/script local name, rank, icon, cost = GetSpellInfo(43987); AutoBar:Print("AutoBarCustom.prototype:init GetSpellInfo(43987) name " .. tostring(name) .. " rank " .. tostring(rank) .. " icon " .. tostring(icon) .. " cost " .. tostring(cost))
-	AutoBarCategoryList["Spell.Mage.Conjure Mana Stone"] = AutoBarSpells:new(
-			"Spell.Mage.Conjure Mana Stone", spellIconList["Conjure Mana Gem"], {
-			"MAGE", spellNameList["Conjure Mana Gem"],
-			})
 
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new(
-			"Spell.Aspect", spellIconList["Aspect of the Hawk"], {
+			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
 			"HUNTER", spellNameList["Aspect of the Cheetah"], --*
-			"HUNTER", spellNameList["Aspect of the Hawk"], --*
 			"HUNTER", spellNameList["Aspect of the Pack"], --*
 			"HUNTER", spellNameList["Aspect of the Iron Hawk"], --*
 			})
@@ -1285,8 +1272,7 @@ function AutoBarCategory:Initialize()
 			})
 
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new(
-			"Spell.Poison.Nonlethal", spellIconList["Mind-numbing Poison"], {
-			"ROGUE", spellNameList["Mind-numbing Poison"], --*
+			"Spell.Poison.Nonlethal", spellIconList["Crippling Poison"], {
 			"ROGUE", spellNameList["Crippling Poison"], --*
 			"ROGUE", spellNameList["Leeching Poison"], --*
 			})
@@ -1298,9 +1284,7 @@ function AutoBarCategory:Initialize()
 			"DEATHKNIGHT", spellNameList["Bone Shield"],
 			"DEATHKNIGHT", spellNameList["Horn of Winter"],
 			"DRUID", spellNameList["Mark of the Wild"],
-			"DRUID", spellNameList["Nature's Grasp"],
 			"DRUID", spellNameList["Ironbark"],
-			"DRUID", spellNameList["Heart of the Wild"],
 			"MAGE", spellNameList["Arcane Brilliance"],
 			"MAGE", spellNameList["Dalaran Brilliance"],
 			"MAGE", spellNameList["Ice Ward"],
@@ -1317,8 +1301,6 @@ function AutoBarCategory:Initialize()
 			"PALADIN", spellNameList["Hand of Sacrifice"],
 			"PALADIN", spellNameList["Hand of Salvation"],
 			"PRIEST", spellNameList["Fear Ward"],
-			"PRIEST", spellNameList["Inner Fire"],
-			"PRIEST", spellNameList["Inner Will"],
 			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
 			"WARLOCK", spellNameList["Dark Intent"],
@@ -1578,7 +1560,6 @@ function AutoBarCategory:Initialize2()
 			"ROGUE", spellNameList["Deadly Poison"],
 			"ROGUE", spellNameList["Wound Poison"],
 			"ROGUE", spellNameList["Crippling Poison"],
-			"ROGUE", spellNameList["Mind-numbing Poison"],
 			"ROGUE", spellNameList["Leeching Poison"],
 			"SHAMAN", spellNameList["Windfury Weapon"],
 			})

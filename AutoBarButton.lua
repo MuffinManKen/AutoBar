@@ -1188,7 +1188,6 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
-		self:AddCategory("Spell.Mage.Conjure Mana Stone")
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
 	end
@@ -2207,9 +2206,6 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Tempest Keep")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Blades Edge")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
-		if (AutoBar.CLASS == "MAGE") then
-			self:AddCategory("Consumable.Cooldown.Stone.Mana.Mana Stone")
-		end
 	end
 end
 
@@ -2371,9 +2367,6 @@ function AutoBarButtonCooldownStoneMana.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
-		if (AutoBar.CLASS == "MAGE") then
-			self:AddCategory("Consumable.Cooldown.Stone.Mana.Mana Stone")
-		end
 	end
 end
 
