@@ -1,0 +1,4 @@
+package-as: MuffinLibPTSets
+ignore:
+    - UpdateAutoBar.bat
+    - xcopy_ignore.txt

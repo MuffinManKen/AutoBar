@@ -1,0 +1,4 @@
+UpdateAutoBar.bat
+xcopy_ignore.txt
+.git
+.pkgmeta

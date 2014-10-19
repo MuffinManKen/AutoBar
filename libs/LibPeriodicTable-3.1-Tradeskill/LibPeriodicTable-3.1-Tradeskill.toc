@@ -1,0 +1,12 @@
+﻿## Interface: 50400
+## LoadOnDemand: 1
+## Title: Lib: PeriodicTable-3.1 [|cffeda55fTradeskill|r]
+## Notes: PeriodicTable data module.
+## Author: Nymbia
+## Version: 3.1
+## Dependencies: LibPeriodicTable-3.1
+## X-Category: Library
+## X-License: LGPL v2.1
+## X-PeriodicTable-3.1-Module: Tradeskill
+
+LibPeriodicTable-3.1-Tradeskill.lua
