@@ -49,7 +49,7 @@ AutoBar.categoryValidateList = {}
 	--Druid
 	spellNameList["Barkskin"] = AutoBar:LoggedGetSpellInfo(22812)
 	spellNameList["Disorienting Roar"] = AutoBar:LoggedGetSpellInfo(99)
-	spellNameList["Faerie Fire"] = AutoBar:LoggedGetSpellInfo(770)
+	spellNameList["Faerie Fire"], _, spellIconList["Faerie Fire"] = AutoBar:LoggedGetSpellInfo(770)
 	spellNameList["Mark of the Wild"], _, spellIconList["Mark of the Wild"] = AutoBar:LoggedGetSpellInfo(1126)
 	spellNameList["Nature's Grasp"] = AutoBar:LoggedGetSpellInfo(16689)
 	spellNameList["Ironbark"] = AutoBar:LoggedGetSpellInfo(102342)
@@ -114,7 +114,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Crippling Poison"] = AutoBar:LoggedGetSpellInfo(3408)
 	spellNameList["Mind-numbing Poison"], _, spellIconList["Mind-numbing Poison"] = AutoBar:LoggedGetSpellInfo(5761)
 	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
-	spellNameList["Paralytic Poison"] = AutoBar:LoggedGetSpellInfo(108215)
 
 	--Shaman
 	spellNameList["Earth Shield"] = AutoBar:LoggedGetSpellInfo(379)
@@ -125,10 +124,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Ancestral Swiftness"] = AutoBar:LoggedGetSpellInfo(16188)
 
 	--Warlock
-	spellNameList["Curse of Exhaustion"] = AutoBar:LoggedGetSpellInfo(18223)
-	spellNameList["Curse of Enfeeblement"], _, spellIconList["Curse of Enfeeblement"] = AutoBar:LoggedGetSpellInfo(109466)
-	spellNameList["Curse of the Elements"] = AutoBar:LoggedGetSpellInfo(1490)
-	spellNameList["Twilight Ward"] = AutoBar:LoggedGetSpellInfo(6229)
 	spellNameList["Sacrificial Pact"] = AutoBar:LoggedGetSpellInfo(108416)
 	spellNameList["Dark Bargain"] = AutoBar:LoggedGetSpellInfo(110913)
 	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
@@ -146,7 +141,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Demoralizing Shout"] = AutoBar:LoggedGetSpellInfo(1160)
 	spellNameList["Battle Shout"] = AutoBar:LoggedGetSpellInfo(6673)
 	spellNameList["Commanding Shout"] = AutoBar:LoggedGetSpellInfo(469)
-	spellNameList["Berserker Stance"], _, spellIconList["Berserker Stance"] = AutoBar:LoggedGetSpellInfo(2458)
 	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(71)
 	spellNameList["Battle Stance"] = AutoBar:LoggedGetSpellInfo(2457)
 
@@ -1295,7 +1289,6 @@ function AutoBarCategory:Initialize()
 			"ROGUE", spellNameList["Mind-numbing Poison"], --*
 			"ROGUE", spellNameList["Crippling Poison"], --*
 			"ROGUE", spellNameList["Leeching Poison"], --*
-			"ROGUE", spellNameList["Paralytic Poison"], --*
 			})
 
 
@@ -1343,7 +1336,7 @@ function AutoBarCategory:Initialize()
 	local spellBeastLore = AutoBar:LoggedGetSpellInfo(1462)
 	local spellDismissPet = AutoBar:LoggedGetSpellInfo(2641)
 	local spellRevivePet = AutoBar:LoggedGetSpellInfo(982)
-	local spellCallPet1 = AutoBar:LoggedGetSpellInfo(883)
+	local spellCallPet1, _, spellCallPet1Icon = AutoBar:LoggedGetSpellInfo(883)
 	local spellCallPet2 = AutoBar:LoggedGetSpellInfo(83242)
 	local spellCallPet3 = AutoBar:LoggedGetSpellInfo(83243)
 	local spellCallPet4 = AutoBar:LoggedGetSpellInfo(83244)
@@ -1357,8 +1350,7 @@ function AutoBarCategory:Initialize()
 	local spellFireElementalTotem = AutoBar:LoggedGetSpellInfo(2894)
 
 	--Druid
-	local spellForceOfNature, spellForceOfNatureIcon
-	spellForceOfNature, _, spellForceOfNatureIcon = AutoBar:LoggedGetSpellInfo(106737)
+
 
 	--Mage
 	local spellSummonWaterElemental = AutoBar:LoggedGetSpellInfo(31687)
@@ -1380,11 +1372,10 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new(
-			"Spell.Class.Pet", spellForceOfNatureIcon, {
+			"Spell.Class.Pet", spellCallPet1Icon, {
 			"DEATHKNIGHT", spellRuneWeapon,
 			"DEATHKNIGHT", spellRaiseDead,
 			"DEATHKNIGHT", spellSummonGargoyle,			
-			"DRUID", spellForceOfNature,
 			"HUNTER", spellCallPet1, 
 			"HUNTER", spellCallPet2, 
 			"HUNTER", spellCallPet3, 
@@ -1502,7 +1493,6 @@ function AutoBarCategory:Initialize()
 			"SHAMAN", spellNameList["Earth Shield"], spellNameList["Earth Shield"],
 			"SHAMAN", spellNameList["Lightning Shield"], spellNameList["Lightning Shield"],
 			"SHAMAN", spellNameList["Water Shield"], spellNameList["Water Shield"],
-			"WARLOCK", spellNameList["Twilight Ward"], spellNameList["Twilight Ward"],
 			"WARLOCK", spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
 			"WARLOCK", spellNameList["Dark Bargain"], spellNameList["Dark Bargain"],
 			"WARLOCK", spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
@@ -1516,9 +1506,8 @@ end
 function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new(
 			"Spell.Stance", spellIconList["Berserker Stance"], nil, {
-			"WARRIOR", spellNameList["Defensive Stance"], spellNameList["Berserker Stance"],
+			"WARRIOR", spellNameList["Defensive Stance"], spellNameList["Battle Stance"],
 			"WARRIOR", spellNameList["Battle Stance"], spellNameList["Defensive Stance"],
-			"WARRIOR", spellNameList["Berserker Stance"], spellNameList["Defensive Stance"],
 			})
 
 
@@ -1553,14 +1542,12 @@ function AutoBarCategory:Initialize2()
 
 	spellNameList["Grounding Totem"], _, spellIconList["Grounding Totem"] = AutoBar:LoggedGetSpellInfo(8177)
 	local spellCapacitorTotem = AutoBar:LoggedGetSpellInfo(108269)
-	local spellStormLashTotem = AutoBar:LoggedGetSpellInfo(120668)
 	local spellSpiritLinkTotem = AutoBar:LoggedGetSpellInfo(98008)
 	local spellWindwalkTotem = AutoBar:LoggedGetSpellInfo(108273)
 	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new(
 			"Spell.Totem.Air", spellIconList["Grounding Totem"], {
 			"SHAMAN", spellNameList["Grounding Totem"], --*
 			"SHAMAN", spellCapacitorTotem, --*
-			"SHAMAN", spellStormLashTotem, --*
 			"SHAMAN", spellSpiritLinkTotem, --*
 			"SHAMAN", spellWindwalkTotem, --*
 			})
@@ -1576,21 +1563,15 @@ function AutoBarCategory:Initialize2()
 			"SHAMAN", spellSearingTotem, --*
 			})
 
-	local spellManaTideTotem = AutoBar:LoggedGetSpellInfo(16190)
 	local spellHealingStreamTotem, _,  spellHealingStreamTotemIcon = AutoBar:LoggedGetSpellInfo(5394)
 	local spellHealingTideTotem = AutoBar:LoggedGetSpellInfo(108280)
 	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new(
 			"Spell.Totem.Water", spellHealingStreamTotemIcon, {
 			"SHAMAN", spellHealingStreamTotem, --*
 			"SHAMAN", spellHealingTideTotem, --*
-			"SHAMAN", spellManaTideTotem, --*
 			})
 
 	spellNameList["Windfury Weapon"], _, spellIconList["Windfury Weapon"] = AutoBar:LoggedGetSpellInfo(8232)
-	spellNameList["Earthliving Weapon"] = AutoBar:LoggedGetSpellInfo(51730)
-	spellNameList["Flametongue Weapon"] = AutoBar:LoggedGetSpellInfo(8024)
-	spellNameList["Frostbrand Weapon"] = AutoBar:LoggedGetSpellInfo(8033)
-	spellNameList["Rockbiter Weapon"] = AutoBar:LoggedGetSpellInfo(8017)
 	
 	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new(
 			"Spell.Buff.Weapon", spellIconList["Windfury Weapon"], {
@@ -1599,12 +1580,7 @@ function AutoBarCategory:Initialize2()
 			"ROGUE", spellNameList["Crippling Poison"],
 			"ROGUE", spellNameList["Mind-numbing Poison"],
 			"ROGUE", spellNameList["Leeching Poison"],
-			"ROGUE", spellNameList["Paralytic Poison"],
 			"SHAMAN", spellNameList["Windfury Weapon"],
-			"SHAMAN", spellNameList["Rockbiter Weapon"],
-			"SHAMAN", spellNameList["Frostbrand Weapon"],
-			"SHAMAN", spellNameList["Flametongue Weapon"],
-			"SHAMAN", spellNameList["Earthliving Weapon"],
 			})
 
 	spellNameList["First Aid"], _, spellIconList["First Aid"] = AutoBar:LoggedGetSpellInfo(27028)
@@ -1660,16 +1636,12 @@ function AutoBarCategory:Initialize2()
 			"Spell.Crafting", spellIconList["First Aid"], craftList)
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new(
-			"Spell.Debuff.Multiple", spellIconList["Curse of Enfeeblement"], {
+			"Spell.Debuff.Multiple", spellIconList["Faerie Fire"], {
 			"DRUID", spellNameList["Disorienting Roar"],
 			"DRUID", spellNameList["Faerie Fire"],
-			"WARLOCK", spellNameList["Curse of Exhaustion"],
-			"WARLOCK", spellNameList["Curse of Enfeeblement"],
-			"WARLOCK", spellNameList["Curse of the Elements"],
 			})
 
 	spellNameList["Hunter's Mark"] = AutoBar:LoggedGetSpellInfo(1130)
-	spellNameList["Widow Venom"] = AutoBar:LoggedGetSpellInfo(82654)
 	spellNameList["Wyvern Sting"] = AutoBar:LoggedGetSpellInfo(19386)
 	spellNameList["Silence"] = AutoBar:LoggedGetSpellInfo(15487)
 	spellNameList["Blind"] = AutoBar:LoggedGetSpellInfo(2094)
@@ -1677,7 +1649,6 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new(
 			"Spell.Debuff.Single", spellIconList["Slow"], {
 			"HUNTER", spellNameList["Hunter's Mark"], --*
-			"HUNTER", spellNameList["Widow Venom"], --*
 			"HUNTER", spellNameList["Wyvern Sting"], --*
 			})
 

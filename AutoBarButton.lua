@@ -30,7 +30,6 @@ AutoBarButton.dirtyButton = {}
 spellNameList["Lay on Hands"], _, spellIconList["Lay on Hands"] = AutoBar:LoggedGetSpellInfo(633)
 spellNameList["Feign Death"], _, spellIconList["Feign Death"] = AutoBar:LoggedGetSpellInfo(5384)
 spellNameList["Disengage"], _, spellIconList["Disengage"] = AutoBar:LoggedGetSpellInfo(781)
-spellNameList["Healing Wave"], _, spellIconList["Healing Wave"] = AutoBar:LoggedGetSpellInfo(331)
 spellNameList["Ice Block"], _, spellIconList["Ice Block"] = AutoBar:LoggedGetSpellInfo(27619)
 spellNameList["Last Stand"], _, spellIconList["Last Stand"] = AutoBar:LoggedGetSpellInfo(12975)
 spellNameList["Desperate Prayer"], _, spellIconList["Desperate Prayer"] = AutoBar:LoggedGetSpellInfo(19236)
@@ -46,9 +45,9 @@ spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellIn
 spellNameList["Wild Charge"], _, spellIconList["Wild Charge"] = AutoBar:LoggedGetSpellInfo(102401)
 spellNameList["Rune Tap"], _, spellIconList["Rune Tap"] = AutoBar:LoggedGetSpellInfo(48982)
 spellNameList["Bear Form"], _, spellIconList["Bear Form"] = AutoBar:LoggedGetSpellInfo(5487)
+spellNameList["Mangle"], _, spellIconList["Mangle"] = AutoBar:LoggedGetSpellInfo(33917)
 spellNameList["Cat Form"], _, spellIconList["Cat Form"] = AutoBar:LoggedGetSpellInfo(768)
 spellNameList["Ghost Wolf"], _, spellIconList["Ghost Wolf"] = AutoBar:LoggedGetSpellInfo(2645)
-spellNameList["Mangle (Cat)"], _, spellIconList["Mangle (Cat)"] = AutoBar:LoggedGetSpellInfo(33876)
 spellNameList["Shadowstep"], _, spellIconList["Shadowstep"] = AutoBar:LoggedGetSpellInfo(36554)
 spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100)
 spellNameList["Heroic Leap"], _, spellIconList["Heroic Leap"]  = AutoBar:LoggedGetSpellInfo(6544)
@@ -1413,23 +1412,23 @@ function AutoBarButtonPowerShift.prototype:Refresh(parentBar, buttonDB)
 	if (AutoBar.CLASS == "DRUID") then
 --[[
 /run local f="Cat Form";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelPlayerBuff(f)
-/cast [form] Mangle (Cat)
+/cast [form] Mangle
 /stopmacro [form]
 /cast !Cat Form
 --]]
 		ShapeshiftRefresh()
 		local macroTexture
 
-		if (GetSpellInfo(spellNameList["Cat Form"]) and GetSpellInfo(spellNameList["Mangle (Cat)"])) then
+		if (GetSpellInfo(spellNameList["Cat Form"]) and GetSpellInfo(spellNameList["Mangle"])) then
 			concatList[1] = "/run local f=\""
 			concatList[2] = spellNameList["Cat Form"]
 			concatList[3] = "\";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelPlayerBuff(f)\n/cast [form] "
-			concatList[4] = spellNameList["Mangle (Cat)"]
+			concatList[4] = spellNameList["Mangle"]
 			concatList[5] = "\n/stopmacro [form]\n"
 			concatList[6] = "/cast !"
 			concatList[7] = spellNameList["Cat Form"]
 			concatList[8] = "\n"
-			macroTexture = spellIconList["Mangle (Cat)"]
+			macroTexture = spellIconList["Mangle"]
 			self.macroActive = true
 
 			local macroText = table.concat(concatList)
@@ -1713,16 +1712,6 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 			concatList[index + 1] = spellNameList["Vanish"]
 
 			macroTexture = spellIconList["Vanish"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "SHAMAN") then
-		if (GetSpellInfo(spellNameList["Ancestral Swiftness"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Ancestral Swiftness"]
-			concatList[index + 2] = "\n/cast "
-			concatList[index + 3] = spellNameList["Healing Wave"]
-
-			macroTexture = spellIconList["Healing Wave"]
 			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "WARRIOR") then
