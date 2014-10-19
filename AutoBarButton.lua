@@ -2093,16 +2093,16 @@ function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 --		end
 --	end                             
 
-	local _, pet_count = C_PetJournal.GetNumPets()
-	local index, pet_id, owned, favorite, description, icon
-	for index = 1, count, 1 do
-		local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
-		pet_id = pet_data[1] 
-		owned = pet_data[3]
-		favorite = pet_data[6]
-		icon = pet_data[9]
-		description = pet_data[13]
-	end
+--	local _, pet_count = C_PetJournal.GetNumPets()
+--	local index, pet_id, owned, favorite, description, icon
+--	for index = 1, pet_count, 1 do
+--		local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
+--		pet_id = pet_data[1] 
+--		owned = pet_data[3]
+--		favorite = pet_data[6]
+--		icon = pet_data[9]
+--		description = pet_data[13]
+--	end
 	
 end
 
