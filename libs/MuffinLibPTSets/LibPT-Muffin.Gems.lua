@@ -1,5 +1,5 @@
 --
--- Muffin.Gems
+-- Muffin.SunSongRanch
 --
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
 LibStub("LibPeriodicTable-3.1"):AddData("Muffin.Gems", "Rev: 1", {
@@ -18,7 +18,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("Muffin.Gems", "Rev: 1", {
 	["Muffin.Gems.Meta.Raw"] = "25867,25868,41266,41334,52303,76132",
 	["Muffin.Gems.Meta.Cut"] = "25890,25893,25894,25895,25896,25897,25898,25899,25901,28556,28557,32409,32410,32640,32641,34220,35501,35503,41285,41307,41333,41335,41339,41375,41376,41377,41378,41379,41380,41381,41382,41385,41389,41395,41396,41397,41398,41400,41401,44076,44078,44081,44082,44084,44087,44088,44089,52289,52291,52292,52293,52294,52295,52296,52297,52298,52299,52300,52301,52302,68778,68779,68780,76879,76884,76885,76886,76887,76888,76890,76891,76892,76893,76894,76895,76896,76897,95344,95345,95346,95347,95348",
 	["Muffin.Gems.Prismatic.Raw"] = "42225,45054,52196,76734",
-	["Muffin.Gems.Prismatic.Cut"] = "22459,22460,34142,34143,42701,42702,49110",
+	["Muffin.Gems.Prismatic.Cut"] = "22459,22460,34142,34143,42701,42702,49110,115803,115804,115805,115806,115807,115808,115809,115811,115812,115813,115814,115815",
 	["Muffin.Gems.Raw"] = "m,Muffin.Gems.Blue.Raw,Muffin.Gems.Red.Raw,Muffin.Gems.Green.Raw,Muffin.Gems.Yellow.Raw,Muffin.Gems.Orange.Raw,Muffin.Gems.Purple.Raw,Muffin.Gems.Meta.Raw,Muffin.Gems.Prismatic.Raw",
 	["Muffin.Gems.Cut"] = "m,Muffin.Gems.Blue.Cut,Muffin.Gems.Red.Cut,Muffin.Gems.Green.Cut,Muffin.Gems.Yellow.Cut,Muffin.Gems.Orange.Cut,Muffin.Gems.Purple.Cut,Muffin.Gems.Meta.Cut,Muffin.Gems.Prismatic.Cut",
 
