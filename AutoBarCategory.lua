@@ -727,9 +727,9 @@ function AutoBarCategory:Initialize()
 			"Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["AutoBar.Food.Health.Basic"] = AutoBarItems:new(
-			"AutoBar.Food.Health.Basic", "INV_Misc_Food_23", "AutoBar.Food.Health.Basic")
-	AutoBarCategoryList["AutoBar.Food.Health.Basic"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Food.Health.Basic"] = AutoBarItems:new(
+			"Muffin.Food.Health.Basic", "INV_Misc_Food_23", "AutoBar.Food.Health.Basic")
+	AutoBarCategoryList["Muffin.Food.Health.Basic"]:SetNonCombat(true)
 
 
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"] = AutoBarItems:new(
@@ -750,17 +750,17 @@ function AutoBarCategory:Initialize()
 			"Consumable.Food.Edible.Combo.Non-Conjured", "INV_Misc_Food_95_Grainbread", "Consumable.Food.Edible.Combo.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["AutoBar.Food.Combo.Basic"] = AutoBarItems:new(
-			"AutoBar.Food.Combo.Basic", "INV_Misc_Food_95_Grainbread", "AutoBar.Food.Combo.Basic")
-	AutoBarCategoryList["AutoBar.Food.Combo.Basic"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Food.Combo.Basic"] = AutoBarItems:new(
+			"Muffin.Food.Combo.Basic", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Basic")
+	AutoBarCategoryList["Muffin.Food.Combo.Basic"]:SetNonCombat(true)
 
-	AutoBarCategoryList["AutoBar.Food.Health.Buff"] = AutoBarItems:new(
-			"AutoBar.Food.Health.Buff", "INV_Misc_Food_95_Grainbread", "AutoBar.Food.Health.Buff")
-	AutoBarCategoryList["AutoBar.Food.Health.Buff"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Food.Health.Buff"] = AutoBarItems:new(
+			"Muffin.Food.Health.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Health.Buff")
+	AutoBarCategoryList["Muffin.Food.Health.Buff"]:SetNonCombat(true)
 
-	AutoBarCategoryList["AutoBar.Food.Mana.Buff"] = AutoBarItems:new(
-			"AutoBar.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "AutoBar.Food.Mana.Buff")
-	AutoBarCategoryList["AutoBar.Food.Mana.Buff"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Food.Mana.Buff"] = AutoBarItems:new(
+			"Muffin.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Mana.Buff")
+	AutoBarCategoryList["Muffin.Food.Mana.Buff"]:SetNonCombat(true)
 
 
 --	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
@@ -1063,9 +1063,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Water.Basic"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureRefreshment,}))
 
-	AutoBarCategoryList["AutoBar.Food.Mana.Basic"] = AutoBarItems:new(
-			"AutoBar.Food.Mana.Basic", "INV_Drink_10", "AutoBar.Food.Mana.Basic")
-	AutoBarCategoryList["AutoBar.Food.Mana.Basic"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Food.Mana.Basic"] = AutoBarItems:new(
+			"Muffin.Food.Mana.Basic", "INV_Drink_10", "Muffin.Food.Mana.Basic")
+	AutoBarCategoryList["Muffin.Food.Mana.Basic"]:SetNonCombat(true)
 
 
 	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new(

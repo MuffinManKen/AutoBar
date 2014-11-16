@@ -1767,17 +1767,11 @@ function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFood.super.prototype.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
---AutoBar:Print("AutoBarButtonFood.prototype:init buttonDB.disableConjure " .. tostring(buttonDB.disableConjure))
 		self:AddCategory("Consumable.Food.Conjure")
 	end
-	self:AddCategory("AutoBar.Food.Health.Basic")
+	self:AddCategory("Muffin.Food.Health.Basic")
 	
-	--DEPRECATE
-	--self:AddCategory("AutoBar.Food.Combo.Basic")
-
 	self:AddCategory("Consumable.Food.Percent.Basic")
-	--self:AddCategory("Consumable.Food.Edible.Basic.Non-Conjured")
-	--self:AddCategory("Consumable.Food.Edible.Combo.Conjured")
 end
 
 local function SetDisableConjure(info, value)
@@ -1815,62 +1809,62 @@ AutoBar.Class["AutoBarButtonFoodBuff"] = AutoBarButtonFoodBuff
 function AutoBarButtonFoodBuff.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFoodBuff.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Consumable.Food.Buff.Stamina")
-	self:AddCategory("Consumable.Food.Buff.HP Regen")
-	self:AddCategory("Consumable.Food.Percent.Bonus")
+--	self:AddCategory("Consumable.Food.Buff.Stamina")
+--	self:AddCategory("Consumable.Food.Buff.HP Regen")
+--	self:AddCategory("Consumable.Food.Percent.Bonus")
 
-	self:AddCategory("AutoBar.Food.Health.Buff")
+	self:AddCategory("Muffin.Food.Health.Buff")
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "WARRIOR") then
-		self:AddCategory("Consumable.Food.Buff.Strength")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-		self:AddCategory("Consumable.Food.Buff.Dodge")
-	elseif (AutoBar.CLASS == "DRUID") then
-		self:AddCategory("Consumable.Food.Buff.Agility")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-		self:AddCategory("Consumable.Food.Buff.Dodge")
-		self:AddCategory("Consumable.Food.Buff.Healing")
-		self:AddCategory("Consumable.Food.Buff.Intellect")
-		self:AddCategory("Consumable.Food.Buff.Mana Regen")
-		self:AddCategory("Consumable.Food.Buff.Spell Damage")
-		self:AddCategory("Consumable.Food.Buff.Spirit")
-	elseif (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE") then
-		self:AddCategory("Consumable.Food.Buff.Agility")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-	elseif (AutoBar.CLASS == "MAGE"or AutoBar.CLASS == "WARLOCK") then
-		self:AddCategory("Consumable.Food.Buff.Intellect")
-		self:AddCategory("Consumable.Food.Buff.Mana Regen")
-		self:AddCategory("Consumable.Food.Buff.Spell Damage")
-		self:AddCategory("Consumable.Food.Buff.Spirit")
-	elseif (AutoBar.CLASS == "PALADIN") then
-		self:AddCategory("Consumable.Food.Buff.Strength")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-		self:AddCategory("Consumable.Food.Buff.Dodge")
-		self:AddCategory("Consumable.Food.Buff.Healing")
-		self:AddCategory("Consumable.Food.Buff.Intellect")
-		self:AddCategory("Consumable.Food.Buff.Mana Regen")
-		self:AddCategory("Consumable.Food.Buff.Spell Damage")
-		self:AddCategory("Consumable.Food.Buff.Spirit")
-	elseif (AutoBar.CLASS == "PRIEST") then
-		self:AddCategory("Consumable.Food.Buff.Intellect")
-		self:AddCategory("Consumable.Food.Buff.Mana Regen")
-		self:AddCategory("Consumable.Food.Buff.Spell Damage")
-		self:AddCategory("Consumable.Food.Buff.Spirit")
-		self:AddCategory("Consumable.Food.Buff.Healing")
-	elseif (AutoBar.CLASS == "ROGUE") then
-		self:AddCategory("Consumable.Food.Buff.Agility")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-	elseif (AutoBar.CLASS == "SHAMAN") then
-		self:AddCategory("Consumable.Food.Buff.Agility")
-		self:AddCategory("Consumable.Food.Buff.Attack Power")
-		self:AddCategory("Consumable.Food.Buff.Healing")
-		self:AddCategory("Consumable.Food.Buff.Intellect")
-		self:AddCategory("Consumable.Food.Buff.Mana Regen")
-		self:AddCategory("Consumable.Food.Buff.Spell Damage")
-		self:AddCategory("Consumable.Food.Buff.Spirit")
-	end
-
-	self:AddCategory("Consumable.Food.Buff.Other")
+--	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "WARRIOR") then
+--		self:AddCategory("Consumable.Food.Buff.Strength")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--		self:AddCategory("Consumable.Food.Buff.Dodge")
+--	elseif (AutoBar.CLASS == "DRUID") then
+--		self:AddCategory("Consumable.Food.Buff.Agility")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--		self:AddCategory("Consumable.Food.Buff.Dodge")
+--		self:AddCategory("Consumable.Food.Buff.Healing")
+--		self:AddCategory("Consumable.Food.Buff.Intellect")
+--		self:AddCategory("Consumable.Food.Buff.Mana Regen")
+--		self:AddCategory("Consumable.Food.Buff.Spell Damage")
+--		self:AddCategory("Consumable.Food.Buff.Spirit")
+--	elseif (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE") then
+--		self:AddCategory("Consumable.Food.Buff.Agility")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--	elseif (AutoBar.CLASS == "MAGE"or AutoBar.CLASS == "WARLOCK") then
+--		self:AddCategory("Consumable.Food.Buff.Intellect")
+--		self:AddCategory("Consumable.Food.Buff.Mana Regen")
+--		self:AddCategory("Consumable.Food.Buff.Spell Damage")
+--		self:AddCategory("Consumable.Food.Buff.Spirit")
+--	elseif (AutoBar.CLASS == "PALADIN") then
+--		self:AddCategory("Consumable.Food.Buff.Strength")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--		self:AddCategory("Consumable.Food.Buff.Dodge")
+--		self:AddCategory("Consumable.Food.Buff.Healing")
+--		self:AddCategory("Consumable.Food.Buff.Intellect")
+--		self:AddCategory("Consumable.Food.Buff.Mana Regen")
+--		self:AddCategory("Consumable.Food.Buff.Spell Damage")
+--		self:AddCategory("Consumable.Food.Buff.Spirit")
+--	elseif (AutoBar.CLASS == "PRIEST") then
+--		self:AddCategory("Consumable.Food.Buff.Intellect")
+--		self:AddCategory("Consumable.Food.Buff.Mana Regen")
+--		self:AddCategory("Consumable.Food.Buff.Spell Damage")
+--		self:AddCategory("Consumable.Food.Buff.Spirit")
+--		self:AddCategory("Consumable.Food.Buff.Healing")
+--	elseif (AutoBar.CLASS == "ROGUE") then
+--		self:AddCategory("Consumable.Food.Buff.Agility")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--	elseif (AutoBar.CLASS == "SHAMAN") then
+--		self:AddCategory("Consumable.Food.Buff.Agility")
+--		self:AddCategory("Consumable.Food.Buff.Attack Power")
+--		self:AddCategory("Consumable.Food.Buff.Healing")
+--		self:AddCategory("Consumable.Food.Buff.Intellect")
+--		self:AddCategory("Consumable.Food.Buff.Mana Regen")
+--		self:AddCategory("Consumable.Food.Buff.Spell Damage")
+--		self:AddCategory("Consumable.Food.Buff.Spirit")
+--	end
+--
+--	self:AddCategory("Consumable.Food.Buff.Other")
 end
 
 
@@ -1880,13 +1874,8 @@ AutoBar.Class["AutoBarButtonFoodCombo"] = AutoBarButtonFoodCombo
 function AutoBarButtonFoodCombo.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFoodCombo.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("AutoBar.Food.Combo.Basic")
+	self:AddCategory("Muffin.Food.Combo.Basic")
 
-	self:AddCategory("Consumable.Food.Combo Percent")
-	self:AddCategory("Consumable.Food.Edible.Combo.Non-Conjured")
-	self:AddCategory("Consumable.Food.Edible.Battleground.Arathi Basin.Basic")
-	self:AddCategory("Consumable.Food.Edible.Battleground.Warsong Gulch.Basic")
-	self:AddCategory("Consumable.Food.Edible.Combo.Conjured")
 end
 
 
@@ -2852,7 +2841,7 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 
-		self:AddCategory("AutoBar.Food.Mana.Basic")
+		self:AddCategory("Muffin.Food.Mana.Basic")
 	end
 end
 
@@ -2883,10 +2872,8 @@ AutoBar.Class["AutoBarButtonWaterBuff"] = AutoBarButtonWaterBuff
 function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 	AutoBarButtonWaterBuff.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.ClassUsesMana(AutoBar.CLASS)) then
-		self:AddCategory("Consumable.Water.Buff")
-		self:AddCategory("AutoBar.Food.Mana.Buff")
-	end
+	self:AddCategory("Muffin.Food.Mana.Buff")
+
 end
 
 
