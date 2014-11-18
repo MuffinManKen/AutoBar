@@ -72,7 +72,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
 	spellNameList["Mage Armor"] = AutoBar:LoggedGetSpellInfo(6117)
 	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(115610)
-	spellNameList["Incanter's Ward"] = AutoBar:LoggedGetSpellInfo(1463)
 	spellNameList["Molten Armor"] = AutoBar:LoggedGetSpellInfo(30482)
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
 	spellNameList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
@@ -1466,7 +1465,6 @@ function AutoBarCategory:Initialize()
 			"DEATHKNIGHT", spellNameList["Bone Shield"], spellNameList["Bone Shield"],
 			"DRUID", spellNameList["Barkskin"], spellNameList["Barkskin"],
 			"MAGE", spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
-			"MAGE", spellNameList["Incanter's Ward"], spellNameList["Incanter's Ward"],
 			"MAGE", spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
 			"PALADIN", spellNameList["Divine Protection"], spellNameList["Hand of Sacrifice"],
 			"PALADIN", spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
