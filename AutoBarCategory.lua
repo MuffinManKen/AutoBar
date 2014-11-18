@@ -56,7 +56,7 @@ AutoBar.categoryValidateList = {}
 	--Hunter
 	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
 	spellNameList["Aspect of the Pack"] = AutoBar:LoggedGetSpellInfo(13159)
-	spellNameList["Aspect of the Iron Hawk"] = AutoBar:LoggedGetSpellInfo(109260)
+	spellNameList["Aspect of the Fox"] = AutoBar:LoggedGetSpellInfo(172106)
 	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
 	spellNameList["Bestial Wrath"] = AutoBar:LoggedGetSpellInfo(19574)
 	spellNameList["Mend Pet"] = AutoBar:LoggedGetSpellInfo(136)
@@ -1262,7 +1262,7 @@ function AutoBarCategory:Initialize()
 			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
 			"HUNTER", spellNameList["Aspect of the Cheetah"], --*
 			"HUNTER", spellNameList["Aspect of the Pack"], --*
-			"HUNTER", spellNameList["Aspect of the Iron Hawk"], --*
+			"HUNTER", spellNameList["Aspect of the Fox"], --*
 			})
 			
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new(
