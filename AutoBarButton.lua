@@ -1875,6 +1875,7 @@ function AutoBarButtonFoodCombo.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFoodCombo.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Food.Combo.Basic")
+	self:AddCategory("Muffin.Food.Combo.Buff")
 
 end
 

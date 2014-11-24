@@ -761,6 +761,10 @@ function AutoBarCategory:Initialize()
 			"Muffin.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Mana.Buff")
 	AutoBarCategoryList["Muffin.Food.Mana.Buff"]:SetNonCombat(true)
 
+	AutoBarCategoryList["Muffin.Food.Combo.Buff"] = AutoBarItems:new(
+			"Muffin.Food.Combo.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Buff")
+	AutoBarCategoryList["Muffin.Food.Combo.Buff"]:SetNonCombat(true)
+
 
 --	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
 --			"Consumable.Food.Edible.Combo.Conjured", "INV_Misc_Food_100", "Consumable.Food.Edible.Combo.Conjured")
