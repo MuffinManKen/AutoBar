@@ -5,6 +5,7 @@
 <Script file="LibPT-Muffin.Gear.lua"/>
 <Script file="LibPT-Muffin.Gems.lua"/>
 <Script file="LibPT-Muffin.Misc.lua"/>
+<Script file="LibPT-Muffin.Potions.lua"/>
 <Script file="LibPT-Muffin.SunsongRanch.lua"/>
 
 </Ui>

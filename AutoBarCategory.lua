@@ -727,7 +727,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Muffin.Food.Health.Basic"] = AutoBarItems:new(
-			"Muffin.Food.Health.Basic", "INV_Misc_Food_23", "AutoBar.Food.Health.Basic")
+			"Muffin.Food.Health.Basic", "INV_Misc_Food_23", "Muffin.Food.Health.Basic")
 	AutoBarCategoryList["Muffin.Food.Health.Basic"]:SetNonCombat(true)
 
 
@@ -928,12 +928,15 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Combat"] = AutoBarItems:new(
 			"Consumable.Cooldown.Potion.Combat", "INV_Potion_54", "Consumable.Cooldown.Potion.Combat")
 
-	AutoBarCategoryList["AutoBar.Potion.Health"] = AutoBarItems:new(
-			"AutoBar.Potion.Health", "INV_Potion_54", "AutoBar.Potion.Health")
+	AutoBarCategoryList["Muffin.Potion.Health"] = AutoBarItems:new(
+			"Muffin.Potion.Health", "INV_Potion_54", "Muffin.Potion.Health")
 
-	AutoBarCategoryList["AutoBar.Potion.Mana"] = AutoBarItems:new(
-			"AutoBar.Potion.Mana", "INV_Potion_76", "AutoBar.Potion.Mana")
+	AutoBarCategoryList["Muffin.Potion.Mana"] = AutoBarItems:new(
+			"Muffin.Potion.Mana", "INV_Potion_76", "Muffin.Potion.Mana")
 			
+	AutoBarCategoryList["Muffin.Potion.Combo"] = AutoBarItems:new(
+			"Muffin.Potion.Combo", "INV_Potion_76", "Muffin.Potion.Combo")
+
 	AutoBarCategoryList["Muffin.SunSongRanch"] = AutoBarItems:new(
 			"Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
 

@@ -1920,7 +1920,8 @@ function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 	
 	--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
 	
-	self:AddCategory("AutoBar.Potion.Health")
+	self:AddCategory("Muffin.Potion.Health")
+	self:AddCategory("Muffin.Potion.Combo")
 	
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
@@ -2178,13 +2179,14 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Buff.Energy")
 	elseif (AutoBar.CLASS == "WARRIOR") then
 		self:AddCategory("Consumable.Buff.Rage")
-	else
+	elseif  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 	
 		--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
 		
-		self:AddCategory("AutoBar.Potion.Mana")
+		self:AddCategory("Muffin.Potion.Mana")
+		self:AddCategory("Muffin.Potion.Combo")
 
 
 		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
@@ -2336,7 +2338,7 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 	elseif (AutoBar.CLASS == "WARRIOR") then
 		self:AddCategory("Consumable.Buff.Rage")
 	else
-		self:AddCategory("AutoBar.Potion.Mana")
+		self:AddCategory("Muffin.Potion.Mana")
 
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Basic")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Pvp")

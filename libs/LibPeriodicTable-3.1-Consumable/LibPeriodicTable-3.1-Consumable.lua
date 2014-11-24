@@ -1,9 +1,9 @@
 -- (c) 2007 Nymbia.  see LGPLv2.1.txt for full details.
 --DO NOT MAKE CHANGES TO THIS FILE BEFORE READING THE WIKI PAGE REGARDING CHANGING THESE FILES
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 464 $", "(%d+)", function(n) return n+90000 end), {
+LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 468 $", "(%d+)", function(n) return n+90000 end), {
 	["Consumable.Anti-Venom"]="6452:25,6453:35,13462:60,2633:60,19440:60,12586:60,9030:60,3386:60,31437:70,25550:70",
-	["Consumable.Bandage.Basic"]="1251:66,2581:114,3530:161,3531:301,6450:400,6451:640,8544:800,8545:1104,14529:1360,14530:2000,21990:2800,21991:3400,38643:3400,38640:4100,34721:4800,34722:5800,53049:17400,53050:26000,53051:35000,72985:54720,72986:123120",
+	["Consumable.Bandage.Basic"]="1251:120,2581:204,3530:287,3531:539,6450:720,6451:1152,8544:1440,8545:2352,14529:2944,14530:3336,21990:3600,21991:4072,34721:4536,34722:5480,53049:6368,53050:6864,53051:7352,72985:8400,72986:9600,111603:54400",
 	["Consumable.Bandage.Battleground.Alterac Valley"]="19307:2000",
 	["Consumable.Bandage.Battleground.Arathi Basin"]="20232:1104,20234:2000,20235:640,20237:1104,20243:2000,20244:640",
 	["Consumable.Bandage.Battleground.Warsong Gulch"]="19067:1104,19066:2000,19068:640",

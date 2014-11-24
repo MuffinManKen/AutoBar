@@ -27,8 +27,10 @@
 	<Script file="libs\LibPeriodicTable-3.1-Tradeskill\LibPeriodicTable-3.1-Tradeskill.lua"/>
 	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
 	<!--@end-no-lib-strip@-->
+	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Food.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Gear.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Gems.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Misc.lua"/>
+	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Potions.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.SunsongRanch.lua"/>
 </Ui>
