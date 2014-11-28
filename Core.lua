@@ -42,7 +42,7 @@ local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local AceOO = AceLibrary("AceOO-2.0")
 local AceEvent = AceLibrary("AceEvent-2.0")
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local L
 local _
@@ -1028,9 +1028,9 @@ function AutoBar:Initialize()
 	self:LogEventStart("AutoBar:Initialize")
 
 	-- Set AutoBar Skin
-	if (LBF and not AutoBar.LBFGroup) then
-		local group = LBF:Group("AutoBar")
-		AutoBar.LBFGroup = group
+	if (Masque and not AutoBar.MasqueGroup) then
+		local group = Masque:Group("AutoBar")
+		AutoBar.MasqueGroup = group
 		group.SkinID = AutoBar.db.account.SkinID or "Blizzard"
 		group.Gloss = AutoBar.db.account.Gloss
 		group.Backdrop = AutoBar.db.account.Backdrop
@@ -1518,23 +1518,6 @@ function AutoBar:MoveButtonsModeOff()
 	self:UpdateActive()
 	if (AutoBarFuBar) then
 		AutoBarFuBar:UpdateDisplay()
-	end
-end
-
-function AutoBar:SkinModeToggle()
-	local ace3 = LibStub("AceAddon-3.0")
-	local BF = ace3 and ace3:GetAddon("ButtonFacade", true)
-	if (BF) then
-		AutoBar:MoveBarModeOff()
-		AutoBar:MoveButtonsModeOff()
-		LibKeyBound:Deactivate()
-		if (BF:OpenOptions()) then
---			BF:OpenMenu()
-		else
---			BF:CloseMenu()
-		end
-	else
-		print(L["ButtonFacade is required to Skin the Buttons"])
 	end
 end
 

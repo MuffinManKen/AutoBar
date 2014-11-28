@@ -59,20 +59,17 @@ local hintString = "|cffffffff%s:|r %s"
 local hintText = {
 	L["AutoBar"],
 	hintString:format(L["Left-Click"], L["Options GUI"]),
---	hintString:format(L["Right-Click"], L["Dropdown UI"]),
+	hintString:format(L["Right-Click"], L["Dropdown UI"]),
 	hintString:format(L["Alt-Click"], L["Key Bindings"]),
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
-	hintString:format(L["Ctrl-Shift-Click"], L["Skin the Buttons"]),
 }
 function LDBOnClick(clickedFrame, button)
 	if (button == "LeftButton") then
 		if (dewdrop and dewdrop:GetOpenedParent()) then
 			dewdrop:Close()
 		end
-		if (IsControlKeyDown() and IsShiftKeyDown()) then
-			AutoBar:SkinModeToggle()
-		elseif (IsShiftKeyDown()) then
+		if (IsShiftKeyDown()) then
 			AutoBar:MoveBarModeToggle()
 		elseif (IsControlKeyDown()) then
 			AutoBar:MoveButtonsModeToggle()
@@ -1246,14 +1243,6 @@ function AutoBar:CreateOptionsAce3()
 							name = L["Key Bindings"],
 							desc = L["Assign Bindings for Buttons on your Bars."],
 							func = LibKeyBound.Toggle,
-							disabled = getCombatLockdown,
-						},
-						skinButtons = {
-							type = "execute",
-							order = 4,
-							name = L["Skin the Buttons"],
-							desc = L["ButtonFacade is required to Skin the Buttons"],
-							func = AutoBar.SkinModeToggle,
 							disabled = getCombatLockdown,
 						},
 						header1 = {
@@ -2900,14 +2889,6 @@ function AutoBar:CreateSmallOptions()
 					desc = L["Assign Bindings for Buttons on your Bars."],
 					get = function() return AutoBar.keyBoundMode end,
 					set = LibKeyBound.Toggle,
-					disabled = getCombatLockdown,
-				},
-				skinButtons = {
-					type = "execute",
-					order = 4,
-					name = L["Skin the Buttons"],
-					desc = L["ButtonFacade is required to Skin the Buttons"],
-					func = AutoBar.SkinModeToggle,
 					disabled = getCombatLockdown,
 				},
 				bars = {

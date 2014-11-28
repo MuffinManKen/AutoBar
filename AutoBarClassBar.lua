@@ -18,7 +18,7 @@ end
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local dewdrop = AceLibrary("Dewdrop-2.0")
@@ -157,19 +157,19 @@ function AutoBar.Class.Bar.prototype:CreateBarFrame()
 		self.fadeFrame:SetScript("OnUpdate", onUpdateFunc)
 	end
 
-	if (LBF) then
-		local group = LBF:Group("AutoBar", self.barKey)
-		driver.LBFGroup = group
+	if (Masque) then
+		local group = Masque:Group("AutoBar", self.barKey)
+		driver.MasqueGroup = group
 		group.SkinID = self.sharedLayoutDB.SkinID or "Blizzard"
 		group.Backdrop = self.sharedLayoutDB.Backdrop
 		group.Gloss = self.sharedLayoutDB.Gloss
 		group.Colors = self.sharedLayoutDB.Colors or {}
 	end
 end
--- /dump LibStub("LibButtonFacade",true):ListSkins()
--- /dump LibStub("LibButtonFacade",true):ListAddons()
--- /dump LibStub("LibButtonFacade",true):ListGroups("AutoBar")
--- /dump LibStub("LibButtonFacade",true):ListButtons("AutoBar", "AutoBarClassBarBasic")
+-- /dump LibStub("Masque",true):ListSkins()
+-- /dump LibStub("Masque",true):ListAddons()
+-- /dump LibStub("Masque",true):ListGroups("AutoBar")
+-- /dump LibStub("Masque",true):ListButtons("AutoBar", "AutoBarClassBarBasic")
 
 -- Refresh the Bar
 -- New buttons are added, unused ones removed
@@ -184,8 +184,8 @@ end
 
 -- Apply the new skin
 function AutoBar.Class.Bar.prototype:UpdateSkin(SkinID)
-	if (LBF) then
-		local group = self.frame.LBFGroup
+	if (Masque) then
+		local group = self.frame.MasqueGroup
 		group.SkinID = SkinID
 		group:Skin(group.SkinID, group.Backdrop, group.Gloss, group.Colors)
 --AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateSkin SkinID " .. tostring(group.SkinID))
@@ -879,8 +879,9 @@ function AutoBar.Class.Bar:OptionsInitialize()
 	if (not AutoBar.db.char.barList) then
 		AutoBar.db.char.barList = {}
 	end
-	if LBF then
-		LBF:RegisterSkinCallback("AutoBar", self.SkinChanged, self)
+	if Masque then
+		--Masque:RegisterSkinCallback("AutoBar", self.SkinChanged, self)
+		group = Masque:Group("AutoBar");
 	end
 end
 

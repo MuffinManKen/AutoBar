@@ -19,7 +19,7 @@ end
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local dewdrop = AceLibrary("Dewdrop-2.0")
 local _G = getfenv(0)
@@ -286,9 +286,9 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	frame.hotKey = _G[("%sHotKey"):format(name)]
 	frame.count = _G[("%sCount"):format(name)]
 	frame.flash = _G[("%sFlash"):format(name)]
-	if (LBF) then
-		local group = self.parentBar.frame.LBFGroup
-		frame.LBFButtonData = {
+	if (Masque) then
+		local group = self.parentBar.frame.MasqueGroup
+		frame.MasqueButtonData = {
 			Border = frame.border,
 			Cooldown = frame.cooldown,
 			Count = frame.count,
@@ -297,7 +297,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 			Icon = frame.icon,
 			Name = frame.macroName,
 		}
-		group:AddButton(frame, frame.LBFButtonData)
+		group:AddButton(frame, frame.MasqueButtonData)
 	end
 	frame.normalTexture = frame:GetNormalTexture()
 
@@ -781,9 +781,9 @@ end
 function AutoBar.Class.Button.prototype:ShowButton()
 	local frame = self.frame
 
-	if (LBF) then
+	if (Masque) then
 		local frame = self.frame
-		local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+		local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 		if (backdrop) then
 			backdrop:Show()
 		end
@@ -794,7 +794,7 @@ function AutoBar.Class.Button.prototype:ShowButton()
 		if (popupHeader) then
 			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
-				local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
 					backdrop:Show()
 				end
@@ -810,8 +810,8 @@ function AutoBar.Class.Button.prototype:HideButton()
 	local frame = self.frame
 
 
-	if (LBF) then
-		local backdrop, gloss = LBF:GetBackdropLayer(self), LBF:GetGlossLayer(self)
+	if (Masque) then
+		local backdrop, gloss = Masque:GetBackdrop(self), Masque:GetGloss(self)
 		if (backdrop) then
 			backdrop:Hide()
 		end
@@ -822,7 +822,7 @@ function AutoBar.Class.Button.prototype:HideButton()
 		if (popupHeader) then
 			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
-				local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
 					backdrop:Hide()
 				end

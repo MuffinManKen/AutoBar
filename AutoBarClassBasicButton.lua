@@ -18,9 +18,7 @@ end
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
---local dewdrop = AceLibrary("Dewdrop-2.0")
 local _G = getfenv(0)
 local _
 
