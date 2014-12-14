@@ -1443,6 +1443,10 @@ function AutoBarCategory:Initialize()
 	local spellPortalValeofEternalBlossomsA = AutoBar:LoggedGetSpellInfo(132620)
 	local spellTeleportValeofEternalBlossomsH = AutoBar:LoggedGetSpellInfo(132627)
 	local spellPortalValeofEternalBlossomsH = AutoBar:LoggedGetSpellInfo(132626)
+	local spellTeleportStormshield = AutoBar:LoggedGetSpellInfo(176248)
+	local spellPortalStormshield = AutoBar:LoggedGetSpellInfo(176246)
+	local spellTeleportWarspear = AutoBar:LoggedGetSpellInfo(176242)
+	local spellPortalWarspear = AutoBar:LoggedGetSpellInfo(176244)
 	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new(
 			"Spell.Portals", spellPortalShattrathIcon, nil, {
 			"MAGE", spellTeleportStonard, spellPortalStonard,
@@ -1460,6 +1464,8 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellTeleportTolBaradA, spellPortalTolBaradA,
 			"MAGE", spellTeleportValeofEternalBlossomsA, spellPortalValeofEternalBlossomsA,
 			"MAGE", spellTeleportValeofEternalBlossomsH, spellPortalValeofEternalBlossomsH,
+			"MAGE", spellTeleportStormshield, spellPortalStormshield,
+			"MAGE", spellTeleportWarspear, spellPortalWarspear,
 			"MAGE", spellNameList["Teleport: Dalaran"], spellNameList["Portal: Dalaran"],
 			"DEATHKNIGHT", spellNameList["Death Gate"], spellNameList["Death Gate"],
 			"DRUID", spellTeleportMoonglade, spellTeleportMoonglade,
