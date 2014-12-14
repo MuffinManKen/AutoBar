@@ -50,4 +50,5 @@ AutoBarClassButton.lua
 AutoBarClassPopupButton.lua
 AutoBarButton.lua
 AutoBarCategory.lua
+AutoBarConfig.lua
 
