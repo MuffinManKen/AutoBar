@@ -1,7 +1,7 @@
 -- (c) 2007 Nymbia.  see LGPLv2.1.txt for full details.
 --DO NOT MAKE CHANGES TO THIS FILE BEFORE READING THE WIKI PAGE REGARDING CHANGING THESE FILES
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 468 $", "(%d+)", function(n) return n+90000 end), {
+LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 469 $", "(%d+)", function(n) return n+90000 end), {
 	["Consumable.Anti-Venom"]="6452:25,6453:35,13462:60,2633:60,19440:60,12586:60,9030:60,3386:60,31437:70,25550:70",
 	["Consumable.Bandage.Basic"]="1251:120,2581:204,3530:287,3531:539,6450:720,6451:1152,8544:1440,8545:2352,14529:2944,14530:3336,21990:3600,21991:4072,34721:4536,34722:5480,53049:6368,53050:6864,53051:7352,72985:8400,72986:9600,111603:54400",
 	["Consumable.Bandage.Battleground.Alterac Valley"]="19307:2000",
@@ -117,7 +117,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 468 $", "(%d+)
 	["Consumable.Cooldown.Stone.Mana.Other"]="23354:60,23386:100,31451:300,20520:1200,12662:1200",
 	["Consumable.Cooldown.Stone.Mana.Mana Stone"]="36799:47250,81901:9450",
 	["Consumable.Cooldown.Drums.Bombs"]="m,Misc.Explosives",
-	["Consumable.Cooldown.Drums.Drums"]="29528:1,29530:2,29531:3,29529:4,29532:5,49633:6,49634:7,102351:8",
+	["Consumable.Cooldown.Drums.Drums"]="29528:1,29530:2,29531:3,29529:4,29532:5,49633:6,49634:7,102351:8,120257:9",
 	["Consumable.Cooldown.Drums.Nets"]="24268:70,24269:80,41509:83",
 	["Consumable.Cooldown.Drums.Other"]="1127,1178,1191,1399,1434,2091,3456,4384,4388,4391,4395,4852,4941,5332,10646,10719,10830,11565,11566,13509,13514,15778,21325,23379,23841",
 
