@@ -1,62 +1,60 @@
 <Bindings>
-	<Binding name="AUTOBAR_CONFIG" header="AUTOBAR_SEP">
+	<Binding name="AUTOBAR_CONFIG" header="AUTOBAR_SEP" category="AutoBar ">
 		AutoBar:ConfigToggle()
 	</Binding>
-	<Binding name="AutoBarButtonHearth_X" runOnUp="true" header="AutoBarButtonHeader">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonMount_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBandages_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCrafting_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonHeal_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonRecovery_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFood_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFoodBuff_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFoodCombo_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBuff_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBuffWeapon1_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBuffWeapon2_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownDrums_X" runOnUp="true" header="AutoBarCooldownHeader">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownPotionCombat_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownStoneCombat_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownPotionHealth_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownStoneHealth_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownPotionMana_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownStoneMana_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownPotionRejuvenation_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCooldownStoneRejuvenation_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonRotationDrums_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonWater_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCharge_X" runOnUp="true" header="AutoBarClassBarExtras">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonClassBuff_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonShields_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonClassPet_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonClassPets2_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFreeAction_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonER_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonExplosive_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFishing_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBattleStandards_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTrinket1_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTrinket2_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonPets_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonQuest_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonSpeed_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonStealth_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonDebuff_X" runOnUp="true" header="AutoBarClassBarHeader">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonPowerShift_X" runOnUp="true" header="AutoBarClassBarDeathKnight">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBear_X" runOnUp="true" header="AutoBarClassBarDruid">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonCat_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTravel_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonBoomkinTree_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonFoodPet_X" runOnUp="true" header="AutoBarClassBarHunter">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonSting_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTrap_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTrack_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonseal_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonPickLock_X" runOnUp="true" header="AutoBarClassBarRogue">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTotemAir_X" runOnUp="true" header="AutoBarClassBarShaman">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTotemEarth_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTotemFire_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonTotemWater_X" runOnUp="true">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonWarlockStones_X" runOnUp="true" header="AutoBarClassBarWarlock">--[[ dummy ]]</Binding>
-	<Binding name="AutoBarButtonStance_X" runOnUp="true" header="AutoBarClassBarWarrior">--[[ dummy ]]</Binding>
+	<Binding name="AutoBarButtonHearth_X"  					category="AutoBar "	header="AutoBarButtonHeader"/>
+	<Binding name="AutoBarButtonMount_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonBandages_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonCrafting_X"   				category="AutoBar "/>
+	<Binding name="AutoBarButtonHeal_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonRecovery_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonFood_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonWater_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonFoodBuff_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonFoodCombo_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonBuff_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonBuffWeapon1_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonBuffWeapon2_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownDrums_X"				category="AutoBar "	header="AutoBarCooldownHeader"/>
+	<Binding name="AutoBarButtonCooldownPotionCombat_X"	category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownStoneCombat_X"		category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownPotionHealth_X"	category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownStoneHealth_X"		category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownPotionMana_X"		category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownStoneMana_X"		category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownPotionRejuvenation_X"	category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownStoneRejuvenation_X"		category="AutoBar "/>
+	<Binding name="AutoBarButtonRotationDrums_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonCharge_X"						category="AutoBar " header="AutoBarClassBarExtras"/>
+	<Binding name="AutoBarButtonClassBuff_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonShields_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonClassPet_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonClassPets2_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonFreeAction_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonER_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonExplosive_X"   				category="AutoBar "/>
+	<Binding name="AutoBarButtonFishing_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonBattleStandards_X"			category="AutoBar "/>
+	<Binding name="AutoBarButtonTrinket1_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonTrinket2_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonPets_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonQuest_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonSpeed_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonStealth_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonDebuff_X"						category="AutoBar " header="AutoBarClassBarHeader"/>
+	<Binding name="AutoBarButtonBear_X"							category="AutoBar " header="AutoBarClassBarDruid"/>
+	<Binding name="AutoBarButtonCat_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonTravel_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonBoomkinTree_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonPowerShift_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonFoodPet_X"						category="AutoBar " header="AutoBarClassBarHunter"/>
+	<Binding name="AutoBarButtonTrap_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonSeal_X"							category="AutoBar "/>
+	<Binding name="AutoBarButtonPickLock_X"					category="AutoBar " header="AutoBarClassBarRogue"/>
+	<Binding name="AutoBarButtonTotemAir_X"					category="AutoBar " header="AutoBarClassBarShaman"/>
+	<Binding name="AutoBarButtonTotemEarth_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonTotemFire_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonTotemWater_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonWarlockStones_X"				category="AutoBar " header="AutoBarClassBarWarlock"/>
+	<Binding name="AutoBarButtonStance_X"						category="AutoBar " header="AutoBarClassBarWarrior"/>
 </Bindings>

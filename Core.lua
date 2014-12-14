@@ -93,6 +93,7 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonFoodCombo_X = L["AutoBarButtonFoodCombo"]
 	BINDING_NAME_AutoBarButtonBuff_X = L["AutoBarButtonBuff"]
 	BINDING_NAME_AutoBarButtonBuffWeapon1_X = L["AutoBarButtonBuffWeapon1"]
+	BINDING_NAME_AutoBarButtonBuffWeapon2_X = L["AutoBarButtonBuffWeapon2"]
 	BINDING_NAME_AutoBarButtonCharge_X = L["AutoBarButtonCharge"]
 	BINDING_NAME_AutoBarButtonClassBuff_X = L["AutoBarButtonClassBuff"]
 	BINDING_NAME_AutoBarButtonShields_X = L["AutoBarButtonShields"]
@@ -1609,9 +1610,18 @@ function AutoBar:ClassUsesMana(class_name)
 
 end
 
-function AutoBar:LogWarning(p_message)
+local function table_pack(...)
+  return { n = select("#", ...), ... }
+end
 
-	table.insert(AutoBar.warning_log, p_message)
+function AutoBar:LogWarning(...)
+
+	local message = "";
+	local args = table_pack(...)
+	for i=1,args.n do
+		message = message .. tostring(args[i]) .. " "
+	end
+	table.insert(AutoBar.warning_log, message)
 
 end
 
