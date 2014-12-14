@@ -1959,15 +1959,96 @@ _, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
 function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 
+	--self:AddCategory("Misc.Mount.Normal")
+	--self:AddCategory("Misc.Mount.Summoned")
+	--self:AddCategory("Misc.Mount.Flying")
+--[[
+	--- ToDo: filtering based on these
+--	self:AddCategory("Misc.Spell.Mount.Ahn'Qiraj")
+	self:AddCategory("Misc.Spell.Mount.Flying.Fast")
+	self:AddCategory("Misc.Spell.Mount.Flying.Slow")
+	self:AddCategory("Misc.Spell.Mount.Ground.Fast")
+	self:AddCategory("Misc.Spell.Mount.Ground.Slow")
+--]]
+	if (not AutoBarCategoryList["Spell.Mount"]) then
+		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
+		AutoBarCategoryList["Spell.Mount"]:SetNoSpellCheck(true)
+	end
+	self:AddCategory("Spell.Mount")
+
+	local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
+	if (not buttonData) then
+		buttonData = {}
+		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
+	end
+	buttonData.SetBest = self.SetBest
+	self.flyable = -1
 	self:Refresh(parentBar, buttonDB)
 end
 
 function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
 
+	local category = AutoBarCategoryList["Spell.Mount"]
+	if (not category) then
+		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new(
+			"Spell.Mount", spellIconList["Amani War Bear"], {})
+		category = AutoBarCategoryList["Spell.Mount"]
+		category:SetNoSpellCheck(true)
+		category.unInitialized = true
+	end
 
+	local companionType = "MOUNT"
+	local count = GetNumCompanions(companionType)
+	local total_mounts = C_MountJournal.GetNumMounts()
 	local thisIsSpam = true
 
+--print("NumCompanions:" .. count .. " UpdateMount:" .. tostring(updateMount))
+
+	if (count > 0) then
+		if (not category.castList) then
+			category.castList = {}
+		end
+		local castList = category.castList
+
+		local unInitialized = category.unInitialized --or (# category.castList ~= count)
+		local spellName, icon
+		local creatureID, creatureName, spellID, active
+		thisIsSpam = not unInitialized
+--print("AutoBarButtonMount.prototype:Refresh unInitialized", unInitialized, "thisIsSpam", thisIsSpam, category.unInitialized, # category.castList, count)
+		for index = 1, total_mounts, 1 do
+			local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfo(index)
+--			print("  MountName:" .. creatureName .. " active:" .. tostring(active) .. " hideOnChar:" .. tostring(hideOnChar) .. " collected:" .. tostring(isCollected))
+			--creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
+			spellName = GetSpellInfo(spellID)
+			if (unInitialized and isCollected and not hideOnChar and isUsable) then
+				spellIconList[spellName] = icon
+				AutoBarSearch:RegisterSpell(spellName, true)
+				local spellInfo = AutoBarSearch.spells[spellName]
+				spellInfo.spellLink = "spell:" .. spellID
+				category.castList[# category.castList + 1] = spellName
+			end
+			if (active and updateMount) then
+				local buttonData = AutoBar.db.char.buttonDataList[self.buttonName]
+				if (AutoBar.flyable) then
+--print("AutoBarButtonMount.prototype:Refresh flyingMount", buttonData.flyingMount, "-->", spellName)
+					if (buttonData.flyingMount ~= spellName) then
+						thisIsSpam = false
+--print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingMount, spellName)
+					end
+					buttonData.flyingMount = spellName
+				else
+--print("AutoBarButtonMount.prototype:Refresh groundMount", buttonData.groundMount, "-->", spellName)
+					if (buttonData.groundMount ~= spellName) then
+						thisIsSpam = false
+--print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundMount, spellName)
+					end
+					buttonData.groundMount = spellName
+				end
+			end
+		end
+		category.unInitialized = nil
+	end
 	return thisIsSpam
 end
 
