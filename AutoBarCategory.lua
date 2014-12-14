@@ -104,6 +104,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
 	spellNameList["Deadly Poison"], _, spellIconList["Deadly Poison"] = AutoBar:LoggedGetSpellInfo(2823)
 	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
+--	spellNameList["Instant Poison"] = AutoBar:LoggedGetSpellInfo(157584)
 	spellNameList["Crippling Poison"], _, spellIconList["Crippling Poison"]  = AutoBar:LoggedGetSpellInfo(3408)
 	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
 
@@ -330,10 +331,16 @@ end
 function AutoBarCategory.prototype:Refresh()
 end
 
+local hack_deadly_poison_name = GetSpellInfo(2823)
+local hack_instant_poison_name = GetSpellInfo(157584)
+
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, itemsIndex)
 	local noSpellCheck = self.noSpellCheck
+	
+	--if (self.categoryKey == "Spell.Poison.Lethal") then print("AddSpell(", spellNameLeft, spellNameRight, itemsIndex,")", noSpellCheck) end
+
 	if (spellNameLeft) then
 		if (not noSpellCheck) then
 			spellNameLeft = GetSpellInfo(spellNameLeft)
@@ -351,6 +358,17 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 		end
 	end
 
+	--if (self.categoryKey == "Spell.Poison.Lethal") then print("   AddSpell - spellname:", spellNameLeft) end
+
+	--HACK: WoW has a bug where GetSpellInfo("Instant Poison") returns nil and GetSpellInfo("Deadly Poison") returns Instant Poison if the character
+	-- has the Swift Poison perk. So if the passed in name is for Instant, ask for Deadly instead. NOTE: These have to be localized names which is
+	-- why we cache those values above
+	if (spellNameLeft == hack_instant_poison_name) then
+		spellNameLeft = hack_deadly_poison_name
+	end
+
+	--if (self.categoryKey == "Spell.Poison.Lethal") then print("   Fixed: spellname:", spellNameLeft) end
+
 	if (spellNameLeft) then
 		AutoBarSearch:RegisterSpell(spellNameLeft, noSpellCheck)
 		self.items[itemsIndex] = spellNameLeft
@@ -358,7 +376,7 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 			AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
 			self.itemsRightClick[spellNameLeft] = spellNameRight
 --AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight))
---		else
+		else
 --			self.itemsRightClick[spellNameLeft] = spellNameLeft
 --AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft))
 		end
@@ -427,9 +445,11 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 	AutoBarSpells.super.prototype.init(self, description, texture) -- Mandatory init.
 	local spellName, index
 
---	AutoBar:StupidLogEnable(description == "Spell.Class.Buff")	
---	AutoBar:StupidLog("\nAutoBarSpells.prototype:init " .. description .. " castList " .. tostring(castList) .. "\n")
+--	AutoBar:StupidLogEnable(description == "Spell.Poison.Lethal")
+--	AutoBar:StupidLog("\nAutoBarSpells.prototype:init " .. description  .. "\n")
 --	AutoBar:StupidLog(AutoBar:Dump(castList))
+--	AutoBar:StupidLog(AutoBar:Dump(rightClickList))
+--	AutoBar:StupidLog(AutoBar:Dump(ptItems))
 
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (castList) then
@@ -439,8 +459,12 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 	end
 	if (rightClickList) then
 		self.castList, self.rightClickList = AutoBarCategory:FilterClass(rightClickList, 3)
+--		AutoBar:StupidLog("\n\nFiltered List:\n")
+--		AutoBar:StupidLog(AutoBar:Dump(self.castList))
+--		AutoBar:StupidLog(AutoBar:Dump(self.rightClickList))
 	end
-	if (pt3List) then
+	
+	if (ptItems) then
 		local rawList = nil
 		rawList = self:RawItemsAdd(rawList, ptItems, false)
 		self.castList = self:RawItemsConvert(rawList)
@@ -454,14 +478,15 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 	end
 	self:Refresh()
 	
---		AutoBar:StupidLogEnable(false)	
+--		AutoBar:StupidLogEnable(false)
 
 end
 
 -- Reset the item list based on changed settings.
 function AutoBarSpells.prototype:Refresh()
 	local itemsIndex = 1
-assert(self.items, "AutoBarSpells.prototype:Refresh wtff")
+assert(self.items, "AutoBarSpells.prototype:Refresh wtf")
+
 	if (self.castList and self.rightClickList) then
 		for spellName in pairs(self.itemsRightClick) do
 			self.itemsRightClick[spellName] = nil
@@ -479,8 +504,11 @@ assert(self.items, "AutoBarSpells.prototype:Refresh wtff")
 		for i, spellName in ipairs(self.castList) do
 			if (spellName) then
 				itemsIndex = AutoBarSpells.super.prototype.AddSpell(self, spellName, nil, itemsIndex)
+				--AutoBar:LogWarning(itemsIndex, spellName)
 			end
 		end
+		--AutoBar:LogWarning("itemsIndex:" .. itemsIndex)
+
 		for i = itemsIndex, # self.items, 1 do
 			self.items[i] = nil
 		end
@@ -1275,6 +1303,7 @@ function AutoBarCategory:Initialize()
 			"Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
 			"ROGUE", spellNameList["Deadly Poison"], --*
 			"ROGUE", spellNameList["Wound Poison"], --*
+--			"ROGUE", spellNameList["Instant Poison"], --*
 			})
 
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new(
