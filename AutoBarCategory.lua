@@ -1432,6 +1432,7 @@ function AutoBarCategory:Initialize()
 			"HUNTER", spellFeedPet,
 			"HUNTER", spellRevivePet,
 			"HUNTER", spellTameBeast,
+			"HUNTER", spellBeastLore,
 	})
 
 
