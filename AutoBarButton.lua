@@ -433,7 +433,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		elseif (popupButtonIndex < popupIndexStart) then
 --print("hiding popupButtonIndex, popupIndexStart, nItems, arrangeOnUse", popupButton:getName(), popupButtonIndex, popupIndexStart, nItems, arrangeOnUse)
 			popupButton.frame:Hide()	-- Hide 1st popup if it is not arrange on use as it is identical to the anchorButton
-		elseif (alwaysPopup) then
+		elseif (self.buttonDB.alwaysPopup) then
 			popupButton.frame:Show()
 			popupHeader:Show()
 		else
@@ -498,14 +498,12 @@ function AutoBarButton.prototype:SetupButton()
 		self:SetupAttributes(self, bag, slot, spell, macroId, itemId, itemData)
 		if (noPopup) then
 			if (popupHeader) then
-				for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+				for _, popupButton in pairs(popupHeader.popupButtonList) do
 					popupButton.frame:Hide()
 				end
 			end
 		else
 			local popupOnModifier = self:GetHierarchicalSetting("popupOnShift")
-			local alwaysPopup = self.buttonDB.alwaysPopup
-			local buttonIndex = self.buttonDB.order
 
 			-- Create the Button's Popup Header
 			if (not popupHeader) then
@@ -635,10 +633,6 @@ local SPELL_PROWL = AutoBar:LoggedGetSpellInfo(5215)
 local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
 
-local TooltipSetItemLink = AutoBar.Class.BasicButton.TooltipSetItemLink
-local TooltipSetMacro = AutoBar.Class.BasicButton.TooltipSetMacro
-local TooltipSetCustom = AutoBar.Class.BasicButton.TooltipSetCustom
-
 -- Set the state attributes of the button
 function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
 	local frame = button.frame
@@ -646,7 +640,6 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 	local enabled = true
 	frame.needsTooltip = true
-	local buttonKey = self.buttonDB.buttonKey
 	local category = itemData and itemData.category
 
 	frame:SetAttribute("category", category)
@@ -960,7 +953,7 @@ end
 
 -- Add category to the end of the buttons list
 function AutoBarButton.prototype:AddCategory(categoryName)
-	for i, category in ipairs(self) do
+	for _, category in ipairs(self) do
 		if (category == categoryName) then
 			-- Ignore.  ToDo shuffle to end.
 			return
@@ -1001,11 +994,10 @@ end
 
 -- Set the state attributes of the button
 function AutoBarButtonMacro.prototype:SetupButton()
-	local buttonKey = self.buttonDB.buttonKey
 	local frame = self.frame
 
 	if (self.macroText and self.buttonDB.enabled) then
---AutoBar:Print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(buttonKey) .. " frame " .. tostring(frame))
+--AutoBar:Print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
 		frame:Show()
 --- ToDo, disable popup
 		self:SetupAttributes(self, nil, nil, nil, self.buttonDB.buttonKey)
@@ -1260,7 +1252,7 @@ local function ShapeshiftRefresh()
 
 	local numShapeshiftForms = GetNumShapeshiftForms()
 	for index = 1, numShapeshiftForms, 1 do
-		local icon, name, active, castable = GetShapeshiftFormInfo(index)
+		local _, name, _, _ = GetShapeshiftFormInfo(index)
 		shapeshift[name] = " [stance:" .. index .. "] " .. name .. ";"
 		shapeshiftIn[name] = " [stance:" .. index .. "]"
 		shapeshiftSet[name] = " [nostance:" .. index .. "] " .. name .. ";"
@@ -1775,13 +1767,12 @@ function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Food.Percent.Basic")
 end
 
-local function SetDisableConjure(info, value)
-	local buttonDB = AutoBar:GetButtonDB(info.arg.buttonKey)
-	local self = AutoBar.buttonList[buttonKey]
-	buttonDB.disableConjure = value
-	AutoBar:BarButtonChanged()
-	AutoBar:CategoriesChanged()
-end
+--local function SetDisableConjure(info, value)
+--	local buttonDB = AutoBar:GetButtonDB(info.arg.buttonKey)
+--	buttonDB.disableConjure = value
+--	AutoBar:BarButtonChanged()
+--	AutoBar:CategoriesChanged()
+--end
 
 function AutoBarButtonFood.prototype:Refresh(parentBar, buttonDB)
 	AutoBarButtonFood.super.prototype.Refresh(self, parentBar, buttonDB)
@@ -1792,7 +1783,6 @@ function AutoBarButtonFood.prototype:Refresh(parentBar, buttonDB)
 			AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetCastList(nil)
 		else
 			self:AddCategory("Consumable.Food.Conjure")
-			AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellRitualOfRefreshment, "MAGE", spellConjureFood,}))
 		end
 	end
 end
@@ -2010,15 +2000,13 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		if (not category.castList) then
 			category.castList = {}
 		end
-		local castList = category.castList
 
 		local unInitialized = category.unInitialized --or (# category.castList ~= count)
-		local spellName, icon
-		local creatureID, creatureName, spellID, active
+		local spellName
 		thisIsSpam = not unInitialized
 --print("AutoBarButtonMount.prototype:Refresh unInitialized", unInitialized, "thisIsSpam", thisIsSpam, category.unInitialized, # category.castList, count)
 		for index = 1, total_mounts, 1 do
-			local creatureName, spellID, icon, active, isUsable, sourceType, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfo(index)
+			local creatureName, spellID, icon, active, isUsable, _, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfo(index)
 --			print("  MountName:" .. creatureName .. " active:" .. tostring(active) .. " hideOnChar:" .. tostring(hideOnChar) .. " collected:" .. tostring(isCollected))
 			--creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
 			spellName = GetSpellInfo(spellID)
@@ -2073,7 +2061,7 @@ function AutoBarButtonMount.prototype.SetBest(sorted, buttonDB, buttonData, sort
 	local self = AutoBar.buttonList[buttonDB.buttonKey]
 	if (self.flyable ~= flyable) then
 		self.flyable = flyable
-		mountId = nil
+		local mountId = nil
 		if (flyable) then
 			mountId = buttonData.flyingMount
 		else
@@ -2101,7 +2089,7 @@ function AutoBarButtonMount.prototype:UpdateUsable()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
 				if (AutoBar.inCombat) then
 					frame.icon:SetVertexColor(0.4, 0.4, 0.4)
@@ -2190,7 +2178,7 @@ function AutoBarButtonPets.prototype:UpdateUsable()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
 				frame.icon:SetVertexColor(1.0, 1.0, 1.0)
 				frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
@@ -2208,14 +2196,6 @@ function AutoBarButtonPickLock.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
-end
-
-
-AutoBarButtonPlaceHolder = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonPlaceHolder"] = AutoBarButtonPlaceHolder
-
-function AutoBarButtonPlaceHolder.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPlaceHolder.super.prototype.init(self, parentBar, buttonDB)
 end
 
 
@@ -2557,7 +2537,7 @@ end
 
 function AutoBarButtonStance.prototype:GetLastUsed()
 	local nStance = GetShapeshiftForm(true)
-	local icon, name = GetShapeshiftFormInfo(nStance)
+	local _, name = GetShapeshiftFormInfo(nStance)
 	return name
 end
 
@@ -2698,7 +2678,7 @@ function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCooldown()
 			end
 		end
@@ -2738,7 +2718,7 @@ function AutoBarButtonTotemEarth.prototype:UpdateCooldown()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCooldown()
 			end
 		end
@@ -2778,7 +2758,7 @@ function AutoBarButtonTotemFire.prototype:UpdateCooldown()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCooldown()
 			end
 		end
@@ -2818,7 +2798,7 @@ function AutoBarButtonTotemWater.prototype:UpdateCooldown()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCooldown()
 			end
 		end
@@ -2848,7 +2828,7 @@ function AutoBarButtonTrinket1.prototype:init(parentBar, buttonDB)
 end
 
 function AutoBarButtonTrinket1.prototype:GetLastUsed()
-	local name, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET1_SLOT))
+	local _, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET1_SLOT))
 	return itemId
 end
 
@@ -2856,7 +2836,6 @@ function AutoBarButtonTrinket1.prototype:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
 		if (itemType == "item") then
-			local itemId = self.frame:GetAttribute("itemId")
 			PickupInventoryItem(TRINKET1_SLOT)
 		end
 	end
@@ -2874,7 +2853,7 @@ function AutoBarButtonTrinket2.prototype:init(parentBar, buttonDB)
 end
 
 function AutoBarButtonTrinket2.prototype:GetLastUsed()
-	local name, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
+	local _, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 	return itemId
 end
 
@@ -2882,8 +2861,7 @@ function AutoBarButtonTrinket2.prototype:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
 		if (itemType == "item") then
-			local itemId = self.frame:GetAttribute("itemId")
-			PickupInventoryItem(TRINKET2_SLOT)
+      PickupInventoryItem(TRINKET2_SLOT)
 		end
 	end
 end
@@ -2939,7 +2917,6 @@ function AutoBarButtonWater.prototype:Refresh(parentBar, buttonDB)
 			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(nil)
 		else
 			self:AddCategory("Consumable.Water.Conjure")
-			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureWater,}))
 		end
 	end
 end

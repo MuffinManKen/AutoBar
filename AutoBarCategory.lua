@@ -160,18 +160,6 @@ local function sortList(a, b)
 end
 
 
-local function castListPairs(castList)
-	local i = -1
-
-	return function ()
-		i = i + 2
-		if (castList[i]) then
-			return i, castList[i], castList[i + 1]
-		end
-	end
-end
-
-
 -- Mandatory attributes:
 --		description - localized description
 --		texture - display icon texture
@@ -312,7 +300,7 @@ function AutoBarCategory.prototype:SetCastList(castList)
 	if (castList) then
 		self.spells = castList
 		local noSpellCheck = self.noSpellCheck
-		for index, spellName in ipairs(castList) do
+		for _, spellName in ipairs(castList) do
 --AutoBar:Print("AutoBarCategory.prototype:SetCastList " .. tostring(spellName))
 			AutoBarSearch:RegisterSpell(spellName, noSpellCheck)
 			if (AutoBarSearch:CanCastSpell(spellName)) then	-- TODO: update on leveling in case new spell aquired
@@ -443,7 +431,6 @@ AutoBarSpells = AceOO.Class(AutoBarCategory)
 -- Icon from castList is used unless not available but rightClickList is
 function AutoBarSpells.prototype:init(description, texture, castList, rightClickList, ptItems)
 	AutoBarSpells.super.prototype.init(self, description, texture) -- Mandatory init.
-	local spellName, index
 
 --	AutoBar:StupidLogEnable(description == "Spell.Poison.Lethal")
 --	AutoBar:StupidLog("\nAutoBarSpells.prototype:init " .. description  .. "\n")
@@ -501,7 +488,7 @@ assert(self.items, "AutoBarSpells.prototype:Refresh wtf")
 			self.items[i] = nil
 		end
 	elseif (self.castList) then
-		for i, spellName in ipairs(self.castList) do
+		for _, spellName in ipairs(self.castList) do
 			if (spellName) then
 				itemsIndex = AutoBarSpells.super.prototype.AddSpell(self, spellName, nil, itemsIndex)
 				--AutoBar:LogWarning(itemsIndex, spellName)
@@ -624,9 +611,7 @@ function AutoBarCustom.prototype:Refresh()
 	local itemType, itemId
 	local itemsIndex = 1
 
-	local items = self.items
-
-	for index, itemDB in ipairs(itemList) do
+	for _, itemDB in ipairs(itemList) do
 		itemType = itemDB.itemType
 		itemId = itemDB.itemId
 		if (itemType == "item") then
@@ -803,7 +788,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
 			"Consumable.Food.Edible.Combo.Conjured", spellConjureFoodIcon, "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellRitualOfRefreshment, "MAGE", spellConjureFood,}))
 
 	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new(
 			"Consumable.Food.Feast", "INV_Misc_Fish_52", "Consumable.Food.Feast")
@@ -1535,14 +1519,12 @@ function AutoBarCategory:Initialize2()
 
 
 			
-	local spellMobileBanking = AutoBar:LoggedGetSpellInfo(83958)
+	local spellMobileBanking, _, iconMobileBanking  = AutoBar:LoggedGetSpellInfo(83958)
 	local spellMassRessurection = AutoBar:LoggedGetSpellInfo(83968)
-	local spellWillTravel = GetSpellInfo(83967)
 	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new(
-			"Spell.Guild", spellEarthElementalTotemIcon, {
+			"Spell.Guild", iconMobileBanking, {
 			"*", spellMobileBanking,
 			"*", spellMassRessurection,
-			"*", spellWillTravel,
 	})
 
 
@@ -1731,7 +1713,7 @@ function AutoBarCategory:Upgrade()
 		local newCustomCategories = {}
 		local categoryKey
 		local customCategories = AutoBar.db.account.customCategories
-		for index, customCategoryDB in pairs(customCategories) do
+		for _, customCategoryDB in pairs(customCategories) do
 			customCategoryDB.name = customCategoryDB.name:gsub("%.", "")
 			categoryKey = AutoBarCustom:GetCustomKey(customCategoryDB.name)
 			customCategoryDB.categoryKey = categoryKey
@@ -1766,7 +1748,7 @@ end
 
 -- Learned new spells etc.  Refresh all categories
 function AutoBarCategory:UpdateCategories()
-	for categoryKey, categoryInfo in pairs(AutoBarCategoryList) do
+	for _, categoryInfo in pairs(AutoBarCategoryList) do
 		categoryInfo:Refresh()
 	end
 end
