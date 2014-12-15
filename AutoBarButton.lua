@@ -1757,6 +1757,7 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
 	self:AddCategory("Tradeskill.Tool.Fishing.Tool")
+	self:AddCategory("Tradeskill.Tool.Fishing.Bait")
 	self:AddCategory("Spell.Fishing")
 end
 
