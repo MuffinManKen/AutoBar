@@ -693,6 +693,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Misc.Engineering.Fireworks"] = AutoBarItems:new(
 			"Misc.Engineering.Fireworks", "INV_Misc_MissileSmall_Red", "Misc.Engineering.Fireworks")
 
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = AutoBarItems:new(
+			"Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
+
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = AutoBarItems:new(
 			"Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
 
@@ -1056,8 +1059,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Cooldown.Stone"] = AutoBarItems:new(
 			"Consumable.Cooldown.Stone", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone")
 
-	AutoBarCategoryList["Consumable.Leatherworking.Drums"] = AutoBarItems:new(
-			"Consumable.Leatherworking.Drums", "INV_Misc_Drum_06", "Consumable.Leatherworking.Drums")
 
 	AutoBarCategoryList["Consumable.Tailor.Net"] = AutoBarItems:new(
 			"Consumable.Tailor.Net", "INV_Misc_Net_01", "Consumable.Tailor.Net")
