@@ -31,11 +31,11 @@ if (not AutoBar.Class) then
 	AutoBar.Class = {}
 end
 
-local function onReceiveDragFunc(bar)
-	local toObject = bar.class
---AutoBar:Print("onReceiveDragFunc " .. tostring(toObject.barKey) .. " arg1 " .. tostring(arg1) .. " arg2 " .. tostring(arg2))
-	toObject:DropObject()
-end
+--local function onReceiveDragFunc(bar)
+--	local toObject = bar.class
+----AutoBar:Print("onReceiveDragFunc " .. tostring(toObject.barKey) .. " arg1 " .. tostring(arg1) .. " arg2 " .. tostring(arg2))
+--	toObject:DropObject()
+--end
 
 local FADEOUT_UPDATE_TIME = 0.1
 local function onUpdateFunc(button, elapsed)
@@ -65,7 +65,6 @@ AutoBar.Class.Bar = AceOO.Class("AceEvent-2.0")
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
 function AutoBar.Class.Bar.prototype:DropObject()
-	local toObject = self
 	local fromObject = AutoBar:GetDraggingObject()
 --AutoBar:Print("AutoBar.Class.Bar.prototype:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
 	if (fromObject and AutoBar.moveButtonsMode) then
@@ -200,7 +199,6 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 	local buttonDB
 
 	-- Create or Refresh the Bar's Buttons
-	local delete
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 		buttonDB = AutoBar.buttonDBList[buttonKey]
 		if (not buttonDB) then
@@ -272,7 +270,7 @@ function AutoBar.Class.Bar.prototype:UpdateAttributes()
 	local buttonList = self.buttonList
 
 	-- Create or Refresh the Bar's Buttons
-	for buttonIndex, button in ipairs(buttonList) do
+	for _, button in ipairs(buttonList) do
 		button:SetupButton()
 	end
 end
@@ -324,7 +322,7 @@ function AutoBar.Class.Bar.prototype:UpdateFadeOut()
 --AutoBar:Print("AutoBar.Class.Bar.prototype:OnUpdate self.sharedLayoutDB.fadeOut " .. tostring(self.sharedLayoutDB.fadeOut))
 	if (self.sharedLayoutDB.fadeOut) then
 		local cancelFade = InCombatLockdown() and self.sharedLayoutDB.fadeOutCancelInCombat or self.frame:IsMouseOver() or IsShiftKeyDown() and self.sharedLayoutDB.fadeOutCancelOnShift or IsControlKeyDown() and self.sharedLayoutDB.fadeOutCancelOnCtrl or IsAltKeyDown() and self.sharedLayoutDB.fadeOutCancelOnAlt
-		for buttonIndex, button in pairs(self.activeButtonList) do
+		for _, button in pairs(self.activeButtonList) do
 --- ToDo: Verify
 			if (button.frame.popupHeader and button.frame.popupHeader:IsVisible()) then
 				cancelFade = true
@@ -423,7 +421,7 @@ end
 
 
 function AutoBar.Class.Bar.prototype:SetButtonFrameStrata(frameStrata)
-	for index, button in pairs(self.buttonList) do
+	for _, button in pairs(self.buttonList) do
 		button.frame:SetFrameStrata(frameStrata)
 		if (button.frame.popupHeader) then
 			button.frame.popupHeader:SetFrameStrata("DIALOG")
@@ -439,7 +437,7 @@ function AutoBar.Class.Bar.prototype:MoveButtonsModeOn()
 	oldOnReceiveDragFunc = frame:GetScript("OnReceiveDrag")
 ---	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	self:ColorBars()
-	for index, button in pairs(self.buttonList) do
+	for _, button in pairs(self.buttonList) do
 		button:MoveButtonsModeOn()
 	end
 	self.dragFrame:Show()
@@ -452,7 +450,7 @@ function AutoBar.Class.Bar.prototype:MoveButtonsModeOff()
 	frame:SetFrameStrata(self.sharedLayoutDB.frameStrata)
 	self:SetButtonFrameStrata(self.sharedLayoutDB.frameStrata)
 	self:ColorBars()
-	for index, button in pairs(self.buttonList) do
+	for _, button in pairs(self.buttonList) do
 		button:MoveButtonsModeOff()
 	end
 	self.dragFrame:Hide()
@@ -546,7 +544,7 @@ function AutoBar.Class.Bar.prototype:PositionLoad()
 			sharedPositionDB.posX = 300
 			sharedPositionDB.posY = 360
 		end
-		local alignPoint = AutoBar.Class.Bar:GetAlignPoints(sharedLayoutDB.alignButtons)
+--		local alignPoint = AutoBar.Class.Bar:GetAlignPoints(sharedLayoutDB.alignButtons)
 		local x, y, s = sharedPositionDB.posX, sharedPositionDB.posY, self.frame:GetEffectiveScale()
 		x, y = x/s, y/s
 		self.frame:ClearAllPoints()
@@ -632,20 +630,20 @@ local function getCenterShift(alignButtons, signX, signY, rows, columns, display
 	local centerShiftX = 0
 	local centerShiftY = 0
 
-	local x = buttonWidth + padding
-	local y = buttonHeight + padding
+	local padded_width = buttonWidth + padding
+	local padded_height = buttonHeight + padding
 
 	if (alignButtons == "6") then
-		centerShiftX = signX * (columns - displayedColumns) * ((buttonWidth + padding)) / 2
+		centerShiftX = signX * (columns - displayedColumns) * (padded_width) / 2
 	elseif (alignButtons == "8") then
-		centerShiftY = signY * (rows - displayedRows) * ((buttonHeight + padding)) / 2
+		centerShiftY = signY * (rows - displayedRows) * (padded_height) / 2
 	elseif (alignButtons == "5") then
-		centerShiftX = signX * (columns - displayedColumns) * ((buttonWidth + padding)) / 2
-		centerShiftY = signY * (rows - displayedRows) * ((buttonHeight + padding)) / 2
+		centerShiftX = signX * (columns - displayedColumns) * (padded_width) / 2
+		centerShiftY = signY * (rows - displayedRows) * (padded_height) / 2
 	elseif (alignButtons == "2") then
-		centerShiftY = signY * (rows - displayedRows) * ((buttonHeight + padding)) / 2
+		centerShiftY = signY * (rows - displayedRows) * (padded_height) / 2
 	elseif (alignButtons == "4") then
-		centerShiftX = signX * (columns - displayedColumns) * ((buttonWidth + padding)) / 2
+		centerShiftX = signX * (columns - displayedColumns) * (padded_width) / 2
 	end
 	return centerShiftX, centerShiftY
 end
@@ -655,15 +653,13 @@ end
 -- Collapse holes if collapseButtons is true
 -- Obey the alignment options in alignButtons
 function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
-	local buttons = # self.buttonList
 	local rows = self.sharedLayoutDB.rows or 1
 	local columns = self.sharedLayoutDB.columns or 24
 	local buttonWidth = self.sharedLayoutDB.buttonWidth
 	local buttonHeight = self.sharedLayoutDB.buttonHeight
 	local padding = self.sharedLayoutDB.padding
 	local alignButtons = self.sharedLayoutDB.alignButtons or "3"
-	local alignPoint, rowRelativePoint, columnRelativePoint, signX, signY = AutoBar.Class.Bar:GetAlignPoints(alignButtons)
-	local collapseButtons = self.sharedLayoutDB.collapseButtons
+	local alignPoint, _, _, signX, signY = AutoBar.Class.Bar:GetAlignPoints(alignButtons)
 	local framePadding = math.max(0, padding)
 
 	self.frame:SetWidth(buttonWidth * columns + ((columns + 1) * framePadding))
@@ -708,7 +704,7 @@ end
 
 
 function AutoBar.Class.Bar.prototype:RefreshAlpha()
-	for index, button in pairs(self.buttonList) do
+	for _, button in pairs(self.buttonList) do
 		button.frame:SetAlpha(self.sharedLayoutDB.alpha or 1)
 	end
 end
@@ -772,12 +768,12 @@ function AutoBar.Class.Bar:NameExists(newName)
 	if (AutoBar.db.account.barList[newKey]) then
 		return true
 	end
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		if (classDB.barList[newKey]) then
 			return true
 		end
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		if (charDB.barList[newKey]) then
 			return true
 		end
@@ -804,18 +800,18 @@ end
 function AutoBar.Class.Bar:Delete(barKey)
 	AutoBar.barList[barKey] = nil
 	AutoBar.db.account.barList[barKey] = nil
-	for classKey, classDB in pairs(AutoBarDB.classes) do
+	for _, classDB in pairs(AutoBarDB.classes) do
 		classDB.barList[barKey] = nil
 	end
-	for charKey, charDB in pairs(AutoBarDB.chars) do
+	for _, charDB in pairs(AutoBarDB.chars) do
 		charDB.barList[barKey] = nil
 	end
 end
 
-function AutoBar.Class.Bar:DeleteButtonKey(barDBList, buttonKey)
-	for barKey, barDB in pairs(barDBList) do
+function AutoBar.Class.Bar:DeleteButtonKey(barDBList, oldKey)
+	for _, barDB in pairs(barDBList) do
 		local buttonKeys = barDB.buttonKeys
-		for buttonIndex, buttonKey in ipairs(buttonKeys) do
+		for _, buttonKey in ipairs(buttonKeys) do
 			if (buttonKey == oldKey) then
 				for index = buttonKey, # buttonKeys - 1, 1 do
 					buttonKeys[index] = buttonKeys[index + 1]
@@ -826,7 +822,7 @@ function AutoBar.Class.Bar:DeleteButtonKey(barDBList, buttonKey)
 end
 
 function AutoBar.Class.Bar:RenameButtonKey(barDBList, oldKey, newKey)
-	for barKey, barDB in pairs(barDBList) do
+	for _, barDB in pairs(barDBList) do
 		local buttonKeys = barDB.buttonKeys
 		for buttonIndex, buttonKey in pairs(buttonKeys) do
 			if (buttonKey == oldKey) then
@@ -853,10 +849,10 @@ function AutoBar.Class.Bar:Rename(oldKey, newName)
 
 	-- Rename Bar for all classes and characters
 	AutoBar.Class.Bar:RenameKey(AutoBar.db.account.barList, oldKey, newKey, newName)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Bar:RenameKey(classDB.barList, oldKey, newKey, newName)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Bar:RenameKey(charDB.barList, oldKey, newKey, newName)
 	end
 
@@ -880,8 +876,7 @@ function AutoBar.Class.Bar:OptionsInitialize()
 		AutoBar.db.char.barList = {}
 	end
 	if Masque then
-		--Masque:RegisterSkinCallback("AutoBar", self.SkinChanged, self)
-		group = Masque:Group("AutoBar");
+		Masque:Group("AutoBar");
 	end
 end
 

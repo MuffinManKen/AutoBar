@@ -272,7 +272,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			isUsable, notEnoughMana = IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
-				local start, duration, enabled = GetItemCooldown(itemId)
+				local _, _, enabled = GetItemCooldown(itemId)
 				if (not enabled) then
 					isUsable = false
 				end

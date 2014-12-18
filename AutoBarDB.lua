@@ -1431,7 +1431,7 @@ function AutoBar:RemoveDuplicateButtons()
 
 		-- Remove Bar Duplicates
 		for buttonKeyIndex, buttonKey in pairs(buttonKeys) do
-			foundBarKey = foundButtons[buttonKey]
+			local foundBarKey = foundButtons[buttonKey]
 			if (foundBarKey and foundBarKey == barKey) then
 				buttonKeys[buttonKeyIndex] = false
 				delete = true
@@ -1719,12 +1719,12 @@ function AutoBar:UpgradeVersion()
 
 		AutoBar:UpgradeLevel(AutoBarDB.account)
 		if (AutoBarDB.classes) then
-			for classKey, classDB in pairs (AutoBarDB.classes) do
+			for _, classDB in pairs (AutoBarDB.classes) do
 				AutoBar:UpgradeLevel(classDB)
 			end
 		end
 		if (AutoBarDB.chars) then
-			for charKey, charDB in pairs (AutoBarDB.chars) do
+			for _, charDB in pairs (AutoBarDB.chars) do
 				AutoBar:UpgradeLevel(charDB)
 			end
 		end

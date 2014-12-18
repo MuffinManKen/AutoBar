@@ -384,12 +384,12 @@ end
 function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targetSlot)
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
-		for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+		for _, popupButton in pairs(popupHeader.popupButtonList) do
 			local frame = popupButton.frame
 			local itemType = self.frame:GetAttribute("type")
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
-				local isUsable, notEnoughMana = IsUsableItem(itemId)
+				local isUsable = IsUsableItem(itemId)
 				if (isUsable) then
 					-- It is usable so we have some in inventory so switch
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)
@@ -425,7 +425,7 @@ function AutoBar.Class.Button.prototype:PostClick(mouseButton, down)
 				if (not didShuffle) then
 --AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick did not shuffle, switchItem itemId " .. tostring(itemId) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 					-- Switch to next item
-					local didSwitch = self:SwitchItem(itemId, targetBag, targetSlot)
+					--[[local didSwitch = ]] self:SwitchItem(itemId, targetBag, targetSlot)
 --AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick didSwitch " .. tostring(didSwitch) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 				end
 			end
@@ -566,7 +566,7 @@ function AutoBar.Class.Button.prototype:UpdateCooldown()
 
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
-		for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+		for _, popupButton in pairs(popupHeader.popupButtonList) do
 			popupButton:UpdateCooldown()
 		end
 	end
@@ -579,7 +579,7 @@ function AutoBar.Class.Button.prototype:UpdateCount()
 	if (AutoBar.db.account.showCount) then
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCount()
 			end
 		end
@@ -594,7 +594,7 @@ function AutoBar.Class.Button.prototype:UpdateUsable()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateUsable()
 			end
 		end
@@ -664,15 +664,15 @@ end
 
 
 local function FindSpell(spellName, bookType)
-	local i, s
+	local s
 	local found = false;
 	for i = 1, MAX_SKILLLINE_TABS do
-		local name, texture, offset, numSpells = GetSpellTabInfo(i)
+		local name, _, offset, numSpells = GetSpellTabInfo(i)
 		if (not name) then
 			break
 		end
 		for s = offset + 1, offset + numSpells do
-			local	spell, rank = GetSpellBookItemName(s, bookType)
+			local	spell = GetSpellBookItemName(s, bookType)
 			if (spell == spellName) then
 				found = true
 			end
@@ -749,8 +749,6 @@ function AutoBar.Class.Button.prototype:OnUpdate(elapsed)
 		end
 	end
 
-	local spellName = frame:GetAttribute("spell")
-
 	if (frame.outOfRange ~= (inRange == 0)) then
 		frame.outOfRange = not frame.outOfRange
 print(frame:GetName(), frame.outOfRange)
@@ -779,7 +777,6 @@ function AutoBar.Class.Button.prototype:StopFlash()
 end
 
 function AutoBar.Class.Button.prototype:ShowButton()
-	local frame = self.frame
 
 	if (Masque) then
 		local frame = self.frame
@@ -792,7 +789,7 @@ function AutoBar.Class.Button.prototype:ShowButton()
 		end
 		local popupHeader = frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
 				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
@@ -820,7 +817,7 @@ function AutoBar.Class.Button.prototype:HideButton()
 		end
 		local popupHeader = frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
 				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
@@ -948,11 +945,13 @@ end
 --[[
 	Following Events are always set and will always be called - i call them the base events
 ]]
-function AutoBar.Class.Button.prototype:BaseEventHandler(e)
+function AutoBar.Class.Button.prototype:BaseEventHandler(event)
 	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
 		return
 	end
 	local e = event
+
+print("AutoBar.Class.Button.prototype:BaseEventHandler")
 
 	if ( e == "PLAYER_ENTERING_WORLD" or e == "ACTIONBAR_PAGE_CHANGED") then
 		self:UpdateButton()
@@ -983,13 +982,15 @@ end
 --[[
 	Following Events are only set when the Button in question has a valid action - i call them the button events
 ]]
-function AutoBar.Class.Button.prototype:ButtonEventHandler(e)
+function AutoBar.Class.Button.prototype:ButtonEventHandler(event, arg1)
 	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
 		return
 	end
-	local e = event
+  
+  print("AutoBar.Class.Button.prototype:ButtonEventHandler")
+  
 	local actionId = self.action
-
+	
 	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_AURAS_CHANGED" ) then
 		self:UpdateUsable()
 		self:UpdateHotkeys()
@@ -1038,12 +1039,12 @@ function AutoBar.Class.Button:NameExists(newName)
 	if (AutoBar.db.account.buttonList[newKey]) then
 		return true
 	end
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		if (classDB.buttonList[newKey]) then
 			return true
 		end
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		if (charDB.buttonList[newKey]) then
 			return true
 		end
@@ -1069,19 +1070,19 @@ end
 
 function AutoBar.Class.Button:Delete(buttonKey)
 	AutoBar.db.account.buttonList[buttonKey] = nil
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		classDB.buttonList[buttonKey] = nil
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		charDB.buttonList[buttonKey] = nil
 	end
 
 	-- Delete ButtonKeys on Bars
 	AutoBar.Class.Bar:DeleteButtonKey(AutoBar.db.account.barList, buttonKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Bar:DeleteButtonKey(classDB.barList, buttonKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Bar:DeleteButtonKey(charDB.barList, buttonKey)
 	end
 
@@ -1091,7 +1092,7 @@ function AutoBar.Class.Button:Delete(buttonKey)
 end
 
 function AutoBar.Class.Button:RenameCategoryKey(dbList, oldKey, newKey)
-	for buttonKey, buttonDB in pairs(dbList) do
+	for _, buttonDB in pairs(dbList) do
 		for index, categoryKey in ipairs(buttonDB) do
 			if (categoryKey == oldKey) then
 				buttonDB[index] = newKey
@@ -1103,10 +1104,10 @@ end
 function AutoBar.Class.Button:RenameCategory(oldKey, newKey)
 	-- Change all db instances
 	AutoBar.Class.Button:RenameCategoryKey(AutoBar.db.account.buttonList, oldKey, newKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Button:RenameCategoryKey(classDB.buttonList, oldKey, newKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Button:RenameCategoryKey(charDB.buttonList, oldKey, newKey)
 	end
 end
@@ -1128,10 +1129,10 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 
 	-- Change all db instances
 	AutoBar.Class.Button:RenameKey(AutoBar.db.account.buttonList, oldKey, newKey, newName)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Button:RenameKey(classDB.buttonList, oldKey, newKey, newName)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Button:RenameKey(charDB.buttonList, oldKey, newKey, newName)
 	end
 
@@ -1147,10 +1148,10 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 
 	-- Change ButtonKeys on Bars
 	AutoBar.Class.Bar:RenameButtonKey(AutoBar.db.account.barList, oldKey, newKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Bar:RenameButtonKey(classDB.barList, oldKey, newKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Bar:RenameButtonKey(charDB.barList, oldKey, newKey)
 	end
 end
