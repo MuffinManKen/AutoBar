@@ -298,11 +298,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 	
-	--Pet Battle Events
---	AutoBar.frame:RegisterEvent("PET_BATTLE_OPENING_START")
---	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
-
-
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -320,8 +315,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 	AutoBar.frame:RegisterEvent("COMPANION_UPDATE")
 	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
---	AutoBar.frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
---	AutoBar.frame:RegisterEvent("UNIT_EXITED_VEHICLE")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -569,10 +562,6 @@ end
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
 
-	if(AutoBar.in_pet_battle) then
-		return
-	end
-
 	if (not InCombatLockdown()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
@@ -584,9 +573,6 @@ end
 
 function AutoBar.events:SPELL_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("SPELL_UPDATE_COOLDOWN", arg1)
-	if(AutoBar.in_pet_battle) then
-		return
-	end
 
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
@@ -594,45 +580,10 @@ function AutoBar.events:SPELL_UPDATE_COOLDOWN(arg1)
 end
 
 
-function AutoBar.events:PET_BATTLE_OPENING_START(arg1)
-	AutoBar:LogEvent("PET_BATTLE_OPENING_START", arg1)
---	
---	for barKey, bar in pairs(AutoBar.barList) do
---		if(AutoBar.barList[barKey]) then
-----			AutoBar.barList[barKey].frame:Hide()
---				RegisterUnitWatch(AutoBar.barList[barKey].frame, true)
---				RegisterStateDriver(AutoBar.barList[barKey].frame, "visibility", "hide; hide")
---		end
---	end
---
-	AutoBar.in_pet_battle = true
-
-end
-
-function AutoBar.events:PET_BATTLE_CLOSE(arg1)
-	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-	
---	for barKey, bar in pairs(AutoBar.barList) do
---		if(AutoBar.barList[barKey]) then
-----			AutoBar.barList[barKey].frame:Show()
---				UnregisterStateDriver(AutoBar.barList[barKey].frame, "visibility")
---				RegisterStateDriver(AutoBar.barList[barKey].frame, "visibility", "show; show")
---				UnregisterStateDriver(AutoBar.barList[barKey].frame, "visibility")
---				UnregisterUnitWatch(AutoBar.barList[barKey].frame)
---		end
---	end
-
-	AutoBar.in_pet_battle = false
-
-end
-
-
-
-
 
 function AutoBar.events:ACTIONBAR_UPDATE_USABLE(arg1)
 	AutoBar:LogEvent("ACTIONBAR_UPDATE_USABLE", arg1)
-	if (AutoBar.inWorld and not AutoBar.in_pet_battle) then
+	if (AutoBar.inWorld) then
 		if (InCombatLockdown()) then
 			for buttonName, button in pairs(AutoBar.buttonList) do
 				button:UpdateUsable()
@@ -797,49 +748,12 @@ end
 
 function AutoBar.events:PLAYER_CONTROL_GAINED()
 	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
-	if (not InCombatLockdown() and not AutoBar.in_pet_battle) then
+	if (not InCombatLockdown()) then
 		AutoBar.delay["UpdateButtons"]:Start()
 	end
 end
 
---function AutoBar.events:UNIT_ENTERED_VEHICLE(arg1, arg2, arg3)
---	AutoBar:LogEvent("UNIT_ENTERED_VEHICLE", arg1)
---	--AutoBar:Print("UNIT_ENTERED_VEHICLE" .. (arg1 or "arg1_blank") .. tostring(arg2) .. (arg3 or "arg3_blank") )
---
---	if( arg1 == "player") then
---	
---		for barKey, bar in pairs(AutoBar.barList) do
---			if(AutoBar.barList[barKey]) then
-----				AutoBar.barList[barKey].frame:Hide()
---				RegisterUnitWatch(AutoBar.barList[barKey].frame, true)
---				RegisterStateDriver(AutoBar.barList[barKey].frame, "visibility", "hide; hide")
---			end
---		end
---	
---		AutoBar.in_pet_battle = true
---	end
---
---end
 
---function AutoBar.events:UNIT_EXITED_VEHICLE(arg1, arg2, arg3)
---	AutoBar:LogEvent("UNIT_EXITED_VEHICLE", arg1)
---	
---	--AutoBar:Print("UNIT_EXITED_VEHICLE" .. (arg1 or "arg1_blank") .. (arg2 or "arg2_blank") .. (arg3 or "arg3_blank") )
---
---	if( arg1 == "player") then
---		for barKey, bar in pairs(AutoBar.barList) do
---			if(AutoBar.barList[barKey]) then
-----				AutoBar.barList[barKey].frame:Show()
---				UnregisterStateDriver(AutoBar.barList[barKey].frame, "visibility")
---				RegisterStateDriver(AutoBar.barList[barKey].frame, "visibility", "show; show")
---				UnregisterStateDriver(AutoBar.barList[barKey].frame, "visibility")
---				UnregisterUnitWatch(AutoBar.barList[barKey].frame)
---			end
---		end
---
---		AutoBar.in_pet_battle = false
---	end
---end
 
 local regenEnableUpdate = "UpdateRescan"
 function AutoBar:SetRegenEnableUpdate(scanType)

@@ -145,9 +145,6 @@ function AutoBar:InitializeDefaults()
 	
 	AutoBar.db.account.stupidlog = ""
 	
-	AutoBar.in_pet_battle = false
-
-
 	-- Simply ascend by 1 so each session produces non-conflicting keys.
 	if (not AutoBar.db.account.keySeed) then
 		AutoBar.db.account.keySeed = 1
