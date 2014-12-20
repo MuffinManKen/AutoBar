@@ -731,15 +731,6 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			shuffle = true,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonRotationDrums"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonRotationDrums"] = {
-			buttonKey = "AutoBarButtonRotationDrums",
-			buttonClass = "AutoBarButtonRotationDrums",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = 13,
-			enabled = true,
-		}
-	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"] = {
 			buttonKey = "AutoBarButtonCooldownDrums",
@@ -1264,7 +1255,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 	
-	local deprecated = {"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura", "AutoBarButtonTrack"  }
+	local deprecated = {"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura", "AutoBarButtonTrack", "AutoBarButtonRotationDrums"  }
 	
 	for _, dep in ipairs(deprecated) do
 		if (AutoBar.db.account.buttonList[dep]) then

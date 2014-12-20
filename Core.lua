@@ -127,7 +127,6 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonCooldownStoneMana_X = L["AutoBarButtonCooldownStoneMana"]
 	BINDING_NAME_AutoBarButtonCooldownPotionRejuvenation_X = L["AutoBarButtonCooldownPotionRejuvenation"]
 	BINDING_NAME_AutoBarButtonCooldownStoneRejuvenation_X = L["AutoBarButtonCooldownStoneRejuvenation"]
-	BINDING_NAME_AutoBarButtonRotationDrums_X = L["AutoBarButtonRotationDrums"]
 
 	BINDING_HEADER_AutoBarClassBarHeader = L["AutoBarClassBarHeader"]
 	BINDING_NAME_AutoBarButtonDebuff_X = L["AutoBarButtonDebuff"]
