@@ -1806,7 +1806,7 @@ function AutoBar:CreateBarOptions(barKey, existingOptions)
 				layoutSpacer = {
 					type = "header",
 					order = 30,
-					name = L["FadeOut"],
+					name = L["General"],
 				},
 				rows = {
 					type = "range",
