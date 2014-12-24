@@ -290,9 +290,19 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 --AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive Active " .. tostring(activeIndex) .. " " .. tostring(button.buttonName))
 			activeButtonList[activeIndex] = button
 			activeIndex = activeIndex + 1
+			if (button.SecureStateDriverRegistered == false) then
+				RegisterStateDriver(button.frame, "visibility", AutoBar.visibility_driver_string)
+				button.SecureStateDriverRegistered = true
+			end
+
 			button.frame:Show()
 		elseif (button) then
 --AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive Inactive " .. tostring(index) .. " " .. tostring(button.buttonName))
+			if (button.SecureStateDriverRegistered ~= false) then
+				UnregisterStateDriver(button.frame, "visibility")
+				button.SecureStateDriverRegistered = false
+			end
+
 			button.frame:Hide()
 		end
 	end

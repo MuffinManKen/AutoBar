@@ -67,6 +67,7 @@ AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
 AutoBar.warning_log = {}
 
+AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
 function AutoBar:ConfigToggle()
