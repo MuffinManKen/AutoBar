@@ -628,6 +628,8 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			defaultButtonIndex = 2,
 			enabled = true,
 			arrangeOnUse = true,
+			mount_show_favourites = true,
+			mount_show_nonfavourites = false,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBandages"]) then

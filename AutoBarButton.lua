@@ -1972,6 +1972,10 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		buttonData = {}
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
 	end
+	
+	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
+	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
+
 	buttonData.SetBest = self.SetBest
 	self.flyable = -1
 	self:Refresh(parentBar, buttonDB)
@@ -1988,7 +1992,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		category:SetNoSpellCheck(true)
 		category.unInitialized = true
 	end
-
+	
 	local companionType = "MOUNT"
 	local count = GetNumCompanions(companionType)
 	local total_mounts = C_MountJournal.GetNumMounts()
@@ -2010,7 +2014,8 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 --			print("  MountName:" .. creatureName .. " active:" .. tostring(active) .. " hideOnChar:" .. tostring(hideOnChar) .. " collected:" .. tostring(isCollected))
 			--creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
 			spellName = GetSpellInfo(spellID)
-			if (unInitialized and isCollected and not hideOnChar and isUsable) then
+			local user_selected = (isFavorite and buttonDB.mount_show_favourites) or (not isFavorite and buttonDB.mount_show_nonfavourites)
+			if (unInitialized and isCollected and not hideOnChar and isUsable and user_selected) then
 				spellIconList[spellName] = icon
 				AutoBarSearch:RegisterSpell(spellName, true)
 				local spellInfo = AutoBarSearch.spells[spellName]
@@ -2039,6 +2044,11 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		category.unInitialized = nil
 	end
 	return thisIsSpam
+end
+
+function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
+	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 end
 
 function AutoBarButtonMount.prototype:Learned(parentBar, buttonDB, updateMount)
