@@ -1,0 +1,72 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\..\FrameXML\UI.xsd">
+
+<Frame name="AutoBarWhatsNewFrame" hidden="true" toplevel="true" frameStrata="HIGH" movable="true" enableMouse="true">
+	<Size x="330" y="200"/>
+	<Anchors><anchor point="CENTER"/></Anchors>
+
+	<Backdrop bgFile="Interface\ChatFrame\ChatFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<TileSize>
+			<AbsValue val="32"/>
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="32"/>
+		</EdgeSize>
+		<BackgroundInsets>
+			<AbsInset left="10" right="10" top="10" bottom="10"/>
+		</BackgroundInsets>
+		<Color r="0" g="0" b="0" a="0.95" />
+	</Backdrop>
+	
+       
+    <Layers>
+		<Layer level="ARTWORK">
+			<Texture name="$parent_FrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+				<Size x="310" y="64"/>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset x="0" y="12"/>
+					</Anchor>
+				</Anchors>
+			</Texture>
+
+			<FontString name="$parent_TitleText" inherits="GameFontNormal" text="WHATSNEW_TITLE">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset x="0" y="-3"/>
+					</Anchor>
+				</Anchors>
+			</FontString>
+			<FontString name="$parent_MOTDText" inherits="GameFontNormal" text="WHATSNEW_TEXT" justifyH="LEFT">
+				<Color r="0" g="1.0" b="0" a="0.95" />
+				<Size x="300" y="135"/>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="10" y="0"/>
+					</Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+
+    </Layers>
+
+
+	<Frames>
+		<Button name="$parent_Button" inherits="UIPanelButtonTemplate" text="OKAY" id="4">
+			<Size x="80" y="22"/>
+			<Anchors>
+				<Anchor point="BOTTOM" relativeTo="AutoBarWhatsNewFrame">
+					<Offset x="0" y="13"/>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick> AutoBarWhatsNewFrame:Hide();</OnClick>
+			</Scripts>
+
+		</Button>
+	</Frames>
+
+
+ </Frame>
+
+
+</Ui> 

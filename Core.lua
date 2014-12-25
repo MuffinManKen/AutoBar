@@ -69,6 +69,14 @@ AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
+WHATSNEW_TITLE = "What's New in AutoBar"
+
+WHATSNEW_TEXT = " - There is a KickStarter to support further development. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
+	" - Mount button config. Choose Faves, non-Faves, or both|n" ..
+	" - BugFix: Empty buttons no longer cover other buttons|n" ..
+	" - Many new items have been added to Fishing|n" ..
+	" - Beast Lore button added for Hunters\n" ..
+	" - Removed Rotation:Drums button"
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
@@ -536,6 +544,13 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	end
 	
 	AutoBar:DumpWarningLog()
+	
+	local this_version = GetAddOnMetadata("AutoBar", "Version")
+	
+	if(this_version ~= AutoBarDB.whatsnew_version) then
+		 AutoBarDB.whatsnew_version = this_version
+		 AutoBarWhatsNewFrame:Show()
+	end
 
 end
 

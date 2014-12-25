@@ -52,3 +52,5 @@ AutoBarButton.lua
 AutoBarCategory.lua
 AutoBarConfig.lua
 
+whatsnew.xml
+
