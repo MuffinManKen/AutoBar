@@ -628,6 +628,7 @@ spellHealingTouch, _, spellHealingTouchIcon = AutoBar:LoggedGetSpellInfo(5185)
 
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
+local SPELL_MILL_HERB = AutoBar:LoggedGetSpellInfo(51005)
 local SPELL_PROWL = AutoBar:LoggedGetSpellInfo(5215)
 
 local TRINKET1_SLOT = 13
@@ -687,6 +688,15 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		elseif (AutoBar.CLASS == "ROGUE" and targeted == "Lockpicking") then
 				frame:SetAttribute("type2", "spell")
 				frame:SetAttribute("spell2", SPELL_PICK_LOCK)
+				frame:SetAttribute("target-bag2", bag)
+				frame:SetAttribute("target-slot2", slot)
+		elseif (targeted == "Milling") then
+				frame:SetAttribute("type", "spell")
+				frame:SetAttribute("spell", SPELL_MILL_HERB)
+				frame:SetAttribute("target-bag", bag)
+				frame:SetAttribute("target-slot", slot)
+				frame:SetAttribute("type2", "item")
+				frame:SetAttribute("item2", "Draenic Mortar")
 				frame:SetAttribute("target-bag2", bag)
 				frame:SetAttribute("target-slot2", slot)
 		elseif (AutoBar.CLASS == "HUNTER" and targeted == "PET") then
@@ -2206,6 +2216,15 @@ function AutoBarButtonPickLock.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
+end
+
+local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
+
+function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
+	AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Tradeskill.Gather.Herbalism")
 end
 
 

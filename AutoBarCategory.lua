@@ -674,18 +674,6 @@ function AutoBarCategory:Initialize()
 			"Misc.Battle Standard.Alterac Valley", "INV_BannerPVP_02", "Misc.Battle Standard.Alterac Valley")
 	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
-	AutoBarCategoryList["Misc.Reagent.Ammo.Arrow"] = AutoBarItems:new(
-			"Misc.Reagent.Ammo.Arrow", "INV_Ammo_Arrow_02", "Misc.Reagent.Ammo.Arrow")
-	AutoBarCategoryList["Misc.Reagent.Ammo.Arrow"]:SetNotUsable(true)
-
-	AutoBarCategoryList["Misc.Reagent.Ammo.Bullet"] = AutoBarItems:new(
-			"Misc.Reagent.Ammo.Bullet", "INV_Ammo_Bullet_02", "Misc.Reagent.Ammo.Bullet")
-	AutoBarCategoryList["Misc.Reagent.Ammo.Bullet"]:SetNotUsable(true)
-
-	AutoBarCategoryList["Misc.Reagent.Ammo.Thrown"] = AutoBarItems:new(
-			"Misc.Reagent.Ammo.Thrown", "INV_Axe_19", "Misc.Reagent.Ammo.Thrown")
-	AutoBarCategoryList["Misc.Reagent.Ammo.Thrown"]:SetNotUsable(true)
-
 	AutoBarCategoryList["Misc.Explosives"] = AutoBarItems:new(
 			"Misc.Explosives", "INV_Misc_Bomb_08", "Misc.Explosives")
 	AutoBarCategoryList["Misc.Explosives"]:SetTargeted(true)
@@ -695,6 +683,9 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = AutoBarItems:new(
 			"Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
+
+	AutoBarCategoryList["Tradeskill.Gather.Herbalism"] = AutoBarItems:new(
+			"Tradeskill.Gather.Herbalism", "INV_Misc_HERB_01", "Tradeskill.Gather.Herbalism")
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = AutoBarItems:new(
 			"Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
@@ -1185,10 +1176,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Buff.Intellect"] = AutoBarItems:new("Consumable.Buff.Intellect", "INV_Scroll_01",
 			"Consumable.Buff.Intellect")
 	AutoBarCategoryList["Consumable.Buff.Intellect"]:SetTargeted(true)
-
---	AutoBarCategoryList["BUFF_PROTECTION"] = AutoBarItems:new("Consumable.Buff.Protection", "INV_Scroll_07",
---			"Consumable.Buff.Protection")
---	AutoBarCategoryList["BUFF_PROTECTION"]:SetTargeted(true)
 
 	AutoBarCategoryList["Consumable.Buff.Spirit"] = AutoBarItems:new("Consumable.Buff.Spirit", "INV_Scroll_01",
 			"Consumable.Buff.Spirit")

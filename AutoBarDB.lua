@@ -952,6 +952,19 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			arrangeOnUse = true,
 		}
 	end
+	
+	if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonMillHerbs"] = {
+				buttonKey = "AutoBarButtonMillHerbs",
+				buttonClass = "AutoBarButtonMillHerbs",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = "11",
+				enabled = true,
+				arrangeOnUse = true,
+				targeted = "Milling",
+			}
+		end
+
 
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		if (not AutoBar.db.account.buttonList["AutoBarButtonWater"]) then
