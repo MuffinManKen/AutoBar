@@ -547,7 +547,9 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	
 	local this_version = GetAddOnMetadata("AutoBar", "Version")
 	
-	if(this_version ~= AutoBarDB.whatsnew_version) then
+	--only mark the dialog as seen if the frame was found. This protects against someone
+	--updating the addon while in-game
+	if(AutoBarWhatsNewFrame and this_version ~= AutoBarDB.whatsnew_version) then
 		 AutoBarDB.whatsnew_version = this_version
 		 AutoBarWhatsNewFrame:Show()
 	end
