@@ -71,12 +71,11 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TITLE = "What's New in AutoBar"
 
-WHATSNEW_TEXT = " - There is a KickStarter to support further development. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
-	" - Mount button config. Choose Faves, non-Faves, or both|n" ..
-	" - BugFix: Empty buttons no longer cover other buttons|n" ..
-	" - Many new items have been added to Fishing|n" ..
-	" - Beast Lore button added for Hunters\n" ..
-	" - Removed Rotation:Drums button"
+WHATSNEW_TEXT = " - Added a Stretch Goal to the KickStarter. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
+	" - Added Milling button to Extras bar|n" ..
+	" - Removed useless Ammo categories|n" ..
+	" - Added Oralius' Whispering Crystal to Flasks button|n" ..
+	" - Added Garrison button to Extras Bar: Miner's Coffee, Preserved Pick, Salvage, and Iron Traps."
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
