@@ -123,6 +123,7 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
 	BINDING_NAME_AutoBarButtonWater_X = L["AutoBarButtonWater"]
 	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
+	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
 
 	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
 

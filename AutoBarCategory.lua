@@ -950,6 +950,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.SunSongRanch"] = AutoBarItems:new(
 			"Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
 
+	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new(
+			"Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
+
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new(
 			"Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")

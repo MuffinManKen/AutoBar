@@ -2249,6 +2249,15 @@ function AutoBarButtonSunsongRanch.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.SunSongRanch")
 end
 
+local AutoBarButtonGarrison = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonGarrison"] = AutoBarButtonGarrison
+
+function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
+	AutoBarButtonGarrison.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Garrison")
+end
+
 local AutoBarButtonQuest = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonQuest"] = AutoBarButtonQuest
 
