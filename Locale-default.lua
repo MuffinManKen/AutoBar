@@ -12,5 +12,8 @@ atl("AutoBarButtonSunsongRanch", "Sunsong Ranch");
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
 
+atl("Tradeskill.Gather.Herbalism", "Herbs");
+atl("AutoBarButtonMillHerbs", "Milling");
+
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
