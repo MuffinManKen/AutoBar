@@ -44,13 +44,13 @@ InterfaceOptions_AddCategory(AutoBar.panel);
 AutoBar.buttonspanel = CreateFrame( "Frame", "AutoBarConfigButtons", AutoBar.panel);
 AutoBar.buttonspanel.name = "Buttons";
 -- Specify childness of this panel (this puts it under the little red [+], instead of giving it a normal AddOn category)
---AutoBar.buttonspanel.parent = AutoBar.panel.name;
+AutoBar.buttonspanel.parent = AutoBar.panel.name;
 -- Add the child to the Interface Options
 InterfaceOptions_AddCategory(AutoBar.buttonspanel);
 
 AutoBar.foodpanel = CreateFrame( "Frame", "AutoBarConfigButtonsFood", AutoBar.buttonspanel);
 AutoBar.foodpanel.name = "Food";
 -- Specify childness of this panel (this puts it under the little red [+], instead of giving it a normal AddOn category)
---AutoBar.foodpanel.parent = AutoBar.buttonspanel.name;
+AutoBar.foodpanel.parent = AutoBar.buttonspanel.name;
 -- Add the child to the Interface Options
 InterfaceOptions_AddCategory(AutoBar.foodpanel);

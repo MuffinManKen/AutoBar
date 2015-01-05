@@ -50,7 +50,9 @@ AutoBarClassButton.lua
 AutoBarClassPopupButton.lua
 AutoBarButton.lua
 AutoBarCategory.lua
-AutoBarConfig.lua
+
+# Not currently used
+#AutoBarConfig.lua
 
 whatsnew.xml
 
