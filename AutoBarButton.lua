@@ -1635,7 +1635,7 @@ AutoBar.Class["AutoBarButtonElixirBoth"] = AutoBarButtonElixirBoth
 function AutoBarButtonElixirBoth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonElixirBoth.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Consumable.Buff Type.Flask")
+	self:AddCategory("Muffin.Flasks")
 end
 
 

@@ -2,6 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 <Script file="LibPT-Muffin.Food.lua"/>
+<Script file="LibPT-Muffin.Flasks.lua"/>
 <Script file="LibPT-Muffin.Garrison.lua"/>
 <Script file="LibPT-Muffin.Gear.lua"/>
 <Script file="LibPT-Muffin.Gems.lua"/>
