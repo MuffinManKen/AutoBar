@@ -72,10 +72,11 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 WHATSNEW_TITLE = "What's New in AutoBar"
 
 WHATSNEW_TEXT = " - Added a Stretch Goal to the KickStarter. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
-	" - Added Milling button to Extras bar|n" ..
-	" - Removed useless Ammo categories|n" ..
-	" - Added Oralius' Whispering Crystal to Flasks button|n" ..
-	" - Added Garrison button to Extras Bar: Miner's Coffee, Preserved Pick, Salvage, and Iron Traps."
+	" - FIXED:Milling button was showing 'Custom' as its name|n" ..
+	" - FIXED:Garrison button now has data|n" ..
+	" - FIXED:Weird 'Food'/'Buttons' addons are no longer shown|n" ..
+	" - FIXED:Milling (left-click) on the Milling button|n" ..
+	" - UPDATED: Flasks button"
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
