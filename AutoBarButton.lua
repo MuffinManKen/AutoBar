@@ -218,10 +218,21 @@ local snippetOnClick = [[
 
 	-- Move the attributes that make the button work
 	local itemType = self:GetAttribute("type")
-	anchorButton:SetAttribute("type", self:GetAttribute("type"))
-	anchorButton:SetAttribute("target-slot1", self:GetAttribute("target-slot1"))
-	if (itemType == "item") then
+	local itemType1 = self:GetAttribute("type1")
+	if(itemType1) then
+		anchorButton:SetAttribute("type1", self:GetAttribute("type1"))
+		anchorButton:SetAttribute("target-slot1", self:GetAttribute("target-slot1"))
+		anchorButton:SetAttribute("target-bag1", self:GetAttribute("target-bag1"))	
 		anchorButton:SetAttribute("item1", self:GetAttribute("item1"))
+		anchorButton:SetAttribute("spell1", self:GetAttribute("spell1"))
+	end
+	anchorButton:SetAttribute("type", self:GetAttribute("type"))
+	anchorButton:SetAttribute("unit", self:GetAttribute("unit"))
+	anchorButton:SetAttribute("target-slot", self:GetAttribute("target-slot"))
+	anchorButton:SetAttribute("target-bag", self:GetAttribute("target-bag"))	
+
+	if (itemType == "item") then
+		anchorButton:SetAttribute("item", self:GetAttribute("item"))
 	elseif (itemType == "spell") then
 		anchorButton:SetAttribute("spell", self:GetAttribute("spell"))
 	elseif (itemType == "macro") then
@@ -234,8 +245,8 @@ local snippetOnClick = [[
 	-- Move the right click attributes
 	itemType = self:GetAttribute("type2")
 	anchorButton:SetAttribute("type2", self:GetAttribute("type2"))
-	anchorButton:SetAttribute("target-bag2", self:GetAttribute("target-bag2"))
 	anchorButton:SetAttribute("target-slot2", self:GetAttribute("target-slot2"))
+	anchorButton:SetAttribute("target-bag2", self:GetAttribute("target-bag2"))
 	anchorButton:SetAttribute("unit2", self:GetAttribute("unit2"))
 	if (itemType == "item") then
 		anchorButton:SetAttribute("item2", self:GetAttribute("item2"))
@@ -606,6 +617,7 @@ end
 function AutoBarButton:SetupAttributesClear(frame)
 	frame:SetAttribute("target-slot1", nil)
 	frame:SetAttribute("target-slot2", nil)
+	frame:SetAttribute("target-bag1", nil)
 	frame:SetAttribute("target-bag2", nil)
 	frame:SetAttribute("unit2", nil)
 	frame:SetAttribute("type", nil)
@@ -691,10 +703,10 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				frame:SetAttribute("target-bag2", bag)
 				frame:SetAttribute("target-slot2", slot)
 		elseif (targeted == "Milling") then
-				frame:SetAttribute("type", "spell")
-				frame:SetAttribute("spell", SPELL_MILL_HERB)
-				frame:SetAttribute("target-bag", bag)
-				frame:SetAttribute("target-slot", slot)
+				frame:SetAttribute("type1", "spell")
+				frame:SetAttribute("spell1", SPELL_MILL_HERB)
+				frame:SetAttribute("target-bag1", bag)
+				frame:SetAttribute("target-slot1", slot)
 				frame:SetAttribute("type2", "item")
 				frame:SetAttribute("item2", "Draenic Mortar")
 				frame:SetAttribute("target-bag2", bag)
@@ -840,6 +852,7 @@ end
 /dump AutoBar.buttonList["AutoBarButtonBuff"].frame:GetAttribute("target-slot2")
 /dump AutoBar.buttonList["AutoBarButtonCooldownStoneMana"].frame:GetAttribute("itemId")
 /dump AutoBar.buttonList["AutoBarButtonCooldownStoneHealth"].frame:GetAttribute("itemId")
+/dump AutoBar.buttonList["AutoBarButtonMillHerbs"].frame.popupHeader.popupButtonList[10].frame:GetAttribute("type")
 --]]
 
 
