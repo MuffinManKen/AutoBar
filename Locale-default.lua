@@ -17,3 +17,7 @@ atl("AutoBarButtonMillHerbs", "Milling");
 
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
+
+atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
+
+
