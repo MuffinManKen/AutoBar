@@ -1247,6 +1247,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Misc.Usable.StartsQuest"] = AutoBarItems:new("Misc.Usable.StartsQuest", "INV_Staff_20",
 			"Misc.Usable.StartsQuest")
 
+	AutoBarCategoryList["Muffin.Misc.Quest"] = AutoBarItems:new("Muffin.Misc.Quest", "INV_BannerPVP_02",
+			"Muffin.Misc.Quest")
+
 	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02",
 			"Misc.Usable.Replenished")
 
