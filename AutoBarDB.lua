@@ -955,7 +955,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 
 	
 	if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonMillHerbs"] = {
+			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
 				buttonKey = "AutoBarButtonMillHerbs",
 				buttonClass = "AutoBarButtonMillHerbs",
 				barKey = "AutoBarClassBarExtras",
@@ -965,6 +965,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				targeted = "Milling",
 			}
 		end
+		
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonGarrison"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonGarrison"] = {
