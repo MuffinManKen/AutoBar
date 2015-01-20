@@ -893,7 +893,7 @@ end
 function AutoBar.Class.Button.prototype:RegisterBarEvents()
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", "BaseEventHandler")
 	self:RegisterEvent("ACTIONBAR_PAGE_CHANGED", "BaseEventHandler")
-	self:RegisterEvent("ACTIONBAR_SLOT_CHANGED", "BaseEventHandler")
+--	self:RegisterEvent("ACTIONBAR_SLOT_CHANGED", "BaseEventHandler")
 	self:RegisterEvent("UPDATE_BINDINGS", "BaseEventHandler")
 	self:RegisterEvent("UPDATE_SHAPESHIFT_FORM", "BaseEventHandler")
 end
@@ -953,6 +953,15 @@ function AutoBar.Class.Button.prototype:BaseEventHandler(event)
 
 print("AutoBar.Class.Button.prototype:BaseEventHandler")
 
+	local timer_name = e .. "last_tick"
+	local now = GetTime()
+	AutoBar[timer_name] = AutoBar[timer_name] or now
+	
+	if ((now - AutoBar[timer_name]) < AutoBar.throttle_limit) then
+		print ("Skipping " .. e)
+		return
+	end
+
 	if ( e == "PLAYER_ENTERING_WORLD" or e == "ACTIONBAR_PAGE_CHANGED") then
 		self:UpdateButton()
 	elseif ( e == "UPDATE_BINDINGS" ) then
@@ -960,6 +969,8 @@ print("AutoBar.Class.Button.prototype:BaseEventHandler")
 	elseif ( e == "UPDATE_SHAPESHIFT_FORM" ) then
 		self:UpdateButton()
 	end
+	
+	AutoBar[timer_name] = now
 end
 
 -- Show grid feedback for droppable buttons
