@@ -64,6 +64,8 @@ AutoBar.delay = {}
 
 AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
+AutoBar.BAG_UPDATE_COOLDOWN_last_tick = GetTime()
+AutoBar.throttle_limit = 1 --in seconds
 
 AutoBar.warning_log = {}
 
@@ -71,12 +73,9 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TITLE = "What's New in AutoBar"
 
-WHATSNEW_TEXT = " - Added a Stretch Goal to the KickStarter. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
-	" - FIXED:Milling button was showing 'Custom' as its name|n" ..
-	" - FIXED:Garrison button now has data|n" ..
-	" - FIXED:Weird 'Food'/'Buttons' addons are no longer shown|n" ..
-	" - FIXED:Milling (left-click) on the Milling button|n" ..
-	" - UPDATED: Flasks button"
+WHATSNEW_TEXT = " - Improved performance by throttling out of control Blizzard events\n" ..
+	" - FIXED:Bars should no longer flicker in while Pet Battleing"
+
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
@@ -581,12 +580,21 @@ end
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
 
-	if (not InCombatLockdown()) then
+	local now = GetTime()
+	if ((now - AutoBar.BAG_UPDATE_COOLDOWN_last_tick) < AutoBar.throttle_limit) then
+--		print("Skipping BAG_UPDATE_COOLDOWN")
+		return
+	end
+
+	if (not InCombatLockdown() and not C_PetBattles.IsInBattle()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
+		
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
+	
+	AutoBar.BAG_UPDATE_COOLDOWN_last_tick = now
 end
 
 
