@@ -1483,6 +1483,13 @@ function AutoBarCategory:Initialize()
 			"SHAMAN", spellAstralRecall, spellAstralRecall,
 			"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
 			})
+			
+	local spellTeleportAncientDalaran = AutoBar:LoggedGetSpellInfo(120145)
+	local spellPortalAncientDalaran = AutoBar:LoggedGetSpellInfo(121848)
+	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new(
+			"Spell.Portals", spellPortalShattrathIcon, nil, {
+			"MAGE", spellTeleportAncientDalaran, spellPortalAncientDalaran,
+			})
 
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new(
 			"Spell.Shields", spellIconList["Ice Barrier"], nil, {

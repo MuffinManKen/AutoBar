@@ -1961,7 +1961,16 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "MAGE" or AutoBar.CLASS == "SHAMAN" or AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Portals")
 	end
+
+	if(buttonDB.hearth_include_ancient_dalaran) then
+		self:AddCategory("Spell.AncientDalaranPortals")
+	end
+	
 	self:AddCategory("Misc.Hearth")
+end
+
+function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
 end
 
 

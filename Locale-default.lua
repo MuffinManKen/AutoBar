@@ -20,4 +20,7 @@ atl("MountShowNonFavourites", "Show Non-Favourites");
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 
+atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
+atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
+
 

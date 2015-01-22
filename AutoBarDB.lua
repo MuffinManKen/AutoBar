@@ -618,6 +618,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 1,
 			enabled = true,
+			hearth_include_ancient_dalaran = false,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonMount"]) then
