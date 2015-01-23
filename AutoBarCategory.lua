@@ -1305,7 +1305,6 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellNameList["Dalaran Brilliance"],
 			"MAGE", spellNameList["Ice Ward"],
 			"MAGE", spellNameList["Frost Armor"],
-			"MAGE", spellNameList["Mage Armor"],
 			"MAGE", spellNameList["Molten Armor"],
 			"MAGE", spellNameList["Slow Fall"],
 			"MONK", spellNameList["Legacy of the Emperor"],
