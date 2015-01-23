@@ -74,7 +74,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(115610)
 	spellNameList["Molten Armor"] = AutoBar:LoggedGetSpellInfo(30482)
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
-	spellNameList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
+	spellNameList["Conjure Refreshment"], _, spellIconList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
 	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
 
 	--Monk
@@ -773,14 +773,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Food.Combo.Buff"]:SetNonCombat(true)
 
 
---	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
---			"Consumable.Food.Edible.Combo.Conjured", "INV_Misc_Food_100", "Consumable.Food.Edible.Combo.Conjured")
---	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
 
-	local spellConjureFood, spellConjureFoodIcon
-	spellConjureFood, _, spellConjureFoodIcon = AutoBar:LoggedGetSpellInfo(42955)
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Combo.Conjured", spellConjureFoodIcon, "Consumable.Food.Edible.Combo.Conjured")
+			"Consumable.Food.Edible.Combo.Conjured", spellIconList["Conjure Refreshment"], "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new(
@@ -1069,12 +1064,10 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Buff.Energy"] = AutoBarItems:new(
 			"Consumable.Buff.Energy", "INV_Drink_Milk_05", "Consumable.Buff.Energy")
 
-	local spellConjureRefreshment, spellConjureRefreshmentIcon
-	spellConjureRefreshment, _, spellConjureRefreshmentIcon = AutoBar:LoggedGetSpellInfo(42955)
 	AutoBarCategoryList["Consumable.Water.Basic"] = AutoBarItems:new(
 			"Consumable.Water.Basic", "INV_Drink_10", "Consumable.Water.Basic", "Consumable.Water.Conjured")
 	AutoBarCategoryList["Consumable.Water.Basic"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureRefreshment,}))
+--	AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureRefreshment,}))
 
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"] = AutoBarItems:new(
 			"Muffin.Food.Mana.Basic", "INV_Drink_10", "Muffin.Food.Mana.Basic")
@@ -1082,13 +1075,13 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new(
-			"Consumable.Water.Conjure", spellConjureRefreshmentIcon, {
-			"MAGE", spellConjureRefreshment,
+			"Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
+			"MAGE", spellNameList["Conjure Refreshment"],
 			})
 
 	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new(
-			"Consumable.Food.Conjure", spellConjureFoodIcon, {
-			"MAGE", spellConjureFood,
+			"Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
+			"MAGE", spellNameList["Conjure Refreshment"],
 			})
 
 	AutoBarCategoryList["Consumable.Water.Percentage"] = AutoBarItems:new(
@@ -1267,7 +1260,7 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new(
-			"Spell.Mage.Conjure Food", spellConjureFoodIcon, {
+			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
 			"MAGE", spellNameList["Conjure Refreshment Table"],
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
