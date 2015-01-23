@@ -1797,18 +1797,18 @@ end
 --	AutoBar:CategoriesChanged()
 --end
 
-function AutoBarButtonFood.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonFood.super.prototype.Refresh(self, parentBar, buttonDB)
-	if (AutoBar.CLASS == "MAGE") then
-		if (buttonDB.disableConjure) then
-			self:DeleteCategory("Consumable.Food.Conjure")
-			buttonDB.castSpell = nil
-			AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetCastList(nil)
-		else
-			self:AddCategory("Consumable.Food.Conjure")
-		end
-	end
-end
+--function AutoBarButtonFood.prototype:Refresh(parentBar, buttonDB)
+--	AutoBarButtonFood.super.prototype.Refresh(self, parentBar, buttonDB)
+--	if (AutoBar.CLASS == "MAGE") then
+--		if (buttonDB.disableConjure) then
+--			self:DeleteCategory("Consumable.Food.Conjure")
+--			buttonDB.castSpell = nil
+--			AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetCastList(nil)
+--		else
+--			self:AddCategory("Consumable.Food.Conjure")
+--		end
+--	end
+--end
 
 function AutoBarButtonFood.prototype:AddOptions(optionList, passValue)
 	if (AutoBar.CLASS == "MAGE") then
@@ -2901,18 +2901,18 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	end
 end
 
-function AutoBarButtonWater.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonWater.super.prototype.Refresh(self, parentBar, buttonDB)
-	if (AutoBar.CLASS == "MAGE") then
-		if (buttonDB.disableConjure) then
-			self:DeleteCategory("Consumable.Water.Conjure")
-			buttonDB.castSpell = nil
-			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(nil)
-		else
-			self:AddCategory("Consumable.Water.Conjure")
-		end
-	end
-end
+--function AutoBarButtonWater.prototype:Refresh(parentBar, buttonDB)
+--	AutoBarButtonWater.super.prototype.Refresh(self, parentBar, buttonDB)
+--	if (AutoBar.CLASS == "MAGE") then
+--		if (buttonDB.disableConjure) then
+--			self:DeleteCategory("Consumable.Water.Conjure")
+--			buttonDB.castSpell = nil
+--			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(nil)
+--		else
+--			self:AddCategory("Consumable.Water.Conjure")
+--		end
+--	end
+--end
 
 function AutoBarButtonWater.prototype:AddOptions(optionList, passValue)
 	if (AutoBar.CLASS == "MAGE") then

@@ -128,6 +128,8 @@ function AutoBar:InitializeDefaults()
 			showTooltip = true,
 			showMacrotext = true,
 			performance = false,
+			log_throttled_events = false,
+			throttle_event_limit = 1.0,
 			selfCastRightClick = true,
 			showEmptyButtons = false,
 			sticky = true,
@@ -747,6 +749,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 15,
 			enabled = true,
+			disableConjure = true,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonFoodBuff"]) then
@@ -987,6 +990,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				barKey = "AutoBarClassBarBasic",
 				defaultButtonIndex = "AutoBarButtonFood",
 				enabled = true,
+				disableConjure = true,
 				}
 		end
 
