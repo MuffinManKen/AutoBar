@@ -252,7 +252,6 @@ function AutoBar:OnInitialize()
 	AutoBar.flyable = SecureCmdOptionParse("[flyable]1")
 
 	-- Single parent for key binding overides, and event handling
-	AutoBar.frame = CreateFrame("Frame", nil, UIParent)
 	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 	AutoBar.frame:SetScript("OnEvent",
 		function(self, event, ...)
