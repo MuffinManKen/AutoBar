@@ -750,6 +750,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			defaultButtonIndex = 15,
 			enabled = true,
 			disableConjure = true,
+			include_combo_basic = true
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonFoodBuff"]) then

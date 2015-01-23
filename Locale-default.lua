@@ -23,4 +23,5 @@ atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
 
+atl("Include Basic Combo Food", "Include Basic Combo Food");
 

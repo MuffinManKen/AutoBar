@@ -1787,6 +1787,10 @@ function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
 	end
 	self:AddCategory("Muffin.Food.Health.Basic")
 	
+	if (buttonDB.include_combo_basic) then	
+		self:AddCategory("Muffin.Food.Combo.Basic")
+	end
+	
 	self:AddCategory("Consumable.Food.Percent.Basic")
 end
 
@@ -1814,6 +1818,9 @@ function AutoBarButtonFood.prototype:AddOptions(optionList, passValue)
 	if (AutoBar.CLASS == "MAGE") then
 		self:SetOptionBoolean(optionList, passValue, "disableConjure", L["Disable Conjure Button"])
 	end
+
+	self:SetOptionBoolean(optionList, passValue, "include_combo_basic", L["Include Basic Combo Food"])
+
 end
 
 
