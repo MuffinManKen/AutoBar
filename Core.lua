@@ -64,9 +64,6 @@ AutoBar.delay = {}
 
 AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
-AutoBar.BAG_UPDATE_COOLDOWN_last_tick = GetTime()
-AutoBar.throttle_limit = 1 --in seconds
-
 AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
@@ -255,6 +252,16 @@ function AutoBar:OnInitialize()
 	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 	AutoBar.frame:SetScript("OnEvent",
 		function(self, event, ...)
+			local timer_name = event .. "_last_tick"
+			local now = GetTime()
+			AutoBar[timer_name] = AutoBar[timer_name] or 0
+			
+			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
+				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")") end
+				return
+			end
+			AutoBar[timer_name] = now
+
 			AutoBar.events[event](AutoBar, ...)
 		end)
 
@@ -580,12 +587,6 @@ end
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
 
-	local now = GetTime()
-	if ((now - AutoBar.BAG_UPDATE_COOLDOWN_last_tick) < AutoBar.throttle_limit) then
---		print("Skipping BAG_UPDATE_COOLDOWN")
-		return
-	end
-
 	if (not InCombatLockdown() and not C_PetBattles.IsInBattle()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
@@ -594,7 +595,6 @@ function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 		button:UpdateCooldown()
 	end
 	
-	AutoBar.BAG_UPDATE_COOLDOWN_last_tick = now
 end
 
 

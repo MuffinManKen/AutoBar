@@ -957,7 +957,7 @@ print("AutoBar.Class.Button.prototype:BaseEventHandler")
 	local now = GetTime()
 	AutoBar[timer_name] = AutoBar[timer_name] or now
 	
-	if ((now - AutoBar[timer_name]) < AutoBar.throttle_limit) then
+	if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
 		print ("Skipping " .. e)
 		return
 	end

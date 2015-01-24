@@ -1283,6 +1283,19 @@ function AutoBar:CreateOptionsAce3()
 							order = 173,
 							name = L["Log Memory"],
 						},
+						log_throttled_events = {
+							type = "toggle",
+							order = 174,
+							name = "Log Throttled Events" --L["Log Memory"], TODO: Localize
+						},
+						throttle_event_limit = {
+							type = "range",
+							order = 175,
+							name = "Throttle Event Limit", --L["Alpha"],
+							desc = "Events happening faster than this limit are ignored (in seconds)", --L["Change the alpha of the bar."],
+							min = 0, max = 10, step = 0.1, bigStep = 0.5,
+						},
+
 						header2 = {
 							type = "header",
 							order = 200,
@@ -3074,6 +3087,16 @@ function AutoBar:CreateSmallOptions()
 					get = function() return AutoBar.db.account.performance end,
 					set = function(value)
 						AutoBar.db.account.performance = value
+					end,
+				},
+				log_throttled_events = {
+					type = "toggle",
+					order = 72,
+					name = "Log Throttled Events", --"L["Log Performance"], TODO Localize
+					desc = "Log Throttled Events", --"L["Log Performance"], TODO Localize
+					get = function() return AutoBar.db.account.log_throttled_events end,
+					set = function(value)
+						AutoBar.db.account.log_throttled_events = value
 					end,
 				},
 				logEvents = {
