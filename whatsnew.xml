@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\..\FrameXML\UI.xsd">
 
 <Frame name="AutoBarWhatsNewFrame" hidden="true" toplevel="true" frameStrata="HIGH" movable="true" enableMouse="true">
-	<Size x="330" y="200"/>
+	<Size x="340" y="220"/>
 	<Anchors><anchor point="CENTER"/></Anchors>
 
 	<Backdrop bgFile="Interface\ChatFrame\ChatFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">

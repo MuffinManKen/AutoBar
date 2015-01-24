@@ -70,8 +70,14 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TITLE = "What's New in AutoBar"
 
-WHATSNEW_TEXT = " - Improved performance by throttling out of control Blizzard events\n" ..
-	" - FIXED:Bars should no longer flicker in while Pet Battleing"
+WHATSNEW_TEXT = " - More throttling of crazy Blizzard events\n" ..
+	" - Mage: Added Ancient Dalaran Portal. Disabled by default|n" ..
+	"- Mage: Removed Mage Armor from buffs; it's Passive|n" ..
+	"- Mage: Conjure Food button is disabled on Food/Water by default|n"..
+	"- Food: Button optionally include Combo Food|n"..
+	"- Added a first cut at mining buff potions|n"..
+	"- Hearth: Added Relic of Karabor|n"..
+	"- Updated this dialog (oops)"
 
 
 function AutoBar:ConfigToggle()
