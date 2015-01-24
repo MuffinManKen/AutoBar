@@ -1219,6 +1219,8 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Flasks"] = AutoBarItems:new("Muffin.Flasks", "INV_Potion_118",
 			"Muffin.Flasks")
 
+	AutoBarCategoryList["Muffin.Potion.Buff"] = AutoBarItems:new("Muffin.Potion.Buff", "INV_Potion_118", "Muffin.Potion.Buff")
+
 	AutoBarCategoryList["Muffin.Gear.Trinket"] = AutoBarItems:new("Muffin.Gear.Trinket", "INV_Misc_OrnateBox",
 			"Muffin.Gear.Trinket")
 

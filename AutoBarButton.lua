@@ -1138,6 +1138,9 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Buff Group.Caster.Target")
 		self:AddCategory("Consumable.Buff Group.Caster.Self")
 	end
+	
+		self:AddCategory("Muffin.Potion.Buff")
+
 end
 
 

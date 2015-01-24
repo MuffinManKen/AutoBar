@@ -8,6 +8,7 @@ atl("AutoBar.Food.Mana.Basic", AutoBar.locale["Consumable.Water.Basic"]);
 atl("AutoBar.Food.Combo.Basic", AutoBar.locale["Consumable.Food.Edible.Combo.Non-Conjured"]);
 atl("AutoBar.SunsongRanch", "Sunsong Ranch");
 atl("AutoBarButtonSunsongRanch", "Sunsong Ranch");
+atl("Muffin.Potion.Buff","Muffin.Potion.Buff");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
