@@ -68,7 +68,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Arcane Brilliance"] = AutoBar:LoggedGetSpellInfo(1459)
 	spellNameList["Dalaran Brilliance"] = AutoBar:LoggedGetSpellInfo(61316)
 	spellNameList["Ice Ward"] = AutoBar:LoggedGetSpellInfo(111264)
-	spellNameList["Frost Armor"] = AutoBar:LoggedGetSpellInfo(7302)
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
 	spellNameList["Mage Armor"] = AutoBar:LoggedGetSpellInfo(6117)
 	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(115610)
@@ -1299,7 +1298,6 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellNameList["Arcane Brilliance"],
 			"MAGE", spellNameList["Dalaran Brilliance"],
 			"MAGE", spellNameList["Ice Ward"],
-			"MAGE", spellNameList["Frost Armor"],
 			"MAGE", spellNameList["Molten Armor"],
 			"MAGE", spellNameList["Slow Fall"],
 			"MONK", spellNameList["Legacy of the Emperor"],
