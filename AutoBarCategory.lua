@@ -1261,11 +1261,9 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new(
-			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
-			"MAGE", spellNameList["Conjure Refreshment Table"],
-			"MAGE", spellNameList["Conjure Refreshment"],
+			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
+			"MAGE", spellNameList["Conjure Refreshment"], spellNameList["Conjure Refreshment Table"],
 			})
-
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new(
 			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
