@@ -52,11 +52,13 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Faerie Fire"], _, spellIconList["Faerie Fire"] = AutoBar:LoggedGetSpellInfo(770)
 	spellNameList["Mark of the Wild"], _, spellIconList["Mark of the Wild"] = AutoBar:LoggedGetSpellInfo(1126)
 	spellNameList["Ironbark"] = AutoBar:LoggedGetSpellInfo(102342)
+	spellNameList["Prowl"] = AutoBar:LoggedGetSpellInfo(5215)
 
 	--Hunter
 	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
 	spellNameList["Aspect of the Pack"] = AutoBar:LoggedGetSpellInfo(13159)
 	spellNameList["Aspect of the Fox"] = AutoBar:LoggedGetSpellInfo(172106)
+	spellNameList["Camouflage"] = AutoBar:LoggedGetSpellInfo(51753)
 	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
 	spellNameList["Bestial Wrath"] = AutoBar:LoggedGetSpellInfo(19574)
 	spellNameList["Mend Pet"] = AutoBar:LoggedGetSpellInfo(136)
@@ -75,6 +77,8 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
 	spellNameList["Conjure Refreshment"], _, spellIconList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
 	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
+	spellNameList["Invisibility"], _, spellIconList["Invisibility"] = AutoBar:LoggedGetSpellInfo(66)
+	spellNameList["Greater Invisibility"], _, spellIconList["Greater Invisibility"] = AutoBar:LoggedGetSpellInfo(110959)
 
 	--Monk
 	spellNameList["Legacy of the Emperor"] = AutoBar:LoggedGetSpellInfo(115921)
@@ -103,9 +107,10 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
 	spellNameList["Deadly Poison"], _, spellIconList["Deadly Poison"] = AutoBar:LoggedGetSpellInfo(2823)
 	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
---	spellNameList["Instant Poison"] = AutoBar:LoggedGetSpellInfo(157584)
 	spellNameList["Crippling Poison"], _, spellIconList["Crippling Poison"]  = AutoBar:LoggedGetSpellInfo(3408)
 	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
+	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
+	spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellInfo(1784)
 
 	--Shaman
 	spellNameList["Earth Shield"] = AutoBar:LoggedGetSpellInfo(379)
@@ -136,6 +141,8 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(71)
 	spellNameList["Battle Stance"] = AutoBar:LoggedGetSpellInfo(2457)
 
+	--Other
+	spellNameList["Shadowmeld"], _, spellIconList["Shadowmeld"] = AutoBar:LoggedGetSpellInfo(58984)
 
 
 
@@ -1259,6 +1266,15 @@ function AutoBarCategory:Initialize()
 			})
 
 
+	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new(
+			"Spell.Stealth", spellIconList["Stealth"], {
+			"ROGUE", spellNameList["Stealth"],
+			"DRUID", spellNameList["Prowl"],
+			"MAGE", spellNameList["Invisibility"],
+			"MAGE", spellNameList["Greater Invisibility"],
+			"HUNTER", spellNameList["Camouflage"],
+			"*", spellNameList["Shadowmeld"],
+			})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new(
 			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
@@ -1276,7 +1292,6 @@ function AutoBarCategory:Initialize()
 			"Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
 			"ROGUE", spellNameList["Deadly Poison"], --*
 			"ROGUE", spellNameList["Wound Poison"], --*
---			"ROGUE", spellNameList["Instant Poison"], --*
 			})
 
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new(

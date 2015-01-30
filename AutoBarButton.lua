@@ -37,11 +37,7 @@ spellNameList["Desperate Prayer"], _, spellIconList["Desperate Prayer"] = AutoBa
 spellNameList["Vanish"], _, spellIconList["Vanish"] = AutoBar:LoggedGetSpellInfo(1856)
 spellNameList["Nature's Swiftness"], _, spellIconList["Nature's Swiftness"] = AutoBar:LoggedGetSpellInfo(132158)
 spellNameList["Frenzied Regeneration"], _, spellIconList["Frenzied Regeneration"] = AutoBar:LoggedGetSpellInfo(22842)
-spellNameList["Invisibility"], _, spellIconList["Invisibility"] = AutoBar:LoggedGetSpellInfo(66)
-spellNameList["Greater Invisibility"], _, spellIconList["Greater Invisibility"] = AutoBar:LoggedGetSpellInfo(110959)
 spellNameList["Shadowform"], _, spellIconList["Shadowform"] = AutoBar:LoggedGetSpellInfo(15473)
-spellNameList["Shadowmeld"], _, spellIconList["Shadowmeld"] = AutoBar:LoggedGetSpellInfo(58984)
-spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellInfo(1784)
 spellNameList["Wild Charge"], _, spellIconList["Wild Charge"] = AutoBar:LoggedGetSpellInfo(102401)
 spellNameList["Rune Tap"], _, spellIconList["Rune Tap"] = AutoBar:LoggedGetSpellInfo(48982)
 spellNameList["Bear Form"], _, spellIconList["Bear Form"] = AutoBar:LoggedGetSpellInfo(5487)
@@ -641,7 +637,6 @@ spellHealingTouch, _, spellHealingTouchIcon = AutoBar:LoggedGetSpellInfo(5185)
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB = AutoBar:LoggedGetSpellInfo(51005)
-local SPELL_PROWL = AutoBar:LoggedGetSpellInfo(5215)
 
 local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
@@ -2545,70 +2540,16 @@ function AutoBarButtonStance.prototype:GetLastUsed()
 end
 
 
-local AutoBarButtonStealth = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonStealth = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonStealth"] = AutoBarButtonStealth
 
 function AutoBarButtonStealth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonStealth.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
+	
+	self:AddCategory("Spell.Stealth")
 end
 
 
-function AutoBarButtonStealth.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonStealth.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	wipe(concatList)
-	concatList[1] = "/cast "
-	local index = 2
-	local macroTexture
-	if (AutoBar.CLASS == "DRUID") then
-		wipe(excludeList)
-		excludeList[spellNameList["Cat Form"]] = true
-		concatList = GetCancelList(excludeList)
-
-		local index = # concatList + 1
-		if (shapeshiftSet[spellNameList["Cat Form"]]) then
-			concatList[index] = " [nostance] "
-			concatList[index+1] = spellNameList["Cat Form"]
-			concatList[index+2] = "; "
-			concatList[index+3] = SPELL_PROWL -- [nostealth]
-			index = index+4
-
-			macroTexture = spellIconList["Cat Form"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "ROGUE") then
-		if (GetSpellInfo(spellNameList["Stealth"])) then
-			concatList[index] = spellNameList["Stealth"]
-
-			macroTexture = spellIconList["Stealth"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "MAGE") then
-		if (GetSpellInfo(spellNameList["Greater Invisibility"])) then
-			concatList[index] = spellNameList["Greater Invisibility"]
-
-			macroTexture = spellIconList["Greater Invisibility"]
-			self.macroActive = true
-		elseif (GetSpellInfo(spellNameList["Invisibility"])) then
-			concatList[index] = spellNameList["Invisibility"]
-
-			macroTexture = spellIconList["Invisibility"]
-			self.macroActive = true
-		end
-	else
-		if (GetSpellInfo(spellNameList["Shadowmeld"])) then
-			concatList[index] = spellNameList["Shadowmeld"]
-
-			macroTexture = spellIconList["Shadowmeld"]
-			self.macroActive = true
-		end
-	end
-	if (self.macroActive) then
-		local macroText = table.concat(concatList)
-		self:AddMacro(macroText, macroTexture)
-	end
-end
 
 
 local AutoBarButtonSeal = AceOO.Class(AutoBarButton)

@@ -12,6 +12,7 @@ atl("Muffin.Potion.Buff","Muffin.Potion.Buff");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
+atl("Spell.Stealth", "Spell.Stealth");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
