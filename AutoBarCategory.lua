@@ -83,6 +83,7 @@ AutoBar.categoryValidateList = {}
 	--Monk
 	spellNameList["Legacy of the Emperor"] = AutoBar:LoggedGetSpellInfo(115921)
 	spellNameList["Legacy of the White Tiger"] = AutoBar:LoggedGetSpellInfo(116781)
+	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
 
 	--Paladin
 	spellNameList["Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(20217) --*
@@ -1487,6 +1488,7 @@ function AutoBarCategory:Initialize()
 			"DRUID", spellTeleportMoonglade, spellTeleportMoonglade,
 			"SHAMAN", spellAstralRecall, spellAstralRecall,
 			"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
+			"MONK", spellNameList["Zen Pilgrimage"], spellNameList["Zen Pilgrimage"],
 			})
 			
 	local spellTeleportAncientDalaran = AutoBar:LoggedGetSpellInfo(120145)

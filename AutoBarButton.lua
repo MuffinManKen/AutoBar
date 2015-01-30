@@ -1962,12 +1962,14 @@ AutoBar.Class["AutoBarButtonHearth"] = AutoBarButtonHearth
 
 function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonHearth.super.prototype.init(self, parentBar, buttonDB)
+	
+	local class = AutoBar.CLASS
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "MAGE" or AutoBar.CLASS == "SHAMAN" or AutoBar.CLASS == "WARLOCK") then
+	if (class == "DEATHKNIGHT" or class == "DRUID" or class == "MAGE" or class == "SHAMAN" or class == "WARLOCK" or class ==  "MONK") then
 		self:AddCategory("Spell.Portals")
 	end
 
-	if(buttonDB.hearth_include_ancient_dalaran) then
+	if(buttonDB.hearth_include_ancient_dalaran and class == "MAGE") then
 		self:AddCategory("Spell.AncientDalaranPortals")
 	end
 	
