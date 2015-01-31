@@ -5,8 +5,6 @@ Credits: Saien the original author.  Sayclub (Korean), PDI175 (Chinese tradition
 Website: http://www.wowace.com/
 Description: Dynamic 24 button bar automatically adds potions, water, food and other items you specify into a button for use. Does not use action slots so you can save those for spells and abilities.
 --]]
-local REVISION = tonumber(("$Revision: 1.2 $"):match("%d+"))
-local DATE = ("$Date: 2010/12/14 01:12:09 $"):match("%d%d%d%d%-%d%d%-%d%d")
 --
 -- Copyright 2004, 2005, 2006 original author.
 -- New Stuff Copyright 2006+ Toadkiller of Proudmoore.
@@ -50,8 +48,6 @@ local _
 AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
 
 local AutoBar = AutoBar
-AutoBar.revision = REVISION
-AutoBar.date = DATE
 
 -- List of [spellName] = <GetSpellInfo Name>
 AutoBar.spellNameList = {}

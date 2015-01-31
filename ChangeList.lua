@@ -76,7 +76,6 @@
 
 [url=http://www.wowace.com/wiki/Debugging]Debugging[/url]
 
-"$Revision: 1.1 $"
 
 print
 

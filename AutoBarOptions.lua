@@ -36,11 +36,6 @@
 
 
 local AutoBar = AutoBar
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
 
 local L = AutoBar.locale
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")

@@ -23,13 +23,6 @@
 
 local AutoBar = AutoBar
 
-local REVISION = tonumber(("$Revision: 1.4 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/12/22 04:28:17 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
-
-
 local L = AutoBar.locale
 local _
 
