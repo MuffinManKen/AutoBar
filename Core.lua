@@ -561,6 +561,8 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		 AutoBarDB.whatsnew_version = this_version
 		 --AutoBarWhatsNewFrame:Show()
 		 
+		WHATSNEW_TITLE = "What's New in AutoBar"
+
 		local frame = CreateFrame("Frame", "AutoBarWhatsNewFrame", UIParent)
 		frame:SetBackdrop({
 			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
@@ -597,7 +599,6 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 		title_text:SetPoint("CENTER", header_frame, "CENTER", 0, 0)
 
-		WHATSNEW_TITLE = "What's New in AutoBar"
 
 		local text = frame:CreateFontString("AutoBarWhatsNewFrameText", "ARTWORK", "GameFontNormal")
 		text:SetTextColor(0, 1, 0, 0.9)
