@@ -557,11 +557,11 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	
 	--only mark the dialog as seen if the frame was found. This protects against someone
 	--updating the addon while in-game
-	if(AutoBarWhatsNewFrame and this_version ~= AutoBarDB.whatsnew_version .. "x") then
+	if(this_version ~= AutoBarDB.whatsnew_version) then
 		 AutoBarDB.whatsnew_version = this_version
 		 --AutoBarWhatsNewFrame:Show()
 		 
-		local frame = CreateFrame("Frame", "xAutoBarWhatsNewFrame", UIParent)
+		local frame = CreateFrame("Frame", "AutoBarWhatsNewFrame", UIParent)
 		frame:SetBackdrop({
 			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
 		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
