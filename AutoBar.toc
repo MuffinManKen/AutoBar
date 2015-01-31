@@ -54,5 +54,3 @@ AutoBarCategory.lua
 # Not currently used
 #AutoBarConfig.lua
 
-whatsnew.xml
-

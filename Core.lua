@@ -68,10 +68,9 @@ AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
-WHATSNEW_TITLE = "What's New in AutoBar"
 
-WHATSNEW_TEXT = " - More throttling of crazy Blizzard events\n" ..
-	" - Mage: Added Ancient Dalaran Portal. Disabled by default|n" ..
+WHATSNEW_TEXT = "- More throttling of crazy Blizzard events\n" ..
+	"- Mage: Added Ancient Dalaran Portal. Disabled by default|n" ..
 	"- Mage: Removed Mage Armor from buffs; it's Passive|n" ..
 	"- Mage: Conjure Food button is disabled on Food/Water by default|n"..
 	"- Food: Button optionally include Combo Food|n"..
@@ -562,9 +561,67 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	
 	--only mark the dialog as seen if the frame was found. This protects against someone
 	--updating the addon while in-game
-	if(AutoBarWhatsNewFrame and this_version ~= AutoBarDB.whatsnew_version) then
+	if(AutoBarWhatsNewFrame and this_version ~= AutoBarDB.whatsnew_version .. "x") then
 		 AutoBarDB.whatsnew_version = this_version
-		 AutoBarWhatsNewFrame:Show()
+		 --AutoBarWhatsNewFrame:Show()
+		 
+		local frame = CreateFrame("Frame", "xAutoBarWhatsNewFrame", UIParent)
+		frame:SetBackdrop({
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		 	tile = true,
+		 	tileSize = 32,
+		 	edgeSize = 32,
+		 	insets = { left = 11, right = 11, top = 11, bottom = 10 }
+		})
+		frame:SetBackdropColor(0, 0, 0, 0.9);
+		frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+
+		local header_frame = CreateFrame("Frame", "AutoBarWhatsNewHeaderFrame", frame)
+		header_frame:SetBackdrop({
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		 	tile = true,
+		 	tileSize = 28,
+		 	edgeSize = 28,
+		 	insets = { left = 5, right = 5, top = 5, bottom = 5 }
+		})
+		header_frame:SetBackdropColor(0, 0, 0, 0.9);
+		header_frame:SetPoint("CENTER", frame, "TOP", 0, 0)
+
+		local title_text = header_frame:CreateFontString("AutoBarWhatsNewTitleText", "ARTWORK", "GameFontNormal")
+		title_text:SetText(WHATSNEW_TITLE .. "|n" .. this_version)
+		title_text:SetJustifyH("CENTER")
+
+		local title_string_width = title_text:GetStringWidth()
+		local title_string_height = title_text:GetStringHeight()
+
+		header_frame:SetSize(title_string_width * 1.4, title_string_height * 1.9)
+		title_text:SetSize(title_string_width, title_string_height)
+
+		title_text:SetPoint("CENTER", header_frame, "CENTER", 0, 0)
+
+		WHATSNEW_TITLE = "What's New in AutoBar"
+
+		local text = frame:CreateFontString("AutoBarWhatsNewFrameText", "ARTWORK", "GameFontNormal")
+		text:SetTextColor(0, 1, 0, 0.9)
+		text:SetText(WHATSNEW_TEXT)
+		text:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -title_string_height)
+		text:SetJustifyH("LEFT")
+		
+		local string_width = text:GetStringWidth() 
+		local string_height = text:GetStringHeight()
+		
+		local ok_button = CreateFrame("Button", "AutoBarWhatsNewFrameOkButton", frame, "UIPanelButtonTemplate")
+		ok_button:SetText(OKAY)
+		 
+		frame:SetSize(string_width * 1.2, string_height * 1.5 + ok_button:GetHeight())
+		text:SetSize(string_width, string_height)
+		
+		ok_button:SetPoint("BOTTOM", frame, "BOTTOM", 0, 15)
+		ok_button:SetScript("OnClick", function(self, button, down) frame:Hide() end)
+
+		frame:Show()
 	end
 
 end
