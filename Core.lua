@@ -69,14 +69,14 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = "- More throttling of crazy Blizzard events\n" ..
-	"- Mage: Added Ancient Dalaran Portal. Disabled by default|n" ..
-	"- Mage: Removed Mage Armor from buffs; it's Passive|n" ..
-	"- Mage: Conjure Food button is disabled on Food/Water by default|n"..
-	"- Food: Button optionally include Combo Food|n"..
-	"- Added a first cut at mining buff potions|n"..
-	"- Hearth: Added Relic of Karabor|n"..
-	"- Updated this dialog (oops)"
+WHATSNEW_TEXT = "- Hearth: Added Wormhole Centrifuge|n" ..
+	"- Fun: Added Walter, Blingtron 5000, Deepdive Helmet|n" ..
+	"- Mage: Removed Frost Armor from Buffs; it's Passive|n" ..
+	"- Mage: Conjure Refreshment Table is the right-click on Conjure Refreshment|n" ..
+	"- Stealth: Button is now a standard spell button with tooltips|n" ..
+	"- Hunter: Added Camouflage to Stealth button|n" ..
+	"- Monk: Added Zen Pilgrimage to Hearth|n" ..
+	"- New, hopefully better, What's New dialog"
 
 
 function AutoBar:ConfigToggle()
