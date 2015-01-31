@@ -1219,7 +1219,7 @@ function AutoBar:CreateOptionsAce3()
 						header0 = {
 							type = "header",
 							order = 0,
-							name = L["AutoBar"] .. " " .. AutoBar.version .. " (" .. AutoBar.revision .. ")",
+							name = L["AutoBar"] .. " " .. AutoBar.version,
 						},
 						moveBarsMode = {
 							type = "execute",
