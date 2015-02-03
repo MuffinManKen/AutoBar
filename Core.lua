@@ -253,6 +253,13 @@ function AutoBar:OnInitialize()
 	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 	AutoBar.frame:SetScript("OnEvent",
 		function(self, event, ...)
+		
+			-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
+			if(event == "BAG_UPDATE") then
+				AutoBar.events[event](AutoBar, ...)
+				return
+			end
+			
 			local timer_name = event .. "_last_tick"
 			local now = GetTime()
 			AutoBar[timer_name] = AutoBar[timer_name] or 0
@@ -311,6 +318,7 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	AutoBar.frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
+	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
 	AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
@@ -631,18 +639,25 @@ end
 
 function AutoBar.events:BAG_UPDATE(arg1)
 	AutoBar:LogEvent("BAG_UPDATE", arg1)
+	
 	if (AutoBar.inWorld and arg1 <= NUM_BAG_FRAMES) then
 		AutoBarSearch.dirtyBags[arg1] = true
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateCount()
-			end
-		else
-			AutoBar.delay["UpdateScan"]:Start()
-		end
 	end
+	
 end
 
+function AutoBar.events:BAG_UPDATE_DELAYED()
+	AutoBar:LogEvent("BAG_UPDATE_DELAYED")
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateCount()
+		end
+	else
+		AutoBar.delay["UpdateScan"]:Start()
+
+	end
+end
 
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
