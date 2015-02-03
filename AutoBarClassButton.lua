@@ -640,8 +640,6 @@ function AutoBar.Class.Button.prototype:IsActive()
 				count = 1
 			end
 		elseif (itemType == "spell") then
-			--ToDo: Reagent based count
---			local spellName = self.frame:GetAttribute("spell")
 			count = 1
 		end
 		return count > 0
