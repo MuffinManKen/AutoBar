@@ -307,7 +307,6 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	self:UpdateButton()
 	self:EventsEnable()
 
---	self:RegisterBarEvents()
 end
 
 -- Handle a click on a popped up button
@@ -497,17 +496,14 @@ function AutoBar.Class.Button.prototype:UpdateButton()
 	self:UpdateHotkeys()
 	local itemType = frame:GetAttribute("type")
 	if (AutoBar.moveButtonsMode) then
---		self:UnregisterButtonEvents()
 		self:ShowButton()
 	elseif (itemType) then
---		self:RegisterButtonEvents()
 		self:UpdateUsable()
 		self:UpdateCooldown()
 		self:ShowButton()
 		frame:SetScript("OnUpdate", OnUpdateFunc)
 	else
 		frame:SetScript("OnUpdate", nil)
---		self:UnregisterButtonEvents()
 
 		frame.cooldown:Hide()
 		self:HideButton()
@@ -884,89 +880,6 @@ function AutoBar.Class.Button.prototype:ShowButtonOptions()
 end
 
 
-function AutoBar.Class.Button.prototype:RegisterBarEvents()
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", "BaseEventHandler")
-	self:RegisterEvent("ACTIONBAR_PAGE_CHANGED", "BaseEventHandler")
---	self:RegisterEvent("ACTIONBAR_SLOT_CHANGED", "BaseEventHandler")
-	self:RegisterEvent("UPDATE_BINDINGS", "BaseEventHandler")
-	self:RegisterEvent("UPDATE_SHAPESHIFT_FORM", "BaseEventHandler")
-end
-
-function AutoBar.Class.Button.prototype:RegisterButtonEvents()
-	if self.eventsregistered then return end
-	self.eventsregistered = true
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_AURAS_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("UNIT_INVENTORY_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_USABLE", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_STATE", "ButtonEventHandler")
-	self:RegisterEvent("UPDATE_INVENTORY_ALERTS", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_ENTER_COMBAT", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_LEAVE_COMBAT", "ButtonEventHandler")
-	self:RegisterEvent("START_AUTOREPEAT_SPELL", "ButtonEventHandler")
-	self:RegisterEvent("STOP_AUTOREPEAT_SPELL", "ButtonEventHandler")
---[[
-	self:RegisterEvent("CRAFT_SHOW", "ButtonEventHandler")
-	self:RegisterEvent("CRAFT_CLOSE", "ButtonEventHandler")
-	self:RegisterEvent("TRADE_SKILL_SHOW", "ButtonEventHandler")
-	self:RegisterEvent("TRADE_SKILL_CLOSE", "ButtonEventHandler")
---]]
-end
-
-function AutoBar.Class.Button.prototype:UnregisterButtonEvents()
-	if not self.eventsregistered then return end
-	self.eventsregistered = nil
-	self:UnregisterEvent("PLAYER_TARGET_CHANGED")
-	self:UnregisterEvent("PLAYER_AURAS_CHANGED")
-	self:UnregisterEvent("UNIT_INVENTORY_CHANGED")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_USABLE")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_STATE")
-	self:UnregisterEvent("UPDATE_INVENTORY_ALERTS")
-	self:UnregisterEvent("PLAYER_ENTER_COMBAT")
-	self:UnregisterEvent("PLAYER_LEAVE_COMBAT")
-	self:UnregisterEvent("START_AUTOREPEAT_SPELL")
-	self:UnregisterEvent("STOP_AUTOREPEAT_SPELL")
---[[
-	self:UnregisterEvent("CRAFT_SHOW")
-	self:UnregisterEvent("CRAFT_CLOSE")
-	self:UnregisterEvent("TRADE_SKILL_SHOW")
-	self:UnregisterEvent("TRADE_SKILL_CLOSE")
---]]
-end
-
---[[
-	Following Events are always set and will always be called - i call them the base events
-]]
-function AutoBar.Class.Button.prototype:BaseEventHandler(event)
-	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
-		return
-	end
-	local e = event
-
-print("AutoBar.Class.Button.prototype:BaseEventHandler")
-
-	local timer_name = e .. "last_tick"
-	local now = GetTime()
-	AutoBar[timer_name] = AutoBar[timer_name] or now
-	
-	if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
-		print ("Skipping " .. e)
-		return
-	end
-
-	if ( e == "PLAYER_ENTERING_WORLD" or e == "ACTIONBAR_PAGE_CHANGED") then
-		self:UpdateButton()
-	elseif ( e == "UPDATE_BINDINGS" ) then
-		self:UpdateHotkeys()
-	elseif ( e == "UPDATE_SHAPESHIFT_FORM" ) then
-		self:UpdateButton()
-	end
-	
-	AutoBar[timer_name] = now
-end
-
 -- Show grid feedback for droppable buttons
 function AutoBar.Class.Button.prototype:ACTIONBAR_SHOWGRID()
 --print(self.frame:GetName(), "ShowGrid")
@@ -982,53 +895,6 @@ function AutoBar.Class.Button.prototype:ACTIONBAR_HIDEGRID()
 	frame.icon:Show()
 	frame.normalTexture:Hide()
 end
-
-
---[[
-	Following Events are only set when the Button in question has a valid action - i call them the button events
-]]
-function AutoBar.Class.Button.prototype:ButtonEventHandler(event, arg1)
-	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
-		return
-	end
-  
-  print("AutoBar.Class.Button.prototype:ButtonEventHandler")
-  
-	local actionId = self.action
-	
-	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_AURAS_CHANGED" ) then
-		self:UpdateUsable()
-		self:UpdateHotkeys()
-	elseif ( event == "UNIT_INVENTORY_CHANGED" ) then
-		if ( arg1 == "player" ) then
-			self:UpdateButton()
-		end
-	elseif ( event == "ACTIONBAR_UPDATE_USABLE" or event == "UPDATE_INVENTORY_ALERTS" or event == "ACTIONBAR_UPDATE_COOLDOWN" ) then
-		self:UpdateUsable()
-		self:UpdateCooldown()
----	elseif ( event == "CRAFT_SHOW" or event == "CRAFT_CLOSE" or event == "TRADE_SKILL_SHOW" or event == "TRADE_SKILL_CLOSE" ) then
----		self:UpdateState()
----	elseif ( event == "ACTIONBAR_UPDATE_STATE" ) then
----		self:UpdateState()
-	elseif ( event == "PLAYER_ENTER_COMBAT" ) then
-		if ( IsAttackAction(actionId) ) then
-			self:StartFlash()
-		end
-	elseif ( event == "PLAYER_LEAVE_COMBAT" ) then
-		if ( IsAttackAction(actionId) ) then
-			self:StopFlash()
-		end
-	elseif ( event == "START_AUTOREPEAT_SPELL" ) then
-		if ( IsAutoRepeatAction(actionId) ) then
-			self:StartFlash()
-		end
-	elseif ( event == "STOP_AUTOREPEAT_SPELL" ) then
-		if ( self.flashing == 1 and not IsAttackAction(actionId) ) then
-			self:StopFlash()
-		end
-	end
-end
-
 
 
 -- Return a unique key to use
