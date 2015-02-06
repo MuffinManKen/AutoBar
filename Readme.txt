@@ -1,4 +1,4 @@
-All releases will be done on Curse.com AND WoWInterface.com so grab it from wherever you prefer.
+All releases will be done on Curse.com and WoWInterface.com so grab it from wherever you prefer.
 
 Main support site:
 https://muffinmangames.com
