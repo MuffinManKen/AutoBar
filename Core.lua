@@ -1345,11 +1345,12 @@ function AutoBar:UpdateButtons()
 	for buttonName, button in pairs(self.buttonListDisabled) do
 --print("   AutoBar:UpdateButtons Disabled " .. buttonName);
 		button:Disable()
-		button:UpdateCooldown()
-		button:UpdateCount()
-		button:UpdateHotkeys()
-		button:UpdateIcon()
-		button:UpdateUsable()
+		--I don't see why we should update all of these if they're disabled.
+		--button:UpdateCooldown()
+		--button:UpdateCount()
+		--button:UpdateHotkeys()
+		--button:UpdateIcon()
+		--button:UpdateUsable()
 	end
 	for buttonKey, button in pairs(self.buttonList) do
 --print("   AutoBar:UpdateButtons Enabled " .. buttonName);
