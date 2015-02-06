@@ -367,7 +367,8 @@ function AutoBar:LogEvent(eventName, arg1)
 		local memory = GetAddOnMemoryUsage("AutoBar")
 		print(eventName, "memory" , memory)
 	end
-	if (AutoBar.db.account.performance or AutoBar.db.account.logEvents) then
+--	if (AutoBar.db.account.performance or AutoBar.db.account.logEvents) then
+	if (AutoBar.db.account.logEvents) then
 		if (arg1) then
 			print(eventName, "arg1" , arg1, "time:", GetTime(), memString, memory)
 		else
@@ -385,10 +386,10 @@ function AutoBar:LogEventStart(eventName)
 	end
 	if (AutoBar.db.account.performance) then
 		if (logItems[eventName]) then
-			print(eventName, "restarted before previous completion")
+			--print(eventName, "restarted before previous completion")
 		else
 			logItems[eventName] = GetTime()
-			print(eventName, "started time:", logItems[eventName])
+			--print(eventName, "started time:", logItems[eventName])
 		end
 	end
 end
@@ -398,13 +399,15 @@ function AutoBar:LogEventEnd(eventName, arg1)
 		if (logItems[eventName]) then
 			local elapsed = GetTime() - logItems[eventName]
 			logItems[eventName] = nil
-			if (arg1) then
-				print(eventName, arg1, "time:", elapsed)
-			else
-				print(eventName, "time:", elapsed)
+			if (elapsed > 0.005) then
+				if (arg1) then
+					print(eventName, arg1, "time:", elapsed)
+				else
+					print(eventName, "time:", elapsed)
+				end
 			end
 		else
-			print(eventName, "restarted before previous completion")
+			--print(eventName, "restarted before previous completion")
 		end
 	end
 	if (AutoBar.db.account.logMemory) then
@@ -1268,8 +1271,8 @@ end
 function AutoBar:UpdateScan()
 	self:LogEventStart("AutoBar:UpdateScan")
 	AutoBarSearch:UpdateScan()
-	self:LogEventEnd("AutoBar:UpdateScan")
 	self:UpdateAttributes()
+	self:LogEventEnd("AutoBar:UpdateScan")
 end
 
 local DelayedUpdateScan = AceOO.Class(Delayed)
@@ -1293,8 +1296,8 @@ function AutoBar:UpdateAttributes()
 	for barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
 	end
-	self:LogEventEnd("AutoBar:UpdateAttributes")
 	self:UpdateActive()
+	self:LogEventEnd("AutoBar:UpdateAttributes")
 end
 
 local DelayedUpdateAttributes = AceOO.Class(Delayed)
