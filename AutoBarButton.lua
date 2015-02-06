@@ -1018,38 +1018,6 @@ function AutoBarButtonMacro.prototype:SetupButton()
 end
 
 
-AutoBarButtonSpell = AceOO.Class(AutoBarButtonMacro)
-
-function AutoBarButtonSpell.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpell.super.prototype.init(self, parentBar, buttonDB)
-end
-
---[[
-local spellButtonList = {
-	spell,
-	heal,
-	harm,
-	heal-shift,
-	harm,
-Heal / Harm, Shift / Ctrl / Alt, adjusted for autoselfcast key + Forms / Stances
-}
---]]
--- Set the state attributes of the button
-function AutoBarButtonSpell.prototype:SetupButton()
-	local buttonKey = self.buttonDB.buttonKey
-	local frame = self.frame
-
-	if (self.macroText and self.buttonDB.enabled) then
---AutoBar:Print("AutoBarButtonSpell.prototype:SetupButton buttonKey " .. tostring(buttonKey) .. " frame " .. tostring(frame))
-		frame:Show()
-
-		self:SetupAttributes(self, nil, nil, nil, buttonKey)
-	else
-		frame:Hide()
-	end
-end
-
-
 local AutoBarButtonAspect = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonAspect"] = AutoBarButtonAspect
 
@@ -2446,62 +2414,6 @@ function AutoBarButtonSpeed.prototype:init(parentBar, buttonDB)
 	AutoBarButtonSpeed.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Buff.Speed")
-end
-
-
-local AutoBarButtonSpell1 = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSpell1"] = AutoBarButtonSpell1
-
-function AutoBarButtonSpell1.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpell1.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS == "DRUID") then
-	elseif (AutoBar.CLASS == "ROGUE") then
-	elseif (AutoBar.CLASS == "WARRIOR") then
-	elseif (AutoBar.CLASS == "MAGE") then
-	end
-end
-
-
-local AutoBarButtonSpell2 = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSpell2"] = AutoBarButtonSpell2
-
-function AutoBarButtonSpell2.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpell2.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS == "DRUID") then
-	elseif (AutoBar.CLASS == "ROGUE") then
-	elseif (AutoBar.CLASS == "WARRIOR") then
-	elseif (AutoBar.CLASS == "MAGE") then
-	end
-end
-
-
-local AutoBarButtonSpell3 = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSpell3"] = AutoBarButtonSpell3
-
-function AutoBarButtonSpell3.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpell3.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS == "DRUID") then
-	elseif (AutoBar.CLASS == "ROGUE") then
-	elseif (AutoBar.CLASS == "WARRIOR") then
-	elseif (AutoBar.CLASS == "MAGE") then
-	end
-end
-
-
-local AutoBarButtonSpell4 = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSpell4"] = AutoBarButtonSpell4
-
-function AutoBarButtonSpell4.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpell4.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS == "DRUID") then
-	elseif (AutoBar.CLASS == "ROGUE") then
-	elseif (AutoBar.CLASS == "WARRIOR") then
-	elseif (AutoBar.CLASS == "MAGE") then
-	end
 end
 
 
