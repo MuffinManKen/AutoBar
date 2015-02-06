@@ -1983,17 +1983,6 @@ _, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
 function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 
-	--self:AddCategory("Misc.Mount.Normal")
-	--self:AddCategory("Misc.Mount.Summoned")
-	--self:AddCategory("Misc.Mount.Flying")
---[[
-	--- ToDo: filtering based on these
---	self:AddCategory("Misc.Spell.Mount.Ahn'Qiraj")
-	self:AddCategory("Misc.Spell.Mount.Flying.Fast")
-	self:AddCategory("Misc.Spell.Mount.Flying.Slow")
-	self:AddCategory("Misc.Spell.Mount.Ground.Fast")
-	self:AddCategory("Misc.Spell.Mount.Ground.Slow")
---]]
 	if (not AutoBarCategoryList["Spell.Mount"]) then
 		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
 		AutoBarCategoryList["Spell.Mount"]:SetNoSpellCheck(true)
@@ -2093,7 +2082,6 @@ end
 /dump GetSpellInfo(43688)
 /dump GetSpellInfo("Amani War Bear")
 /dump AutoBarCategoryList["Spell.Mount"]
-/dump AutoBarCategoryList["Misc.Mount.Summoned"]
 /script AutoBarSearch.sorted:Update("AutoBarButtonMount")
 /dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
 --]]

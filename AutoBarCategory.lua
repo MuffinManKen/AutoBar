@@ -1007,33 +1007,10 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Misc.Booze"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Misc.Mount.Normal"] = AutoBarItems:new(
-			"Misc.Mount.Normal", "Ability_Mount_JungleTiger", "Misc.Mount.Normal")
-	AutoBarCategoryList["Misc.Mount.Normal"]:SetNonCombat(true)
-
---	AutoBarCategoryList["Misc.Mount.Ahn'Qiraj"] = AutoBarItems:new(
---			"Misc.Mount.Ahn'Qiraj", "INV_Misc_QirajiCrystal_05", "Misc.Mount.Ahn'Qiraj")
---	AutoBarCategoryList["Misc.Mount.Ahn'Qiraj"]:SetNonCombat(true)
---	AutoBarCategoryList["Misc.Mount.Ahn'Qiraj"]:SetLocation(BZ["Ahn'Qiraj"])
-
-	AutoBarCategoryList["Misc.Mount.Flying"] = AutoBarItems:new(
-			"Misc.Mount.Flying", "Ability_Mount_Wyvern_01", "Misc.Mount.Flying")
-	AutoBarCategoryList["Misc.Mount.Flying"]:SetNonCombat(true)
-
 	AutoBarCategoryList["Muffin.Misc.Openable"] = AutoBarItems:new(
 			"Muffin.Misc.Openable", "INV_Misc_Bag_17", "Muffin.Misc.Openable")
 
---[[
---	AutoBarCategoryList["Misc.Spell.Mount.Ahn'Qiraj"] = AutoBarSpells:new(
---			"Misc.Spell.Mount.Ahn'Qiraj", "Ability_Mount_Wyvern_01", nil, nil, "Misc.Spell.Mount.Ahn'Qiraj")
---	AutoBarCategoryList["Misc.Mount.Flying"]:SetNonCombat(true)
 
---	self:AddCategory("Misc.Spell.Mount.Ahn'Qiraj")
-	self:AddCategory("Misc.Spell.Mount.Flying.Fast")
-	self:AddCategory("Misc.Spell.Mount.Flying.Slow")
-	self:AddCategory("Misc.Spell.Mount.Ground.Fast")
-	self:AddCategory("Misc.Spell.Mount.Ground.Slow")
---]]
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation"] = AutoBarItems:new(
 			"Consumable.Cooldown.Potion.Rejuvenation", "INV_Potion_47", "Consumable.Cooldown.Potion.Rejuvenation")
 
