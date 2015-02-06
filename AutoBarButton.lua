@@ -679,7 +679,6 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		elseif (targeted == "WEAPON") then
 			frame:SetAttribute("target-slot1", 16)
 			frame:SetAttribute("target-slot2", 17)
-			frame:SetAttribute("target-slot3", 18)
 		elseif (targeted == TRINKET1_SLOT) then
 			frame:SetAttribute("target-slot1", TRINKET1_SLOT)
 			frame:SetAttribute("target-slot2", TRINKET2_SLOT)
