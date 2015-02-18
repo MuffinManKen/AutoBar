@@ -15,6 +15,9 @@ Changes:
 v6.0.2.17 --pending
  - Streamlined bag update handling; it should be faster but still accurate
  - AutoBar will no longer show items you're too low level to use
+ - Monk: Fortifying Brew added to Shield button
+ - Monk: Storm, Earth, and Fire added to Class Pet
+ - Monk: ER button removed (was empty anyway)
 
 v6.0.2.16
  - Hearth: Added Wormhole Centrifuge
