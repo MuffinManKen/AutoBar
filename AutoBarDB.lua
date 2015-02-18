@@ -1135,7 +1135,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS ~= "WARLOCK") then
+	if (AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "MONK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonER"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonER"] = {
 				buttonKey = "AutoBarButtonER",
@@ -1293,6 +1293,10 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			AutoBar.db.char.buttonList[dep] = nil
 		end
 		
+	end
+	
+	if(AutoBar.CLASS == "MONK" and AutoBar.db.class.buttonList["AutoBarButtonER"]) then
+		AutoBar.db.class.buttonList["AutoBarButtonER"] = nil
 	end
 
 end

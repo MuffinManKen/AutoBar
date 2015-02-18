@@ -78,7 +78,8 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Legacy of the Emperor"] = AutoBar:LoggedGetSpellInfo(115921)
 	spellNameList["Legacy of the White Tiger"] = AutoBar:LoggedGetSpellInfo(116781)
 	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
-
+	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
+	
 	--Paladin
 	spellNameList["Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(20217) --*
 	spellNameList["Blessing of Might"] = AutoBar:LoggedGetSpellInfo(19740) --*
@@ -1324,11 +1325,11 @@ function AutoBarCategory:Initialize()
 	local spellEarthElementalTotem = AutoBar:LoggedGetSpellInfo(2062)
 	local spellFireElementalTotem = AutoBar:LoggedGetSpellInfo(2894)
 
-	--Druid
-
-
 	--Mage
 	local spellSummonWaterElemental = AutoBar:LoggedGetSpellInfo(31687)
+
+	--Monk
+	local spellStormEarthFire = AutoBar:LoggedGetSpellInfo(137639)
 
 	--Warlock
 	local spellEyeOfKilrogg = AutoBar:LoggedGetSpellInfo(126)
@@ -1357,6 +1358,7 @@ function AutoBarCategory:Initialize()
 			"HUNTER", spellCallPet4, 
 			"HUNTER", spellCallPet5, 
 			"MAGE", spellSummonWaterElemental,
+			"MONK", spellStormEarthFire,
 			"PRIEST", spellShadowfiend,
 			"SHAMAN", spellEarthElementalTotem,
 			"SHAMAN", spellFireElementalTotem,
@@ -1472,21 +1474,22 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new(
 			"Spell.Shields", spellIconList["Ice Barrier"], nil, {
 			"DEATHKNIGHT", spellNameList["Bone Shield"], spellNameList["Bone Shield"],
-			"DRUID", spellNameList["Barkskin"], spellNameList["Barkskin"],
-			"MAGE", spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
-			"MAGE", spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
-			"PALADIN", spellNameList["Divine Protection"], spellNameList["Hand of Sacrifice"],
-			"PALADIN", spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
-			"PRIEST", spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
-			"ROGUE", spellNameList["Evasion"], spellNameList["Evasion"],
-			"SHAMAN", spellNameList["Earth Shield"], spellNameList["Earth Shield"],
-			"SHAMAN", spellNameList["Lightning Shield"], spellNameList["Lightning Shield"],
-			"SHAMAN", spellNameList["Water Shield"], spellNameList["Water Shield"],
-			"WARLOCK", spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
-			"WARLOCK", spellNameList["Dark Bargain"], spellNameList["Dark Bargain"],
-			"WARLOCK", spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
-			"WARRIOR", spellNameList["Shield Block"], spellNameList["Shield Block"],
-			"WARRIOR", spellNameList["Shield Wall"], spellNameList["Shield Wall"],
+			"DRUID", 		spellNameList["Barkskin"], 	spellNameList["Barkskin"],
+			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
+			"MAGE", 			spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
+			"MONK", 			spellNameList["Fortifying Brew"], spellNameList["Fortifying Brew"],
+			"PALADIN", 		spellNameList["Divine Protection"], spellNameList["Hand of Sacrifice"],
+			"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
+			"PRIEST", 		spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
+			"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
+			"SHAMAN", 		spellNameList["Earth Shield"], spellNameList["Earth Shield"],
+			"SHAMAN", 		spellNameList["Lightning Shield"], spellNameList["Lightning Shield"],
+			"SHAMAN", 		spellNameList["Water Shield"], spellNameList["Water Shield"],
+			"WARLOCK", 		spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
+			"WARLOCK", 		spellNameList["Dark Bargain"], spellNameList["Dark Bargain"],
+			"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
+			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
+			"WARRIOR", 		spellNameList["Shield Wall"], spellNameList["Shield Block"],
 			})
 end
 
