@@ -1040,6 +1040,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Buff.Rage"] = AutoBarItems:new(
 			"Consumable.Buff.Rage", "INV_Potion_24", "Consumable.Buff.Rage")
 
+	AutoBarCategoryList["Muffin.Potion.Rage"] = AutoBarItems:new(
+			"Muffin.Potion.Rage", "INV_Potion_24", "Muffin.Potion.Rage")
+
 	AutoBarCategoryList["Consumable.Buff.Energy"] = AutoBarItems:new(
 			"Consumable.Buff.Energy", "INV_Drink_Milk_05", "Consumable.Buff.Energy")
 

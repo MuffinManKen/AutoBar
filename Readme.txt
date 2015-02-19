@@ -18,6 +18,8 @@ v6.0.2.17 --pending
  - Monk: Fortifying Brew added to Shield button
  - Monk: Storm, Earth, and Fire added to Class Pet
  - Monk: ER button removed (was empty anyway)
+ - Druid: Potion Cooldown Mana and Mana buttons will now show Rage potions
+ - Rage Potions: Added Pure Rage Potion
 
 v6.0.2.16
  - Hearth: Added Wormhole Centrifuge

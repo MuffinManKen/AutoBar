@@ -2256,9 +2256,14 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "ROGUE") then
 		self:AddCategory("Consumable.Buff.Energy")
-	elseif (AutoBar.CLASS == "WARRIOR") then
+	end
+	
+	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
 		self:AddCategory("Consumable.Buff.Rage")
-	elseif  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+		self:AddCategory("Muffin.Potion.Rage")
+	end
+
+	if  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 	
@@ -2347,18 +2352,18 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "ROGUE") then
 		self:AddCategory("Consumable.Buff.Energy")
-	elseif (AutoBar.CLASS == "WARRIOR") then
+	end
+	
+	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
 		self:AddCategory("Consumable.Buff.Rage")
-	else
-		self:AddCategory("Muffin.Potion.Mana")
+		self:AddCategory("Muffin.Potion.Rage")
+	end
 
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Basic")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Pvp")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Coilfang")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Tempest Keep")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Blades Edge")
+	if(AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+		self:AddCategory("Muffin.Potion.Mana")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
 	end
+
 end
 
 

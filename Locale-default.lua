@@ -9,6 +9,7 @@ atl("AutoBar.Food.Combo.Basic", AutoBar.locale["Consumable.Food.Edible.Combo.Non
 atl("AutoBar.SunsongRanch", "Sunsong Ranch");
 atl("AutoBarButtonSunsongRanch", "Sunsong Ranch");
 atl("Muffin.Potion.Buff","Muffin.Potion.Buff");
+atl("Muffin.Potion.Rage","Muffin.Potion.Rage");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
