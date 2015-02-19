@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.0.2.18
+ - Updated the What's New dialog with the stuff from 6.0.2.17. Oops.
+
 v6.0.2.17
  - Streamlined bag update handling; it should be faster but still accurate
  - AutoBar will no longer show items you're too low level to use

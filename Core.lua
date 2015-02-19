@@ -65,14 +65,14 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = "- Hearth: Added Wormhole Centrifuge|n" ..
-	"- Fun: Added Walter, Blingtron 5000, Deepdive Helmet|n" ..
-	"- Mage: Removed Frost Armor from Buffs; it's Passive|n" ..
-	"- Mage: Conjure Refreshment Table is the right-click on Conjure Refreshment|n" ..
-	"- Stealth: Button is now a standard spell button with tooltips|n" ..
-	"- Hunter: Added Camouflage to Stealth button|n" ..
-	"- Monk: Added Zen Pilgrimage to Hearth|n" ..
-	"- New, hopefully better, What's New dialog"
+WHATSNEW_TEXT = "- Streamlined bag update handling; it should be faster but still accurate|n" ..
+ "- AutoBar will no longer show items you're too low level to use|n" ..
+ "- Monk: Fortifying Brew added to Shield button|n" ..
+ "- Monk: Storm, Earth, and Fire added to Class Pet|n" ..
+ "- Monk: ER button removed (was empty anyway)|n" ..
+ "- Druid: Potion Cooldown Mana and Mana buttons will now show Rage potions|n" ..
+ "- Rage Potions: Added Pure Rage Potion|n" ..
+ "- Garrison: Added Weapon and Armor Enhancement Tokens"
 
 
 function AutoBar:ConfigToggle()
