@@ -3,3 +3,4 @@ test.bat
 xcopy_ignore.txt
 CVS
 .git
+media
