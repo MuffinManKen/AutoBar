@@ -565,7 +565,6 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	--updating the addon while in-game
 	if(this_version ~= AutoBarDB.whatsnew_version) then
 		 AutoBarDB.whatsnew_version = this_version
-		 --AutoBarWhatsNewFrame:Show()
 		 
 		WHATSNEW_TITLE = "What's New in AutoBar"
 
@@ -609,7 +608,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		local text = frame:CreateFontString("AutoBarWhatsNewFrameText", "ARTWORK", "GameFontNormal")
 		text:SetTextColor(0, 1, 0, 0.9)
 		text:SetText(WHATSNEW_TEXT)
-		text:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -title_string_height)
+		text:SetPoint("LEFT", frame, "LEFT", 20, 0)
 		text:SetJustifyH("LEFT")
 		
 		local string_width = text:GetStringWidth() 
@@ -618,7 +617,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		local ok_button = CreateFrame("Button", "AutoBarWhatsNewFrameOkButton", frame, "UIPanelButtonTemplate")
 		ok_button:SetText(OKAY)
 		 
-		frame:SetSize(string_width * 1.2, string_height * 1.5 + ok_button:GetHeight())
+		frame:SetSize(math.max(string_width * 1.2, 300), math.max(string_height * 1.5, 100) + ok_button:GetHeight())
 		text:SetSize(string_width, string_height)
 		
 		ok_button:SetPoint("BOTTOM", frame, "BOTTOM", 0, 15)
