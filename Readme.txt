@@ -12,6 +12,10 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.1.0.00
+ - Updated libs
+ - TOC bump for Patch 6.1
+
 v6.0.2.18
  - Updated the What's New dialog with the stuff from 6.0.2.17. Oops.
 

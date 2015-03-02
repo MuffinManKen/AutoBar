@@ -65,14 +65,9 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = "- Streamlined bag update handling; it should be faster but still accurate|n" ..
- "- AutoBar will no longer show items you're too low level to use|n" ..
- "- Monk: Fortifying Brew added to Shield button|n" ..
- "- Monk: Storm, Earth, and Fire added to Class Pet|n" ..
- "- Monk: ER button removed (was empty anyway)|n" ..
- "- Druid: Potion Cooldown Mana and Mana buttons will now show Rage potions|n" ..
- "- Rage Potions: Added Pure Rage Potion|n" ..
- "- Garrison: Added Weapon and Armor Enhancement Tokens"
+WHATSNEW_TEXT = " - Updated libs|n" ..
+" - TOC bump for Patch 6.1"
+
 
 
 function AutoBar:ConfigToggle()
