@@ -66,7 +66,8 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = " - Updated libs|n" ..
-" - TOC bump for Patch 6.1"
+" - TOC bump for Patch 6.1|n" ..
+" - What's New dialog kept popping"
 
 
 
