@@ -545,7 +545,7 @@ if (GetLocale() == "zhCN") then
 		["Misc.Reagent.Ammo.Arrow"] = "箭";
 		["Misc.Reagent.Ammo.Bullet"] = "子弹";
 		["Misc.Reagent.Ammo.Thrown"] = "投掷武器";
-		["Misc.Explosives"] = "工程学爆炸物";-- Check
+		["Muffin.Explosives"] = "工程学爆炸物";-- Check
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="坐骑: 其拉甲虫",
 		["Misc.Spell.Mount.Flying.Fast"]="坐骑: 快速飞行",

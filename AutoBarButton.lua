@@ -1717,7 +1717,7 @@ AutoBar.Class["AutoBarButtonExplosive"] = AutoBarButtonExplosive
 function AutoBarButtonExplosive.prototype:init(parentBar, buttonDB)
 	AutoBarButtonExplosive.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Misc.Explosives")
+	self:AddCategory("Muffin.Explosives")
 end
 
 

@@ -545,7 +545,7 @@ if (GetLocale() == "koKR") then
 		["Misc.Reagent.Ammo.Arrow"] = "화살";
 		["Misc.Reagent.Ammo.Bullet"] = "탄환";
 		["Misc.Reagent.Ammo.Thrown"] = "투척 무기류";
-		["Misc.Explosives"] = "폭발물";
+		["Muffin.Explosives"] = "폭발물";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="탈것: 퀴라지",
 		["Misc.Spell.Mount.Flying.Fast"]="탈것: 빠른 날것",

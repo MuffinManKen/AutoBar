@@ -546,7 +546,7 @@ if (GetLocale() == "deDE") then
 		["Misc.Reagent.Ammo.Arrow"] = "Pfeile",
 		["Misc.Reagent.Ammo.Bullet"] = "Patronen",
 		["Misc.Reagent.Ammo.Thrown"] = "Wurfwaffen",
-		["Misc.Explosives"] = "Sprengstoffe",
+		["Muffin.Explosives"] = "Sprengstoffe",
 
 		["Spell.Mount"] = "Mount Spells";
 

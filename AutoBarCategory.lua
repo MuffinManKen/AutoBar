@@ -676,9 +676,9 @@ function AutoBarCategory:Initialize()
 			"Misc.Battle Standard.Alterac Valley", "INV_BannerPVP_02", "Misc.Battle Standard.Alterac Valley")
 	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
-	AutoBarCategoryList["Misc.Explosives"] = AutoBarItems:new(
-			"Misc.Explosives", "INV_Misc_Bomb_08", "Misc.Explosives")
-	AutoBarCategoryList["Misc.Explosives"]:SetTargeted(true)
+	AutoBarCategoryList["Muffin.Explosives"] = AutoBarItems:new(
+			"Muffin.Explosives", "INV_Misc_Bomb_08", "Muffin.Explosives")
+	AutoBarCategoryList["Muffin.Explosives"]:SetTargeted(true)
 
 	AutoBarCategoryList["Misc.Engineering.Fireworks"] = AutoBarItems:new(
 			"Misc.Engineering.Fireworks", "INV_Misc_MissileSmall_Red", "Misc.Engineering.Fireworks")

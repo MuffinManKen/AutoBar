@@ -551,7 +551,7 @@ if (GetLocale() == "ptBR") then
 		["Misc.Reagent.Ammo.Arrow"] = "Arrows";
 		["Misc.Reagent.Ammo.Bullet"] = "Bullets";
 		["Misc.Reagent.Ammo.Thrown"] = "Thrown Weapons";
-		["Misc.Explosives"] = "Explosives";
+		["Muffin.Explosives"] = "Explosives";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="Mounts: Qiraji",
 		["Misc.Spell.Mount.Flying.Fast"]="Mounts: Fast Flying",

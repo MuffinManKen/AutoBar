@@ -545,7 +545,7 @@ if (GetLocale() == "ruRU") then
 		["Misc.Reagent.Ammo.Arrow"] = "Стрелы";
 		["Misc.Reagent.Ammo.Bullet"] = "Пули";
 		["Misc.Reagent.Ammo.Thrown"] = "Метательное Оружие";
-		["Misc.Explosives"] = "Взрывчатка";
+		["Muffin.Explosives"] = "Взрывчатка";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="Транспорт: киражейские",
 		["Misc.Spell.Mount.Flying.Fast"]="Транспорт: быстрые летуны",
