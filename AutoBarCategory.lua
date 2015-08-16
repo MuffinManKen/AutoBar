@@ -1125,6 +1125,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Buff.Water Breathing"] = AutoBarItems:new("Consumable.Buff.Water Breathing", "INV_Potion_80",
 			"Consumable.Buff.Water Breathing")
 
+	AutoBarCategoryList["Muffin.Potion.Water Breathing"] = AutoBarItems:new("Muffin.Potion.Water Breathing", "INV_Potion_80",
+			"Muffin.Potion.Water Breathing")
+
 --[[
 	AutoBarCategoryList["Consumable.Buff.Other.Target"] = AutoBarItems:new("Consumable.Buff.Other.Target", "INV_Potion_80",
 			"Consumable.Buff.Other.Target")

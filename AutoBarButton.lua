@@ -1093,6 +1093,8 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Buff Group.General.Self")
 	self:AddCategory("Consumable.Buff.Water Breathing")
 
+	self:AddCategory("Muffin.Potion.Water Breathing")
+
 
 	-- Melee
 	if (AutoBar.CLASS ~= "MAGE" and AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "PRIEST") then
