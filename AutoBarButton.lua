@@ -1975,6 +1975,13 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	
 	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
+	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
+
+	if(buttonDB.mount_show_class == true) then
+		self:AddCategory("Misc.Mount.Summoned")
+		local class = AutoBar.CLASS
+		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then self:AddCategory("Muffin.Mount") end
+	end
 
 	buttonData.SetBest = self.SetBest
 	self.flyable = -1
@@ -2049,6 +2056,7 @@ end
 function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
+	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
 end
 
 function AutoBarButtonMount.prototype:Learned(parentBar, buttonDB, updateMount)

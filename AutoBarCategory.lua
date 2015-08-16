@@ -1698,6 +1698,10 @@ function AutoBarCategory:Initialize2()
 			"*",spellNameList["Running Wild"],
 			})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
+	
+	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount")
+	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
+
 end
 
 
