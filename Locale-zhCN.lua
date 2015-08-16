@@ -542,9 +542,6 @@ if (GetLocale() == "zhCN") then
 		["Consumable.Buff Type.Guardian"] = "增益: 防护药剂";
 		["Consumable.Buff Type.Flask"] = "增益: 合剂";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "灵魂碎片";
-		["Misc.Reagent.Ammo.Arrow"] = "箭";
-		["Misc.Reagent.Ammo.Bullet"] = "子弹";
-		["Misc.Reagent.Ammo.Thrown"] = "投掷武器";
 		["Muffin.Explosives"] = "工程学爆炸物";-- Check
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="坐骑: 其拉甲虫",

@@ -542,9 +542,6 @@ if (GetLocale() == "ruRU") then
 		["Consumable.Buff Type.Guardian"] = "Бафф: Защитные Эликсиры";
 		["Consumable.Buff Type.Flask"] = "Бафф: Фляжка";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "Осколки души";
-		["Misc.Reagent.Ammo.Arrow"] = "Стрелы";
-		["Misc.Reagent.Ammo.Bullet"] = "Пули";
-		["Misc.Reagent.Ammo.Thrown"] = "Метательное Оружие";
 		["Muffin.Explosives"] = "Взрывчатка";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="Транспорт: киражейские",

@@ -543,9 +543,6 @@ if (GetLocale() == "deDE") then
 		["Consumable.Buff Type.Guardian"] = "Buff: Wächterelixier",
 		["Consumable.Buff Type.Flask"] = "Buff: Fläschchen",
 		["AUTOBAR_CLASS_SOULSHARDS"] = "Seelensteine",
-		["Misc.Reagent.Ammo.Arrow"] = "Pfeile",
-		["Misc.Reagent.Ammo.Bullet"] = "Patronen",
-		["Misc.Reagent.Ammo.Thrown"] = "Wurfwaffen",
 		["Muffin.Explosives"] = "Sprengstoffe",
 
 		["Spell.Mount"] = "Mount Spells";

@@ -541,9 +541,6 @@ if (GetLocale() == "esES") then
 		["Consumable.Buff Type.Guardian"] = "Buff: Elixir del Guardian";
 		["Consumable.Buff Type.Flask"] = "Buff: Frasco";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "Fragmentos del Alma";
-		["Misc.Reagent.Ammo.Arrow"] = "Flechas";
-		["Misc.Reagent.Ammo.Bullet"] = "Balas";
-		["Misc.Reagent.Ammo.Thrown"] = "Armas Arrojadizas";
 		["Muffin.Explosives"] = "Explosivos";
 
 		["Spell.Mount"] = "Mount Spells";

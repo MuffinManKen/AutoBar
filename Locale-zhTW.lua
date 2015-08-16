@@ -542,9 +542,6 @@ if (GetLocale() == "zhTW") then
 		["Consumable.Buff Type.Guardian"] = "增益: 防護藥劑";
 		["Consumable.Buff Type.Flask"] = "增益: 精煉";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "靈魂裂片";
-		["Misc.Reagent.Ammo.Arrow"] = "箭";
-		["Misc.Reagent.Ammo.Bullet"] = "子彈";
-		["Misc.Reagent.Ammo.Thrown"] = "投擲武器";
 		["Muffin.Explosives"] = "爆裂物";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="坐騎: 其拉甲蟲",

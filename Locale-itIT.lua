@@ -549,9 +549,6 @@ if (GetLocale() == "itIT") then
 		["Consumable.Buff Type.Guardian"] = "Buff: Guardian Elixir";
 		["Consumable.Buff Type.Flask"] = "Buff: Flask";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "Soul Shards";
-		["Misc.Reagent.Ammo.Arrow"] = "Arrows";
-		["Misc.Reagent.Ammo.Bullet"] = "Bullets";
-		["Misc.Reagent.Ammo.Thrown"] = "Thrown Weapons";
 		["Muffin.Explosives"] = "Explosives";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="Mounts: Qiraji",

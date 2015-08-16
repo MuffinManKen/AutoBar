@@ -542,9 +542,6 @@ if (GetLocale() == "koKR") then
 		["Consumable.Buff Type.Guardian"] = "버프: 강화 비약";
 		["Consumable.Buff Type.Flask"] = "버프: 영약";
 		["AUTOBAR_CLASS_SOULSHARDS"] = "영혼석";
-		["Misc.Reagent.Ammo.Arrow"] = "화살";
-		["Misc.Reagent.Ammo.Bullet"] = "탄환";
-		["Misc.Reagent.Ammo.Thrown"] = "투척 무기류";
 		["Muffin.Explosives"] = "폭발물";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="탈것: 퀴라지",
