@@ -1172,6 +1172,18 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				arrangeOnUse = true,
 			}
 		end
+		
+		if (not AutoBar.db.class.buttonList["AutoBarButtonAmmo"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonAmmo"] = {
+				buttonKey = "AutoBarButtonAmmo",
+				buttonClass = "AutoBarButtonAmmo",
+				barKey = AutoBar.classBar,
+				defaultButtonIndex = "*",
+				enabled = true,
+				arrangeOnUse = true,
+			}
+		end
+
 	end
 
 	if (AutoBar.CLASS == "ROGUE") then

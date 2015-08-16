@@ -12,6 +12,10 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.2.0.00
+ - Updated libs
+ - TOC bump for Patch 6.2
+
 v6.1.0.01
  - What's New dialog kept popping
 

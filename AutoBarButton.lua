@@ -1027,6 +1027,15 @@ function AutoBarButtonAspect.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Aspect")
 end
 
+local AutoBarButtonAmmo = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonAmmo"] = AutoBarButtonAmmo
+
+function AutoBarButtonAmmo.prototype:init(parentBar, buttonDB)
+	AutoBarButtonAmmo.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.Ammo")
+end
+
 local AutoBarButtonPoisonLethal = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 
@@ -1082,6 +1091,8 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Buff.Other.Self")
 	self:AddCategory("Consumable.Buff Group.General.Target")
 	self:AddCategory("Consumable.Buff Group.General.Self")
+	self:AddCategory("Consumable.Buff.Water Breathing")
+
 
 	-- Melee
 	if (AutoBar.CLASS ~= "MAGE" and AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "PRIEST") then

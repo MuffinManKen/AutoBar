@@ -362,7 +362,7 @@ function Stuff.prototype:ScanInventory()
 	local name, itemId, oldItemId
 
 	-- Scan equipped items
-	for slot = 0, 19 do
+	for slot = 1, 19 do
 		name, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", slot))
 		oldItemId = slotList[slot]
 
@@ -448,7 +448,7 @@ function Stuff.prototype:Scan()
 		AutoBarSearch.dirtyBags.spells = nil
 	end
 	if (AutoBarSearch.dirtyBags.macros) then
---AutoBar:Print("Stuff.prototype:Scan    scanning spells ");
+--AutoBar:Print("Stuff.prototype:Scan    scanning macros ");
 		self:ScanMacros()
 		AutoBarSearch.dirtyBags.macros = nil
 	end
@@ -1195,9 +1195,9 @@ end
 function AutoBarSearch:UpdateScan()
 --AutoBar:Print("AutoBarSearch:Reset Start")
 	-- ToDo: reimplement the dirty code
-	for i = 0, 4, 1 do
-		AutoBarSearch.dirtyBags[i] = true
-	end
+--	for i = 0, 4, 1 do
+--		AutoBarSearch.dirtyBags[i] = true
+--	end
 	AutoBarSearch.dirtyBags.inventory = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true

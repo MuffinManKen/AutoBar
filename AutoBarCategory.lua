@@ -51,7 +51,6 @@ AutoBar.categoryValidateList = {}
 	--Hunter
 	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
 	spellNameList["Aspect of the Pack"] = AutoBar:LoggedGetSpellInfo(13159)
-	spellNameList["Aspect of the Fox"] = AutoBar:LoggedGetSpellInfo(172106)
 	spellNameList["Camouflage"] = AutoBar:LoggedGetSpellInfo(51753)
 	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
 	spellNameList["Bestial Wrath"] = AutoBar:LoggedGetSpellInfo(19574)
@@ -59,6 +58,9 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Intimidation"] = AutoBar:LoggedGetSpellInfo(7093)
 	spellNameList["Master's Call"] = AutoBar:LoggedGetSpellInfo(53271)
 	spellNameList["Feed Pet"], _, spellIconList["Feed Pet"] = AutoBar:LoggedGetSpellInfo(6991)
+	spellNameList["Incendiary Ammo"] = AutoBar:LoggedGetSpellInfo(162536)
+	spellNameList["Poisoned Ammo"] = AutoBar:LoggedGetSpellInfo(162537)
+	spellNameList["Frozen Ammo"] = AutoBar:LoggedGetSpellInfo(162539)
 
 	--Mage
 	spellNameList["Arcane Brilliance"] = AutoBar:LoggedGetSpellInfo(1459)
@@ -1120,6 +1122,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Buff.Other.Self"] = AutoBarItems:new("Consumable.Buff.Other.Self", "INV_Potion_80",
 			"Consumable.Buff.Other.Self")
 
+	AutoBarCategoryList["Consumable.Buff.Water Breathing"] = AutoBarItems:new("Consumable.Buff.Water Breathing", "INV_Potion_80",
+			"Consumable.Buff.Water Breathing")
+
 --[[
 	AutoBarCategoryList["Consumable.Buff.Other.Target"] = AutoBarItems:new("Consumable.Buff.Other.Target", "INV_Potion_80",
 			"Consumable.Buff.Other.Target")
@@ -1261,8 +1266,15 @@ function AutoBarCategory:Initialize()
 			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
 			"HUNTER", spellNameList["Aspect of the Cheetah"], --*
 			"HUNTER", spellNameList["Aspect of the Pack"], --*
-			"HUNTER", spellNameList["Aspect of the Fox"], --*
 			})
+			
+	AutoBarCategoryList["Spell.Ammo"] = AutoBarSpells:new(
+			"Spell.Ammo", spellIconList["Aspect of the Cheetah"], {
+			"HUNTER", spellNameList["Incendiary Ammo"],
+			"HUNTER", spellNameList["Poisoned Ammo"],
+			"HUNTER", spellNameList["Frozen Ammo"],
+			})
+
 			
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new(
 			"Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
@@ -1564,15 +1576,13 @@ function AutoBarCategory:Initialize2()
 			"SHAMAN", spellHealingTideTotem, --*
 			})
 
-	spellNameList["Windfury Weapon"], _, spellIconList["Windfury Weapon"] = AutoBar:LoggedGetSpellInfo(8232)
-	
+
 	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new(
-			"Spell.Buff.Weapon", spellIconList["Windfury Weapon"], {
+			"Spell.Buff.Weapon", spellIconList["Deadly Poison"], {
 			"ROGUE", spellNameList["Deadly Poison"],
 			"ROGUE", spellNameList["Wound Poison"],
 			"ROGUE", spellNameList["Crippling Poison"],
 			"ROGUE", spellNameList["Leeching Poison"],
-			"SHAMAN", spellNameList["Windfury Weapon"],
 			})
 
 	spellNameList["First Aid"], _, spellIconList["First Aid"] = AutoBar:LoggedGetSpellInfo(27028)

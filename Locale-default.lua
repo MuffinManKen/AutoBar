@@ -29,3 +29,6 @@ atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
 atl("Include Basic Combo Food", "Include Basic Combo Food");
 
 atl("Supporters", "Supporters");
+
+atl("Spell.Ammo", "Exotic Munitions");
+atl("AutoBarButtonAmmo", "Exotic Munitions");

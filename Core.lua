@@ -66,8 +66,7 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = " - Updated libs|n" ..
-" - TOC bump for Patch 6.1|n" ..
-" - What's New dialog kept popping"
+" - TOC bump for Patch 6.2|n"
 
 
 
@@ -636,16 +635,18 @@ end
 
 
 function AutoBar.events:BAG_UPDATE(arg1)
-	AutoBar:LogEvent("BAG_UPDATE", arg1)
+	AutoBar:LogEventStart("BAG_UPDATE")
 	
 	if (AutoBar.inWorld and arg1 <= NUM_BAG_FRAMES) then
 		AutoBarSearch.dirtyBags[arg1] = true
 	end
+
+	AutoBar:LogEventEnd("BAG_UPDATE", arg1)
 	
 end
 
 function AutoBar.events:BAG_UPDATE_DELAYED()
-	AutoBar:LogEvent("BAG_UPDATE_DELAYED")
+	AutoBar:LogEventStart("BAG_UPDATE_DELAYED")
 
 	if (InCombatLockdown()) then
 		for buttonName, button in pairs(AutoBar.buttonList) do
@@ -653,12 +654,13 @@ function AutoBar.events:BAG_UPDATE_DELAYED()
 		end
 	else
 		AutoBar.delay["UpdateScan"]:Start()
-
 	end
+		AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
+
 end
 
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
-	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
+	AutoBar:LogEventStart("BAG_UPDATE_COOLDOWN")
 
 	if (not InCombatLockdown() and not C_PetBattles.IsInBattle()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
@@ -667,7 +669,9 @@ function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
-	
+
+	AutoBar:LogEventEnd("BAG_UPDATE_COOLDOWN", arg1)
+
 end
 
 

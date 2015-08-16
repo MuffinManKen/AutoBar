@@ -1487,6 +1487,27 @@ function AutoBar:CreateOptionsAce3()
 						}
 					},
 				},
+				supporters = {
+					type = "group",
+					order = 50,
+					name = L["Supporters"],
+					childGroups = "tree",
+					args = {
+						header0 = {
+							type = "header",
+							order = 0,
+							name = "AutoBar Supporters",
+						},
+						supp_text = {
+						    type = "description",
+							order = 1,
+						    name = "Schaufel-Shandris & Thana|n|nFlashback of Shandris, IShiftMyself and Arrtard (Alexstraza), CrzyKidd, Solarious, Nurgle the Wonder Hamster, Joe Jamp, Dahn-Silvermoon, MrUzagi",
+						    desc = "Awesome people",
+						    fontSize = "medium",
+						}
+					},
+				},
+
 				config = {
 					type = "execute",
 					order = 50,
