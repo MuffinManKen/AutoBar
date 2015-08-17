@@ -12,6 +12,11 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.2.0.01
+ - Added new "Show Class" option for Mounts to workaround yet another Blizzard bug
+ - AutoBar should no longer complain about Muffin.Explosives. Really, really.
+ - Minor data updates
+
 v6.2.0.00
  - Updated libs
  - TOC bump for Patch 6.2
