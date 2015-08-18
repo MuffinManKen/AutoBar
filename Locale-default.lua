@@ -35,3 +35,11 @@ atl("Supporters", "Supporters");
 
 atl("Spell.Ammo", "Exotic Munitions");
 atl("AutoBarButtonAmmo", "Exotic Munitions");
+
+atl("Spell.Class.Pet", "Class Pet");
+atl("Spell.Class.Pets2", "Pet Combat");
+atl("Spell.Class.Pets3", "Pet Misc");
+
+atl("AutoBarButtonClassPet", "Class Pet");
+atl("AutoBarButtonClassPets2", "Pet Combat");
+atl("AutoBarButtonClassPets3", "Pet Misc");
