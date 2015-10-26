@@ -4,3 +4,4 @@ xcopy_ignore.txt
 CVS
 .git
 media
+.pkgmeta
