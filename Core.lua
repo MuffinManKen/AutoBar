@@ -71,6 +71,13 @@ WHATSNEW_TEXT = " - Added new 'Show Class' option for Mounts to workaround yet a
 
 
 
+function AutoBar:IsInLockDown()
+
+	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle()
+
+end
+
+
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
 			AutoBar:OpenOptions()
@@ -319,6 +326,7 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 	
+	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -484,7 +492,7 @@ function Delayed.prototype:Start(arg1, customDelay)
 	AutoBar:LogEvent("--> DELAYED ", self.name)
 
 	-- If in combat delay call till after combat
-	if (InCombatLockdown()) then
+	if (InCombatLockdown() or C_PetBattles.IsInBattle()) then
 		self.timerInfo.runPostCombat = true
 		return
 	end
@@ -494,7 +502,7 @@ function Delayed.prototype:Start(arg1, customDelay)
 		local myself = self
 		local arg1 = arg1
 		-- If in combat delay call till after combat
-		if (InCombatLockdown()) then
+		if (InCombatLockdown()or C_PetBattles.IsInBattle()) then
 			self.timerInfo.runPostCombat = true
 			return
 		end
@@ -656,14 +664,15 @@ function AutoBar.events:BAG_UPDATE_DELAYED()
 	else
 		AutoBar.delay["UpdateScan"]:Start()
 	end
-		AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
+	
+	AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
 
 end
 
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE_COOLDOWN")
 
-	if (not InCombatLockdown() and not C_PetBattles.IsInBattle()) then
+	if (not AutoBar:IsInLockDown()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
 		
@@ -762,10 +771,8 @@ end
 
 
 function AutoBar.events:UPDATE_BINDINGS()
-	if (not InCombatLockdown()) then
-		self:RegisterOverrideBindings()
-		AutoBar.delay["UpdateButtons"]:Start()
-	end
+	self:RegisterOverrideBindings()
+	AutoBar.delay["UpdateButtons"]:Start()
 end
 
 
@@ -777,7 +784,7 @@ end
 
 function AutoBar.events:SPELLS_CHANGED(arg1)
 	AutoBar:LogEvent("SPELLS_CHANGED", arg1)
-	if (InCombatLockdown()) then
+	if (AutoBar:IsInLockDown()) then
 		AutoBar:SetRegenEnableUpdate("UpdateSpells")
 	else
 		AutoBar.delay["UpdateSpells"]:Start(arg1)
@@ -853,9 +860,7 @@ end
 
 function AutoBar.events:PLAYER_CONTROL_GAINED()
 	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
-	if (not InCombatLockdown()) then
-		AutoBar.delay["UpdateButtons"]:Start()
-	end
+	AutoBar.delay["UpdateButtons"]:Start()
 end
 
 
@@ -879,16 +884,17 @@ end
 function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 	AutoBar:LogEvent("PLAYER_REGEN_DISABLED", arg1)
 	AutoBar.inCombat = true
-if (InCombatLockdown()) then
-	print("PLAYER_REGEN_DISABLED called while InCombatLockdown")
---else
---print("PLAYER_REGEN_DISABLED " .. tostring(self))
-end
+	if (InCombatLockdown()) then
+		print("PLAYER_REGEN_DISABLED called while InCombatLockdown")
+	--else
+	--print("PLAYER_REGEN_DISABLED " .. tostring(self))
+	end
 
 	if (AutoBar.moveButtonsMode) then
 		AutoBar:MoveButtonsModeOff()
 		LibKeyBound:Deactivate()
 	end
+	
 	if (AutoBar.keyBoundMode) then
 		LibKeyBound:Deactivate()
 	end
@@ -909,37 +915,23 @@ end
 	AutoBar:SetRegenEnableUpdate("UpdateRescan")
 end
 
+function AutoBar.events:PET_BATTLE_CLOSE(arg1)
+	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
+	
+	AutoBar.delay[regenEnableUpdate]:Start()
 
---function AutoBar:UNIT_MANA()
---	if (arg1 == "player") then
---		AutoBar:LogEvent("UNIT_MANA", arg1)
---		if (not InCombatLockdown()) then
---			AutoBar.delay["UpdateButtons"]:Start()
---		end
---	end
---end
---
---
---function AutoBar:UNIT_HEALTH()
---	if (arg1 == "player") then
---		AutoBar:LogEvent("UNIT_HEALTH", arg1)
---		if (not InCombatLockdown()) then
---			AutoBar.delay["UpdateButtons"]:Start()
---		end
---	end
---end
+	-- AutoBar.in_pet_battle = false
 
+end
 
 function AutoBar.events:PLAYER_ALIVE(arg1)
-	if (not InCombatLockdown()) then
-		AutoBar:LogEvent("PLAYER_ALIVE", arg1)
-		AutoBar.delay["UpdateButtons"]:Start()
-	end
+	AutoBar:LogEvent("PLAYER_ALIVE", arg1)
+	AutoBar.delay["UpdateButtons"]:Start()
 end
 
 
 function AutoBar.events:PLAYER_AURAS_CHANGED(arg1)
-	if (InCombatLockdown()) then
+	if (AutoBar:IsInLockDown()) then
 		for buttonName, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
