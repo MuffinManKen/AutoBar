@@ -65,9 +65,9 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Added new 'Show Class' option for Mounts to workaround yet another Blizzard bug|n" ..
-" - AutoBar should no longer complain about Muffin.Explosives. Really, really.|n" ..
-" - Minor data updates|n"
+WHATSNEW_TEXT = " - Updated item libs|n" ..
+" - Bars should no longer flash during pet battles|n"
+
 
 
 
