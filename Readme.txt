@@ -12,6 +12,11 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.2.0.03:
+ - Data updates
+ - Reorganized some settings on the UI
+ - Added new SPELLS_CHANGED setting. If you have constant hitching every few seconds, try disabling this.
+
 v6.2.0.02
  - Data updates
  - Bars should no longer flash in pet battles

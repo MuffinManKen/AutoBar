@@ -1263,42 +1263,54 @@ function AutoBar:CreateOptionsAce3()
 							name = L["Show Extended Tooltips"],
 							disabled = function() return not self.db.account.showTooltip end,
 						},
+						header_debug = {
+							type = "header",
+							order = 200,
+							name = "Advanced/Debug",
+						},
+
 						performance = {
 							type = "toggle",
-							order = 171,
+							order = 201,
 							name = L["Log Performance"],
 						},
 						logEvents = {
 							type = "toggle",
-							order = 172,
+							order = 202,
 							name = L["Log Events"],
 						},
 						logMemory = {
 							type = "toggle",
-							order = 173,
+							order = 203,
 							name = L["Log Memory"],
+						},
+						handle_spell_changed = {
+							type = "toggle",
+							order = 204,
+							name = "SPELLS_CHANGED",
+							desc = "If unchecked some spell-related messages will be ignored. This will improve performance, but may cause side-effects",
 						},
 						log_throttled_events = {
 							type = "toggle",
-							order = 174,
-							name = "Log Throttled Events" --L["Log Memory"], TODO: Localize
+							order = 240,
+							name = "Log Throttled Events"
 						},
 						throttle_event_limit = {
 							type = "range",
-							order = 175,
-							name = "Throttle Event Limit", --L["Alpha"],
-							desc = "Events happening faster than this limit are ignored (in seconds)", --L["Change the alpha of the bar."],
+							order = 241,
+							name = "Throttle Event Limit",
+							desc = "Events happening faster than this limit are ignored (in seconds)",
 							min = 0, max = 10, step = 0.1, bigStep = 0.5,
 						},
 
 						header2 = {
 							type = "header",
-							order = 200,
+							order = 300,
 							name = "",
 						},
 						collapseButtons = {
 							type = "toggle",
-							order = 210,
+							order = 310,
 							name = L["Collapse Buttons"],
 							desc = L["Collapse Buttons that have nothing in them."],
 							arg = passValue,
@@ -1306,49 +1318,49 @@ function AutoBar:CreateOptionsAce3()
 						},
 						showEmptyButtons = {
 							type = "toggle",
-							order = 211,
+							order = 311,
 							name = L["Show Empty Buttons"],
 							desc = L["Show Empty Buttons for %s"]:format(name),
 							tristate = true,
 						},
 						showCount = {
 							type = "toggle",
-							order = 221,
+							order = 321,
 							name = L["Show Count Text"],
 							desc = L["Show Count Text for %s"]:format(name),
 							tristate = true,
 						},
 						showHotkey = {
 							type = "toggle",
-							order = 231,
+							order = 331,
 							name = L["Show Hotkey Text"],
 							desc = L["Show Hotkey Text for %s"]:format(name),
 							tristate = true,
 						},
 						showTooltip = {
 							type = "toggle",
-							order = 241,
+							order = 341,
 							name = L["Show Tooltips"],
 							desc = L["Show Tooltips for %s"]:format(name),
 							tristate = true,
 						},
 						showTooltipCombat = {
 							type = "toggle",
-							order = 242,
+							order = 342,
 							name = L["Show Tooltips in Combat"],
 							tristate = true,
 							disabled = getTooltipDisabled,
 						},
 						selfCastRightClick = {
 							type = "toggle",
-							order = 261,
+							order = 361,
 							name = L["RightClick SelfCast"],
 							desc = L["SelfCast using Right click"],
 							tristate = true,
 						},
 						popupOnShift = {
 							type = "toggle",
-							order = 271,
+							order = 371,
 							name = L["Popup on Shift Key"],
 							desc = L["Popup while Shift key is pressed for %s"]:format(name),
 							arg = passValue,
@@ -1357,12 +1369,12 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutSpacer = {
 							type = "header",
-							order = 300,
+							order = 400,
 							name = L["FadeOut"],
 						},
 						alpha = {
 							type = "range",
-							order = 310,
+							order = 410,
 							name = L["Alpha"],
 							desc = L["Change the alpha of the bar."],
 							min = 0, max = 1, step = 0.01, bigStep = 0.05,
@@ -1371,7 +1383,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOut = {
 							type = "toggle",
-							order = 311,
+							order = 411,
 							name = L["FadeOut"],
 							desc = L["Fade out the Bar when not hovering over it."],
 							arg = passValue,
@@ -1380,7 +1392,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutCancelInCombat = {
 							type = "toggle",
-							order = 312,
+							order = 412,
 							name = L["FadeOut Cancels in combat"],
 							desc = L["FadeOut is cancelled when entering combat."],
 							arg = passValue,
@@ -1389,7 +1401,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutCancelOnShift = {
 							type = "toggle",
-							order = 313,
+							order = 413,
 							name = L["FadeOut Cancels on Shift"],
 							desc = L["FadeOut is cancelled when holding down the Shift key."],
 							arg = passValue,
@@ -1398,7 +1410,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutCancelOnCtrl = {
 							type = "toggle",
-							order = 313,
+							order = 413,
 							name = L["FadeOut Cancels on Ctrl"],
 							desc = L["FadeOut is cancelled when holding down the Ctrl key."],
 							arg = passValue,
@@ -1407,7 +1419,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutCancelOnAlt = {
 							type = "toggle",
-							order = 313,
+							order = 413,
 							name = L["FadeOut Cancels on Alt"],
 							desc = L["FadeOut is cancelled when holding down the Alt key."],
 							arg = passValue,
@@ -1416,7 +1428,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutTime = {
 							type = "range",
-							order = 315,
+							order = 415,
 							name = L["FadeOut Time"],
 							desc = L["FadeOut takes this amount of time."],
 							min = 0, max = 10, step = 0.1, bigStep = 1,
@@ -1425,7 +1437,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutDelay = {
 							type = "range",
-							order = 316,
+							order = 416,
 							name = L["FadeOut Delay"],
 							desc = L["FadeOut starts after this amount of time."],
 							min = 0, max = 10, step = 0.1, bigStep = 1,
@@ -1434,7 +1446,7 @@ function AutoBar:CreateOptionsAce3()
 						},
 						fadeOutAlpha = {
 							type = "range",
-							order = 317,
+							order = 417,
 							name = L["FadeOut Alpha"],
 							desc = L["FadeOut stops at this Alpha level."],
 							min = 0, max = 1, step = 0.01, bigStep = 0.05,

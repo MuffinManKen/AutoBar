@@ -124,13 +124,17 @@ function AutoBar:InitializeDefaults()
 			showMacrotext = true,
 			performance = false,
 			log_throttled_events = false,
-			throttle_event_limit = 1.0,
+			throttle_event_limit = 0.0,
+			handle_spell_changed = true,
 			selfCastRightClick = true,
 			showEmptyButtons = false,
 			sticky = true,
 			style = "Dreamlayout",
 			barList = {},
 		}
+	end
+	if(self.defaults.handle_spell_changed == nil) then
+		handle_spell_changed = true
 	end
 	self:RegisterDefaults('account', self.defaults)
 

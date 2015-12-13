@@ -66,7 +66,8 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = " - Updated item libs|n" ..
-" - Bars should no longer flash during pet battles|n"
+" - Reorganized some settings on the UI|n" ..
+" - Added new SPELLS_CHANGED setting for people who know what it does|n"
 
 
 
@@ -323,7 +324,10 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
-	AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
+	
+	if(AutoBar.db.account.handle_spell_changed) then 
+		AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
+	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 	
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
@@ -371,7 +375,6 @@ function AutoBar:LogEvent(eventName, arg1)
 		local memory = GetAddOnMemoryUsage("AutoBar")
 		print(eventName, "memory" , memory)
 	end
---	if (AutoBar.db.account.performance or AutoBar.db.account.logEvents) then
 	if (AutoBar.db.account.logEvents) then
 		if (arg1) then
 			print(eventName, "arg1" , arg1, "time:", GetTime(), memString, memory)
@@ -783,6 +786,10 @@ end
 
 
 function AutoBar.events:SPELLS_CHANGED(arg1)
+
+	if(not AutoBar.db.account.handle_spell_changed) then 
+		return
+	end
 	AutoBar:LogEvent("SPELLS_CHANGED", arg1)
 	if (AutoBar:IsInLockDown()) then
 		AutoBar:SetRegenEnableUpdate("UpdateSpells")
