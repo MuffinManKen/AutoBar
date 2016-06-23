@@ -194,9 +194,9 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		end
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 	end
 end

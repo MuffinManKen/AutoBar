@@ -2536,9 +2536,9 @@ function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 
 		local popupHeader = self.frame.popupHeader
@@ -2549,7 +2549,7 @@ function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 		end
 	end
 end
--- /script CooldownFrame_SetTimer(AutoBarButtonTotemAirFrame.cooldown, 0, 0, 0)
+-- /script CooldownFrame_Set(AutoBarButtonTotemAirFrame.cooldown, 0, 0, 0)
 
 local AutoBarButtonTotemEarth = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTotemEarth"] = AutoBarButtonTotemEarth
@@ -2576,9 +2576,9 @@ function AutoBarButtonTotemEarth.prototype:UpdateCooldown()
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 
 		local popupHeader = self.frame.popupHeader
@@ -2616,9 +2616,9 @@ function AutoBarButtonTotemFire.prototype:UpdateCooldown()
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 
 		local popupHeader = self.frame.popupHeader
@@ -2656,9 +2656,9 @@ function AutoBarButtonTotemWater.prototype:UpdateCooldown()
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 
 		local popupHeader = self.frame.popupHeader
