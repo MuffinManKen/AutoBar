@@ -998,7 +998,7 @@ end
 
 function AutoBar.LinkDecode(link)
 	if (link) then
-		local _, _, id, _, _, _, name = string.find(link, "item:(%d+):(%d+):(%d+):(%d+).+%[(.+)%]")
+		local id, name = string.match(link,"item:(%d+):.+%[(.*)%]")
 		if (id and name) then
 			return name, tonumber(id)
 		end
