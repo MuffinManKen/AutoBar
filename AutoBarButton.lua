@@ -1945,6 +1945,9 @@ function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 end
 
 
+
+-------------------------- AutoBarButtonMount ---------------------
+
 local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
 
@@ -1973,6 +1976,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
 	end
 	
+	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
 	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
 	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
@@ -2009,7 +2013,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	local count = GetNumCompanions(companion_type)
 	local thisIsSpam = true
 
---print("NumCompanions:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Mount Count:" .. AutoBar.last_mount_count)
+--print("NumMounts:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Mount Count:" .. AutoBar.last_mount_count)
 --print(debugstack(1, 3, 3));
 
 	--If the number of known mounts has changed, do stuff
@@ -2030,8 +2034,8 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		for k, v in pairs(mount_ids) do
 			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_MountJournal.GetMountInfoByID(v)
 			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
-			--local autobar_filtered = AutoBarMountFilter[spell_id] or false;
-			if (is_collected and user_selected and not hide_on_char) then
+			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
+			if (is_collected and user_selected and not hide_on_char and not qiraji_filtered) then
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
@@ -2066,6 +2070,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 end
 
 function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
@@ -2141,12 +2146,12 @@ _, _, spellIconList["Phoenix Hatchling"] = AutoBar:LoggedGetSpellInfo(46599)
 function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
---if (not AutoBarCategoryList["Spell.Critter"]) then
---	AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new(
---		"Spell.Critter", spellIconList["Phoenix Hatchling"], {})
---	AutoBarCategoryList["Spell.Critter"]:SetNoSpellCheck(true)
---end
---self:AddCategory("Spell.Critter")
+	if (not AutoBarCategoryList["Spell.Critter"]) then
+		AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new(
+			"Spell.Critter", spellIconList["Phoenix Hatchling"], {})
+		AutoBarCategoryList["Spell.Critter"]:SetNoSpellCheck(true)
+	end
+	self:AddCategory("Spell.Critter")
 
 	self:Refresh(parentBar, buttonDB)
 end
@@ -2154,16 +2159,26 @@ end
 function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
 
---	if (not AutoBarCategoryList["Spell.Critter"]) then
---		AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new(
---			"Spell.Critter", spellIconList["Phoenix Hatchling"], {})
---		AutoBarCategoryList["Spell.Critter"]:SetNoSpellCheck(true)
---	end
---	local category = AutoBarCategoryList["Spell.Critter"]
+	if (not AutoBarCategoryList["Spell.Critter"]) then
+		--AutoBarButtonPets.prototype:init hasn't run, so skip
+		--print("Skipping AutoBarButtonPets.prototype:Refresh);
+		return true;
+	end
 
---	local companionType = "CRITTER"
---	local count = GetNumCompanions(companionType)
---
+	local category = AutoBarCategoryList["Spell.Critter"]
+
+	AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
+
+	local companionType = "CRITTER"
+	local _, count = C_PetJournal.GetNumPets()
+
+--print("NumCritters:" .. count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
+
+	if (count ~= AutoBar.last_critter_count) then
+--print("   Gonna do critter stuff");
+		AutoBar.last_critter_count = count;
+
+	end
 --	if (count > 0) then
 --		if (not category.castList) then
 --			category.castList = {}

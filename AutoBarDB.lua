@@ -630,6 +630,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			defaultButtonIndex = 2,
 			enabled = true,
 			arrangeOnUse = true,
+			mount_show_qiraji = false,
 			mount_show_favourites = true,
 			mount_show_nonfavourites = false,
 			mount_show_class = true,

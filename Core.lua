@@ -58,7 +58,7 @@ AutoBar.events = {}
 
 AutoBar.delay = {}
 
-AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1} -- No Qiraji
+AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
 AutoBar.warning_log = {}
 

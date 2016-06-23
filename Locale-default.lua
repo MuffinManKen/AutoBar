@@ -19,6 +19,7 @@ atl("Spell.Stealth", "Spell.Stealth");
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
 
+atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
