@@ -331,8 +331,9 @@ local hack_instant_poison_name = GetSpellInfo(157584)
 -- spellNameRight specifies a separate spell to cast on right click
 function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, itemsIndex)
 	local noSpellCheck = self.noSpellCheck
-	
-	--if (self.categoryKey == "Spell.Poison.Lethal") then print("AddSpell(", spellNameLeft, spellNameRight, itemsIndex,")", noSpellCheck) end
+
+--	if (self.categoryKey == "Spell.Mount") then print("Spell.Mount:AddSpell(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
+--	if (self.categoryKey == "Muffin.Mount") then print("Muffin.Mount:AddSpell(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
 	if (spellNameLeft) then
 		if (not noSpellCheck) then
