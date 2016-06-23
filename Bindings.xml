@@ -41,6 +41,9 @@
 	<Binding name="AutoBarButtonQuest_X"						category="AutoBar "/>
 	<Binding name="AutoBarButtonSpeed_X"						category="AutoBar "/>
 	<Binding name="AutoBarButtonStealth_X"						category="AutoBar "/>
+	<Binding name="AutoBarButtonSunsongRanch_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonGarrison_X"					category="AutoBar "/>
+	
 	<Binding name="AutoBarButtonDebuff_X"						category="AutoBar " header="AutoBarClassBarHeader"/>
 	<Binding name="AutoBarButtonBear_X"							category="AutoBar " header="AutoBarClassBarDruid"/>
 	<Binding name="AutoBarButtonCat_X"							category="AutoBar "/>

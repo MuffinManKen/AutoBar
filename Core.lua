@@ -99,11 +99,14 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonHeal_X = L["AutoBarButtonHeal"]
 	BINDING_NAME_AutoBarButtonRecovery_X = L["AutoBarButtonRecovery"]
 	BINDING_NAME_AutoBarButtonFood_X = L["AutoBarButtonFood"]
+	BINDING_NAME_AutoBarButtonWater_X = L["AutoBarButtonWater"]
 	BINDING_NAME_AutoBarButtonFoodBuff_X = L["AutoBarButtonFoodBuff"]
 	BINDING_NAME_AutoBarButtonFoodCombo_X = L["AutoBarButtonFoodCombo"]
 	BINDING_NAME_AutoBarButtonBuff_X = L["AutoBarButtonBuff"]
 	BINDING_NAME_AutoBarButtonBuffWeapon1_X = L["AutoBarButtonBuffWeapon1"]
 	BINDING_NAME_AutoBarButtonBuffWeapon2_X = L["AutoBarButtonBuffWeapon2"]
+
+	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
 	BINDING_NAME_AutoBarButtonCharge_X = L["AutoBarButtonCharge"]
 	BINDING_NAME_AutoBarButtonClassBuff_X = L["AutoBarButtonClassBuff"]
 	BINDING_NAME_AutoBarButtonShields_X = L["AutoBarButtonShields"]
@@ -122,11 +125,8 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonSpeed_X = L["AutoBarButtonSpeed"]
 	BINDING_NAME_AutoBarButtonStance_X = L["AutoBarButtonStance"]
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
-	BINDING_NAME_AutoBarButtonWater_X = L["AutoBarButtonWater"]
 	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
 	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
-
-	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
 
 	BINDING_HEADER_AutoBarCooldownHeader = L["AutoBarCooldownHeader"]
 	BINDING_NAME_AutoBarButtonCooldownDrums_X = L["AutoBarButtonCooldownDrums"]
