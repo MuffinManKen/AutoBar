@@ -39,7 +39,8 @@ spellNameList["Mangle"], _, spellIconList["Mangle"] = AutoBar:LoggedGetSpellInfo
 spellNameList["Cat Form"], _, spellIconList["Cat Form"] = AutoBar:LoggedGetSpellInfo(768)
 spellNameList["Ghost Wolf"], _, spellIconList["Ghost Wolf"] = AutoBar:LoggedGetSpellInfo(2645)
 spellNameList["Shadowstep"], _, spellIconList["Shadowstep"] = AutoBar:LoggedGetSpellInfo(36554)
-spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100)
+
+
 spellNameList["Heroic Leap"], _, spellIconList["Heroic Leap"]  = AutoBar:LoggedGetSpellInfo(6544)
 spellNameList["Intervene"], _, spellIconList["Intervene"]  = AutoBar:LoggedGetSpellInfo(3411)
 spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(55694)
@@ -1459,27 +1460,16 @@ function AutoBarButtonCharge.prototype:Refresh(parentBar, buttonDB)
 		end
 	elseif (AutoBar.CLASS == "WARRIOR") then
 		if (GetSpellInfo(spellNameList["Charge"])) then
-			concatList[index] = "[nocombat,harm,nostance:1]"
-			concatList[index + 1] = spellNameList["Battle Stance"]
-			concatList[index + 2] = ";"
-			concatList[index + 3] = "[nocombat,harm,stance:1]"
-			concatList[index + 4] = spellNameList["Charge"]
-			concatList[index + 5] = ";"
+			concatList[index] = spellNameList["Charge"]
+			macroTexture = spellIconList["Charge"]
 			self.macroActive = true
-			index = index + 6
 		end
-		if (GetSpellInfo(spellNameList["Intervene"])) then
-			concatList[index] = "[nostance:2,help]"
-			concatList[index + 1] = spellNameList["Defensive Stance"]
-			concatList[index + 2] = ";"
-			concatList[index + 3] = "[stance:2,help]"
-			concatList[index + 4] = spellNameList["Intervene"]
-			concatList[index + 5] = ";"
+		if (GetSpellInfo(spellNameList["Intercept"])) then
+			concatList[index] = spellNameList["Intercept"]
+			macroTexture = spellIconList["Intercept"]
 			self.macroActive = true
-			index = index + 6
 		end
 
-		macroTexture = spellIconList["Charge"]
 	end
 	if (self.macroActive) then
 		local macroText = table.concat(concatList)
