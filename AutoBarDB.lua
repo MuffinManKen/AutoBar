@@ -62,6 +62,7 @@ local CLASS_COLUMN_DEFAULT = 10
 
 local classBar = {
 	DEATHKNIGHT = "AutoBarClassBarDeathKnight",
+	DEMONHUNTER = "AutoBarClassBarDemonHunter",
 	DRUID = "AutoBarClassBarDruid",
 	HUNTER = "AutoBarClassBarHunter",
 	MAGE = "AutoBarClassBarMage",
@@ -174,6 +175,7 @@ function AutoBar:InitializeDefaults()
 			posX = 300,
 			posY = 200,
 			DEATHKNIGHT = true,
+			DEMONHUNTER = true,
 			DRUID = true,
 			HUNTER = true,
 			MAGE = true,
@@ -210,6 +212,7 @@ function AutoBar:InitializeDefaults()
 			posX = 300,
 			posY = 360,
 			DEATHKNIGHT = true,
+			DEMONHUNTER = true,
 			DRUID = true,
 			HUNTER = true,
 			MAGE = true,
@@ -224,6 +227,41 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
+	if (AutoBar.CLASS == "DEMONHUNTER") then
+
+-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
+AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
+AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
+
+		if (not AutoBar.db.class.barList["AutoBarClassBarDemonHunter"]) then
+			AutoBar.db.class.barList["AutoBarClassBarDemonHunter"] = {
+				enabled = true,
+				share = "2",
+				rows = 1,
+				columns = CLASS_COLUMN_DEFAULT,
+				alignButtons = "3",
+				alpha = 1,
+				buttonWidth = 36,
+				buttonHeight = 36,
+				collapseButtons = true,
+				docking = nil,
+				dockShiftX = 0,
+				dockShiftY = 0,
+				fadeOut = false,
+				frameStrata = "LOW",
+				hide = false,
+				padding = 0,
+				popupDirection = "1",
+				scale = 1,
+				showOnModifier = nil,
+				posX = 300,
+				posY = 280,
+				DEMONHUNTER = true,
+				buttonKeys = {},
+			}
+		end
+	end
+	
 	if (AutoBar.CLASS == "MONK") then
 
 -- ToDo: This temporarily forces existing configs to recognize MONK.  Remove after MoP

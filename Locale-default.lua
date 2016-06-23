@@ -44,3 +44,5 @@ atl("Spell.Class.Pets3", "Pet Misc");
 atl("AutoBarButtonClassPet", "Class Pet");
 atl("AutoBarButtonClassPets2", "Pet Combat");
 atl("AutoBarButtonClassPets3", "Pet Misc");
+
+atl("AutoBarClassBarDemonHunter", "Demon Hunter")

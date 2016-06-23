@@ -144,6 +144,7 @@ function AutoBar:OnInitialize()
 
 	BINDING_HEADER_AutoBarClassBarDeathKnight = L["AutoBarClassBarDeathKnight"]
 	BINDING_HEADER_AutoBarClassBarMonk = L["AutoBarClassBarMonk"]
+	BINDING_HEADER_AutoBarClassBarDemonHunter = L["AutoBarClassBarDemonHunter"]
 
 	BINDING_HEADER_AutoBarClassBarDruid = L["AutoBarClassBarDruid"]
 	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
