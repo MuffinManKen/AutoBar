@@ -1952,10 +1952,17 @@ _, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
 
 function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
-
+print("AutoBarButtonMount.prototype:init");
+	
 	if (not AutoBarCategoryList["Spell.Mount"]) then
 		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
-		AutoBarCategoryList["Spell.Mount"]:SetNoSpellCheck(true)
+		local category = AutoBarCategoryList["Spell.Mount"]
+		category:SetNoSpellCheck(true)
+		category.unInitialized = true
+		if (not category.castList) then
+			category.castList = {}
+			--print("  Spell.Mount was null, making it empty");
+		end
 	end
 	self:AddCategory("Spell.Mount")
 
@@ -1978,68 +1985,111 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	buttonData.SetBest = self.SetBest
 	self.flyable = -1
 	self:Refresh(parentBar, buttonDB)
+	print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
 end
 
 function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
 
-	local category = AutoBarCategoryList["Spell.Mount"]
-	if (not category) then
-		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new(
-			"Spell.Mount", spellIconList["Amani War Bear"], {})
-		category = AutoBarCategoryList["Spell.Mount"]
-		category:SetNoSpellCheck(true)
-		category.unInitialized = true
+	if (not AutoBarCategoryList["Spell.Mount"]) then
+--		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {})
+--		category:SetNoSpellCheck(true)
+		--AutoBarButtonMount.prototype:init hasn't run, so skip
+		print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+		return true;
 	end
+
+	local category = AutoBarCategoryList["Spell.Mount"]
 	
-	local companionType = "MOUNT"
-	local count = GetNumCompanions(companionType)
-	local total_mounts = C_MountJournal.GetNumMounts()
+	AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
+	
+	local companion_type = "MOUNT"
+	local count = GetNumCompanions(companion_type)
 	local thisIsSpam = true
 
---print("NumCompanions:" .. count .. " UpdateMount:" .. tostring(updateMount))
+print("NumCompanions:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Mount Count:" .. AutoBar.last_mount_count)
+--print(debugstack(1, 3, 3));
 
-	if (count > 0) then
+	--If the number of known mounts has changed, do stuff
+	if (count ~= AutoBar.last_mount_count) then
+print("   Gonna do stuff");
+		AutoBar.last_mount_count = count;
+		
 		if (not category.castList) then
 			category.castList = {}
 		end
 
-		local unInitialized = category.unInitialized --or (# category.castList ~= count)
-		local spellName
-		thisIsSpam = not unInitialized
---print("AutoBarButtonMount.prototype:Refresh unInitialized", unInitialized, "thisIsSpam", thisIsSpam, category.unInitialized, # category.castList, count)
-		for index = 1, total_mounts, 1 do
-			local creatureName, spellID, icon, active, isUsable, _, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfo(index)
---			print("  MountName:" .. creatureName .. " active:" .. tostring(active) .. " hideOnChar:" .. tostring(hideOnChar) .. " collected:" .. tostring(isCollected))
-			--creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
-			spellName = GetSpellInfo(spellID)
-			local user_selected = (isFavorite and buttonDB.mount_show_favourites) or (not isFavorite and buttonDB.mount_show_nonfavourites)
-			if (unInitialized and isCollected and not hideOnChar and isUsable and user_selected) then
-				spellIconList[spellName] = icon
-				AutoBarSearch:RegisterSpell(spellName, true)
-				local spellInfo = AutoBarSearch.spells[spellName]
-				spellInfo.spellLink = "spell:" .. spellID
-				category.castList[# category.castList + 1] = spellName
+		local initialized = not category.unInitialized --or (# category.castList ~= count)
+		local spell_name
+		thisIsSpam = initialized
+		local mount_ids = C_MountJournal.GetMountIDs(); --All mount ids in the journal
+print("AutoBarButtonMount.prototype:Refresh initialized:", initialized, "thisIsSpam:", thisIsSpam, "castlist:", # category.castList, "Mounts:", count, "MountIDs:", #mount_ids)
+
+		for k, v in pairs(mount_ids) do
+			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_MountJournal.GetMountInfoByID(v)
+			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
+			--local autobar_filtered = AutoBarMountFilter[spell_id] or false;
+			if (is_collected and user_selected and not hide_on_char) then
+				spell_name = GetSpellInfo(spell_id)
+				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+				spellIconList[spell_name] = icon
+				AutoBarSearch:RegisterSpell(spell_name, true)
+				local spellInfo = AutoBarSearch.spells[spell_name]
+				spellInfo.spellLink = "spell:" .. spell_id
+				category.castList[# category.castList + 1] = spell_name
 			end
 			if (active and updateMount) then
 				local buttonData = AutoBar.db.char.buttonDataList[self.buttonName]
 				if (AutoBar.flyable) then
---print("AutoBarButtonMount.prototype:Refresh flyingMount", buttonData.flyingMount, "-->", spellName)
-					if (buttonData.flyingMount ~= spellName) then
+print("AutoBarButtonMount.prototype:Refresh flyingMount", buttonData.flyingMount, "-->", spell_name)
+					if (buttonData.flyingMount ~= spell_name) then
 						thisIsSpam = false
---print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingMount, spellName)
+print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingMount, spell_name)
 					end
-					buttonData.flyingMount = spellName
+					buttonData.flyingMount = spell_name
 				else
---print("AutoBarButtonMount.prototype:Refresh groundMount", buttonData.groundMount, "-->", spellName)
-					if (buttonData.groundMount ~= spellName) then
+print("AutoBarButtonMount.prototype:Refresh groundMount", buttonData.groundMount, "-->", spell_name)
+					if (buttonData.groundMount ~= spell_name) then
 						thisIsSpam = false
---print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundMount, spellName)
+print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundMount, spell_name)
 					end
-					buttonData.groundMount = spellName
+					buttonData.groundMount = spell_name
 				end
 			end
+
 		end
+--		for index = 1, total_mounts, 1 do
+--			local creatureName, spellID, icon, active, isUsable, _, isFavorite, _, _, hideOnChar, isCollected = C_MountJournal.GetMountInfo(index)
+----			print("  MountName:" .. creatureName .. " active:" .. tostring(active) .. " hideOnChar:" .. tostring(hideOnChar) .. " collected:" .. tostring(isCollected))
+--			--creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
+--			spellName = GetSpellInfo(spellID)
+--			local user_selected = (isFavorite and buttonDB.mount_show_favourites) or (not isFavorite and buttonDB.mount_show_nonfavourites)
+--			if (unInitialized and isCollected and not hideOnChar and isUsable and user_selected) then
+--				spellIconList[spellName] = icon
+--				AutoBarSearch:RegisterSpell(spellName, true)
+--				local spellInfo = AutoBarSearch.spells[spellName]
+--				spellInfo.spellLink = "spell:" .. spellID
+--				category.castList[# category.castList + 1] = spellName
+--			end
+--			if (active and updateMount) then
+--				local buttonData = AutoBar.db.char.buttonDataList[self.buttonName]
+--				if (AutoBar.flyable) then
+----print("AutoBarButtonMount.prototype:Refresh flyingMount", buttonData.flyingMount, "-->", spellName)
+--					if (buttonData.flyingMount ~= spellName) then
+--						thisIsSpam = false
+----print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingMount, spellName)
+--					end
+--					buttonData.flyingMount = spellName
+--				else
+----print("AutoBarButtonMount.prototype:Refresh groundMount", buttonData.groundMount, "-->", spellName)
+--					if (buttonData.groundMount ~= spellName) then
+--						thisIsSpam = false
+----print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundMount, spellName)
+--					end
+--					buttonData.groundMount = spellName
+--				end
+--			end
+--		end
 		category.unInitialized = nil
 	end
 	return thisIsSpam
