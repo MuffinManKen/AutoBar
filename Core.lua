@@ -58,7 +58,7 @@ AutoBar.events = {}
 
 AutoBar.delay = {}
 
-AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1} -- No Qiraji
 
 AutoBar.warning_log = {}
 
@@ -733,8 +733,9 @@ end
 function AutoBar.events:COMPANION_UPDATE(companionType)
 	AutoBar:LogEventStart("COMPANION_UPDATE", companionType)
 	if (AutoBar.inWorld) then
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		local thisIsSpam = true
+		
+		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button and companionType ~= "CRITTER") then
 			thisIsSpam = button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
@@ -758,7 +759,7 @@ function AutoBar.events:COMPANION_LEARNED()
 	if (AutoBar.inWorld) then
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button) then
-			button:Learned(button.parentBar, button.buttonDB, companionType == "MOUNT")
+			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
 		button = AutoBar.buttonList["AutoBarButtonPets"]
 		if (button) then
