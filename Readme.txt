@@ -12,6 +12,16 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.0.00:
+ - Demon Hunter Support
+ - Added Keybinds for Garrison and Sun Song Ranch
+ - Fixed Mounts for Legion
+ - Qiraji Mounts are now filtered out by default
+ - Fixed Item buttons for Legion
+ - Various other minor breakage caused by Legion
+ - TOC bump for 7.0
+ - Updated Ace3-GUI
+
 v6.2.0.03:
  - Data updates
  - Reorganized some settings on the UI
