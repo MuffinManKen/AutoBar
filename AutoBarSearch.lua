@@ -16,6 +16,7 @@ local AceOO = AceLibrary("AceOO-2.0")
 AutoBarSearch = {}
 AutoBarSearch.spells = {}
 AutoBarSearch.macros = {}
+AutoBarSearch.toys = {}
 
 AutoBarSearch.dirtyBags = {}
 local searchSpace, items, playerLevel
@@ -395,6 +396,12 @@ function Stuff.prototype:ScanSpells()
 	end
 end
 
+-- Scan available Toys
+function Stuff.prototype:ScanToys()
+	for toy_id, toy_info in pairs(AutoBarSearch.toys) do
+		self:Add(toy_id, nil, nil, toy_id)
+	end
+end
 
 -- Scan available Macros
 function Stuff.prototype:ScanMacros()
@@ -452,6 +459,13 @@ function Stuff.prototype:Scan()
 		self:ScanMacros()
 		AutoBarSearch.dirtyBags.macros = nil
 	end
+
+	if (AutoBarSearch.dirtyBags.toys) then
+--AutoBar:Print("Stuff.prototype:Scan    scanning toys ");
+		self:ScanToys()
+		AutoBarSearch.dirtyBags.toys = nil
+	end
+
 	AutoBar:LogEventEnd("Stuff.prototype:Scan")
 end
 
@@ -1127,6 +1141,18 @@ function AutoBarSearch:RegisterSpell(spellName, noSpellCheck, spellLink)
 	return spellName
 end
 
+function AutoBarSearch:RegisterToy(p_item_id, p_toy_name)
+	local toy_info = AutoBarSearch.toys[p_item_id]
+
+	if (not toy_info) then
+		toy_info = {}
+		AutoBarSearch.toys[p_item_id] = toy_info
+	end
+
+	toy_info.toy_name = p_toy_name
+	toy_info.toy_id = p_item_id
+
+end
 
 -- Register a macro or customMacro
 -- macroId is one of
@@ -1185,6 +1211,7 @@ function AutoBarSearch:Reset()
 	AutoBarSearch.dirtyBags.inventory = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
+	AutoBarSearch.dirtyBags.toys = true
 	AutoBarSearch.dirty = true
 	AutoBarSearch.stuff:Scan()
 	AutoBarSearch.sorted:Update()
@@ -1201,6 +1228,7 @@ function AutoBarSearch:UpdateScan()
 	AutoBarSearch.dirtyBags.inventory = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
+	AutoBarSearch.dirtyBags.toys = true
 	AutoBarSearch.dirty = true
 
 	AutoBarSearch.stuff:Scan()

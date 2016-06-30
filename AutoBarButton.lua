@@ -710,7 +710,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			else
 				frame:SetAttribute("unit2", "pet")
 			end
-		elseif (targeted) then
+		else
 			-- Support selfcast-RightMouse
 			if (selfCastRightClick) then
 				frame:SetAttribute("unit2", "player")
@@ -1944,6 +1944,129 @@ function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
 end
 
+-------------------------- AutoBarButtonToyBox ---------------------
+local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
+
+_, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
+
+function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
+	AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
+print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
+	
+	if (not AutoBarCategoryList["Spell.ToyBox"]) then
+		AutoBarCategoryList["Spell.ToyBox"] = AutoBarToys:new( "Spell.ToyBox", spellIconList["Puntable Marmot"], {})
+		local category = AutoBarCategoryList["Spell.ToyBox"]
+		category.unInitialized = true
+	end
+	self:AddCategory("Spell.ToyBox")
+
+	if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
+		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
+	end
+	
+--	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
+--	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
+--	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
+--	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
+
+--	if(buttonDB.mount_show_class == true) then
+--		self:AddCategory("Misc.Mount.Summoned")
+--		local class = AutoBar.CLASS
+--		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then self:AddCategory("Muffin.Mount") end
+--	end
+
+	self:Refresh(parentBar, buttonDB)
+	print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Spell.ToyBox"].items .. " entries");
+	AutoBarCategoryList["Spell.ToyBox"]:Refresh()
+end
+--/dump AutoBarCategoryList["Muffin.Garrison"]
+function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox)
+	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
+
+	if (not AutoBarCategoryList["Spell.ToyBox"]) then
+--		AutoBarCategoryList["Spell.ToyBox"] = AutoBarSpells:new( "Spell.ToyBox", spellIconList["Amani War Bear"], {})
+--		category:SetNoSpellCheck(true)
+		--AutoBarButtonToyBox.prototype:init hasn't run, so skip
+		print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(updateToyBox));
+		return true;
+	end
+
+	local category = AutoBarCategoryList["Spell.ToyBox"]
+	
+	AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
+	
+	C_ToyBox.SetCollectedShown(true)
+	C_ToyBox.SetAllSourceTypeFilters(true)
+	C_ToyBox.SetFilterString("")
+
+	local toy_total = C_ToyBox.GetNumTotalDisplayedToys()
+	local toy_total_learned = C_ToyBox.GetNumLearnedDisplayedToys()
+
+
+print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
+
+	--If the number of known Toys has changed, do stuff
+	if (toy_total_learned ~= AutoBar.last_ToyBox_count) then
+print("   Gonna do stuff");
+		AutoBar.last_ToyBox_count = toy_total_learned;
+		
+		if (not category.items) then
+			category.items = {}
+		end
+
+		local initialized = not category.unInitialized
+
+		if(toy_total_learned <= 0) then
+			return
+		end
+		
+		for i = 1, toy_total do
+			local item_index = C_ToyBox.GetToyFromIndex(i)
+			local item_id, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_index)
+			if PlayerHasToy(item_id) then
+			print("  Adding ", toy_name, item_id);
+				AutoBarSearch:RegisterToy(item_id, toy_name)
+				category.items[#category.items + 1] = item_id
+			end
+		end
+
+--		for k, v in pairs(ToyBox_ids) do
+--			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_ToyBoxJournal.GetToyBoxInfoByID(v)
+--			local user_selected = (is_favourite and buttonDB.ToyBox_show_favourites) or (not is_favourite and buttonDB.ToyBox_show_nonfavourites)
+--			local qiraji_filtered = (not buttonDB.ToyBox_show_qiraji and AutoBarToyBoxIsQiraji[spell_id]) or false;
+--			if (is_collected and user_selected and not hide_on_char and not qiraji_filtered) then
+--				spell_name = GetSpellInfo(spell_id)
+--				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+--				spellIconList[spell_name] = icon
+--				AutoBarSearch:RegisterSpell(spell_name, true)
+--				local spellInfo = AutoBarSearch.spells[spell_name]
+--				spellInfo.spellLink = "spell:" .. spell_id
+--				category.castList[# category.castList + 1] = spell_name
+--			end
+--			if (active and updateToyBox) then
+--				local buttonData = AutoBar.db.char.buttonDataList[self.buttonName]
+--				if (AutoBar.flyable) then
+----print("AutoBarButtonToyBox.prototype:Refresh flyingToyBox", buttonData.flyingToyBox, "-->", spell_name)
+--					if (buttonData.flyingToyBox ~= spell_name) then
+--						thisIsSpam = false
+----print("AutoBarButtonToyBox.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingToyBox, spell_name)
+--					end
+--					buttonData.flyingToyBox = spell_name
+--				else
+----print("AutoBarButtonToyBox.prototype:Refresh groundToyBox", buttonData.groundToyBox, "-->", spell_name)
+--					if (buttonData.groundToyBox ~= spell_name) then
+--						thisIsSpam = false
+----print("AutoBarButtonToyBox.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundToyBox, spell_name)
+--					end
+--					buttonData.groundToyBox = spell_name
+--				end
+--			end
+--		end
+
+		category.unInitialized = nil
+	end
+end
 
 
 -------------------------- AutoBarButtonMount ---------------------

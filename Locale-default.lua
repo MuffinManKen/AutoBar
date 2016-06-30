@@ -14,6 +14,7 @@ atl("Muffin.Potion.Water Breathing","Muffin.Potion.Water Breathing");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
+atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
@@ -26,6 +27,8 @@ atl("MountShowClass", "Show Class");
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
+
+
 
 atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");

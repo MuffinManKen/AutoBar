@@ -1022,6 +1022,17 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		}
 	end
 
+--	if (not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
+--		AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
+--			buttonKey = "AutoBarButtonToyBox",
+--			buttonClass = "AutoBarButtonToyBox",
+--			barKey = "AutoBarClassBarExtras",
+--			defaultButtonIndex = 13,
+--			enabled = true,
+--			arrangeOnUse = true,
+--		}
+--	end
+
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		if (not AutoBar.db.account.buttonList["AutoBarButtonWater"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonWater"] = {

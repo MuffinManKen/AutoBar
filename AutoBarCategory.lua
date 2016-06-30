@@ -225,27 +225,27 @@ end
 
 -- Add items from set to rawList
 -- If priority is true, the items will have priority over non-priority items with the same values
-function AutoBarCategory.prototype:RawItemsAdd(rawList, set, priority)
-	if (not rawList) then
-		rawList = {}
+function AutoBarCategory.prototype:RawItemsAdd(p_raw_list, p_set, p_priority)
+	if (not p_raw_list) then
+		p_raw_list = {}
 	end
-	if (set) then
-		local cacheSet = PT:GetSetTable(set)
-		if (cacheSet) then
-			local index = # rawList + 1
-			for itemId, value in PT:IterateSet(set) do
+	if (p_set) then
+		local cache_set = PT:GetSetTable(p_set)
+		if (cache_set) then
+			local index = # p_raw_list + 1
+			for itemId, value in PT:IterateSet(p_set) do
 				if (not value or type(value) == "boolean") then
 					value = 0;
 				end
 				value = tonumber(value)
-				rawList[index] = {itemId, value, priority}
+				p_raw_list[index] = {itemId, value, p_priority}
 				index = index + 1
 			end
 		else
-			print("AutoBar could not find the PT3.1 set ", set, ".  Make sure you have all the libraries AutoBar needs to function.")
+			print("AutoBar could not find the PT3.1 p_set ", p_set, ".  Make sure you have all the libraries AutoBar needs to function.")
 		end
 	end
-	return rawList
+	return p_raw_list
 end
 
 -- Return nil or list of spells matching player class
@@ -401,6 +401,18 @@ end
 -- Reset the item list based on changed settings.
 function AutoBarItems.prototype:Refresh()
 end
+
+AutoBarToys = AceOO.Class(AutoBarCategory)
+
+function AutoBarToys.prototype:init(description, shortTexture, toy_list)
+	AutoBarToys.super.prototype.init(self, description, "Interface\\Icons\\" .. shortTexture) -- Mandatory init.
+	self.toys = toy_list
+end
+
+-- Reset the item list based on changed settings.
+function AutoBarToys.prototype:Refresh()
+end
+
 
 
 local spellFeedPet = AutoBar:LoggedGetSpellInfo(6991)
