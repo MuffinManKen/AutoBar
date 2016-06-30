@@ -113,18 +113,14 @@ AutoBar.categoryValidateList = {}
 	--Shaman
 	spellNameList["Earth Shield"] = AutoBar:LoggedGetSpellInfo(379)
 	spellNameList["Lightning Shield"] = AutoBar:LoggedGetSpellInfo(324)
-	spellNameList["Water Shield"] = AutoBar:LoggedGetSpellInfo(52127)
 	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
 	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533) --*
-	spellNameList["Ancestral Swiftness"] = AutoBar:LoggedGetSpellInfo(16188)
 
 	--Warlock
 	spellNameList["Sacrificial Pact"] = AutoBar:LoggedGetSpellInfo(108416)
-	spellNameList["Dark Bargain"] = AutoBar:LoggedGetSpellInfo(110913)
 	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
 	spellNameList["Soul Link"] = AutoBar:LoggedGetSpellInfo(108415)
 	spellNameList["Unending Breath"] = AutoBar:LoggedGetSpellInfo(5697)
-	spellNameList["Dark Intent"] = AutoBar:LoggedGetSpellInfo(109773) 
 	spellNameList["Soulstone"] = AutoBar:LoggedGetSpellInfo(20707) 
 	spellNameList["Command Demon"] = AutoBar:LoggedGetSpellInfo(119898) 
 	spellNameList["Grimoire of Service"] = AutoBar:LoggedGetSpellInfo(108501) 
@@ -134,8 +130,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
 	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
 	spellNameList["Demoralizing Shout"] = AutoBar:LoggedGetSpellInfo(1160)
-	spellNameList["Battle Shout"] = AutoBar:LoggedGetSpellInfo(6673)
-	spellNameList["Commanding Shout"] = AutoBar:LoggedGetSpellInfo(469)
+	spellNameList["Commanding Shout"] = AutoBar:LoggedGetSpellInfo(97462)
 	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(197690)
 	spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100)
 	spellNameList["Intercept"], _, spellIconList["Intercept"] = AutoBar:LoggedGetSpellInfo(198304)
@@ -1317,11 +1312,9 @@ function AutoBarCategory:Initialize()
 			"PRIEST", spellNameList["Fear Ward"],
 			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
-			"WARLOCK", spellNameList["Dark Intent"],
 			"WARLOCK", spellNameList["Unending Breath"],
 			"WARLOCK", spellNameList["Soulstone"],
 			"WARLOCK", spellNameList["Soul Link"],
-			"WARRIOR", spellNameList["Battle Shout"],
 			"WARRIOR", spellNameList["Commanding Shout"],
 			"WARRIOR", spellNameList["Demoralizing Shout"],
 
@@ -1506,9 +1499,7 @@ function AutoBarCategory:Initialize()
 			"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
 			"SHAMAN", 		spellNameList["Earth Shield"], spellNameList["Earth Shield"],
 			"SHAMAN", 		spellNameList["Lightning Shield"], spellNameList["Lightning Shield"],
-			"SHAMAN", 		spellNameList["Water Shield"], spellNameList["Water Shield"],
 			"WARLOCK", 		spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
-			"WARLOCK", 		spellNameList["Dark Bargain"], spellNameList["Dark Bargain"],
 			"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
 			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
 			"WARRIOR", 		spellNameList["Shield Wall"], spellNameList["Shield Block"],
@@ -1526,11 +1517,9 @@ function AutoBarCategory:Initialize2()
 
 			
 	local spellMobileBanking, _, iconMobileBanking  = AutoBar:LoggedGetSpellInfo(83958)
-	local spellMassRessurection = AutoBar:LoggedGetSpellInfo(83968)
 	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new(
 			"Spell.Guild", iconMobileBanking, {
 			"*", spellMobileBanking,
-			"*", spellMassRessurection,
 	})
 
 
