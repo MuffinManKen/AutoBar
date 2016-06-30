@@ -17,6 +17,7 @@ v7.0.0.00:
  - Added Keybinds for Garrison and Sun Song Ranch
  - Fixed Mounts for Legion
  - Qiraji Mounts are now filtered out by default
+ - Mounts load much quicker now
  - Fixed Item buttons for Legion
  - Various other minor breakage caused by Legion
  - TOC bump for 7.0
