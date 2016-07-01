@@ -66,7 +66,7 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = " - There is a KickStarter to support updates for Legion. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
-" - Added keybinds for Garrison and Sunsong Ranch|n"
+" - Added keybinds for Garrison and Sunsong Ranch|n" ..
 " - Data updates|n"
 
 
