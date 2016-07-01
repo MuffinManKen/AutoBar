@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v6.2.0.04:
+ - Added keybinds for Garrisons and Sunsong Ranch
+
 v6.2.0.03:
  - Data updates
  - Reorganized some settings on the UI
