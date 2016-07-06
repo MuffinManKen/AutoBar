@@ -74,7 +74,7 @@ WHATSNEW_TEXT = " - Updated item libs|n" ..
 
 function AutoBar:IsInLockDown()
 
-	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle()
+	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle() or UnitInVehicle("player")
 
 end
 
