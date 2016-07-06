@@ -22,6 +22,7 @@ v7.0.0.00:
  - Various other minor breakage caused by Legion
  - TOC bump for 7.0
  - Updated Ace3-GUI
+ - Bars should no longer flash while in a vehicle
 
 v6.2.0.03:
  - Data updates
