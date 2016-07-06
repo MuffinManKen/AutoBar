@@ -311,9 +311,10 @@ local hack_instant_poison_name = GetSpellInfo(157584)
 function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, itemsIndex)
 	local noSpellCheck = self.noSpellCheck
 
---	if (self.categoryKey == "Spell.Mount") then print("Spell.Mount:AddSpell(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
---	if (self.categoryKey == "Muffin.Mount") then print("Muffin.Mount:AddSpell(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
+--local tracked_category = "Spell.Portals"
+--	if (self.categoryKey == tracked_category) then print(self.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
+	--If the spells are not known by the player, their names are replaced with nil
 	if (spellNameLeft) then
 		if (not noSpellCheck) then
 			spellNameLeft = GetSpellInfo(spellNameLeft)
@@ -331,7 +332,7 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 		end
 	end
 
-	--if (self.categoryKey == "Spell.Poison.Lethal") then print("   AddSpell - spellname:", spellNameLeft) end
+--	if (self.categoryKey == tracked_category) then print("   AddSpell - spellname:", spellNameLeft) end
 
 	--HACK: WoW has a bug where GetSpellInfo("Instant Poison") returns nil and GetSpellInfo("Deadly Poison") returns Instant Poison if the character
 	-- has the Swift Poison perk. So if the passed in name is for Instant, ask for Deadly instead. NOTE: These have to be localized names which is
@@ -340,7 +341,7 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 		spellNameLeft = hack_deadly_poison_name
 	end
 
-	--if (self.categoryKey == "Spell.Poison.Lethal") then print("   Fixed: spellname:", spellNameLeft) end
+	--if (self.categoryKey == tracked_category) then print("   Fixed: spellname:", spellNameLeft) end
 
 	if (spellNameLeft) then
 		AutoBarSearch:RegisterSpell(spellNameLeft, noSpellCheck)
@@ -348,10 +349,10 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 		if (spellNameRight) then
 			AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
 			self.itemsRightClick[spellNameLeft] = spellNameRight
---AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight))
+--if (self.categoryKey == tracked_category) then AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight)) end
 		else
 --			self.itemsRightClick[spellNameLeft] = spellNameLeft
---AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft))
+--if (self.categoryKey == tracked_category) then AutoBar:Print("AutoBarCategory.prototype:AddSpell castable spellNameLeft " .. tostring(spellNameLeft)) end
 		end
 		itemsIndex = itemsIndex + 1
 	elseif (spellNameRight) then
