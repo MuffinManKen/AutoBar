@@ -266,11 +266,10 @@ function AutoBarCategory:FilterClass(castList, itemsPerLine)
 end
 
 -- Convert list of negative numbered spellId to spellName.
-function AutoBarCategory:FilterPTSpells(castList)
+function AutoBarCategory:PTSpellIDsToSpellName(castList)
 	local spellName
 --print("AutoBarCategory:FilterClass castList " .. tostring(castList))
 
-	-- Filter out CLASS spells from castList
 	for i = 1, # castList do
 		local spellId = castList[i] * -1
 		spellName = GetSpellInfo(spellId)
@@ -427,33 +426,31 @@ AutoBarSpells = AceOO.Class(AutoBarCategory)
 -- { "DRUID", "Mark of the Wild", "Gift of the Wild", ["<class>", "<localized spell name left click>", "<localized spell name right click>",] ... }
 -- Pass in only one of castList, rightClickList
 -- Icon from castList is used unless not available but rightClickList is
-function AutoBarSpells.prototype:init(description, texture, castList, rightClickList, ptItems)
+function AutoBarSpells.prototype:init(description, texture, castList, rightClickList, p_pt_set)
 	AutoBarSpells.super.prototype.init(self, description, texture) -- Mandatory init.
 
---	AutoBar:StupidLogEnable(description == "Spell.Poison.Lethal")
+--	if(p_pt_set) then
+--	AutoBar:StupidLogEnable(true)
 --	AutoBar:StupidLog("\nAutoBarSpells.prototype:init " .. description  .. "\n")
 --	AutoBar:StupidLog(AutoBar:Dump(castList))
 --	AutoBar:StupidLog(AutoBar:Dump(rightClickList))
---	AutoBar:StupidLog(AutoBar:Dump(ptItems))
+--	AutoBar:StupidLog(AutoBar:Dump(p_pt_set))
+--	end
 
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (castList) then
 		self.castList = AutoBarCategory:FilterClass(castList)
---		AutoBar:StupidLog("\n\nFiltered List:\n")
---		AutoBar:StupidLog(AutoBar:Dump(self.castList))
 	end
 	if (rightClickList) then
 		self.castList, self.rightClickList = AutoBarCategory:FilterClass(rightClickList, 3)
---		AutoBar:StupidLog("\n\nFiltered List:\n")
---		AutoBar:StupidLog(AutoBar:Dump(self.castList))
---		AutoBar:StupidLog(AutoBar:Dump(self.rightClickList))
 	end
 	
-	if (ptItems) then
+	--Convert a PT set to a list of localized spell names
+	if (p_pt_set) then
 		local rawList = nil
-		rawList = self:RawItemsAdd(rawList, ptItems, false)
-		self.castList = self:RawItemsConvert(rawList)
-		self.castList = AutoBarCategory:FilterPTSpells(self.castList)
+		rawList = self:RawItemsAdd(rawList, p_pt_set, false)
+		local id_list = self:RawItemsConvert(rawList)
+		self.castList = AutoBarCategory:PTSpellIDsToSpellName(id_list)
 	end
 
 	-- Populate items based on currently castable spells
