@@ -336,7 +336,7 @@ function AutoBarCategory.prototype:AddSpell(spellNameLeft, spellNameRight, items
 	--HACK: WoW has a bug where GetSpellInfo("Instant Poison") returns nil and GetSpellInfo("Deadly Poison") returns Instant Poison if the character
 	-- has the Swift Poison perk. So if the passed in name is for Instant, ask for Deadly instead. NOTE: These have to be localized names which is
 	-- why we cache those values above
-	if (spellNameLeft == hack_instant_poison_name) then
+	if (hack_instant_poison_name and (spellNameLeft == hack_instant_poison_name)) then
 		spellNameLeft = hack_deadly_poison_name
 	end
 
