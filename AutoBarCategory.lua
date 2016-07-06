@@ -1384,7 +1384,7 @@ function AutoBarCategory:Initialize()
 	local spellTeleportAncientDalaran = AutoBar:LoggedGetSpellInfo(120145)
 	local spellPortalAncientDalaran = AutoBar:LoggedGetSpellInfo(121848)
 	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new(
-			"Spell.Portals", spellPortalShattrathIcon, nil, {
+			"Spell.AncientDalaranPortals", spellPortalShattrathIcon, nil, {
 			"MAGE", spellTeleportAncientDalaran, spellPortalAncientDalaran,
 			})
 
