@@ -37,21 +37,21 @@ local _
 AutoBar.categoryValidateList = {}
 
 	--DeathKnight
-	spellNameList["Bone Shield"] = AutoBar:LoggedGetSpellInfo(49222)
 	spellNameList["Horn of Winter"] = AutoBar:LoggedGetSpellInfo(57330)
 	
 	--Druid
-	spellNameList["Barkskin"] = AutoBar:LoggedGetSpellInfo(22812)
+	spellNameList["Barkskin"], _, spellIconList["Barkskin"] = AutoBar:LoggedGetSpellInfo(22812)
 	spellNameList["Disorienting Roar"] = AutoBar:LoggedGetSpellInfo(99)
-	spellNameList["Faerie Fire"], _, spellIconList["Faerie Fire"] = AutoBar:LoggedGetSpellInfo(770)
-	spellNameList["Mark of the Wild"], _, spellIconList["Mark of the Wild"] = AutoBar:LoggedGetSpellInfo(1126)
 	spellNameList["Ironbark"] = AutoBar:LoggedGetSpellInfo(102342)
 	spellNameList["Prowl"] = AutoBar:LoggedGetSpellInfo(5215)
 
 	--Hunter
-	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(5118)
-	spellNameList["Aspect of the Pack"] = AutoBar:LoggedGetSpellInfo(13159)
-	spellNameList["Camouflage"] = AutoBar:LoggedGetSpellInfo(51753)
+	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(186257)
+	spellNameList["Aspect of the Chameleon"]= AutoBar:LoggedGetSpellInfo(61648)
+	spellNameList["Aspect of the Turtle"]= AutoBar:LoggedGetSpellInfo(186265)
+	spellNameList["Aspect of the Eagle"]= AutoBar:LoggedGetSpellInfo(186289)
+	spellNameList["Aspect of the Wild"]= AutoBar:LoggedGetSpellInfo(193530)
+	spellNameList["Camouflage"] = AutoBar:LoggedGetSpellInfo(199483)
 	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
 	spellNameList["Bestial Wrath"] = AutoBar:LoggedGetSpellInfo(19574)
 	spellNameList["Mend Pet"] = AutoBar:LoggedGetSpellInfo(136)
@@ -63,13 +63,9 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Frozen Ammo"] = AutoBar:LoggedGetSpellInfo(162539)
 
 	--Mage
-	spellNameList["Arcane Brilliance"] = AutoBar:LoggedGetSpellInfo(1459)
-	spellNameList["Dalaran Brilliance"] = AutoBar:LoggedGetSpellInfo(61316)
-	spellNameList["Ice Ward"] = AutoBar:LoggedGetSpellInfo(111264)
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
 	spellNameList["Mage Armor"] = AutoBar:LoggedGetSpellInfo(6117)
 	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(115610)
-	spellNameList["Molten Armor"] = AutoBar:LoggedGetSpellInfo(30482)
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
 	spellNameList["Conjure Refreshment"], _, spellIconList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
 	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
@@ -77,27 +73,18 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Greater Invisibility"], _, spellIconList["Greater Invisibility"] = AutoBar:LoggedGetSpellInfo(110959)
 
 	--Monk
-	spellNameList["Legacy of the Emperor"] = AutoBar:LoggedGetSpellInfo(115921)
-	spellNameList["Legacy of the White Tiger"] = AutoBar:LoggedGetSpellInfo(116781)
 	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
 	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
 	
 	--Paladin
-	spellNameList["Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(20217) 
-	spellNameList["Blessing of Might"] = AutoBar:LoggedGetSpellInfo(19740) 
 	spellNameList["Divine Protection"] = AutoBar:LoggedGetSpellInfo(498) 
 	spellNameList["Divine Shield"] = AutoBar:LoggedGetSpellInfo(642) 
 	spellNameList["Hand of Freedom"] = AutoBar:LoggedGetSpellInfo(1044) 
 	spellNameList["Hand of Protection"] = AutoBar:LoggedGetSpellInfo(1022) 
 	spellNameList["Hand of Sacrifice"] = AutoBar:LoggedGetSpellInfo(6940) 
-	spellNameList["Hand of Salvation"] = AutoBar:LoggedGetSpellInfo(1038) 
-	spellNameList["Seal of Insight"], _, spellIconList["Seal of Insight"] = AutoBar:LoggedGetSpellInfo(20165)
-	spellNameList["Seal of Justice"] = AutoBar:LoggedGetSpellInfo(20164)
-	spellNameList["Seal of Righteousness"] = AutoBar:LoggedGetSpellInfo(20154)
-	spellNameList["Seal of Truth"] = AutoBar:LoggedGetSpellInfo(31801)
+	spellNameList["Seal of Light"], _, spellIconList["Seal of Light"] = AutoBar:LoggedGetSpellInfo(202273)
 
 	--Priest
-	spellNameList["Fear Ward"] = AutoBar:LoggedGetSpellInfo(6346)
 	spellNameList["Power Word: Fortitude"] = AutoBar:LoggedGetSpellInfo(13864)
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
 	
@@ -111,8 +98,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellInfo(1784)
 
 	--Shaman
-	spellNameList["Earth Shield"] = AutoBar:LoggedGetSpellInfo(379)
-	spellNameList["Lightning Shield"] = AutoBar:LoggedGetSpellInfo(324)
 	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
 	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533) --*
 
@@ -943,127 +928,91 @@ function AutoBarCategory:Initialize()
 			"Consumable.Food.Buff.Other", "INV_Drink_17", "Consumable.Food.Buff.Other")
 	AutoBarCategoryList["Consumable.Food.Buff.Other"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Combat"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Combat", "INV_Potion_54", "Consumable.Cooldown.Potion.Combat")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Combat"] = AutoBarItems:new("Consumable.Cooldown.Potion.Combat", "INV_Potion_54", "Consumable.Cooldown.Potion.Combat")
 
-	AutoBarCategoryList["Muffin.Potion.Health"] = AutoBarItems:new(
-			"Muffin.Potion.Health", "INV_Potion_54", "Muffin.Potion.Health")
+	AutoBarCategoryList["Muffin.Potion.Health"] = AutoBarItems:new("Muffin.Potion.Health", "INV_Potion_54", "Muffin.Potion.Health")
 
-	AutoBarCategoryList["Muffin.Potion.Mana"] = AutoBarItems:new(
-			"Muffin.Potion.Mana", "INV_Potion_76", "Muffin.Potion.Mana")
+	AutoBarCategoryList["Muffin.Potion.Mana"] = AutoBarItems:new("Muffin.Potion.Mana", "INV_Potion_76", "Muffin.Potion.Mana")
 			
-	AutoBarCategoryList["Muffin.Potion.Combo"] = AutoBarItems:new(
-			"Muffin.Potion.Combo", "INV_Potion_76", "Muffin.Potion.Combo")
+	AutoBarCategoryList["Muffin.Potion.Combo"] = AutoBarItems:new("Muffin.Potion.Combo", "INV_Potion_76", "Muffin.Potion.Combo")
 
-	AutoBarCategoryList["Muffin.SunSongRanch"] = AutoBarItems:new(
-			"Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
+	AutoBarCategoryList["Muffin.SunSongRanch"] = AutoBarItems:new("Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
 
-	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new(
-			"Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
+	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new("Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
 
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"]:SetAnywhere(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Basic"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.Basic", "INV_Potion_54", "Consumable.Cooldown.Potion.Health.Basic")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Basic"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Basic", "INV_Potion_54", "Consumable.Cooldown.Potion.Health.Basic")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.PvP", "INV_Potion_39", "Consumable.Cooldown.Potion.Health.PvP")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.PvP", "INV_Potion_39", "Consumable.Cooldown.Potion.Health.PvP")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"]:SetBattleground(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Blades Edge"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.Blades Edge", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Blades Edge")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Blades Edge"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Blades Edge", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Blades Edge")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Blades Edge"]:SetLocation(GetMapNameByID(475)) -- Blade's Edge Mountains
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Coilfang"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.Coilfang", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Coilfang")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Coilfang"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Coilfang", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Coilfang")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Coilfang"]:SetLocation("Coilfang")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Tempest Keep"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Health.Tempest Keep", "INV_Potion_153", "Consumable.Cooldown.Potion.Health.Tempest Keep")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Tempest Keep"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Tempest Keep", "INV_Potion_153", "Consumable.Cooldown.Potion.Health.Tempest Keep")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Tempest Keep"]:SetLocation("Tempest Keep")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Anywhere", "INV_Alchemy_EndlessFlask_04", "Consumable.Cooldown.Potion.Mana.Anywhere")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Anywhere", "INV_Alchemy_EndlessFlask_04", "Consumable.Cooldown.Potion.Mana.Anywhere")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"]:SetAnywhere(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Basic"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Basic", "INV_Potion_76", "Consumable.Cooldown.Potion.Mana.Basic")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Basic"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Basic", "INV_Potion_76", "Consumable.Cooldown.Potion.Mana.Basic")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Pvp", "INV_Potion_81", "Consumable.Cooldown.Potion.Mana.Pvp")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Pvp", "INV_Potion_81", "Consumable.Cooldown.Potion.Mana.Pvp")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"]:SetBattleground(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Blades Edge"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Blades Edge", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Blades Edge")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Blades Edge"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Blades Edge", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Blades Edge")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Blades Edge"]:SetLocation(GetMapNameByID(475)) -- Blade's Edge Mountains
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Coilfang"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Coilfang", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Coilfang")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Coilfang"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Coilfang", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Coilfang")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Coilfang"]:SetLocation("Coilfang")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Tempest Keep"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Mana.Tempest Keep", "INV_Potion_156", "Consumable.Cooldown.Potion.Mana.Tempest Keep")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Tempest Keep"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Tempest Keep", "INV_Potion_156", "Consumable.Cooldown.Potion.Mana.Tempest Keep")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Tempest Keep"]:SetLocation("Tempest Keep")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Combat"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Combat", "INV_Stone_04", "Consumable.Cooldown.Stone.Combat")
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Combat"] = AutoBarItems:new("Consumable.Cooldown.Stone.Combat", "INV_Stone_04", "Consumable.Cooldown.Stone.Combat")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Warlock"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Health.Warlock", "INV_Stone_04", "Consumable.Cooldown.Stone.Health.Warlock")
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Warlock"] = AutoBarItems:new("Consumable.Cooldown.Stone.Health.Warlock", "INV_Stone_04", "Consumable.Cooldown.Stone.Health.Warlock")
 
-	AutoBarCategoryList["Misc.Booze"] = AutoBarItems:new(
-			"Misc.Booze", "INV_Drink_03", "Misc.Booze")
+	AutoBarCategoryList["Misc.Booze"] = AutoBarItems:new("Misc.Booze", "INV_Drink_03", "Misc.Booze")
 	AutoBarCategoryList["Misc.Booze"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Muffin.Misc.Openable"] = AutoBarItems:new(
-			"Muffin.Misc.Openable", "INV_Misc_Bag_17", "Muffin.Misc.Openable")
+	AutoBarCategoryList["Muffin.Misc.Openable"] = AutoBarItems:new("Muffin.Misc.Openable", "INV_Misc_Bag_17", "Muffin.Misc.Openable")
+
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation"] = AutoBarItems:new("Consumable.Cooldown.Potion.Rejuvenation", "INV_Potion_47", "Consumable.Cooldown.Potion.Rejuvenation")
+
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Statue"] = AutoBarItems:new("Consumable.Cooldown.Stone.Health.Statue", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone.Health.Statue")
+
+	AutoBarCategoryList["Consumable.Cooldown.Drums"] = AutoBarItems:new("Consumable.Cooldown.Drums", "INV_Misc_Drum_05", "Consumable.Cooldown.Drums")
+
+	AutoBarCategoryList["Consumable.Cooldown.Potion"] = AutoBarItems:new("Consumable.Cooldown.Potion", "INV_Potion_47", "Consumable.Cooldown.Potion")
+
+	AutoBarCategoryList["Consumable.Cooldown.Stone"] = AutoBarItems:new("Consumable.Cooldown.Stone", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone")
 
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Rejuvenation", "INV_Potion_47", "Consumable.Cooldown.Potion.Rejuvenation")
+	AutoBarCategoryList["Consumable.Tailor.Net"] = AutoBarItems:new("Consumable.Tailor.Net", "INV_Misc_Net_01", "Consumable.Tailor.Net")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Statue"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Health.Statue", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone.Health.Statue")
+	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep"] = AutoBarItems:new("Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep", "INV_Potion_83", "Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep")
 
-	AutoBarCategoryList["Consumable.Cooldown.Drums"] = AutoBarItems:new(
-			"Consumable.Cooldown.Drums", "INV_Misc_Drum_05", "Consumable.Cooldown.Drums")
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Mana Stone"] = AutoBarItems:new("Consumable.Cooldown.Stone.Mana.Mana Stone", "INV_Misc_Gem_Sapphire_02", "Consumable.Cooldown.Stone.Mana.Mana Stone")
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion", "INV_Potion_47", "Consumable.Cooldown.Potion")
+	AutoBarCategoryList["Consumable.Buff.Rage"] = AutoBarItems:new("Consumable.Buff.Rage", "INV_Potion_24", "Consumable.Buff.Rage")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone")
+	AutoBarCategoryList["Muffin.Potion.Rage"] = AutoBarItems:new("Muffin.Potion.Rage", "INV_Potion_24", "Muffin.Potion.Rage")
 
+	AutoBarCategoryList["Consumable.Buff.Energy"] = AutoBarItems:new("Consumable.Buff.Energy", "INV_Drink_Milk_05", "Consumable.Buff.Energy")
 
-	AutoBarCategoryList["Consumable.Tailor.Net"] = AutoBarItems:new(
-			"Consumable.Tailor.Net", "INV_Misc_Net_01", "Consumable.Tailor.Net")
-
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep"] = AutoBarItems:new(
-			"Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep", "INV_Potion_83", "Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep")
-
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Mana Stone"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Mana.Mana Stone", "INV_Misc_Gem_Sapphire_02", "Consumable.Cooldown.Stone.Mana.Mana Stone")
-
-	AutoBarCategoryList["Consumable.Buff.Rage"] = AutoBarItems:new(
-			"Consumable.Buff.Rage", "INV_Potion_24", "Consumable.Buff.Rage")
-
-	AutoBarCategoryList["Muffin.Potion.Rage"] = AutoBarItems:new(
-			"Muffin.Potion.Rage", "INV_Potion_24", "Muffin.Potion.Rage")
-
-	AutoBarCategoryList["Consumable.Buff.Energy"] = AutoBarItems:new(
-			"Consumable.Buff.Energy", "INV_Drink_Milk_05", "Consumable.Buff.Energy")
-
-	AutoBarCategoryList["Consumable.Water.Basic"] = AutoBarItems:new(
-			"Consumable.Water.Basic", "INV_Drink_10", "Consumable.Water.Basic", "Consumable.Water.Conjured")
+	AutoBarCategoryList["Consumable.Water.Basic"] = AutoBarItems:new("Consumable.Water.Basic", "INV_Drink_10", "Consumable.Water.Basic", "Consumable.Water.Conjured")
 	AutoBarCategoryList["Consumable.Water.Basic"]:SetNonCombat(true)
 --	AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureRefreshment,}))
 
-	AutoBarCategoryList["Muffin.Food.Mana.Basic"] = AutoBarItems:new(
-			"Muffin.Food.Mana.Basic", "INV_Drink_10", "Muffin.Food.Mana.Basic")
+	AutoBarCategoryList["Muffin.Food.Mana.Basic"] = AutoBarItems:new("Muffin.Food.Mana.Basic", "INV_Drink_10", "Muffin.Food.Mana.Basic")
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"]:SetNonCombat(true)
 
 
@@ -1077,175 +1026,128 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
 
-	AutoBarCategoryList["Consumable.Water.Percentage"] = AutoBarItems:new(
-			"Consumable.Water.Percentage", "INV_Drink_04", "Consumable.Water.Percentage")
+	AutoBarCategoryList["Consumable.Water.Percentage"] = AutoBarItems:new("Consumable.Water.Percentage", "INV_Drink_04", "Consumable.Water.Percentage")
 	AutoBarCategoryList["Consumable.Water.Percentage"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Water.Buff.Spirit"] = AutoBarItems:new(
-			"Consumable.Water.Buff.Spirit", "INV_Drink_16", "Consumable.Water.Buff.Spirit")
+	AutoBarCategoryList["Consumable.Water.Buff.Spirit"] = AutoBarItems:new("Consumable.Water.Buff.Spirit", "INV_Drink_16", "Consumable.Water.Buff.Spirit")
 	AutoBarCategoryList["Consumable.Water.Buff.Spirit"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Water.Buff"] = AutoBarItems:new(
-			"Consumable.Water.Buff", "INV_Drink_08", "Consumable.Water.Buff")
+	AutoBarCategoryList["Consumable.Water.Buff"] = AutoBarItems:new("Consumable.Water.Buff", "INV_Drink_08", "Consumable.Water.Buff")
 	AutoBarCategoryList["Consumable.Water.Buff"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Mana"] = AutoBarItems:new("Consumable.Weapon Buff.Oil.Mana", "INV_Potion_100",
-			"Consumable.Weapon Buff.Oil.Mana")
+	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Mana"] = AutoBarItems:new("Consumable.Weapon Buff.Oil.Mana", "INV_Potion_100", "Consumable.Weapon Buff.Oil.Mana")
 	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Mana"]:SetTargeted("WEAPON")
 
-	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Wizard"] = AutoBarItems:new("Consumable.Weapon Buff.Oil.Wizard", "INV_Potion_105",
-			"Consumable.Weapon Buff.Oil.Wizard")
+	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Wizard"] = AutoBarItems:new("Consumable.Weapon Buff.Oil.Wizard", "INV_Potion_105", "Consumable.Weapon Buff.Oil.Wizard")
 	AutoBarCategoryList["Consumable.Weapon Buff.Oil.Wizard"]:SetTargeted("WEAPON")
 
-	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Sharpening Stone"] = AutoBarItems:new("Consumable.Weapon Buff.Stone.Sharpening Stone", "INV_Stone_SharpeningStone_01",
-			"Consumable.Weapon Buff.Stone.Sharpening Stone")
+	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Sharpening Stone"] = AutoBarItems:new("Consumable.Weapon Buff.Stone.Sharpening Stone", "INV_Stone_SharpeningStone_01", "Consumable.Weapon Buff.Stone.Sharpening Stone")
 	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Sharpening Stone"]:SetTargeted("WEAPON")
 
-	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Weight Stone"] = AutoBarItems:new("Consumable.Weapon Buff.Stone.Weight Stone", "INV_Stone_WeightStone_02",
-			"Consumable.Weapon Buff.Stone.Weight Stone")
+	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Weight Stone"] = AutoBarItems:new("Consumable.Weapon Buff.Stone.Weight Stone", "INV_Stone_WeightStone_02", "Consumable.Weapon Buff.Stone.Weight Stone")
 	AutoBarCategoryList["Consumable.Weapon Buff.Stone.Weight Stone"]:SetTargeted("WEAPON")
 
 
-	AutoBarCategoryList["Consumable.Buff Group.General.Self"] = AutoBarItems:new("Consumable.Buff Group.General.Self", "INV_Potion_80",
-			"Consumable.Buff Group.General.Self")
+	AutoBarCategoryList["Consumable.Buff Group.General.Self"] = AutoBarItems:new("Consumable.Buff Group.General.Self", "INV_Potion_80", "Consumable.Buff Group.General.Self")
 
-	AutoBarCategoryList["Consumable.Buff Group.General.Target"] = AutoBarItems:new("Consumable.Buff Group.General.Target", "INV_Potion_80",
-			"Consumable.Buff Group.General.Target")
+	AutoBarCategoryList["Consumable.Buff Group.General.Target"] = AutoBarItems:new("Consumable.Buff Group.General.Target", "INV_Potion_80", "Consumable.Buff Group.General.Target")
 	AutoBarCategoryList["Consumable.Buff Group.General.Target"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff Group.Caster.Self"] = AutoBarItems:new("Consumable.Buff Group.Caster.Self", "INV_Potion_66",
-			"Consumable.Buff Group.Caster.Self")
+	AutoBarCategoryList["Consumable.Buff Group.Caster.Self"] = AutoBarItems:new("Consumable.Buff Group.Caster.Self", "INV_Potion_66", "Consumable.Buff Group.Caster.Self")
 
-	AutoBarCategoryList["Consumable.Buff Group.Caster.Target"] = AutoBarItems:new("Consumable.Buff Group.Caster.Target", "INV_Potion_66",
-			"Consumable.Buff Group.Caster.Target")
+	AutoBarCategoryList["Consumable.Buff Group.Caster.Target"] = AutoBarItems:new("Consumable.Buff Group.Caster.Target", "INV_Potion_66", "Consumable.Buff Group.Caster.Target")
 	AutoBarCategoryList["Consumable.Buff Group.Caster.Target"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff Group.Melee.Self"] = AutoBarItems:new("Consumable.Buff Group.Melee.Self", "INV_Potion_43",
-			"Consumable.Buff Group.Melee.Self")
+	AutoBarCategoryList["Consumable.Buff Group.Melee.Self"] = AutoBarItems:new("Consumable.Buff Group.Melee.Self", "INV_Potion_43", "Consumable.Buff Group.Melee.Self")
 
-	AutoBarCategoryList["Consumable.Buff Group.Melee.Target"] = AutoBarItems:new("Consumable.Buff Group.Melee.Target", "INV_Potion_43",
-			"Consumable.Buff Group.Melee.Target")
+	AutoBarCategoryList["Consumable.Buff Group.Melee.Target"] = AutoBarItems:new("Consumable.Buff Group.Melee.Target", "INV_Potion_43", "Consumable.Buff Group.Melee.Target")
 	AutoBarCategoryList["Consumable.Buff Group.Melee.Target"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Other.Self"] = AutoBarItems:new("Consumable.Buff.Other.Self", "INV_Potion_80",
-			"Consumable.Buff.Other.Self")
+	AutoBarCategoryList["Consumable.Buff.Other.Self"] = AutoBarItems:new("Consumable.Buff.Other.Self", "INV_Potion_80", "Consumable.Buff.Other.Self")
 
-	AutoBarCategoryList["Consumable.Buff.Water Breathing"] = AutoBarItems:new("Consumable.Buff.Water Breathing", "INV_Potion_80",
-			"Consumable.Buff.Water Breathing")
+	AutoBarCategoryList["Consumable.Buff.Water Breathing"] = AutoBarItems:new("Consumable.Buff.Water Breathing", "INV_Potion_80", "Consumable.Buff.Water Breathing")
 
-	AutoBarCategoryList["Muffin.Potion.Water Breathing"] = AutoBarItems:new("Muffin.Potion.Water Breathing", "INV_Potion_80",
-			"Muffin.Potion.Water Breathing")
+	AutoBarCategoryList["Muffin.Potion.Water Breathing"] = AutoBarItems:new("Muffin.Potion.Water Breathing", "INV_Potion_80", "Muffin.Potion.Water Breathing")
 
 --[[
-	AutoBarCategoryList["Consumable.Buff.Other.Target"] = AutoBarItems:new("Consumable.Buff.Other.Target", "INV_Potion_80",
-			"Consumable.Buff.Other.Target")
+	AutoBarCategoryList["Consumable.Buff.Other.Target"] = AutoBarItems:new("Consumable.Buff.Other.Target", "INV_Potion_80", "Consumable.Buff.Other.Target")
 	AutoBarCategoryList["Consumable.Buff.Other.Target"]:SetTargeted(true)
 --]]
 
-	AutoBarCategoryList["Consumable.Buff.Chest"] = AutoBarItems:new("Consumable.Buff.Chest", "INV_Misc_Rune_10",
-			"Consumable.Buff.Chest")
+	AutoBarCategoryList["Consumable.Buff.Chest"] = AutoBarItems:new("Consumable.Buff.Chest", "INV_Misc_Rune_10", "Consumable.Buff.Chest")
 	AutoBarCategoryList["Consumable.Buff.Chest"]:SetTargeted("CHEST")
 
-	AutoBarCategoryList["Consumable.Buff.Shield"] = AutoBarItems:new("Consumable.Buff.Shield", "INV_Misc_Rune_13",
-			"Consumable.Buff.Shield")
+	AutoBarCategoryList["Consumable.Buff.Shield"] = AutoBarItems:new("Consumable.Buff.Shield", "INV_Misc_Rune_13", "Consumable.Buff.Shield")
 	AutoBarCategoryList["Consumable.Buff.Shield"]:SetTargeted("SHIELD")
 
-	AutoBarCategoryList["Consumable.Weapon Buff"] = AutoBarItems:new("Consumable.Weapon Buff", "INV_Misc_Rune_13",
-			"Consumable.Weapon Buff")
+	AutoBarCategoryList["Consumable.Weapon Buff"] = AutoBarItems:new("Consumable.Weapon Buff", "INV_Misc_Rune_13", "Consumable.Weapon Buff")
 	AutoBarCategoryList["Consumable.Weapon Buff"]:SetTargeted("WEAPON")
 
-	AutoBarCategoryList["Consumable.Buff.Health"] = AutoBarItems:new("Consumable.Buff.Health", "INV_Potion_43",
-			"Consumable.Buff.Health")
+	AutoBarCategoryList["Consumable.Buff.Health"] = AutoBarItems:new("Consumable.Buff.Health", "INV_Potion_43", "Consumable.Buff.Health")
 
-	AutoBarCategoryList["Consumable.Buff.Armor"] = AutoBarItems:new("Consumable.Buff.Armor", "INV_Potion_66",
-			"Consumable.Buff.Armor")
+	AutoBarCategoryList["Consumable.Buff.Armor"] = AutoBarItems:new("Consumable.Buff.Armor", "INV_Potion_66", "Consumable.Buff.Armor")
 
-	AutoBarCategoryList["Consumable.Buff.Regen Health"] = AutoBarItems:new("Consumable.Buff.Regen Health", "INV_Potion_80",
-			"Consumable.Buff.Regen Health")
+	AutoBarCategoryList["Consumable.Buff.Regen Health"] = AutoBarItems:new("Consumable.Buff.Regen Health", "INV_Potion_80", "Consumable.Buff.Regen Health")
 
-	AutoBarCategoryList["Consumable.Buff.Agility"] = AutoBarItems:new("Consumable.Buff.Agility", "INV_Scroll_02",
-			"Consumable.Buff.Agility")
+	AutoBarCategoryList["Consumable.Buff.Agility"] = AutoBarItems:new("Consumable.Buff.Agility", "INV_Scroll_02", "Consumable.Buff.Agility")
 	AutoBarCategoryList["Consumable.Buff.Agility"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Intellect"] = AutoBarItems:new("Consumable.Buff.Intellect", "INV_Scroll_01",
-			"Consumable.Buff.Intellect")
+	AutoBarCategoryList["Consumable.Buff.Intellect"] = AutoBarItems:new("Consumable.Buff.Intellect", "INV_Scroll_01", "Consumable.Buff.Intellect")
 	AutoBarCategoryList["Consumable.Buff.Intellect"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Spirit"] = AutoBarItems:new("Consumable.Buff.Spirit", "INV_Scroll_01",
-			"Consumable.Buff.Spirit")
+	AutoBarCategoryList["Consumable.Buff.Spirit"] = AutoBarItems:new("Consumable.Buff.Spirit", "INV_Scroll_01", "Consumable.Buff.Spirit")
 	AutoBarCategoryList["Consumable.Buff.Spirit"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Stamina"] = AutoBarItems:new("Consumable.Buff.Stamina", "INV_Scroll_07",
-			"Consumable.Buff.Stamina")
+	AutoBarCategoryList["Consumable.Buff.Stamina"] = AutoBarItems:new("Consumable.Buff.Stamina", "INV_Scroll_07", "Consumable.Buff.Stamina")
 	AutoBarCategoryList["Consumable.Buff.Stamina"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Strength"] = AutoBarItems:new("Consumable.Buff.Strength", "INV_Scroll_02",
-			"Consumable.Buff.Strength")
+	AutoBarCategoryList["Consumable.Buff.Strength"] = AutoBarItems:new("Consumable.Buff.Strength", "INV_Scroll_02", "Consumable.Buff.Strength")
 	AutoBarCategoryList["Consumable.Buff.Strength"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Attack Power"] = AutoBarItems:new("Consumable.Buff.Attack Power", "INV_Misc_MonsterScales_07",
-			"Consumable.Buff.Attack Power")
+	AutoBarCategoryList["Consumable.Buff.Attack Power"] = AutoBarItems:new("Consumable.Buff.Attack Power", "INV_Misc_MonsterScales_07", "Consumable.Buff.Attack Power")
 	AutoBarCategoryList["Consumable.Buff.Attack Power"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Attack Speed"] = AutoBarItems:new("Consumable.Buff.Attack Speed", "INV_Misc_MonsterScales_17",
-			"Consumable.Buff.Attack Speed")
+	AutoBarCategoryList["Consumable.Buff.Attack Speed"] = AutoBarItems:new("Consumable.Buff.Attack Speed", "INV_Misc_MonsterScales_17", "Consumable.Buff.Attack Speed")
 	AutoBarCategoryList["Consumable.Buff.Attack Speed"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Dodge"] = AutoBarItems:new("Consumable.Buff.Dodge", "INV_Misc_MonsterScales_17",
-			"Consumable.Buff.Dodge")
+	AutoBarCategoryList["Consumable.Buff.Dodge"] = AutoBarItems:new("Consumable.Buff.Dodge", "INV_Misc_MonsterScales_17", "Consumable.Buff.Dodge")
 	AutoBarCategoryList["Consumable.Buff.Dodge"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Resistance.Self"] = AutoBarItems:new("Consumable.Buff.Resistance", "INV_Misc_MonsterScales_15",
-			"Consumable.Buff.Resistance.Self")
+	AutoBarCategoryList["Consumable.Buff.Resistance.Self"] = AutoBarItems:new("Consumable.Buff.Resistance", "INV_Misc_MonsterScales_15", "Consumable.Buff.Resistance.Self")
 
-	AutoBarCategoryList["Consumable.Buff.Resistance.Target"] = AutoBarItems:new("Consumable.Buff.Resistance", "INV_Misc_MonsterScales_15",
-			"Consumable.Buff.Resistance.Target")
+	AutoBarCategoryList["Consumable.Buff.Resistance.Target"] = AutoBarItems:new("Consumable.Buff.Resistance", "INV_Misc_MonsterScales_15", "Consumable.Buff.Resistance.Target")
 	AutoBarCategoryList["Consumable.Buff.Resistance.Target"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Buff.Speed"] = AutoBarItems:new("Consumable.Buff.Speed", "INV_Potion_95",
-			"Consumable.Buff.Speed")
+	AutoBarCategoryList["Consumable.Buff.Speed"] = AutoBarItems:new("Consumable.Buff.Speed", "INV_Potion_95", "Consumable.Buff.Speed")
 
-	AutoBarCategoryList["Consumable.Buff Type.Battle"] = AutoBarItems:new("Consumable.Buff Type.Battle", "INV_Potion_111",
-			"Consumable.Buff Type.Battle")
+	AutoBarCategoryList["Consumable.Buff Type.Battle"] = AutoBarItems:new("Consumable.Buff Type.Battle", "INV_Potion_111", "Consumable.Buff Type.Battle")
 
-	AutoBarCategoryList["Consumable.Buff Type.Guardian"] = AutoBarItems:new("Consumable.Buff Type.Guardian", "INV_Potion_155",
-			"Consumable.Buff Type.Guardian")
+	AutoBarCategoryList["Consumable.Buff Type.Guardian"] = AutoBarItems:new("Consumable.Buff Type.Guardian", "INV_Potion_155", "Consumable.Buff Type.Guardian")
 
-	AutoBarCategoryList["Consumable.Buff Type.Flask"] = AutoBarItems:new("Consumable.Buff Type.Flask", "INV_Potion_118",
-			"Consumable.Buff Type.Flask")
+	AutoBarCategoryList["Consumable.Buff Type.Flask"] = AutoBarItems:new("Consumable.Buff Type.Flask", "INV_Potion_118", "Consumable.Buff Type.Flask")
 
-	AutoBarCategoryList["Muffin.Flasks"] = AutoBarItems:new("Muffin.Flasks", "INV_Potion_118",
-			"Muffin.Flasks")
+	AutoBarCategoryList["Muffin.Flasks"] = AutoBarItems:new("Muffin.Flasks", "INV_Potion_118", "Muffin.Flasks")
 
 	AutoBarCategoryList["Muffin.Potion.Buff"] = AutoBarItems:new("Muffin.Potion.Buff", "INV_Potion_118", "Muffin.Potion.Buff")
 
-	AutoBarCategoryList["Muffin.Gear.Trinket"] = AutoBarItems:new("Muffin.Gear.Trinket", "INV_Misc_OrnateBox",
-			"Muffin.Gear.Trinket")
+	AutoBarCategoryList["Muffin.Gear.Trinket"] = AutoBarItems:new("Muffin.Gear.Trinket", "INV_Misc_OrnateBox", "Muffin.Gear.Trinket")
 
-	AutoBarCategoryList["Misc.Lockboxes"] = AutoBarItems:new("Misc.Lockboxes", "INV_Trinket_Naxxramas06",
-			"Misc.Lockboxes")
+	AutoBarCategoryList["Misc.Lockboxes"] = AutoBarItems:new("Misc.Lockboxes", "INV_Trinket_Naxxramas06", "Misc.Lockboxes")
 
-	AutoBarCategoryList["Misc.Usable.BossItem"] = AutoBarItems:new("Misc.Usable.BossItem", "INV_BannerPVP_02",
-			"Misc.Usable.BossItem")
+	AutoBarCategoryList["Misc.Usable.BossItem"] = AutoBarItems:new("Misc.Usable.BossItem", "INV_BannerPVP_02", "Misc.Usable.BossItem")
 
-	AutoBarCategoryList["Misc.Usable.Fun"] = AutoBarItems:new("Misc.Usable.Fun", "INV_Misc_Toy_10",
-			"Misc.Usable.Fun")
+	AutoBarCategoryList["Misc.Usable.Fun"] = AutoBarItems:new("Misc.Usable.Fun", "INV_Misc_Toy_10", "Misc.Usable.Fun")
 
-	AutoBarCategoryList["Misc.Usable.Permanent"] = AutoBarItems:new("Misc.Usable.Permanent", "INV_BannerPVP_02",
-			"Misc.Usable.Permanent")
+	AutoBarCategoryList["Misc.Usable.Permanent"] = AutoBarItems:new("Misc.Usable.Permanent", "INV_BannerPVP_02", "Misc.Usable.Permanent")
 
-	AutoBarCategoryList["Misc.Usable.Quest"] = AutoBarItems:new("Misc.Usable.Quest", "INV_BannerPVP_02",
-			"Misc.Usable.Quest")
+	AutoBarCategoryList["Misc.Usable.Quest"] = AutoBarItems:new("Misc.Usable.Quest", "INV_BannerPVP_02", "Misc.Usable.Quest")
 
-	AutoBarCategoryList["Misc.Usable.StartsQuest"] = AutoBarItems:new("Misc.Usable.StartsQuest", "INV_Staff_20",
-			"Misc.Usable.StartsQuest")
+	AutoBarCategoryList["Misc.Usable.StartsQuest"] = AutoBarItems:new("Misc.Usable.StartsQuest", "INV_Staff_20", "Misc.Usable.StartsQuest")
 
-	AutoBarCategoryList["Muffin.Misc.Quest"] = AutoBarItems:new("Muffin.Misc.Quest", "INV_BannerPVP_02",
-			"Muffin.Misc.Quest")
+	AutoBarCategoryList["Muffin.Misc.Quest"] = AutoBarItems:new("Muffin.Misc.Quest", "INV_BannerPVP_02", "Muffin.Misc.Quest")
 
-	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02",
-			"Misc.Usable.Replenished")
+	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02", "Misc.Usable.Replenished")
 
 
 	local spellCreateHealthstone, spellCreateHealthstoneIcon
@@ -1277,9 +1179,12 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new(
 			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
 			"HUNTER", spellNameList["Aspect of the Cheetah"], 
-			"HUNTER", spellNameList["Aspect of the Pack"], 
+			"HUNTER", spellNameList["Aspect of the Chameleon"], 
+			"HUNTER", spellNameList["Aspect of the Turtle"], 
+			"HUNTER", spellNameList["Aspect of the Eagle"], 
+			"HUNTER", spellNameList["Aspect of the Wild"], 
 			})
-			
+	
 	AutoBarCategoryList["Spell.Ammo"] = AutoBarSpells:new(
 			"Spell.Ammo", spellIconList["Aspect of the Cheetah"], {
 			"HUNTER", spellNameList["Incendiary Ammo"],
@@ -1303,25 +1208,13 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new(
-			"Spell.Class.Buff", spellIconList["Mark of the Wild"], {
-			"DEATHKNIGHT", spellNameList["Bone Shield"],
+			"Spell.Class.Buff", spellIconList["Barkskin"], {
 			"DEATHKNIGHT", spellNameList["Horn of Winter"],
-			"DRUID", spellNameList["Mark of the Wild"],
 			"DRUID", spellNameList["Ironbark"],
-			"MAGE", spellNameList["Arcane Brilliance"],
-			"MAGE", spellNameList["Dalaran Brilliance"],
-			"MAGE", spellNameList["Ice Ward"],
-			"MAGE", spellNameList["Molten Armor"],
 			"MAGE", spellNameList["Slow Fall"],
-			"MONK", spellNameList["Legacy of the Emperor"],
-			"MONK", spellNameList["Legacy of the White Tiger"],
-			"PALADIN", spellNameList["Blessing of Kings"],
-			"PALADIN", spellNameList["Blessing of Might"],
 			"PALADIN", spellNameList["Hand of Freedom"],
 			"PALADIN", spellNameList["Hand of Protection"],
 			"PALADIN", spellNameList["Hand of Sacrifice"],
-			"PALADIN", spellNameList["Hand of Salvation"],
-			"PRIEST", spellNameList["Fear Ward"],
 			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
 			"WARLOCK", spellNameList["Unending Breath"],
@@ -1500,7 +1393,6 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new(
 			"Spell.Shields", spellIconList["Ice Barrier"], nil, {
-			"DEATHKNIGHT", spellNameList["Bone Shield"], spellNameList["Bone Shield"],
 			"DRUID", 		spellNameList["Barkskin"], 	spellNameList["Barkskin"],
 			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
 			"MAGE", 			spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
@@ -1509,8 +1401,6 @@ function AutoBarCategory:Initialize()
 			"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
 			"PRIEST", 		spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
 			"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
-			"SHAMAN", 		spellNameList["Earth Shield"], spellNameList["Earth Shield"],
-			"SHAMAN", 		spellNameList["Lightning Shield"], spellNameList["Lightning Shield"],
 			"WARLOCK", 		spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
 			"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
 			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
@@ -1638,9 +1528,8 @@ function AutoBarCategory:Initialize2()
 			"Spell.Crafting", spellIconList["First Aid"], craftList)
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new(
-			"Spell.Debuff.Multiple", spellIconList["Faerie Fire"], {
+			"Spell.Debuff.Multiple", spellIconList["Slow"], {
 			"DRUID", spellNameList["Disorienting Roar"],
-			"DRUID", spellNameList["Faerie Fire"],
 			})
 
 	spellNameList["Hunter's Mark"] = AutoBar:LoggedGetSpellInfo(1130)
@@ -1661,11 +1550,8 @@ function AutoBarCategory:Initialize2()
 			})
 
 	AutoBarCategoryList["Spell.Seal"] = AutoBarSpells:new(
-			"Spell.Seal", spellIconList["Seal of Insight"], {
-			"PALADIN", spellNameList["Seal of Insight"], 
-			"PALADIN", spellNameList["Seal of Justice"], 
-			"PALADIN", spellNameList["Seal of Righteousness"], 
-			"PALADIN", spellNameList["Seal of Truth"], 
+			"Spell.Seal", spellIconList["Seal of Light"], {
+			"PALADIN", spellNameList["Seal of Light"], 
 			})
 
 

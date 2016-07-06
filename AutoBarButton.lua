@@ -29,11 +29,9 @@ spellNameList["Last Stand"], _, spellIconList["Last Stand"] = AutoBar:LoggedGetS
 spellNameList["Desperate Prayer"], _, spellIconList["Desperate Prayer"] = AutoBar:LoggedGetSpellInfo(19236)
 
 spellNameList["Vanish"], _, spellIconList["Vanish"] = AutoBar:LoggedGetSpellInfo(1856)
-spellNameList["Nature's Swiftness"], _, spellIconList["Nature's Swiftness"] = AutoBar:LoggedGetSpellInfo(132158)
 spellNameList["Frenzied Regeneration"], _, spellIconList["Frenzied Regeneration"] = AutoBar:LoggedGetSpellInfo(22842)
-spellNameList["Shadowform"], _, spellIconList["Shadowform"] = AutoBar:LoggedGetSpellInfo(15473)
 spellNameList["Wild Charge"], _, spellIconList["Wild Charge"] = AutoBar:LoggedGetSpellInfo(102401)
-spellNameList["Rune Tap"], _, spellIconList["Rune Tap"] = AutoBar:LoggedGetSpellInfo(48982)
+spellNameList["Rune Tap"], _, spellIconList["Rune Tap"] = AutoBar:LoggedGetSpellInfo(194679)
 spellNameList["Bear Form"], _, spellIconList["Bear Form"] = AutoBar:LoggedGetSpellInfo(5487)
 spellNameList["Mangle"], _, spellIconList["Mangle"] = AutoBar:LoggedGetSpellInfo(33917)
 spellNameList["Cat Form"], _, spellIconList["Cat Form"] = AutoBar:LoggedGetSpellInfo(768)
@@ -43,7 +41,7 @@ spellNameList["Shadowstep"], _, spellIconList["Shadowstep"] = AutoBar:LoggedGetS
 
 spellNameList["Heroic Leap"], _, spellIconList["Heroic Leap"]  = AutoBar:LoggedGetSpellInfo(6544)
 spellNameList["Intervene"], _, spellIconList["Intervene"]  = AutoBar:LoggedGetSpellInfo(3411)
-spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(55694)
+spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
 
 
 
@@ -1618,16 +1616,7 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 
 	local macroTexture
 	if (AutoBar.CLASS == "DRUID") then
-		if (GetSpellInfo(spellNameList["Nature's Swiftness"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Nature's Swiftness"]
-			concatList[index + 2] = "\n/cast "
-			concatList[index + 3] = spellHealingTouch
-
-			macroTexture = spellHealingTouchIcon
-			self.macroActive = true
-
-		elseif (GetSpellInfo(spellNameList["Frenzied Regeneration"])) then
+		if (GetSpellInfo(spellNameList["Frenzied Regeneration"])) then
 			concatList[index] = "/cast "
 			concatList[index + 1] = spellNameList["Frenzied Regeneration"]
 			concatList[index + 2] = "\n"
