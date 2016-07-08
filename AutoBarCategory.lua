@@ -768,8 +768,7 @@ function AutoBarCategory:Initialize()
 			"Muffin.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Mana.Buff")
 	AutoBarCategoryList["Muffin.Food.Mana.Buff"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Food.Combo.Buff"] = AutoBarItems:new(
-			"Muffin.Food.Combo.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Buff")
+	AutoBarCategoryList["Muffin.Food.Combo.Buff"] = AutoBarItems:new("Muffin.Food.Combo.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Buff")
 	AutoBarCategoryList["Muffin.Food.Combo.Buff"]:SetNonCombat(true)
 
 
@@ -778,112 +777,53 @@ function AutoBarCategory:Initialize()
 			"Consumable.Food.Edible.Combo.Conjured", spellIconList["Conjure Refreshment"], "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new(
-			"Consumable.Food.Feast", "INV_Misc_Fish_52", "Consumable.Food.Feast")
+	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new("Consumable.Food.Feast", "INV_Misc_Fish_52", "Consumable.Food.Feast")
 	AutoBarCategoryList["Consumable.Food.Feast"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Percent.Basic"] = AutoBarItems:new(
-			"Consumable.Food.Percent.Basic", "INV_Misc_Food_60", "Consumable.Food.Percent.Basic")
+	AutoBarCategoryList["Consumable.Food.Percent.Basic"] = AutoBarItems:new("Consumable.Food.Percent.Basic", "INV_Misc_Food_60", "Consumable.Food.Percent.Basic")
 	AutoBarCategoryList["Consumable.Food.Percent.Basic"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Percent.Bonus"] = AutoBarItems:new(
-			"Consumable.Food.Percent.Bonus", "INV_Misc_Food_62", "Consumable.Food.Percent.Bonus")
+	AutoBarCategoryList["Consumable.Food.Percent.Bonus"] = AutoBarItems:new("Consumable.Food.Percent.Bonus", "INV_Misc_Food_62", "Consumable.Food.Percent.Bonus")
 	AutoBarCategoryList["Consumable.Food.Percent.Bonus"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Combo Percent"] = AutoBarItems:new(
-			"Consumable.Food.Combo Percent", "INV_Food_ChristmasFruitCake_01", "Consumable.Food.Combo Percent")
+	AutoBarCategoryList["Consumable.Food.Combo Percent"] = AutoBarItems:new("Consumable.Food.Combo Percent", "INV_Food_ChristmasFruitCake_01", "Consumable.Food.Combo Percent")
 	AutoBarCategoryList["Consumable.Food.Combo Percent"]:SetNonCombat(true)
 
---	rawList = self:RawItemsAdd(nil, "Consumable.Food.Edible.Bread.Basic", false);
---	rawList = self:RawItemsAdd(rawList, "Consumable.Food.Edible.Bread.Conjured", true);
---	AutoBarCategoryList["Consumable.Food.Pet.Bread"]["items"] = self:RawItemsConvert(rawList);
---	["Consumable.Food.Pet.Bread"] = {
---		["description"] = Consumable.Food.Pet.Bread;
---		["texture"] = "INV_Misc_Food_35";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
-	AutoBarCategoryList["Consumable.Food.Pet.Bread"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
+
+	AutoBarCategoryList["Consumable.Food.Pet.Bread"] = AutoBarPetFood:new("Consumable.Food.Pet.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
 	AutoBarCategoryList["Consumable.Food.Pet.Bread"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Bread"]:SetTargeted("PET")
 
---	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]["items"] = self:GetSetItemsArrayPT3("Consumable.Food.Edible.Cheese.Basic");
---	["Consumable.Food.Pet.Cheese"] = {
---		["description"] = Consumable.Food.Pet.Cheese;
---		["texture"] = "INV_Misc_Food_37";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
+
 	AutoBarCategoryList["Consumable.Food.Pet.Cheese"] = AutoBarPetFood:new(
 			"Consumable.Food.Pet.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetTargeted("PET")
 
---	rawList = self:RawItemsAdd(nil, "Consumable.Food.Inedible.Fish", false);
---	rawList = self:RawItemsAdd(rawList, "Consumable.Food.Edible.Fish.Basic", true);
---	AutoBarCategoryList["Consumable.Food.Pet.Fish"]["items"] = self:RawItemsConvert(rawList);
---	["Consumable.Food.Pet.Fish"] = {
---		["description"] = Consumable.Food.Pet.Fish;
---		["texture"] = "INV_Misc_Fish_22";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
-	AutoBarCategoryList["Consumable.Food.Pet.Fish"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
+
+	AutoBarCategoryList["Consumable.Food.Pet.Fish"] = AutoBarPetFood:new("Consumable.Food.Pet.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Fish"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Fish"]:SetTargeted("PET")
 
---	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]["items"] = self:GetSetItemsArrayPT3("Consumable.Food.Edible.Fruit.Basic");
---	["Consumable.Food.Pet.Fruit"] = {
---		["description"] = Consumable.Food.Pet.Fruit;
---		["texture"] = "INV_Misc_Food_19";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
+
 	AutoBarCategoryList["Consumable.Food.Pet.Fruit"] = AutoBarPetFood:new(
 			"Consumable.Food.Pet.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetTargeted("PET")
 
---	AutoBarCategoryList["Consumable.Food.Pet.Fungus"]["items"] = self:GetSetItemsArrayPT3("Consumable.Food.Edible.Fungus.Basic");	-- Now includes senjin combo ;-(
---	["Consumable.Food.Pet.Fungus"] = {
---		["description"] = Consumable.Food.Pet.Fungus;
---		["texture"] = "INV_Mushroom_05";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
-	AutoBarCategoryList["Consumable.Food.Pet.Fungus"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
+
+	AutoBarCategoryList["Consumable.Food.Pet.Fungus"] = AutoBarPetFood:new("Consumable.Food.Pet.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Fungus"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Fungus"]:SetTargeted("PET")
 
---	rawList = self:RawItemsAdd(nil, "Consumable.Food.Inedible.Meat", false);
---	rawList = self:RawItemsAdd(rawList, "Consumable.Food.Edible.Meat.Basic", true);
---	AutoBarCategoryList["Consumable.Food.Pet.Meat"]["items"] = self:RawItemsConvert(rawList);
---	["Consumable.Food.Pet.Meat"] = {
---		["description"] = Consumable.Food.Pet.Meat;
---		["texture"] = "INV_Misc_Food_14";
---		["nonCombat"] = true,
---		["targeted"] = "PET";
---		["castSpell"] = spellFeedPet;
---	},
-	AutoBarCategoryList["Consumable.Food.Pet.Meat"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
+	AutoBarCategoryList["Consumable.Food.Pet.Meat"] = AutoBarPetFood:new("Consumable.Food.Pet.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Meat"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Meat"]:SetTargeted("PET")
 
-	AutoBarCategoryList["Consumable.Buff Pet"] = AutoBarPetFood:new(
-			"Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
+	AutoBarCategoryList["Consumable.Buff Pet"] = AutoBarPetFood:new("Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
 	AutoBarCategoryList["Consumable.Buff Pet"]:SetTargeted("PET")
 
-	AutoBarCategoryList["Consumable.Food.Bonus"] = AutoBarItems:new(
-			"Consumable.Food.Bonus", "INV_Misc_Food_47", "Consumable.Food.Bonus")
+	AutoBarCategoryList["Consumable.Food.Bonus"] = AutoBarItems:new("Consumable.Food.Bonus", "INV_Misc_Food_47", "Consumable.Food.Bonus")
 	AutoBarCategoryList["Consumable.Food.Bonus"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Food.Buff.Agility"] = AutoBarItems:new(
