@@ -144,10 +144,35 @@ local function sortList(a, b)
 	end
 end
 
+-- Add items from set to rawList
+-- If priority is true, the items will have priority over non-priority items with the same values
+local function AddSetToRawItems(p_raw_list, p_set, p_priority)
+	if (not p_raw_list) then
+		p_raw_list = {}
+	end
+	if (p_set) then
+		local cache_set = PT:GetSetTable(p_set)
+		if (cache_set) then
+			local index = # p_raw_list + 1
+			for itemId, value in PT:IterateSet(p_set) do
+				if (not value or type(value) == "boolean") then
+					value = 0;
+				end
+				value = tonumber(value)
+				p_raw_list[index] = {itemId, value, p_priority}
+				index = index + 1
+			end
+		else
+			print("AutoBar could not find the PT3.1 p_set ", p_set, ".  Make sure you have all the libraries AutoBar needs to function.")
+		end
+	end
+	return p_raw_list
+end
+
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 -- If the spell is known (or noSpellCheck is active), copy it to the items list
-function AddSpellToCategory(p_category, spellNameLeft, spellNameRight, itemsIndex)
+local function AddSpellToCategory(p_category, spellNameLeft, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
 
 --local tracked_category = "Spell.Portals"
@@ -267,30 +292,7 @@ function AutoBarCategory.prototype:RawItemsConvert(rawList)
 end
 
 
--- Add items from set to rawList
--- If priority is true, the items will have priority over non-priority items with the same values
-function AutoBarCategory.prototype:RawItemsAdd(p_raw_list, p_set, p_priority)
-	if (not p_raw_list) then
-		p_raw_list = {}
-	end
-	if (p_set) then
-		local cache_set = PT:GetSetTable(p_set)
-		if (cache_set) then
-			local index = # p_raw_list + 1
-			for itemId, value in PT:IterateSet(p_set) do
-				if (not value or type(value) == "boolean") then
-					value = 0;
-				end
-				value = tonumber(value)
-				p_raw_list[index] = {itemId, value, p_priority}
-				index = index + 1
-			end
-		else
-			print("AutoBar could not find the PT3.1 p_set ", p_set, ".  Make sure you have all the libraries AutoBar needs to function.")
-		end
-	end
-	return p_raw_list
-end
+
 
 -- Return nil or list of spells matching player class
 -- itemsPerLine defaults to 2 (class type, spell).
@@ -378,9 +380,9 @@ function AutoBarItems.prototype:init(description, shortTexture, ptItems, ptPrior
 	self.ptPriorityItems = ptPriorityItems
 
 	local rawList = nil
-	rawList = self:RawItemsAdd(rawList, ptItems, false)
+	rawList = AddSetToRawItems(rawList, ptItems, false)
 	if (ptPriorityItems) then
-		rawList = self:RawItemsAdd(rawList, ptPriorityItems, true)
+		rawList = AddSetToRawItems(rawList, ptPriorityItems, true)
 	end
 	self.items = self:RawItemsConvert(rawList)
 end
@@ -451,7 +453,7 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 	--Convert a PT set to a list of localized spell names
 	if (p_pt_set) then
 		local rawList = nil
-		rawList = self:RawItemsAdd(rawList, p_pt_set, false)
+		rawList = AddSetToRawItems(rawList, p_pt_set, false)
 		local id_list = self:RawItemsConvert(rawList)
 		self.castList = AutoBarCategory:PTSpellIDsToSpellName(id_list)
 	end
