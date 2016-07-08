@@ -23,6 +23,7 @@ v7.0.0.00:
  - TOC bump for 7.0
  - Updated Ace3-GUI
  - Bars should no longer flash while in a vehicle
+ - Custom Macro buttons should now have a meaningful icon
 
 v6.2.0.03:
  - Data updates
