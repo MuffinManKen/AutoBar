@@ -1168,7 +1168,7 @@ function AutoBarSearch:RegisterMacro(macroId, macroIndex, macroName, macroText)
 
 	macroInfo.macroIndex = macroIndex
 	macroInfo.macroName = macroName
-	macroInfo.macroText = macroText
+	macroInfo.macroText = strtrim(macroText) --TODO: Do this in the GUI
 end
 
 
