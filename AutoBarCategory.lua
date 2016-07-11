@@ -169,6 +169,17 @@ local function AddSetToRawItems(p_raw_list, p_set, p_priority)
 	return p_raw_list
 end
 
+-- Convert rawList to a simple array of itemIds, ordered by their value in the set, and priority if any
+local function RawListToItemIDList(p_raw_list)
+	local itemArray = {}
+	table.sort(p_raw_list, sortList)
+	for i, j in ipairs(p_raw_list) do
+		itemArray[i] = j[1]
+	end
+	return itemArray
+end
+
+
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 -- If the spell is known (or noSpellCheck is active), copy it to the items list
@@ -275,21 +286,13 @@ function AutoBarCategory.prototype:SetNotUsable(notUsable)
 	self.notUsable = notUsable
 end
 
--- True if item is not usable (soul shards, arrows, etc.)
+-- True if item the spell check should be skipped, used for things like Mounts(?) where the spell check would otherwise fail
 function AutoBarCategory.prototype:SetNoSpellCheck(noSpellCheck)
 	self.noSpellCheck = noSpellCheck
 end
 
 
--- Convert rawList to a simple array of itemIds, ordered by their value in the set, and priority if any
-function AutoBarCategory.prototype:RawItemsConvert(rawList)
-	local itemArray = {}
-	table.sort(rawList, sortList)
-	for i, j in ipairs(rawList) do
-		itemArray[i] = j[1]
-	end
-	return itemArray
-end
+
 
 
 
@@ -384,7 +387,7 @@ function AutoBarItems.prototype:init(description, shortTexture, ptItems, ptPrior
 	if (ptPriorityItems) then
 		rawList = AddSetToRawItems(rawList, ptPriorityItems, true)
 	end
-	self.items = self:RawItemsConvert(rawList)
+	self.items = RawListToItemIDList(rawList)
 end
 
 -- Reset the item list based on changed settings.
@@ -454,7 +457,7 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 	if (p_pt_set) then
 		local rawList = nil
 		rawList = AddSetToRawItems(rawList, p_pt_set, false)
-		local id_list = self:RawItemsConvert(rawList)
+		local id_list = RawListToItemIDList(rawList)
 		self.castList = AutoBarCategory:PTSpellIDsToSpellName(id_list)
 	end
 
