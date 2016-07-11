@@ -1606,9 +1606,9 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 	wipe(concatList)
 	local index = 1
 	
-	local macro_body;
-
+	local macro_body
 	local macroTexture
+
 	if (AutoBar.CLASS == "DRUID") then
 		if (GetSpellInfo(spellNameList["Frenzied Regeneration"])) then
 			concatList[index] = "/cast "
