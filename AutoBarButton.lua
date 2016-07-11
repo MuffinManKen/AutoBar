@@ -1849,12 +1849,12 @@ function AutoBarButtonFoodPet.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFoodPet.super.prototype.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "HUNTER") then
-		self:AddCategory("Consumable.Food.Pet.Bread")
-		self:AddCategory("Consumable.Food.Pet.Cheese")
-		self:AddCategory("Consumable.Food.Pet.Fish")
-		self:AddCategory("Consumable.Food.Pet.Fruit")
-		self:AddCategory("Consumable.Food.Pet.Fungus")
-		self:AddCategory("Consumable.Food.Pet.Meat")
+		self:AddCategory("Consumable.Food.Bread")
+		self:AddCategory("Consumable.Food.Cheese")
+		self:AddCategory("Consumable.Food.Fish")
+		self:AddCategory("Consumable.Food.Fruit")
+		self:AddCategory("Consumable.Food.Fungus")
+		self:AddCategory("Consumable.Food.Meat")
 		self:AddCategory("Consumable.Buff Pet")
 	end
 

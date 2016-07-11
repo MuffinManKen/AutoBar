@@ -759,33 +759,27 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Combo Percent"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Bread"] = AutoBarPetFood:new("Consumable.Food.Pet.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
-	AutoBarCategoryList["Consumable.Food.Pet.Bread"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Bread"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Bread"] = AutoBarPetFood:new("Consumable.Food.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
+	AutoBarCategoryList["Consumable.Food.Bread"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Cheese"] = AutoBarPetFood:new( "Consumable.Food.Pet.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
-	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Cheese"] = AutoBarPetFood:new( "Consumable.Food.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
+	AutoBarCategoryList["Consumable.Food.Cheese"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Fish"] = AutoBarPetFood:new("Consumable.Food.Pet.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
-	AutoBarCategoryList["Consumable.Food.Pet.Fish"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Fish"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Fish"] = AutoBarPetFood:new("Consumable.Food.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
+	AutoBarCategoryList["Consumable.Food.Fish"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Fruit"] = AutoBarPetFood:new( "Consumable.Food.Pet.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
-	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Fruit"] = AutoBarPetFood:new( "Consumable.Food.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
+	AutoBarCategoryList["Consumable.Food.Fruit"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Fungus"] = AutoBarPetFood:new("Consumable.Food.Pet.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
-	AutoBarCategoryList["Consumable.Food.Pet.Fungus"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Fungus"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Fungus"] = AutoBarPetFood:new("Consumable.Food.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
+	AutoBarCategoryList["Consumable.Food.Fungus"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Pet.Meat"] = AutoBarPetFood:new("Consumable.Food.Pet.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
-	AutoBarCategoryList["Consumable.Food.Pet.Meat"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Pet.Meat"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Food.Meat"] = AutoBarPetFood:new("Consumable.Food.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
+	AutoBarCategoryList["Consumable.Food.Meat"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Buff Pet"] = AutoBarPetFood:new("Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
 	AutoBarCategoryList["Consumable.Buff Pet"]:SetTargeted("PET")
