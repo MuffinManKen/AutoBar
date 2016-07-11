@@ -1605,6 +1605,8 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 	self.macroActive = nil
 	wipe(concatList)
 	local index = 1
+	
+	local macro_body;
 
 	local macroTexture
 	if (AutoBar.CLASS == "DRUID") then
@@ -1627,15 +1629,11 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 		end
 	elseif (AutoBar.CLASS == "HUNTER") then
 		if (GetSpellInfo(spellNameList["Feign Death"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Feign Death"]
-
+			macro_body = "/cast " .. spellNameList["Feign Death"]
 			macroTexture = spellIconList["Feign Death"]
 			self.macroActive = true
 		elseif (GetSpellInfo(spellNameList["Disengage"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Disengage"]
-
+			macro_body = "/cast " ..spellNameList["Disengage"]
 			macroTexture = spellIconList["Disengage"]
 			self.macroActive = true
 		end
@@ -1687,9 +1685,9 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 		end
 
 	end
+	self.macroActive = macro_body and true;
 	if (self.macroActive) then
-		local macroText = table.concat(concatList)
-		self:AddMacro(macroText, macroTexture)
+		self:AddMacro(macro_body, macroTexture)
 	end
 end
 
