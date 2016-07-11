@@ -58,9 +58,6 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Intimidation"] = AutoBar:LoggedGetSpellInfo(7093)
 	spellNameList["Master's Call"] = AutoBar:LoggedGetSpellInfo(53271)
 	spellNameList["Feed Pet"], _, spellIconList["Feed Pet"] = AutoBar:LoggedGetSpellInfo(6991)
-	spellNameList["Incendiary Ammo"] = AutoBar:LoggedGetSpellInfo(162536)
-	spellNameList["Poisoned Ammo"] = AutoBar:LoggedGetSpellInfo(162537)
-	spellNameList["Frozen Ammo"] = AutoBar:LoggedGetSpellInfo(162539)
 
 	--Mage
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
@@ -1084,14 +1081,7 @@ function AutoBarCategory:Initialize()
 			"HUNTER", spellNameList["Aspect of the Wild"], 
 			})
 	
-	AutoBarCategoryList["Spell.Ammo"] = AutoBarSpells:new(
-			"Spell.Ammo", spellIconList["Aspect of the Cheetah"], {
-			"HUNTER", spellNameList["Incendiary Ammo"],
-			"HUNTER", spellNameList["Poisoned Ammo"],
-			"HUNTER", spellNameList["Frozen Ammo"],
-			})
-
-			
+		
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new(
 			"Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
 			"ROGUE", spellNameList["Deadly Poison"], 

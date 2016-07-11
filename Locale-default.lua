@@ -37,9 +37,6 @@ atl("Include Basic Combo Food", "Include Basic Combo Food");
 
 atl("Supporters", "Supporters");
 
-atl("Spell.Ammo", "Exotic Munitions");
-atl("AutoBarButtonAmmo", "Exotic Munitions");
-
 atl("Spell.Class.Pet", "Class Pet");
 atl("Spell.Class.Pets2", "Pet Combat");
 atl("Spell.Class.Pets3", "Pet Misc");
