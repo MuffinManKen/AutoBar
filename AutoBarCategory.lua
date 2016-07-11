@@ -653,119 +653,89 @@ end
 
 -- Create category list using PeriodicTable data.
 function AutoBarCategory:Initialize()
-	AutoBarCategoryList["Misc.Hearth"] = AutoBarItems:new(
-			"Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
+	AutoBarCategoryList["Misc.Hearth"] = AutoBarItems:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
 
-	AutoBarCategoryList["Consumable.Buff.Free Action"] = AutoBarItems:new(
-			"Consumable.Buff.Free Action", "INV_Potion_04", "Consumable.Buff.Free Action")
+	AutoBarCategoryList["Consumable.Buff.Free Action"] = AutoBarItems:new( "Consumable.Buff.Free Action", "INV_Potion_04", "Consumable.Buff.Free Action")
 
-	AutoBarCategoryList["Consumable.Anti-Venom"] = AutoBarItems:new(
-			"Consumable.Anti-Venom", "INV_Drink_14", "Consumable.Anti-Venom")
+	AutoBarCategoryList["Consumable.Anti-Venom"] = AutoBarItems:new( "Consumable.Anti-Venom", "INV_Drink_14", "Consumable.Anti-Venom")
 	AutoBarCategoryList["Consumable.Anti-Venom"]:SetTargeted(true)
 
-	AutoBarCategoryList["Misc.Battle Standard.Guild"] = AutoBarItems:new(
-			"Misc.Battle Standard.Guild", "INV_BannerPVP_01", "Misc.Battle Standard.Guild")
+	AutoBarCategoryList["Misc.Battle Standard.Guild"] = AutoBarItems:new( "Misc.Battle Standard.Guild", "INV_BannerPVP_01", "Misc.Battle Standard.Guild")
 
-	AutoBarCategoryList["Misc.Battle Standard.Battleground"] = AutoBarItems:new(
-			"Misc.Battle Standard.Battleground", "INV_BannerPVP_01", "Misc.Battle Standard.Battleground")
+	AutoBarCategoryList["Misc.Battle Standard.Battleground"] = AutoBarItems:new( "Misc.Battle Standard.Battleground", "INV_BannerPVP_01", "Misc.Battle Standard.Battleground")
 	AutoBarCategoryList["Misc.Battle Standard.Battleground"]:SetBattleground(true)
 
-	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"] = AutoBarItems:new(
-			"Misc.Battle Standard.Alterac Valley", "INV_BannerPVP_02", "Misc.Battle Standard.Alterac Valley")
+	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"] = AutoBarItems:new( "Misc.Battle Standard.Alterac Valley", "INV_BannerPVP_02", "Misc.Battle Standard.Alterac Valley")
 	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
-	AutoBarCategoryList["Muffin.Explosives"] = AutoBarItems:new(
-			"Muffin.Explosives", "INV_Misc_Bomb_08", "Muffin.Explosives")
+	AutoBarCategoryList["Muffin.Explosives"] = AutoBarItems:new( "Muffin.Explosives", "INV_Misc_Bomb_08", "Muffin.Explosives")
 	AutoBarCategoryList["Muffin.Explosives"]:SetTargeted(true)
 
-	AutoBarCategoryList["Misc.Engineering.Fireworks"] = AutoBarItems:new(
-			"Misc.Engineering.Fireworks", "INV_Misc_MissileSmall_Red", "Misc.Engineering.Fireworks")
+	AutoBarCategoryList["Misc.Engineering.Fireworks"] = AutoBarItems:new( "Misc.Engineering.Fireworks", "INV_Misc_MissileSmall_Red", "Misc.Engineering.Fireworks")
 
-	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = AutoBarItems:new(
-			"Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
 
-	AutoBarCategoryList["Tradeskill.Gather.Herbalism"] = AutoBarItems:new(
-			"Tradeskill.Gather.Herbalism", "INV_Misc_HERB_01", "Tradeskill.Gather.Herbalism")
+	AutoBarCategoryList["Tradeskill.Gather.Herbalism"] = AutoBarItems:new( "Tradeskill.Gather.Herbalism", "INV_Misc_HERB_01", "Tradeskill.Gather.Herbalism")
 
-	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = AutoBarItems:new(
-			"Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
 
-	AutoBarCategoryList["Tradeskill.Tool.Fishing.Lure"] = AutoBarItems:new(
-			"Tradeskill.Tool.Fishing.Lure", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Lure")
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Lure"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Lure", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Lure")
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Lure"]:SetTargeted("WEAPON")
 
-	AutoBarCategoryList["Tradeskill.Tool.Fishing.Other"] = AutoBarItems:new(
-			"Tradeskill.Tool.Fishing.Other", "INV_Drink_03", "Tradeskill.Tool.Fishing.Other")
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Other"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Other", "INV_Drink_03", "Tradeskill.Tool.Fishing.Other")
 
-	AutoBarCategoryList["Tradeskill.Tool.Fishing.Tool"] = AutoBarItems:new(
-			"Tradeskill.Tool.Fishing.Tool", "INV_Fishingpole_01", "Tradeskill.Tool.Fishing.Tool")
+	AutoBarCategoryList["Tradeskill.Tool.Fishing.Tool"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Tool", "INV_Fishingpole_01", "Tradeskill.Tool.Fishing.Tool")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Other"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Mana.Other", "Spell_Shadow_SealOfKings", "Consumable.Cooldown.Stone.Mana.Other")
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Other"] = AutoBarItems:new( "Consumable.Cooldown.Stone.Mana.Other", "Spell_Shadow_SealOfKings", "Consumable.Cooldown.Stone.Mana.Other")
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Other"] = AutoBarItems:new(
-			"Consumable.Cooldown.Stone.Health.Other", "INV_Misc_Food_55", "Consumable.Cooldown.Stone.Health.Other")
+	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Other"] = AutoBarItems:new( "Consumable.Cooldown.Stone.Health.Other", "INV_Misc_Food_55", "Consumable.Cooldown.Stone.Health.Other")
 
-	AutoBarCategoryList["Consumable.Bandage.Basic"] = AutoBarItems:new(
-			"Consumable.Bandage.Basic", "INV_Misc_Bandage_Netherweave_Heavy", "Consumable.Bandage.Basic")
+	AutoBarCategoryList["Consumable.Bandage.Basic"] = AutoBarItems:new( "Consumable.Bandage.Basic", "INV_Misc_Bandage_Netherweave_Heavy", "Consumable.Bandage.Basic")
 	AutoBarCategoryList["Consumable.Bandage.Basic"]:SetTargeted(true)
 
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"] = AutoBarItems:new(
-			"Consumable.Bandage.Battleground.Alterac Valley", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Alterac Valley")
+	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Alterac Valley", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Alterac Valley")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"]:SetTargeted(true)
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"] = AutoBarItems:new(
-			"Consumable.Bandage.Battleground.Arathi Basin", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Arathi Basin")
+	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Arathi Basin", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Arathi Basin")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"]:SetTargeted(true)
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"]:SetLocation(GetMapNameByID(461)) -- Arathi Basin
 
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"] = AutoBarItems:new(
-			"Consumable.Bandage.Battleground.Warsong Gulch", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Warsong Gulch")
+	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Warsong Gulch", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Warsong Gulch")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"]:SetTargeted(true)
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"]:SetLocation(GetMapNameByID(443)) -- Warsong Gulch
 
-	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
+	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
+	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Food.Health.Basic"] = AutoBarItems:new(
-			"Muffin.Food.Health.Basic", "INV_Misc_Food_23", "Muffin.Food.Health.Basic")
+	AutoBarCategoryList["Muffin.Food.Health.Basic"] = AutoBarItems:new( "Muffin.Food.Health.Basic", "INV_Misc_Food_23", "Muffin.Food.Health.Basic")
 	AutoBarCategoryList["Muffin.Food.Health.Basic"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Battleground.Arathi Basin.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Arathi Basin.Basic")
+	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"] = AutoBarItems:new( "Consumable.Food.Edible.Battleground.Arathi Basin.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Arathi Basin.Basic")
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"]:SetLocation(GetMapNameByID(461)) -- Arathi Basin
 
-	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Battleground.Warsong Gulch.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Warsong Gulch.Basic")
+	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"] = AutoBarItems:new( "Consumable.Food.Edible.Battleground.Warsong Gulch.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Warsong Gulch.Basic")
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"]:SetLocation(GetMapNameByID(443)) -- Warsong Gulch
 
-	AutoBarCategoryList["Consumable.Food.Combo Health"] = AutoBarItems:new(
-			"Consumable.Food.Combo Health", "INV_Misc_Food_33", "Consumable.Food.Combo Health")
+	AutoBarCategoryList["Consumable.Food.Combo Health"] = AutoBarItems:new( "Consumable.Food.Combo Health", "INV_Misc_Food_33", "Consumable.Food.Combo Health")
 	AutoBarCategoryList["Consumable.Food.Combo Health"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Edible.Combo.Non-Conjured"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Combo.Non-Conjured", "INV_Misc_Food_95_Grainbread", "Consumable.Food.Edible.Combo.Non-Conjured")
+	AutoBarCategoryList["Consumable.Food.Edible.Combo.Non-Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Combo.Non-Conjured", "INV_Misc_Food_95_Grainbread", "Consumable.Food.Edible.Combo.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Food.Combo.Basic"] = AutoBarItems:new(
-			"Muffin.Food.Combo.Basic", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Basic")
+	AutoBarCategoryList["Muffin.Food.Combo.Basic"] = AutoBarItems:new( "Muffin.Food.Combo.Basic", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Basic")
 	AutoBarCategoryList["Muffin.Food.Combo.Basic"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Food.Health.Buff"] = AutoBarItems:new(
-			"Muffin.Food.Health.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Health.Buff")
+	AutoBarCategoryList["Muffin.Food.Health.Buff"] = AutoBarItems:new( "Muffin.Food.Health.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Health.Buff")
 	AutoBarCategoryList["Muffin.Food.Health.Buff"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Food.Mana.Buff"] = AutoBarItems:new(
-			"Muffin.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Mana.Buff")
+	AutoBarCategoryList["Muffin.Food.Mana.Buff"] = AutoBarItems:new( "Muffin.Food.Mana.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Mana.Buff")
 	AutoBarCategoryList["Muffin.Food.Mana.Buff"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Muffin.Food.Combo.Buff"] = AutoBarItems:new("Muffin.Food.Combo.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Buff")
@@ -773,8 +743,7 @@ function AutoBarCategory:Initialize()
 
 
 
-	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new(
-			"Consumable.Food.Edible.Combo.Conjured", spellIconList["Conjure Refreshment"], "Consumable.Food.Edible.Combo.Conjured")
+	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Combo.Conjured", spellIconList["Conjure Refreshment"], "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new("Consumable.Food.Feast", "INV_Misc_Fish_52", "Consumable.Food.Feast")
@@ -795,8 +764,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Pet.Bread"]:SetTargeted("PET")
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Cheese"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
+	AutoBarCategoryList["Consumable.Food.Pet.Cheese"] = AutoBarPetFood:new( "Consumable.Food.Pet.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Cheese"]:SetTargeted("PET")
 
@@ -806,8 +774,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Pet.Fish"]:SetTargeted("PET")
 
 
-	AutoBarCategoryList["Consumable.Food.Pet.Fruit"] = AutoBarPetFood:new(
-			"Consumable.Food.Pet.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
+	AutoBarCategoryList["Consumable.Food.Pet.Fruit"] = AutoBarPetFood:new( "Consumable.Food.Pet.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
 	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetNonCombat(true)
 	AutoBarCategoryList["Consumable.Food.Pet.Fruit"]:SetTargeted("PET")
 
@@ -826,48 +793,37 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Bonus"] = AutoBarItems:new("Consumable.Food.Bonus", "INV_Misc_Food_47", "Consumable.Food.Bonus")
 	AutoBarCategoryList["Consumable.Food.Bonus"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Agility"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Agility", "INV_Misc_Fish_13", "Consumable.Food.Buff.Agility")
+	AutoBarCategoryList["Consumable.Food.Buff.Agility"] = AutoBarItems:new( "Consumable.Food.Buff.Agility", "INV_Misc_Fish_13", "Consumable.Food.Buff.Agility")
 	AutoBarCategoryList["Consumable.Food.Buff.Agility"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Attack Power"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Attack Power", "INV_Misc_Fish_13", "Consumable.Food.Buff.Attack Power")
+	AutoBarCategoryList["Consumable.Food.Buff.Attack Power"] = AutoBarItems:new( "Consumable.Food.Buff.Attack Power", "INV_Misc_Fish_13", "Consumable.Food.Buff.Attack Power")
 	AutoBarCategoryList["Consumable.Food.Buff.Attack Power"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Healing"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Healing", "INV_Misc_Fish_13", "Consumable.Food.Buff.Healing")
+	AutoBarCategoryList["Consumable.Food.Buff.Healing"] = AutoBarItems:new( "Consumable.Food.Buff.Healing", "INV_Misc_Fish_13", "Consumable.Food.Buff.Healing")
 	AutoBarCategoryList["Consumable.Food.Buff.Healing"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.HP Regen"] = AutoBarItems:new(
-			"Consumable.Food.Buff.HP Regen", "INV_Misc_Fish_19", "Consumable.Food.Buff.HP Regen")
+	AutoBarCategoryList["Consumable.Food.Buff.HP Regen"] = AutoBarItems:new( "Consumable.Food.Buff.HP Regen", "INV_Misc_Fish_19", "Consumable.Food.Buff.HP Regen")
 	AutoBarCategoryList["Consumable.Food.Buff.HP Regen"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Intellect"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Intellect", "INV_Misc_Food_63", "Consumable.Food.Buff.Intellect")
+	AutoBarCategoryList["Consumable.Food.Buff.Intellect"] = AutoBarItems:new( "Consumable.Food.Buff.Intellect", "INV_Misc_Food_63", "Consumable.Food.Buff.Intellect")
 	AutoBarCategoryList["Consumable.Food.Buff.Intellect"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Mana Regen"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Mana Regen", "INV_Drink_17", "Consumable.Food.Buff.Mana Regen")
+	AutoBarCategoryList["Consumable.Food.Buff.Mana Regen"] = AutoBarItems:new( "Consumable.Food.Buff.Mana Regen", "INV_Drink_17", "Consumable.Food.Buff.Mana Regen")
 	AutoBarCategoryList["Consumable.Food.Buff.Mana Regen"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Spell Damage"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Spell Damage", "INV_Misc_Food_65", "Consumable.Food.Buff.Spell Damage")
+	AutoBarCategoryList["Consumable.Food.Buff.Spell Damage"] = AutoBarItems:new( "Consumable.Food.Buff.Spell Damage", "INV_Misc_Food_65", "Consumable.Food.Buff.Spell Damage")
 	AutoBarCategoryList["Consumable.Food.Buff.Spell Damage"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Spirit"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Spirit", "INV_Misc_Fish_03", "Consumable.Food.Buff.Spirit")
+	AutoBarCategoryList["Consumable.Food.Buff.Spirit"] = AutoBarItems:new( "Consumable.Food.Buff.Spirit", "INV_Misc_Fish_03", "Consumable.Food.Buff.Spirit")
 	AutoBarCategoryList["Consumable.Food.Buff.Spirit"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Stamina"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Stamina", "INV_Misc_Food_65", "Consumable.Food.Buff.Stamina")
+	AutoBarCategoryList["Consumable.Food.Buff.Stamina"] = AutoBarItems:new( "Consumable.Food.Buff.Stamina", "INV_Misc_Food_65", "Consumable.Food.Buff.Stamina")
 	AutoBarCategoryList["Consumable.Food.Buff.Stamina"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Strength"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Strength", "INV_Misc_Food_41", "Consumable.Food.Buff.Strength")
+	AutoBarCategoryList["Consumable.Food.Buff.Strength"] = AutoBarItems:new( "Consumable.Food.Buff.Strength", "INV_Misc_Food_41", "Consumable.Food.Buff.Strength")
 	AutoBarCategoryList["Consumable.Food.Buff.Strength"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Buff.Other"] = AutoBarItems:new(
-			"Consumable.Food.Buff.Other", "INV_Drink_17", "Consumable.Food.Buff.Other")
+	AutoBarCategoryList["Consumable.Food.Buff.Other"] = AutoBarItems:new( "Consumable.Food.Buff.Other", "INV_Drink_17", "Consumable.Food.Buff.Other")
 	AutoBarCategoryList["Consumable.Food.Buff.Other"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Combat"] = AutoBarItems:new("Consumable.Cooldown.Potion.Combat", "INV_Potion_54", "Consumable.Cooldown.Potion.Combat")
@@ -958,13 +914,11 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new(
-			"Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
+	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
 
-	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new(
-			"Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
+	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
 
