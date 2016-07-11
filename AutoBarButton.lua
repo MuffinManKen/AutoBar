@@ -1628,14 +1628,12 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "HUNTER") then
-		if (GetSpellInfo(spellNameList["Feign Death"])) then
-			macro_body = "/cast " .. spellNameList["Feign Death"]
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Feign Death"))) then
+			macro_body = "/cast " .. AutoBar:GetSpellNameByName("Feign Death")
 			macroTexture = spellIconList["Feign Death"]
-			self.macroActive = true
-		elseif (GetSpellInfo(spellNameList["Disengage"])) then
-			macro_body = "/cast " ..spellNameList["Disengage"]
+		elseif (GetSpellInfo(AutoBar:GetSpellNameByName("Disengage"))) then
+			macro_body = "/cast " .. AutoBar:GetSpellNameByName("Disengage")
 			macroTexture = spellIconList["Disengage"]
-			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "MAGE") then
 		if (GetSpellInfo(spellNameList["Ice Block"])) then

@@ -58,6 +58,11 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Intimidation"] = AutoBar:LoggedGetSpellInfo(7093)
 	spellNameList["Master's Call"] = AutoBar:LoggedGetSpellInfo(53271)
 	spellNameList["Feed Pet"], _, spellIconList["Feed Pet"] = AutoBar:LoggedGetSpellInfo(6991)
+	spellNameList["Binding Shot"] = AutoBar:LoggedGetSpellInfo(109248)
+	spellNameList["Concussive Shot"] = AutoBar:LoggedGetSpellInfo(5116)
+	spellNameList["Wing Clip"] = AutoBar:LoggedGetSpellInfo(195645)
+	spellNameList["Sentinel"] = AutoBar:LoggedGetSpellInfo(206817)
+	spellNameList["Ranger's Net"] = AutoBar:LoggedGetSpellInfo(200108)
 
 	--Mage
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
@@ -1051,29 +1056,29 @@ function AutoBarCategory:Initialize()
 			})
 
 
-	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new(
-			"Spell.Stealth", spellIconList["Stealth"], {
+	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
+	{
 			"ROGUE", spellNameList["Stealth"],
 			"DRUID", spellNameList["Prowl"],
 			"MAGE", spellNameList["Invisibility"],
 			"MAGE", spellNameList["Greater Invisibility"],
-			"HUNTER", spellNameList["Camouflage"],
+		"HUNTER", AutoBar:GetSpellNameByName("Camouflage"),
 			"*", spellNameList["Shadowmeld"],
-			})
+	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new(
 			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
 			"MAGE", spellNameList["Conjure Refreshment"], spellNameList["Conjure Refreshment Table"],
 			})
 
-	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new(
-			"Spell.Aspect", spellIconList["Aspect of the Cheetah"], {
-			"HUNTER", spellNameList["Aspect of the Cheetah"], 
-			"HUNTER", spellNameList["Aspect of the Chameleon"], 
-			"HUNTER", spellNameList["Aspect of the Turtle"], 
-			"HUNTER", spellNameList["Aspect of the Eagle"], 
-			"HUNTER", spellNameList["Aspect of the Wild"], 
-			})
+	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Aspect of the Cheetah"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Aspect of the Chameleon"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Aspect of the Turtle"),
+		"HUNTER", AutoBar:GetSpellNameByName("Aspect of the Eagle"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Aspect of the Wild"), 
+	})
 	
 		
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new(
@@ -1410,21 +1415,22 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new(
 			"Spell.Crafting", spellIconList["First Aid"], craftList)
 
-	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new(
-			"Spell.Debuff.Multiple", spellIconList["Slow"], {
-			"DRUID", spellNameList["Disorienting Roar"],
-			})
+	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
+	{
+		"DRUID",		AutoBar:GetSpellNameByName("Disorienting Roar"),
+		"HUNTER",	AutoBar:GetSpellNameByName("Binding Shot"),
+		"HUNTER",	AutoBar:GetSpellNameByName("Sentinel"),
+	})
 
-	spellNameList["Hunter's Mark"] = AutoBar:LoggedGetSpellInfo(1130)
-	spellNameList["Wyvern Sting"] = AutoBar:LoggedGetSpellInfo(19386)
 	spellNameList["Silence"] = AutoBar:LoggedGetSpellInfo(15487)
 	spellNameList["Blind"] = AutoBar:LoggedGetSpellInfo(2094)
 	spellNameList["Sap"] = AutoBar:LoggedGetSpellInfo(6770)
-	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new(
-			"Spell.Debuff.Single", spellIconList["Slow"], {
-			"HUNTER", spellNameList["Hunter's Mark"], 
-			"HUNTER", spellNameList["Wyvern Sting"], 
-			})
+	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Concussive Shot"),
+		"HUNTER", AutoBar:GetSpellNameByName("Wing Clip"),
+		"HUNTER", AutoBar:GetSpellNameByName("Ranger's Net"),
+	})
 
 	spellNameList["Fishing"], _, spellIconList["Fishing"] = AutoBar:LoggedGetSpellInfo(131474)
 	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new(
@@ -1444,13 +1450,13 @@ function AutoBarCategory:Initialize2()
 	spellNameList["Caltrops"] = AutoBar:LoggedGetSpellInfo(194277)
 	spellNameList["Steel Trap"] = AutoBar:LoggedGetSpellInfo(162488)
 
-	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new(
-		"Spell.Trap", spellIconList["Explosive Trap"], {
-		"HUNTER", spellNameList["Explosive Trap"], --*
-		"HUNTER", spellNameList["Freezing Trap"],  --*
-		"HUNTER", spellNameList["Caltrops"], 		 --*
-		"HUNTER", spellNameList["Tar Trap"],       --*
-		"HUNTER", spellNameList["Steel Trap"],     --*
+	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Explosive Trap"),
+		"HUNTER", AutoBar:GetSpellNameByName("Freezing Trap"),
+		"HUNTER", AutoBar:GetSpellNameByName("Caltrops"),
+		"HUNTER", AutoBar:GetSpellNameByName("Tar Trap"),
+		"HUNTER", AutoBar:GetSpellNameByName("Steel Trap"),
 	})
 
 	spellNameList["Flight Form"] = AutoBar:LoggedGetSpellInfo(33943)

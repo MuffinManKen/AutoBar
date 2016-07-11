@@ -70,7 +70,16 @@ WHATSNEW_TEXT = " - Updated item libs|n" ..
 " - Added new SPELLS_CHANGED setting for people who know what it does|n"
 
 
+function AutoBar:GetSpellNameByName(p_name)
 
+	if (AutoBar.spellNameList[p_name]) then
+		return AutoBar.spellNameList[p_name]
+	end
+	
+	AutoBar:Print("Unknown Spell Name:" .. p_name)
+
+	return nil
+end
 
 function AutoBar:IsInLockDown()
 
