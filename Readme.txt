@@ -24,7 +24,9 @@ v7.0.0.00:
  - Updated Ace3-GUI
  - Bars should no longer flash while in a vehicle
  - Custom Macro buttons should now have a meaningful icon
- - Hunters: Removed Exotic Munitions/Ammo button
+ - Hunters: 
+ 		- Removed Exotic Munitions/Ammo button
+ 		- Feed Pet button works (been broken for a while)
 
 v6.2.0.03:
  - Data updates
