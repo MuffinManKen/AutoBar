@@ -1179,17 +1179,15 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS ~= "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonShields"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonShields"] = {
-				buttonKey = "AutoBarButtonShields",
-				buttonClass = "AutoBarButtonShields",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
+	if (not AutoBar.db.class.buttonList["AutoBarButtonShields"]) then
+		AutoBar.db.class.buttonList["AutoBarButtonShields"] = {
+			buttonKey = "AutoBarButtonShields",
+			buttonClass = "AutoBarButtonShields",
+			barKey = AutoBar.classBar,
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
 	end
 
 	if (AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "MONK") then
@@ -1205,7 +1203,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",

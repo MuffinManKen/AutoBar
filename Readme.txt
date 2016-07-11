@@ -27,6 +27,7 @@ v7.0.0.00:
  - Hunters: 
  		- Removed Exotic Munitions/Ammo button
  		- Feed Pet button works (been broken for a while)
+ 		- Added Shield and Charge button
 
 v6.2.0.03:
  - Data updates

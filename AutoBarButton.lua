@@ -43,6 +43,8 @@ spellNameList["Heroic Leap"], _, spellIconList["Heroic Leap"]  = AutoBar:LoggedG
 spellNameList["Intervene"], _, spellIconList["Intervene"]  = AutoBar:LoggedGetSpellInfo(3411)
 spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
 
+--Hunter
+spellNameList["Harpoon"], _, spellIconList["Harpoon"]  = AutoBar:LoggedGetSpellInfo(190925)
 
 
 
@@ -211,14 +213,14 @@ local snippetOnClick = [[
 	if(itemType1) then
 		anchorButton:SetAttribute("type1", self:GetAttribute("type1"))
 		anchorButton:SetAttribute("target-slot1", self:GetAttribute("target-slot1"))
-		anchorButton:SetAttribute("target-bag1", self:GetAttribute("target-bag1"))	
+		anchorButton:SetAttribute("target-bag1", self:GetAttribute("target-bag1"))
 		anchorButton:SetAttribute("item1", self:GetAttribute("item1"))
 		anchorButton:SetAttribute("spell1", self:GetAttribute("spell1"))
 	end
 	anchorButton:SetAttribute("type", self:GetAttribute("type"))
 	anchorButton:SetAttribute("unit", self:GetAttribute("unit"))
 	anchorButton:SetAttribute("target-slot", self:GetAttribute("target-slot"))
-	anchorButton:SetAttribute("target-bag", self:GetAttribute("target-bag"))	
+	anchorButton:SetAttribute("target-bag", self:GetAttribute("target-bag"))
 
 	if (itemType == "item") then
 		anchorButton:SetAttribute("item", self:GetAttribute("item"))
@@ -1098,7 +1100,7 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Buff Group.Caster.Target")
 		self:AddCategory("Consumable.Buff Group.Caster.Self")
 	end
-	
+
 		self:AddCategory("Muffin.Potion.Buff")
 
 end
@@ -1275,7 +1277,7 @@ local function GetCancelList(excludeList)
 	end
 	concatList[index] = "]\n/dismount [mounted]\n/cast "
 	index = index + 1
-	
+
 	return concatList
 end
 
@@ -1428,11 +1430,10 @@ end
 
 function AutoBarButtonCharge.prototype:Refresh(parentBar, buttonDB)
 	AutoBarButtonCharge.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	wipe(concatList)
 
-	concatList[1] = "/cast "
-	local index = 2
+	self.macroActive = nil
+	local spell_name
+
 	local macroTexture
 	if (AutoBar.CLASS == "DRUID") then
 		if (GetSpellInfo(spellNameList["Wild Charge"])) then
@@ -1459,11 +1460,18 @@ function AutoBarButtonCharge.prototype:Refresh(parentBar, buttonDB)
 			macroTexture = spellIconList["Intercept"]
 			self.macroActive = true
 		end
+	elseif (AutoBar.CLASS == "HUNTER") then
+
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Harpoon"))) then
+			spell_name = AutoBar:GetSpellNameByName("Harpoon")
+		end
 
 	end
-	if (self.macroActive) then
-		local macroText = table.concat(concatList)
-		self:AddMacro(macroText, macroTexture)
+
+	if (spell_name) then
+		self.macroActive = true
+		local macroText = "/cast " .. spell_name
+		self:AddMacro(macroText, spellIconList[spell_name])
 	end
 end
 
@@ -1605,7 +1613,7 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 	self.macroActive = nil
 	wipe(concatList)
 	local index = 1
-	
+
 	local macro_body
 	local macroTexture
 
@@ -1725,11 +1733,11 @@ function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Food.Conjure")
 	end
 	self:AddCategory("Muffin.Food.Health.Basic")
-	
-	if (buttonDB.include_combo_basic) then	
+
+	if (buttonDB.include_combo_basic) then
 		self:AddCategory("Muffin.Food.Combo.Basic")
 	end
-	
+
 	self:AddCategory("Consumable.Food.Percent.Basic")
 end
 
@@ -1878,12 +1886,12 @@ function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 
 	--self:AddCategory("Consumable.Potion.Recovery.Healing.Endless")
 	--self:AddCategory("Consumable.Potion.Recovery.Healing.Basic")
-	
+
 	--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
-	
+
 	self:AddCategory("Muffin.Potion.Health")
 	self:AddCategory("Muffin.Potion.Combo")
-	
+
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
@@ -1903,7 +1911,7 @@ AutoBar.Class["AutoBarButtonHearth"] = AutoBarButtonHearth
 
 function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonHearth.super.prototype.init(self, parentBar, buttonDB)
-	
+
 	local class = AutoBar.CLASS
 
 	if (class == "DEATHKNIGHT" or class == "DRUID" or class == "MAGE" or class == "SHAMAN" or class == "WARLOCK" or class ==  "MONK") then
@@ -1913,7 +1921,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	if(buttonDB.hearth_include_ancient_dalaran and class == "MAGE") then
 		self:AddCategory("Spell.AncientDalaranPortals")
 	end
-	
+
 	self:AddCategory("Misc.Hearth")
 end
 
@@ -1930,7 +1938,7 @@ _, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
 function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 	AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
 print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
-	
+
 	if (not AutoBarCategoryList["Spell.ToyBox"]) then
 		AutoBarCategoryList["Spell.ToyBox"] = AutoBarToys:new( "Spell.ToyBox", spellIconList["Puntable Marmot"], {})
 		local category = AutoBarCategoryList["Spell.ToyBox"]
@@ -1941,7 +1949,7 @@ print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 	if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
 	end
-	
+
 --	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
 --	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 --	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
@@ -1970,9 +1978,9 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 	end
 
 	local category = AutoBarCategoryList["Spell.ToyBox"]
-	
+
 	AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
-	
+
 	C_ToyBox.SetCollectedShown(true)
 	C_ToyBox.SetAllSourceTypeFilters(true)
 	C_ToyBox.SetFilterString("")
@@ -1987,7 +1995,7 @@ print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned ..
 	if (toy_total_learned ~= AutoBar.last_ToyBox_count) then
 print("   Gonna do stuff");
 		AutoBar.last_ToyBox_count = toy_total_learned;
-		
+
 		if (not category.items) then
 			category.items = {}
 		end
@@ -1997,7 +2005,7 @@ print("   Gonna do stuff");
 		if(toy_total_learned <= 0) then
 			return
 		end
-		
+
 		for i = 1, toy_total do
 			local item_index = C_ToyBox.GetToyFromIndex(i)
 			local item_id, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_index)
@@ -2056,7 +2064,7 @@ _, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
 function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 --print("AutoBarButtonMount.prototype:init");
-	
+
 	if (not AutoBarCategoryList["Spell.Mount"]) then
 		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
 		local category = AutoBarCategoryList["Spell.Mount"]
@@ -2075,7 +2083,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		buttonData = {}
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
 	end
-	
+
 	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
 	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
@@ -2106,9 +2114,9 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	end
 
 	local category = AutoBarCategoryList["Spell.Mount"]
-	
+
 	AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
-	
+
 	local companion_type = "MOUNT"
 	local count = GetNumCompanions(companion_type)
 	local thisIsSpam = true
@@ -2120,7 +2128,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	if (count ~= AutoBar.last_mount_count) then
 --print("   Gonna do stuff");
 		AutoBar.last_mount_count = count;
-		
+
 		if (not category.castList) then
 			category.castList = {}
 		end
@@ -2296,19 +2304,19 @@ function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 --			spellInfo.spellLink = "spell:" .. spellID
 --			category.castList[index] = spellName
 --		end
---	end                             
+--	end
 
 --	local _, pet_count = C_PetJournal.GetNumPets()
 --	local index, pet_id, owned, favorite, description, icon
 --	for index = 1, pet_count, 1 do
 --		local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
---		pet_id = pet_data[1] 
+--		pet_id = pet_data[1]
 --		owned = pet_data[3]
 --		favorite = pet_data[6]
 --		icon = pet_data[9]
 --		description = pet_data[13]
 --	end
-	
+
 end
 
 
@@ -2403,7 +2411,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "ROGUE") then
 		self:AddCategory("Consumable.Buff.Energy")
 	end
-	
+
 	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
 		self:AddCategory("Consumable.Buff.Rage")
 		self:AddCategory("Muffin.Potion.Rage")
@@ -2412,9 +2420,9 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 	if  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
-	
+
 		--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
-		
+
 		self:AddCategory("Muffin.Potion.Mana")
 		self:AddCategory("Muffin.Potion.Combo")
 
@@ -2499,7 +2507,7 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "ROGUE") then
 		self:AddCategory("Consumable.Buff.Energy")
 	end
-	
+
 	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
 		self:AddCategory("Consumable.Buff.Rage")
 		self:AddCategory("Muffin.Potion.Rage")
@@ -2591,7 +2599,7 @@ AutoBar.Class["AutoBarButtonStealth"] = AutoBarButtonStealth
 
 function AutoBarButtonStealth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonStealth.super.prototype.init(self, parentBar, buttonDB)
-	
+
 	self:AddCategory("Spell.Stealth")
 end
 

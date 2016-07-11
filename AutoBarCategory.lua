@@ -63,6 +63,18 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Wing Clip"] = AutoBar:LoggedGetSpellInfo(195645)
 	spellNameList["Sentinel"] = AutoBar:LoggedGetSpellInfo(206817)
 	spellNameList["Ranger's Net"] = AutoBar:LoggedGetSpellInfo(200108)
+	spellNameList["Dire Beast"] = AutoBar:LoggedGetSpellInfo(120679)
+	spellNameList["Dire Frenzy"] = AutoBar:LoggedGetSpellInfo(217200)
+	spellNameList["Eagle Eye"] = AutoBar:LoggedGetSpellInfo(6197)
+	spellNameList["Tame Beast"] = AutoBar:LoggedGetSpellInfo(1515)
+	spellNameList["Beast Lore"] = AutoBar:LoggedGetSpellInfo(1462)
+	spellNameList["Dismiss Pet"] = AutoBar:LoggedGetSpellInfo(2641)
+	spellNameList["Revive Pet"] = AutoBar:LoggedGetSpellInfo(982)
+	spellNameList["Call Pet 1"], _, spellCallPet1Icon = AutoBar:LoggedGetSpellInfo(883)
+	spellNameList["Call Pet 2"] = AutoBar:LoggedGetSpellInfo(83242)
+	spellNameList["Call Pet 3"] = AutoBar:LoggedGetSpellInfo(83243)
+	spellNameList["Call Pet 4"] = AutoBar:LoggedGetSpellInfo(83244)
+	spellNameList["Call Pet 5"] = AutoBar:LoggedGetSpellInfo(83245)
 
 	--Mage
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
@@ -1113,20 +1125,10 @@ function AutoBarCategory:Initialize()
 
 			})
 
-	local spellEagleEye = AutoBar:LoggedGetSpellInfo(6197)
-	local spellTameBeast = AutoBar:LoggedGetSpellInfo(1515)
-	local spellBeastLore = AutoBar:LoggedGetSpellInfo(1462)
-	local spellDismissPet = AutoBar:LoggedGetSpellInfo(2641)
-	local spellRevivePet = AutoBar:LoggedGetSpellInfo(982)
-	local spellCallPet1, _, spellCallPet1Icon = AutoBar:LoggedGetSpellInfo(883)
-	local spellCallPet2 = AutoBar:LoggedGetSpellInfo(83242)
-	local spellCallPet3 = AutoBar:LoggedGetSpellInfo(83243)
-	local spellCallPet4 = AutoBar:LoggedGetSpellInfo(83244)
-	local spellCallPet5 = AutoBar:LoggedGetSpellInfo(83245)
-	local spellShadowfiend = AutoBar:LoggedGetSpellInfo(34433)
 	
 	
-	
+		local spellShadowfiend = AutoBar:LoggedGetSpellInfo(34433)
+
 	--Shaman
 	local spellEarthElemental = AutoBar:LoggedGetSpellInfo(198103)
 	local spellFireElemental = AutoBar:LoggedGetSpellInfo(198067)
@@ -1154,16 +1156,16 @@ function AutoBarCategory:Initialize()
 	local spellSummonGargoyle = AutoBar:LoggedGetSpellInfo(49206)
 
 
-	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new(
-			"Spell.Class.Pet", spellCallPet1Icon, {
+	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellCallPet1Icon,
+	{
 			"DEATHKNIGHT", spellRuneWeapon,
 			"DEATHKNIGHT", spellRaiseDead,
 			"DEATHKNIGHT", spellSummonGargoyle,			
-			"HUNTER", spellCallPet1, 
-			"HUNTER", spellCallPet2, 
-			"HUNTER", spellCallPet3, 
-			"HUNTER", spellCallPet4, 
-			"HUNTER", spellCallPet5, 
+		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 1"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 2"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 3"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 4"), 
+		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 5"), 
 			"MAGE", spellSummonWaterElemental,
 			"MONK", spellStormEarthFire,
 			"PRIEST", spellShadowfiend,
@@ -1181,26 +1183,29 @@ function AutoBarCategory:Initialize()
 			"WARLOCK", spellSummonVoidwalker,
 			})
 
-	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new(
-			"Spell.Class.Pets2", spellCallPet1Icon, {
-			"HUNTER", spellNameList["Kill Command"],
-			"HUNTER", spellNameList["Bestial Wrath"],
-			"HUNTER", spellNameList["Master's Call"],
-			"HUNTER", spellNameList["Mend Pet"],
-			"HUNTER", spellNameList["Intimidation"],
+	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellCallPet1Icon, 
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Kill Command"),
+		"HUNTER", AutoBar:GetSpellNameByName("Bestial Wrath"),
+		"HUNTER", AutoBar:GetSpellNameByName("Dire Beast"),
+		"HUNTER", AutoBar:GetSpellNameByName("Dire Frenzy"),
+		"HUNTER", AutoBar:GetSpellNameByName("Master's Call"),
+		"HUNTER", AutoBar:GetSpellNameByName("Mend Pet"),
+		"HUNTER", AutoBar:GetSpellNameByName("Intimidation"),
 			"WARLOCK", spellNameList["Command Demon"],
 			"WARLOCK", spellNameList["Grimoire of Service"],
 			"WARLOCK", spellNameList["Grimoire of Sacrifice"],
 			})
 
-	AutoBarCategoryList["Spell.Class.Pets3"] = AutoBarSpells:new(	--Misc pet abilities
-		"Spell.Class.Pets3", spellIconList["Feed Pet"], {
-			"HUNTER", spellDismissPet,
-			"HUNTER", spellEagleEye,
-			"HUNTER", spellFeedPet,
-			"HUNTER", spellRevivePet,
-			"HUNTER", spellTameBeast,
-			"HUNTER", spellBeastLore,
+	--Misc pet abilities
+	AutoBarCategoryList["Spell.Class.Pets3"] = AutoBarSpells:new(	"Spell.Class.Pets3", spellIconList["Feed Pet"], 
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Dismiss Pet"),
+		"HUNTER", AutoBar:GetSpellNameByName("Eagle Eye"),
+		"HUNTER", AutoBar:GetSpellNameByName("Feed Pet"),
+		"HUNTER", AutoBar:GetSpellNameByName("Revive Pet"),
+		"HUNTER", AutoBar:GetSpellNameByName("Tame Beast"),
+		"HUNTER", AutoBar:GetSpellNameByName("Beast Lore"),
 	})
 
 
@@ -1279,9 +1284,10 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellTeleportAncientDalaran, spellPortalAncientDalaran,
 			})
 
-	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new(
-			"Spell.Shields", spellIconList["Ice Barrier"], nil, {
+	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
+	{
 			"DRUID", 		spellNameList["Barkskin"], 	spellNameList["Barkskin"],
+		"HUNTER", 		AutoBar:GetSpellNameByName("Aspect of the Turtle"), 	AutoBar:GetSpellNameByName("Aspect of the Turtle"),
 			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
 			"MAGE", 			spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
 			"MONK", 			spellNameList["Fortifying Brew"], spellNameList["Fortifying Brew"],
@@ -1293,7 +1299,7 @@ function AutoBarCategory:Initialize()
 			"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
 			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
 			"WARRIOR", 		spellNameList["Shield Wall"], spellNameList["Shield Block"],
-			})
+	})
 end
 
 -- Create category list using PeriodicTable data.
