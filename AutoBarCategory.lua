@@ -116,15 +116,20 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533) --*
 
 	--Warlock
-	spellNameList["Sacrificial Pact"] = AutoBar:LoggedGetSpellInfo(108416)
 	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
-	spellNameList["Soul Link"] = AutoBar:LoggedGetSpellInfo(108415)
 	spellNameList["Unending Breath"] = AutoBar:LoggedGetSpellInfo(5697)
 	spellNameList["Soulstone"] = AutoBar:LoggedGetSpellInfo(20707) 
 	spellNameList["Command Demon"] = AutoBar:LoggedGetSpellInfo(119898) 
-	spellNameList["Grimoire of Service"] = AutoBar:LoggedGetSpellInfo(108501) 
 	spellNameList["Grimoire of Sacrifice"] = AutoBar:LoggedGetSpellInfo(108503) 
+	spellNameList["Call Dreadstalkers"] = AutoBar:LoggedGetSpellInfo(104316) 
+	spellNameList["Demonic Empowerment"] = AutoBar:LoggedGetSpellInfo(193396) 
+	spellNameList["Demonwrath"] = AutoBar:LoggedGetSpellInfo(193440) 
+	spellNameList["Summon Darkglare"] = AutoBar:LoggedGetSpellInfo(205180) 
+	spellNameList["Curse of Tongues"] = AutoBar:LoggedGetSpellInfo(199890) 
+	spellNameList["Curse of Weakness"] = AutoBar:LoggedGetSpellInfo(199892) 
+	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
 	
+
 	--Warrior
 	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
 	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
@@ -1057,14 +1062,16 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02", "Misc.Usable.Replenished")
 
 
-	local spellCreateHealthstone, spellCreateHealthstoneIcon
+	local spellCreateHealthstone, spellCreateHealthstoneIcon, spellRitualOfSouls
 	spellCreateHealthstone, _, spellCreateHealthstoneIcon = AutoBar:LoggedGetSpellInfo(6201)
-	local spellRitualOfSouls, spellRitualOfSoulsIcon
-	spellRitualOfSouls, _, spellRitualOfSoulsIcon = AutoBar:LoggedGetSpellInfo(29893)
-	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new(
-			"Spell.Warlock.Create Healthstone", spellCreateHealthstoneIcon, {
-			"WARLOCK", spellCreateHealthstone,
-			"WARLOCK", spellRitualOfSouls,
+	spellRitualOfSouls = AutoBar:LoggedGetSpellInfo(29893)
+	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellCreateHealthstoneIcon, nil,
+	{
+		"WARLOCK", spellCreateHealthstone, spellRitualOfSouls,
+	})
+
+	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
+			"MAGE", spellNameList["Conjure Refreshment"], spellNameList["Conjure Refreshment Table"],
 			})
 
 
@@ -1078,10 +1085,6 @@ function AutoBarCategory:Initialize()
 			"*", spellNameList["Shadowmeld"],
 	})
 
-	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new(
-			"Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
-			"MAGE", spellNameList["Conjure Refreshment"], spellNameList["Conjure Refreshment Table"],
-			})
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
 	{
@@ -1107,8 +1110,8 @@ function AutoBarCategory:Initialize()
 
 
 
-	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new(
-			"Spell.Class.Buff", spellIconList["Barkskin"], {
+	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
+	{
 			"DEATHKNIGHT", spellNameList["Horn of Winter"],
 			"DRUID", spellNameList["Ironbark"],
 			"MAGE", spellNameList["Slow Fall"],
@@ -1117,13 +1120,11 @@ function AutoBarCategory:Initialize()
 			"PALADIN", spellNameList["Hand of Sacrifice"],
 			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
-			"WARLOCK", spellNameList["Unending Breath"],
-			"WARLOCK", spellNameList["Soulstone"],
-			"WARLOCK", spellNameList["Soul Link"],
+		"WARLOCK", AutoBar:GetSpellNameByName("Unending Breath"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Soulstone"),
 			"WARRIOR", spellNameList["Commanding Shout"],
 			"WARRIOR", spellNameList["Demoralizing Shout"],
-
-			})
+	})
 
 	
 	
@@ -1169,19 +1170,19 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellSummonWaterElemental,
 			"MONK", spellStormEarthFire,
 			"PRIEST", spellShadowfiend,
-			"SHAMAN", spellEarthElemental, --*
-			"SHAMAN", spellFireElemental,  --*
-			"SHAMAN", spellStormElemental, --*
-			"SHAMAN", spellNameList["Feral Spirit"], --*
-			"WARLOCK", spellSummonDoomguard,
-			"WARLOCK", spellEyeOfKilrogg,
-			"WARLOCK", spellSummonInfernal,
-			"WARLOCK", spellSummonFelguard,
-			"WARLOCK", spellSummonFelhunter,
-			"WARLOCK", spellSummonImp,
-			"WARLOCK", spellSummonSuccubus,
-			"WARLOCK", spellSummonVoidwalker,
-			})
+			"SHAMAN", spellEarthElemental,
+			"SHAMAN", spellFireElemental,
+			"SHAMAN", spellStormElemental,
+			"SHAMAN", spellNameList["Feral Spirit"],
+		"WARLOCK", spellSummonDoomguard,
+		"WARLOCK", spellEyeOfKilrogg,
+		"WARLOCK", spellSummonInfernal,
+		"WARLOCK", spellSummonFelguard,
+		"WARLOCK", spellSummonFelhunter,
+		"WARLOCK", spellSummonImp,
+		"WARLOCK", spellSummonSuccubus,
+		"WARLOCK", spellSummonVoidwalker,
+	})
 
 	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellCallPet1Icon, 
 	{
@@ -1192,10 +1193,13 @@ function AutoBarCategory:Initialize()
 		"HUNTER", AutoBar:GetSpellNameByName("Master's Call"),
 		"HUNTER", AutoBar:GetSpellNameByName("Mend Pet"),
 		"HUNTER", AutoBar:GetSpellNameByName("Intimidation"),
-			"WARLOCK", spellNameList["Command Demon"],
-			"WARLOCK", spellNameList["Grimoire of Service"],
-			"WARLOCK", spellNameList["Grimoire of Sacrifice"],
-			})
+		"WARLOCK", AutoBar:GetSpellNameByName("Command Demon"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Call Dreadstalkers"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Grimoire of Sacrifice"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Demonic Empowerment"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Demonwrath"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Darkglare"),
+	})
 
 	--Misc pet abilities
 	AutoBarCategoryList["Spell.Class.Pets3"] = AutoBarSpells:new(	"Spell.Class.Pets3", spellIconList["Feed Pet"], 
@@ -1295,8 +1299,7 @@ function AutoBarCategory:Initialize()
 			"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
 			"PRIEST", 		spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
 			"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
-			"WARLOCK", 		spellNameList["Sacrificial Pact"], spellNameList["Sacrificial Pact"],
-			"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
+		"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
 			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
 			"WARRIOR", 		spellNameList["Shield Wall"], spellNameList["Shield Block"],
 	})
@@ -1436,6 +1439,9 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", AutoBar:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", AutoBar:GetSpellNameByName("Wing Clip"),
 		"HUNTER", AutoBar:GetSpellNameByName("Ranger's Net"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Tongues"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Weakness"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Fragility"),
 	})
 
 	spellNameList["Fishing"], _, spellIconList["Fishing"] = AutoBar:LoggedGetSpellInfo(131474)
@@ -1570,4 +1576,17 @@ end
 /dump AutoBarCategoryList["Consumable.Buff Group.Caster.Self"]
 /dump LibStub("LibPeriodicTable-3.1"):GetSetTable("Consumable.Buff Group.Caster.Self")
 /script for itemId, value in LibStub("LibPeriodicTable-3.1"):IterateSet("Consumable.Buff Group.Caster.Self") do AutoBar:Print(itemId .. " " .. value); end
+--]]
+
+--[[
+/script local button = CreateFrame("Button", "TestPet", nil, "SecureActionButtonTemplate"); button:SetAttribute("type","companion"); button:SetAttribute("spell","Ritual of Summoning")
+
+/script test_button = CreateFrame("Button", "TestPet", UIParent, "SecureActionButtonTemplate"); test_button:SetWidth(36); test_button:SetHeight(36); test_button:SetPoint("CENTER"); test_button:SetAttribute("type","macro"); test_button:SetAttribute("macrotext","/say Ritual of Summoning")
+/script test_texture = test_button:CreateTexture("TestTexture")
+
+/script test_texture:SetTexture("Interface\\Icons\\INV_Misc_QirajiCrystal_05"); test_texture:SetPoint("CENTER");
+
+/script test_button:SetAttribute("type","spell"); test_button:SetAttribute("spell","Ritual of Summoning")
+
+/script test_button:SetAttribute("type","action"); test_button:SetAttribute("summonpet","BattlePet-0-00000020C939")
 --]]

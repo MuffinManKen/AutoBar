@@ -47,6 +47,10 @@ spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
 spellNameList["Harpoon"], _, spellIconList["Harpoon"]  = AutoBar:LoggedGetSpellInfo(190925)
 
 
+--Warlock
+spellNameList["Dark Pact"], _, spellIconList["Dark Pact"]  = AutoBar:LoggedGetSpellInfo(108416)
+
+
 
 function AutoBarButton.prototype:init(parentBar, buttonDB)
 	AutoBarButton.super.prototype.init(self, parentBar, buttonDB)
@@ -1636,12 +1640,16 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "HUNTER") then
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Feign Death"))) then
-			macro_body = "/cast " .. AutoBar:GetSpellNameByName("Feign Death")
+		local feign_death = AutoBar:GetSpellNameByName("Feign Death")
+		if (GetSpellInfo(feign_death)) then
+			macro_body = "/cast " .. feign_death
 			macroTexture = spellIconList["Feign Death"]
-		elseif (GetSpellInfo(AutoBar:GetSpellNameByName("Disengage"))) then
-			macro_body = "/cast " .. AutoBar:GetSpellNameByName("Disengage")
-			macroTexture = spellIconList["Disengage"]
+		else
+			local disengage = AutoBar:GetSpellNameByName("Disengage")
+			if (GetSpellInfo(disengage)) then
+				macro_body = "/cast " .. disengage
+				macroTexture = spellIconList["Disengage"]
+			end
 		end
 	elseif (AutoBar.CLASS == "MAGE") then
 		if (GetSpellInfo(spellNameList["Ice Block"])) then
@@ -1674,6 +1682,12 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 
 			macroTexture = spellIconList["Vanish"]
 			self.macroActive = true
+		end
+	elseif (AutoBar.CLASS == "WARLOCK") then
+		local dark_pact = AutoBar:GetSpellNameByName("Dark Pact")
+		if (GetSpellInfo(dark_pact)) then
+			macro_body = "/cast " .. dark_pact
+			macroTexture = spellIconList["Dark Pact"]
 		end
 	elseif (AutoBar.CLASS == "WARRIOR") then
 		if (GetSpellInfo(spellNameList["Last Stand"])) then

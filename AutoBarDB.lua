@@ -1154,7 +1154,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			}
 		end
 	end
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR" and AutoBar.CLASS ~= "PALADIN") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
 				buttonKey = "AutoBarButtonClassPet",
@@ -1166,7 +1166,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "HUNTER") then
+	if (AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
@@ -1190,7 +1190,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		}
 	end
 
-	if (AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "MONK") then
+	if (AutoBar.CLASS ~= "MONK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonER"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonER"] = {
 				buttonKey = "AutoBarButtonER",
