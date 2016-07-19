@@ -14,17 +14,21 @@ atl("Muffin.Potion.Water Breathing","Muffin.Potion.Water Breathing");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
+atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
 
+atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
+
+atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
 
 atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
@@ -33,9 +37,6 @@ atl("Include Basic Combo Food", "Include Basic Combo Food");
 
 atl("Supporters", "Supporters");
 
-atl("Spell.Ammo", "Exotic Munitions");
-atl("AutoBarButtonAmmo", "Exotic Munitions");
-
 atl("Spell.Class.Pet", "Class Pet");
 atl("Spell.Class.Pets2", "Pet Combat");
 atl("Spell.Class.Pets3", "Pet Misc");
@@ -43,3 +44,5 @@ atl("Spell.Class.Pets3", "Pet Misc");
 atl("AutoBarButtonClassPet", "Class Pet");
 atl("AutoBarButtonClassPets2", "Pet Combat");
 atl("AutoBarButtonClassPets3", "Pet Misc");
+
+atl("AutoBarClassBarDemonHunter", "Demon Hunter")

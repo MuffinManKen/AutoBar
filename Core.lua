@@ -58,23 +58,32 @@ AutoBar.events = {}
 
 AutoBar.delay = {}
 
-AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
 AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - There is a KickStarter to support updates for Legion. See |cFFFFFF00MuffinManGames.com|r for more information.\n" ..
-" - Added keybinds for Garrison and Sunsong Ranch|n" ..
-" - Data updates|n"
+WHATSNEW_TEXT = " - Updated item libs|n" ..
+" - Reorganized some settings on the UI|n" ..
+" - Added new SPELLS_CHANGED setting for people who know what it does|n"
 
 
+function AutoBar:GetSpellNameByName(p_name)
 
+	if (AutoBar.spellNameList[p_name]) then
+		return AutoBar.spellNameList[p_name]
+	end
+	
+	AutoBar:Print("Unknown Spell Name:" .. p_name)
+
+	return nil
+end
 
 function AutoBar:IsInLockDown()
 
-	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle()
+	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle() or UnitInVehicle("player")
 
 end
 
@@ -127,6 +136,7 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
 	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
 	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
+--	BINDING_NAME_AutoBarButtonToyBox_X = L["AutoBarButtonToyBox"]
 
 	BINDING_HEADER_AutoBarCooldownHeader = L["AutoBarCooldownHeader"]
 	BINDING_NAME_AutoBarButtonCooldownDrums_X = L["AutoBarButtonCooldownDrums"]
@@ -144,6 +154,7 @@ function AutoBar:OnInitialize()
 
 	BINDING_HEADER_AutoBarClassBarDeathKnight = L["AutoBarClassBarDeathKnight"]
 	BINDING_HEADER_AutoBarClassBarMonk = L["AutoBarClassBarMonk"]
+	BINDING_HEADER_AutoBarClassBarDemonHunter = L["AutoBarClassBarDemonHunter"]
 
 	BINDING_HEADER_AutoBarClassBarDruid = L["AutoBarClassBarDruid"]
 	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
@@ -733,8 +744,9 @@ end
 function AutoBar.events:COMPANION_UPDATE(companionType)
 	AutoBar:LogEventStart("COMPANION_UPDATE", companionType)
 	if (AutoBar.inWorld) then
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		local thisIsSpam = true
+		
+		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button and companionType ~= "CRITTER") then
 			thisIsSpam = button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
@@ -758,7 +770,7 @@ function AutoBar.events:COMPANION_LEARNED()
 	if (AutoBar.inWorld) then
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button) then
-			button:Learned(button.parentBar, button.buttonDB, companionType == "MOUNT")
+			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
 		button = AutoBar.buttonList["AutoBarButtonPets"]
 		if (button) then
@@ -997,7 +1009,7 @@ end
 
 function AutoBar.LinkDecode(link)
 	if (link) then
-		local _, _, id, _, _, _, name = string.find(link, "item:(%d+):(%d+):(%d+):(%d+).+%[(.+)%]")
+		local id, name = string.match(link,"item:(%d+):.+%[(.*)%]")
 		if (id and name) then
 			return name, tonumber(id)
 		end

@@ -632,6 +632,17 @@ local function setCustomButtonName(info, value)
 	end
 end
 
+local function getDemonHunter(info)
+	local barKey = info.arg.barKey
+	return AutoBar.barLayoutDBList[barKey].DEMONHUNTER
+end
+
+local function setDemonHunter(info, value)
+	local barKey = info.arg.barKey
+	AutoBar.barLayoutDBList[barKey].DEMONHUNTER = value
+	AutoBar:BarsChanged()
+end
+
 local function getMonk(info)
 	local barKey = info.arg.barKey
 	return AutoBar.barLayoutDBList[barKey].MONK
@@ -900,6 +911,7 @@ local function BarNew()
 		posX = 300,
 		posY = 360,
 		DEATHKNIGHT = true,
+		DEMONHUNTER = true,
 		DRUID = true,
 		HUNTER = true,
 		MAGE = true,
@@ -1990,10 +2002,21 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 			disabled = getCombatLockdown,
 		}
 	end
+		if (not barOptions.args.demonhunter) then
+		barOptions.args.demonhunter = {
+			type = "toggle",
+			order = 109,
+			name = L["AutoBarClassBarDemonHunter"],
+			get = getDemonHunter,
+			set = setDemonHunter,
+			arg = passValue,
+			disabled = getCombatLockdown,
+		}
+	end
 		if (not barOptions.args.monk) then
 		barOptions.args.monk = {
 			type = "toggle",
-			order = 109,
+			order = 110,
 			name = L["AutoBarClassBarMonk"],
 			get = getMonk,
 			set = setMonk,
@@ -2004,7 +2027,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.deathKnight) then
 		barOptions.args.deathKnight = {
 			type = "toggle",
-			order = 110,
+			order = 111,
 			name = L["AutoBarClassBarDeathKnight"],
 			get = getDeathKnight,
 			set = setDeathKnight,
@@ -2015,7 +2038,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.druid) then
 		barOptions.args.druid = {
 			type = "toggle",
-			order = 111,
+			order = 112,
 			name = L["AutoBarClassBarDruid"],
 			get = getDruid,
 			set = setDruid,
@@ -2026,7 +2049,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.hunter) then
 		barOptions.args.hunter = {
 			type = "toggle",
-			order = 112,
+			order = 113,
 			name = L["AutoBarClassBarHunter"],
 			get = getHunter,
 			set = setHunter,
@@ -2037,7 +2060,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.mage) then
 		barOptions.args.mage = {
 			type = "toggle",
-			order = 113,
+			order = 114,
 			name = L["AutoBarClassBarMage"],
 			get = getMage,
 			set = setMage,
@@ -2048,7 +2071,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.paladin) then
 		barOptions.args.paladin = {
 			type = "toggle",
-			order = 114,
+			order = 115,
 			name = L["AutoBarClassBarPaladin"],
 			get = getPaladin,
 			set = setPaladin,
@@ -2059,7 +2082,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.priest) then
 		barOptions.args.priest = {
 			type = "toggle",
-			order = 115,
+			order = 116,
 			name = L["AutoBarClassBarPriest"],
 			get = getPriest,
 			set = setPriest,
@@ -2070,7 +2093,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.rogue) then
 		barOptions.args.rogue = {
 			type = "toggle",
-			order = 116,
+			order = 117,
 			name = L["AutoBarClassBarRogue"],
 			get = getRogue,
 			set = setRogue,
@@ -2081,7 +2104,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.shaman) then
 		barOptions.args.shaman = {
 			type = "toggle",
-			order = 117,
+			order = 118,
 			name = L["AutoBarClassBarShaman"],
 			get = getShaman,
 			set = setShaman,
@@ -2092,7 +2115,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.warlock) then
 		barOptions.args.warlock = {
 			type = "toggle",
-			order = 118,
+			order = 119,
 			name = L["AutoBarClassBarWarlock"],
 			get = getWarlock,
 			set = setWarlock,
@@ -2103,7 +2126,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 	if (not barOptions.args.warrior) then
 		barOptions.args.warrior = {
 			type = "toggle",
-			order = 119,
+			order = 120,
 			name = L["AutoBarClassBarWarrior"],
 			get = getWarrior,
 			set = setWarrior,

@@ -62,6 +62,7 @@ local CLASS_COLUMN_DEFAULT = 10
 
 local classBar = {
 	DEATHKNIGHT = "AutoBarClassBarDeathKnight",
+	DEMONHUNTER = "AutoBarClassBarDemonHunter",
 	DRUID = "AutoBarClassBarDruid",
 	HUNTER = "AutoBarClassBarHunter",
 	MAGE = "AutoBarClassBarMage",
@@ -143,9 +144,9 @@ function AutoBar:InitializeDefaults()
 
 	AutoBar.Class.Button:OptionsInitialize()
 	AutoBar.Class.Button:OptionsUpgrade()
-	
+
 	AutoBar.db.account.stupidlog = ""
-	
+
 	-- Simply ascend by 1 so each session produces non-conflicting keys.
 	if (not AutoBar.db.account.keySeed) then
 		AutoBar.db.account.keySeed = 1
@@ -174,6 +175,7 @@ function AutoBar:InitializeDefaults()
 			posX = 300,
 			posY = 200,
 			DEATHKNIGHT = true,
+			DEMONHUNTER = true,
 			DRUID = true,
 			HUNTER = true,
 			MAGE = true,
@@ -210,6 +212,7 @@ function AutoBar:InitializeDefaults()
 			posX = 300,
 			posY = 360,
 			DEATHKNIGHT = true,
+			DEMONHUNTER = true,
 			DRUID = true,
 			HUNTER = true,
 			MAGE = true,
@@ -224,14 +227,14 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (AutoBar.CLASS == "MONK") then
+	if (AutoBar.CLASS == "DEMONHUNTER") then
 
--- ToDo: This temporarily forces existing configs to recognize MONK.  Remove after MoP
-AutoBar.db.account.barList["AutoBarClassBarBasic"].MONK = true
-AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
+-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
+AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
+AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
 
-		if (not AutoBar.db.class.barList["AutoBarClassBarMonk"]) then
-			AutoBar.db.class.barList["AutoBarClassBarMonk"] = {
+		if (not AutoBar.db.class.barList["AutoBarClassBarDemonHunter"]) then
+			AutoBar.db.class.barList["AutoBarClassBarDemonHunter"] = {
 				enabled = true,
 				share = "2",
 				rows = 1,
@@ -253,12 +256,13 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				showOnModifier = nil,
 				posX = 300,
 				posY = 280,
-				MONK = true,
+				DEMONHUNTER = true,
 				buttonKeys = {},
 			}
 		end
 	end
-	
+
+
 	if (AutoBar.CLASS == "DEATHKNIGHT") then
 
 -- ToDo: This temporarily forces existing configs to recognize DEATHKNIGHT.  Remove after wotlk
@@ -380,6 +384,42 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			}
 		end
 	end
+
+	if (AutoBar.CLASS == "MONK") then
+
+-- ToDo: This temporarily forces existing configs to recognize MONK.  Remove after MoP
+AutoBar.db.account.barList["AutoBarClassBarBasic"].MONK = true
+AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
+
+		if (not AutoBar.db.class.barList["AutoBarClassBarMonk"]) then
+			AutoBar.db.class.barList["AutoBarClassBarMonk"] = {
+				enabled = true,
+				share = "2",
+				rows = 1,
+				columns = CLASS_COLUMN_DEFAULT,
+				alignButtons = "3",
+				alpha = 1,
+				buttonWidth = 36,
+				buttonHeight = 36,
+				collapseButtons = true,
+				docking = nil,
+				dockShiftX = 0,
+				dockShiftY = 0,
+				fadeOut = false,
+				frameStrata = "LOW",
+				hide = false,
+				padding = 0,
+				popupDirection = "1",
+				scale = 1,
+				showOnModifier = nil,
+				posX = 300,
+				posY = 280,
+				MONK = true,
+				buttonKeys = {},
+			}
+		end
+	end
+
 	if (AutoBar.CLASS == "PALADIN") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarPaladin"]) then
 			AutoBar.db.class.barList["AutoBarClassBarPaladin"] = {
@@ -630,6 +670,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			defaultButtonIndex = 2,
 			enabled = true,
 			arrangeOnUse = true,
+			mount_show_qiraji = false,
 			mount_show_favourites = true,
 			mount_show_nonfavourites = false,
 			mount_show_class = true,
@@ -935,7 +976,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			arrangeOnUse = true,
 		}
 	end
-	
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"] = {
 			buttonKey = "AutoBarButtonGuildSpell",
@@ -958,7 +999,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		}
 	end
 
-	
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
 				buttonKey = "AutoBarButtonMillHerbs",
@@ -970,7 +1011,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				targeted = "Milling",
 			}
 		end
-		
+
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonGarrison"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonGarrison"] = {
@@ -982,6 +1023,17 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			arrangeOnUse = true,
 		}
 	end
+
+--	if (not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
+--		AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
+--			buttonKey = "AutoBarButtonToyBox",
+--			buttonClass = "AutoBarButtonToyBox",
+--			barKey = "AutoBarClassBarExtras",
+--			defaultButtonIndex = 13,
+--			enabled = true,
+--			arrangeOnUse = true,
+--		}
+--	end
 
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		if (not AutoBar.db.account.buttonList["AutoBarButtonWater"]) then
@@ -1102,7 +1154,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			}
 		end
 	end
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR" and AutoBar.CLASS ~= "PALADIN") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
 				buttonKey = "AutoBarButtonClassPet",
@@ -1114,7 +1166,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "HUNTER") then
+	if (AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
@@ -1127,20 +1179,18 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS ~= "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonShields"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonShields"] = {
-				buttonKey = "AutoBarButtonShields",
-				buttonClass = "AutoBarButtonShields",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
+	if (not AutoBar.db.class.buttonList["AutoBarButtonShields"]) then
+		AutoBar.db.class.buttonList["AutoBarButtonShields"] = {
+			buttonKey = "AutoBarButtonShields",
+			buttonClass = "AutoBarButtonShields",
+			barKey = AutoBar.classBar,
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
 	end
 
-	if (AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "MONK") then
+	if (AutoBar.CLASS ~= "MONK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonER"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonER"] = {
 				buttonKey = "AutoBarButtonER",
@@ -1153,7 +1203,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",
@@ -1177,17 +1227,6 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				arrangeOnUse = true,
 			}
 		end
-		
-		if (not AutoBar.db.class.buttonList["AutoBarButtonAmmo"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonAmmo"] = {
-				buttonKey = "AutoBarButtonAmmo",
-				buttonClass = "AutoBarButtonAmmo",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
 
 	end
 
@@ -1203,7 +1242,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				targeted = "Lockpicking",
 			}
 		end
-		
+
 		if (not AutoBar.db.class.buttonList["AutoBarButtonPoisonLethal"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonPoisonLethal"] = {
 				buttonKey = "AutoBarButtonPoisonLethal",
@@ -1214,7 +1253,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				arrangeOnUse = true,
 			}
 		end
-		
+
 		if (not AutoBar.db.class.buttonList["AutoBarButtonPoisonNonlethal"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonPoisonNonlethal"] = {
 				buttonKey = "AutoBarButtonPoisonNonlethal",
@@ -1296,9 +1335,13 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			}
 		end
 	end
-	
-	local deprecated = {"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura", "AutoBarButtonTrack", "AutoBarButtonRotationDrums"  }
-	
+
+	local deprecated = 
+	{
+		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
+		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo"
+	}
+
 	for _, dep in ipairs(deprecated) do
 		if (AutoBar.db.account.buttonList[dep]) then
 			AutoBar.db.account.buttonList[dep] = nil
@@ -1309,9 +1352,9 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		if (AutoBar.db.char.buttonList[dep]) then
 			AutoBar.db.char.buttonList[dep] = nil
 		end
-		
+
 	end
-	
+
 	if(AutoBar.CLASS == "MONK" and AutoBar.db.class.buttonList["AutoBarButtonER"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonER"] = nil
 	end

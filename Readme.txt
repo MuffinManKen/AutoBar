@@ -12,6 +12,27 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.0.00:
+ - Demon Hunter Support
+ - Added Keybinds for Garrison and Sun Song Ranch
+ - Fixed Mounts for Legion
+ - Qiraji Mounts are now filtered out by default
+ - Mounts load much quicker now
+ - Fixed Item buttons for Legion
+ - Various other minor breakage caused by Legion
+ - TOC bump for 7.0
+ - Updated Ace3-GUI
+ - Bars should no longer flash while in a vehicle
+ - Custom Macro buttons should now have a meaningful icon
+ - Hunters: 
+ 		- Removed Exotic Munitions/Ammo button
+ 		- Feed Pet button works (been broken for a while)
+ 		- Added Shield and Charge button
+ 		- Updated spells
+ - Warlock:
+ 		- Added ER button (Dark Pact)
+ 		- Updated spells
+
 v6.2.0.04:
  - Added keybinds for Garrisons and Sunsong Ranch
 

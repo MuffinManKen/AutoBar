@@ -114,6 +114,33 @@ function AutoBar.Class.BasicButton:TooltipApply(button)
 	end
 end
 
+local function get_texture_for_macro_body(p_macro_body)
+	local debug = false
+	
+	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*(%a+[%a ]+)")
+	local show_tt_tex = show_tt_action and select(3, GetSpellInfo(show_tt_action))
+	if(not debug and show_tt_tex) then return show_tt_tex end;
+
+	local action = SecureCmdOptionParse(p_macro_body)
+	local action_tex = action and select(3, GetSpellInfo(action))
+	if(not debug and action_tex) then return action_tex end;
+
+	local parsed_action = string.match(p_macro_body, "/cast%s*(%a+[%a ]+)")
+	local parsed_tex = parsed_action and select(3, GetSpellInfo(parsed_action))
+	if(not debug and parsed_tex) then return parsed_tex end;
+
+
+	if (debug) then
+		print("macro body:", p_macro_body);
+		print("   action:" .. action, "action_tex", action_tex)
+		print("   parsed action:", parsed_action, "parsed tex:", parsed_tex)
+		print("   show_tt_action", show_tt_action, "show_tt_tex", show_tt_tex)
+		
+		return show_tt_tex or action_tex or parsed_tex
+	end
+	
+	return nil
+end
 
 local borderBlue = {r = 0, g = 0, b = 1.0, a = 0.35}
 local borderGreen = {r = 0, g = 1.0, b = 0, a = 0.35}
@@ -131,9 +158,6 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 				-- Add a green border if button is an equipped item
 				borderColor = borderGreen
 			end
-if (itemId == 43569) then
---	print("43569:", texture)
-end
 		end
 	elseif (itemType == "macro") then
 		local macroIndex = frame:GetAttribute("macro")
@@ -142,7 +166,8 @@ end
 		else
 			texture = frame.class.macroTexture
 			if (not texture) then
-				texture = "Interface\\Icons\\INV_Misc_Gift_05"
+				local macro_text = self.frame:GetAttribute("macrotext")
+				texture = get_texture_for_macro_body(macro_text) or "Interface\\Icons\\INV_Misc_Gift_05"
 			end
 		end
 	elseif (itemType == "spell") then
@@ -194,9 +219,9 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		end
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
-			CooldownFrame_SetTimer(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		else
-			CooldownFrame_SetTimer(self.frame.cooldown, 0, 0, 0)
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 	end
 end
