@@ -65,9 +65,9 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Updated item libs|n" ..
-" - Reorganized some settings on the UI|n" ..
-" - Added new SPELLS_CHANGED setting for people who know what it does|n"
+WHATSNEW_TEXT = " - Demon Hunter Support|n" ..
+" - Lots of Legion fixes|n" ..
+" - See the Readme.txt file (or Curse/WoWI change log) for more detail|n"
 
 
 function AutoBar:GetSpellNameByName(p_name)
