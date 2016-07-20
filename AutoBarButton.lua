@@ -1440,29 +1440,19 @@ function AutoBarButtonCharge.prototype:Refresh(parentBar, buttonDB)
 
 	local macroTexture
 	if (AutoBar.CLASS == "DRUID") then
-		if (GetSpellInfo(spellNameList["Wild Charge"])) then
-			concatList[index] = spellNameList["Wild Charge"]
-
-			macroTexture = spellIconList["Wild Charge"]
-			self.macroActive = true
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Wild Charge"))) then
+			spell_name = AutoBar:GetSpellNameByName("Wild Charge")
 		end
 	elseif (AutoBar.CLASS == "ROGUE") then
-		if (GetSpellInfo(spellNameList["Shadowstep"])) then
-			concatList[index] = spellNameList["Shadowstep"]
-
-			macroTexture = spellIconList["Shadowstep"]
-			self.macroActive = true
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Shadowstep"))) then
+			spell_name = AutoBar:GetSpellNameByName("Shadowstep")
 		end
 	elseif (AutoBar.CLASS == "WARRIOR") then
-		if (GetSpellInfo(spellNameList["Charge"])) then
-			concatList[index] = spellNameList["Charge"]
-			macroTexture = spellIconList["Charge"]
-			self.macroActive = true
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Charge"))) then
+			spell_name = AutoBar:GetSpellNameByName("Charge")
 		end
-		if (GetSpellInfo(spellNameList["Intercept"])) then
-			concatList[index] = spellNameList["Intercept"]
-			macroTexture = spellIconList["Intercept"]
-			self.macroActive = true
+		if (GetSpellInfo(AutoBar:GetSpellNameByName("Intercept"))) then
+			spell_name = AutoBar:GetSpellNameByName("Intercept")
 		end
 	elseif (AutoBar.CLASS == "HUNTER") then
 
