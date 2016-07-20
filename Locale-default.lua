@@ -11,6 +11,7 @@ atl("AutoBarButtonSunsongRanch", "Sunsong Ranch");
 atl("Muffin.Potion.Buff","Muffin.Potion.Buff");
 atl("Muffin.Potion.Rage","Muffin.Potion.Rage");
 atl("Muffin.Potion.Water Breathing","Muffin.Potion.Water Breathing");
+atl("Muffin.Potion.Health", "Muffin.Potion.Health");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
