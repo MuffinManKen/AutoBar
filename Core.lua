@@ -65,9 +65,9 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Demon Hunter Support|n" ..
-" - Lots of Legion fixes|n" ..
-" - See the Readme.txt file (or Curse/WoWI change log) for more detail|n"
+WHATSNEW_TEXT = " - 'Muffin.Potion.Health' category now shows up in the list|n" ..
+" - Custom macros with an apostrophe in the spell name now show a proper icon|n" ..
+" - The 'Charge'' button was broken for a few classes (Rogue, Warrior, and Druid)|n"
 
 
 function AutoBar:GetSpellNameByName(p_name)

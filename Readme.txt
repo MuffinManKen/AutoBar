@@ -12,6 +12,11 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.0.01:
+ - "Muffin.Potion.Health" category now shows up in the list
+ - Custom macros with an apostrophe in the spell name now show a proper icon
+ - The "Charge" button was broken for a few classes (Rogue, Warrior, and Druid)
+
 v7.0.0.00:
  - Demon Hunter Support
  - Added Keybinds for Garrison and Sun Song Ranch
@@ -24,7 +29,6 @@ v7.0.0.00:
  - Updated Ace3-GUI
  - Bars should no longer flash while in a vehicle
  - Custom Macro buttons should now have a meaningful icon
- - "Muffin.Potion.Health" category now shows up in the list
  - Hunters: 
  		- Removed Exotic Munitions/Ammo button
  		- Feed Pet button works (been broken for a while)
