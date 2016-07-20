@@ -125,7 +125,7 @@ local function get_texture_for_macro_body(p_macro_body)
 	local action_tex = action and select(3, GetSpellInfo(action))
 	if(not debug and action_tex) then return action_tex end;
 
-	local parsed_action = string.match(p_macro_body, "/cast%s*(%a+[%a ]+)")
+	local parsed_action = string.match(p_macro_body, "/cast%s*(%a+[%a ']+)")
 	local parsed_tex = parsed_action and select(3, GetSpellInfo(parsed_action))
 	if(not debug and parsed_tex) then return parsed_tex end;
 
