@@ -114,29 +114,40 @@ function AutoBar.Class.BasicButton:TooltipApply(button)
 	end
 end
 
+local function get_texture_for_action(p_action)
+
+	return select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
+
+end
+
 local function get_texture_for_macro_body(p_macro_body)
 	local debug = false
 	
 	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*(%a+[%a ]+)")
-	local show_tt_tex = show_tt_action and select(3, GetSpellInfo(show_tt_action))
+	local show_tt_tex = show_tt_action and get_texture_for_action(show_tt_action)
 	if(not debug and show_tt_tex) then return show_tt_tex end;
 
 	local action = SecureCmdOptionParse(p_macro_body)
-	local action_tex = action and select(3, GetSpellInfo(action))
+	local action_tex = action and get_texture_for_action(action)
 	if(not debug and action_tex) then return action_tex end;
 
-	local parsed_action = string.match(p_macro_body, "/cast%s*(%a+[%a ']+)")
-	local parsed_tex = parsed_action and select(3, GetSpellInfo(parsed_action))
-	if(not debug and parsed_tex) then return parsed_tex end;
+	local cast_action = string.match(p_macro_body, "/cast%s*(%a+[%a ']+)")
+	local cast_tex = cast_action and get_texture_for_action(cast_action)
+	if(not debug and cast_tex) then return cast_tex end;
+
+	local use_action = string.match(p_macro_body, "/use%s*(%a+[%a ']+)")
+	local use_tex = use_action and get_texture_for_action(use_action)
+	if(not debug and use_tex) then return use_tex end;
 
 
 	if (debug) then
 		print("macro body:", p_macro_body);
 		print("   action:" .. action, "action_tex", action_tex)
-		print("   parsed action:", parsed_action, "parsed tex:", parsed_tex)
+		print("   cast action:", cast_action, "cast tex:", cast_tex)
+		print("   use action:", use_action, "use tex:", use_tex)
 		print("   show_tt_action", show_tt_action, "show_tt_tex", show_tt_tex)
 		
-		return show_tt_tex or action_tex or parsed_tex
+		return show_tt_tex or action_tex or cast_tex or use_tex
 	end
 	
 	return nil
