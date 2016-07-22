@@ -255,6 +255,7 @@ function AutoBar:OnInitialize()
 
 	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
 	_, AutoBar.CLASS = UnitClass("player")
+	AutoBar.NiceClass = string.sub(AutoBar.CLASS, 1, 1) .. string.lower(string.sub(AutoBar.CLASS, 2))
 	AutoBar.CLASSPROFILE = "_" .. AutoBar.CLASS;
 
 	AutoBar:RegisterDB("AutoBarDB", nil, "class")
