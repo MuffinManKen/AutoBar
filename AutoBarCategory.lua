@@ -1489,6 +1489,15 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount")
 	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
 
+	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Wild Charge"),
+		"HUNTER", AutoBar:GetSpellNameByName("Harpoon"),
+		"ROGUE", AutoBar:GetSpellNameByName("Shadowstep"),
+		"WARRIOR", AutoBar:GetSpellNameByName("Charge"),
+		"WARRIOR", AutoBar:GetSpellNameByName("Intercept"),
+	})
+
 end
 
 

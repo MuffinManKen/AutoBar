@@ -1423,50 +1423,14 @@ end
 
 
 
-
-local AutoBarButtonCharge = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonCharge = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCharge"] = AutoBarButtonCharge
 
 function AutoBarButtonCharge.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCharge.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
-end
 
-function AutoBarButtonCharge.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonCharge.super.prototype.Refresh(self, parentBar, buttonDB)
+	self:AddCategory("Spell.Charge")
 
-	self.macroActive = nil
-	local spell_name
-
-	local macroTexture
-	if (AutoBar.CLASS == "DRUID") then
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Wild Charge"))) then
-			spell_name = AutoBar:GetSpellNameByName("Wild Charge")
-		end
-	elseif (AutoBar.CLASS == "ROGUE") then
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Shadowstep"))) then
-			spell_name = AutoBar:GetSpellNameByName("Shadowstep")
-		end
-	elseif (AutoBar.CLASS == "WARRIOR") then
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Charge"))) then
-			spell_name = AutoBar:GetSpellNameByName("Charge")
-		end
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Intercept"))) then
-			spell_name = AutoBar:GetSpellNameByName("Intercept")
-		end
-	elseif (AutoBar.CLASS == "HUNTER") then
-
-		if (GetSpellInfo(AutoBar:GetSpellNameByName("Harpoon"))) then
-			spell_name = AutoBar:GetSpellNameByName("Harpoon")
-		end
-
-	end
-
-	if (spell_name) then
-		self.macroActive = true
-		local macroText = "/cast " .. spell_name
-		self:AddMacro(macroText, spellIconList[spell_name])
-	end
 end
 
 
