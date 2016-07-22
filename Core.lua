@@ -275,6 +275,11 @@ function AutoBar:OnInitialize()
 				return
 			end
 			
+			--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
+			if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
+				return
+			end
+			
 			local timer_name = event .. "_last_tick"
 			local now = GetTime()
 			AutoBar[timer_name] = AutoBar[timer_name] or 0
@@ -359,6 +364,7 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 	AutoBar.frame:RegisterEvent("COMPANION_UPDATE")
 	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
+	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -563,6 +569,13 @@ function Delayed.prototype:Start(arg1, customDelay)
 --print("***Delayed.prototype:Start "..self.name.." end ");
 end
 
+function AutoBar.events:GET_ITEM_INFO_RECEIVED()
+
+--print("GET_ITEM_INFO_RECEIVED")
+	AutoBar.missing_items = false;
+	AutoBar.delay["UpdateActive"]:Start()
+
+end
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
 	AutoBar.inCombat = nil

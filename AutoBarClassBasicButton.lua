@@ -150,6 +150,11 @@ local function get_texture_for_macro_body(p_macro_body)
 		return show_tt_tex or action_tex or cast_tex or use_tex
 	end
 	
+	--We haven't found a texture. This might be because it's just not cached yet.
+	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
+	AutoBar.missing_items = true
+	--print("AutoBar.missing_items = true")
+	
 	return nil
 end
 
