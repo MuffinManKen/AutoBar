@@ -88,6 +88,7 @@ AutoBar.categoryValidateList = {}
 
 	--Monk
 	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
+	spellNameList["Zen Pilgrimage: Return"] = AutoBar:LoggedGetSpellInfo(126896)
 	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
 	
 	--Paladin
@@ -198,15 +199,21 @@ local function RawListToItemIDList(p_raw_list)
 	return itemArray
 end
 
+local hack_deadly_poison_name = GetSpellInfo(2823)
+local hack_instant_poison_name = GetSpellInfo(157584)
+
+local hack_zen_pilgrimage_name = GetSpellInfo(126892)
+local hack_zen_return_name = GetSpellInfo(126896)
+
 
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 -- If the spell is known (or noSpellCheck is active), copy it to the items list
-local function AddSpellToCategory(p_category, spellNameLeft, spellNameRight, itemsIndex)
+local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
-
+	local spellNameLeft = p_spell_name_left
 --local tracked_category = "Spell.Portals"
---	if (p_category.categoryKey == tracked_category) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
+--if (p_category.categoryKey == tracked_category) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
 	--If the spells are not known by the player, their names are replaced with nil
 	if (spellNameLeft) then
@@ -234,6 +241,11 @@ local function AddSpellToCategory(p_category, spellNameLeft, spellNameRight, ite
 	if (hack_instant_poison_name and (spellNameLeft == hack_instant_poison_name)) then
 		spellNameLeft = hack_deadly_poison_name
 	end
+	--Zen Pilgrimage has a similar issue to Deadly Poison except it's triggered by using the other spell (Pilgrimage <-> Return)
+	if (hack_zen_return_name and (p_spell_name_left == hack_zen_return_name)) then
+		spellNameLeft = hack_zen_pilgrimage_name
+	end
+
 
 	--if (p_category.categoryKey == tracked_category) then print("   Fixed: spellname:", spellNameLeft) end
 
@@ -386,8 +398,6 @@ end
 function AutoBarCategory.prototype:Refresh()
 end
 
-local hack_deadly_poison_name = GetSpellInfo(2823)
-local hack_instant_poison_name = GetSpellInfo(157584)
 
 
 
@@ -1274,11 +1284,12 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellTeleportStormshield, spellPortalStormshield,
 			"MAGE", spellTeleportWarspear, spellPortalWarspear,
 			"MAGE", spellNameList["Teleport: Dalaran"], spellNameList["Portal: Dalaran"],
+			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage"), AutoBar:GetSpellNameByName("Zen Pilgrimage"),
+			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"), AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"),
 			"DEATHKNIGHT", spellNameList["Death Gate"], spellNameList["Death Gate"],
 			"DRUID", spellTeleportMoonglade, spellTeleportMoonglade,
 			"SHAMAN", spellAstralRecall, spellAstralRecall,
 			"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
-			"MONK", spellNameList["Zen Pilgrimage"], spellNameList["Zen Pilgrimage"],
 			})
 			
 	local spellTeleportAncientDalaran = AutoBar:LoggedGetSpellInfo(120145)
