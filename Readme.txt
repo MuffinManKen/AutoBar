@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+Next:
+ - Removed the Coilfang/Tempest Keep/Blade's Edge-specific categories and code.
+
 v7.0.0.02:
  - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.
  - More custom macros should have a useful icon (items, spells, /use, /cast)
