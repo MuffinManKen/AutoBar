@@ -12,7 +12,6 @@
 --		texture
 --		targeted
 --		nonCombat
---		location
 --		battleground
 --		notUsable (soul shards, arrows, etc.)
 --		flying

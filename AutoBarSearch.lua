@@ -21,31 +21,6 @@ AutoBarSearch.toys = {}
 AutoBarSearch.dirtyBags = {}
 local searchSpace, items, playerLevel
 
-AutoBarSearch.zoneGroup = {}
-AutoBarSearch.zoneGroup[GetMapNameByID(780)] = "Coilfang"
-AutoBarSearch.zoneGroup[GetMapNameByID(728)] = "Coilfang"
-AutoBarSearch.zoneGroup[GetMapNameByID(727)] = "Coilfang"
-AutoBarSearch.zoneGroup[GetMapNameByID(726)] = "Coilfang"
-AutoBarSearch.zoneGroup[GetMapNameByID(731)] = "Tempest Keep"
-AutoBarSearch.zoneGroup[GetMapNameByID(729)] = "Tempest Keep"
-AutoBarSearch.zoneGroup[GetMapNameByID(782)] = "Tempest Keep"
-AutoBarSearch.zoneGroup[GetMapNameByID(730)] = "Tempest Keep"
-
-AutoBarSearch.subZoneGroup = {}
---AutoBarSearch.subZoneGroup[GetMapNameByID(780)] = "BE Plateaus"  --Really? this looks like a copy/paste error
---AutoBarSearch.subZoneGroup[BZ["Forge Camp: Terror"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["The Vortex Pinnacle"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Rivendark's Perch"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Ogri'la"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Obsidia's Perch"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Skyguard Outpost"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Shartuul's Transporter"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Forge Camp: Wrath"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Bash'ir Landing"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Crystal Spine"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Insidion's Perch"]] = "BE Plateaus"
---AutoBarSearch.subZoneGroup[BZ["Furywing's Perch"]] = "BE Plateaus"
-
 -- Recycle lists will avoid garbage collection and memory thrashing but potentially grow over time
 -- A simple 2 list aproach that recycles objects specific to that type of list so the bulk of operations should be only initing recycled objects.
 local Recycle = AceOO.Class()
@@ -1056,15 +1031,6 @@ function Sorted.prototype:SetBest(buttonKey)
 		categoryInfo = AutoBarCategoryList[category]
 -- n = { itemId, slotIndex, categoryIndex}, ... }
 		if (categoryInfo) then
-			local zone = GetRealZoneText()
-			if (categoryInfo.location and categoryInfo.location ~= zone) then
---AutoBar:Print("Sorted:SetBest in zone " .. tostring(zone) .. " categoryInfo.location " .. tostring(categoryInfo.location))
-				local zoneGroup = AutoBarSearch.zoneGroup[zone]
-				if (zoneGroup ~= categoryInfo.location) then
---AutoBar:Print("Sorted:SetBest failed zoneGroup " .. tostring(zoneGroup) .. " categoryInfo.location " .. tostring(categoryInfo.location))
-					good = nil
-				end
-			end
 			if (categoryInfo.battleground and not AutoBar.inBG) then
 				good = nil
 			else

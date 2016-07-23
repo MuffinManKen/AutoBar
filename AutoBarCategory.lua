@@ -12,7 +12,6 @@
 --		texture
 --		targeted
 --		nonCombat
---		location
 --		battleground
 --		notUsable (soul shards, arrows, etc.)
 --		flying
@@ -275,7 +274,7 @@ end
 --		description - localized description
 --		texture - display icon texture
 -- Optional attributes:
---		targeted, nonCombat, location, battleground, notUsable
+--		targeted, nonCombat, battleground, notUsable
 AutoBarCategory = AceOO.Class()
 AutoBarCategory.virtual = true
 
@@ -295,11 +294,6 @@ end
 -- True if only usable outside combat
 function AutoBarCategory.prototype:SetNonCombat(nonCombat)
 	self.nonCombat = nonCombat
-end
-
--- True if item is location specific
-function AutoBarCategory.prototype:SetLocation(location)
-	self.location = location
 end
 
 -- True if item is usable anywhere, including battlegrounds
@@ -698,7 +692,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Misc.Battle Standard.Battleground"]:SetBattleground(true)
 
 	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"] = AutoBarItems:new( "Misc.Battle Standard.Alterac Valley", "INV_BannerPVP_02", "Misc.Battle Standard.Alterac Valley")
-	AutoBarCategoryList["Misc.Battle Standard.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
 	AutoBarCategoryList["Muffin.Explosives"] = AutoBarItems:new( "Muffin.Explosives", "INV_Misc_Bomb_08", "Muffin.Explosives")
 	AutoBarCategoryList["Muffin.Explosives"]:SetTargeted(true)
@@ -727,15 +720,12 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Alterac Valley", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Alterac Valley")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"]:SetTargeted(true)
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Alterac Valley"]:SetLocation(GetMapNameByID(401)) -- Alterac Valley
 
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Arathi Basin", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Arathi Basin")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"]:SetTargeted(true)
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Arathi Basin"]:SetLocation(GetMapNameByID(461)) -- Arathi Basin
 
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"] = AutoBarItems:new( "Consumable.Bandage.Battleground.Warsong Gulch", "INV_Misc_Bandage_12", "Consumable.Bandage.Battleground.Warsong Gulch")
 	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"]:SetTargeted(true)
-	AutoBarCategoryList["Consumable.Bandage.Battleground.Warsong Gulch"]:SetLocation(GetMapNameByID(443)) -- Warsong Gulch
 
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
@@ -749,11 +739,9 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"] = AutoBarItems:new( "Consumable.Food.Edible.Battleground.Arathi Basin.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Arathi Basin.Basic")
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Arathi Basin.Basic"]:SetLocation(GetMapNameByID(461)) -- Arathi Basin
 
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"] = AutoBarItems:new( "Consumable.Food.Edible.Battleground.Warsong Gulch.Basic", "INV_Misc_Food_33", "Consumable.Food.Edible.Battleground.Warsong Gulch.Basic")
 	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Edible.Battleground.Warsong Gulch.Basic"]:SetLocation(GetMapNameByID(443)) -- Warsong Gulch
 
 	AutoBarCategoryList["Consumable.Food.Combo Health"] = AutoBarItems:new( "Consumable.Food.Combo Health", "INV_Misc_Food_33", "Consumable.Food.Combo Health")
 	AutoBarCategoryList["Consumable.Food.Combo Health"]:SetNonCombat(true)
@@ -873,14 +861,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.PvP", "INV_Potion_39", "Consumable.Cooldown.Potion.Health.PvP")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"]:SetBattleground(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Blades Edge"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Blades Edge", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Blades Edge")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Blades Edge"]:SetLocation(GetMapNameByID(475)) -- Blade's Edge Mountains
-
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Coilfang"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Coilfang", "INV_Potion_167", "Consumable.Cooldown.Potion.Health.Coilfang")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Coilfang"]:SetLocation("Coilfang")
-
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Tempest Keep"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Tempest Keep", "INV_Potion_153", "Consumable.Cooldown.Potion.Health.Tempest Keep")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Tempest Keep"]:SetLocation("Tempest Keep")
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Anywhere", "INV_Alchemy_EndlessFlask_04", "Consumable.Cooldown.Potion.Mana.Anywhere")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"]:SetAnywhere(true)
@@ -890,14 +870,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Pvp", "INV_Potion_81", "Consumable.Cooldown.Potion.Mana.Pvp")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"]:SetBattleground(true)
 
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Blades Edge"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Blades Edge", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Blades Edge")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Blades Edge"]:SetLocation(GetMapNameByID(475)) -- Blade's Edge Mountains
-
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Coilfang"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Coilfang", "INV_Potion_168", "Consumable.Cooldown.Potion.Mana.Coilfang")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Coilfang"]:SetLocation("Coilfang")
-
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Tempest Keep"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Tempest Keep", "INV_Potion_156", "Consumable.Cooldown.Potion.Mana.Tempest Keep")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Tempest Keep"]:SetLocation("Tempest Keep")
 
 	AutoBarCategoryList["Consumable.Cooldown.Stone.Combat"] = AutoBarItems:new("Consumable.Cooldown.Stone.Combat", "INV_Stone_04", "Consumable.Cooldown.Stone.Combat")
 

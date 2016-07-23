@@ -323,16 +323,6 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
 			return
 		end
-		local categoryInfo = AutoBarCategoryList[category]
-		if (isUsable and categoryInfo and categoryInfo.location) then
-			local zone = GetRealZoneText()
-			if (categoryInfo.location ~= zone) then
-				local zoneGroup = AutoBarSearch.zoneGroup[zone]
-				if (zoneGroup ~= categoryInfo.location) then
-					isUsable = nil
-				end
-			end
-		end
 
 		local oor = AutoBar.db.account.outOfRange or "none"
 		if (isUsable and (not frame.outOfRange or not (oor ~= "none"))) then

@@ -826,30 +826,12 @@ function AutoBar.events:SPELLS_CHANGED(arg1)
 end
 
 function AutoBar:UpdateZone(event)
---[[
-	print(tostring(event) .. " GetZoneText()" .. GetZoneText())
-	print(tostring(event) .. " GetRealZoneText()" .. GetRealZoneText())
-	print(tostring(event) .. " GetSubZoneText()" .. GetSubZoneText())
-	print(tostring(event) .. " GetMinimapZoneText()" .. GetMinimapZoneText())
-	print(tostring(event) .. " GetMinimapZoneText()" .. GetMinimapZoneText())
---]]
-	local newZone = AutoBarSearch.subZoneGroup[GetSubZoneText()]
-	local zone = GetRealZoneText()
-	if (not newZone) then
-		if (zone and zone ~= "") then
-			newZone = AutoBarSearch.subZoneGroup[zone]
-		end
-	end
-	if (newZone and newZone ~= AutoBar.currentZone) then
---print("AutoBar:UpdateZone ", AutoBar.currentZone, "-->", newZone)
-		AutoBar.currentZone = newZone
-	end
 
 	local flyable = IsFlyableArea()
 	if (AutoBar.flyable ~= flyable) then
 		AutoBar.flyable = flyable
 		if (AutoBar.buttonList["AutoBarButtonMount"]) then
---print("AutoBar:UpdateZone AutoBar.flyable", AutoBar.flyable, "-->", flyable)
+			--print("AutoBar:UpdateZone AutoBar.flyable", AutoBar.flyable, "-->", flyable)
 			AutoBar.delay["UpdateScan"]:Start(nil)
 		end
 	end

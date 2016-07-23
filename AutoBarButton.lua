@@ -1865,9 +1865,6 @@ function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
 
 	--self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Coilfang")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Tempest Keep")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Blades Edge")
 	--self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
 	--self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
 	--self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
@@ -2399,9 +2396,6 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		--self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Basic")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Pvp")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Coilfang")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Tempest Keep")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Blades Edge")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
 	end
 end
@@ -2447,9 +2441,6 @@ function AutoBarButtonCooldownPotionHealth.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
 	self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Coilfang")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Tempest Keep")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Blades Edge")
 	self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
 end
 
