@@ -65,9 +65,10 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - 'Muffin.Potion.Health' category now shows up in the list|n" ..
-" - Custom macros with an apostrophe in the spell name now show a proper icon|n" ..
-" - The 'Charge'' button was broken for a few classes (Rogue, Warrior, and Druid)|n"
+WHATSNEW_TEXT = " - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.|n" ..
+" - More custom macros should have a useful icon (items, spells, /use, /cast)|n" ..
+" - The 'Charge'' button is now a normal button instead of a macro button. Simpler, better.|n" ..
+" - Updated MuffinLibPT|n"
 
 
 function AutoBar:GetSpellNameByName(p_name)

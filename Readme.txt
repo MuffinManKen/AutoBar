@@ -12,6 +12,12 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.0.02:
+ - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.
+ - More custom macros should have a useful icon (items, spells, /use, /cast)
+ - The "Charge" button is now a normal button instead of a macro button. Simpler, better.
+ - Updated MuffinLibPT
+
 v7.0.0.01:
  - "Muffin.Potion.Health" category now shows up in the list
  - Custom macros with an apostrophe in the spell name now show a proper icon
