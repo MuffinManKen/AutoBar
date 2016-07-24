@@ -1069,7 +1069,7 @@ function AutoBar:Initialize()
 	AutoBarCategory:UpdateCustomCategories()
 	AutoBarSearch:Initialize()
 	self:LogEventEnd("AutoBar:Initialize")
-AutoBarSearch:Test()
+--AutoBarSearch:Test()
 end
 
 -- Complete reload of everything.  Dump most old data structures.

@@ -1235,7 +1235,7 @@ end
 
 -- Test harness		/script AutoBarSearch:Test()
 function AutoBarSearch:Test()
-	if (false and DevTools_Dump) then
+	if (true and true) then
 		AutoBarSearch.trace = true
 		print("\nAutoBarSearch:Test start")
 		AutoBarSearch:Empty()
