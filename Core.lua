@@ -1114,8 +1114,8 @@ function AutoBar:UpdateCategories()
 	if (not InCombatLockdown()) then
 		self:LogEventStart("AutoBar:UpdateCategories")
 		AutoBarCategory:UpdateCustomCategories()
-		self:LogEventEnd("AutoBar:UpdateCategories")
 		self:UpdateCustomBars()
+		self:LogEventEnd("AutoBar:UpdateCategories")
 	else
 		self:LogEvent("AutoBar:UpdateCategories InCombatLockdown")
 	end
@@ -1164,8 +1164,9 @@ end
 function AutoBar:UpdateCustomButtons()
 	self:LogEventStart("AutoBar:UpdateCustomButtons")
 
-	self:LogEventEnd("AutoBar:UpdateCustomButtons")
 	self:UpdateSpells()
+
+	self:LogEventEnd("AutoBar:UpdateCustomButtons")
 end
 
 local DelayedUpdateCustomButtons = AceOO.Class(Delayed)
@@ -1189,9 +1190,9 @@ function AutoBar:UpdateSpells()
 	AutoBarSearch.stuff:ScanMacros()
 	AutoBarCategory:UpdateCategories()
 --	AutoBar:RefreshButtons()
-	self:LogEventEnd("AutoBar:UpdateSpells")
 	-- ToDo: update on learn.
 	self:UpdateObjects()
+	self:LogEventEnd("AutoBar:UpdateSpells")
 end
 
 local DelayedUpdateSpells = AceOO.Class(Delayed)
@@ -1233,8 +1234,8 @@ function AutoBar:UpdateObjects()
 			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
 		end
 	end
-	self:LogEventEnd("AutoBar:UpdateObjects")
 	self:UpdateRescan()
+	self:LogEventEnd("AutoBar:UpdateObjects")
 end
 -- /script AutoBar.barList["AutoBarClassBarExtras"].frame:Hide()
 -- /dump AutoBar.barList["AutoBarClassBarHunter"].buttonList
@@ -1257,8 +1258,8 @@ end
 function AutoBar:UpdateRescan()
 	self:LogEventStart("AutoBar:UpdateRescan")
 	AutoBarSearch:Reset()
-	self:LogEventEnd("AutoBar:UpdateRescan")
 	self:UpdateAttributes()
+	self:LogEventEnd("AutoBar:UpdateRescan")
 end
 
 local DelayedUpdateRescan = AceOO.Class(Delayed)
@@ -1329,8 +1330,8 @@ function AutoBar:UpdateActive()
 		bar:UpdateActive()
 		bar:RefreshLayout()
 	end
-	self:LogEventEnd("AutoBar:UpdateActive")
 	self:UpdateButtons()
+	self:LogEventEnd("AutoBar:UpdateActive")
 end
 
 local DelayedUpdateActive = AceOO.Class(Delayed)
@@ -1370,13 +1371,13 @@ function AutoBar:UpdateButtons()
 		button:UpdateIcon()
 		button:UpdateUsable()
 	end
-	self:LogEventEnd("AutoBar:UpdateButtons #buttons " .. tostring(# self.buttonList))
 	if (self.enableBindings) then
 		self:RegisterOverrideBindings()
 		AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 		self.enableBindings = nil
 --print("<-- enableBindings")
 	end
+	self:LogEventEnd("AutoBar:UpdateButtons", " #buttons " .. tostring(# self.buttonList))
 end
 
 local DelayedUpdateButtons = AceOO.Class(Delayed)
