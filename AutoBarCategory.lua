@@ -198,6 +198,19 @@ local function RawListToItemIDList(p_raw_list)
 	return itemArray
 end
 
+
+-- Convert list of negative numbered spellId to spellName.
+function PTSpellIDsToSpellName(p_cast_list)
+--print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
+
+	for i = 1, # p_cast_list do
+		local spellId = p_cast_list[i] * -1
+		p_cast_list[i] = GetSpellInfo(spellId)
+	end
+	return p_cast_list
+end
+
+
 local hack_deadly_poison_name = GetSpellInfo(2823)
 local hack_instant_poison_name = GetSpellInfo(157584)
 
@@ -280,10 +293,11 @@ AutoBarCategory.virtual = true
 
 function AutoBarCategory.prototype:init(description, texture)
 	AutoBarCategory.super.prototype.init(self) -- Mandatory init.
-	self.categoryKey = description
 
+	self.categoryKey = description
 	self.description = L[description]
 	self.texture = texture
+
 end
 
 -- True if items can be targeted
@@ -306,7 +320,7 @@ function AutoBarCategory.prototype:SetBattleground(battleground)
 	self.battleground = battleground
 end
 
--- True if item is not usable (soul shards, arrows, etc.)
+-- True if item is not usable (display only)
 function AutoBarCategory.prototype:SetNotUsable(notUsable)
 	self.notUsable = notUsable
 end
@@ -326,25 +340,24 @@ end
 -- itemsPerLine defaults to 2 (class type, spell).
 -- Only supports 2 & 3 for now.
 -- ToDo: generalize for more per line.
-function AutoBarCategory:FilterClass(castList, itemsPerLine)
+function AutoBarCategory:FilterClass(castList, p_items_per_line)
 	local spellName, index, filteredList2, filteredList3
-	if (not itemsPerLine) then
-		itemsPerLine = 2
-	end
+	local items_per_line = p_items_per_line or 2
+
 
 	-- Filter out CLASS spells from castList
 	index = 1
-	for i = 1, # castList, itemsPerLine do
+	for i = 1, # castList, items_per_line do
 		if (AutoBar.CLASS == castList[i] or "*" == castList[i]) then
 			spellName = castList[i + 1]
 			if (not filteredList2) then
 				filteredList2 = {}
 			end
-			if (itemsPerLine == 3 and not filteredList3) then
+			if (items_per_line == 3 and not filteredList3) then
 				filteredList3 = {}
 			end
 			filteredList2[index] = spellName
-			if (itemsPerLine == 3) then
+			if (items_per_line == 3) then
 				spellName = castList[i + 2]
 				filteredList3[index] = spellName
 			end
@@ -354,18 +367,7 @@ function AutoBarCategory:FilterClass(castList, itemsPerLine)
 	return filteredList2, filteredList3
 end
 
--- Convert list of negative numbered spellId to spellName.
-function AutoBarCategory:PTSpellIDsToSpellName(castList)
-	local spellName
---print("AutoBarCategory:FilterClass castList " .. tostring(castList))
 
-	for i = 1, # castList do
-		local spellId = castList[i] * -1
-		spellName = GetSpellInfo(spellId)
-		castList[i] = spellName
-	end
-	return castList
-end
 
 -- Top castable item from castList will cast on RightClick
 function AutoBarCategory.prototype:SetCastList(castList)
@@ -481,7 +483,7 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 		local rawList = nil
 		rawList = AddSetToRawItems(rawList, p_pt_set, false)
 		local id_list = RawListToItemIDList(rawList)
-		self.castList = AutoBarCategory:PTSpellIDsToSpellName(id_list)
+		self.castList = PTSpellIDsToSpellName(id_list)
 	end
 
 	-- Populate items based on currently castable spells
@@ -497,8 +499,9 @@ end
 
 -- Reset the item list based on changed settings.
 function AutoBarSpells.prototype:Refresh()
-	local itemsIndex = 1
 assert(self.items, "AutoBarSpells.prototype:Refresh wtf")
+
+	local itemsIndex = 1
 
 	if (self.castList and self.rightClickList) then
 		for spellName in pairs(self.itemsRightClick) do
@@ -517,10 +520,8 @@ assert(self.items, "AutoBarSpells.prototype:Refresh wtf")
 		for _, spellName in ipairs(self.castList) do
 			if (spellName) then
 				itemsIndex = AddSpellToCategory(self, spellName, nil, itemsIndex)
-				--AutoBar:LogWarning(itemsIndex, spellName)
 			end
 		end
-		--AutoBar:LogWarning("itemsIndex:" .. itemsIndex)
 
 		for i = itemsIndex, # self.items, 1 do
 			self.items[i] = nil
@@ -906,7 +907,6 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Consumable.Water.Basic"] = AutoBarItems:new("Consumable.Water.Basic", "INV_Drink_10", "Consumable.Water.Basic", "Consumable.Water.Conjured")
 	AutoBarCategoryList["Consumable.Water.Basic"]:SetNonCombat(true)
---	AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(AutoBarCategory:FilterClass({"MAGE", spellConjureRefreshment,}))
 
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"] = AutoBarItems:new("Muffin.Food.Mana.Basic", "INV_Drink_10", "Muffin.Food.Mana.Basic")
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"]:SetNonCombat(true)
