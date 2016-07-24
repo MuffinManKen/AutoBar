@@ -19,7 +19,7 @@ AutoBarSearch.macros = {}
 AutoBarSearch.toys = {}
 
 AutoBarSearch.dirtyBags = {}
-local searchSpace, items, playerLevel
+local searchSpace, items
 
 -- Recycle lists will avoid garbage collection and memory thrashing but potentially grow over time
 -- A simple 2 list aproach that recycles objects specific to that type of list so the bulk of operations should be only initing recycled objects.
@@ -277,7 +277,7 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 		-- Filter out too high level items
 		local itemMinLevel
 		itemMinLevel = select(5,GetItemInfo(itemId));
-		if ((itemMinLevel or 0) <= playerLevel) then
+		if ((itemMinLevel or 0) <= AutoBar.playerLevel) then
 			AutoBarSearch.found:Add(itemId, bag, slot)
 		end
 	else
@@ -409,8 +409,8 @@ end
 
 -- Scan the requested Stuff.
 function Stuff.prototype:Scan()
-	playerLevel = UnitLevel("player")
 	AutoBar:LogEventStart("Stuff.prototype:Scan")
+	AutoBar.playerLevel = UnitLevel("player")
 	for bag = 0, 4, 1 do
 		if (AutoBarSearch.dirtyBags[bag]) then
 			AutoBar:LogEventStart("AutoBar scanned bag")
@@ -1239,7 +1239,7 @@ function AutoBarSearch:Test()
 		AutoBarSearch.trace = true
 		print("\nAutoBarSearch:Test start")
 		AutoBarSearch:Empty()
-		playerLevel = UnitLevel("player")
+		AutoBar.playerLevel = UnitLevel("player")
 
 		UpdateAddOnMemoryUsage()
 		local usedKB = GetAddOnMemoryUsage("AutoBar")
