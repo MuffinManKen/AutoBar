@@ -343,9 +343,11 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		splitRelativeSide = "BOTTOM"
 		splitPaddingY = -padding
 	end
+	
+	local max_popup_height = self.buttonDB.max_popup_height or MAX_POPUP_HEIGHT
 
 	-- For gigantic popups, split it up into a block
-	local nSplits = math.ceil(nItems / MAX_POPUP_HEIGHT)
+	local nSplits = math.ceil(nItems / max_popup_height)
 	local splitLength, splitRelativePoint
 	if (nSplits > 1) then
 		splitLength = math.ceil(nItems / nSplits)

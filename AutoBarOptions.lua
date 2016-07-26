@@ -2344,6 +2344,15 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 					arg = passValue,
 					disabled = getCombatLockdown,
 				},
+				max_popup_height = {
+					type = "range",
+					max = 32, min = 1, step = 1,
+					order = 21,
+					name = L["Max Popup Height"],
+					desc = L["Max Popup Height Desc"],
+					arg = passValue,
+					disabled = getCombatLockdown,
+				},
 			},
 		}
 	end
