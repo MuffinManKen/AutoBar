@@ -48,8 +48,8 @@ end
 
 -- Adds some trash to the recycle list
 -- do delete trash from the original list.
-function Recycle.prototype:Recycle()
-	table.insert(self.recycleList, trash)
+function Recycle.prototype:Recycle(p_trash)
+	table.insert(self.recycleList, p_trash)
 end
 
 
