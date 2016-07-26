@@ -2357,6 +2357,16 @@ function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Garrison")
 end
 
+local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
+
+function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
+	AutoBarButtonBattlePetItems.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Battle Pet Items.Level")
+	self:AddCategory("Muffin.Battle Pet Items.Upgrade")
+end
+
 local AutoBarButtonQuest = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonQuest"] = AutoBarButtonQuest
 

@@ -47,6 +47,7 @@ atl("AutoBarButtonClassPets2", "Pet Combat");
 atl("AutoBarButtonClassPets3", "Pet Misc");
 
 atl("AutoBarClassBarDemonHunter", "Demon Hunter")
+atl("AutoBarButtonBattlePetItems", "Battle Pet Items")
 
 atl("Max Popup Height", "Max Popup Height")
 atl("Max Popup Height Desc", "Maximum Number of button rows for a popup")

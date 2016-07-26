@@ -1043,6 +1043,10 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02", "Misc.Usable.Replenished")
 
+	AutoBarCategoryList["Muffin.Battle Pet Items.Upgrade"] = AutoBarItems:new("Muffin.Battle Pet Items.Upgrade", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Upgrade")
+
+	AutoBarCategoryList["Muffin.Battle Pet Items.Level"] = AutoBarItems:new("Muffin.Battle Pet Items.Level", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Level")
+
 
 	local spellCreateHealthstone, spellCreateHealthstoneIcon, spellRitualOfSouls
 	spellCreateHealthstone, _, spellCreateHealthstoneIcon = AutoBar:LoggedGetSpellInfo(6201)
