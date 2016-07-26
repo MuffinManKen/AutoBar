@@ -1226,6 +1226,18 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 			}
 		end
 	end
+	
+	if (not AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
+		AutoBar.db.class.buttonList["AutoBarButtonInterrupt"] = {
+			buttonKey = "AutoBarButtonInterrupt",
+			buttonClass = "AutoBarButtonInterrupt",
+			barKey = AutoBar.classBar,
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
+
 
 	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonAspect"]) then

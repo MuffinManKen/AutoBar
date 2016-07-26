@@ -17,6 +17,7 @@ atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
 atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
+atl("AutoBarButtonInterrupt", "Interrupts");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");

@@ -1435,6 +1435,16 @@ function AutoBarButtonCharge.prototype:init(parentBar, buttonDB)
 
 end
 
+local AutoBarButtonInterrupt = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonInterrupt"] = AutoBarButtonInterrupt
+
+function AutoBarButtonInterrupt.prototype:init(parentBar, buttonDB)
+	AutoBarButtonInterrupt.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.Interrupt")
+
+end
+
 
 local AutoBarButtonTravel = AceOO.Class(AutoBarButtonMacro)
 AutoBar.Class["AutoBarButtonTravel"] = AutoBarButtonTravel

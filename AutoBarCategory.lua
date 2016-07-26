@@ -74,6 +74,8 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Call Pet 3"] = AutoBar:LoggedGetSpellInfo(83243)
 	spellNameList["Call Pet 4"] = AutoBar:LoggedGetSpellInfo(83244)
 	spellNameList["Call Pet 5"] = AutoBar:LoggedGetSpellInfo(83245)
+	spellNameList["Counter Shot"] = AutoBar:LoggedGetSpellInfo(147362)
+
 
 	--Mage
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
@@ -1485,6 +1487,11 @@ function AutoBarCategory:Initialize2()
 		"WARRIOR", AutoBar:GetSpellNameByName("Intercept"),
 	})
 
+	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
+	{
+		"HUNTER", AutoBar:GetSpellNameByName("Counter Shot"),
+
+	})
 end
 
 
