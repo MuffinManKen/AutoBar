@@ -2735,13 +2735,6 @@ function AutoBar:CreateCustomCategoryOptions(options)
 						arg = passValue,
 						disabled = getCombatLockdown,
 					},
-					location = {
-						type = "toggle",
-						order = 4,
-						name = L["Location"],
-						arg = passValue,
-						disabled = getCombatLockdown,
-					},
 					nonCombat = {
 						type = "toggle",
 						order = 5,
