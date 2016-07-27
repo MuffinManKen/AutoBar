@@ -12,8 +12,17 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
-Next:
+v7.0.0.03:
  - Removed the Coilfang/Tempest Keep/Blade's Edge-specific categories and code.
+ - Performance improvements
+ - Added a per-button Max Popup Height gui control
+ - Commented out PopUpOnShift references since it doesn't work
+ - Updated MuffinLibPT
+ - Added Battle Pet Items button to Extras bar
+ - Added Interrupt button to Class Bar
+ - Reviewed Rogue Class bar
+ - Reviewed Paladin Class bar
+ - Added experimental performance improvement. Please report if you see any issues.
 
 v7.0.0.02:
  - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.

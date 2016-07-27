@@ -65,11 +65,16 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.|n" ..
-" - More custom macros should have a useful icon (items, spells, /use, /cast)|n" ..
-" - The 'Charge'' button is now a normal button instead of a macro button. Simpler, better.|n" ..
-" - Updated MuffinLibPT|n"
-
+WHATSNEW_TEXT = " - Removed the Coilfang/Tempest Keep/Blade's Edge-specific categories and code.|n" ..
+" - Performance improvements|n" ..
+" - Added a per-button Max Popup Height gui control|n" ..
+" - Commented out PopUpOnShift references since it doesn't work|n" ..
+" - Updated MuffinLibPT|n" ..
+" - Added Battle Pet Items button to Extras bar|n" ..
+" - Added Interrupt button to Class Bar|n" ..
+" - Reviewed Rogue Class bar|n" ..
+" - Reviewed Paladin Class bar|n" ..
+" - Added experimental performance improvement. Please report if you see any issues.|n"
 
 function AutoBar:GetSpellNameByName(p_name)
 
