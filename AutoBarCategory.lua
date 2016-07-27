@@ -130,6 +130,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Curse of Tongues"] = AutoBar:LoggedGetSpellInfo(199890) 
 	spellNameList["Curse of Weakness"] = AutoBar:LoggedGetSpellInfo(199892) 
 	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
+	spellNameList["Grimoire: Felhunter"] = AutoBar:LoggedGetSpellInfo(111897) 
 	
 
 	--Warrior
@@ -1490,7 +1491,7 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"HUNTER", AutoBar:GetSpellNameByName("Counter Shot"),
-
+		"WARLOCK", AutoBar:GetSpellNameByName("Grimoire: Felhunter"),
 	})
 end
 
