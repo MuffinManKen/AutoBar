@@ -1626,13 +1626,11 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "PALADIN") then
-		if (GetSpellInfo(spellNameList["Lay on Hands"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Lay on Hands"]
-
-			macroTexture = spellIconList["Lay on Hands"]
-			self.macroActive = true
-		end
+			local lay_hands = AutoBar:GetSpellNameByName("Lay on Hands")
+			if (GetSpellInfo(lay_hands)) then
+				macro_body = "/cast " .. lay_hands
+				macroTexture = spellIconList["Lay on Hands"]
+			end
 	elseif (AutoBar.CLASS == "PRIEST") then
 		if (GetSpellInfo(spellNameList["Desperate Prayer"])) then
 			concatList[index] = "/cast "
@@ -2582,17 +2580,6 @@ function AutoBarButtonStealth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Stealth")
 end
 
-
-
-
-local AutoBarButtonSeal = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSeal"] = AutoBarButtonSeal
-
-function AutoBarButtonSeal.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSeal.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.Seal")
-end
 
 
 local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)

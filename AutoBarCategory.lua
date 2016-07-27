@@ -93,11 +93,18 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
 	
 	--Paladin
-	spellNameList["Divine Protection"] = AutoBar:LoggedGetSpellInfo(498) 
+	spellNameList["Ardent Defender"] = AutoBar:LoggedGetSpellInfo(31850) 
 	spellNameList["Divine Shield"] = AutoBar:LoggedGetSpellInfo(642) 
-	spellNameList["Hand of Freedom"] = AutoBar:LoggedGetSpellInfo(1044) 
-	spellNameList["Hand of Protection"] = AutoBar:LoggedGetSpellInfo(1022) 
-	spellNameList["Hand of Sacrifice"] = AutoBar:LoggedGetSpellInfo(6940) 
+	spellNameList["Blessing of Freedom"] = AutoBar:LoggedGetSpellInfo(1044) 
+	spellNameList["Blessing of Protection"] = AutoBar:LoggedGetSpellInfo(1022) 
+	spellNameList["Blessing of Sacrifice"] = AutoBar:LoggedGetSpellInfo(6940) 
+	spellNameList["Blessing of Spellwarding"] = AutoBar:LoggedGetSpellInfo(204018) 
+	spellNameList["Blessing of Salvation"] = AutoBar:LoggedGetSpellInfo(204013) 
+	spellNameList["Greater Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(203538) 
+	spellNameList["Greater Blessing of Might"] = AutoBar:LoggedGetSpellInfo(203528) 
+	spellNameList["Greater Blessing of Wisdom"] = AutoBar:LoggedGetSpellInfo(203539) 
+	spellNameList["Hand of Hindrance"] = AutoBar:LoggedGetSpellInfo(183218)
+	spellNameList["Rebuke"] = AutoBar:LoggedGetSpellInfo(96231)
 	spellNameList["Seal of Light"], _, spellIconList["Seal of Light"] = AutoBar:LoggedGetSpellInfo(202273)
 
 	--Priest
@@ -1106,9 +1113,14 @@ function AutoBarCategory:Initialize()
 			"DEATHKNIGHT", spellNameList["Horn of Winter"],
 			"DRUID", spellNameList["Ironbark"],
 			"MAGE", spellNameList["Slow Fall"],
-			"PALADIN", spellNameList["Hand of Freedom"],
-			"PALADIN", spellNameList["Hand of Protection"],
-			"PALADIN", spellNameList["Hand of Sacrifice"],
+		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Freedom"),
+		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Protection"),
+		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Sacrifice"),
+		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Spellwarding"),
+		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Salvation"),
+		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Kings"),
+		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Might"),
+		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Wisdom"),
 			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
 		"WARLOCK", AutoBar:GetSpellNameByName("Unending Breath"),
@@ -1117,7 +1129,6 @@ function AutoBarCategory:Initialize()
 			"WARRIOR", spellNameList["Demoralizing Shout"],
 	})
 
-	
 	
 		local spellShadowfiend = AutoBar:LoggedGetSpellInfo(34433)
 
@@ -1287,8 +1298,8 @@ function AutoBarCategory:Initialize()
 			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
 			"MAGE", 			spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
 			"MONK", 			spellNameList["Fortifying Brew"], spellNameList["Fortifying Brew"],
-			"PALADIN", 		spellNameList["Divine Protection"], spellNameList["Hand of Sacrifice"],
-			"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
+		"PALADIN", 		spellNameList["Ardent Defender"], spellNameList["Ardent Defender"],
+		"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Divine Shield"],
 			"PRIEST", 		spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
 		"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
 		"ROGUE", 		spellNameList["Riposte"], 		spellNameList["Riposte"],
@@ -1432,6 +1443,7 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", AutoBar:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", AutoBar:GetSpellNameByName("Wing Clip"),
 		"HUNTER", AutoBar:GetSpellNameByName("Ranger's Net"),
+		"PALADIN", AutoBar:GetSpellNameByName("Hand of Hindrance"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Tongues"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Weakness"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Fragility"),
@@ -1441,11 +1453,6 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new(
 			"Spell.Fishing", spellIconList["Fishing"], {
 			"*", spellNameList["Fishing"],
-			})
-
-	AutoBarCategoryList["Spell.Seal"] = AutoBarSpells:new(
-			"Spell.Seal", spellIconList["Seal of Light"], {
-			"PALADIN", spellNameList["Seal of Light"], 
 			})
 
 
@@ -1494,6 +1501,7 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"HUNTER", AutoBar:GetSpellNameByName("Counter Shot"),
+		"PALADIN", AutoBar:GetSpellNameByName("Rebuke"),
 		"ROGUE", AutoBar:GetSpellNameByName("Kick"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Grimoire: Felhunter"),
 	})
