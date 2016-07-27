@@ -1584,7 +1584,7 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 	wipe(concatList)
 	local index = 1
 
-	local macro_body
+	local macro_body = nil
 	local macroTexture
 
 	if (AutoBar.CLASS == "DRUID") then
@@ -1642,12 +1642,10 @@ function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
 			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "ROGUE") then
-		if (GetSpellInfo(spellNameList["Vanish"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Vanish"]
-
+		local vanish = AutoBar:GetSpellNameByName("Vanish")
+		if (GetSpellInfo(vanish)) then
+			macro_body = "/cast " .. vanish
 			macroTexture = spellIconList["Vanish"]
-			self.macroActive = true
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		local dark_pact = AutoBar:GetSpellNameByName("Dark Pact")

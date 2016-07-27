@@ -110,8 +110,10 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
 	spellNameList["Crippling Poison"], _, spellIconList["Crippling Poison"]  = AutoBar:LoggedGetSpellInfo(3408)
 	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
-	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
+	spellNameList["Agonizing Poison"] = AutoBar:LoggedGetSpellInfo(200802)
 	spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellInfo(1784)
+	spellNameList["Kick"] = AutoBar:LoggedGetSpellInfo(1766)
+	spellNameList["Riposte"] = AutoBar:LoggedGetSpellInfo(199754)
 
 	--Shaman
 	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
@@ -1066,12 +1068,12 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
 	{
-			"ROGUE", spellNameList["Stealth"],
 			"DRUID", spellNameList["Prowl"],
 			"MAGE", spellNameList["Invisibility"],
 			"MAGE", spellNameList["Greater Invisibility"],
 		"HUNTER", AutoBar:GetSpellNameByName("Camouflage"),
-			"*", spellNameList["Shadowmeld"],
+		"ROGUE", AutoBar:GetSpellNameByName("Stealth"),
+		"*", spellNameList["Shadowmeld"],
 	})
 
 
@@ -1085,16 +1087,16 @@ function AutoBarCategory:Initialize()
 	})
 	
 		
-	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new(
-			"Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
-			"ROGUE", spellNameList["Deadly Poison"], 
-			"ROGUE", spellNameList["Wound Poison"], 
-			})
+	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
+		"ROGUE", AutoBar:GetSpellNameByName("Agonizing Poison"), 
+		"ROGUE", AutoBar:GetSpellNameByName("Deadly Poison"), 
+		"ROGUE", AutoBar:GetSpellNameByName("Wound Poison"), 
+	})
 
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new(
 			"Spell.Poison.Nonlethal", spellIconList["Crippling Poison"], {
-			"ROGUE", spellNameList["Crippling Poison"], 
-			"ROGUE", spellNameList["Leeching Poison"], 
+			"ROGUE", AutoBar:GetSpellNameByName("Crippling Poison"), 
+			"ROGUE", AutoBar:GetSpellNameByName("Leeching Poison"), 
 			})
 
 
@@ -1288,7 +1290,8 @@ function AutoBarCategory:Initialize()
 			"PALADIN", 		spellNameList["Divine Protection"], spellNameList["Hand of Sacrifice"],
 			"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Hand of Protection"],
 			"PRIEST", 		spellNameList["Power Word: Shield"], spellNameList["Power Word: Shield"],
-			"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
+		"ROGUE", 		spellNameList["Evasion"], 		spellNameList["Evasion"],
+		"ROGUE", 		spellNameList["Riposte"], 		spellNameList["Riposte"],
 		"WARLOCK", 		spellNameList["Unending Resolve"], spellNameList["Unending Resolve"],
 			"WARRIOR", 		spellNameList["Shield Block"], spellNameList["Shield Wall"],
 			"WARRIOR", 		spellNameList["Shield Wall"], spellNameList["Shield Block"],
@@ -1491,6 +1494,7 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"HUNTER", AutoBar:GetSpellNameByName("Counter Shot"),
+		"ROGUE", AutoBar:GetSpellNameByName("Kick"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Grimoire: Felhunter"),
 	})
 end
