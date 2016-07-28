@@ -2093,6 +2093,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	local companion_type = "MOUNT"
 	local count = GetNumCompanions(companion_type)
 	local thisIsSpam = true
+	local faction_id = -1 --Illegal value, probably
 
 --print("NumMounts:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Mount Count:" .. AutoBar.last_mount_count)
 --print(debugstack(1, 3, 3));
@@ -2101,6 +2102,12 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	if (count ~= AutoBar.last_mount_count) then
 --print("   Gonna do stuff");
 		AutoBar.last_mount_count = count;
+		
+		if(AutoBar.player_faction_name == "Horde") then
+			faction_id = 0
+		elseif (AutoBar.player_faction_name == "Alliance") then
+			faction_id = 1
+		end
 
 		if (not category.castList) then
 			category.castList = {}
@@ -2113,10 +2120,16 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 --print("AutoBarButtonMount.prototype:Refresh initialized:", initialized, "thisIsSpam:", thisIsSpam, "castlist:", # category.castList, "Mounts:", count, "MountIDs:", #mount_ids)
 
 		for k, v in pairs(mount_ids) do
-			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_MountJournal.GetMountInfoByID(v)
+			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_filtered, is_collected = C_MountJournal.GetMountInfoByID(v)
 			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
 			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
-			if (is_collected and user_selected and not hide_on_char and not qiraji_filtered) then
+			local faction_ok = (not faction_specific) or (faction_specific and (faction_id == faction))
+--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider") then 
+--local temp = string.format("%5s  %5s  Usable:%5s", v, spell_id, tostring(usable))
+--print(temp, "FacSpecific:",faction_specific, "Faction:", faction, "Filtered:", is_filtered, "Collected:", is_collected, name)
+--print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
+--end;
+			if (is_collected and user_selected and faction_ok and not qiraji_filtered) then
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
