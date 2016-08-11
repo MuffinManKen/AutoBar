@@ -12,7 +12,7 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
-v7.0.0.03:
+v7.0.3.00:
  - Removed the Coilfang/Tempest Keep/Blade's Edge-specific categories and code.
  - Performance improvements
  - Added a per-button Max Popup Height gui control
@@ -20,41 +20,20 @@ v7.0.0.03:
  - Updated MuffinLibPT
  - Added Battle Pet Items button to Extras bar
  - Added Interrupt button to Class Bar
- - Reviewed Rogue Class bar
- - Reviewed Paladin Class bar
- - Added experimental performance improvement. Please report if you see any issues.
-
-v7.0.0.02:
+ - Reviewed Class Bars: Rogue, Paladin, Hunter, Warlock
  - Monk: Zen Pilgrimage:Return is now on your Hearth. The tooltip may be wrong, but it will work.
- - More custom macros should have a useful icon (items, spells, /use, /cast)
  - The "Charge" button is now a normal button instead of a macro button. Simpler, better.
- - Updated MuffinLibPT
-
-v7.0.0.01:
  - "Muffin.Potion.Health" category now shows up in the list
- - Custom macros with an apostrophe in the spell name now show a proper icon
- - The "Charge" button was broken for a few classes (Rogue, Warrior, and Druid)
-
-v7.0.0.00:
  - Demon Hunter Support
  - Added Keybinds for Garrison and Sun Song Ranch
  - Fixed Mounts for Legion
  - Qiraji Mounts are now filtered out by default
  - Mounts load much quicker now
  - Fixed Item buttons for Legion
- - Various other minor breakage caused by Legion
  - TOC bump for 7.0
  - Updated Ace3-GUI
  - Bars should no longer flash while in a vehicle
  - Custom Macro buttons should now have a meaningful icon
- - Hunters: 
- 		- Removed Exotic Munitions/Ammo button
- 		- Feed Pet button works (been broken for a while)
- 		- Added Shield and Charge button
- 		- Updated spells
- - Warlock:
- 		- Added ER button (Dark Pact)
- 		- Updated spells
 
 v6.2.0.04:
  - Added keybinds for Garrisons and Sunsong Ranch
