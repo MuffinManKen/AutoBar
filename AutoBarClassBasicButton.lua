@@ -123,7 +123,7 @@ end
 local function get_texture_for_macro_body(p_macro_body)
 	local debug = false
 	
-	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*(%a+[%a ]+)")
+	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*([^\n]+)")
 	local show_tt_tex = show_tt_action and get_texture_for_action(show_tt_action)
 	if(not debug and show_tt_tex) then return show_tt_tex end;
 
@@ -131,11 +131,11 @@ local function get_texture_for_macro_body(p_macro_body)
 	local action_tex = action and get_texture_for_action(action)
 	if(not debug and action_tex) then return action_tex end;
 
-	local cast_action = string.match(p_macro_body, "/cast%s*(%a+[%a ']+)")
+	local cast_action = string.match(p_macro_body, "/cast%s*([^\n]+)")
 	local cast_tex = cast_action and get_texture_for_action(cast_action)
 	if(not debug and cast_tex) then return cast_tex end;
 
-	local use_action = string.match(p_macro_body, "/use%s*(%a+[%a ']+)")
+	local use_action = string.match(p_macro_body, "/use%s*([^\n]+)")
 	local use_tex = use_action and get_texture_for_action(use_action)
 	if(not debug and use_tex) then return use_tex end;
 
