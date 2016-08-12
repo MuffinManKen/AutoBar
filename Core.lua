@@ -1114,6 +1114,7 @@ function AutoBar:UpdateCategories()
 		self:LogEventEnd("AutoBar:UpdateCategories")
 	else
 		self:LogEvent("AutoBar:UpdateCategories InCombatLockdown")
+		AutoBar:SetRegenEnableUpdate("UpdateCategories")
 	end
 end
 
