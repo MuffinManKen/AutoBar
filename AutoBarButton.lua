@@ -945,6 +945,16 @@ function AutoBarButton.prototype:AddOptions(optionList, passValue)
 end
 
 
+local function set_button_option(p_info, p_value)
+
+	local button_key = p_info.arg.buttonKey
+	local button_db = AutoBar:GetButtonDB(button_key)
+
+	button_db[p_info[# p_info]] = p_value
+	button_db.is_dirty = true
+	AutoBarChanged()
+end
+
 -- Call specific option type methods to do the actual setting
 function AutoBarButton.prototype:SetOptionBoolean(optionList, passValue, valueName, name, desc)
 	if (not optionList.headerCustomOptions) then
@@ -962,6 +972,7 @@ function AutoBarButton.prototype:SetOptionBoolean(optionList, passValue, valueNa
 			desc = desc,
 			arg = passValue,
 			disabled = InCombatLockdown,
+			set = set_button_option,
 		}
 	else
 		optionList[valueName].arg = passValue
@@ -2072,7 +2083,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	self.flyable = -1
 	self:Refresh(parentBar, buttonDB)
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
-	AutoBarCategoryList["Spell.Mount"]:Refresh()
+	--AutoBarCategoryList["Spell.Mount"]:Refresh()
 end
 
 function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
@@ -2094,14 +2105,16 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	local count = GetNumCompanions(companion_type)
 	local thisIsSpam = true
 	local faction_id = -1 --Illegal value, probably
+	local needs_update = (count ~= AutoBar.last_mount_count) or buttonDB.is_dirty
 
---print("NumMounts:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Mount Count:" .. AutoBar.last_mount_count)
+--print("NumMounts:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
 --print(debugstack(1, 3, 3));
 
 	--If the number of known mounts has changed, do stuff
-	if (count ~= AutoBar.last_mount_count) then
+	if (needs_update) then
 --print("   Gonna do stuff");
 		AutoBar.last_mount_count = count;
+		buttonDB.is_dirty = false
 		
 		if(AutoBar.player_faction_name == "Horde") then
 			faction_id = 0
@@ -2109,9 +2122,9 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			faction_id = 1
 		end
 
-		if (not category.castList) then
+--		if (not category.castList) then
 			category.castList = {}
-		end
+--		end
 
 		local initialized = not category.unInitialized --or (# category.castList ~= count)
 		local spell_name
@@ -2159,6 +2172,8 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		end
 
 		category.unInitialized = nil
+		
+		AutoBarCategoryList["Spell.Mount"]:Refresh()
 	end
 	return thisIsSpam
 end

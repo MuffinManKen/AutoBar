@@ -173,7 +173,7 @@ function AutoBar:OpenOptions()
 	AceCfgDlg:Open("AutoBar")
 end
 
-local function AutoBarChanged()
+function AutoBarChanged()
 	AutoBar:UpdateObjects()
 	AceCfgReg:NotifyChange("AutoBar")
 end
