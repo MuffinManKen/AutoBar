@@ -1592,14 +1592,16 @@ function AutoBar:Print(p_stuff)
 	print(p_stuff)
 end
 
-function AutoBar:Dump(o)
-	if type(o) == 'table' then
+function AutoBar:Dump(o, p_max_depth)
+	local depth = p_max_depth or 5
+	if type(o) == 'table' and (depth >= 1)  then
+		depth = depth - 1
 		local s = '{ '
 		for k,v in pairs(o) do
 			if type(k) ~= 'number' then
 				k = '"'..k..'"'
 			end
-			s = s .. '['..k..'] = ' .. AutoBar:Dump(v) .. ','
+			s = s .. '['..k..'] = ' .. AutoBar:Dump(v, depth) .. ','
 		end
 		return s .. '} '
 	else
