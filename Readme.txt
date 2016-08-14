@@ -12,6 +12,13 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.01:
+ - Macro Buttons now show an icon if the item/spell/etc has an odd character in it (affected MOLL-E, Blingtron, and others)
+ - Added Dalaran Hearthstone and Flight Master's Whistle to Hearth
+ - If you login while in combat, AutoBar will reload itself when combat completes
+ - Updated MuffinLibPT
+ - Making changes to button options (Mounts: Show Favourites, etc) should refresh the button immediately
+
 v7.0.3.00:
  - Removed the Coilfang/Tempest Keep/Blade's Edge-specific categories and code.
  - Performance improvements

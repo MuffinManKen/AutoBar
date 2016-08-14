@@ -65,7 +65,12 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Tons of changes. See the Readme or Change Log on Curse/WowInterface/MuffinManGames.com|n"
+WHATSNEW_TEXT = " - Macro Buttons now show an icon if the item/spell/etc has an odd character in it (affected MOLL-E, Blingtron, and others)|n" ..
+" - Added Dalaran Hearthstone and Flight Master's Whistle to Hearth|n" ..
+" - If you login while in combat, AutoBar will reload itself when combat completes|n" ..
+" - Updated MuffinLibPT|n" ..
+" - Making changes to button options (Mounts: Show Favourites, etc) should refresh the button immediately|n|n"
+
 
 function AutoBar:GetSpellNameByName(p_name)
 
