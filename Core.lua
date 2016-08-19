@@ -1354,7 +1354,7 @@ end
 function AutoBar:UpdateButtons()
 	self:LogEventStart("AutoBar:UpdateButtons")
 	for buttonName, button in pairs(self.buttonListDisabled) do
---print("   AutoBar:UpdateButtons Disabled " .. buttonName);
+		--if (buttonKey == "AutoBarButtonCharge") then print("   AutoBar:UpdateButtons Disabled " .. buttonName); end;
 		button:Disable()
 		--I don't see why we should update all of these if they're disabled.
 		--button:UpdateCooldown()
@@ -1364,7 +1364,7 @@ function AutoBar:UpdateButtons()
 		--button:UpdateUsable()
 	end
 	for buttonKey, button in pairs(self.buttonList) do
---print("   AutoBar:UpdateButtons Enabled " .. buttonName);
+		--if (buttonKey == "AutoBarButtonCharge") then print("   AutoBar:UpdateButtons Enabled " .. buttonKey); end;
 		assert(button.buttonDB.enabled, "In list but disabled " .. buttonKey)
 		button:SetupButton()
 		button:UpdateCooldown()
