@@ -298,6 +298,7 @@ function Stuff.prototype:Delete(itemId, bag, slot, spell)
 	else
 		slotList = self.dataList.spells
 		slotList[spell] = nil
+		--if(spell == "Wild Charge") then print("Stuff.prototype:Delete", itemId, bag, slot, spell) end;
 	end
 
 	AutoBarSearch.found:Delete(itemId, bag, slot, spell)
@@ -359,13 +360,15 @@ end
 -- Scan available Spells
 function Stuff.prototype:ScanSpells()
 	for spellName, spellInfo in pairs(AutoBarSearch.spells) do
---AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName));
+		--local debug = (spellName == "Wild Charge")
+		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
 		spellInfo.canCast = AutoBarSearch:CanCastSpell(spellName)
-
+		--if (debug) then print("Spell Info:", AutoBar:Dump(spellInfo)); end;
 		AutoBarSearch:RegisterSpell(spellName)
 		if (spellInfo.canCast) then
 			self:Add(spellName, nil, nil, spellName)
 		else
+			--if (debug) then print("Deleting:", spellName); end;
 			self:Delete(spellName, nil, nil, spellName)
 		end
 	end
@@ -559,12 +562,12 @@ end
 -- Remove bag, slot, spell for the itemId
 function Found.prototype:Delete(itemId, bag, slot, spell)
 	local itemData = self.dataList[itemId]
+	--if (spell == "Wild Charge") then print("Found.prototype:Delete - itemId ",itemId," bag ",bag," slot ",slot," spell ", spell, "ItemData", itemData) end
 	if (itemData) then
---AutoBar:Print("Found.prototype:Delete    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " nItems " .. tostring(nItems))
 		local i = 1
 		repeat
 			if (itemData[i] == bag and itemData[i + 1] == slot and itemData[i + 2] == spell) then
---AutoBar:Print("Found.prototype:Delete    itemData[i] " .. tostring(itemData[i]) .. " itemData[i + 1] " .. tostring(itemData[i + 1]) .. " itemData[i + 2] " .. tostring(itemData[i + 2]) .. " i " .. tostring(i))
+				--AutoBar:Print("Found.prototype:Delete    itemData[i] " .. tostring(itemData[i]) .. " itemData[i + 1] " .. tostring(itemData[i + 1]) .. " itemData[i + 2] " .. tostring(itemData[i + 2]) .. " i " .. tostring(i))
 				-- Move rest back
 				local j = i
 				repeat
