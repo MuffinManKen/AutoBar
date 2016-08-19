@@ -1084,19 +1084,22 @@ end
 -- Register a spell, and figure out its spellbook index for use in tooltip
 -- Multiple calls refresh current state of the spell
 -- {spellName = {canCast, spellLink, spellTab}}
-function AutoBarSearch:RegisterSpell(spellName, noSpellCheck, spellLink)
+function AutoBarSearch:RegisterSpell(p_spell_name, noSpellCheck, p_spell_link)
 
-	local spellInfo = AutoBarSearch.spells[spellName]
+	local spellInfo = AutoBarSearch.spells[p_spell_name]
 	
+	--local debug = (p_spell_name == "Wild Charge")
+	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, noSpellCheck, p_spell_link, GetSpellLink(p_spell_name)); end
+
 	if (not spellInfo) then
 		spellInfo = {}
-		AutoBarSearch.spells[spellName] = spellInfo
+		AutoBarSearch.spells[p_spell_name] = spellInfo
 	end
 	
-	if (spellLink) then
-		spellInfo.spellLink = spellLink
-	elseif (not spellInfo.spellLink) then
-		spellInfo.spellLink = GetSpellLink(spellName)
+	if (p_spell_link) then
+		spellInfo.spellLink = p_spell_link
+	else
+		spellInfo.spellLink = GetSpellLink(p_spell_name)
 	end
 	
 	if (noSpellCheck) then
@@ -1104,7 +1107,7 @@ function AutoBarSearch:RegisterSpell(spellName, noSpellCheck, spellLink)
 	end
 
 	spellInfo.canCast = spellInfo.spellLink or spellInfo.noSpellCheck
-	return spellName
+	return p_spell_name
 end
 
 function AutoBarSearch:RegisterToy(p_item_id, p_toy_name)
