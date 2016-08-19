@@ -88,13 +88,16 @@ end
 
 -- Refresh the category list
 function AutoBar.Class.Button.prototype:Refresh(parentBar, buttonDB)
+	--if(buttonDB.buttonKey == "AutoBarButtonCharge") then print("AB.C.Button.proto.Refresh", self.buttonName, self.buttonDB.hasCustomCategories, #self.buttonDB) end
 	self.parentBar = parentBar
 	if (buttonDB ~= self.buttonDB) then
 		self.buttonDB = buttonDB
 		assert(self.buttonName == buttonDB.buttonKey, "AutoBar.Class.Button.prototype:Refresh Button Name changed")
 		self.buttonDBIndex = buttonDB.order
 	end
+	
 	self.buttonName = buttonDB.buttonKey
+	
 	if (self.buttonDB.hasCustomCategories) then
 		for categoryIndex, categoryKey in ipairs(self.buttonDB) do
 			self[categoryIndex] = categoryKey
@@ -640,7 +643,10 @@ function AutoBar.Class.Button.prototype:IsActive()
 				count = 1
 			end
 		elseif (itemType == "spell") then
-			count = 1
+			local sortedItems = AutoBarSearch.sorted:GetList(self.buttonName)
+			if(sortedItems) then
+				count = #sortedItems
+			end
 		end
 		return count > 0
 	elseif (self.macroTexture) then
