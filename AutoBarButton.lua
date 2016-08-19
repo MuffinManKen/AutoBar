@@ -490,7 +490,7 @@ function AutoBarButton.prototype:SetupButton()
 	local popupHeader = frame.popupHeader
 	local popupKeyHandler = frame.popupKeyHandler
 
---AutoBar:Print("AutoBarButton.prototype:SetupButton buttonKey " .. tostring(buttonKey) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell) .. " macroId " .. tostring(macroId))
+	--if (buttonKey == "AutoBarButtonCharge") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId) end;
 	if ((bag or slot or spell or macroId) and self.buttonDB.enabled) then
 		frame:Show()
 		local sortedItems = AutoBarSearch.sorted:GetList(buttonKey)
@@ -585,14 +585,17 @@ function AutoBarButton.prototype:SetupButton()
 		end
 
 	else
+		--if (buttonKey == "AutoBarButtonCharge") then print("Charge has no spell") end;
 		frame:SetAttribute("itemId", nil)
 		frame:Hide()
 		if (popupHeader) then
 			popupHeader:Hide()
 		end
 
+		--if (buttonKey == "AutoBarButtonCharge") then print("move_mode",AutoBar.moveButtonsMode, "showEmpty", AutoBar.db.account.showEmptyButtons, "Alwaysshow", self.buttonDB.alwaysShow, "enabled", self.buttonDB.enabled ) end;
 		if ((AutoBar.moveButtonsMode or AutoBar.db.account.showEmptyButtons or self.buttonDB.alwaysShow) and self.buttonDB.enabled) then
 			frame:Show()
+			--if (buttonKey == "AutoBarButtonCharge") then print("Showing Frame", "self[1]", self[1]); end;
 			if (self[1]) then
 				frame:SetAttribute("category", self[# self])
 			else
