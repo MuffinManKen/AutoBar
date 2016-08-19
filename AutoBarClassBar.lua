@@ -196,7 +196,7 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 	-- Create or Refresh the Bar's Buttons
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 
---local debug = (buttonKey == "AutoBarButtonCharge")
+		--local debug = (buttonKey == "AutoBarButtonCharge")
 		buttonDB = AutoBar.buttonDBList[buttonKey]
 		if (not buttonDB) then
 			buttonKeyList[buttonKeyIndex] = nil
@@ -206,28 +206,28 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
+				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
 			end
 
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			else
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			end
 			buttonList[buttonKeyIndex].order = buttonKeyIndex
 		else
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
+			--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
 			-- Move to disabled cache
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 				AutoBar.buttonListDisabled[buttonKey] = AutoBar.buttonList[buttonKey]
 				AutoBar.buttonList[buttonKey] = nil
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
+				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
 			elseif (AutoBar.buttonListDisabled[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
@@ -240,7 +240,7 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 
 	-- Trim Excess
 	for buttonIndex = # buttonList, # buttonKeyList + 1, -1 do
---if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Trim " .. tostring(buttonList[buttonIndex].buttonDB.buttonKey) .. " buttonIndex " .. tostring(buttonIndex)); end
+		--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Trim " .. tostring(buttonList[buttonIndex].buttonDB.buttonKey) .. " buttonIndex " .. tostring(buttonIndex)); end
 		buttonList[buttonIndex] = nil
 	end
 
@@ -280,11 +280,11 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 	local activeIndex = 1
 	local maxActiveButtons = self.sharedLayoutDB.rows * self.sharedLayoutDB.columns
 
---AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive maxButtons " .. tostring(maxButtons))
+	--AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive maxButtons " .. tostring(maxButtons))
 	for index = 1, maxButtons, 1 do
 		local button = self.buttonList[index]
 		if (button and button:IsActive()) then
---AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive Active " .. tostring(activeIndex) .. " " .. tostring(button.buttonName))
+			--if (button.buttonName == "AutoBarButtonCharge") then print("AB.Class.Bar.proto:UpdateActive Active ", activeIndex, button.buttonName, button:IsActive()) end;
 			activeButtonList[activeIndex] = button
 			activeIndex = activeIndex + 1
 			if (button.SecureStateDriverRegistered == false) then
@@ -294,7 +294,7 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 
 			button.frame:Show()
 		elseif (button) then
---AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive Inactive " .. tostring(index) .. " " .. tostring(button.buttonName))
+			--if (button.buttonName == "AutoBarButtonCharge") then print("AutoBar.Class.Bar.prototype:UpdateActive Inactive " .. tostring(index) .. " " .. tostring(button.buttonName)) end
 			if (button.SecureStateDriverRegistered ~= false) then
 				UnregisterStateDriver(button.frame, "visibility")
 				button.SecureStateDriverRegistered = false
@@ -306,7 +306,7 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 
 	-- Ditch buttons in excess of rows * columns
 	if ((activeIndex - 1) > maxActiveButtons and not AutoBar.moveButtonsMode) then
---AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
+		--AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
 		activeIndex = maxActiveButtons + 1
 	end
 
