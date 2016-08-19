@@ -365,7 +365,7 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-	AutoBar.frame:RegisterEvent("COMPANION_UPDATE")
+--	AutoBar.frame:RegisterEvent("COMPANION_UPDATE")
 	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 
