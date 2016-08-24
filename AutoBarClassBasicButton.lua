@@ -54,6 +54,10 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		local name = AutoBarButton:GetDisplayName(button.class.buttonDB)
 		GameTooltip:AddLine(name, 0.8, 0, 1)
 		GameTooltip:Show()
+	elseif (itemLink) then
+		if (GameTooltip:SetHyperlink(itemLink)) then
+			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
+		end
 	elseif (buttonType == "macro") then
 		-- There is no accesible GameTooltip function for macros so make one with its name and the macro text
 		local macroName = button:GetAttribute("macroName")
@@ -64,10 +68,6 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 			GameTooltip:AddLine(macroBody, 1, 1, 1, 1)
 			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 			GameTooltip:Show()
-		end
-	elseif (itemLink) then
-		if (GameTooltip:SetHyperlink(itemLink)) then
-			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 		end
 	elseif (buttonType == "item") then
 		-- There is no way to get charge information outside built in Blizzard functions for buttonType == "action"
@@ -116,46 +116,33 @@ end
 
 local function get_texture_for_action(p_action)
 
-	return select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
+	if (p_action) then
+		return select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
+	end
+	
+	return nil
 
 end
 
 local function get_texture_for_macro_body(p_macro_body)
 	local debug = false
 	
-	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*([^\n]+)")
-	local show_tt_tex = show_tt_action and get_texture_for_action(show_tt_action)
-	if(not debug and show_tt_tex) then return show_tt_tex end;
-
-	local action = SecureCmdOptionParse(p_macro_body)
-	local action_tex = action and get_texture_for_action(action)
-	if(not debug and action_tex) then return action_tex end;
-
-	local cast_action = string.match(p_macro_body, "/cast%s*([^\n]+)")
-	local cast_tex = cast_action and get_texture_for_action(cast_action)
-	if(not debug and cast_tex) then return cast_tex end;
-
-	local use_action = string.match(p_macro_body, "/use%s*([^\n]+)")
-	local use_tex = use_action and get_texture_for_action(use_action)
-	if(not debug and use_tex) then return use_tex end;
-
-
+	local action = AutoBar:GetActionForMacroBody(p_macro_body);
+	local texture = get_texture_for_action(action)
+	
 	if (debug) then
-		print("macro body:", p_macro_body);
-		print("   action:" .. action, "action_tex", action_tex)
-		print("   cast action:", cast_action, "cast tex:", cast_tex)
-		print("   use action:", use_action, "use tex:", use_tex)
-		print("   show_tt_action", show_tt_action, "show_tt_tex", show_tt_tex)
-		
-		return show_tt_tex or action_tex or cast_tex or use_tex
+		print("   texture:", texture);
+		print("   action:" .. action)
 	end
 	
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
-	AutoBar.missing_items = true
-	--print("AutoBar.missing_items = true")
+	if(texture == nil) then
+		AutoBar.missing_items = true
+		--print("AutoBar.missing_items = true")
+	end
 	
-	return nil
+	return texture
 end
 
 local borderBlue = {r = 0, g = 0, b = 1.0, a = 0.35}
@@ -182,8 +169,13 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		else
 			texture = frame.class.macroTexture
 			if (not texture) then
-				local macro_text = self.frame:GetAttribute("macrotext")
-				texture = get_texture_for_macro_body(macro_text) or "Interface\\Icons\\INV_Misc_Gift_05"
+				local macro_action = self.frame:GetAttribute("macro_action")
+				if(macro_action == nil) then
+					local macro_text = self.frame:GetAttribute("macrotext")
+					macro_action = AutoBar:GetActionForMacroBody(macro_text)
+					--print(macro_text, macro_action)
+				end
+				texture = get_texture_for_action(macro_action) or "Interface\\Icons\\INV_Misc_Gift_05"
 			end
 		end
 	elseif (itemType == "spell") then

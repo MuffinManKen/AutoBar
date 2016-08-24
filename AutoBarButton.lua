@@ -801,6 +801,9 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				button.macroActive = true
 				frame:SetAttribute("macroName", macroInfo.macroName)
 				frame:SetAttribute("macroBody", macroInfo.macroText)
+				if (macroInfo.macro_action) then
+					frame:SetAttribute("itemLink", GetSpellLink(macroInfo.macro_action) or select(2,GetItemInfo(macroInfo.macro_action)))
+				end
 			end
 		elseif (spell) then
 			-- Default spell to cast

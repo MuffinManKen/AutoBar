@@ -1141,6 +1141,9 @@ function AutoBarSearch:RegisterMacro(macroId, macroIndex, macroName, macroText)
 	macroInfo.macroIndex = macroIndex
 	macroInfo.macroName = macroName
 	macroInfo.macroText = macroText and strtrim(macroText) --TODO: Do this in the GUI
+	if (macroInfo.macroText) then
+		macroInfo.macro_action = AutoBar:GetActionForMacroBody(macroInfo.macroText)
+	end
 end
 
 

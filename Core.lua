@@ -95,6 +95,44 @@ function AutoBar:GetSpellNameByName(p_name)
 	return nil
 end
 
+-- Process a macro to determine what its "action" is:
+--		a spell
+--		an item
+function AutoBar:GetActionForMacroBody(p_macro_body)
+	local debug = false
+	
+	--print(debugstack())
+	local show_action = string.match(p_macro_body, "#show%s*([^\n]+)")
+	if(not debug and show_action) then return show_action end;
+
+	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*([^\n]+)")
+	if(not debug and show_tt_action) then return show_tt_action end;
+
+	local cast_action = string.match(p_macro_body, "/cast%s*([^\n]+)")
+
+	local use_action = string.match(p_macro_body, "/use%s*([^\n]+)")
+
+	local secure_parse = SecureCmdOptionParse(cast_action or use_action)
+	if(not debug and secure_parse) then return secure_parse end;
+
+
+
+	if (debug) then
+		print("macro body:", p_macro_body);
+		print("   secure parse:", secure_parse)
+		print("   cast action:", cast_action)
+		print("   use action:", use_action)
+		print("   show_tt_action", show_tt_action)
+		print("   show_action", show_action)
+		
+		return show_action or show_tt_action or secure_parse or cast_action or use_action
+	end
+	
+	
+	return nil
+end
+
+
 function AutoBar:IsInLockDown()
 
 	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle() or UnitInVehicle("player")
