@@ -65,11 +65,16 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Macro Buttons now show an icon if the item/spell/etc has an odd character in it (affected MOLL-E, Blingtron, and others)|n" ..
-" - Added Dalaran Hearthstone and Flight Master's Whistle to Hearth|n" ..
-" - If you login while in combat, AutoBar will reload itself when combat completes|n" ..
-" - Updated MuffinLibPT|n" ..
-" - Making changes to button options (Mounts: Show Favourites, etc) should refresh the button immediately|n|n"
+WHATSNEW_TEXT = " - If you change your talents/spec, spells you no longer know won't stay on your bar|n" ..
+" - No longer processes COMPANION_UPDATE messages since they fire constantly when in a city|n" ..
+" - Removed the "New" button on custom categories since that way to add an item never worked|n" ..
+" - Tooltips are now shown for custom macro buttons|n" ..
+
+
+
+
+
+
 --/run AutoBar:FrameInsp(
 function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 

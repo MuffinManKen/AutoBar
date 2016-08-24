@@ -12,6 +12,12 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.02:
+ - If you change your talents/spec, spells you no longer know won't stay on your bar
+ - No longer processes COMPANION_UPDATE messages since they fire constantly when in a city
+ - Removed the "New" button on custom categories since that way to add an item never worked
+ - Tooltips are now shown for custom macro buttons
+
 v7.0.3.01:
  - Macro Buttons now show an icon if the item/spell/etc has an odd character in it (affected MOLL-E, Blingtron, and others)
  - Added Dalaran Hearthstone and Flight Master's Whistle to Hearth
