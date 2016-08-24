@@ -70,6 +70,18 @@ WHATSNEW_TEXT = " - Macro Buttons now show an icon if the item/spell/etc has an 
 " - If you login while in combat, AutoBar will reload itself when combat completes|n" ..
 " - Updated MuffinLibPT|n" ..
 " - Making changes to button options (Mounts: Show Favourites, etc) should refresh the button immediately|n|n"
+--/run AutoBar:FrameInsp(
+function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
+
+	local frame = _G[p_frame] or AutoBarButtonExplosiveFrame
+	
+	print("Type:", frame:GetAttribute("type"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
+	print("Item:", frame:GetAttribute("item"))
+	print("State:", frame:GetAttribute("state"))
+	print("Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"))
+	print("Macro:", frame:GetAttribute("macro"), "Spell:", frame:GetAttribute("spell"), "Spell2:", frame:GetAttribute("spell2"))
+
+end
 
 
 function AutoBar:GetSpellNameByName(p_name)
