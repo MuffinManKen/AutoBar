@@ -802,7 +802,9 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				frame:SetAttribute("macroName", macroInfo.macroName)
 				frame:SetAttribute("macroBody", macroInfo.macroText)
 				if (macroInfo.macro_action) then
-					frame:SetAttribute("itemLink", GetSpellLink(macroInfo.macro_action) or select(2,GetItemInfo(macroInfo.macro_action)))
+					frame:SetAttribute("macro_action", macroInfo.macro_action)
+					local link = GetSpellLink(macroInfo.macro_action) or select(2,GetItemInfo(macroInfo.macro_action))
+					frame:SetAttribute("itemLink", link)
 				end
 			end
 		elseif (spell) then
