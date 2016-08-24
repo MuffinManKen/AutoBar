@@ -2784,13 +2784,13 @@ function AutoBar:CreateCustomCategoryOptions(options)
 						type = "group",
 						name = L["Items"],
 						args = {
-							newCategoryItem = {
-							    type = "execute",
-								order = 0,
-							    name = L["New"],
-							    func = CategoryItemNew,
-								arg = passValue,
-							},
+--							newCategoryItem = {
+--							    type = "execute",
+--								order = 0,
+--							    name = L["New"],
+--							    func = CategoryItemNew,
+--								arg = passValue,
+--							},
 							newCategoryMacro = {
 							    type = "execute",
 								order = 1,
