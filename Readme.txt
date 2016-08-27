@@ -17,6 +17,7 @@ v7.0.3.02:
  - No longer processes COMPANION_UPDATE messages since they fire constantly when in a city
  - Removed the "New" button on custom categories since that way to add an item never worked
  - Tooltips are now shown for custom macro buttons
+ - Updated MuffinLibPT
 
 v7.0.3.01:
  - Macro Buttons now show an icon if the item/spell/etc has an odd character in it (affected MOLL-E, Blingtron, and others)

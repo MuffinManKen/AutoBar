@@ -67,9 +67,9 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = " - If you change your talents/spec, spells you no longer know won't stay on your bar|n" ..
 " - No longer processes COMPANION_UPDATE messages since they fire constantly when in a city|n" ..
-" - Removed the "New" button on custom categories since that way to add an item never worked|n" ..
+" - Removed the 'New'' button on custom categories since that way to add an item never worked|n" ..
 " - Tooltips are now shown for custom macro buttons|n" ..
-
+" - Updated MuffinLibPT|n"
 
 
 
