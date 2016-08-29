@@ -107,17 +107,20 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	local debug = false
 	
 	--print(debugstack())
-	local show_action = string.match(p_macro_body, "#show%s*([^\n]+)")
+	local show_action = string.match(p_macro_body, "#show%s+([^\n]+)")
 	if(not debug and show_action) then return show_action end;
 
-	local show_tt_action = string.match(p_macro_body, "#showtooltip%s*([^\n]+)")
+	local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
 	if(not debug and show_tt_action) then return show_tt_action end;
 
-	local cast_action = string.match(p_macro_body, "/cast%s*([^\n]+)")
+	local cast_action = string.match(p_macro_body, "/cast%s+([^\n]+)")
 
-	local use_action = string.match(p_macro_body, "/use%s*([^\n]+)")
+	local use_action = string.match(p_macro_body, "/use%s+([^\n]+)")
 
-	local secure_parse = SecureCmdOptionParse(cast_action or use_action)
+	local secure_parse
+	if(cast_action or use_action) then
+		secure_parse = SecureCmdOptionParse(cast_action or use_action)
+	end
 	if(not debug and secure_parse) then return secure_parse end;
 
 
