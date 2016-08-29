@@ -1275,45 +1275,6 @@ function AutoBar:CreateOptionsAce3()
 							name = L["Show Extended Tooltips"],
 							disabled = function() return not self.db.account.showTooltip end,
 						},
-						header_debug = {
-							type = "header",
-							order = 200,
-							name = "Advanced/Debug",
-						},
-
-						performance = {
-							type = "toggle",
-							order = 201,
-							name = L["Log Performance"],
-						},
-						logEvents = {
-							type = "toggle",
-							order = 202,
-							name = L["Log Events"],
-						},
-						logMemory = {
-							type = "toggle",
-							order = 203,
-							name = L["Log Memory"],
-						},
-						handle_spell_changed = {
-							type = "toggle",
-							order = 204,
-							name = "SPELLS_CHANGED",
-							desc = "If unchecked some spell-related messages will be ignored. This will improve performance, but may cause side-effects",
-						},
-						log_throttled_events = {
-							type = "toggle",
-							order = 240,
-							name = "Log Throttled Events"
-						},
-						throttle_event_limit = {
-							type = "range",
-							order = 241,
-							name = "Throttle Event Limit",
-							desc = "Events happening faster than this limit are ignored (in seconds)",
-							min = 0, max = 10, step = 0.1, bigStep = 0.5,
-						},
 
 						header2 = {
 							type = "header",
@@ -1465,6 +1426,46 @@ function AutoBar:CreateOptionsAce3()
 							arg = passValue,
 							disabled = getFadeOutDisabled,
 						},
+						header_debug = {
+							type = "header",
+							order = 500,
+							name = "Advanced/Debug",
+						},
+
+						performance = {
+							type = "toggle",
+							order = 501,
+							name = L["Log Performance"],
+						},
+						logEvents = {
+							type = "toggle",
+							order = 502,
+							name = L["Log Events"],
+						},
+						logMemory = {
+							type = "toggle",
+							order = 503,
+							name = L["Log Memory"],
+						},
+						handle_spell_changed = {
+							type = "toggle",
+							order = 504,
+							name = "Ignore SPELLS_CHANGED",
+							desc = "If unchecked some spell-related messages will be ignored. This will improve performance, but may cause side-effects",
+						},
+						log_throttled_events = {
+							type = "toggle",
+							order = 540,
+							name = "Log Throttled Events"
+						},
+						throttle_event_limit = {
+							type = "range",
+							order = 541,
+							name = "Throttle Event Limit",
+							desc = "Events happening faster than this limit are ignored (in seconds)",
+							min = 0, max = 10, step = 0.1, bigStep = 0.5,
+						},
+
 					}
 				},
 				categories = {
