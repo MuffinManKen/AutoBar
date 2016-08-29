@@ -12,6 +12,10 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.03:
+ - Moved Advanced/Debug settings to the bottom of the dialog
+ - Fixed "SecureCmdOptionParse" bug
+
 v7.0.3.02:
  - If you change your talents/spec, spells you no longer know won't stay on your bar
  - No longer processes COMPANION_UPDATE messages since they fire constantly when in a city
