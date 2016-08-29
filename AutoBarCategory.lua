@@ -36,8 +36,14 @@ local _
 AutoBar.categoryValidateList = {}
 
 	--DeathKnight
-	spellNameList["Horn of Winter"] = AutoBar:LoggedGetSpellInfo(57330)
-	
+	spellNameList["Path of Frost"] = AutoBar:LoggedGetSpellInfo(3714)
+	spellNameList["Dark Transformation"] = AutoBar:LoggedGetSpellInfo(63560)
+	spellNameList["Chains of Ice"] = AutoBar:LoggedGetSpellInfo(45524)
+	spellNameList["Anti-Magic Shell"] = AutoBar:LoggedGetSpellInfo(48707)
+	spellNameList["Icebound Fortitude"] = AutoBar:LoggedGetSpellInfo(48792)
+	spellNameList["Mind Freeze"] = AutoBar:LoggedGetSpellInfo(47528)
+
+
 	--Druid
 	spellNameList["Barkskin"], _, spellIconList["Barkskin"] = AutoBar:LoggedGetSpellInfo(22812)
 	spellNameList["Disorienting Roar"] = AutoBar:LoggedGetSpellInfo(99)
@@ -1111,7 +1117,7 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
-			"DEATHKNIGHT", spellNameList["Horn of Winter"],
+			"DEATHKNIGHT", spellNameList["Path of Frost"],
 			"DRUID", spellNameList["Ironbark"],
 			"MAGE", spellNameList["Slow Fall"],
 		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Freedom"),
@@ -1158,10 +1164,11 @@ function AutoBarCategory:Initialize()
 	local spellRuneWeapon = AutoBar:LoggedGetSpellInfo(49028)
 	local spellRaiseDead = AutoBar:LoggedGetSpellInfo(46584)
 	local spellSummonGargoyle = AutoBar:LoggedGetSpellInfo(49206)
-
+	local spellArmyoftheDead =  AutoBar:LoggedGetSpellInfo(42650)
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellCallPet1Icon,
 	{
+			"DEATHKNIGHT", spellArmyoftheDead,
 			"DEATHKNIGHT", spellRuneWeapon,
 			"DEATHKNIGHT", spellRaiseDead,
 			"DEATHKNIGHT", spellSummonGargoyle,			
@@ -1189,6 +1196,7 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellCallPet1Icon, 
 	{
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Dark Transformation"),
 		"HUNTER", AutoBar:GetSpellNameByName("Kill Command"),
 		"HUNTER", AutoBar:GetSpellNameByName("Bestial Wrath"),
 		"HUNTER", AutoBar:GetSpellNameByName("Dire Beast"),
@@ -1294,6 +1302,8 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
+		"DEATHKNIGHT", 		AutoBar:GetSpellNameByName("Anti-Magic Shell"), 	AutoBar:GetSpellNameByName("Anti-Magic Shell"),
+		"DEATHKNIGHT", 		AutoBar:GetSpellNameByName("Icebound Fortitude"), 	AutoBar:GetSpellNameByName("Icebound Fortitude"),
 			"DRUID", 		spellNameList["Barkskin"], 	spellNameList["Barkskin"],
 		"HUNTER", 		AutoBar:GetSpellNameByName("Aspect of the Turtle"), 	AutoBar:GetSpellNameByName("Aspect of the Turtle"),
 			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
@@ -1441,6 +1451,7 @@ function AutoBarCategory:Initialize2()
 	spellNameList["Sap"] = AutoBar:LoggedGetSpellInfo(6770)
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Chains of Ice"),
 		"HUNTER", AutoBar:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", AutoBar:GetSpellNameByName("Wing Clip"),
 		"HUNTER", AutoBar:GetSpellNameByName("Ranger's Net"),
@@ -1516,6 +1527,7 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Mind Freeze"),
 		"HUNTER", AutoBar:GetSpellNameByName("Counter Shot"),
 		"PALADIN", AutoBar:GetSpellNameByName("Rebuke"),
 		"ROGUE", AutoBar:GetSpellNameByName("Kick"),

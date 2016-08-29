@@ -1107,7 +1107,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonDebuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonDebuff"] = {
 				buttonKey = "AutoBarButtonDebuff",
@@ -1131,7 +1131,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK" or AutoBar.CLASS == "DEATHKNIGHT") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPets2"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPets2"] = {
 				buttonKey = "AutoBarButtonClassPets2",
