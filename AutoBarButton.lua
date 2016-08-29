@@ -47,10 +47,6 @@ spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
 spellNameList["Harpoon"], _, spellIconList["Harpoon"]  = AutoBar:LoggedGetSpellInfo(190925)
 
 
---Warlock
-spellNameList["Dark Pact"], _, spellIconList["Dark Pact"]  = AutoBar:LoggedGetSpellInfo(108416)
-
-
 
 function AutoBarButton.prototype:init(parentBar, buttonDB)
 	AutoBarButton.super.prototype.init(self, parentBar, buttonDB)
@@ -1587,111 +1583,15 @@ function AutoBarButtonElixirBoth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Flasks")
 end
 
-
-local AutoBarButtonER = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonER = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonER"] = AutoBarButtonER
 
 function AutoBarButtonER.prototype:init(parentBar, buttonDB)
 	AutoBarButtonER.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
+
+	self:AddCategory("Spell.ER")
+
 end
-
-
-function AutoBarButtonER.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonER.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	wipe(concatList)
-	local index = 1
-
-	local macro_body = nil
-	local macroTexture
-
-	if (AutoBar.CLASS == "DRUID") then
-		if (GetSpellInfo(spellNameList["Frenzied Regeneration"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Frenzied Regeneration"]
-			concatList[index + 2] = "\n"
-
-			macroTexture = spellIconList["Frenzied Regeneration"]
-			self.macroActive = true
-
-		end
-	elseif (AutoBar.CLASS == "DEATHKNIGHT") then
-		if (GetSpellInfo(spellNameList["Rune Tap"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Rune Tap"]
-
-			macroTexture = spellIconList["Rune Tap"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "HUNTER") then
-		local feign_death = AutoBar:GetSpellNameByName("Feign Death")
-		if (GetSpellInfo(feign_death)) then
-			macro_body = "/cast " .. feign_death
-			macroTexture = spellIconList["Feign Death"]
-		else
-			local disengage = AutoBar:GetSpellNameByName("Disengage")
-			if (GetSpellInfo(disengage)) then
-				macro_body = "/cast " .. disengage
-				macroTexture = spellIconList["Disengage"]
-			end
-		end
-	elseif (AutoBar.CLASS == "MAGE") then
-		if (GetSpellInfo(spellNameList["Ice Block"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Ice Block"]
-
-			macroTexture = spellIconList["Ice Block"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "PALADIN") then
-			local lay_hands = AutoBar:GetSpellNameByName("Lay on Hands")
-			if (GetSpellInfo(lay_hands)) then
-				macro_body = "/cast " .. lay_hands
-				macroTexture = spellIconList["Lay on Hands"]
-			end
-	elseif (AutoBar.CLASS == "PRIEST") then
-		if (GetSpellInfo(spellNameList["Desperate Prayer"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Desperate Prayer"]
-
-			macroTexture = spellIconList["Desperate Prayer"]
-			self.macroActive = true
-		end
-	elseif (AutoBar.CLASS == "ROGUE") then
-		local vanish = AutoBar:GetSpellNameByName("Vanish")
-		if (GetSpellInfo(vanish)) then
-			macro_body = "/cast " .. vanish
-			macroTexture = spellIconList["Vanish"]
-		end
-	elseif (AutoBar.CLASS == "WARLOCK") then
-		local dark_pact = AutoBar:GetSpellNameByName("Dark Pact")
-		if (GetSpellInfo(dark_pact)) then
-			macro_body = "/cast " .. dark_pact
-			macroTexture = spellIconList["Dark Pact"]
-		end
-	elseif (AutoBar.CLASS == "WARRIOR") then
-		if (GetSpellInfo(spellNameList["Last Stand"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Last Stand"]
-
-			macroTexture = spellIconList["Last Stand"]
-			self.macroActive = true
-		elseif (GetSpellInfo(spellNameList["Enraged Regeneration"])) then
-			concatList[index] = "/cast "
-			concatList[index + 1] = spellNameList["Enraged Regeneration"]
-
-			macroTexture = spellIconList["Enraged Regeneration"]
-			self.macroActive = true
-		end
-
-	end
-	self.macroActive = macro_body and true;
-	if (self.macroActive) then
-		self:AddMacro(macro_body, macroTexture)
-	end
-end
-
 
 
 local AutoBarButtonExplosive = AceOO.Class(AutoBarButton)

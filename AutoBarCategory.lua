@@ -140,7 +140,8 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Curse of Weakness"] = AutoBar:LoggedGetSpellInfo(199892) 
 	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
 	spellNameList["Grimoire: Felhunter"] = AutoBar:LoggedGetSpellInfo(111897) 
-	
+	spellNameList["Dark Pact"], _, spellIconList["Dark Pact"]  = AutoBar:LoggedGetSpellInfo(108416)
+
 
 	--Warrior
 	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
@@ -1496,6 +1497,21 @@ function AutoBarCategory:Initialize2()
 		"ROGUE", AutoBar:GetSpellNameByName("Shadowstep"),
 		"WARRIOR", AutoBar:GetSpellNameByName("Charge"),
 		"WARRIOR", AutoBar:GetSpellNameByName("Intercept"),
+	})
+
+	AutoBarCategoryList["Spell.ER"] = AutoBarSpells:new( "Spell.ER", spellIconList["Charge"],
+	{
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Rune Tap"),
+		"DRUID", AutoBar:GetSpellNameByName("Frenzied Regeneration"),
+		"HUNTER", AutoBar:GetSpellNameByName("Feign Death"),
+		"HUNTER", AutoBar:GetSpellNameByName("Disengage"),
+		"MAGE", AutoBar:GetSpellNameByName("Ice Block"),
+		"PALADIN", AutoBar:GetSpellNameByName("Lay on Hands"),
+		"PRIEST", AutoBar:GetSpellNameByName("Desperate Prayer"),
+		"ROGUE", AutoBar:GetSpellNameByName("Vanish"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Dark Pact"),
+		"WARRIOR", AutoBar:GetSpellNameByName("Last Stand"),
+		"WARRIOR", AutoBar:GetSpellNameByName("Enraged Regeneration"),
 	})
 
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
