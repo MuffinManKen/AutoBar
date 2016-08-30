@@ -1082,11 +1082,14 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 				rightClickTargetsPet = true,
 			}
 		end
+	end
+	
+	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
 				buttonKey = "AutoBarButtonTrap",
 				buttonClass = "AutoBarButtonTrap",
-				barKey = "AutoBarClassBarHunter",
+				barKey = AutoBar.classBar,
 				defaultButtonIndex = "*",
 				enabled = true,
 				arrangeOnUse = true,
@@ -1202,7 +1205,7 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		end
 	end
 
-	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",
