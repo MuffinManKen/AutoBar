@@ -65,8 +65,9 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Moved Advanced/Debug settings to the bottom of the dialog|n" ..
-" - Fixed 'SecureCmdOptionParse' bug|n"
+WHATSNEW_TEXT = " - Reviewed Class Bars: Death Knight, Demon Hunter|n" ..
+" - ER button is a normal spell button, rather than a macro|n"
+
 
 
 

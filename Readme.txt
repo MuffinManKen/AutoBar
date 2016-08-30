@@ -12,6 +12,10 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.04:
+ - Reviewed Class Bars: Death Knight, Demon Hunter
+ - ER button is a normal spell button, rather than a macro
+
 v7.0.3.03:
  - Moved Advanced/Debug settings to the bottom of the dialog
  - Fixed "SecureCmdOptionParse" bug
