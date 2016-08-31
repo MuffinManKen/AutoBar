@@ -65,8 +65,12 @@ AutoBar.warning_log = {}
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
 
-WHATSNEW_TEXT = " - Reviewed Class Bars: Death Knight, Demon Hunter|n" ..
-" - ER button is a normal spell button, rather than a macro|n"
+WHATSNEW_TEXT = "" ..
+" - Updated MuffinLibPT|n" ..
+" - Added new Dalaran Lures to Fishing button|n" ..
+" - Hunter: Added Fetch/Play Dead/Wake Up|n" ..
+" - Ports: Dreamway, Broken Dalaran, Hall of the Guardian|n"
+
 
 
 

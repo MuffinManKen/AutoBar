@@ -12,6 +12,12 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.05:
+ - Updated MuffinLibPT
+ - Added new Dalaran Lures to Fishing button
+ - Hunter: Added Fetch/Play Dead/Wake Up
+ - Ports: Dreamway, Broken Dalaran, Hall of the Guardian
+
 v7.0.3.04:
  - Reviewed Class Bars: Death Knight, Demon Hunter
  - ER button is a normal spell button, rather than a macro
