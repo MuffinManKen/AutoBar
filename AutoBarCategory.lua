@@ -1260,7 +1260,12 @@ function AutoBarCategory:Initialize()
 	spellNameList["Teleport: Dalaran"] = AutoBar:LoggedGetSpellInfo(53140)
 	spellNameList["Portal: Dalaran"] = AutoBar:LoggedGetSpellInfo(53142)
 	spellNameList["Death Gate"] = AutoBar:LoggedGetSpellInfo(50977)
+	local spellTeleportBrokenDalaran = AutoBar:LoggedGetSpellInfo(224869)
+	local spellPortalBrokenDalaran = AutoBar:LoggedGetSpellInfo(224871)
+	local spellTeleportHallofGuardian = AutoBar:LoggedGetSpellInfo(204287)
+	
 	local spellTeleportMoonglade = AutoBar:LoggedGetSpellInfo(18960)
+	local spellTeleportDreamway = AutoBar:LoggedGetSpellInfo(193753)
 	local spellAstralRecall = AutoBar:LoggedGetSpellInfo(556)
 	local spellRitualOfSummoning = AutoBar:LoggedGetSpellInfo(698)
 	local spellTeleportTolBaradH = AutoBar:LoggedGetSpellInfo(88344)
@@ -1275,8 +1280,10 @@ function AutoBarCategory:Initialize()
 	local spellPortalStormshield = AutoBar:LoggedGetSpellInfo(176246)
 	local spellTeleportWarspear = AutoBar:LoggedGetSpellInfo(176242)
 	local spellPortalWarspear = AutoBar:LoggedGetSpellInfo(176244)
-	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new(
-			"Spell.Portals", spellPortalShattrathIcon, nil, {
+	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new( "Spell.Portals", spellPortalShattrathIcon, nil,
+	{
+		"DRUID", spellTeleportMoonglade, spellTeleportMoonglade,
+		"DRUID", spellTeleportDreamway, spellTeleportDreamway,
 			"MAGE", spellTeleportStonard, spellPortalStonard,
 			"MAGE", spellTeleportTheramore, spellPortalTheramore,
 			"MAGE", spellTeleportUndercity, spellPortalUndercity,
@@ -1294,13 +1301,14 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellTeleportValeofEternalBlossomsH, spellPortalValeofEternalBlossomsH,
 			"MAGE", spellTeleportStormshield, spellPortalStormshield,
 			"MAGE", spellTeleportWarspear, spellPortalWarspear,
+			"MAGE", spellTeleportHallofGuardian, spellTeleportHallofGuardian,
+			"MAGE", spellTeleportBrokenDalaran, spellPortalBrokenDalaran,
 			"MAGE", spellNameList["Teleport: Dalaran"], spellNameList["Portal: Dalaran"],
 			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage"), AutoBar:GetSpellNameByName("Zen Pilgrimage"),
 			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"), AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"),
-			"DEATHKNIGHT", spellNameList["Death Gate"], spellNameList["Death Gate"],
-			"DRUID", spellTeleportMoonglade, spellTeleportMoonglade,
+		"DEATHKNIGHT", spellNameList["Death Gate"], spellNameList["Death Gate"],	
 			"SHAMAN", spellAstralRecall, spellAstralRecall,
-			"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
+		"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
 			})
 			
 	local spellTeleportAncientDalaran = AutoBar:LoggedGetSpellInfo(120145)
