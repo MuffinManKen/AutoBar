@@ -1,5 +1,5 @@
 --
--- LibPT-Muffin.Misc
+-- LibPT-Muffin.Skill.Fishing
 --
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
 LibStub("LibPeriodicTable-3.1"):AddData("Muffin.Skill.Fishing", "Rev: 1",
