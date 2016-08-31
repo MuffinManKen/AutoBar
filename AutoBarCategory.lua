@@ -91,6 +91,10 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Call Pet 4"] = AutoBar:LoggedGetSpellInfo(83244)
 	spellNameList["Call Pet 5"] = AutoBar:LoggedGetSpellInfo(83245)
 	spellNameList["Counter Shot"] = AutoBar:LoggedGetSpellInfo(147362)
+	spellNameList["Fetch"] = AutoBar:LoggedGetSpellInfo(125050)
+	spellNameList["Play Dead"] = AutoBar:LoggedGetSpellInfo(209997)
+	spellNameList["Wake Up"] = AutoBar:LoggedGetSpellInfo(210000)
+
 
 
 	--Mage
@@ -1231,6 +1235,9 @@ function AutoBarCategory:Initialize()
 		"HUNTER", AutoBar:GetSpellNameByName("Revive Pet"),
 		"HUNTER", AutoBar:GetSpellNameByName("Tame Beast"),
 		"HUNTER", AutoBar:GetSpellNameByName("Beast Lore"),
+		"HUNTER", AutoBar:GetSpellNameByName("Fetch"),
+		"HUNTER", AutoBar:GetSpellNameByName("Play Dead"),
+		"HUNTER", AutoBar:GetSpellNameByName("Wake Up"),
 	})
 
 
