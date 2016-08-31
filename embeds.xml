@@ -37,5 +37,6 @@
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Misc.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Mount.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Potions.lua"/>
+	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Fishing.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.SunsongRanch.lua"/>
 </Ui>

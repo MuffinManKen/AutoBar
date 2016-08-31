@@ -30,6 +30,8 @@ atl("MountShowClass", "Show Class");
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
 
+atl("Muffin.Skill.Fishing.Lure", "Muffin.Skill.Fishing.Lure");
+
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
 
 atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");

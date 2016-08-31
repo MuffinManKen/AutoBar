@@ -1610,7 +1610,7 @@ AutoBar.Class["AutoBarButtonFishing"] = AutoBarButtonFishing
 function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFishing.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Tradeskill.Tool.Fishing.Lure")
+	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
 	self:AddCategory("Tradeskill.Tool.Fishing.Tool")
