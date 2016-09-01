@@ -2045,12 +2045,12 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
 			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
 			local faction_ok = (not faction_specific) or (faction_specific and (faction_id == faction))
---if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider") then 
---local temp = string.format("%5s  %5s  Usable:%5s", v, spell_id, tostring(usable))
---print(temp, "FacSpecific:",faction_specific, "Faction:", faction, "Filtered:", is_filtered, "Collected:", is_collected, name)
+--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider" or name == "Creeping Carpet") then 
+--print(string.format("%5s  %5s  Usable:%5s", v, spell_id, tostring(usable)), name)
+--print("   FacSpecific:",faction_specific, "Faction:", faction, "Filtered:", is_filtered, "Collected:", is_collected)
 --print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 --end;
-			if (is_collected and user_selected and faction_ok and not qiraji_filtered) then
+			if (is_collected and user_selected and usable and not qiraji_filtered) then
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
