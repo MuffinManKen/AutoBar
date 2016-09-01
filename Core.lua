@@ -413,8 +413,9 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 	AutoBar.frame:RegisterEvent("ZONE_CHANGED")
 	AutoBar.frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	--TODO: add ZONE_CHANGED_INDOORS?
 	AutoBar.frame:RegisterEvent("PLAYER_ALIVE")
-	AutoBar.frame:RegisterEvent("PLAYER_AURAS_CHANGED")
+	AutoBar.frame:RegisterUnitEvent("UNIT_AURA")
 	AutoBar.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
 	AutoBar.frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	AutoBar.frame:RegisterEvent("PLAYER_REGEN_DISABLED")
@@ -996,13 +997,13 @@ function AutoBar.events:PLAYER_ALIVE(arg1)
 end
 
 
-function AutoBar.events:PLAYER_AURAS_CHANGED(arg1)
+function AutoBar.events:UNIT_AURA(arg1)
 	if (AutoBar:IsInLockDown()) then
 		for buttonName, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	else
-		AutoBar:LogEvent("PLAYER_AURAS_CHANGED", arg1)
+		AutoBar:LogEvent("UNIT_AURA", arg1)
 		AutoBar.delay["UpdateButtons"]:Start()
 	end
 end
