@@ -411,7 +411,6 @@ function AutoBar:OnEnable(first)
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
-	AutoBar.frame:RegisterEvent("MINIMAP_ZONE_CHANGED")
 	AutoBar.frame:RegisterEvent("ZONE_CHANGED")
 	AutoBar.frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	AutoBar.frame:RegisterEvent("PLAYER_ALIVE")
@@ -895,14 +894,6 @@ function AutoBar:UpdateZone(event)
 		end
 	end
 
-end
-
-function AutoBar.events:MINIMAP_ZONE_CHANGED(arg1)
-	AutoBar:LogEvent("MINIMAP_ZONE_CHANGED", arg1)
-	AutoBar:UpdateZone("MINIMAP_ZONE_CHANGED")
---	if (not InCombatLockdown()) then
---		AutoBar.delay["UpdateActive"]:Start()
---	end
 end
 
 function AutoBar.events:ZONE_CHANGED(arg1)
