@@ -130,7 +130,8 @@ AutoBar.categoryValidateList = {}
 	--Priest
 	spellNameList["Power Word: Fortitude"] = AutoBar:LoggedGetSpellInfo(13864)
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
-	
+	spellNameList["Shadowfiend"] = AutoBar:LoggedGetSpellInfo(34433)
+
 	--Rogue
 	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
 	spellNameList["Deadly Poison"], _, spellIconList["Deadly Poison"] = AutoBar:LoggedGetSpellInfo(2823)
@@ -1196,7 +1197,7 @@ function AutoBarCategory:Initialize()
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 5"), 
 			"MAGE", spellSummonWaterElemental,
 			"MONK", spellStormEarthFire,
-			"PRIEST", spellShadowfiend,
+		"PRIEST", AutoBar:GetSpellNameByName("Shadowfiend"), 
 			"SHAMAN", spellEarthElemental,
 			"SHAMAN", spellFireElemental,
 			"SHAMAN", spellStormElemental,
