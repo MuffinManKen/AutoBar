@@ -128,9 +128,11 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Seal of Light"], _, spellIconList["Seal of Light"] = AutoBar:LoggedGetSpellInfo(202273)
 
 	--Priest
-	spellNameList["Power Word: Fortitude"] = AutoBar:LoggedGetSpellInfo(13864)
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
 	spellNameList["Shadowfiend"] = AutoBar:LoggedGetSpellInfo(34433)
+	spellNameList["Dispersion"] = AutoBar:LoggedGetSpellInfo(47585)
+	spellNameList["Guardian Spirit"] = AutoBar:LoggedGetSpellInfo(47788)
+	spellNameList["Pain Suppression"] = AutoBar:LoggedGetSpellInfo(33206)
 
 	--Rogue
 	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
@@ -1553,7 +1555,9 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", AutoBar:GetSpellNameByName("Disengage"),
 		"MAGE", AutoBar:GetSpellNameByName("Ice Block"),
 		"PALADIN", AutoBar:GetSpellNameByName("Lay on Hands"),
-		"PRIEST", AutoBar:GetSpellNameByName("Desperate Prayer"),
+		"PRIEST", AutoBar:GetSpellNameByName("Dispersion"),
+		"PRIEST", AutoBar:GetSpellNameByName("Guardian Spirit"),
+		"PRIEST", AutoBar:GetSpellNameByName("Pain Suppression"),
 		"ROGUE", AutoBar:GetSpellNameByName("Vanish"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Dark Pact"),
 		"WARRIOR", AutoBar:GetSpellNameByName("Last Stand"),
