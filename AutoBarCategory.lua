@@ -1136,7 +1136,7 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
-			"DEATHKNIGHT", spellNameList["Path of Frost"],
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Path of Frost"),
 			"DRUID", spellNameList["Ironbark"],
 			"MAGE", spellNameList["Slow Fall"],
 		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Freedom"),
@@ -1147,7 +1147,6 @@ function AutoBarCategory:Initialize()
 		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Kings"),
 		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Might"),
 		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Wisdom"),
-			"PRIEST", spellNameList["Power Word: Fortitude"],
 			"SHAMAN", spellNameList["Water Walking"],
 		"WARLOCK", AutoBar:GetSpellNameByName("Unending Breath"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Soulstone"),
@@ -1156,7 +1155,6 @@ function AutoBarCategory:Initialize()
 	})
 
 	
-		local spellShadowfiend = AutoBar:LoggedGetSpellInfo(34433)
 
 	--Shaman
 	local spellEarthElemental = AutoBar:LoggedGetSpellInfo(198103)
