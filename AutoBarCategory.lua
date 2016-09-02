@@ -903,6 +903,8 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new("Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
 
+	AutoBarCategoryList["Muffin.Order Hall"] = AutoBarItems:new("Muffin.Order Hall", "archaeology_5_0_mogucoin", "Muffin.Order Hall")
+
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"]:SetAnywhere(true)

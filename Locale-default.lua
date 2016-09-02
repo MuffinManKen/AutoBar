@@ -15,6 +15,8 @@ atl("Muffin.Potion.Health", "Muffin.Potion.Health");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
+atl("AutoBarButtonOrderHall", "Order Hall")
+atl("Muffin.Order Hall", "Muffin.Order Hall")
 atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
 atl("AutoBarButtonInterrupt", "Interrupts");

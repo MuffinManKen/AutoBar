@@ -1024,6 +1024,17 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
 		}
 	end
 
+	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHall"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonOrderHall"] = {
+			buttonKey = "AutoBarButtonOrderHall",
+			buttonClass = "AutoBarButtonOrderHall",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBattlePetItems"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonBattlePetItems"] = {
 			buttonKey = "AutoBarButtonBattlePetItems",
