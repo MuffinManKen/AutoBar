@@ -1958,6 +1958,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
 	--AutoBarCategoryList["Spell.Mount"]:Refresh()
 end
+local reverse_sort_func = function( a,b ) return a > b end
 
 function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
@@ -2024,6 +2025,8 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 				spellInfo.spellLink = "spell:" .. spell_id
 				category.castList[# category.castList + 1] = spell_name
 			end
+			
+			table.sort(category.castList, reverse_sort_func)
 		end
 
 		category.unInitialized = nil
