@@ -12,6 +12,15 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.06:
+ - Added Pet Bandages to the Battle Pet Items button
+ - Added more Dalaran Lures
+ - Reviewed Priest Class Bar
+ - Profession-specific mounts shouldn't show up for people without that profession
+ - Added Big Fountain Goldfish to Food
+ - Added Pet Treats to Battle Pet Items button
+ - Added Order Hall button. Right now it just has "Gain Artifact Power" items.
+
 v7.0.3.05:
  - Updated MuffinLibPT
  - Added new Dalaran Lures to Fishing button

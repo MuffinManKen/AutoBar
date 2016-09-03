@@ -66,10 +66,14 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-" - Updated MuffinLibPT|n" ..
-" - Added new Dalaran Lures to Fishing button|n" ..
-" - Hunter: Added Fetch/Play Dead/Wake Up|n" ..
-" - Ports: Dreamway, Broken Dalaran, Hall of the Guardian|n"
+" - Added Pet Bandages to the Battle Pet Items button|n" ..
+" - Added more Dalaran Lures|n" ..
+" - Reviewed Priest Class Bar|n" ..
+" - Profession-specific mounts shouldn't show up for people without that profession|n" ..
+" - Added Big Fountain Goldfish to Food|n" ..
+" - Added Pet Treats to Battle Pet Items button|n" ..
+" - Added Order Hall button. Right now it just has 'Gain Artifact Power' items.|n" ..
+"|n"
 
 
 
@@ -79,7 +83,7 @@ WHATSNEW_TEXT = "" ..
 function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 
 	local frame = _G[p_frame] or AutoBarButtonExplosiveFrame
-	
+
 	print("Type:", frame:GetAttribute("type"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
 	print("Item:", frame:GetAttribute("item"))
 	print("State:", frame:GetAttribute("state"))
