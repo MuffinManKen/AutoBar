@@ -98,7 +98,7 @@ function AutoBar:GetSpellNameByName(p_name)
 	if (AutoBar.spellNameList[p_name]) then
 		return AutoBar.spellNameList[p_name]
 	end
-	
+
 	AutoBar:Print("Unknown Spell Name:" .. p_name)
 
 	return nil
@@ -109,7 +109,7 @@ end
 --		an item
 function AutoBar:GetActionForMacroBody(p_macro_body)
 	local debug = false
-	
+
 	--print(debugstack())
 	local show_action = string.match(p_macro_body, "#show%s+([^\n]+)")
 	if(not debug and show_action) then return show_action end;
@@ -136,11 +136,11 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 		print("   use action:", use_action)
 		print("   show_tt_action", show_tt_action)
 		print("   show_action", show_action)
-		
+
 		return show_action or show_tt_action or secure_parse or cast_action or use_action
 	end
-	
-	
+
+
 	return nil
 end
 
@@ -329,28 +329,27 @@ function AutoBar:OnInitialize()
 	AutoBar.inWorld = false
 	AutoBar.inCombat = nil		-- For item use restrictions
 	AutoBar.inBG = false		-- For battleground only items
-	AutoBar.flyable = SecureCmdOptionParse("[flyable]1")
 
 	-- Single parent for key binding overides, and event handling
 	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 	AutoBar.frame:SetScript("OnEvent",
 		function(self, event, ...)
-		
+
 			-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
 			if(event == "BAG_UPDATE") then
 				AutoBar.events[event](AutoBar, ...)
 				return
 			end
-			
+
 			--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
 			if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
 				return
 			end
-			
+
 			local timer_name = event .. "_last_tick"
 			local now = GetTime()
 			AutoBar[timer_name] = AutoBar[timer_name] or 0
-			
+
 			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
 				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")") end
 				return
@@ -407,19 +406,16 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
-	
-	if(AutoBar.db.account.handle_spell_changed) then 
+
+	if(AutoBar.db.account.handle_spell_changed) then
 		AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
-	
+
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
-	AutoBar.frame:RegisterEvent("ZONE_CHANGED")
-	AutoBar.frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	--TODO: add ZONE_CHANGED_INDOORS?
 	AutoBar.frame:RegisterEvent("PLAYER_ALIVE")
 	AutoBar.frame:RegisterUnitEvent("UNIT_AURA")
 	AutoBar.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
@@ -429,7 +425,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
---	AutoBar.frame:RegisterEvent("COMPANION_UPDATE")
 	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 
@@ -659,21 +654,21 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 --print("   PLAYER_ENTERING_WORLD")
 		AutoBar.delay["UpdateCategories"]:Start()
 	end
-	
+
 	AutoBar:DumpWarningLog()
-	
+
 	local this_version = GetAddOnMetadata("AutoBar", "Version")
-	
+
 	--only mark the dialog as seen if the frame was found. This protects against someone
 	--updating the addon while in-game
 	if(this_version ~= AutoBarDB.whatsnew_version) then
 		 AutoBarDB.whatsnew_version = this_version
-		 
+
 		WHATSNEW_TITLE = "What's New in AutoBar"
 
 		local frame = CreateFrame("Frame", "AutoBarWhatsNewFrame", UIParent)
 		frame:SetBackdrop({
-			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		 	tile = true,
 		 	tileSize = 32,
@@ -685,7 +680,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 		local header_frame = CreateFrame("Frame", "AutoBarWhatsNewHeaderFrame", frame)
 		header_frame:SetBackdrop({
-			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		 	tile = true,
 		 	tileSize = 28,
@@ -713,16 +708,16 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		text:SetText(WHATSNEW_TEXT)
 		text:SetPoint("LEFT", frame, "LEFT", 20, 0)
 		text:SetJustifyH("LEFT")
-		
-		local string_width = text:GetStringWidth() 
+
+		local string_width = text:GetStringWidth()
 		local string_height = text:GetStringHeight()
-		
+
 		local ok_button = CreateFrame("Button", "AutoBarWhatsNewFrameOkButton", frame, "UIPanelButtonTemplate")
 		ok_button:SetText(OKAY)
-		 
+
 		frame:SetSize(math.max(string_width * 1.2, 300), math.max(string_height * 1.5, 100) + ok_button:GetHeight())
 		text:SetSize(string_width, string_height)
-		
+
 		ok_button:SetPoint("BOTTOM", frame, "BOTTOM", 0, 15)
 		ok_button:SetScript("OnClick", function(self, button, down) frame:Hide() end)
 
@@ -739,13 +734,13 @@ end
 
 function AutoBar.events:BAG_UPDATE(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE")
-	
+
 	if (AutoBar.inWorld and arg1 <= NUM_BAG_FRAMES) then
 		AutoBarSearch.dirtyBags[arg1] = true
 	end
 
 	AutoBar:LogEventEnd("BAG_UPDATE", arg1)
-	
+
 end
 
 function AutoBar.events:BAG_UPDATE_DELAYED()
@@ -758,7 +753,7 @@ function AutoBar.events:BAG_UPDATE_DELAYED()
 	else
 		AutoBar.delay["UpdateScan"]:Start()
 	end
-	
+
 	AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
 
 end
@@ -769,7 +764,7 @@ function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	if (not AutoBar:IsInLockDown()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
-		
+
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
@@ -780,11 +775,14 @@ end
 
 
 function AutoBar.events:SPELL_UPDATE_COOLDOWN(arg1)
-	AutoBar:LogEvent("SPELL_UPDATE_COOLDOWN", arg1)
+	AutoBar:LogEventStart("SPELL_UPDATE_COOLDOWN")
 
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
+
+	AutoBar:LogEventEnd("SPELL_UPDATE_COOLDOWN", arg1)
+
 end
 
 
@@ -796,7 +794,6 @@ function AutoBar.events:ACTIONBAR_UPDATE_USABLE(arg1)
 			for buttonName, button in pairs(AutoBar.buttonList) do
 				button:UpdateUsable()
 			end
-			pendingScan = true
 		else
 			AutoBar.delay["UpdateScan"]:Start(arg1)
 		end
@@ -879,7 +876,7 @@ end
 
 function AutoBar.events:SPELLS_CHANGED(arg1)
 
-	if(not AutoBar.db.account.handle_spell_changed) then 
+	if(not AutoBar.db.account.handle_spell_changed) then
 		return
 	end
 	AutoBar:LogEvent("SPELLS_CHANGED", arg1)
@@ -967,7 +964,7 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 		AutoBar:MoveButtonsModeOff()
 		LibKeyBound:Deactivate()
 	end
-	
+
 	if (AutoBar.keyBoundMode) then
 		LibKeyBound:Deactivate()
 	end
@@ -990,7 +987,7 @@ end
 
 function AutoBar.events:PET_BATTLE_CLOSE(arg1)
 	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-	
+
 	AutoBar.delay[regenEnableUpdate]:Start()
 
 	-- AutoBar.in_pet_battle = false
@@ -1608,7 +1605,7 @@ function AutoBar:MoveButtonsModeOff()
 	end
 end
 
- 
+
 --
 -- ConfigMode support
 --
@@ -1625,7 +1622,7 @@ CONFIGMODE_CALLBACKS["AutoBar"] = function(action)
 	end
 end
 
- 
+
 --
 -- Drag and Drop support
 --
