@@ -808,7 +808,6 @@ function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 			for buttonName, button in pairs(AutoBar.buttonList) do
 				button:UpdateUsable()
 			end
-			pendingScan = true
 		else
 			AutoBar.delay["UpdateScan"]:Start(arg1)
 		end
@@ -816,48 +815,29 @@ function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 end
 
 
--- companionType = nil - Update the current companion
--- companionType = "CRITTER" or "MOUNT" indicates that the active companion of that type has changed.
-function AutoBar.events:COMPANION_UPDATE(companionType)
-	AutoBar:LogEventStart("COMPANION_UPDATE", companionType)
-	if (AutoBar.inWorld) then
-		local thisIsSpam = true
-		
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button and companionType ~= "CRITTER") then
-			thisIsSpam = button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
-		end
-		button = AutoBar.buttonList["AutoBarButtonPets"]
-		if (button and companionType ~= "MOUNT") then
-			button:Refresh(button.parentBar, button.buttonDB)
-		end
-		if (not thisIsSpam) then
-			AutoBar.delay["UpdateCategories"]:Start()
-			if (InCombatLockdown()) then
-				pendingScan = true
-			end
-		end
-	end
-	AutoBar:LogEventEnd("COMPANION_UPDATE", companionType)
-end
+function AutoBar.events:COMPANION_LEARNED(...)
+	local companionType = ...;
+	local need_update = false;
 
-
-function AutoBar.events:COMPANION_LEARNED()
 	AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
+
 	if (AutoBar.inWorld) then
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button) then
+		if (button and (companionType == "MOUNT")) then
 			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
+
 		button = AutoBar.buttonList["AutoBarButtonPets"]
-		if (button) then
+		if (button and (companionType == "MOUNT")) then
 			button:Refresh(button.parentBar, button.buttonDB)
 		end
-		AutoBar.delay["UpdateCategories"]:Start()
-		if (InCombatLockdown()) then
-			pendingScan = true
+
+		if(need_update) then
+			AutoBar.delay["UpdateCategories"]:Start()
 		end
+
 	end
+
 	AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
 end
 
@@ -887,45 +867,6 @@ function AutoBar.events:SPELLS_CHANGED(arg1)
 	end
 end
 
-function AutoBar:UpdateZone(event)
-
-	local flyable = IsFlyableArea()
-	if (AutoBar.flyable ~= flyable) then
-		AutoBar.flyable = flyable
-		if (AutoBar.buttonList["AutoBarButtonMount"]) then
-			--print("AutoBar:UpdateZone AutoBar.flyable", AutoBar.flyable, "-->", flyable)
-			AutoBar.delay["UpdateScan"]:Start(nil)
-		end
-	end
-
-end
-
-function AutoBar.events:ZONE_CHANGED(arg1)
-	AutoBar:LogEvent("ZONE_CHANGED", arg1)
-	AutoBar:UpdateZone("ZONE_CHANGED")
---	if (not InCombatLockdown()) then
---		AutoBar.delay["UpdateActive"]:Start()
---	end
-end
-
--- Apparently this is never used
---function AutoBar.events:ZONE_CHANGED_INDOORS(arg1)
---	AutoBar:LogEvent("ZONE_CHANGED_INDOORS", arg1)
---	AutoBar:UpdateZone("ZONE_CHANGED_INDOORS")
---	if (not InCombatLockdown()) then
-----		AutoBar.delay["UpdateActive"]:Start()
---	end
---end
-
-
-function AutoBar.events:ZONE_CHANGED_NEW_AREA(arg1)
-	AutoBar:LogEvent("ZONE_CHANGED_NEW_AREA", arg1)
-	AutoBar:UpdateZone("ZONE_CHANGED_NEW_AREA")
-	if (not InCombatLockdown()) then
-		AutoBarSearch.sorted:DirtyButtons()
-		AutoBar.delay["UpdateActive"]:Start(nil, 3)
-	end
-end
 
 
 function AutoBar.events:PLAYER_CONTROL_GAINED()

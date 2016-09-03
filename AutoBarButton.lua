@@ -1955,9 +1955,6 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then self:AddCategory("Muffin.Mount") end
 	end
 
-	buttonData.SetBest = self.SetBest
-	self.flyable = -1
-	self:Refresh(parentBar, buttonDB)
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
 	--AutoBarCategoryList["Spell.Mount"]:Refresh()
 end
@@ -2027,24 +2024,6 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 				spellInfo.spellLink = "spell:" .. spell_id
 				category.castList[# category.castList + 1] = spell_name
 			end
-			if (active and updateMount) then
-				local buttonData = AutoBar.db.char.buttonDataList[self.buttonName]
-				if (AutoBar.flyable) then
---print("AutoBarButtonMount.prototype:Refresh flyingMount", buttonData.flyingMount, "-->", spell_name)
-					if (buttonData.flyingMount ~= spell_name) then
-						thisIsSpam = false
---print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.flyingMount, spell_name)
-					end
-					buttonData.flyingMount = spell_name
-				else
---print("AutoBarButtonMount.prototype:Refresh groundMount", buttonData.groundMount, "-->", spell_name)
-					if (buttonData.groundMount ~= spell_name) then
-						thisIsSpam = false
---print("AutoBarButtonMount.prototype:Refresh thisIsSpam", thisIsSpam, buttonData.groundMount, spell_name)
-					end
-					buttonData.groundMount = spell_name
-				end
-			end
 		end
 
 		category.unInitialized = nil
@@ -2073,26 +2052,6 @@ end
 /script AutoBarSearch.sorted:Update("AutoBarButtonMount")
 /dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
 --]]
-
-function AutoBarButtonMount.prototype.SetBest(sorted, buttonDB, buttonData, sortedItems, searchItems)
-	local stopProcessing
-	local flyable = AutoBar.flyable
-	local self = AutoBar.buttonList[buttonDB.buttonKey]
-	if (self.flyable ~= flyable) then
-		self.flyable = flyable
-		local mountId = nil
-		if (flyable) then
-			mountId = buttonData.flyingMount
-		else
-			mountId = buttonData.groundMount
-		end
-
-		if (mountId) then
-			buttonData.arrangeOnUse = mountId
-		end
-	end
-	return stopProcessing
-end
 
 --- Temporary until Blizzard makes their code work for mounts & critters
 function AutoBarButtonMount.prototype:UpdateUsable()
