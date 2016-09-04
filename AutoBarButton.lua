@@ -1545,7 +1545,7 @@ AutoBar.Class["AutoBarButtonElixirBattle"] = AutoBarButtonElixirBattle
 function AutoBarButtonElixirBattle.prototype:init(parentBar, buttonDB)
 	AutoBarButtonElixirBattle.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Consumable.Buff Type.Battle")
+	self:AddCategory("Muffin.Elixir.Battle")
 end
 
 
@@ -1555,7 +1555,7 @@ AutoBar.Class["AutoBarButtonElixirGuardian"] = AutoBarButtonElixirGuardian
 function AutoBarButtonElixirGuardian.prototype:init(parentBar, buttonDB)
 	AutoBarButtonElixirGuardian.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Consumable.Buff Type.Guardian")
+	self:AddCategory("Muffin.Elixir.Guardian")
 end
 
 
@@ -1565,7 +1565,7 @@ AutoBar.Class["AutoBarButtonElixirBoth"] = AutoBarButtonElixirBoth
 function AutoBarButtonElixirBoth.prototype:init(parentBar, buttonDB)
 	AutoBarButtonElixirBoth.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Muffin.Flasks")
+	self:AddCategory("Muffin.Flask")
 end
 
 local AutoBarButtonER = AceOO.Class(AutoBarButton)

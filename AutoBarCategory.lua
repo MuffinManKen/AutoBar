@@ -1073,7 +1073,11 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Consumable.Buff Type.Flask"] = AutoBarItems:new("Consumable.Buff Type.Flask", "INV_Potion_118", "Consumable.Buff Type.Flask")
 
-	AutoBarCategoryList["Muffin.Flasks"] = AutoBarItems:new("Muffin.Flasks", "INV_Potion_118", "Muffin.Flasks")
+	AutoBarCategoryList["Muffin.Flask"] = AutoBarItems:new("Muffin.Flask", "INV_Potion_118", "Muffin.Flask")
+
+	AutoBarCategoryList["Muffin.Elixir.Guardian"] = AutoBarItems:new("Muffin.Elixir.Guardian", "INV_Potion_118", "Muffin.Elixir.Guardian")
+
+	AutoBarCategoryList["Muffin.Elixir.Battle"] = AutoBarItems:new("Muffin.Elixir.Battle", "INV_Potion_118", "Muffin.Elixir.Battle")
 
 	AutoBarCategoryList["Muffin.Potion.Buff"] = AutoBarItems:new("Muffin.Potion.Buff", "INV_Potion_118", "Muffin.Potion.Buff")
 
@@ -1671,7 +1675,7 @@ end
 /dump AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"]
 /dump AutoBarCategoryList["Spell.Crafting"].castList
 /dump AutoBarCategoryList["Consumable.Buff Group.Caster.Self"]
-/dump LibStub("LibPeriodicTable-3.1"):GetSetTable("Consumable.Buff Group.Caster.Self")
+/dump LibStub("LibPeriodicTable-3.1"):GetSetTable("Muffin.Elixir.Guardian")
 /script for itemId, value in LibStub("LibPeriodicTable-3.1"):IterateSet("Consumable.Buff Group.Caster.Self") do AutoBar:Print(itemId .. " " .. value); end
 --]]
 
