@@ -1587,8 +1587,8 @@ end
 --/script DEFAULT_CHAT_FRAME:AddMessage("" .. tostring())
 --/print GetMouseFocus():GetName()
 
-function AutoBar:Print(p_stuff)
-	print(p_stuff)
+function AutoBar:Print(...)
+	print(...)
 end
 
 function AutoBar:Dump(o, p_max_depth)
@@ -1677,4 +1677,54 @@ function AutoBar:LoggedGetSpellInfo(p_spell_id)
 
 end
 
+function AutoBar:DebugItemCategory(p_category_name)
+
+	print("Category name:", p_category_name)
+	local pt_set = LibStub("LibPeriodicTable-3.1"):GetSetTable(p_category_name)
+	local set_size = AutoBar:tcount(pt_set) - 1 --PTSets have a "set" member which is the set name
+	print("Size of PT Set:", set_size)
+	
+	local items = AutoBarCategoryList[p_category_name].items
+	local item_size = AutoBar:tcount(items)
+	
+	print("# Category Items:", item_size)
+
+	if(item_size) then
+		local diff_set = AutoBar:SetDifference(pt_set, items)
+		print("In PT, but not in items:", table.concat(diff_set, ","))
+		diff_set = AutoBar:SetDifference(items, pt_set)
+		print("In items, but not in PT:", table.concat(diff_set, ","))
+	end
+
+end
+
+--/dump LibStub("LibPeriodicTable-3.1"):GetSetTable("Muffin.Flask")
+--/dump AutoBarCategoryList["Muffin.Flask"].castList
+--/dump AutoBarCategoryList["Muffin.Flask"].items
+--/dump /run AutoBar:DebugItemCategory("Muffin.Flask")
+
+-- tcount: count table members even if they're not indexed by numbers
+function AutoBar:tcount(p_table)
+
+	if(p_table == nil) then return nil; end
+
+	local n = #p_table
+	if (n == 0) then
+		for k in pairs(p_table) do
+			n = n + 1;
+		end
+	end
+	return n
+end
+
+function AutoBar:SetDifference(p_set1, p_set2)
+	if(p_set1 == nil) then return {} end;
+	if(p_set2 == nil) then return p_set1 end;
+	
+	local s = {}
+	for e in pairs(p_set1) do
+		if not p_set2[e] then s[tostring(e)] = true end
+	end
+	return s
+end
 
