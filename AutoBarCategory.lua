@@ -271,8 +271,9 @@ local hack_zen_return_name = GetSpellInfo(126896)
 local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
 	local spellNameLeft = p_spell_name_left
---local tracked_category = "Spell.Portals"
---if (p_category.categoryKey == tracked_category) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
+--	local tracked_spells = {["Revive Pet"] = true, ["Mend Pet"] = true}
+--	local debug_me = tracked_spells[p_spell_name_left]
+--if (debug_me) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
 	--If the spells are not known by the player, their names are replaced with nil
 	if (spellNameLeft) then
@@ -292,7 +293,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		end
 	end
 
---	if (p_category.categoryKey == tracked_category) then print("   AddSpellToCategory - spellname:", spellNameLeft) end
+--	if (debug_me) then print("   AddSpellToCategory - spellname:", spellNameLeft) end
 
 	--HACK: WoW has a bug where GetSpellInfo("Instant Poison") returns nil and GetSpellInfo("Deadly Poison") returns Instant Poison if the character
 	-- has the Swift Poison perk. So if the passed in name is for Instant, ask for Deadly instead. NOTE: These have to be localized names which is
@@ -306,7 +307,9 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 	end
 
 
-	--if (p_category.categoryKey == tracked_category) then print("   Fixed: spellname:", spellNameLeft) end
+
+
+--	if (debug_me) then print("   Fixed: spellname:", spellNameLeft) end
 
 	if (spellNameLeft) then
 		AutoBarSearch:RegisterSpell(spellNameLeft, noSpellCheck)
@@ -314,10 +317,10 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		if (spellNameRight) then
 			AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
 			p_category.itemsRightClick[spellNameLeft] = spellNameRight
---if (p_category.categoryKey == tracked_category) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight)) end
+--if (debug_me) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight)) end
 		else
 --			p_category.itemsRightClick[spellNameLeft] = spellNameLeft
---if (p_category.categoryKey == tracked_category) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft)) end
+--if (debug_me) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft)) end
 		end
 		itemsIndex = itemsIndex + 1
 	elseif (spellNameRight) then
