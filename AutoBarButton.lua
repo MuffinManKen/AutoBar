@@ -2247,6 +2247,7 @@ function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Battle Pet Items.Level")
 	self:AddCategory("Muffin.Battle Pet Items.Upgrade")
 	self:AddCategory("Muffin.Battle Pet Items.Bandages")
+	self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
 end
 
 local AutoBarButtonQuest = AceOO.Class(AutoBarButton)
