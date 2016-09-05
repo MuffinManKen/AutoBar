@@ -1728,3 +1728,15 @@ function AutoBar:SetDifference(p_set1, p_set2)
 	return s
 end
 
+function AutoBar:FindNamelessCategories()
+
+	print("Nameless Categories:")
+	for key in pairs(AutoBarCategoryList) do
+		if(AutoBar.locale[key] == nil) then
+			print(key)
+		end
+	end
+
+
+
+end
