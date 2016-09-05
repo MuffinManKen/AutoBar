@@ -662,11 +662,11 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 	if (targeted) then
 		if (targeted == "CHEST") then
-			frame:SetAttribute("target-slot1", 5)
-			frame:SetAttribute("target-slot2", 5)
+			frame:SetAttribute("target-slot", 5)
+			--frame:SetAttribute("target-slot2", 5)
 		elseif (targeted == "SHIELD") then
-			frame:SetAttribute("target-slot1", 17)
-			frame:SetAttribute("target-slot2", 17)
+			frame:SetAttribute("target-slot", 17)
+			--frame:SetAttribute("target-slot2", 17)
 		elseif (targeted == "WEAPON") then
 			frame:SetAttribute("target-slot1", 16)
 			frame:SetAttribute("target-slot2", 17)
