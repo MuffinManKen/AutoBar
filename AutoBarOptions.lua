@@ -1450,7 +1450,7 @@ function AutoBar:CreateOptionsAce3()
 						handle_spell_changed = {
 							type = "toggle",
 							order = 504,
-							name = "Ignore SPELLS_CHANGED",
+							name = "Allow SPELLS_CHANGED",
 							desc = "If unchecked some spell-related messages will be ignored. This will improve performance, but may cause side-effects",
 						},
 						log_throttled_events = {
