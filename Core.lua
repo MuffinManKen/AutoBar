@@ -1730,13 +1730,12 @@ end
 
 function AutoBar:FindNamelessCategories()
 
-	print("Nameless Categories:")
+	local nameless = ""
 	for key in pairs(AutoBarCategoryList) do
 		if(AutoBar.locale[key] == nil) then
-			print(key)
+			nameless = nameless .. "|n" .. key
 		end
 	end
 
-
-
+	return nameless
 end

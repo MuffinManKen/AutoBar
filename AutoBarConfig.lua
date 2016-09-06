@@ -14,42 +14,76 @@ local AutoBar = AutoBar
 local L = AutoBar.locale
 local _
 
---AutoBar.panel = CreateFrame( "Frame", "AutoBarConfigPanel", UIParent );
--- Register in the Interface Addon Options GUI
--- Set the name for the Category for the Options Panel
---AutoBar.panel.name = "AutoBar";
--- Add the panel to the Interface Options
---InterfaceOptions_AddCategory(AutoBar.panel);
+AutoBarConfig = {}
+AutoBarConfig.Debug = {} --table to store stuff related to the Debug Frame
+
+AutoBarConfig.OptionsFrame = AceGUI:Create("BlizOptionsGroup")
+AutoBarConfig.OptionsFrame:SetName("AutoBar")
+InterfaceOptions_AddCategory(AutoBarConfig.OptionsFrame.frame);
+
+AutoBarConfig.DebugFrame = AceGUI:Create("BlizOptionsGroup")
+AutoBarConfig.DebugFrame:SetName("Debug", "AutoBar")
+AutoBarConfig.DebugFrame:SetLayout("Fill")
+InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
 
 
----- Make a child panel
---AutoBar.buttonspanel = CreateFrame( "Frame", "AutoBarConfigButtons", AutoBar.panel);
---AutoBar.buttonspanel.name = "Buttons";
----- Specify childness of this panel (this puts it under the little red [+], instead of giving it a normal AddOn category)
---AutoBar.buttonspanel.parent = AutoBar.panel.name;
----- Add the child to the Interface Options
---InterfaceOptions_AddCategory(AutoBar.buttonspanel);
---
---AutoBar.foodpanel = CreateFrame( "Frame", "AutoBarConfigButtonsFood", AutoBar.buttonspanel);
---AutoBar.foodpanel.name = "Food";
----- Specify childness of this panel (this puts it under the little red [+], instead of giving it a normal AddOn category)
---AutoBar.foodpanel.parent = AutoBar.buttonspanel.name;
----- Add the child to the Interface Options
---InterfaceOptions_AddCategory(AutoBar.foodpanel);
+local function set_nameless_category_text(p_widget)
+
+	local edit_box = p_widget:GetUserData("edit_box")
+	edit_box:SetText(AutoBar:FindNamelessCategories())
+
+end
+
+-- function that draws the widgets for the first tab
+local function DrawGroup1(container)
+
+	local button = AceGUI:Create("Button")
+	button:SetText("Find Nameless Categories")
+	button:SetWidth(200)
+	button:SetCallback("OnClick", set_nameless_category_text)
+	container:AddChild(button)
+
+	local edit_box = AceGUI:Create("MultiLineEditBox")
+	edit_box:SetNumLines(20)
+	edit_box:SetFullWidth(true)
+	edit_box:DisableButton(true)
+	container:AddChild(edit_box)
+
+	button:SetUserData("edit_box", edit_box)
+end
 
 
--- Debug Panel
---AutoBar.buttonspanel = CreateFrame( "Frame", "AutoBarConfigDebug", AutoBar.panel);
---AutoBar.buttonspanel.name = "Debug";
+-- function that draws the widgets for the second tab
+local function DrawGroup2(container)
+  local desc = AceGUI:Create("Label")
+  desc:SetText("This is Tab 2")
+  desc:SetFullWidth(true)
+  container:AddChild(desc)
+  
+  local button = AceGUI:Create("Button")
+  button:SetText("Tab 2 Button")
+  button:SetWidth(200)
+  container:AddChild(button)
+end
 
---AutoBar.buttonspanel.parent = AutoBar.panel.name; -- Child of the main panel
---InterfaceOptions_AddCategory(AutoBar.buttonspanel);
+-- Callback function for OnGroupSelected
+local function SelectGroup(container, event, group)
+   container:ReleaseChildren()
+   if group == "tab1" then
+      DrawGroup1(container)
+   elseif group == "tab2" then
+      DrawGroup2(container)
+   end
+end
 
---BlizOptionsGroup_AB_Name = "AutoBar2"
-local blizz_options = AceGUI:Create("BlizOptionsGroup")
-blizz_options:SetName("AutoBar2")
-InterfaceOptions_AddCategory(blizz_options.frame);
+local tab =  AceGUI:Create("TabGroup")
+tab:SetLayout("Flow")
+-- Setup which tabs to show
+tab:SetTabs({{text="Nameless Categories", value="tab1"}, {text="Tab 2", value="tab2"}})
+-- Register callback
+tab:SetCallback("OnGroupSelected", SelectGroup)
+-- Set initial Tab (this will fire the OnGroupSelected callback)
+tab:SelectTab("tab1")
 
-local blizz_options_debug = AceGUI:Create("BlizOptionsGroup")
-blizz_options_debug:SetName("AutoBar2-1", "AutoBar2")
-InterfaceOptions_AddCategory(blizz_options_debug.frame);
+-- add to the frame container
+AutoBarConfig.DebugFrame:AddChild(tab)
