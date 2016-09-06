@@ -3,6 +3,18 @@ local function atl(key, name)
 	AutoBar.locale[key] = AutoBar.locale[key] or name;
 end
 
+local function atld(key)
+	AutoBar.locale[key] = AutoBar.locale[key] or key;
+end
+
+local function atl_table(p_table)
+	for i,v in ipairs(p_table) do
+		AutoBar.locale[v] = AutoBar.locale[v] or v;
+	end
+	
+end
+
+
 atl("AutoBar.Food.Health.Basic", AutoBar.locale["Consumable.Food.Edible.Basic.Non-Conjured"]);
 atl("AutoBar.Food.Mana.Basic", AutoBar.locale["Consumable.Water.Basic"]);
 atl("AutoBar.Food.Combo.Basic", AutoBar.locale["Consumable.Food.Edible.Combo.Non-Conjured"]);
@@ -59,3 +71,29 @@ atl("AutoBarButtonBattlePetItems", "Battle Pet Items")
 
 atl("Max Popup Height", "Max Popup Height")
 atl("Max Popup Height Desc", "Maximum Number of button rows for a popup")
+
+atl("Muffin.Gear.Trinket", "Muffin.Gear.Trinket")
+
+atl("Muffin.Food.Health.Basic", "Muffin.Food.Health.Basic")
+atl("Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep", "Consumable.Cooldown.Potion.Rejuvenation.Dreamless Sleep")
+atl("Muffin.Food.Combo", "Muffin.Food.Combo")
+atl("Muffin.Potion.Combo", "Muffin.Potion.Combo")
+atl("Consumable.Buff.Water Breathing", "Consumable.Buff.Water Breathing")
+
+
+local quick_sets = 
+{
+	"Consumable.Buff.Resistance.Self",
+	"Consumable.Food.Bread",
+	"Consumable.Food.Cheese",
+	"Consumable.Food.Fungus",
+	"Muffin.Battle Pet Items.Upgrade",
+	"Muffin.Food.Combo.Basic",
+	"Muffin.Food.Mana.Basic",
+	"Spell.Interrupt",
+	"Spell.Mage.Conjure Food",
+	"Spell.Charge",
+	"Spell.ER",
+}
+
+atl_table(quick_sets);
