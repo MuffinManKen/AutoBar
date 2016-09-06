@@ -12,6 +12,15 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.07:
+ - AutoBar should no longer forget your chosen mount
+ - Mount buttons are now sorted (with the exception of your current choice and the first one)
+ - Added Muffin.Garrison.Gearworks
+ - Added Muffin.Order Hall.Troop Recruit
+ - Added Muffin.Elixir categories
+ - Updated MuffinLibPT
+ - Not all built-in Categories were available to custom buttons, but now are.
+
 v7.0.3.06:
  - Added Pet Bandages to the Battle Pet Items button
  - Added more Dalaran Lures

@@ -66,13 +66,12 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-" - Added Pet Bandages to the Battle Pet Items button|n" ..
-" - Added more Dalaran Lures|n" ..
-" - Reviewed Priest Class Bar|n" ..
-" - Profession-specific mounts shouldn't show up for people without that profession|n" ..
-" - Added Big Fountain Goldfish to Food|n" ..
-" - Added Pet Treats to Battle Pet Items button|n" ..
-" - Added Order Hall button. Right now it just has 'Gain Artifact Power' items.|n" ..
+" - AutoBar should no longer forget your chosen mount|n" ..
+" - Mount buttons are now sorted (with the exception of your current choice and the first one)|n" ..
+" - Added Muffin.Garrison.Gearworks|n" ..
+" - Added Muffin.Order Hall.Troop Recruit|n" ..
+" - Added Muffin.Elixir categories|n" ..
+" - Updated MuffinLibPT|n" ..
 "|n"
 
 
