@@ -94,6 +94,21 @@ local quick_sets =
 	"Spell.Mage.Conjure Food",
 	"Spell.Charge",
 	"Spell.ER",
+	"Consumable.Buff.Resistance.Target",
+	"Muffin.Potion.Mana",
+	"Muffin.Food.Health.Buff",
+	"Consumable.Food.Meat",
+	"Consumable.Food.Fish",
+	"Muffin.Food.Combo.Buff",
+	"Muffin.SunSongRanch",
+	"Muffin.Battle Pet Items.Level",
+	"Muffin.Misc.Openable",
+	"Tradeskill.Tool.Fishing.Bait",
+	"Muffin.Battle Pet Items.Bandages",
+	"Consumable.Food.Fruit",
+	"Muffin.Garrison",
+	"Muffin.Food.Mana.Buff",
+	"Muffin.Battle Pet Items.Pet Treat",
 }
 
 atl_table(quick_sets);
