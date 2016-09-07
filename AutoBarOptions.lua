@@ -1257,12 +1257,12 @@ function AutoBar:CreateOptionsAce3()
 							order = 100,
 							name = "",
 						},
-						sticky = {
-							type = "toggle",
-							order = 151,
-							name = L["Sticky Frames"],
-							desc = L["Snap Bars while moving"],
-						},
+--						sticky = {
+--							type = "toggle",
+--							order = 151,
+--							name = L["Sticky Frames"],
+--							desc = L["Snap Bars while moving"],
+--						},
 						clampedToScreen = {
 							type = "toggle",
 							order = 161,
@@ -3012,17 +3012,17 @@ function AutoBar:CreateSmallOptions()
 						},
 					}
 				},
-				sticky = {
-					order = 15,
-					name = L["Sticky Frames"],
-					desc = L["Snap Bars while moving"],
-					type = "toggle",
-					get = function() return self.db.account.sticky end,
-					set = function(value)
-						self.db.account.sticky = value
-						AutoBarChanged()
-					end,
-				},
+--				sticky = {
+--					order = 15,
+--					name = L["Sticky Frames"],
+--					desc = L["Snap Bars while moving"],
+--					type = "toggle",
+--					get = function() return self.db.account.sticky end,
+--					set = function(value)
+--						self.db.account.sticky = value
+--						AutoBarChanged()
+--					end,
+--				},
 				clampedToScreen = {
 					order = 15,
 					name = L["Clamp Bars to screen"],
