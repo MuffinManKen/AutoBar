@@ -1269,12 +1269,12 @@ function AutoBar:CreateOptionsAce3()
 							name = L["Clamp Bars to screen"],
 							desc = L["Clamped Bars can not be positioned off screen"],
 						},
-						showTooltipExtended = {
-							type = "toggle",
-							order = 170,
-							name = L["Show Extended Tooltips"],
-							disabled = function() return not self.db.account.showTooltip end,
-						},
+--						showTooltipExtended = {
+--							type = "toggle",
+--							order = 170,
+--							name = L["Show Extended Tooltips"],
+--							disabled = function() return not self.db.account.showTooltip end,
+--						},
 
 						header2 = {
 							type = "header",
@@ -3079,18 +3079,18 @@ function AutoBar:CreateSmallOptions()
 					end,
 					disabled = function() return not self.db.account.showTooltip end,
 				},
-				showTooltipExtended = {
-					type = "toggle",
-					order = 42,
-					name = L["Show Extended Tooltips"],
-					desc = L["Show Extended Tooltips"],
-					get = function() return self.db.account.showTooltipExtended end,
-					set = function(value)
-						self.db.account.showTooltipExtended = value
-						AutoBarChanged()
-					end,
-					disabled = function() return not self.db.account.showTooltip end,
-				},
+--				showTooltipExtended = {
+--					type = "toggle",
+--					order = 42,
+--					name = L["Show Extended Tooltips"],
+--					desc = L["Show Extended Tooltips"],
+--					get = function() return self.db.account.showTooltipExtended end,
+--					set = function(value)
+--						self.db.account.showTooltipExtended = value
+--						AutoBarChanged()
+--					end,
+--					disabled = function() return not self.db.account.showTooltip end,
+--				},
 				showEmptyButtons = {
 					type = "toggle",
 					order = 51,

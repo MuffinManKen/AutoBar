@@ -844,87 +844,88 @@ end
 -- Button Update callback functions
 --
 
-function AutoBarButton:SetTooltip(button)
+--function AutoBarButton:SetTooltip(button)
 --AutoBar:Print("SetTooltip " .. tostring(self.needsTooltip) .. " button " .. tostring(button) .. " button " .. tostring(button) .. " showTooltip " .. tostring(AutoBar.db.account.showTooltip) .. " self.needsTooltip " .. tostring(self.needsTooltip))
-	local isAutoBarButton = self.class and self.class.buttonDB
-
-	if (isAutoBarButton and self.GetHotkey) then
-		LibKeyBound:Set(self)
-	end
-	local noTooltip = not (AutoBar.db.account.showTooltip and self.needsTooltip or AutoBar.moveButtonsMode)
-	noTooltip = noTooltip or (InCombatLockdown() and not AutoBar.db.account.showTooltipCombat) or (button == "OnLeave")
-	if (noTooltip) then
-		self.updateTooltip = nil
-		GameTooltip:Hide()
-		return
-	end
-
-	if (GetCVar("UberTooltips") == "1") then
-		GameTooltip_SetDefaultAnchor(GameTooltip, self)
-	else
-		local x = self:GetRight();
-		if ( x >= ( GetScreenWidth() / 2 ) ) then
-			GameTooltip:SetOwner(self, "ANCHOR_LEFT");
-		else
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-		end
-	end
-
-	-- Add Button or Bar name
-	if (AutoBar.moveButtonsMode) then
-		if (self.class and self.class.sharedLayoutDB) then
-			GameTooltip:AddLine(self.class.barName)
-		elseif(isAutoBarButton) then
-			GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
-		end
-	else
-		local buttonType = self:GetAttribute("type")
-
-		if (not buttonType) then
-			if (isAutoBarButton) then
-				GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
-			else
-				self.updateTooltip = nil
-			end
-		elseif (buttonType == "item") then
-			local itemLink = self:GetAttribute("item")
-			if (itemLink) then
-				local itemId = self:GetAttribute("itemId")
-				local bag, slot = AutoBarSearch.found:GetItemData(itemId)
-				if (bag and slot) then
-					GameTooltip:SetBagItem(bag, slot)
-				elseif (slot) then
-					GameTooltip:SetInventoryItem("player", slot)
-				else
-					GameTooltip:SetHyperlink(itemLink)
-				end
-			end
-			self.updateTooltip = TOOLTIP_UPDATE_TIME
-			if (AutoBar.db.account.showTooltipExtended) then
-				GameTooltip_ShowCompareItem()
-			end
--- /script local bag, slot = strmatch("3,4", "^(%d+)%s+(%d+)$"); AutoBar:Print("bag " .. tostring(bag).." slot " .. tostring(slot))
-		elseif (buttonType == "spell") then
-			local spellName = self:GetAttribute("spell")
-
-			if (spellName) then
-				local spellInfo = AutoBarSearch.spells[spellName]
-				GameTooltip:SetSpellBookItem(spellInfo.spellId, spellInfo.spellTab)
-			end
-			self.updateTooltip = TOOLTIP_UPDATE_TIME
-		end
-
-		local rightClickType = self:GetAttribute("type2")
-		if (rightClickType == "spell") then
-			local spellName = self:GetAttribute("spell2")
-			if (spellName) then
-				GameTooltip:AddLine(L["Right Click casts "] .. spellName, 1, 0.2, 1, 1)
-			end
-		end
-	end
-
-	GameTooltip:Show()
-end
+--	local isAutoBarButton = self.class and self.class.buttonDB
+--
+--	if (isAutoBarButton and self.GetHotkey) then
+--		LibKeyBound:Set(self)
+--	end
+--	local noTooltip = not (AutoBar.db.account.showTooltip and self.needsTooltip or AutoBar.moveButtonsMode)
+--	noTooltip = noTooltip or (InCombatLockdown() and not AutoBar.db.account.showTooltipCombat) or (button == "OnLeave")
+--	if (noTooltip) then
+--		self.updateTooltip = nil
+--		GameTooltip:Hide()
+--		return
+--	end
+--
+--	if (GetCVar("UberTooltips") == "1") then
+--		GameTooltip_SetDefaultAnchor(GameTooltip, self)
+--	else
+--		local x = self:GetRight();
+--		if ( x >= ( GetScreenWidth() / 2 ) ) then
+--			GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+--		else
+--			GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+--		end
+--	end
+--
+--	-- Add Button or Bar name
+--	if (AutoBar.moveButtonsMode) then
+--		if (self.class and self.class.sharedLayoutDB) then
+--			GameTooltip:AddLine(self.class.barName)
+--		elseif(isAutoBarButton) then
+--			GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
+--		end
+--	else
+--		local buttonType = self:GetAttribute("type")
+--
+--		if (not buttonType) then
+--			if (isAutoBarButton) then
+--				GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
+--			else
+--				self.updateTooltip = nil
+--			end
+--		elseif (buttonType == "item") then
+--			local itemLink = self:GetAttribute("item")
+--			if (itemLink) then
+--				local itemId = self:GetAttribute("itemId")
+--				local bag, slot = AutoBarSearch.found:GetItemData(itemId)
+--				if (bag and slot) then
+--					GameTooltip:SetBagItem(bag, slot)
+--				elseif (slot) then
+--					GameTooltip:SetInventoryItem("player", slot)
+--				else
+--					GameTooltip:SetHyperlink(itemLink)
+--				end
+--			end
+--			self.updateTooltip = TOOLTIP_UPDATE_TIME
+--			if (AutoBar.db.account.showTooltipExtended) then
+--				print("GameTooltip_ShowCompareItem")
+--				GameTooltip_ShowCompareItem()
+--			end
+---- /script local bag, slot = strmatch("3,4", "^(%d+)%s+(%d+)$"); AutoBar:Print("bag " .. tostring(bag).." slot " .. tostring(slot))
+--		elseif (buttonType == "spell") then
+--			local spellName = self:GetAttribute("spell")
+--
+--			if (spellName) then
+--				local spellInfo = AutoBarSearch.spells[spellName]
+--				GameTooltip:SetSpellBookItem(spellInfo.spellId, spellInfo.spellTab)
+--			end
+--			self.updateTooltip = TOOLTIP_UPDATE_TIME
+--		end
+--
+--		local rightClickType = self:GetAttribute("type2")
+--		if (rightClickType == "spell") then
+--			local spellName = self:GetAttribute("spell2")
+--			if (spellName) then
+--				GameTooltip:AddLine(L["Right Click casts "] .. spellName, 1, 0.2, 1, 1)
+--			end
+--		end
+--	end
+--
+--	GameTooltip:Show()
+--end
 
 
 -- Add your Button custom options to the optionlist
