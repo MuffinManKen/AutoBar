@@ -27,18 +27,18 @@ AceGUIWidget-DragLink.lua
 Core.lua
 
 # Localization
-Locale-enUS.lua
-Locale-deDE.lua
-Locale-esES.lua
-Locale-esMX.lua
-Locale-frFR.lua
-Locale-itIT.lua
-Locale-koKR.lua
-Locale-ptBR.lua
-Locale-ruRU.lua
-Locale-zhCN.lua
-Locale-zhTW.lua
-Locale-default.lua
+locale/Locale-enUS.lua
+locale/Locale-deDE.lua
+locale/Locale-esES.lua
+locale/Locale-esMX.lua
+locale/Locale-frFR.lua
+locale/Locale-itIT.lua
+locale/Locale-koKR.lua
+locale/Locale-ptBR.lua
+locale/Locale-ruRU.lua
+locale/Locale-zhCN.lua
+locale/Locale-zhTW.lua
+locale/Locale-default.lua
 
 AutoBarDB.lua
 AutoBarOptions.lua
