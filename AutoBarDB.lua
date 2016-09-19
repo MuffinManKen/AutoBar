@@ -251,86 +251,22 @@ function AutoBar:InitializeDefaults()
 		DRUID = "AutoBarClassBarDruid",
 		HUNTER = "AutoBarClassBarHunter",
 		MAGE = "AutoBarClassBarMage",
-		MONK = "AutoBarClassBarMonk"
+		MONK = "AutoBarClassBarMonk",
+		PALADIN = "AutoBarClassBarPaladin",
+		PRIEST = "AutoBarClassBarPriest",
+		ROGUE = "AutoBarClassBarRogue",
+		SHAMAN = "AutoBarClassBarShaman",
+		WARLOCK = "AutoBarClassBarWarlock",
+		WARRIOR = "AutoBarClassBarWarrior"
 	}
 
-	if (AutoBar.CLASS == "DEMONHUNTER") then
-
-		-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
-		AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
-		AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
-
-		if (not AutoBar.db.class.barList["AutoBarClassBarDemonHunter"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDemonHunter"] = get_class_bar_default_settings("DEMONHUNTER")
-		end
+	-- Create the character's class bar if it doesn't already exist
+	local class_bar_name = class_bar_map[AutoBar.CLASS]
+	if (not AutoBar.db.class.barList[class_bar_name]) then
+		AutoBar.db.class.barList[class_bar_name] = get_class_bar_default_settings(AutoBar.CLASS)
 	end
 
 
-	if (AutoBar.CLASS == "DEATHKNIGHT") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarDeathKnight"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDeathKnight"] = get_class_bar_default_settings("DEATHKNIGHT")
-		end
-	end
-
-	if (AutoBar.CLASS == "DRUID") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarDruid"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDruid"] = get_class_bar_default_settings("DRUID")
-		end
-	end
-
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarHunter"]) then
-			AutoBar.db.class.barList["AutoBarClassBarHunter"] = get_class_bar_default_settings("HUNTER")
-		end
-	end
-
-	if (AutoBar.CLASS == "MAGE") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarMage"]) then
-			AutoBar.db.class.barList["AutoBarClassBarMage"] = get_class_bar_default_settings("MAGE")
-		end
-	end
-
-	if (AutoBar.CLASS == "MONK") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarMonk"]) then
-			AutoBar.db.class.barList["AutoBarClassBarMonk"] = get_class_bar_default_settings("MONK")
-		end
-	end
-
-	if (AutoBar.CLASS == "PALADIN") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarPaladin"]) then
-			AutoBar.db.class.barList["AutoBarClassBarPaladin"] = get_class_bar_default_settings("PALADIN")
-		end
-	end
-
-	if (AutoBar.CLASS == "PRIEST") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarPriest"]) then
-			AutoBar.db.class.barList["AutoBarClassBarPriest"] = get_class_bar_default_settings("PRIEST")
-		end
-	end
-
-	if (AutoBar.CLASS == "ROGUE") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarRogue"]) then
-			AutoBar.db.class.barList["AutoBarClassBarRogue"] = get_class_bar_default_settings("ROGUE")
-		end
-	end
-
-	if (AutoBar.CLASS == "SHAMAN") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarShaman"]) then
-			AutoBar.db.class.barList["AutoBarClassBarShaman"] = get_class_bar_default_settings("SHAMAN")
-		end
-	end
-
-	if (AutoBar.CLASS == "WARLOCK") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarWarlock"]) then
-			AutoBar.db.class.barList["AutoBarClassBarWarlock"] = get_class_bar_default_settings("WARLOCK")
-		end
-	end
-
-	if (AutoBar.CLASS == "WARRIOR") then
-		if (not AutoBar.db.class.barList["AutoBarClassBarWarrior"]) then
-			AutoBar.db.class.barList["AutoBarClassBarWarrior"] = get_class_bar_default_settings("WARRIOR")
-		end
-	end
 
 	if (AutoBar.CLASS == "DRUID") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonBear"]) then
@@ -916,7 +852,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
@@ -1098,14 +1034,14 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	local deprecated = 
+	local deprecated_buttons = 
 	{
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal"
 	}
 
-	for _, dep in ipairs(deprecated) do
+	for _, dep in ipairs(deprecated_buttons) do
 		if (AutoBar.db.account.buttonList[dep]) then
 			AutoBar.db.account.buttonList[dep] = nil
 		end
