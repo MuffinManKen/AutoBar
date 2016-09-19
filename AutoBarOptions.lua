@@ -1332,15 +1332,6 @@ function AutoBar:CreateOptionsAce3()
 							tristate = true,
 							disabled = getCombatLockdown,
 						},
-						alpha = {
-							type = "range",
-							order = 411,
-							name = L["Alpha"],
-							desc = L["Change the alpha of the bar."],
-							min = 0, max = 1, step = 0.01, bigStep = 0.05,
-							arg = passValue,
-							disabled = getCombatLockdown,
-						},
 
 						fadeOutCancelInCombat = {
 							type = "toggle",
