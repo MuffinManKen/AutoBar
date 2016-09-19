@@ -110,6 +110,81 @@ function AutoBar:GetCategoryItemDB(categoryKey, itemIndex)
 	return AutoBar.db.account.customCategories[categoryKey].items[itemIndex]
 end
 
+local function get_bar_default_settings()
+
+	local settings = 
+	{
+		enabled = true,
+		rows = 1,
+		columns = ROW_COLUMN_MAX,
+		alignButtons = "3",
+		alpha = 1,
+		buttonWidth = 36,
+		buttonHeight = 36,
+		docking = nil,
+		dockShiftX = 0,
+		dockShiftY = 0,
+		fadeOut = false,
+		frameStrata = "LOW",
+		hide = false,
+		padding = 0,
+		popupDirection = "1",
+		scale = 1,
+		showOnModifier = nil,
+		posX = 300,
+		posY = 200,
+		DEATHKNIGHT = true,
+		DEMONHUNTER = true,
+		DRUID = true,
+		HUNTER = true,
+		MAGE = true,
+		MONK = true,
+		PALADIN = true,
+		PRIEST = true,
+		ROGUE = true,
+		SHAMAN = true,
+		WARLOCK = true,
+		WARRIOR = true,
+		buttonKeys = {},	
+	}
+
+	return settings
+
+end
+
+local function get_class_bar_default_settings(p_class_name)
+
+	local settings = 
+	{
+		enabled = true,
+		share = "2",
+		rows = 1,
+		columns = CLASS_COLUMN_DEFAULT,
+		alignButtons = "3",
+		alpha = 1,
+		buttonWidth = 36,
+		buttonHeight = 36,
+		docking = nil,
+		dockShiftX = 0,
+		dockShiftY = 0,
+		fadeOut = false,
+		frameStrata = "LOW",
+		hide = false,
+		padding = 0,
+		popupDirection = "1",
+		scale = 1,
+		showOnModifier = nil,
+		posX = 300,
+		posY = 280,
+		DEMONHUNTER = true,
+		buttonKeys = {},
+	}
+	
+	settings[p_class_name] = true
+
+	return settings
+
+end
 
 function AutoBar:InitializeDefaults()
 	if (not self.defaults) then
@@ -117,7 +192,6 @@ function AutoBar:InitializeDefaults()
 			name = "Spambelly",
 			guiName = "Spambelly",
 			alignButtons = "3",
-			alpha = 1,
 			frameLocked = false,
 			showCount = true,
 			showHotkey = true,
@@ -129,7 +203,6 @@ function AutoBar:InitializeDefaults()
 			handle_spell_changed = true,
 			selfCastRightClick = true,
 			showEmptyButtons = false,
-			sticky = true,
 			style = "Dreamlayout",
 			barList = {},
 		}
@@ -153,431 +226,109 @@ function AutoBar:InitializeDefaults()
 	end
 
 	if (not AutoBar.db.account.barList["AutoBarClassBarBasic"]) then
-		AutoBar.db.account.barList["AutoBarClassBarBasic"] = {
-			enabled = true,
-			rows = 1,
-			columns = ROW_COLUMN_MAX,
-			alignButtons = "3",
-			alpha = 1,
-			buttonWidth = 36,
-			buttonHeight = 36,
-			docking = nil,
-			dockShiftX = 0,
-			dockShiftY = 0,
-			fadeOut = false,
-			frameStrata = "LOW",
-			hide = false,
-			padding = 0,
-			popupDirection = "1",
-			scale = 1,
-			showOnModifier = nil,
-			posX = 300,
-			posY = 200,
-			DEATHKNIGHT = true,
-			DEMONHUNTER = true,
-			DRUID = true,
-			HUNTER = true,
-			MAGE = true,
-			MONK = true,
-			PALADIN = true,
-			PRIEST = true,
-			ROGUE = true,
-			SHAMAN = true,
-			WARLOCK = true,
-			WARRIOR = true,
-			buttonKeys = {},
-		}
+		AutoBar.db.account.barList["AutoBarClassBarBasic"] = get_bar_default_settings();
 	end
 	if (not AutoBar.db.account.barList["AutoBarClassBarExtras"]) then
-		AutoBar.db.account.barList["AutoBarClassBarExtras"] = {
-			enabled = true,
-			rows = 1,
-			columns = 9, --ROW_COLUMN_MAX,
-			alignButtons = "3",
-			alpha = 1,
-			buttonWidth = 36,
-			buttonHeight = 36,
-			docking = nil,
-			dockShiftX = 0,
-			dockShiftY = 0,
-			fadeOut = false,
-			frameStrata = "LOW",
-			hide = false,
-			padding = 0,
-			popupDirection = "1",
-			scale = 1,
-			showOnModifier = nil,
-			posX = 300,
-			posY = 360,
-			DEATHKNIGHT = true,
-			DEMONHUNTER = true,
-			DRUID = true,
-			HUNTER = true,
-			MAGE = true,
-			MONK = true,
-			PALADIN = true,
-			PRIEST = true,
-			ROGUE = true,
-			SHAMAN = true,
-			WARLOCK = true,
-			WARRIOR = true,
-			buttonKeys = {},
-		}
+		AutoBar.db.account.barList["AutoBarClassBarExtras"] = get_bar_default_settings();
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].columns = 9 --ROW_COLUMN_MAX,
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].posX = 300
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].posY = 360
 	end
+
+	--
+	-- Create the various class bars
+	--
+	if (AutoBar.CLASS == "DEMONHUNTER") then
+		-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
+		AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
+	end
+
+	local class_bar_map = 
+	{
+		DEMONHUNTER = "AutoBarClassBarDemonHunter",
+		DEATHKNIGHT = "AutoBarClassBarDeathKnight",
+		DRUID = "AutoBarClassBarDruid",
+		HUNTER = "AutoBarClassBarHunter",
+		MAGE = "AutoBarClassBarMage",
+		MONK = "AutoBarClassBarMonk"
+	}
 
 	if (AutoBar.CLASS == "DEMONHUNTER") then
 
--- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
-AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
-AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
+		-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
+		AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
 
 		if (not AutoBar.db.class.barList["AutoBarClassBarDemonHunter"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDemonHunter"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				DEMONHUNTER = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarDemonHunter"] = get_class_bar_default_settings("DEMONHUNTER")
 		end
 	end
 
 
 	if (AutoBar.CLASS == "DEATHKNIGHT") then
-
--- ToDo: This temporarily forces existing configs to recognize DEATHKNIGHT.  Remove after wotlk
---AutoBar.db.account.barList["AutoBarClassBarBasic"].DEATHKNIGHT = true
---AutoBar.db.account.barList["AutoBarClassBarExtras"].DEATHKNIGHT = true
-
 		if (not AutoBar.db.class.barList["AutoBarClassBarDeathKnight"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDeathKnight"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				DEATHKNIGHT = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarDeathKnight"] = get_class_bar_default_settings("DEATHKNIGHT")
 		end
 	end
+
 	if (AutoBar.CLASS == "DRUID") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarDruid"]) then
-			AutoBar.db.class.barList["AutoBarClassBarDruid"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				DRUID = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarDruid"] = get_class_bar_default_settings("DRUID")
 		end
 	end
+
 	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarHunter"]) then
-			AutoBar.db.class.barList["AutoBarClassBarHunter"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				HUNTER = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarHunter"] = get_class_bar_default_settings("HUNTER")
 		end
 	end
+
 	if (AutoBar.CLASS == "MAGE") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarMage"]) then
-			AutoBar.db.class.barList["AutoBarClassBarMage"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				MAGE = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarMage"] = get_class_bar_default_settings("MAGE")
 		end
 	end
 
 	if (AutoBar.CLASS == "MONK") then
-
--- ToDo: This temporarily forces existing configs to recognize MONK.  Remove after MoP
-AutoBar.db.account.barList["AutoBarClassBarBasic"].MONK = true
-AutoBar.db.account.barList["AutoBarClassBarExtras"].MONK = true
-
 		if (not AutoBar.db.class.barList["AutoBarClassBarMonk"]) then
-			AutoBar.db.class.barList["AutoBarClassBarMonk"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				MONK = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarMonk"] = get_class_bar_default_settings("MONK")
 		end
 	end
 
 	if (AutoBar.CLASS == "PALADIN") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarPaladin"]) then
-			AutoBar.db.class.barList["AutoBarClassBarPaladin"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				PALADIN = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarPaladin"] = get_class_bar_default_settings("PALADIN")
 		end
 	end
+
 	if (AutoBar.CLASS == "PRIEST") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarPriest"]) then
-			AutoBar.db.class.barList["AutoBarClassBarPriest"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				PRIEST = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarPriest"] = get_class_bar_default_settings("PRIEST")
 		end
 	end
+
 	if (AutoBar.CLASS == "ROGUE") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarRogue"]) then
-			AutoBar.db.class.barList["AutoBarClassBarRogue"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				ROGUE = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarRogue"] = get_class_bar_default_settings("ROGUE")
 		end
 	end
+
 	if (AutoBar.CLASS == "SHAMAN") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarShaman"]) then
-			AutoBar.db.class.barList["AutoBarClassBarShaman"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				SHAMAN = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarShaman"] = get_class_bar_default_settings("SHAMAN")
 		end
 	end
+
 	if (AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarWarlock"]) then
-			AutoBar.db.class.barList["AutoBarClassBarWarlock"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				WARLOCK = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarWarlock"] = get_class_bar_default_settings("WARLOCK")
 		end
 	end
+
 	if (AutoBar.CLASS == "WARRIOR") then
 		if (not AutoBar.db.class.barList["AutoBarClassBarWarrior"]) then
-			AutoBar.db.class.barList["AutoBarClassBarWarrior"] = {
-				enabled = true,
-				share = "2",
-				rows = 1,
-				columns = CLASS_COLUMN_DEFAULT,
-				alignButtons = "3",
-				alpha = 1,
-				buttonWidth = 36,
-				buttonHeight = 36,
-				docking = nil,
-				dockShiftX = 0,
-				dockShiftY = 0,
-				fadeOut = false,
-				frameStrata = "LOW",
-				hide = false,
-				padding = 0,
-				popupDirection = "1",
-				scale = 1,
-				showOnModifier = nil,
-				posX = 300,
-				posY = 280,
-				WARRIOR = true,
-				buttonKeys = {},
-			}
+			AutoBar.db.class.barList["AutoBarClassBarWarrior"] = get_class_bar_default_settings("WARRIOR")
 		end
 	end
 
