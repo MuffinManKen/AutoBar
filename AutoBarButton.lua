@@ -1996,6 +1996,32 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		elseif (AutoBar.player_faction_name == "Alliance") then
 			faction_id = 1
 		end
+		
+		local bad_mounts={}
+		local prof1_idx, prof2_idx = GetProfessions()
+		local prof1_id = prof1_idx and select(7, GetProfessionInfo(prof1_idx))
+		local prof2_id = prof2_idx and select(7, GetProfessionInfo(prof2_idx))
+
+		local is_tailor = (prof1_id == 197) or (prof2_id == 197)
+		if(not is_tailor) then
+			bad_mounts[169952] = true	--Creeping Carpet
+			bad_mounts[61309] = true	--Magnificent Flying Carpet
+			bad_mounts[75596] = true	--Frosty Flying Carpet
+			bad_mounts[61451] = true	--Magnificent Flying Carpet
+		end
+
+		local is_engineer = (prof1_id == 202) or (prof2_id == 202)
+		if(not is_engineer) then
+			bad_mounts[44153] = true	--Flying Machine
+			bad_mounts[44151] = true	--Turbo Flying Machine
+		end
+		
+		local is_engineer = (prof1_id == 202) or (prof2_id == 202)
+		if(not is_engineer) then
+			bad_mounts[44153] = true	--Flying Machine
+			bad_mounts[44151] = true	--Turbo Flying Machine
+		end
+
 
 --		if (not category.castList) then
 			category.castList = {}
@@ -2012,12 +2038,12 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
 			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
 			local faction_ok = (not faction_specific) or (faction_specific and (faction_id == faction))
---if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider" or name == "Creeping Carpet") then 
+--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider" or name == "Creeping Carpet" or (is_filtered and is_collected)) then 
 --print(string.format("%5s  %5s  Usable:%5s", v, spell_id, tostring(usable)), name)
 --print("   FacSpecific:",faction_specific, "Faction:", faction, "Filtered:", is_filtered, "Collected:", is_collected)
 --print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 --end;
-			if (is_collected and user_selected and usable and not qiraji_filtered) then
+			if (is_collected and user_selected and faction_ok and not qiraji_filtered and not bad_mounts[spell_id]) then
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
