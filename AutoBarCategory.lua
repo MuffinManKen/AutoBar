@@ -763,7 +763,8 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Tool"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Tool", "INV_Fishingpole_01", "Tradeskill.Tool.Fishing.Tool")
 
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"] = AutoBarItems:new( "Muffin.Skill.Fishing.Lure", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
-
+	AutoBarCategoryList["Muffin.Skill.Fishing.Misc"] = AutoBarItems:new( "Muffin.Skill.Fishing.Misc", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Misc")
+	AutoBarCategoryList["Muffin.Skill.Fishing.Rare Fish"] = AutoBarItems:new( "Muffin.Skill.Fishing.Rare Fish", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Rare Fish")
 
 	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Other"] = AutoBarItems:new( "Consumable.Cooldown.Stone.Mana.Other", "Spell_Shadow_SealOfKings", "Consumable.Cooldown.Stone.Mana.Other")
 
@@ -1517,10 +1518,12 @@ function AutoBarCategory:Initialize2()
 	})
 
 	spellNameList["Fishing"], _, spellIconList["Fishing"] = AutoBar:LoggedGetSpellInfo(131474)
-	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new(
-			"Spell.Fishing", spellIconList["Fishing"], {
-			"*", spellNameList["Fishing"],
-			})
+	spellNameList["Undercurrent"] = AutoBar:LoggedGetSpellInfo(201891)
+	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new("Spell.Fishing", spellIconList["Fishing"],
+	{
+		"*", AutoBar:GetSpellNameByName("Fishing"),
+		"*", AutoBar:GetSpellNameByName("Undercurrent"),
+	})
 
 
 	spellNameList["Freezing Trap"] = AutoBar:LoggedGetSpellInfo(187650)

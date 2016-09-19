@@ -1597,6 +1597,9 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFishing.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
+	self:AddCategory("Muffin.Skill.Fishing.Misc")
+	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
+	
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
 	self:AddCategory("Tradeskill.Tool.Fishing.Tool")
