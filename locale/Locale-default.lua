@@ -109,6 +109,8 @@ local quick_sets =
 	"Muffin.Garrison",
 	"Muffin.Food.Mana.Buff",
 	"Muffin.Battle Pet Items.Pet Treat",
+	"Muffin.Skill.Fishing.Misc",
+	"Muffin.Skill.Fishing.Rare Fish",
 }
 
 atl_table(quick_sets);
