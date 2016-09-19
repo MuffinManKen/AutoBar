@@ -54,7 +54,7 @@ if (GetLocale() == "enUS") then
 		["Drop items, spells or macros onto Button to add them to its top Custom Category"] = "Drop items, spells or macros onto Button to add them to its top Custom Category";
 		["Enabled"] = "Enabled",
 		["Enable %s."] = "Enable %s.",
-		["FadeOut"] = "FadeOut",
+		["FadeOut"] = "Fade Out",
 		["Fade out the Bar when not hovering over it."] = "Fade out the Bar when not hovering over it.",
 		["FadeOut Time"] = "FadeOut Time",
 		["FadeOut takes this amount of time."] = "FadeOut takes this amount of time",
