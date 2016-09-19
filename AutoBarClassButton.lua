@@ -607,7 +607,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 	if (not self.buttonDB.enabled) then
 		return false
 	end
-	if (AutoBar.db.account.showEmptyButtons or AutoBar.moveButtonsMode or self.buttonDB.alwaysShow or not self.parentBar.sharedLayoutDB.collapseButtons) then --AutoBar.keyBoundMode or
+	if (AutoBar.db.account.showEmptyButtons or AutoBar.moveButtonsMode or self.buttonDB.alwaysShow or AutoBar.keyBoundMode) then
 		return true
 	end
 	local itemType = self.frame:GetAttribute("type")
