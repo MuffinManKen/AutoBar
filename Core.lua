@@ -66,12 +66,13 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-" - AutoBar should no longer forget your chosen mount|n" ..
-" - Mount buttons are now sorted (with the exception of your current choice and the first one)|n" ..
-" - Added Muffin.Garrison.Gearworks|n" ..
-" - Added Muffin.Order Hall.Troop Recruit|n" ..
-" - Added Muffin.Elixir categories|n" ..
-" - Updated MuffinLibPT|n" ..
+" - Updated MuffinLibPT and LibPeriodicTable|n" ..
+" - Added Bulging Barrel of Oil and Huge Ogre Cache to Garrison items|n" ..
+" - Removed 'Sticky Frames'' option since it didn't work|n" ..
+" - ShowExtendedTooltips was never implemented. Removed.|n" ..
+" - Mount button wasn't showing anything if you logged in while in an inn. Removed Blizzard filtering for professions, added my own.|n" ..
+" - Added more fishing stuff|n" ..
+" - Removed Collapse Buttons option|n" ..
 "|n"
 
 

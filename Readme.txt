@@ -12,6 +12,15 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.08:
+ - Updated MuffinLibPT and LibPeriodicTable
+ - Added Bulging Barrel of Oil and Huge Ogre Cache to Garrison items
+ - Removed "Sticky Frames" option since it didn't work
+ - ShowExtendedTooltips was never implemented. Removed.
+ - Mount button wasn't showing anything if you logged in while in an inn. Removed Blizzard filtering for professions, added my own.
+ - Added more fishing stuff
+ - Removed Collapse Buttons option
+
 v7.0.3.07:
  - AutoBar should no longer forget your chosen mount
  - Mount buttons are now sorted (with the exception of your current choice and the first one)
