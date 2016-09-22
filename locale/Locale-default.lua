@@ -14,6 +14,7 @@ local function atl_table(p_table)
 	
 end
 
+atl("ResetCategoryDescription", "Removes ALL custom categories")
 
 atl("AutoBar.Food.Health.Basic", AutoBar.locale["Consumable.Food.Edible.Basic.Non-Conjured"]);
 atl("AutoBar.Food.Mana.Basic", AutoBar.locale["Consumable.Water.Basic"]);

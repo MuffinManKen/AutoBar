@@ -1454,7 +1454,7 @@ function AutoBar:CreateOptionsAce3()
 						    type = "execute",
 							order = 2,
 						    name = L["Reset"],
-						    desc = L["Reset"],
+						    desc = L["ResetCategoryDescription"],
 						    func = CategoryReset,
 						},
 					}
@@ -2969,7 +2969,7 @@ function AutoBar:CreateSmallOptions()
 						    type = "execute",
 							order = 2,
 						    name = L["Reset"],
-						    desc = L["Reset"],
+						    desc = L["ResetCategoryDescription"],
 						    func = CategoryReset,
 						},
 					}
