@@ -116,23 +116,9 @@ end
 
 local function get_texture_for_action(p_action)
 
+	local texture
 	if (p_action) then
-		return select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
-	end
-	
-	return nil
-
-end
-
-local function get_texture_for_macro_body(p_macro_body)
-	local debug = false
-	
-	local action = AutoBar:GetActionForMacroBody(p_macro_body);
-	local texture = get_texture_for_action(action)
-	
-	if (debug) then
-		print("   texture:", texture);
-		print("   action:" .. action)
+		texture = select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
 	end
 	
 	--We haven't found a texture. This might be because it's just not cached yet.
@@ -141,9 +127,31 @@ local function get_texture_for_macro_body(p_macro_body)
 		AutoBar.missing_items = true
 		--print("AutoBar.missing_items = true")
 	end
-	
-	return texture
+
+	return nil
+
 end
+
+--local function get_texture_for_macro_body(p_macro_body)
+--	local debug = false
+--	
+--	local action = AutoBar:GetActionForMacroBody(p_macro_body);
+--	local texture = get_texture_for_action(action)
+--	
+--	if (debug) then
+--		print("   texture:", texture);
+--		print("   action:" .. action)
+--	end
+--	
+--	--We haven't found a texture. This might be because it's just not cached yet.
+--	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
+--	if(texture == nil) then
+--		AutoBar.missing_items = true
+--		--print("AutoBar.missing_items = true")
+--	end
+--	
+--	return texture
+--end
 
 local borderBlue = {r = 0, g = 0, b = 1.0, a = 0.35}
 local borderGreen = {r = 0, g = 1.0, b = 0, a = 0.35}
@@ -156,6 +164,11 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
 			_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))
+			if(texture == nil) then
+				AutoBar.missing_items = true
+				--print("AutoBar.missing_items = true")
+			end
+
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)
 			if ((not bag) and slot) then
 				-- Add a green border if button is an equipped item
