@@ -173,6 +173,17 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 				borderColor = borderGreen
 			end
 		end
+	elseif (itemType == "toy") then
+		local item_id = frame:GetAttribute("itemId")
+		if (item_id) then
+			_, _, texture =  C_ToyBox.GetToyInfo(tonumber(item_id))
+			if(texture == nil) then
+				_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(item_id))
+			end
+			if(texture == nil) then
+				AutoBar:SetMissingItemFlag(item_id);
+			end
+		end
 	elseif (itemType == "macro") then
 		local macroIndex = frame:GetAttribute("macro")
 		if (macroIndex) then
@@ -221,27 +232,28 @@ end
 -- Set cooldown based on the type settings
 function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
-	if (itemType) then-- and not self.parentBar.faded
-		local start, duration, enabled = 0, 0, 0
+	if (not itemType) then-- and not self.parentBar.faded
+		return;
+	end
+	local start, duration, enabled = 0, 0, 0
 
-		if (itemType == "item") then
-			local itemId = self.frame:GetAttribute("itemId")
-			if (itemId) then
-			start, duration, enabled = GetItemCooldown(itemId)
-			end
-		elseif (itemType == "macro") then
+	if (itemType == "item") then
+		local itemId = self.frame:GetAttribute("itemId")
+		if (itemId) then
+		start, duration, enabled = GetItemCooldown(itemId)
+		end
+	elseif (itemType == "macro") then
 --			local macroText = self.frame:GetAttribute("macrotext")
 --			SecureCmdOptionParse()?
-		elseif (itemType == "spell") then
-			local spellName = self.frame:GetAttribute("spell")
-			start, duration, enabled = GetSpellCooldown(spellName)
-		end
+	elseif (itemType == "spell") then
+		local spellName = self.frame:GetAttribute("spell")
+		start, duration, enabled = GetSpellCooldown(spellName)
+	end
 
-		if (start and duration and enabled and start > 0 and duration > 0) then
-			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
-		else
-			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
-		end
+	if (start and duration and enabled and start > 0 and duration > 0) then
+		CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
+	else
+		CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 	end
 end
 

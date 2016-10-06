@@ -209,6 +209,8 @@ local snippetOnClick = [[
 
 	if (itemType == "item") then
 		anchorButton:SetAttribute("item", self:GetAttribute("item"))
+	elseif (itemType == "toy") then
+		anchorButton:SetAttribute("toy", self:GetAttribute("toy"))
 	elseif (itemType == "spell") then
 		anchorButton:SetAttribute("spell", self:GetAttribute("spell"))
 	elseif (itemType == "macro") then
@@ -635,6 +637,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 	frame.needsTooltip = true
 	local category = itemData and itemData.category
 
+--print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, itemId, itemData.category)
 	frame:SetAttribute("category", category)
 	frame:SetAttribute("itemId", itemId)
 
@@ -1820,47 +1823,33 @@ _, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
 
 function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 	AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
-print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
+--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
-	if (not AutoBarCategoryList["Spell.ToyBox"]) then
-		AutoBarCategoryList["Spell.ToyBox"] = AutoBarToys:new( "Spell.ToyBox", spellIconList["Puntable Marmot"], {})
-		local category = AutoBarCategoryList["Spell.ToyBox"]
+	if (not AutoBarCategoryList["Items.ToyBox"]) then
+		AutoBarCategoryList["Items.ToyBox"] = AutoBarToys:new( "Items.ToyBox", spellIconList["Puntable Marmot"], {})
+		local category = AutoBarCategoryList["Items.ToyBox"]
 		category.unInitialized = true
 	end
-	self:AddCategory("Spell.ToyBox")
+	self:AddCategory("Items.ToyBox")
 
 	if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
 	end
 
---	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
---	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
---	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
---	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
-
---	if(buttonDB.mount_show_class == true) then
---		self:AddCategory("Misc.Mount.Summoned")
---		local class = AutoBar.CLASS
---		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then self:AddCategory("Muffin.Mount") end
---	end
-
 	self:Refresh(parentBar, buttonDB)
-	print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Spell.ToyBox"].items .. " entries");
-	AutoBarCategoryList["Spell.ToyBox"]:Refresh()
+	--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Items.ToyBox"].items .. " entries");
+	AutoBarCategoryList["Items.ToyBox"]:Refresh()
 end
 --/dump AutoBarCategoryList["Muffin.Garrison"]
 function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox)
 	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
 
-	if (not AutoBarCategoryList["Spell.ToyBox"]) then
---		AutoBarCategoryList["Spell.ToyBox"] = AutoBarSpells:new( "Spell.ToyBox", spellIconList["Amani War Bear"], {})
---		category:SetNoSpellCheck(true)
-		--AutoBarButtonToyBox.prototype:init hasn't run, so skip
-		print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(updateToyBox));
+	if (not AutoBarCategoryList["Items.ToyBox"]) then
+		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(updateToyBox));
 		return true;
 	end
 
-	local category = AutoBarCategoryList["Spell.ToyBox"]
+	local category = AutoBarCategoryList["Items.ToyBox"]
 
 	AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
 
@@ -1872,16 +1861,14 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 	local toy_total_learned = C_ToyBox.GetNumLearnedDisplayedToys()
 
 
-print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
+--print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
 
 	--If the number of known Toys has changed, do stuff
-	if (toy_total_learned ~= AutoBar.last_ToyBox_count) then
-print("   Gonna do stuff");
+	if (toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) then
+--print("   Gonna do stuff");
 		AutoBar.last_ToyBox_count = toy_total_learned;
 
-		if (not category.items) then
-			category.items = {}
-		end
+		category.items = {}
 
 		local initialized = not category.unInitialized
 
@@ -1893,8 +1880,12 @@ print("   Gonna do stuff");
 			local item_index = C_ToyBox.GetToyFromIndex(i)
 			local item_id, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_index)
 			if PlayerHasToy(item_id) then
-			print("  Adding ", toy_name, item_id);
-				AutoBarSearch:RegisterToy(item_id, toy_name)
+				--print("  Adding ", toy_name, item_id);
+				local link = select(2, GetItemInfo(item_id))
+				AutoBarSearch:RegisterToy(item_id, link)
+				if(not link) then
+					AutoBar:SetMissingItemFlag(item_id)
+				end
 				category.items[#category.items + 1] = item_id
 			end
 		end
@@ -2757,7 +2748,7 @@ function AutoBarButtonTrinket2.prototype:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
 		if (itemType == "item") then
-      PickupInventoryItem(TRINKET2_SLOT)
+      	PickupInventoryItem(TRINKET2_SLOT)
 		end
 	end
 end

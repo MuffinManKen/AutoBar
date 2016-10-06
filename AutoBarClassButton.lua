@@ -638,6 +638,11 @@ function AutoBar.Class.Button.prototype:IsActive()
 					count = 1
 				end
 			end
+		elseif (itemType == "toy") then
+			local sortedItems = AutoBarSearch.sorted:GetList(self.buttonName)
+			if(sortedItems) then
+				count = #sortedItems
+			end
 		elseif (itemType == "macro") then
 			if (self.macroActive) then
 				count = 1
