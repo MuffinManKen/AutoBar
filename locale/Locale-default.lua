@@ -31,8 +31,6 @@ atl("Muffin.Flask", "Muffin.Flask");
 
 atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
-atl("AutoBarButtonOrderHall", "Order Hall")
-atl("Muffin.Order Hall", "Muffin.Order Hall")
 atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
 atl("AutoBarButtonInterrupt", "Interrupts");
@@ -81,6 +79,8 @@ atl("Muffin.Food.Combo", "Muffin.Food.Combo")
 atl("Muffin.Potion.Combo", "Muffin.Potion.Combo")
 atl("Consumable.Buff.Water Breathing", "Consumable.Buff.Water Breathing")
 
+atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
+atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
 
 local quick_sets = 
 {
@@ -110,6 +110,11 @@ local quick_sets =
 	"Muffin.Garrison",
 	"Muffin.Food.Mana.Buff",
 	"Muffin.Battle Pet Items.Pet Treat",
+	"Muffin.Order Hall.Ancient Mana",
+	"Muffin.Order Hall.Artifact Power",
+	"Muffin.Order Hall.Buff",
+	"Muffin.Order Hall.Champion",
+	"Muffin.Order Hall.Troop Recruit",
 	"Muffin.Skill.Fishing.Misc",
 	"Muffin.Skill.Fishing.Rare Fish",
 }

@@ -1095,6 +1095,8 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Potion.Water Breathing")
 
+	self:AddCategory("Muffin.Order Hall.Buff")
+
 
 	-- Melee
 	if (AutoBar.CLASS ~= "MAGE" and AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "PRIEST") then
@@ -2261,11 +2263,26 @@ end
 
 local AutoBarButtonOrderHall = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonOrderHall"] = AutoBarButtonOrderHall
+local AutoBarButtonOrderHallTroop = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonOrderHallTroop"] = AutoBarButtonOrderHallTroop
 
-function AutoBarButtonOrderHall.prototype:init(parentBar, buttonDB)
-	AutoBarButtonOrderHall.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonOrderHallTroop.prototype:init(parentBar, buttonDB)
+	AutoBarButtonOrderHallTroop.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Muffin.Order Hall")
+	self:AddCategory("Muffin.Order Hall.Troop Recruit")
+	self:AddCategory("Muffin.Order Hall.Champion")
+
+end
+
+local AutoBarButtonOrderHallResource = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonOrderHallResource"] = AutoBarButtonOrderHallResource
+
+function AutoBarButtonOrderHallResource.prototype:init(parentBar, buttonDB)
+	AutoBarButtonOrderHallResource.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Order Hall.Artifact Power")
+	self:AddCategory("Muffin.Order Hall.Ancient Mana")
+
 end
 
 local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)

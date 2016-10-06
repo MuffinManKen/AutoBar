@@ -697,10 +697,21 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHall"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonOrderHall"] = {
-			buttonKey = "AutoBarButtonOrderHall",
-			buttonClass = "AutoBarButtonOrderHall",
+	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHallTroop"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonOrderHallTroop"] = {
+			buttonKey = "AutoBarButtonOrderHallTroop",
+			buttonClass = "AutoBarButtonOrderHallTroop",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
+
+	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHallResource"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonOrderHallResource"] = {
+			buttonKey = "AutoBarButtonOrderHallResource",
+			buttonClass = "AutoBarButtonOrderHallResource",
 			barKey = "AutoBarClassBarExtras",
 			defaultButtonIndex = "*",
 			enabled = true,
@@ -1038,7 +1049,7 @@ function AutoBar:InitializeDefaults()
 	{
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
-		"AutoBarButtonSeal"
+		"AutoBarButtonSeal", "AutoBarButtonOrderHall"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do
