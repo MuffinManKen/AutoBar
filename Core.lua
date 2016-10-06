@@ -35,7 +35,6 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- The Update functions can be called directly or via AutoBar.delay["UpdateButtons"].
 -- Delayed calls allow multiple updates to clump & get dealt with at once, especially after combat ends.
 
-local _G = getfenv(0)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local AceOO = AceLibrary("AceOO-2.0")
