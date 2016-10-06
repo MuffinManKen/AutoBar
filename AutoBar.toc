@@ -24,6 +24,9 @@ embeds.xml
 
 
 AceGUIWidget-DragLink.lua
+
+AutoBarGlobals.lua
+
 Core.lua
 
 # Localization
@@ -42,6 +45,7 @@ locale/Locale-default.lua
 
 AutoBarDB.lua
 AutoBarOptions.lua
+AutoBarSearchUtil.lua
 AutoBarSearch.lua
 AutoBarClassBar.lua
 AutoBarClassBasicButton.lua
