@@ -740,6 +740,17 @@ function AutoBar:InitializeDefaults()
 --			arrangeOnUse = true,
 --		}
 --	end
+	
+	if (not AutoBar.db.account.buttonList["AutoBarButtonReputation"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonReputation"] = {
+			buttonKey = "AutoBarButtonReputation",
+			buttonClass = "AutoBarButtonReputation",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
 
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		if (not AutoBar.db.account.buttonList["AutoBarButtonWater"]) then

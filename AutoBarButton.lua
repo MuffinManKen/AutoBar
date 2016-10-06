@@ -2261,8 +2261,16 @@ function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Garrison")
 end
 
-local AutoBarButtonOrderHall = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonOrderHall"] = AutoBarButtonOrderHall
+local AutoBarButtonReputation = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonReputation"] = AutoBarButtonReputation
+
+function AutoBarButtonReputation.prototype:init(parentBar, buttonDB)
+	AutoBarButtonReputation.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Reputation")
+end
+
+
 local AutoBarButtonOrderHallTroop = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonOrderHallTroop"] = AutoBarButtonOrderHallTroop
 

@@ -81,6 +81,7 @@ atl("Consumable.Buff.Water Breathing", "Consumable.Buff.Water Breathing")
 
 atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
 atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
+atl("AutoBarButtonReputation", "Reputation")
 
 local quick_sets = 
 {
