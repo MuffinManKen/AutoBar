@@ -1,0 +1,9 @@
+
+
+/run hearth = AutoBarCategoryList["Misc.Hearth"]
+/watch hearth
+
+/run toys = AutoBarCategoryList["Items.ToyBox"]
+/watch toys
+
+/dump GetItemInfo("Whitewater Carp")
