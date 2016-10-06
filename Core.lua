@@ -634,7 +634,7 @@ end
 function AutoBar.events:GET_ITEM_INFO_RECEIVED()
 
 --print("GET_ITEM_INFO_RECEIVED")
-	AutoBar.missing_items = false;
+	AutoBar:ClearMissingItemFlag();
 	AutoBar.delay["UpdateActive"]:Start()
 
 end
@@ -1738,4 +1738,20 @@ function AutoBar:FindNamelessCategories()
 	end
 
 	return nameless
+end
+
+function AutoBar:ClearMissingItemFlag()
+
+	AutoBar.missing_items = false;
+
+end
+
+local l_missing_item_count = 0
+function AutoBar:SetMissingItemFlag(p_item)
+
+	AutoBar.missing_items = true;
+
+	l_missing_item_count = l_missing_item_count + 1
+	--print("AutoBar.missing_items = true, (", p_item, ") - ", l_missing_item_count)
+
 end

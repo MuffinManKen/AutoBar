@@ -124,11 +124,10 @@ local function get_texture_for_action(p_action)
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 	if(texture == nil) then
-		AutoBar.missing_items = true
-		--print("AutoBar.missing_items = true")
+		AutoBar:SetMissingItemFlag(p_action);
 	end
 
-	return nil
+	return texture;
 
 end
 
@@ -165,8 +164,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if (itemId) then
 			_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))
 			if(texture == nil) then
-				AutoBar.missing_items = true
-				--print("AutoBar.missing_items = true")
+				AutoBar:SetMissingItemFlag(itemID);
 			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)
