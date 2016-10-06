@@ -1178,7 +1178,7 @@ end
 
 
 
--- Rescan all registerred spells
+-- Rescan all registered spells
 function AutoBar:UpdateSpells()
 	self:LogEventStart("AutoBar:UpdateSpells")
 	AutoBarSearch.stuff:ScanSpells()
