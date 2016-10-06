@@ -6,13 +6,13 @@ Website: http://www.wowace.com/
 Description: Dynamic 24 button bar automatically adds potions, water, food and other items you specify into a button for use. Does not use action slots so you can save those for spells and abilities.
 --]]
 --
--- Copyright 2004, 2005, 2006 original author.
--- New Stuff Copyright 2006+ Toadkiller of Proudmoore.
+-- Copyright 2004 - 2006 original author.
+-- New Stuff Copyright 2006-2009 Toadkiller of Proudmoore.
+-- New Stuff Copyright 2009- MuffinManKen
 
--- Maintained by Azethoth / Toadkiller of Proudmoore.  Original author Saien of Hyjal
+-- Maintained by MuffinManKen.  Original author Saien of Hyjal
 -- http://muffinmangames.com
 
--- See Changelist.lua for changes
 
 
 --
