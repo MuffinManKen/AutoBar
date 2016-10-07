@@ -12,6 +12,17 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.0.3.09:
+ - Improved handling of WoW not having items cached
+ - Removed global bar alpha setting since bar-level setting always took precendence
+ - Lots of code cleanup
+ - Improved UI docs (Category Reset)
+ - Updated MuffinLibPT and LibPeriodicTable
+ - Split Order Hall button into 2: Troops & Resources
+ - Added Ancient Mana items to Order Hall Resources
+ - Added Reputation button
+ - Order Hall categories are more fine-grained for people who want more control over custom buttons
+
 v7.0.3.08:
  - Updated MuffinLibPT and LibPeriodicTable
  - Added Bulging Barrel of Oil and Huge Ogre Cache to Garrison items

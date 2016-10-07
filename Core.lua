@@ -65,13 +65,15 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
+" - Improved handling of WoW not having items cached|n" ..
+" - Removed global bar alpha setting since bar-level setting always took precendence|n" ..
+" - Lots of code cleanup|n" ..
+" - Improved UI docs (Category Reset)|n" ..
 " - Updated MuffinLibPT and LibPeriodicTable|n" ..
-" - Added Bulging Barrel of Oil and Huge Ogre Cache to Garrison items|n" ..
-" - Removed 'Sticky Frames'' option since it didn't work|n" ..
-" - ShowExtendedTooltips was never implemented. Removed.|n" ..
-" - Mount button wasn't showing anything if you logged in while in an inn. Removed Blizzard filtering for professions, added my own.|n" ..
-" - Added more fishing stuff|n" ..
-" - Removed Collapse Buttons option|n" ..
+" - Split Order Hall button into 2: Troops & Resources|n" ..
+" - Added Ancient Mana items to Order Hall Resources|n" ..
+" - Added Reputation button|n" ..
+" - Order Hall categories are more fine-grained for people who want more control over custom buttons|n" ..
 "|n"
 
 
