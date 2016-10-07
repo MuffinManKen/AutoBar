@@ -6,3 +6,4 @@ CVS
 .git
 media
 .pkgmeta
+notes.txt
