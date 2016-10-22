@@ -1102,7 +1102,7 @@ end
 
 -- Register a spell, and figure out its spellbook index for use in tooltip
 -- Multiple calls refresh current state of the spell
--- {spellName = {canCast, spellLink, spellTab}}
+-- {spellName = {canCast, spellLink, noSpellCheck}}
 function AutoBarSearch:RegisterSpell(p_spell_name, noSpellCheck, p_spell_link)
 
 	local spellInfo = AutoBarSearch.spells[p_spell_name]
