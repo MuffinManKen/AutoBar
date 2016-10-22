@@ -276,9 +276,8 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 --AutoBar:Print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
 	if (bag or slot) then
 		-- Filter out too high level items
-		local itemMinLevel
-		itemMinLevel = select(5,GetItemInfo(itemId));
-		if ((itemMinLevel or 0) <= AutoBar.playerLevel) then
+		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
+		if (itemMinLevel <= AutoBar.playerLevel) then
 			AutoBarSearch.found:Add(itemId, bag, slot)
 		end
 	else
