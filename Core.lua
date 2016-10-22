@@ -1629,7 +1629,7 @@ function AutoBar:MakeSet(list)
    return set
  end
 
-AutoBar.set_mana_users = AutoBar:MakeSet{"DRUID","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+AutoBar.set_mana_users = AutoBar:MakeSet{"DRUID","MAGE","MONK","PRIEST","PALADIN","SHAMAN","WARLOCK"}
 
 function AutoBar:ClassUsesMana(class_name)
 
