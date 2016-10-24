@@ -360,10 +360,6 @@ function AutoBarCategory.prototype:SetNonCombat(nonCombat)
 	self.nonCombat = nonCombat
 end
 
--- True if item is usable anywhere, including battlegrounds
-function AutoBarCategory.prototype:SetAnywhere(anywhere)
-	self.anywhere = anywhere
-end
 
 -- True if item is for battlegrounds only
 function AutoBarCategory.prototype:SetBattleground(battleground)
@@ -917,7 +913,6 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"]:SetAnywhere(true)
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Basic"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Basic", "INV_Potion_54", "Consumable.Cooldown.Potion.Health.Basic")
 
@@ -926,7 +921,6 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Anywhere", "INV_Alchemy_EndlessFlask_04", "Consumable.Cooldown.Potion.Mana.Anywhere")
-	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Anywhere"]:SetAnywhere(true)
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Basic"] = AutoBarItems:new("Consumable.Cooldown.Potion.Mana.Basic", "INV_Potion_76", "Consumable.Cooldown.Potion.Mana.Basic")
 
