@@ -65,15 +65,13 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-" - Improved handling of WoW not having items cached|n" ..
-" - Removed global bar alpha setting since bar-level setting always took precendence|n" ..
-" - Lots of code cleanup|n" ..
-" - Improved UI docs (Category Reset)|n" ..
-" - Updated MuffinLibPT and LibPeriodicTable|n" ..
-" - Split Order Hall button into 2: Troops & Resources|n" ..
-" - Added Ancient Mana items to Order Hall Resources|n" ..
-" - Added Reputation button|n" ..
-" - Order Hall categories are more fine-grained for people who want more control over custom buttons|n" ..
+" - Fixed breakage caused by patch 7.1|n" ..
+" - Removed LibKeyBoundExtra since it's not needed|n" ..
+" - Updated LibKeyBound|n" ..
+" - Updated Muffin LibPT|n" ..
+" - Monks are now considered Mana users|n" ..
+" - Added Toy Box button on Extras bar. This is very basic, more is coming.|n" ..
+" - Optimized some stuff|n" ..
 "|n"
 
 

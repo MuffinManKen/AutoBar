@@ -12,6 +12,15 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.00:
+ - Fixed breakage caused by patch 7.1
+ - Removed LibKeyBoundExtra since it's not needed
+ - Updated LibKeyBound
+ - Updated Muffin LibPT
+ - Monks are now considered Mana users
+ - Added Toy Box button on Extras bar. This is very basic, more is coming.
+ - Optimized some stuff
+
 v7.0.3.09:
  - Improved handling of WoW not having items cached
  - Removed global bar alpha setting since bar-level setting always took precendence
