@@ -54,6 +54,11 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		local name = AutoBarButton:GetDisplayName(button.class.buttonDB)
 		GameTooltip:AddLine(name, 0.8, 0, 1)
 		GameTooltip:Show()
+	elseif (buttonType == "toy") then
+		local toy_id = button:GetAttribute("toy")
+		if (GameTooltip:SetToyByItemID(toy_id)) then
+			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
+		end
 	elseif (itemLink) then
 		if (GameTooltip:SetHyperlink(itemLink)) then
 			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
@@ -174,7 +179,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 			end
 		end
 	elseif (itemType == "toy") then
-		local item_id = frame:GetAttribute("itemId")
+		local item_id = frame:GetAttribute("toy")
 		if (item_id) then
 			_, _, texture =  C_ToyBox.GetToyInfo(tonumber(item_id))
 			if(texture == nil) then

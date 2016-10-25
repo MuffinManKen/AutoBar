@@ -7,3 +7,12 @@ AutoBarGlobalDataObject = {}
 
 -- All global code with be a child of this table.  
 AutoBarGlobalCodeSpace = {}
+
+
+function AutoBarGlobalCodeSpace:ToyGUID(p_toy_id)
+
+	local l = 7 - string.len(p_toy_id);
+	local guid = "toy:" .. string.rep("0", l) .. p_toy_id;
+
+	return guid;
+end

@@ -20,6 +20,8 @@
 --		limit
 
 local AutoBar = AutoBar
+local ABGCS = AutoBarGlobalCodeSpace
+
 local spellNameList = AutoBar.spellNameList
 local spellIconList = AutoBar.spellIconList
 
@@ -381,7 +383,6 @@ end
 -- Return nil or list of spells matching player class
 -- itemsPerLine defaults to 2 (class type, spell).
 -- Only supports 2 & 3 for now.
--- ToDo: generalize for more per line.
 function AutoBarCategory:FilterClass(castList, p_items_per_line)
 	local spellName, index, filteredList2, filteredList3
 	local items_per_line = p_items_per_line or 2
@@ -441,16 +442,6 @@ end
 function AutoBarItems.prototype:Refresh()
 end
 
-AutoBarToys = AceOO.Class(AutoBarCategory)
-
-function AutoBarToys.prototype:init(description, shortTexture)
-	AutoBarToys.super.prototype.init(self, description, shortTexture) -- Mandatory init.
-	self.is_toy = true
-end
-
--- Reset the item list based on changed settings.
-function AutoBarToys.prototype:Refresh()
-end
 
 
 
@@ -469,6 +460,39 @@ end
 
 -- Reset the item list based on changed settings.
 function AutoBarPetFood.prototype:Refresh()
+end
+
+AutoBarToys = AceOO.Class(AutoBarCategory)
+
+function AutoBarToys.prototype:init(description, shortTexture)
+	AutoBarToys.super.prototype.init(self, description, shortTexture) -- Mandatory init.
+	self.is_toy = true
+	
+	-- Current active items
+	self.items = {}
+	--All items in the category
+	self.all_items = {}
+
+	self:Refresh()
+
+end
+
+-- Reset the item list in case the player learned new toys
+function AutoBarToys.prototype:Refresh()
+	local list_index = 1
+
+	for _, toy_id in ipairs(self.all_items) do
+		if (toy_id and PlayerHasToy(toy_id)) then
+			AutoBarSearch:RegisterToy(toy_id)
+			self.items[list_index] = ABGCS:ToyGUID(toy_id)
+			list_index = list_index + 1
+		end
+	end
+
+	--trim any missing ones of the end. You never forget Toys, so is this needed?
+	for i = list_index, # self.items, 1 do
+		self.items[i] = nil
+	end
 end
 
 

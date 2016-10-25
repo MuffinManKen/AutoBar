@@ -401,8 +401,8 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		popupButtonFrame:SetAttribute("checkselfcast", true)
 		popupButtonFrame:SetAttribute("checkfocuscast", true)
 
-		local bag, slot, spell, itemId, macroId = AutoBarSearch.sorted:GetInfo(buttonKey, popupButtonIndex)
-		self:SetupAttributes(popupButton, bag, slot, spell, macroId, itemId, buttonItems[itemId])
+		local bag, slot, spell, itemId, macroId, toy_guid = AutoBarSearch.sorted:GetInfo(buttonKey, popupButtonIndex)
+		self:SetupAttributes(popupButton, bag, slot, spell, macroId, toy_guid, itemId, buttonItems[itemId])
 		popupButton:UpdateIcon()
 	end
 
@@ -469,12 +469,12 @@ function AutoBarButton.prototype:SetupButton()
 	local buttonKey = self.buttonDB.buttonKey
 	local frame = self.frame
 
-	local bag, slot, spell, itemId, macroId = AutoBarSearch.sorted:GetInfo(buttonKey, 1)
+	local bag, slot, spell, itemId, macroId, toy_guid = AutoBarSearch.sorted:GetInfo(buttonKey, 1)
 	local popupHeader = frame.popupHeader
 	local popupKeyHandler = frame.popupKeyHandler
 
-	--if (buttonKey == "AutoBarButtonCharge") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId) end;
-	if ((bag or slot or spell or macroId) and self.buttonDB.enabled) then
+	--if (buttonKey == "AutoBarButtonToyBox") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "toy_guid", toy_guid) end;
+	if ((bag or slot or spell or macroId or toy_guid) and self.buttonDB.enabled) then
 		frame:Show()
 		local sortedItems = AutoBarSearch.sorted:GetList(buttonKey)
 		local noPopup = self.buttonDB.noPopup
@@ -486,7 +486,7 @@ function AutoBarButton.prototype:SetupButton()
 		local buttonItems = AutoBarSearch.items:GetList(buttonKey)
 		local itemData = buttonItems[itemId]
 
-		self:SetupAttributes(self, bag, slot, spell, macroId, itemId, itemData)
+		self:SetupAttributes(self, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 		if (noPopup) then
 			if (popupHeader) then
 				for _, popupButton in pairs(popupHeader.popupButtonList) do
@@ -629,7 +629,7 @@ local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
 
 -- Set the state attributes of the button
-function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_toy_guid, itemId, itemData)
 	local frame = button.frame
 	AutoBarButton:SetupAttributesClear(frame)
 
@@ -637,7 +637,11 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 	frame.needsTooltip = true
 	local category = itemData and itemData.category
 
---print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, itemId, itemData.category)
+	--Debug for Whitewater Carp and Ancient Amber
+	local tracked_toys = {[131814] = true, [69776] = true}
+	local debug_me = tracked_toys[itemId]
+	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, itemId, itemData.category) end;
+
 	frame:SetAttribute("category", category)
 	frame:SetAttribute("itemId", itemId)
 
@@ -739,7 +743,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		if (itemsRightClick and itemsRightClick[itemId]) then
 			castSpell = itemsRightClick[itemId]
 			selfCastRightClick = nil
---AutoBar:Print("AutoBarButton.prototype:SetupAttributes buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
+--AutoBar:Print("AutoBarButton.prototype:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
 		end
 		-- Special spell to cast on RightClick
 		if (castSpell) then
@@ -801,8 +805,18 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			if (spellInfo.spellLink) then
 				frame:SetAttribute("itemLink", spellInfo.spellLink)
 			end
+		elseif (p_toy_guid) then
+			local toy_info = AutoBarSearch.toys[p_toy_guid]
+			frame:SetAttribute("type", "toy")
+			frame:SetAttribute("toy", toy_info.item_id)
+
+			-- Tooltip
+			if (toy_info.link) then
+				frame:SetAttribute("itemLink", toy_info.link)
+			end
 		elseif (castSpell) then
 			-- Set castSpell as default if nothing else is available
+--AutoBar:Print("AutoBarButton.prototype:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
 			frame:SetAttribute("type", "spell")
 			frame:SetAttribute("spell", castSpell)
 
@@ -1825,31 +1839,32 @@ function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 	AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
 --print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
-	if (not AutoBarCategoryList["Items.ToyBox"]) then
-		AutoBarCategoryList["Items.ToyBox"] = AutoBarToys:new( "Items.ToyBox", spellIconList["Puntable Marmot"], {})
-		local category = AutoBarCategoryList["Items.ToyBox"]
+	if (not AutoBarCategoryList["Toys.ToyBox"]) then
+		AutoBarCategoryList["Toys.ToyBox"] = AutoBarToys:new( "Toys.ToyBox", spellIconList["Puntable Marmot"], {})
+		local category = AutoBarCategoryList["Toys.ToyBox"]
 		category.unInitialized = true
 	end
-	self:AddCategory("Items.ToyBox")
+	self:AddCategory("Toys.ToyBox")
 
 	if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
 	end
 
 	self:Refresh(parentBar, buttonDB)
-	--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Items.ToyBox"].items .. " entries");
-	AutoBarCategoryList["Items.ToyBox"]:Refresh()
+	--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Toys.ToyBox"].items .. " entries");
 end
---/dump AutoBarCategoryList["Muffin.Garrison"]
+
+local reverse_sort_func = function( a,b ) return a > b end
+
 function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox)
 	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
 
-	if (not AutoBarCategoryList["Items.ToyBox"]) then
+	if (not AutoBarCategoryList["Toys.ToyBox"]) then
 		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(updateToyBox));
 		return true;
 	end
 
-	local category = AutoBarCategoryList["Items.ToyBox"]
+	local category = AutoBarCategoryList["Toys.ToyBox"]
 
 	AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
 
@@ -1869,6 +1884,7 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 		AutoBar.last_ToyBox_count = toy_total_learned;
 
 		category.items = {}
+		category.all_items = {}
 
 		local initialized = not category.unInitialized
 
@@ -1877,18 +1893,21 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 		end
 
 		for i = 1, toy_total do
-			local item_index = C_ToyBox.GetToyFromIndex(i)
-			local item_id, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_index)
-			if PlayerHasToy(item_id) then
+			local item_id = C_ToyBox.GetToyFromIndex(i)
+			local _, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_id)
+			if (PlayerHasToy(item_id) and C_ToyBox.IsToyUsable(item_id)) then
 				--print("  Adding ", toy_name, item_id);
-				local link = select(2, GetItemInfo(item_id))
-				AutoBarSearch:RegisterToy(item_id, link)
+				local link = C_ToyBox.GetToyLink(item_id)
+--				AutoBarSearch:RegisterToy(item_id, link)
 				if(not link) then
 					AutoBar:SetMissingItemFlag(item_id)
 				end
-				category.items[#category.items + 1] = item_id
+				category.all_items[#category.all_items + 1] = item_id
 			end
 		end
+		
+		--table.sort(category.all_items, reverse_sort_func)
+
 
 --		for k, v in pairs(ToyBox_ids) do
 --			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_ToyBoxJournal.GetToyBoxInfoByID(v)
@@ -1906,7 +1925,10 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 --			end
 --		end
 
-		category.unInitialized = nil
+		category.unInitialized = false
+		
+		AutoBarCategoryList["Toys.ToyBox"]:Refresh()
+
 	end
 end
 
@@ -1955,7 +1977,6 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
 	--AutoBarCategoryList["Spell.Mount"]:Refresh()
 end
-local reverse_sort_func = function( a,b ) return a > b end
 
 function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
@@ -2049,8 +2070,9 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 				category.castList[# category.castList + 1] = spell_name
 			end
 			
-			table.sort(category.castList, reverse_sort_func)
 		end
+
+		table.sort(category.castList, reverse_sort_func)
 
 		category.unInitialized = nil
 		

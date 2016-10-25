@@ -7,6 +7,7 @@ Website: http://www.wowace.com/
 -- http://muffinmangames.com
 
 local AutoBar = AutoBar
+local ABGCS = AutoBarGlobalCodeSpace
 
 
 local _
@@ -256,7 +257,6 @@ function Stuff.prototype:init()
 	end
 	self.dataList.inventory = {}
 	self.dataList.spells = {}
-	self.dataList.toys = {}
 end
 
 -- Add itemId to bag, slot, spell
@@ -273,7 +273,7 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 		slotList[spell] = itemId
 	end
 
---AutoBar:Print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
+	--if(spell == "toy:127670") then print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell)) end;
 	if (bag or slot) then
 		-- Filter out too high level items
 		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
@@ -285,6 +285,8 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 	end
 --AutoBar:Print("Stuff.prototype:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
+
+
 
 -- Remove itemId from bag, slot, spell
 function Stuff.prototype:Delete(itemId, bag, slot, spell)
@@ -305,14 +307,7 @@ function Stuff.prototype:Delete(itemId, bag, slot, spell)
 --AutoBar:Print("Stuff.prototype:Delete bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
 
-function Stuff.prototype:AddToy(p_item_id)
-	local slotList = self.dataList.toys
-	
-	--slotList[p_item_id] = p_item_id
 
-	--AutoBarSearch.found:Add(p_item_id, bag, slot)
---AutoBar:Print("Stuff.prototype:AddToy " .. itemID)
-end
 
 -- Scan the given bag.
 function Stuff.prototype:ScanBag(bag)
@@ -345,9 +340,10 @@ end
 --As far as I know there is no way to get rid of a toy, so we don't need to ever delete anything
 function Stuff.prototype:ScanToyBox()
 --AutoBarSearch.toys
-	for item_id, toy_data in pairs(AutoBarSearch.toys) do
-		AutoBarSearch:RegisterToy(item_id, toy_data.link);
-		self:AddToy(spellName, nil, nil, spellName)
+	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
+		AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);
+		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AutoBar:Dump(toy_data))
+		self:Add(toy_guid, nil, nil, toy_guid)
 	end
 
 end
@@ -425,11 +421,12 @@ end
 
 -- Scan the requested Stuff.
 function Stuff.prototype:Scan()
-	AutoBar:LogEventStart("Stuff.prototype:Scan")
+	AutoBar:LogEventStart("Stuff:Scan")
 	AutoBar.playerLevel = UnitLevel("player")
 	for bag = 0, 4, 1 do
 		if (AutoBarSearch.dirtyBags[bag]) then
 			AutoBar:LogEventStart("AutoBar scanned bag")
+--AutoBar:Print("Stuff.prototype:Scan    scanning bag ", bag);
 			self:ScanBag(bag)
 			AutoBar:LogEventEnd("AutoBar scanned bag", bag)
 			AutoBarSearch.dirtyBags[bag] = nil
@@ -439,7 +436,7 @@ function Stuff.prototype:Scan()
 	if (AutoBarSearch.dirtyBags.toybox) then
 --AutoBar:Print("Stuff.prototype:Scan    scanning toybox ");
 		self:ScanToyBox()
-		AutoBarSearch.dirtyBags.toybox = nil
+		AutoBarSearch.dirtyBags.toybox = false
 	end
 
 	if (AutoBarSearch.dirtyBags.inventory) then
@@ -460,7 +457,7 @@ function Stuff.prototype:Scan()
 		AutoBarSearch.dirtyBags.macros = nil
 	end
 
-	AutoBar:LogEventEnd("Stuff.prototype:Scan")
+	AutoBar:LogEventEnd("Stuff:Scan")
 end
 
 -- Remove and Recycle all items
@@ -713,7 +710,7 @@ function Current.prototype:Merge(itemId)
 		if (searchItems and searchItems[itemId]) then
 			local itemData = searchItems[itemId]
 			self:Add(buttonKey, itemId)
---AutoBar:Print("Current.prototype:Merge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
+--print("Current.prototype:Merge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey), itemData.slotIndex, itemData.categoryIndex)
 			AutoBarSearch.sorted:Add(buttonKey, itemId, itemData.slotIndex, itemData.categoryIndex)
 		end
 	end
@@ -947,11 +944,11 @@ end
 function Sorted.prototype:GetInfo(buttonKey, index)
 	local sortedItems = self.dataList[buttonKey]
 	if (not sortedItems) then
-		return nil, nil, nil, nil, nil
+		return nil, nil, nil, nil, nil, nil
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId
+	local bag, slot, spell, itemId, macroId, toy_guid
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -960,11 +957,16 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 			spell = found[itemId][3]
 		end
 	end
-	if (spell and spell:find("^macro")) then
-		macroId = spell
-		spell = nil
+	if (spell) then
+		if(spell:find("^toy")) then
+			toy_guid = spell
+			spell = nil
+		elseif(spell:find("^macro")) then
+			macroId = spell
+			spell = nil
+		end
 	end
-	return bag, slot, spell, itemId, macroId
+	return bag, slot, spell, itemId, macroId, toy_guid
 end
 -- /dump AutoBarSearch.items.dataList["AutoBarCustomButtonPlanning Mods"]
 -- /dump AutoBarSearch.found:GetList()["customMacroCustomMinnaplanaMah Macro"]
@@ -1131,24 +1133,25 @@ end
 
 function AutoBarSearch:RegisterToy(p_toy_id, p_item_link)
 
-	local toy_info = AutoBarSearch.toys[p_toy_id]
-	
-	local debug = false; --(p_spell_name == "Wild Charge")
+	local debug = false; --(p_toy_id == 127670)
+	local toy_guid = ABGCS:ToyGUID(p_toy_id)
+	local toy_info = AutoBarSearch.toys[toy_guid]
 
 	if (not toy_info) then
 		toy_info = {}
-		AutoBarSearch.toys[p_toy_id] = toy_info
+		AutoBarSearch.toys[toy_guid] = toy_info
 	end
 	
 	if (p_item_link) then
 		toy_info.link = p_item_link
 	else
-		toy_info.link = select(2, GetItemInfo(p_toy_id))
+		toy_info.link = C_ToyBox.GetToyLink(p_toy_id)
 	end
 	
+	toy_info.item_id = p_toy_id
 	toy_info.is_toy = true
 
-	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, p_item_link, "=>", toy_info.link); end
+	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid, p_item_link, "=>", toy_info.link); end
 
 end
 
@@ -1227,7 +1230,7 @@ function AutoBarSearch:UpdateScan()
 --		AutoBarSearch.dirtyBags[i] = true
 --	end
 	AutoBarSearch.dirtyBags.inventory = true
-	AutoBarSearch.dirtyBags.toybox = true
+--	AutoBarSearch.dirtyBags.toybox = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
 	AutoBarSearch.dirty = true
