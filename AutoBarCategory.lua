@@ -411,26 +411,6 @@ end
 
 
 
--- Top castable item from castList will cast on RightClick
-function AutoBarCategory.prototype:SetCastList(castList)
---AutoBar:Print("AutoBarCategory.prototype:SetCastList " .. description .. " castList " .. tostring(castList))
-	if (castList) then
-		self.spells = castList
-		local noSpellCheck = self.noSpellCheck
-		for _, spellName in ipairs(castList) do
---AutoBar:Print("AutoBarCategory.prototype:SetCastList " .. tostring(spellName))
-			AutoBarSearch:RegisterSpell(spellName, noSpellCheck)
-			if (AutoBarSearch:CanCastSpell(spellName)) then	-- TODO: update on leveling in case new spell aquired
---AutoBar:Print("AutoBarCategory.prototype:SetCastList castable " .. tostring(spellName))
-				self.castSpell = spellName
-			end
-		end
-	else
-		self.spells = nil
-		self.castSpell = nil
-	end
-end
-
 -- Reset the item list based on changed settings.
 -- So pet change, Spellbook changed for spells, etc.
 function AutoBarCategory.prototype:Refresh()
