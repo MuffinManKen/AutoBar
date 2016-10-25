@@ -632,11 +632,13 @@ function Delayed.prototype:Start(arg1, customDelay)
 --print("***Delayed.prototype:Start "..self.name.." end ");
 end
 
-function AutoBar.events:GET_ITEM_INFO_RECEIVED()
-
---print("GET_ITEM_INFO_RECEIVED")
+function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
+	AutoBar:LogEventStart("GET_ITEM_INFO_RECEIVED", p_item_id)
+--print("GET_ITEM_INFO_RECEIVED", p_item_id)
 	AutoBar:ClearMissingItemFlag();
 	AutoBar.delay["UpdateActive"]:Start()
+
+	AutoBar:LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
 
 end
 
