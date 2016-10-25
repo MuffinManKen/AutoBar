@@ -1664,22 +1664,4 @@ end
 /script for itemId, value in LibStub("LibPeriodicTable-3.1"):IterateSet("Consumable.Buff Group.Caster.Self") do AutoBar:Print(itemId .. " " .. value); end
 --]]
 
---[[
-/script local button = CreateFrame("Button", "TestPet", nil, "SecureActionButtonTemplate"); button:SetAttribute("type","companion"); button:SetAttribute("spell","Ritual of Summoning")
 
-/script test_button = CreateFrame("Button", "TestPet", UIParent, "SecureActionButtonTemplate"); test_button:SetWidth(36); test_button:SetHeight(36); test_button:SetPoint("CENTER"); 
-/script test_button:SetAttribute("type","macro"); test_button:SetAttribute("macrotext","/say Ritual of Summoning")
-/script test_texture = test_button:CreateTexture("TestTexture")
-
-/script test_texture:SetTexture("Interface\\Icons\\INV_Misc_QirajiCrystal_05"); test_texture:SetPoint("CENTER");
-/script test_texture:SetTexture("133246"); test_texture:SetPoint("CENTER");
-
-/script test_button:SetAttribute("type","spell"); test_button:SetAttribute("spell","Ritual of Summoning")
-
-/script test_button:SetAttribute("type","action"); test_button:SetAttribute("summonpet","BattlePet-0-00000020C939")
-
-
-/script test_button:SetAttribute("type","toy"); test_button:SetAttribute("toy", 119212)
-/script test_button:SetAttribute("type","toy"); test_button:SetAttribute("toy", "Whitewater Carp")
-
---]]
