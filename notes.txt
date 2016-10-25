@@ -15,10 +15,26 @@
 
 /dump C_ToyBox.GetToyInfo(C_ToyBox.GetToyFromIndex(2))
 
+/dump GetItemInfo("Accursed Tome of the Sargerei")
+/dump C_ToyBox.GetToyInfo(127670)
 
 
+/dump C_ToyBox.GetToyLink(127670)
+
+/dump AutoBar.db.account.buttonList["AutoBarButtonToyBox"]
 
 
+/dump AutoBarSearch.toys
+
+
+/run print(C_ToyBox.GetToyLink(127670), select(2,GetItemInfo(127670)))
+
+13x13 + 8  => 13x10 + 5 //Pre/Post Usable filtering
+****NOTE: Does anything need to look up or store the item link for a toy since GameTooltip takes the item id directly??
+
+Engineer only toy: Wormhole Centrifuge 112059
+
+C_ToyBox.IsToyUsable(112059)
 --[[
 /script local button = CreateFrame("Button", "TestPet", nil, "SecureActionButtonTemplate"); button:SetAttribute("type","companion"); button:SetAttribute("spell","Ritual of Summoning")
 
