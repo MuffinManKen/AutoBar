@@ -414,6 +414,9 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
+	AutoBar.frame:RegisterEvent("TOYS_UPDATED")
+
+
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -935,6 +938,19 @@ function AutoBar.events:PET_BATTLE_CLOSE(arg1)
 	AutoBar.delay[regenEnableUpdate]:Start()
 
 	-- AutoBar.in_pet_battle = false
+
+end
+
+function AutoBar.events:TOYS_UPDATED(p_arg1, p_arg2)
+	AutoBar:LogEventStart("TOYS_UPDATED", p_arg1, p_arg2)
+
+	AutoBarSearch.dirtyBags.toybox = true
+--print("TOYS_UPDATED", p_arg1, p_arg2)
+	if (not InCombatLockdown()) then
+		AutoBar.delay["UpdateScan"]:Start()
+	end
+
+	AutoBar:LogEventEnd("TOYS_UPDATED", p_arg1, p_arg2)
 
 end
 
@@ -1758,3 +1774,4 @@ function AutoBar:SetMissingItemFlag(p_item)
 	--print("AutoBar.missing_items = true, (", p_item, ") - ", l_missing_item_count)
 
 end
+
