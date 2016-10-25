@@ -2714,13 +2714,6 @@ function AutoBar:CreateCustomCategoryOptions(options)
 						arg = passValue,
 						disabled = getCombatLockdown,
 					},
-					notUsable = {
-						type = "toggle",
-						order = 6,
-						name = L["Not directly usable"],
-						arg = passValue,
-						disabled = getCombatLockdown,
-					},
 					targeted = {
 						type = "toggle",
 						order = 7,

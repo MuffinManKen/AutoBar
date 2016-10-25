@@ -13,7 +13,6 @@
 --		targeted
 --		nonCombat
 --		battleground
---		notUsable (soul shards, arrows, etc.)
 --		flying
 
 --	AutoBar
@@ -333,11 +332,12 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 end
 
 
+
 -- Mandatory attributes:
 --		description - localized description
 --		texture - display icon texture
 -- Optional attributes:
---		targeted, nonCombat, battleground, notUsable
+--		targeted, nonCombat, battleground
 AutoBarCategory = AceOO.Class()
 AutoBarCategory.virtual = true
 
@@ -366,10 +366,6 @@ function AutoBarCategory.prototype:SetBattleground(battleground)
 	self.battleground = battleground
 end
 
--- True if item is not usable (display only)
-function AutoBarCategory.prototype:SetNotUsable(notUsable)
-	self.notUsable = notUsable
-end
 
 -- True if item the spell check should be skipped, used for things like Mounts(?) where the spell check would otherwise fail
 function AutoBarCategory.prototype:SetNoSpellCheck(noSpellCheck)
