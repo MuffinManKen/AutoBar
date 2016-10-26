@@ -65,6 +65,9 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
+"v7.1.0.01:|n" ..
+" - Fixed an issue on the Trinket button if you had extra trinkets in your bag|n" ..
+"v7.1.0.00:|n" ..
 " - Fixed breakage caused by patch 7.1|n" ..
 " - Removed LibKeyBoundExtra since it's not needed|n" ..
 " - Updated LibKeyBound|n" ..

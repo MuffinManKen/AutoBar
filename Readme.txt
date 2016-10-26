@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.01:
+ - Fixed an issue on the Trinket button if you had extra trinkets in your bag
+
 v7.1.0.00:
  - Fixed breakage caused by patch 7.1
  - Removed LibKeyBoundExtra since it's not needed
