@@ -640,7 +640,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 	--Debug for Whitewater Carp and Ancient Amber
 	local tracked_toys = {[131814] = true, [69776] = true}
 	local debug_me = tracked_toys[itemId]
-	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, itemId, itemData.category) end;
+	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, p_toy_guid, itemId, itemData.category) end;
 
 	frame:SetAttribute("category", category)
 	frame:SetAttribute("itemId", itemId)
@@ -1127,7 +1127,7 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Consumable.Buff Group.Caster.Self")
 	end
 
-		self:AddCategory("Muffin.Potion.Buff")
+	self:AddCategory("Muffin.Potion.Buff")
 
 end
 
@@ -1152,10 +1152,10 @@ function AutoBarButtonClassBuff.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Class.Buff")
 end
 
-function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 	local selfCastRightClick = AutoBar.db.account.selfCastRightClick
 	AutoBar.db.account.selfCastRightClick = nil
-	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 	AutoBar.db.account.selfCastRightClick = selfCastRightClick
 end
 
@@ -2564,8 +2564,8 @@ function AutoBarButtonTotemAir.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Air")
 end
 
-function AutoBarButtonTotemAir.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
-	AutoBarButtonTotemAir.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonTotemAir.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
+	AutoBarButtonTotemAir.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 
 	DestroyTotem(self.frame, totemAir)
 end
@@ -2604,8 +2604,8 @@ function AutoBarButtonTotemEarth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Earth")
 end
 
-function AutoBarButtonTotemEarth.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
-	AutoBarButtonTotemEarth.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonTotemEarth.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
+	AutoBarButtonTotemEarth.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 
 	DestroyTotem(self.frame, totemEarth)
 end
@@ -2644,8 +2644,8 @@ function AutoBarButtonTotemFire.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Fire")
 end
 
-function AutoBarButtonTotemFire.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
-	AutoBarButtonTotemFire.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonTotemFire.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
+	AutoBarButtonTotemFire.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 
 	DestroyTotem(self.frame, totemFire)
 end
@@ -2684,8 +2684,8 @@ function AutoBarButtonTotemWater.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Water")
 end
 
-function AutoBarButtonTotemWater.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
-	AutoBarButtonTotemWater.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonTotemWater.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
+	AutoBarButtonTotemWater.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 
 	DestroyTotem(self.frame, totemWater)
 end
@@ -2777,17 +2777,15 @@ end
 
 
 local equipTrinket2String = "/equipslot " .. TRINKET2_SLOT .. " "
-function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, itemId, itemData)
+function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 --AutoBar:Print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
 
 	local _, equippedItemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 
-	if (equippedItemId == itemId) then
-		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
-	elseif (not bag) then
-		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, itemId, itemData)
+	if ((equippedItemId == itemId) or (not bag)) then
+		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, itemId, itemData)
 	else
-		local _,_,_,_,_,_,_,_,_,macroTexture = GetItemInfo(tonumber(itemId))
+		local macroTexture = select(10,GetItemInfo(tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
