@@ -120,6 +120,7 @@ local quick_sets =
 	"Spell.ER",
 	"Spell.Interrupt",
 	"Spell.Mage.Conjure Food",
+	"Toys.ToyBox",
 	"Tradeskill.Tool.Fishing.Bait",
 
 
