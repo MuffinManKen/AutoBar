@@ -462,10 +462,10 @@ end
 function AutoBarPetFood.prototype:Refresh()
 end
 
-AutoBarToys = AceOO.Class(AutoBarCategory)
+AutoBarToyCategory = AceOO.Class(AutoBarCategory)
 
-function AutoBarToys.prototype:init(description, shortTexture)
-	AutoBarToys.super.prototype.init(self, description, shortTexture) -- Mandatory init.
+function AutoBarToyCategory.prototype:init(description, shortTexture, p_pt_name)
+	AutoBarToyCategory.super.prototype.init(self, description, shortTexture) -- Mandatory init.
 	self.is_toy = true
 	
 	-- Current active items
@@ -473,12 +473,20 @@ function AutoBarToys.prototype:init(description, shortTexture)
 	--All items in the category
 	self.all_items = {}
 
+	if(p_pt_name) then
+	print("pt_name", p_pt_name);
+		local rawList = nil
+		rawList = AddSetToRawItems(rawList, p_pt_name, false)
+		self.all_items = RawListToItemIDList(rawList)
+	print("all_items", AutoBar:Dump(self.all_items))
+	end
+
 	self:Refresh()
 
 end
 
 -- Reset the item list in case the player learned new toys
-function AutoBarToys.prototype:Refresh()
+function AutoBarToyCategory.prototype:Refresh()
 	local list_index = 1
 
 	for _, toy_id in ipairs(self.all_items) do
@@ -726,6 +734,9 @@ end
 
 -- Create category list using PeriodicTable data.
 function AutoBarCategory:Initialize()
+
+	AutoBarCategoryList["Muffin.Toys.Hearth"] = AutoBarToyCategory:new( "Muffin.Toys.Hearth", spellIconList["Puntable Marmot"], "Muffin.Toys.Hearth")
+
 	AutoBarCategoryList["Misc.Hearth"] = AutoBarItems:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
 
 	AutoBarCategoryList["Consumable.Buff.Free Action"] = AutoBarItems:new( "Consumable.Buff.Free Action", "INV_Potion_04", "Consumable.Buff.Free Action")

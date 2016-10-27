@@ -117,6 +117,7 @@ local quick_sets =
 	"Muffin.Skill.Fishing.Misc",
 	"Muffin.Skill.Fishing.Rare Fish",
 	"Muffin.SunSongRanch",
+	"Muffin.Toys.Hearth",
 	"Spell.Charge",
 	"Spell.ER",
 	"Spell.Interrupt",

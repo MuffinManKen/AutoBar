@@ -41,4 +41,5 @@
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Potions.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Fishing.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.SunsongRanch.lua"/>
+	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Toys.lua"/>
 </Ui>

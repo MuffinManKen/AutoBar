@@ -1823,6 +1823,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	end
 
 	self:AddCategory("Misc.Hearth")
+	self:AddCategory("Muffin.Toys.Hearth")
 end
 
 function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
@@ -1840,7 +1841,7 @@ function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 --print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
 	if (not AutoBarCategoryList["Toys.ToyBox"]) then
-		AutoBarCategoryList["Toys.ToyBox"] = AutoBarToys:new( "Toys.ToyBox", spellIconList["Puntable Marmot"], {})
+		AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", spellIconList["Puntable Marmot"])
 		local category = AutoBarCategoryList["Toys.ToyBox"]
 		category.unInitialized = true
 	end
