@@ -42,6 +42,7 @@ atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
+atl("ToyBoxOnlyFavourites", "Only Show Favourites");
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");

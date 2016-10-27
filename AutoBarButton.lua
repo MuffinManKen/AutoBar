@@ -1850,6 +1850,8 @@ function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
 	end
 
+	if(buttonDB.toybox_only_show_favourites == nil) then buttonDB.toybox_only_show_favourites = false end
+
 	self:Refresh(parentBar, buttonDB)
 	--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Toys.ToyBox"].items .. " entries");
 end
@@ -1894,9 +1896,10 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 
 		for i = 1, toy_total do
 			local item_id = C_ToyBox.GetToyFromIndex(i)
-			local _, toy_name, toy_icon, toy_fave = C_ToyBox.GetToyInfo(item_id)
-			if (PlayerHasToy(item_id) and C_ToyBox.IsToyUsable(item_id)) then
-				--print("  Adding ", toy_name, item_id);
+			local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(item_id)
+			local user_selected = (buttonDB.toybox_only_show_favourites and toy_is_fave) or not buttonDB.toybox_only_show_favourites
+			if (PlayerHasToy(item_id) and C_ToyBox.IsToyUsable(item_id) and user_selected) then
+				--print("  Adding ", toy_name, item_id, toy_is_fave);
 				local link = C_ToyBox.GetToyLink(item_id)
 --				AutoBarSearch:RegisterToy(item_id, link)
 				if(not link) then
@@ -1908,23 +1911,6 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 		
 		--table.sort(category.all_items, reverse_sort_func)
 
-
---		for k, v in pairs(ToyBox_ids) do
---			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, hide_on_char, is_collected = C_ToyBoxJournal.GetToyBoxInfoByID(v)
---			local user_selected = (is_favourite and buttonDB.ToyBox_show_favourites) or (not is_favourite and buttonDB.ToyBox_show_nonfavourites)
---			local qiraji_filtered = (not buttonDB.ToyBox_show_qiraji and AutoBarToyBoxIsQiraji[spell_id]) or false;
---			if (is_collected and user_selected and not hide_on_char and not qiraji_filtered) then
---				spell_name = GetSpellInfo(spell_id)
---				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
---				spellIconList[spell_name] = icon
---				AutoBarSearch:RegisterSpell(spell_name, true)
---				local spellInfo = AutoBarSearch.spells[spell_name]
---				spellInfo.spellLink = "spell:" .. spell_id
---				category.castList[# category.castList + 1] = spell_name
---			end
---			end
---		end
-
 		category.unInitialized = false
 		
 		AutoBarCategoryList["Toys.ToyBox"]:Refresh()
@@ -1932,6 +1918,9 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 	end
 end
 
+function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "toybox_only_show_favourites", L["ToyBoxOnlyFavourites"])
+end
 
 -------------------------- AutoBarButtonMount ---------------------
 
