@@ -2302,10 +2302,23 @@ AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
 function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
 	AutoBarButtonBattlePetItems.super.prototype.init(self, parentBar, buttonDB)
 
+	if(buttonDB.show_ornamental == nil) then buttonDB.show_ornamental = true end
+
 	self:AddCategory("Muffin.Battle Pet Items.Level")
 	self:AddCategory("Muffin.Battle Pet Items.Upgrade")
 	self:AddCategory("Muffin.Battle Pet Items.Bandages")
 	self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
+
+	self:AddCategory("Muffin.Toys.Pet Battle")
+	
+	if(buttonDB.show_ornamental == true) then
+		self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
+	end
+
+end
+
+function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
 end
 
 local AutoBarButtonQuest = AceOO.Class(AutoBarButton)

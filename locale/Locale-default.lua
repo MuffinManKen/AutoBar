@@ -43,6 +43,7 @@ atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
 atl("ToyBoxOnlyFavourites", "Only Show Favourites");
+atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
@@ -95,7 +96,6 @@ local quick_sets =
 	"Consumable.Food.Fruit",
 	"Consumable.Food.Fungus",
 	"Consumable.Food.Meat",
-	"Items.ToyBox",
 	"Muffin.Battle Pet Items.Bandages",
 	"Muffin.Battle Pet Items.Level",
 	"Muffin.Battle Pet Items.Pet Treat",
@@ -118,6 +118,8 @@ local quick_sets =
 	"Muffin.Skill.Fishing.Rare Fish",
 	"Muffin.SunSongRanch",
 	"Muffin.Toys.Hearth",
+	"Muffin.Toys.Pet Battle",
+	"Muffin.Toys.Companion Pet.Ornamental",
 	"Spell.Charge",
 	"Spell.ER",
 	"Spell.Interrupt",

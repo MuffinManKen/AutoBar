@@ -736,6 +736,8 @@ end
 function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Muffin.Toys.Hearth"] = AutoBarToyCategory:new( "Muffin.Toys.Hearth", spellIconList["Puntable Marmot"], "Muffin.Toys.Hearth")
+	AutoBarCategoryList["Muffin.Toys.Pet Battle"] = AutoBarToyCategory:new( "Muffin.Toys.Pet Battle", spellIconList["Puntable Marmot"], "Muffin.Toys.Pet Battle")
+	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
 
 	AutoBarCategoryList["Misc.Hearth"] = AutoBarItems:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
 
