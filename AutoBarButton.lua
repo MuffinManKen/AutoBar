@@ -2310,6 +2310,7 @@ function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
 
 	self:AddCategory("Muffin.Toys.Pet Battle")
+	self:AddCategory("Spell.Pet Battle")
 	
 	if(buttonDB.show_ornamental == true) then
 		self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")

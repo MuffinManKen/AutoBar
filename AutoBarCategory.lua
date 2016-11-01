@@ -36,6 +36,9 @@ local _
 -- List of categoryKey, category.description pairs for button categories
 AutoBar.categoryValidateList = {}
 
+	--All
+	spellNameList["Revive Battle Pets"] = AutoBar:LoggedGetSpellInfo(125439)
+
 	--DeathKnight
 	spellNameList["Path of Frost"] = AutoBar:LoggedGetSpellInfo(3714)
 	spellNameList["Dark Transformation"] = AutoBar:LoggedGetSpellInfo(63560)
@@ -988,6 +991,11 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
 			"MAGE", spellNameList["Conjure Refreshment"],
 			})
+
+	AutoBarCategoryList["Spell.Pet Battle"] = AutoBarSpells:new("Spell.Pet Battle", spellIconList["Conjure Refreshment"],
+	{
+		"*", spellNameList["Revive Battle Pets"],
+	})
 
 	AutoBarCategoryList["Consumable.Water.Percentage"] = AutoBarItems:new("Consumable.Water.Percentage", "INV_Drink_04", "Consumable.Water.Percentage")
 	AutoBarCategoryList["Consumable.Water.Percentage"]:SetNonCombat(true)
