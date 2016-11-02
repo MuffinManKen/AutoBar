@@ -1618,6 +1618,7 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
+	self:AddCategory("Muffin.Toys.Fishing")
 	
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
@@ -1824,6 +1825,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Hearth")
 	self:AddCategory("Muffin.Toys.Hearth")
+	self:AddCategory("Muffin.Toys.Portal")
 end
 
 function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)

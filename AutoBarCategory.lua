@@ -481,7 +481,7 @@ function AutoBarToyCategory.prototype:init(description, shortTexture, p_pt_name)
 		local rawList = nil
 		rawList = AddSetToRawItems(rawList, p_pt_name, false)
 		self.all_items = RawListToItemIDList(rawList)
-	print("all_items", AutoBar:Dump(self.all_items))
+		--print("all_items", AutoBar:Dump(self.all_items))
 	end
 
 	self:Refresh()
@@ -493,7 +493,7 @@ function AutoBarToyCategory.prototype:Refresh()
 	local list_index = 1
 
 	for _, toy_id in ipairs(self.all_items) do
-		if (toy_id and PlayerHasToy(toy_id)) then
+		if (toy_id and PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id)) then
 			AutoBarSearch:RegisterToy(toy_id)
 			self.items[list_index] = ABGCS:ToyGUID(toy_id)
 			list_index = list_index + 1
@@ -741,6 +741,10 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Toys.Hearth"] = AutoBarToyCategory:new( "Muffin.Toys.Hearth", spellIconList["Puntable Marmot"], "Muffin.Toys.Hearth")
 	AutoBarCategoryList["Muffin.Toys.Pet Battle"] = AutoBarToyCategory:new( "Muffin.Toys.Pet Battle", spellIconList["Puntable Marmot"], "Muffin.Toys.Pet Battle")
 	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
+	AutoBarCategoryList["Muffin.Toys.Portal"] = AutoBarToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
+	AutoBarCategoryList["Muffin.Toys.Fishing"] = AutoBarToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
+
+
 
 	AutoBarCategoryList["Misc.Hearth"] = AutoBarItems:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
 
