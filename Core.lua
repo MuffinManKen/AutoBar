@@ -65,16 +65,14 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-"v7.1.0.01:|n" ..
-" - Fixed an issue on the Trinket button if you had extra trinkets in your bag|n" ..
-"v7.1.0.00:|n" ..
-" - Fixed breakage caused by patch 7.1|n" ..
-" - Removed LibKeyBoundExtra since it's not needed|n" ..
-" - Updated LibKeyBound|n" ..
+"v7.1.0.02:|n" ..
+" - Added Show Favourites option to Toy Box button|n" ..
 " - Updated Muffin LibPT|n" ..
-" - Monks are now considered Mana users|n" ..
-" - Added Toy Box button on Extras bar. This is very basic, more is coming.|n" ..
-" - Optimized some stuff|n" ..
+" - Pet Battle button has Safari Hat and Revive Battle Pets|n" ..
+" - Pet Battle button has ornamental toys (leashes, etc). Optional.|n" ..
+" - Added more Toy-based Portals|n" ..
+" - Added some Fishing Toys|n" ..
+" - Are things missing? Report them at |cFFFFFF00MuffinManGames.com|r|n" ..
 "|n"
 
 

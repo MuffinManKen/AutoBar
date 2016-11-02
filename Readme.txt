@@ -12,6 +12,15 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.02:
+ - Added Show Favourites option to Toy Box button
+ - Updated Muffin LibPT
+ - Pet Battle button has Safari Hat and Revive Battle Pets
+ - Pet Battle button has ornamental toys (leashes, etc). Optional.
+ - Added more Toy-based Portals
+ - Added some Fishing Toys
+ - Are things missing? Report them at MuffinManGames.com
+
 v7.1.0.01:
  - Fixed an issue on the Trinket button if you had extra trinkets in your bag
 
