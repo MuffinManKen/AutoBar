@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.03:
+ - What's New dialog popped up on every log in
+
 v7.1.0.02:
  - Added Show Favourites option to Toy Box button
  - Updated Muffin LibPT
