@@ -477,7 +477,7 @@ function AutoBarToyCategory.prototype:init(description, shortTexture, p_pt_name)
 	self.all_items = {}
 
 	if(p_pt_name) then
-	print("pt_name", p_pt_name);
+		--print("pt_name", p_pt_name);
 		local rawList = nil
 		rawList = AddSetToRawItems(rawList, p_pt_name, false)
 		self.all_items = RawListToItemIDList(rawList)
