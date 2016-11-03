@@ -81,16 +81,18 @@ WHATSNEW_TEXT = "" ..
 
 
 
---/run AutoBar:FrameInsp(
+--/run AutoBar:FrameInsp(AutoBarButtonClassPetFrame)
 function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 
-	local frame = _G[p_frame] or AutoBarButtonExplosiveFrame
+	local frame = p_frame
 
-	print("Type:", frame:GetAttribute("type"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
+	print("Type:", frame:GetAttribute("type"),"type1:", frame:GetAttribute("type1"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
 	print("Item:", frame:GetAttribute("item"))
 	print("State:", frame:GetAttribute("state"))
-	print("Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"))
-	print("Macro:", frame:GetAttribute("macro"), "Spell:", frame:GetAttribute("spell"), "Spell2:", frame:GetAttribute("spell2"))
+	print("Attribute:", frame:GetAttribute("attribute"))
+	print("Action:", frame:GetAttribute("action"),"Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"), "ActionPage:", frame:GetAttribute("actionpage"))
+	print("Macro:", frame:GetAttribute("macro"), "Spell:", frame:GetAttribute("spell"), "Spell1:", frame:GetAttribute("spell1"), "Spell2:", frame:GetAttribute("spell2"))
+	print("Unit:", frame:GetAttribute("unit"), "HelpButton:", frame:GetAttribute("helpbutton"), "harmbutton:", frame:GetAttribute("harmbutton"))
 
 end
 
