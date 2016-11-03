@@ -122,7 +122,7 @@ AutoBar.categoryValidateList = {}
 
 	--Monk
 	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
-	spellNameList["Zen Pilgrimage: Return"] = AutoBar:LoggedGetSpellInfo(126896)
+	spellNameList["Zen Pilgrimage: Return"] = AutoBar:LoggedGetSpellInfo(126895)
 	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
 	
 	--Paladin
@@ -262,27 +262,21 @@ function PTSpellIDsToSpellName(p_cast_list)
 end
 
 
-local hack_deadly_poison_name = GetSpellInfo(2823)
-local hack_instant_poison_name = GetSpellInfo(157584)
-
-local hack_zen_pilgrimage_name = GetSpellInfo(126892)
-local hack_zen_return_name = GetSpellInfo(126896)
-
 
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 -- If the spell is known (or noSpellCheck is active), copy it to the items list
 local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
-	local spellNameLeft = p_spell_name_left
---	local tracked_spells = {["Revive Pet"] = true, ["Mend Pet"] = true}
---	local debug_me = tracked_spells[p_spell_name_left]
+	local spellNameLeft = nil
+	--local tracked_spells = {["Zen Pilgrimage"] = true, ["Zen Pilgrimage: Return"] = true}
+	--local debug_me = tracked_spells[p_spell_name_left]
 --if (debug_me) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
 	--If the spells are not known by the player, their names are replaced with nil
-	if (spellNameLeft) then
+	if (p_spell_name_left) then
 		if (not noSpellCheck) then
-			spellNameLeft = GetSpellInfo(spellNameLeft)
+			spellNameLeft = GetSpellInfo(p_spell_name_left)
 		end
 		if (not p_category.items) then
 			p_category.items = {}
@@ -297,34 +291,19 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		end
 	end
 
---	if (debug_me) then print("   AddSpellToCategory - spellname:", spellNameLeft) end
+	--if (debug_me) then print("   AddSpellToCategory - spellname:", p_spell_name_left) end
 
-	--HACK: WoW has a bug where GetSpellInfo("Instant Poison") returns nil and GetSpellInfo("Deadly Poison") returns Instant Poison if the character
-	-- has the Swift Poison perk. So if the passed in name is for Instant, ask for Deadly instead. NOTE: These have to be localized names which is
-	-- why we cache those values above
-	if (hack_instant_poison_name and (spellNameLeft == hack_instant_poison_name)) then
-		spellNameLeft = hack_deadly_poison_name
-	end
-	--Zen Pilgrimage has a similar issue to Deadly Poison except it's triggered by using the other spell (Pilgrimage <-> Return)
-	if (hack_zen_return_name and (p_spell_name_left == hack_zen_return_name)) then
-		spellNameLeft = hack_zen_pilgrimage_name
-	end
-
-
-
-
---	if (debug_me) then print("   Fixed: spellname:", spellNameLeft) end
 
 	if (spellNameLeft) then
-		AutoBarSearch:RegisterSpell(spellNameLeft, noSpellCheck)
-		p_category.items[itemsIndex] = spellNameLeft
+		AutoBarSearch:RegisterSpell(p_spell_name_left, noSpellCheck)
+		p_category.items[itemsIndex] = p_spell_name_left
 		if (spellNameRight) then
 			AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
-			p_category.itemsRightClick[spellNameLeft] = spellNameRight
---if (debug_me) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft) .. " spellNameRight " .. tostring(spellNameRight)) end
+			p_category.itemsRightClick[p_spell_name_left] = spellNameRight
+--if (debug_me) then AutoBar:Print("AddSpellToCategory castable p_spellNameLeft " .. tostring(p_spell_name_left) .. " spellNameRight " .. tostring(spellNameRight)) end
 		else
---			p_category.itemsRightClick[spellNameLeft] = spellNameLeft
---if (debug_me) then AutoBar:Print("AddSpellToCategory castable spellNameLeft " .. tostring(spellNameLeft)) end
+--			p_category.itemsRightClick[p_spell_name_left] = p_spell_name_left
+--if (debug_me) then AutoBar:Print("AddSpellToCategory castable p_spellNameLeft " .. tostring(p_spell_name_left)) end
 		end
 		itemsIndex = itemsIndex + 1
 	elseif (spellNameRight) then
@@ -1366,8 +1345,8 @@ function AutoBarCategory:Initialize()
 			"MAGE", spellTeleportHallofGuardian, spellTeleportHallofGuardian,
 			"MAGE", spellTeleportBrokenDalaran, spellPortalBrokenDalaran,
 			"MAGE", spellNameList["Teleport: Dalaran"], spellNameList["Portal: Dalaran"],
-			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage"), AutoBar:GetSpellNameByName("Zen Pilgrimage"),
-			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"), AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"),
+			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage"), nil,
+			"MONK", AutoBar:GetSpellNameByName("Zen Pilgrimage: Return"), nil,
 		"DEATHKNIGHT", spellNameList["Death Gate"], spellNameList["Death Gate"],	
 			"SHAMAN", spellAstralRecall, spellAstralRecall,
 		"WARLOCK", spellRitualOfSummoning, spellRitualOfSummoning,
