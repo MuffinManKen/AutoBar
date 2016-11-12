@@ -1713,12 +1713,13 @@ function AutoBar:CreateBarOptions(barKey, existingOptions)
 				newButtonSpacer = {
 					type = "header",
 					order = 10,
-					name = "",
+					name = "Buttons",
 				},
 				newButton = {
 				    type = "execute",
 					order = 11,
-				    name = L["New"],
+				    name = L["NewButton"],
+				    desc = L["NewButtonTooltip"],
 				    func = BarButtonNew,
 					arg = passValue,
 				},
@@ -2509,8 +2510,8 @@ function AutoBar:CreateButtonOptions(options)
 		options["newButton"] = {
 		    type = "execute",
 			order = 1,
-		    name = L["New"],
-		    desc = L["New"],
+		    name = L["NewButton"],
+		    desc = L["NewButtonTooltip"],
 		    func = ButtonNew,
 		}
 	end

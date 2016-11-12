@@ -85,6 +85,11 @@ atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
 atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
 atl("AutoBarButtonReputation", "Reputation")
 
+atl("NewButton", "New Button")
+atl("NewButtonTooltip", "Create a new custom button")
+
+
+
 local quick_sets = 
 {
 	--Categories
