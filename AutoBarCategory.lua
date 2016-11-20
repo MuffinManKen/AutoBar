@@ -269,14 +269,16 @@ end
 local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
 	local spellNameLeft = nil
-	--local tracked_spells = {["Zen Pilgrimage"] = true, ["Zen Pilgrimage: Return"] = true}
+	--local tracked_spells = {["Swift Stormsaber"] = true, ["White Ram"] = true}
 	--local debug_me = tracked_spells[p_spell_name_left]
---if (debug_me) then print(p_category.categoryKey,"(", spellNameLeft, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
+--if (debug_me) then print(p_category.categoryKey,"(", p_spell_name_left, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
 
 	--If the spells are not known by the player, their names are replaced with nil
 	if (p_spell_name_left) then
 		if (not noSpellCheck) then
 			spellNameLeft = GetSpellInfo(p_spell_name_left)
+		else
+			spellNameLeft = p_spell_name_left
 		end
 		if (not p_category.items) then
 			p_category.items = {}
@@ -291,7 +293,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		end
 	end
 
-	--if (debug_me) then print("   AddSpellToCategory - spellname:", p_spell_name_left) end
+	--if (debug_me) then print("   AddSpellToCategory - spellname:", spellNameLeft) end
 
 
 	if (spellNameLeft) then
