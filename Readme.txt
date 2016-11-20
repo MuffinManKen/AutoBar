@@ -12,7 +12,12 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
-v7.1.0.03:
+v7.1.0.04:
+ - Simplified the handling of some spells (notably Zen Pilgrimage)
+ - Changed New to New Button in the Buttons UI and added a better tooltip
+ - Updated Muffin LibPT and LibPeriodicTable
+ 
+ v7.1.0.03:
  - What's New dialog popped up on every log in
 
 v7.1.0.02:

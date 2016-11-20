@@ -65,15 +65,10 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-"v7.1.0.03:|n" ..
-" - What's New dialog popped up on every log in|n" ..
-"v7.1.0.02:|n" ..
-" - Added Show Favourites option to Toy Box button|n" ..
-" - Updated Muffin LibPT|n" ..
-" - Pet Battle button has Safari Hat and Revive Battle Pets|n" ..
-" - Pet Battle button has ornamental toys (leashes, etc). Optional.|n" ..
-" - Added more Toy-based Portals|n" ..
-" - Added some Fishing Toys|n" ..
+"v7.1.0.04:|n" ..
+" - Simplified the handling of some spells (notably Zen Pilgrimage)|n" ..
+" - Changed New to New Button in the Buttons UI and added a better tooltip|n" ..
+" - Updated Muffin LibPT and LibPeriodicTable|n" ..
 " - Are things missing? Report them at |cFFFFFF00MuffinManGames.com|r|n" ..
 "|n"
 
