@@ -65,6 +65,8 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
+"v7.1.0.05:|n" ..
+" - The Mount button was only showing Class mounts|n" ..
 "v7.1.0.04:|n" ..
 " - Simplified the handling of some spells (notably Zen Pilgrimage)|n" ..
 " - Changed New to New Button in the Buttons UI and added a better tooltip|n" ..

@@ -12,6 +12,9 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.05:
+ - The Mount button was only showing Class mounts
+
 v7.1.0.04:
  - Simplified the handling of some spells (notably Zen Pilgrimage)
  - Changed New to New Button in the Buttons UI and added a better tooltip
