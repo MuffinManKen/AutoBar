@@ -59,6 +59,11 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		if (GameTooltip:SetToyByItemID(toy_id)) then
 			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 		end
+	elseif (buttonType == "spell") then
+		local spell_name = button:GetAttribute("spell")
+		local spell_info = AutoBarSearch.spells[spell_name]
+		GameTooltip:SetSpellByID(spell_info.spell_id);
+		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 	elseif (itemLink) then
 		if (GameTooltip:SetHyperlink(itemLink)) then
 			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow

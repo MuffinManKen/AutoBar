@@ -2056,7 +2056,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
-				AutoBarSearch:RegisterSpell(spell_name, true)
+				AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
 				local spellInfo = AutoBarSearch.spells[spell_name]
 				spellInfo.spellLink = "spell:" .. spell_id
 				category.castList[# category.castList + 1] = spell_name
@@ -2175,7 +2175,7 @@ function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 --			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
 --			spellName = GetSpellInfo(spellID)
 --			spellIconList[spellName] = icon
---			AutoBarSearch:RegisterSpell(spellName, true)
+--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
 --			local spellInfo = AutoBarSearch.spells[spellName]
 --			spellInfo.spellLink = "spell:" .. spellID
 --			category.castList[index] = spellName

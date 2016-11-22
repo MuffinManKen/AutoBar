@@ -269,6 +269,8 @@ end
 local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
 	local spellNameLeft = nil
+	local left_spell_id = nil
+	local right_spell_id = nil
 	--local tracked_spells = {["Swift Stormsaber"] = true, ["White Ram"] = true}
 	--local debug_me = tracked_spells[p_spell_name_left]
 --if (debug_me) then print(p_category.categoryKey,"(", p_spell_name_left, ",", spellNameRight, ",", itemsIndex,")", noSpellCheck) end
@@ -276,7 +278,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 	--If the spells are not known by the player, their names are replaced with nil
 	if (p_spell_name_left) then
 		if (not noSpellCheck) then
-			spellNameLeft = GetSpellInfo(p_spell_name_left)
+			spellNameLeft, _, _, _, _, _, left_spell_id = GetSpellInfo(p_spell_name_left)
 		else
 			spellNameLeft = p_spell_name_left
 		end
@@ -286,7 +288,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 	end
 	if (spellNameRight) then
 		if (not noSpellCheck) then
-			spellNameRight = GetSpellInfo(spellNameRight)
+			spellNameRight, _, _, _, _, _, right_spell_id  = GetSpellInfo(spellNameRight)
 		end
 		if (not p_category.itemsRightClick) then
 			p_category.itemsRightClick = {}
@@ -297,10 +299,10 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 
 
 	if (spellNameLeft) then
-		AutoBarSearch:RegisterSpell(p_spell_name_left, noSpellCheck)
+		AutoBarSearch:RegisterSpell(p_spell_name_left, left_spell_id, noSpellCheck)
 		p_category.items[itemsIndex] = p_spell_name_left
 		if (spellNameRight) then
-			AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
+			AutoBarSearch:RegisterSpell(spellNameRight, right_spell_id, noSpellCheck)
 			p_category.itemsRightClick[p_spell_name_left] = spellNameRight
 --if (debug_me) then AutoBar:Print("AddSpellToCategory castable p_spellNameLeft " .. tostring(p_spell_name_left) .. " spellNameRight " .. tostring(spellNameRight)) end
 		else
@@ -309,7 +311,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		end
 		itemsIndex = itemsIndex + 1
 	elseif (spellNameRight) then
-		AutoBarSearch:RegisterSpell(spellNameRight, noSpellCheck)
+		AutoBarSearch:RegisterSpell(spellNameRight, right_spell_id, noSpellCheck)
 		p_category.items[itemsIndex] = spellNameRight
 		p_category.itemsRightClick[spellNameRight] = spellNameRight
 		itemsIndex = itemsIndex + 1

@@ -379,7 +379,7 @@ function Stuff.prototype:ScanSpells()
 		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
 		spellInfo.canCast = AutoBarSearch:CanCastSpell(spellName)
 		--if (debug) then print("Spell Info:", AutoBar:Dump(spellInfo)); end;
-		AutoBarSearch:RegisterSpell(spellName)
+		AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
 		if (spellInfo.canCast) then
 			self:Add(spellName, nil, nil, spellName)
 		else
@@ -1105,7 +1105,7 @@ end
 -- Register a spell, and figure out its spellbook index for use in tooltip
 -- Multiple calls refresh current state of the spell
 -- {spellName = {canCast, spellLink, noSpellCheck}}
-function AutoBarSearch:RegisterSpell(p_spell_name, noSpellCheck, p_spell_link)
+function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_spell_link)
 
 	local spellInfo = AutoBarSearch.spells[p_spell_name]
 	
@@ -1122,6 +1122,13 @@ function AutoBarSearch:RegisterSpell(p_spell_name, noSpellCheck, p_spell_link)
 	else
 		spellInfo.spellLink = GetSpellLink(p_spell_name)
 	end
+	
+	if (p_spell_id) then
+		spellInfo.spell_id = p_spell_id
+	else
+		spellInfo.spell_id = select(7, GetSpellInfo(p_spell_name))
+	end
+
 	
 	if (noSpellCheck) then
 		spellInfo.noSpellCheck = true
