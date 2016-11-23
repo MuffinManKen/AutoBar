@@ -948,7 +948,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId, toy_guid
+	local bag, slot, spell, itemId, macroId, toy_guid, bpet_guid
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -961,12 +961,15 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 		if(spell:find("^toy")) then
 			toy_guid = spell
 			spell = nil
+		elseif(spell:find("^bpet")) then
+			bpet_guid = spell
+			spell = nil
 		elseif(spell:find("^macro")) then
 			macroId = spell
 			spell = nil
 		end
 	end
-	return bag, slot, spell, itemId, macroId, toy_guid
+	return bag, slot, spell, itemId, macroId, toy_guid, bpet_guid
 end
 -- /dump AutoBarSearch.items.dataList["AutoBarCustomButtonPlanning Mods"]
 -- /dump AutoBarSearch.found:GetList()["customMacroCustomMinnaplanaMah Macro"]
