@@ -639,8 +639,8 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 	--Debug for Whitewater Carp and Ancient Amber
 	local tracked_toys = {[131814] = true, [69776] = true}
-	local debug_me = tracked_toys[itemId]
-	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, p_toy_guid, itemId, itemData.category) end;
+	local debug_me = false --tracked_toys[itemId]
+	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, p_toy_guid, p_bpet_guid, itemId, itemData.category) end;
 
 	frame:SetAttribute("category", category)
 	frame:SetAttribute("itemId", itemId)
