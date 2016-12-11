@@ -55,6 +55,13 @@ C_ToyBox.IsToyUsable(112059)
 
 --]]
 
+*** summonpet is not a valid attribute. Summoning a battle pet from a Secure button can only be done via a macro
+
+/script btn = CreateFrame("Button", "TestPet", UIParent, "SecureActionButtonTemplate,ActionButtonTemplate");
+/script btn:SetAttribute("type", "summonpet");
+/script btn:SetAttribute("summonpet", C_PetJournal.GetPetInfoByIndex(1));
+/script btn:SetPoint("Center",UIParent)
+/script btn:RegisterForClicks("AnyUp")
 
 
-
+/script btn:SetAttribute("type", "summonpet");
