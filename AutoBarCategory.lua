@@ -489,6 +489,33 @@ function AutoBarToyCategory.prototype:Refresh()
 	end
 end
 
+AutoBarMacroTextCategory = AceOO.Class(AutoBarCategory)
+
+function AutoBarMacroTextCategory.prototype:init(description, shortTexture)
+	AutoBarMacroTextCategory.super.prototype.init(self, description, shortTexture) -- Mandatory init.
+	self.is_macro_text = true
+	
+	-- Current active items
+	self.items = {}
+
+	self:Refresh()
+
+end
+
+function AutoBarMacroTextCategory.prototype:Refresh()
+
+	--Nothing to do
+
+end
+
+function AutoBarMacroTextCategory.prototype:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override)
+
+	local next_index = #self.items + 1
+	local guid = ABGCS:MacroTextGUID(p_macro_text)
+	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override)
+	self.items[next_index] = guid
+end
+
 
 -- Category consisting of spells
 AutoBarSpells = AceOO.Class(AutoBarCategory)
@@ -726,6 +753,17 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
 	AutoBarCategoryList["Muffin.Toys.Portal"] = AutoBarToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
 	AutoBarCategoryList["Muffin.Toys.Fishing"] = AutoBarToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
+
+
+
+	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
+
+	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = AutoBarMacroTextCategory( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"]:AddMacroText("/randomfavoritepet",  "Interface/Icons/PetBattle_Health", L["Summon A Random Fave Pet"])
+
+	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = AutoBarMacroTextCategory( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
+	AutoBarCategoryList["Macro.BattlePet.DismissPet"]:AddMacroText("/dismisspet",  "Interface/Icons/Spell_BrokenHeart", L["Dismiss Battle Pet"])
 
 
 

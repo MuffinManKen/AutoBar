@@ -10,6 +10,8 @@ local AutoBar = AutoBar
 local spellNameList = AutoBar.spellNameList
 local spellIconList = AutoBar.spellIconList
 
+local ABGData = AutoBarGlobalDataObject
+
 local AceOO = AceLibrary("AceOO-2.0")
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local L = AutoBar.locale
@@ -401,8 +403,8 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		popupButtonFrame:SetAttribute("checkselfcast", true)
 		popupButtonFrame:SetAttribute("checkfocuscast", true)
 
-		local bag, slot, spell, itemId, macroId, toy_guid, bpet_guid = AutoBarSearch.sorted:GetInfo(buttonKey, popupButtonIndex)
-		self:SetupAttributes(popupButton, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, buttonItems[itemId])
+		local bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data = AutoBarSearch.sorted:GetInfo(buttonKey, popupButtonIndex)
+		self:SetupAttributes(popupButton, bag, slot, spell, macroId, toy_guid, type_id, info_data, itemId, buttonItems[itemId])
 		popupButton:UpdateIcon()
 	end
 
@@ -469,12 +471,12 @@ function AutoBarButton.prototype:SetupButton()
 	local buttonKey = self.buttonDB.buttonKey
 	local frame = self.frame
 
-	local bag, slot, spell, itemId, macroId, toy_guid, bpet_guid = AutoBarSearch.sorted:GetInfo(buttonKey, 1)
+	local bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data = AutoBarSearch.sorted:GetInfo(buttonKey, 1)
 	local popupHeader = frame.popupHeader
 	local popupKeyHandler = frame.popupKeyHandler
 
-	--if (buttonKey == "AutoBarButtonToyBox") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "toy_guid", toy_guid) end;
-	if ((bag or slot or spell or macroId or toy_guid or bpet_guid) and self.buttonDB.enabled) then
+	--if (buttonKey == "AutoBarButtonPets") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "toy_guid", toy_guid, "type_id", type_id, "info_data", info_data) end;
+	if ((bag or slot or spell or macroId or toy_guid or type_id) and self.buttonDB.enabled) then
 		frame:Show()
 		local sortedItems = AutoBarSearch.sorted:GetList(buttonKey)
 		local noPopup = self.buttonDB.noPopup
@@ -486,7 +488,7 @@ function AutoBarButton.prototype:SetupButton()
 		local buttonItems = AutoBarSearch.items:GetList(buttonKey)
 		local itemData = buttonItems[itemId]
 
-		self:SetupAttributes(self, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+		self:SetupAttributes(self, bag, slot, spell, macroId, toy_guid, type_id, info_data, itemId, itemData)
 		if (noPopup) then
 			if (popupHeader) then
 				for _, popupButton in pairs(popupHeader.popupButtonList) do
@@ -629,7 +631,7 @@ local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
 
 -- Set the state attributes of the button
-function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_toy_guid, p_bpet_guid, itemId, itemData)
+function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_toy_guid, p_type_id, p_info_data, itemId, itemData)
 	local frame = button.frame
 	AutoBarButton:SetupAttributesClear(frame)
 
@@ -637,10 +639,8 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 	frame.needsTooltip = true
 	local category = itemData and itemData.category
 
-	--Debug for Whitewater Carp and Ancient Amber
-	local tracked_toys = {[131814] = true, [69776] = true}
-	local debug_me = false --tracked_toys[itemId]
-	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, p_toy_guid, p_bpet_guid, itemId, itemData.category) end;
+	local debug_me = false; --p_type_id ~= nil
+	if (debug_me) then print("ABButton.proto:SetupAttributes",  bag, slot, spell, macroId, p_toy_guid, p_type_id, p_info_data, itemId, itemData.category) end;
 
 	frame:SetAttribute("category", category)
 	frame:SetAttribute("itemId", itemId)
@@ -777,6 +777,11 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				frame:SetAttribute("type2", "item")
 				frame:SetAttribute("item2", itemLink)
 			end
+		elseif (p_type_id == ABGData.TYPE_MACRO_TEXT) then
+			frame:SetAttribute("type", "macro")
+			frame:SetAttribute("macrotext", p_info_data.macro_text)
+			frame:SetAttribute("AutoBarGUID", p_info_data.guid)
+			button.macroActive = true
 		elseif (macroId) then
 			local macroInfo = AutoBarSearch.macros[macroId]
 			frame:SetAttribute("type", "macro")
@@ -816,9 +821,9 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			end
 		elseif (p_bpet_guid) then
 			local bpet_info = AutoBarSearch.bpets[p_bpet_guid]
-			frame:SetAttribute("type", "action")
-			frame:SetAttribute("summonpet", bpet_info.bpet_id)
-
+			frame:SetAttribute("type", "macro")
+			frame:SetAttribute("macrotext", "/summonpet " .. bpet_info.bpet_id)
+			button.macroActive = true
 			-- Tooltip
 			--TODO: No idea how to set this yet
 			--if (toy_info.link) then
@@ -1162,10 +1167,10 @@ function AutoBarButtonClassBuff.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Class.Buff")
 end
 
-function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 	local selfCastRightClick = AutoBar.db.account.selfCastRightClick
 	AutoBar.db.account.selfCastRightClick = nil
-	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 	AutoBar.db.account.selfCastRightClick = selfCastRightClick
 end
 
@@ -2141,11 +2146,14 @@ function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
 	if (not AutoBarCategoryList["Spell.Critter"]) then
-		AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new(
-			"Spell.Critter", spellIconList["Phoenix Hatchling"], {})
+		AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new( "Spell.Critter", spellIconList["Phoenix Hatchling"], {})
 		AutoBarCategoryList["Spell.Critter"]:SetNoSpellCheck(true)
 	end
 	self:AddCategory("Spell.Critter")
+	
+	self:AddCategory("Macro.BattlePet.SummonRandom")
+	self:AddCategory("Macro.BattlePet.DismissPet")
+	self:AddCategory("Macro.BattlePet.SummonRandomFave")
 
 	self:Refresh(parentBar, buttonDB)
 end
@@ -2164,24 +2172,30 @@ function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 	AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
 
 	local companionType = "CRITTER"
-	local _, count = C_PetJournal.GetNumPets()
+	local _, total_pet_count = C_PetJournal.GetNumPets()
 
---print("NumCritters:" .. count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
+--print("NumCritters:" .. total_pet_count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
 
-	if (count ~= AutoBar.last_critter_count) then
+	if (total_pet_count ~= AutoBar.last_critter_count) then
 --print("   Gonna do critter stuff");
-		AutoBar.last_critter_count = count;
+		AutoBar.last_critter_count = total_pet_count;
 
 	end
---	if (count > 0) then
---		if (not category.castList) then
---			category.castList = {}
---		end
---		local castList = category.castList
---
---		local spellName, icon
---		local creatureID, creatureName, spellID, active
---		for index = 1, count, 1 do
+	if (total_pet_count > 0) then
+		if (not category.castList) then
+			category.castList = {}
+		end
+		local castList = category.castList
+
+		for index = 1, total_pet_count, 1 do
+			local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
+			pet_id = pet_data[1]
+			owned = pet_data[3]
+			favorite = pet_data[6]
+			icon = pet_data[9]
+			description = pet_data[13]
+			local user_selected = owned and favorite
+
 --			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
 --			spellName = GetSpellInfo(spellID)
 --			spellIconList[spellName] = icon
@@ -2189,19 +2203,9 @@ function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 --			local spellInfo = AutoBarSearch.spells[spellName]
 --			spellInfo.spellLink = "spell:" .. spellID
 --			category.castList[index] = spellName
---		end
---	end
+		end
+	end
 
---	local _, pet_count = C_PetJournal.GetNumPets()
---	local index, pet_id, owned, favorite, description, icon
---	for index = 1, pet_count, 1 do
---		local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
---		pet_id = pet_data[1]
---		owned = pet_data[3]
---		favorite = pet_data[6]
---		icon = pet_data[9]
---		description = pet_data[13]
---	end
 
 end
 
@@ -2580,8 +2584,8 @@ function AutoBarButtonTotemAir.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Air")
 end
 
-function AutoBarButtonTotemAir.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
-	AutoBarButtonTotemAir.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonTotemAir.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemAir.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemAir)
 end
@@ -2620,8 +2624,8 @@ function AutoBarButtonTotemEarth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Earth")
 end
 
-function AutoBarButtonTotemEarth.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
-	AutoBarButtonTotemEarth.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonTotemEarth.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemEarth.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemEarth)
 end
@@ -2660,8 +2664,8 @@ function AutoBarButtonTotemFire.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Fire")
 end
 
-function AutoBarButtonTotemFire.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
-	AutoBarButtonTotemFire.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonTotemFire.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemFire.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemFire)
 end
@@ -2700,8 +2704,8 @@ function AutoBarButtonTotemWater.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Totem.Water")
 end
 
-function AutoBarButtonTotemWater.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
-	AutoBarButtonTotemWater.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonTotemWater.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemWater.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemWater)
 end
@@ -2793,13 +2797,13 @@ end
 
 
 local equipTrinket2String = "/equipslot " .. TRINKET2_SLOT .. " "
-function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 --AutoBar:Print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
 
 	local _, equippedItemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 
 	if ((equippedItemId == itemId) or (not bag)) then
-		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, bpet_guid, itemId, itemData)
+		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, toy_guid, p_type_id, p_info_data, itemId, itemData)
 	else
 		local macroTexture = select(10, GetItemInfo(tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering

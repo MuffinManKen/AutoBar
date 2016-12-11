@@ -88,6 +88,10 @@ atl("AutoBarButtonReputation", "Reputation")
 atl("NewButton", "New Button")
 atl("NewButtonTooltip", "Create a new custom button")
 
+atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet from your pet journal|r")
+atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet from your list of favourites in the pet journal|r")
+atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current battle pet|r")
+
 
 
 local quick_sets = 
@@ -101,6 +105,9 @@ local quick_sets =
 	"Consumable.Food.Fruit",
 	"Consumable.Food.Fungus",
 	"Consumable.Food.Meat",
+	"Macro.BattlePet.SummonRandom",
+	"Macro.BattlePet.DismissPet",
+	"Macro.BattlePet.SummonRandomFave",
 	"Muffin.Battle Pet Items.Bandages",
 	"Muffin.Battle Pet Items.Level",
 	"Muffin.Battle Pet Items.Pet Treat",

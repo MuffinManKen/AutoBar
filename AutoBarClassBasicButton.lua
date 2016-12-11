@@ -50,9 +50,17 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 
 	local itemLink = button:GetAttribute("itemLink")
 	local buttonType = button:GetAttribute("type")
+	local item_guid = button:GetAttribute("AutoBarGUID")
+	local item_data = item_guid and AutoBarSearch.macro_text[item_guid] --This should query a global guid registry and then the specific ones if not found. Now only macrotext for CategoryMacros are using this
+
+
 	if (AutoBar.moveButtonsMode) then
 		local name = AutoBarButton:GetDisplayName(button.class.buttonDB)
-		GameTooltip:AddLine(name, 0.8, 0, 1)
+		GameTooltip:AddLine(name, 0.8, 0, 1, -1)
+		GameTooltip:Show()
+	elseif(item_data and item_data.tooltip) then
+		GameTooltip:AddLine(item_data.tooltip, 1, 1, 1)
+		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 		GameTooltip:Show()
 	elseif (buttonType == "toy") then
 		local toy_id = button:GetAttribute("toy")
@@ -168,8 +176,12 @@ local borderGreen = {r = 0, g = 1.0, b = 0, a = 0.35}
 function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	local texture, borderColor
 	local itemType = frame:GetAttribute("type")
+	local item_guid = frame:GetAttribute("AutoBarGUID")
+	local item_data = item_guid and AutoBarSearch.macro_text[item_guid] --This should query a global guid registry and then the specific ones if not found. Now only macrotext for CategoryMacros are using this
 
-	if (itemType == "item") then
+	if(item_data and item_data.icon) then
+		texture = item_data.icon
+	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
 			_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))

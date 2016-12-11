@@ -8,7 +8,7 @@ Website: http://www.wowace.com/
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
-
+local ABGData = AutoBarGlobalDataObject
 
 local _
 
@@ -18,6 +18,7 @@ AutoBarSearch = {}
 AutoBarSearch.spells = {}
 AutoBarSearch.toys = {}
 AutoBarSearch.macros = {}
+AutoBarSearch.macro_text = {}
 
 AutoBarSearch.dirtyBags = {}
 local searchSpace, items
@@ -339,11 +340,21 @@ end
 
 --As far as I know there is no way to get rid of a toy, so we don't need to ever delete anything
 function Stuff.prototype:ScanToyBox()
---AutoBarSearch.toys
+
 	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
 		AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);
 		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AutoBar:Dump(toy_data))
 		self:Add(toy_guid, nil, nil, toy_guid)
+	end
+
+end
+
+function Stuff.prototype:ScanMacroText()
+
+	for macro_text_guid, macro_text_data in pairs(AutoBarSearch.macro_text) do
+		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
+		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AutoBar:Dump(macro_text_data))
+		self:Add(macro_text_guid, nil, nil, macro_text_guid)
 	end
 
 end
@@ -431,6 +442,12 @@ function Stuff.prototype:Scan()
 			AutoBar:LogEventEnd("AutoBar scanned bag", bag)
 			AutoBarSearch.dirtyBags[bag] = nil
 		end
+	end
+	
+	if (AutoBarSearch.dirtyBags.macro_text) then
+--AutoBar:Print("Stuff.prototype:Scan    scanning macro_text ");
+		self:ScanMacroText()
+		AutoBarSearch.dirtyBags.macro_text = false
 	end
 	
 	if (AutoBarSearch.dirtyBags.toybox) then
@@ -948,7 +965,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId, toy_guid, bpet_guid
+	local bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -964,12 +981,16 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 		elseif(spell:find("^bpet")) then
 			bpet_guid = spell
 			spell = nil
+		elseif(spell:find("^macrotext:")) then
+			type_id = ABGData.TYPE_MACRO_TEXT
+			info_data = AutoBarSearch.macro_text[spell]
+			spell = nil
 		elseif(spell:find("^macro")) then
 			macroId = spell
 			spell = nil
 		end
 	end
-	return bag, slot, spell, itemId, macroId, toy_guid, bpet_guid
+	return bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data
 end
 -- /dump AutoBarSearch.items.dataList["AutoBarCustomButtonPlanning Mods"]
 -- /dump AutoBarSearch.found:GetList()["customMacroCustomMinnaplanaMah Macro"]
@@ -1141,6 +1162,37 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_s
 	return p_spell_name
 end
 
+function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_icon_override, p_tooltip_override)
+
+	local debug = false; --(p_macro_guid == 127670)
+	local macro_text_info = AutoBarSearch.macro_text[p_macro_guid]
+
+	if (not macro_text_info) then
+		macro_text_info = {}
+		AutoBarSearch.macro_text[p_macro_guid] = macro_text_info
+	end
+	
+	if (p_macro_icon_override) then
+		macro_text_info.icon = p_macro_icon_override
+	else
+		macro_text_info.icon = nil
+	end
+
+	if (p_tooltip_override) then
+		macro_text_info.tooltip = p_tooltip_override
+	else
+		macro_text_info.tooltip = nil
+	end
+
+
+	macro_text_info.guid = p_macro_guid
+	macro_text_info.macro_text = p_macro_text
+	macro_text_info.is_macro_text = true
+
+	if (debug) then print("AutoBarSearch:RegisterMacroText", "GUID:", p_macro_guid, "icon:", p_macro_icon, "text:", p_macro_text); end
+
+end
+
 function AutoBarSearch:RegisterToy(p_toy_id, p_item_link)
 
 	local debug = false; --(p_toy_id == 127670)
@@ -1226,6 +1278,7 @@ function AutoBarSearch:Reset()
 	AutoBarSearch.dirtyBags.toybox = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
+	AutoBarSearch.dirtyBags.macro_text = true
 	AutoBarSearch.dirty = true
 	AutoBarSearch.stuff:Scan()
 	AutoBarSearch.sorted:Update()

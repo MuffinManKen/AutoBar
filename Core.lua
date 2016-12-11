@@ -78,7 +78,7 @@ WHATSNEW_TEXT = "" ..
 
 
 
---/run AutoBar:FrameInsp(AutoBarButtonClassPetFrame)
+--/run AutoBar:FrameInsp(ActionButton3)
 function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 
 	local frame = p_frame
@@ -88,7 +88,8 @@ function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 	print("State:", frame:GetAttribute("state"))
 	print("Attribute:", frame:GetAttribute("attribute"))
 	print("Action:", frame:GetAttribute("action"),"Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"), "ActionPage:", frame:GetAttribute("actionpage"))
-	print("Macro:", frame:GetAttribute("macro"), "Spell:", frame:GetAttribute("spell"), "Spell1:", frame:GetAttribute("spell1"), "Spell2:", frame:GetAttribute("spell2"))
+	print("Macro:", frame:GetAttribute("macro"), "MacroText:", frame:GetAttribute("macrotext"))
+	print("Spell:", frame:GetAttribute("spell"), "Spell1:", frame:GetAttribute("spell1"), "Spell2:", frame:GetAttribute("spell2"))
 	print("Unit:", frame:GetAttribute("unit"), "HelpButton:", frame:GetAttribute("helpbutton"), "harmbutton:", frame:GetAttribute("harmbutton"))
 
 end
