@@ -197,6 +197,7 @@ local snippetOnClick = [[
 	-- Move the attributes that make the button work
 	local itemType = self:GetAttribute("type")
 	local itemType1 = self:GetAttribute("type1")
+	local item_guid = self:GetAttribute("AutoBarGUID")
 	if(itemType1) then
 		anchorButton:SetAttribute("type1", self:GetAttribute("type1"))
 		anchorButton:SetAttribute("target-slot1", self:GetAttribute("target-slot1"))
@@ -208,6 +209,7 @@ local snippetOnClick = [[
 	anchorButton:SetAttribute("unit", self:GetAttribute("unit"))
 	anchorButton:SetAttribute("target-slot", self:GetAttribute("target-slot"))
 	anchorButton:SetAttribute("target-bag", self:GetAttribute("target-bag"))
+	anchorButton:SetAttribute("AutoBarGUID", self:GetAttribute("AutoBarGUID"))
 
 	if (itemType == "item") then
 		anchorButton:SetAttribute("item", self:GetAttribute("item"))
@@ -220,6 +222,10 @@ local snippetOnClick = [[
 		anchorButton:SetAttribute("macrotext", self:GetAttribute("macrotext"))
 		anchorButton:SetAttribute("macroName", self:GetAttribute("macroName"))
 		anchorButton:SetAttribute("macroBody", self:GetAttribute("macroBody"))
+	end
+	
+	if(item_guid) then
+		anchorButton:SetAttribute("macrotext", self:GetAttribute("macrotext"))
 	end
 
 	-- Move the right click attributes
@@ -262,13 +268,19 @@ local function UpdateHandlers(frame, sourceButton)
 	local itemId
 	local buttonKey = frame.class.buttonName
 	local itemType = frame:GetAttribute("type")
-	if (itemType) then
+	local item_guid = frame:GetAttribute("AutoBarGUID")
+	
+	if(item_guid) then
+		itemId = item_guid
+	elseif (itemType) then
 		if (itemType == "item") then
 			itemId = frame:GetAttribute("itemId")
 		elseif (itemType == "spell") then
 			itemId = frame:GetAttribute("spell")
 		elseif (itemType == "macro") then
 			itemId = frame:GetAttribute("macroId")
+		else
+			print("AutoBar UpdateHandlers can't handle:", itemType);
 		end
 	end
 
@@ -618,6 +630,7 @@ function AutoBarButton:SetupAttributesClear(frame)
 	frame:SetAttribute("macroBody", nil)
 	frame:SetAttribute("macro2", nil)
 	frame:SetAttribute("macrotext2", nil)
+	frame:SetAttribute("AutoBarGUID", nil)
 end
 
 local spellHealingTouch, spellHealingTouchIcon

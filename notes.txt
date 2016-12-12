@@ -1,4 +1,6 @@
 
+ ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
+
 
 /run hearth = AutoBarCategoryList["Misc.Hearth"]
 /watch hearth
@@ -29,7 +31,6 @@
 
 /run print(C_ToyBox.GetToyLink(127670), select(2,GetItemInfo(127670)))
 
-13x13 + 8  => 13x10 + 5 //Pre/Post Usable filtering
 ****NOTE: Does anything need to look up or store the item link for a toy since GameTooltip takes the item id directly??
 
 Engineer only toy: Wormhole Centrifuge 112059
@@ -54,6 +55,10 @@ C_ToyBox.IsToyUsable(112059)
 /script test_button:SetAttribute("type","toy"); test_button:SetAttribute("toy", "Whitewater Carp")
 
 --]]
+
+hyperlink for pets: C_PetJournal.GetBattlePetLink(guid)
+
+http://wow.gamepedia.com/World_of_Warcraft_API#Pet_Journal_Functions
 
 *** summonpet is not a valid attribute. Summoning a battle pet from a Secure button can only be done via a macro
 

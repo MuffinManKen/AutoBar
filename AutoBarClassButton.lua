@@ -604,6 +604,8 @@ end
 --/dump AutoBar.buttonList["AutoBarButtonCat"]:IsActive()
 
 function AutoBar.Class.Button.prototype:IsActive()
+	local debug_me = false; --("AutoBarButtonPets" == self.buttonName)
+	if (debug_me) then print("AutoBar.Class.Button:IsActive", self.buttonName); end;
 	if (not self.buttonDB.enabled) then
 		return false
 	end
@@ -612,7 +614,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 	end
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
---AutoBar:Print("AutoBar.Class.Button.prototype:IsActive itemId " .. tostring(itemId))
+		if (debug_me) then print("AutoBar.Class.Button.prototype:IsActive itemId ", itemId, "itemtype:", itemType); end;
 		local category = self.frame:GetAttribute("category")
 		local categoryInfo = AutoBarCategoryList[category]
 		if (categoryInfo and categoryInfo.battleground and not AutoBar.inBG) then
