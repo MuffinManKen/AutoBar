@@ -1081,23 +1081,6 @@ function Sorted.prototype:SetBest(buttonKey)
 			else
 				if (categoryInfo.nonCombat and AutoBar.inCombat) then
 					good = nil
---				elseif (categoryInfo.limit) then
---					local losthp = UnitHealthMax("player") - UnitHealth("player");
---					local lostmana = UnitManaMax("player") - UnitMana("player");
---					if (UnitPowerType("player") ~= 0 ) then
---						--if (UnitClass("player") == "Druid") then
---							-- Can't check mana in druid forms
---						--	lostmana = 0;
---						--else
---							-- Class doesn't have mana, don't limit
---							lostmana = 10000
---						--end
---					end
---					if (categoryInfo.limit.downhp and categoryInfo.limit.downhp[categoryIndex] > losthp) then
---						good = nil
---					elseif (categoryInfo.limit.downmana and categoryInfo.limit.downmana[categoryIndex] > lostmana) then
---						good = nil
---					end
 				end
 			end
 		end
