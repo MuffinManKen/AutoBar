@@ -12,6 +12,11 @@ To Do:
  - Toybox (Favourite and All)
 
 Changes:
+v7.1.0.06:
+ - Hunter's Call Pet tooltip now shows the pet name instead of a number
+ - Updated Data Libs
+ - Added to Pet button: Summon Random Pet, Summon Random Favourite Pet, Dismiss Pet
+ 
 v7.1.0.05:
  - The Mount button was only showing Class mounts
 

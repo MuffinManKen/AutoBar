@@ -65,15 +65,12 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 
 WHATSNEW_TEXT = "" ..
-"v7.1.0.05:|n" ..
-" - The Mount button was only showing Class mounts|n" ..
-"v7.1.0.04:|n" ..
-" - Simplified the handling of some spells (notably Zen Pilgrimage)|n" ..
-" - Changed New to New Button in the Buttons UI and added a better tooltip|n" ..
-" - Updated Muffin LibPT and LibPeriodicTable|n" ..
-" - Are things missing? Report them at |cFFFFFF00MuffinManGames.com|r|n" ..
-"|n"
-
+[[
+v7.1.0.06:
+ - Hunter's Call Pet tooltip now shows the pet name instead of a number
+ - Updated Data Libs
+ - Added to Pet button: Summon Random Pet, Summon Random Favourite Pet, Dismiss Pet
+]] .. "|n"
 
 
 
