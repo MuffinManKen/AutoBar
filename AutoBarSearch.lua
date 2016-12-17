@@ -342,7 +342,7 @@ end
 function Stuff.prototype:ScanToyBox()
 
 	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
-		AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);
+		AutoBarSearch:RegisterToy(toy_data.item_id);
 		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AutoBar:Dump(toy_data))
 		self:Add(toy_guid, nil, nil, toy_guid)
 	end
@@ -1176,7 +1176,7 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 
 end
 
-function AutoBarSearch:RegisterToy(p_toy_id, p_item_link)
+function AutoBarSearch:RegisterToy(p_toy_id)
 
 	local debug = false; --(p_toy_id == 127670)
 	local toy_guid = ABGCS:ToyGUID(p_toy_id)
@@ -1187,16 +1187,10 @@ function AutoBarSearch:RegisterToy(p_toy_id, p_item_link)
 		AutoBarSearch.toys[toy_guid] = toy_info
 	end
 	
-	if (p_item_link) then
-		toy_info.link = p_item_link
-	else
-		toy_info.link = C_ToyBox.GetToyLink(p_toy_id)
-	end
-	
 	toy_info.item_id = p_toy_id
 	toy_info.is_toy = true
 
-	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid, p_item_link, "=>", toy_info.link); end
+	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid); end
 
 end
 
