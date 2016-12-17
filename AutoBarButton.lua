@@ -2328,6 +2328,7 @@ function AutoBarButtonOrderHallResource.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Order Hall.Artifact Power")
 	self:AddCategory("Muffin.Order Hall.Ancient Mana")
+	self:AddCategory("Muffin.Order Hall.Order Resources")
 
 end
 
