@@ -7,10 +7,6 @@ https://muffinmangames.com
 *For Cooldown counts please use Omni Cooldown Count
 *For skinning install the Masque addon
 
-To Do:
- - Pets (Favourite, and All).
- - Toybox (Favourite and All)
-
 Changes:
 v7.1.0.07:
  - Blocked the Falcosaur mounts from appearing on the Mount button until Blizzard fixes them.
