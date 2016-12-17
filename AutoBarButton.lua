@@ -279,6 +279,8 @@ local function UpdateHandlers(frame, sourceButton)
 			itemId = frame:GetAttribute("spell")
 		elseif (itemType == "macro") then
 			itemId = frame:GetAttribute("macroId")
+		elseif (itemType == "toy") then
+			itemId = frame:GetAttribute("toy")
 		else
 			print("AutoBar UpdateHandlers can't handle:", itemType);
 		end
