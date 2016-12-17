@@ -66,10 +66,10 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
-v7.1.0.06:
- - Hunter's Call Pet tooltip now shows the pet name instead of a number
- - Updated Data Libs
- - Added to Pet button: Summon Random Pet, Summon Random Favourite Pet, Dismiss Pet
+v7.1.0.07:
+ - Blocked the Falcosaur mounts from appearing on the Mount button until Blizzard fixes them.
+ - Added Order Hall Resources Category
+ - Made Toy handling a little more efficient
 ]] .. "|n"
 
 
