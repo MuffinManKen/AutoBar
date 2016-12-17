@@ -827,21 +827,11 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			local toy_info = AutoBarSearch.toys[p_toy_guid]
 			frame:SetAttribute("type", "toy")
 			frame:SetAttribute("toy", toy_info.item_id)
-
-			-- Tooltip
-			if (toy_info.link) then
-				frame:SetAttribute("itemLink", toy_info.link)
-			end
 		elseif (p_bpet_guid) then
 			local bpet_info = AutoBarSearch.bpets[p_bpet_guid]
 			frame:SetAttribute("type", "macro")
 			frame:SetAttribute("macrotext", "/summonpet " .. bpet_info.bpet_id)
 			button.macroActive = true
-			-- Tooltip
-			--TODO: No idea how to set this yet
-			--if (toy_info.link) then
-			--	frame:SetAttribute("itemLink", toy_info.link)
-			--end
 		elseif (castSpell) then
 			-- Set castSpell as default if nothing else is available
 --AutoBar:Print("AutoBarButton.prototype:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
