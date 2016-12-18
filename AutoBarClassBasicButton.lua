@@ -254,14 +254,20 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	if (not itemType) then-- and not self.parentBar.faded
 		return;
 	end
+	
+	local item_guid = self.frame:GetAttribute("AutoBarGUID")
+	local item_data = ABGCS:InfoFromGUID(item_guid)
+
 	local start, duration, enabled = 0, 0, 0
 
 	if (itemType == "item") then
 		local itemId = self.frame:GetAttribute("itemId")
 		if (itemId) then
-		start, duration, enabled = GetItemCooldown(itemId)
+			start, duration, enabled = GetItemCooldown(itemId)
 		end
-	elseif (itemType == "macro") then
+	elseif (itemType == "toy" and item_data) then
+		start, duration, enabled = GetItemCooldown(item_data.item_id)
+--	elseif (itemType == "macro") then --ToDo some day
 --			local macroText = self.frame:GetAttribute("macrotext")
 --			SecureCmdOptionParse()?
 	elseif (itemType == "spell") then
