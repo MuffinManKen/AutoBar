@@ -70,3 +70,18 @@ http://wow.gamepedia.com/World_of_Warcraft_API#Pet_Journal_Functions
 
 
 /script btn:SetAttribute("type", "summonpet");
+
+
+When adding new types:
+SetupAttributes
+AutoBarSearch.sorted:GetInfo
+
+
+
+Is this still needed??:
+	function AutoBarButtonMount.prototype:UpdateUsable()
+	function AutoBarButtonPets.prototype:UpdateUsable()
+
+function AutoBar.Class.BasicButton.prototype:UpdateUsable():
+	for toys should call C_ToyBox.IsToyUsable() ?
+
