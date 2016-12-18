@@ -5,6 +5,8 @@
 -- All global data will be a child of this table
 AutoBarGlobalDataObject = {
 	TYPE_MACRO_TEXT = 1,
+	TYPE_TOY = 2,
+	TYPE_BATTLE_PET = 3,
 }
 
 -- All global code with be a child of this table.  
@@ -34,3 +36,24 @@ function AutoBarGlobalCodeSpace:MacroTextGUID(p_macro_text)
 
 	return guid;
 end
+
+
+--This should query a global guid registry and then the specific ones if not found. 
+function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
+	return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
+end
+
+function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
+	local texture;
+	local item_id = tonumber(p_toy_id)
+	
+	_, _, texture =  C_ToyBox.GetToyInfo(item_id)
+
+	if(texture == nil) then
+		_,_,_,_,_,_,_,_,_, texture = GetItemInfo(item_id)
+	end
+
+	return texture;
+end
+
+

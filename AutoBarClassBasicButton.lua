@@ -9,6 +9,8 @@
 
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
+local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
 
 
 local AceOO = AceLibrary("AceOO-2.0")
@@ -51,22 +53,21 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 	local itemLink = button:GetAttribute("itemLink")
 	local buttonType = button:GetAttribute("type")
 	local item_guid = button:GetAttribute("AutoBarGUID")
-	local item_data = item_guid and AutoBarSearch.macro_text[item_guid] --This should query a global guid registry and then the specific ones if not found. Now only macrotext for CategoryMacros are using this
+	local item_data = ABGCS:InfoFromGUID(item_guid)
 
 
 	if (AutoBar.moveButtonsMode) then
 		local name = AutoBarButton:GetDisplayName(button.class.buttonDB)
 		GameTooltip:AddLine(name, 0.8, 0, 1, -1)
 		GameTooltip:Show()
-	elseif(item_data and item_data.tooltip) then
-		GameTooltip:AddLine(item_data.tooltip, 1, 1, 1)
+	elseif(item_data) then
+		if(item_data.tooltip) then
+			GameTooltip:AddLine(item_data.tooltip, 1, 1, 1)
+		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
+			GameTooltip:SetToyByItemID(item_data.item_id)
+		end
 		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 		GameTooltip:Show()
-	elseif (buttonType == "toy") then
-		local toy_id = button:GetAttribute("toy")
-		if (GameTooltip:SetToyByItemID(toy_id)) then
-			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
-		end
 	elseif (buttonType == "spell") then
 		local spell_name = button:GetAttribute("spell")
 		local spell_info = AutoBarSearch.spells[spell_name]
@@ -177,10 +178,17 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	local texture, borderColor
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
-	local item_data = item_guid and AutoBarSearch.macro_text[item_guid] --This should query a global guid registry and then the specific ones if not found. Now only macrotext for CategoryMacros are using this
+	local item_data =  ABGCS:InfoFromGUID(item_guid)
 
-	if(item_data and item_data.icon) then
-		texture = item_data.icon
+	if(item_data) then
+		if(item_data.icon) then
+			texture = item_data.icon -- Use cached icon if we have one
+		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
+			texture = ABGCS:GetIconForToyID(item_data.item_id)
+			if(texture == nil) then
+				AutoBar:SetMissingItemFlag(item_id);
+			end
+		end
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
@@ -193,17 +201,6 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 			if ((not bag) and slot) then
 				-- Add a green border if button is an equipped item
 				borderColor = borderGreen
-			end
-		end
-	elseif (itemType == "toy") then
-		local item_id = frame:GetAttribute("toy")
-		if (item_id) then
-			_, _, texture =  C_ToyBox.GetToyInfo(tonumber(item_id))
-			if(texture == nil) then
-				_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(item_id))
-			end
-			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(item_id);
 			end
 		end
 	elseif (itemType == "macro") then
@@ -292,7 +289,9 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
 				count1 = GetItemCount(tonumber(itemId), nil, true) or 0
-			elseif (itemType == "macro") then
+-- 		Toys and Macros don't have counts, though a macro of an item could.
+--			elseif (itemType == "macro") then
+--			elseif (itemType == "toy") then
 			elseif (itemType == "spell") then
 				local spellName = frame:GetAttribute("spell")
 				count1 = GetSpellCount(spellName) or 0

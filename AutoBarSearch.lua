@@ -965,7 +965,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data
+	local bag, slot, spell, itemId, macroId, type_id, info_data
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -976,7 +976,8 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 	if (spell) then
 		if(spell:find("^toy")) then
-			toy_guid = spell
+			type_id = ABGData.TYPE_TOY
+			info_data = AutoBarSearch.toys[spell]
 			spell = nil
 		elseif(spell:find("^bpet")) then
 			bpet_guid = spell
@@ -990,7 +991,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 			spell = nil
 		end
 	end
-	return bag, slot, spell, itemId, macroId, toy_guid, type_id, info_data
+	return bag, slot, spell, itemId, macroId, type_id, info_data
 end
 -- /dump AutoBarSearch.items.dataList["AutoBarCustomButtonPlanning Mods"]
 -- /dump AutoBarSearch.found:GetList()["customMacroCustomMinnaplanaMah Macro"]
@@ -1170,7 +1171,7 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 
 	macro_text_info.guid = p_macro_guid
 	macro_text_info.macro_text = p_macro_text
-	macro_text_info.is_macro_text = true
+	macro_text_info.ab_type = ABGData.TYPE_MACRO_TEXT
 
 	if (debug) then print("AutoBarSearch:RegisterMacroText", "GUID:", p_macro_guid, "icon:", p_macro_icon, "text:", p_macro_text); end
 
@@ -1187,8 +1188,10 @@ function AutoBarSearch:RegisterToy(p_toy_id)
 		AutoBarSearch.toys[toy_guid] = toy_info
 	end
 	
+	toy_info.guid = toy_guid
 	toy_info.item_id = p_toy_id
-	toy_info.is_toy = true
+	toy_info.ab_type = ABGData.TYPE_TOY
+	toy_info.icon = select(3, C_ToyBox.GetToyInfo(tonumber(p_toy_id)))
 
 	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid); end
 
