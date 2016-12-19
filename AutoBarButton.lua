@@ -1878,11 +1878,11 @@ end
 
 local reverse_sort_func = function( a,b ) return a > b end
 
-function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox)
+function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
 	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
 
 	if (not AutoBarCategoryList["Toys.ToyBox"]) then
-		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(updateToyBox));
+		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(p_force_update));
 		return true;
 	end
 
@@ -1901,8 +1901,8 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, updateToyBox
 --print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
 
 	--If the number of known Toys has changed, do stuff
-	if (toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) then
---print("   Gonna do stuff");
+	if ((toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) or p_force_update) then
+		--print("   Gonna do toybox stuff");
 		AutoBar.last_ToyBox_count = toy_total_learned;
 
 		category.items = {}
