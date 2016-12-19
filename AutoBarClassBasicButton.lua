@@ -61,7 +61,9 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		GameTooltip:AddLine(name, 0.8, 0, 1, -1)
 		GameTooltip:Show()
 	elseif(item_data) then
-		if(item_data.tooltip) then
+		if(item_data.link) then
+			GameTooltip:SetHyperlink(item_data.link)
+		elseif(item_data.tooltip) then
 			GameTooltip:AddLine(item_data.tooltip, 1, 1, 1)
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
 			GameTooltip:SetToyByItemID(item_data.item_id)

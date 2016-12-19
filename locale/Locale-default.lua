@@ -97,6 +97,7 @@ atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current ba
 local quick_sets = 
 {
 	--Categories
+	"Battle Pet.Favourites",
 	"Consumable.Buff.Resistance.Self",
 	"Consumable.Buff.Resistance.Target",
 	"Consumable.Food.Bread",

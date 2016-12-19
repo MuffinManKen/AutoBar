@@ -508,11 +508,11 @@ function AutoBarMacroTextCategory.prototype:Refresh()
 
 end
 
-function AutoBarMacroTextCategory.prototype:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override)
+function AutoBarMacroTextCategory.prototype:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local next_index = #self.items + 1
 	local guid = ABGCS:MacroTextGUID(p_macro_text)
-	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override)
+	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	self.items[next_index] = guid
 end
 
@@ -756,13 +756,13 @@ function AutoBarCategory:Initialize()
 
 
 
-	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
 
-	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = AutoBarMacroTextCategory( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"]:AddMacroText("/randomfavoritepet",  "Interface/Icons/PetBattle_Health", L["Summon A Random Fave Pet"])
 
-	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = AutoBarMacroTextCategory( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
+	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
 	AutoBarCategoryList["Macro.BattlePet.DismissPet"]:AddMacroText("/dismisspet",  "Interface/Icons/Spell_BrokenHeart", L["Dismiss Battle Pet"])
 
 

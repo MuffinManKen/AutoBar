@@ -1146,7 +1146,7 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_s
 	return p_spell_name
 end
 
-function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_icon_override, p_tooltip_override)
+function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local debug = false; --(p_macro_guid == 127670)
 	local macro_text_info = AutoBarSearch.macro_text[p_macro_guid]
@@ -1166,6 +1166,12 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 		macro_text_info.tooltip = p_tooltip_override
 	else
 		macro_text_info.tooltip = nil
+	end
+
+	if (p_hyperlink_override) then
+		macro_text_info.link = p_hyperlink_override
+	else
+		macro_text_info.link = nil
 	end
 
 

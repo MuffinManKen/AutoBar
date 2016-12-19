@@ -2153,11 +2153,10 @@ _, _, spellIconList["Phoenix Hatchling"] = AutoBar:LoggedGetSpellInfo(46599)
 function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
-	if (not AutoBarCategoryList["Spell.Critter"]) then
-		AutoBarCategoryList["Spell.Critter"] = AutoBarSpells:new( "Spell.Critter", spellIconList["Phoenix Hatchling"], {})
-		AutoBarCategoryList["Spell.Critter"]:SetNoSpellCheck(true)
+	if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
+		AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", spellIconList["Phoenix Hatchling"])
 	end
-	self:AddCategory("Spell.Critter")
+	self:AddCategory("Battle Pet.Favourites")
 	
 	self:AddCategory("Macro.BattlePet.SummonRandom")
 	self:AddCategory("Macro.BattlePet.DismissPet")
@@ -2166,44 +2165,48 @@ function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 	self:Refresh(parentBar, buttonDB)
 end
 
+--	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
+
 function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
 
-	if (not AutoBarCategoryList["Spell.Critter"]) then
+	if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
 		--AutoBarButtonPets.prototype:init hasn't run, so skip
 		--print("Skipping AutoBarButtonPets.prototype:Refresh);
 		return true;
 	end
 
-	local category = AutoBarCategoryList["Spell.Critter"]
+	local category = AutoBarCategoryList["Battle Pet.Favourites"]
+	if (not category.castList) then
+		category.castList = {}
+	end
+	local castList = category.castList
 
 	AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
 
-	local companionType = "CRITTER"
 	local _, total_pet_count = C_PetJournal.GetNumPets()
 
---print("NumCritters:" .. total_pet_count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
+	--print("NumCritters:" .. total_pet_count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
 
 	if (total_pet_count ~= AutoBar.last_critter_count) then
---print("   Gonna do critter stuff");
+		--print("   Gonna do critter stuff");
 		AutoBar.last_critter_count = total_pet_count;
-
-	end
-	if (total_pet_count > 0) then
-		if (not category.castList) then
-			category.castList = {}
-		end
-		local castList = category.castList
 
 		for index = 1, total_pet_count, 1 do
 			local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
-			pet_id = pet_data[1]
-			owned = pet_data[3]
-			favorite = pet_data[6]
-			icon = pet_data[9]
-			description = pet_data[13]
-			local user_selected = owned and favorite
+			local pet_id = pet_data[1]
+			local owned = pet_data[3]
+			local favourite = pet_data[6]
+			local icon = pet_data[9]
+			--local link = C_PetJournal.GetBattlePetLink(pet_id)
+			--local description = pet_data[13]
+			local name = pet_data[4] or pet_data[8]
+			local user_selected = owned and favourite
 
+			if(user_selected) then
+				local summon_macro = "/summonpet " .. pet_id
+				category:AddMacroText(summon_macro, icon, "Summon " .. name, nil)
+			end
 --			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
 --			spellName = GetSpellInfo(spellID)
 --			spellIconList[spellName] = icon
