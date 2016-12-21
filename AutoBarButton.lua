@@ -1885,6 +1885,8 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_upda
 		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(p_force_update));
 		return true;
 	end
+	
+	local made_update = false
 
 	local category = AutoBarCategoryList["Toys.ToyBox"]
 
@@ -1903,6 +1905,7 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_upda
 	--If the number of known Toys has changed, do stuff
 	if ((toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) or p_force_update) then
 		--print("   Gonna do toybox stuff");
+		made_update = true
 		AutoBar.last_ToyBox_count = toy_total_learned;
 
 		category.items = {}
@@ -1929,13 +1932,13 @@ function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_upda
 			end
 		end
 		
-		--table.sort(category.all_items, reverse_sort_func)
-
 		category.unInitialized = false
 		
 		AutoBarCategoryList["Toys.ToyBox"]:Refresh()
 
 	end
+	
+	return made_update
 end
 
 function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
