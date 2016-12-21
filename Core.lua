@@ -942,10 +942,18 @@ end
 function AutoBar.events:TOYS_UPDATED(p_arg1, p_arg2)
 	AutoBar:LogEventStart("TOYS_UPDATED", p_arg1, p_arg2)
 
+	local need_update = false;
+	
 	AutoBarSearch.dirtyBags.toybox = true
---print("TOYS_UPDATED", p_arg1, p_arg2)
-	if (not InCombatLockdown()) then
-		AutoBar.delay["UpdateScan"]:Start()
+	local button = AutoBar.buttonList["AutoBarButtonToyBox"]
+	if (button) then
+		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
+	end
+
+	--print("TOYS_UPDATED", p_arg1, p_arg2, "need update:", need_update)
+
+	if(need_update) then
+		AutoBar.delay["UpdateCategories"]:Start()
 	end
 
 	AutoBar:LogEventEnd("TOYS_UPDATED", p_arg1, p_arg2)
