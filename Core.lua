@@ -66,10 +66,11 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
-v7.1.0.07:
- - Blocked the Falcosaur mounts from appearing on the Mount button until Blizzard fixes them.
- - Added Order Hall Resources Category
- - Made Toy handling a little more efficient
+ - Toys now show cooldowns
+ - Added Favourite Battle Pets to the Pet button
+ - Toy Box button should update immediately when you change your Favourites
+ - Updated Data Libs
+ - Happy Winter Veil!
 ]] .. "|n"
 
 

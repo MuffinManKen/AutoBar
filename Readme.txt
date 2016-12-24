@@ -8,6 +8,13 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.1.0.08:
+ - Toys now show cooldowns
+ - Added Favourite Battle Pets to the Pet button
+ - Toy Box button should update immediately when you change your Favourites
+ - Updated Data Libs
+ - Happy Winter Veil!
+
 v7.1.0.07:
  - Blocked the Falcosaur mounts from appearing on the Mount button until Blizzard fixes them.
  - Added Order Hall Resources Category
@@ -36,7 +43,6 @@ v7.1.0.02:
  - Pet Battle button has ornamental toys (leashes, etc). Optional.
  - Added more Toy-based Portals
  - Added some Fishing Toys
- - Are things missing? Report them at MuffinManGames.com
 
 v7.1.0.01:
  - Fixed an issue on the Trinket button if you had extra trinkets in your bag
