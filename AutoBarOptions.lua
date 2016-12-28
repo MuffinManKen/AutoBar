@@ -70,6 +70,8 @@ function LDBOnClick(clickedFrame, button)
 			AutoBar:MoveButtonsModeToggle()
 		elseif (IsAltKeyDown()) then
 			LibKeyBound:Toggle()
+		elseif(AceCfgDlg.OpenFrames["AutoBar"]) then
+			AceCfgDlg:Close("AutoBar")
 		else
 			AutoBar:CreateOptionsAce3()
 			AceCfgDlg:Open("AutoBar")
