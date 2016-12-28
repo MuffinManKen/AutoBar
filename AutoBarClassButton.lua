@@ -15,8 +15,6 @@ local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
-local dewdrop = AceLibrary("Dewdrop-2.0")
-local _G = getfenv(0)
 local _
 
 -- Basic Button with textures, highlighting, keybindText, tooltips etc.
@@ -62,11 +60,6 @@ local function OnUpdateFunc(button, elapsed)
 	end
 end
 
-local function menuFunc(object, unit, button)
-	local self = object.class
---AutoBar:Print("menuFunc " .. tostring(object) .. " object.class " .. tostring(object.class) .. " button " .. tostring(button))
-	self:ShowButtonOptions()
-end
 
 function AutoBar.Class.Button.prototype:init(parentBar, buttonDB)
 	AutoBar.Class.Button.super.prototype.init(self)
@@ -860,8 +853,6 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOn()
 	frame:SetScript("OnDragStart", onDragStartFunc)
 	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	frame.macroName:SetText(AutoBarButton:GetDisplayName(self.buttonDB))
-	frame:SetAttribute("type2", "menu")
-	frame.menu = menuFunc
 	frame:Show()
 end
 
@@ -879,15 +870,6 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOff()
 	else
 		frame:Hide()
 	end
-end
-
-function AutoBar.Class.Button.prototype:ShowButtonOptions()
-	if InCombatLockdown() then
-		assert(false, "In Combat with Move Button code. ShowButtonOptions")
-	end
-	self.optionsTable = AutoBar:CreateBarButtonOptions(nil, nil, self.buttonName, self.optionsTable)
---AutoBar:Print("AutoBar.Class.Button.prototype:ShowButtonOptions self.optionsTable " .. tostring(self.optionsTable) .. " self.buttonName " .. tostring(self.buttonName))
-	dewdrop:Open(self.frame, 'children', function() dewdrop:FeedAceOptionsTable(self.optionsTable) end, 'cursorX', true, 'cursorY', true)
 end
 
 

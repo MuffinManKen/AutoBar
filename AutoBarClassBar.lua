@@ -16,8 +16,6 @@ local L = AutoBar.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
-local dewdrop = AceLibrary("Dewdrop-2.0")
-local _G = getfenv(0)
 
 -- List of Bars for the current user
 AutoBar.barList = {}
@@ -54,7 +52,7 @@ end
 
 -- Basic Bar that can do the classic AutoBar layout grid
 -- Provides snapto when dragging bars
-AutoBar.Class.Bar = AceOO.Class("AceEvent-2.0")
+AutoBar.Class.Bar = AceOO.Class()
 
 
 -- Handle dragging of items, macros, spells to the button
@@ -741,16 +739,6 @@ function AutoBar.Class.Bar.prototype:ButtonRemove(buttonDB)
 			break
 		end
 	end
-end
-
-
-function AutoBar.Class.Bar.prototype:ShowBarOptions()
-	if InCombatLockdown() then
-		return
-	end
-	AutoBar:CreateOptionsAce3()
-	self.optionsTable = AutoBar.optionsMain.args.bars.args[self.barKey]
-	dewdrop:Open(self.frame, 'children', function() dewdrop:FeedAceOptionsTable(self.optionsTable) end, 'cursorX', true, 'cursorY', true)
 end
 
 
