@@ -2168,8 +2168,6 @@ function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 	self:Refresh(parentBar, buttonDB)
 end
 
---	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
-
 function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 	AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
 
