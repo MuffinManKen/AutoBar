@@ -430,6 +430,8 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
+	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
+	AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -638,11 +640,59 @@ function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
 	AutoBar:LogEventStart("GET_ITEM_INFO_RECEIVED", p_item_id)
 --print("GET_ITEM_INFO_RECEIVED", p_item_id)
 	AutoBar:ClearMissingItemFlag();
-	AutoBar.delay["UpdateActive"]:Start()
+	AutoBar.delay["UpdateScan"]:Start()
 
 	AutoBar:LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
 
 end
+
+-- Given an item link, this adds the item to the given category
+-- NOTE: No effort is made to avoid adding an item that as already been added. As long as the list is small, this isn't worth worrying about.
+local function add_item_to_dynamic_category(p_item_link, p_category_name)
+	local debug_me = false
+	local category = AutoBarCategoryList[p_category_name]
+
+	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, AutoBar:Dump(category)); end;
+
+	local item_name, item_id = AutoBar.ItemLinkDecode(p_item_link)
+	category.items[#category.items + 1] = item_id
+
+	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
+end
+
+function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
+	AutoBar:LogEventStart("QUEST_ACCEPTED", p_quest_index)
+
+	local link = GetQuestLogSpecialItemInfo(p_quest_index)
+	
+	if(link) then
+		add_item_to_dynamic_category(link, "Dynamic.Quest")
+		AutoBar.delay["UpdateScan"]:Start()
+	end
+
+	AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
+end
+
+function AutoBar.events:QUEST_LOG_UPDATE(p_arg1)
+	AutoBar:LogEventStart("QUEST_LOG_UPDATE", p_arg1)
+	
+	--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
+	if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
+		AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
+		local _, num_quests = GetNumQuestLogEntries()
+
+		for i = 1, num_quests do 
+			local link = GetQuestLogSpecialItemInfo(i)
+			if(link) then
+				add_item_to_dynamic_category(link, "Dynamic.Quest")
+			end
+		end
+	end
+
+	AutoBar:LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
+
+end
+
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
 	AutoBar.inCombat = nil
