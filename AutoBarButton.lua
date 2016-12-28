@@ -2361,7 +2361,15 @@ function AutoBarButtonQuest.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Misc.Quest")
 	self:AddCategory("Misc.Usable.BossItem")
 	self:AddCategory("Dynamic.Quest")
-	
+end
+
+local AutoBarButtonRaidTarget = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonRaidTarget"] = AutoBarButtonRaidTarget
+
+function AutoBarButtonRaidTarget.prototype:init(parentBar, buttonDB)
+	AutoBarButtonRaidTarget.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Macro.Raid Target")
 end
 
 

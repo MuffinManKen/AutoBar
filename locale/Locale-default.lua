@@ -48,6 +48,8 @@ atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
 
+atl("AutoBarButtonRaidTarget", "Raid Targets")
+
 atl("Muffin.Skill.Fishing.Lure", "Muffin.Skill.Fishing.Lure");
 
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
@@ -92,7 +94,14 @@ atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet fro
 atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet from your list of favourites in the pet journal|r")
 atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current battle pet|r")
 
-
+atl("Raid 1","Raid Star")
+atl("Raid 2","Raid Circle")
+atl("Raid 3","Raid Diamond")
+atl("Raid 4","Raid Triangle")
+atl("Raid 5","Raid Moon")
+atl("Raid 6","Raid Square")
+atl("Raid 7","Raid X")
+atl("Raid 8","Raid Skull")
 
 local quick_sets = 
 {
@@ -109,6 +118,7 @@ local quick_sets =
 	"Macro.BattlePet.SummonRandom",
 	"Macro.BattlePet.DismissPet",
 	"Macro.BattlePet.SummonRandomFave",
+	"Macro.Raid Target",
 	"Muffin.Battle Pet Items.Bandages",
 	"Muffin.Battle Pet Items.Level",
 	"Muffin.Battle Pet Items.Pet Treat",
@@ -143,6 +153,7 @@ local quick_sets =
 	"Spell.Pet Battle",
 	"Toys.ToyBox",
 	"Tradeskill.Tool.Fishing.Bait",
+
 
 
 }

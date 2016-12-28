@@ -730,6 +730,17 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
+	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"] = {
+			buttonKey = "AutoBarButtonRaidTarget",
+			buttonClass = "AutoBarButtonRaidTarget",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = "*",
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
 			buttonKey = "AutoBarButtonToyBox",
