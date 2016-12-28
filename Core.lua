@@ -1025,7 +1025,7 @@ function AutoBar.SetDraggingIndex(frameName, index)
 end
 
 
-function AutoBar.LinkDecode(link)
+function AutoBar.ItemLinkDecode(link)
 	if (link) then
 		local id, name = string.match(link,"item:(%d+):.+%[(.*)%]")
 		if (id and name) then

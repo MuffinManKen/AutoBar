@@ -2772,7 +2772,7 @@ function AutoBarButtonTrinket1.prototype:init(parentBar, buttonDB)
 end
 
 function AutoBarButtonTrinket1.prototype:GetLastUsed()
-	local _, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET1_SLOT))
+	local _, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", TRINKET1_SLOT))
 	return itemId
 end
 
@@ -2797,7 +2797,7 @@ function AutoBarButtonTrinket2.prototype:init(parentBar, buttonDB)
 end
 
 function AutoBarButtonTrinket2.prototype:GetLastUsed()
-	local _, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
+	local _, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 	return itemId
 end
 
@@ -2815,7 +2815,7 @@ local equipTrinket2String = "/equipslot " .. TRINKET2_SLOT .. " "
 function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 --AutoBar:Print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
 
-	local _, equippedItemId = AutoBar.LinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
+	local _, equippedItemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)

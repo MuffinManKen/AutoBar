@@ -321,7 +321,7 @@ function Stuff.prototype:ScanBag(bag)
 	-- ToDo: Clear out excess slots if bag got smaller
 
 	for slot = 1, nSlots, 1 do
-		name, itemId = AutoBar.LinkDecode(GetContainerItemLink(bag, slot))
+		name, itemId = AutoBar.ItemLinkDecode(GetContainerItemLink(bag, slot))
 		oldItemId = slotList[slot]
 
 --AutoBar:Print("Stuff.prototype:Scan name " .. tostring(name) .. " itemId " .. tostring(itemId) .. " oldItemId " .. tostring(oldItemId))
@@ -366,7 +366,7 @@ function Stuff.prototype:ScanInventory()
 
 	-- Scan equipped items
 	for slot = 1, 19 do
-		name, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", slot))
+		name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", slot))
 		oldItemId = slotList[slot]
 
 		if (itemId) then
@@ -1035,7 +1035,7 @@ function Sorted.prototype:SetBest(buttonKey)
 
 	local buttonDB = AutoBar.buttonDBList[buttonKey]
 	if (buttonDB.equipped) then
-		local name, itemId = AutoBar.LinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
+		local name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
 		if (self:SwapToFront(sortedItems, itemId)) then
 			return
 		else
