@@ -7,3 +7,6 @@ CVS
 media
 .pkgmeta
 notes.txt
+.ctag
+.prj
+.pui
