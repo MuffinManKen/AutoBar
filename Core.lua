@@ -420,7 +420,7 @@ function AutoBar:OnEnable(first)
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 	AutoBar.frame:RegisterEvent("PLAYER_ALIVE")
-	AutoBar.frame:RegisterUnitEvent("UNIT_AURA")
+	AutoBar.frame:RegisterUnitEvent("UNIT_AURA", "player")
 	AutoBar.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
 	AutoBar.frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	AutoBar.frame:RegisterEvent("PLAYER_REGEN_DISABLED")
