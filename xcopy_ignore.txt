@@ -1,7 +1,5 @@
-UpdateAutoBar.bat
-test.bat
 xcopy_ignore.txt
-Beta test.bat
+.bat
 CVS
 .git
 media
