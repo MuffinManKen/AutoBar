@@ -66,11 +66,12 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
- - Toys now show cooldowns
- - Added Favourite Battle Pets to the Pet button
- - Toy Box button should update immediately when you change your Favourites
- - Updated Data Libs
- - Happy Winter Veil!
+ - Improved performance when in a party/raid or when you have a pet
+ - AutoBar will try to detect when Quest items are acquired and add them to the Quest button
+ - Left-clicking the minimap/LDB button will toggle the AutoBar config dialog rather than just opening it
+ - Right-clicking on a button while in Move Buttons mode no longer tries to open a dropdown menu. It didn't work anyway.
+ - Making progress on removing old unsupported 3rd party libraries (Ace2,etc)
+ - Added Raid Target Button
 ]] .. "|n"
 
 

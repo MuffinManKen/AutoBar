@@ -8,6 +8,14 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.1.0.09:
+ - Improved performance when in a party/raid or when you have a pet
+ - AutoBar will try to detect when Quest items are acquired and add them to the Quest button
+ - Left-clicking the minimap/LDB button will toggle the AutoBar config dialog rather than just opening it
+ - Right-clicking on a button while in Move Buttons mode no longer tries to open a dropdown menu. It didn't work anyway.
+ - Making progress on removing old unsupported 3rd party libraries (Ace2,etc)
+ - Added Raid Target Button
+
 v7.1.0.08:
  - Toys now show cooldowns
  - Added Favourite Battle Pets to the Pet button
