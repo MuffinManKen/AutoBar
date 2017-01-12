@@ -66,13 +66,7 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
- - Improved performance when in a party/raid or when you have a pet
- - AutoBar will try to detect when Quest items are acquired and add them to the Quest button
- - Left-clicking the minimap/LDB button will toggle the AutoBar config dialog rather than just opening it
- - Right-clicking on a button while in Move Buttons mode no longer tries to open a dropdown menu. It didn't work anyway.
- - Making progress on removing old unsupported 3rd party libraries (Ace2,etc)
- - Added Raid Target Button
- - Added/Removed abilities for Patch 7.1.5
+ - Updated data libraries
 ]] .. "|n"
 
 

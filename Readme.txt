@@ -8,6 +8,9 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.1.5.00:
+ - Updated Data libraries
+
 v7.1.0.09:
  - Improved performance when in a party/raid or when you have a pet
  - AutoBar will try to detect when Quest items are acquired and add them to the Quest button
