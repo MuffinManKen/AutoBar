@@ -111,8 +111,9 @@ AutoBar.categoryValidateList = {}
 
 	--Mage
 	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
-	spellNameList["Mage Armor"] = AutoBar:LoggedGetSpellInfo(6117)
-	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(115610)
+	spellNameList["Prismatic Barrier"] = AutoBar:LoggedGetSpellInfo(235450)
+	spellNameList["Blazing Barrier"] = AutoBar:LoggedGetSpellInfo(235313)
+	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(198111)
 	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
 	spellNameList["Conjure Refreshment"], _, spellIconList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
 	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
@@ -134,11 +135,9 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Blessing of Spellwarding"] = AutoBar:LoggedGetSpellInfo(204018) 
 	spellNameList["Blessing of Salvation"] = AutoBar:LoggedGetSpellInfo(204013) 
 	spellNameList["Greater Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(203538) 
-	spellNameList["Greater Blessing of Might"] = AutoBar:LoggedGetSpellInfo(203528) 
 	spellNameList["Greater Blessing of Wisdom"] = AutoBar:LoggedGetSpellInfo(203539) 
 	spellNameList["Hand of Hindrance"] = AutoBar:LoggedGetSpellInfo(183218)
 	spellNameList["Rebuke"] = AutoBar:LoggedGetSpellInfo(96231)
-	spellNameList["Seal of Light"], _, spellIconList["Seal of Light"] = AutoBar:LoggedGetSpellInfo(202273)
 
 	--Priest
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
@@ -1226,7 +1225,6 @@ function AutoBarCategory:Initialize()
 		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Spellwarding"),
 		"PALADIN", AutoBar:GetSpellNameByName("Blessing of Salvation"),
 		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Kings"),
-		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Might"),
 		"PALADIN", AutoBar:GetSpellNameByName("Greater Blessing of Wisdom"),
 			"SHAMAN", spellNameList["Water Walking"],
 		"WARLOCK", AutoBar:GetSpellNameByName("Unending Breath"),
@@ -1416,8 +1414,10 @@ function AutoBarCategory:Initialize()
 		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Icebound Fortitude"), 	AutoBar:GetSpellNameByName("Anti-Magic Shell"),
 			"DRUID", 		spellNameList["Barkskin"], 	spellNameList["Barkskin"],
 		"HUNTER", 		AutoBar:GetSpellNameByName("Aspect of the Turtle"), 	AutoBar:GetSpellNameByName("Aspect of the Turtle"),
-			"MAGE", 			spellNameList["Ice Barrier"], spellNameList["Ice Barrier"],
-			"MAGE", 			spellNameList["Temporal Shield"], spellNameList["Temporal Shield"],
+			"MAGE", 			AutoBar:GetSpellNameByName("Ice Barrier"), AutoBar:GetSpellNameByName("Ice Barrier"),
+			"MAGE", 			AutoBar:GetSpellNameByName("Temporal Shield"), AutoBar:GetSpellNameByName("Temporal Shield"),
+			"MAGE", 			AutoBar:GetSpellNameByName("Blazing Barrier"), AutoBar:GetSpellNameByName("Blazing Barrier"),
+			"MAGE", 			AutoBar:GetSpellNameByName("Prismatic Barrier"), AutoBar:GetSpellNameByName("Prismatic Barrier"),
 			"MONK", 			spellNameList["Fortifying Brew"], spellNameList["Fortifying Brew"],
 		"PALADIN", 		spellNameList["Ardent Defender"], spellNameList["Ardent Defender"],
 		"PALADIN", 		spellNameList["Divine Shield"], spellNameList["Divine Shield"],
