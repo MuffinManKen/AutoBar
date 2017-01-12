@@ -72,6 +72,7 @@ WHATSNEW_TEXT = "" ..
  - Right-clicking on a button while in Move Buttons mode no longer tries to open a dropdown menu. It didn't work anyway.
  - Making progress on removing old unsupported 3rd party libraries (Ace2,etc)
  - Added Raid Target Button
+ - Added/Removed abilities for Patch 7.1.5
 ]] .. "|n"
 
 
