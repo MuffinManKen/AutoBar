@@ -105,39 +105,39 @@ end
 --		an item
 function AutoBar:GetActionForMacroBody(p_macro_body)
 	local debug = false
+	local action
+	local tooltip
+	local icon
 
 	--print(debugstack())
 	local show_action = string.match(p_macro_body, "#show%s+([^\n]+)")
-	if(not debug and show_action) then return show_action end;
-
-	local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
-	if(not debug and show_tt_action) then return show_tt_action end;
-
-	local cast_action = string.match(p_macro_body, "/cast%s+([^\n]+)")
-
-	local use_action = string.match(p_macro_body, "/use%s+([^\n]+)")
-
-	local secure_parse
-	if(cast_action or use_action) then
-		secure_parse = SecureCmdOptionParse(cast_action or use_action)
+	if(show_action) then
+		action = show_action
+	else
+		local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
+		if(show_tt_action) then
+			action = show_tt_action
+			tooltip = GetSpellLink(action) or select(2,GetItemInfo(action))
+		end
 	end
-	if(not debug and secure_parse) then return secure_parse end;
+	
+	if(not action) then
+		local cast_action = string.match(p_macro_body, "/cast%s+([^\n]+)")
 
+		local use_action = string.match(p_macro_body, "/use%s+([^\n]+)")
 
+		if(cast_action or use_action) then
+			action = SecureCmdOptionParse(cast_action or use_action)
+			tooltip = GetSpellLink(action) or select(2,GetItemInfo(action))
+		end
 
-	if (debug) then
-		print("macro body:", p_macro_body);
-		print("   secure parse:", secure_parse)
-		print("   cast action:", cast_action)
-		print("   use action:", use_action)
-		print("   show_tt_action", show_tt_action)
-		print("   show_action", show_action)
-
-		return show_action or show_tt_action or secure_parse or cast_action or use_action
 	end
 
+	if(action) then 
+		icon = select(3, GetSpellInfo(action)) or select(10, GetItemInfo(action))
+	end
 
-	return nil
+	return action, icon, tooltip
 end
 
 

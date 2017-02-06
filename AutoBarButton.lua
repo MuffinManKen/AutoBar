@@ -797,6 +797,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("type", "macro")
 			frame:SetAttribute("macrotext", p_info_data.macro_text)
 			frame:SetAttribute("AutoBarGUID", p_info_data.guid)
+			frame:SetAttribute("itemLink", p_info_data.macro_tooltip)
 			button.macroActive = true
 		elseif (p_type_id == ABGData.TYPE_BATTLE_PET) then
 			frame:SetAttribute("type", "macro")
@@ -815,11 +816,11 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				button.macroActive = true
 				frame:SetAttribute("macroName", macroInfo.macroName)
 				frame:SetAttribute("macroBody", macroInfo.macroText)
-				if (macroInfo.macro_action) then
-					frame:SetAttribute("macro_action", macroInfo.macro_action)
-					local link = GetSpellLink(macroInfo.macro_action) or select(2,GetItemInfo(macroInfo.macro_action))
-					frame:SetAttribute("itemLink", link)
-				end
+				
+				frame:SetAttribute("macro_action", macroInfo.macro_action)
+				--frame:SetAttribute("macro_tooltip", macroInfo.macro_tooltip)
+				frame:SetAttribute("itemLink", macroInfo.macro_tooltip)
+				frame:SetAttribute("macro_icon", macroInfo.macro_icon)
 			end
 		elseif (spell) then
 			-- Default spell to cast

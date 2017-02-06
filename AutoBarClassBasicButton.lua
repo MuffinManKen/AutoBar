@@ -210,14 +210,9 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if (macroIndex) then
 			_, texture = GetMacroInfo(macroIndex)
 		else
-			texture = frame.class.macroTexture
+			texture = frame.class.macroTexture or self.frame:GetAttribute("macro_icon")
 			if (not texture) then
 				local macro_action = self.frame:GetAttribute("macro_action")
---				if(macro_action == nil) then
---					local macro_text = self.frame:GetAttribute("macrotext")
---					macro_action = AutoBar:GetActionForMacroBody(macro_text)
---					--print(macro_text, macro_action)
---				end
 				texture = get_texture_for_action(macro_action) or "Interface\\Icons\\INV_Misc_Gift_05"
 			end
 		end

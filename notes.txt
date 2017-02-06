@@ -1,4 +1,10 @@
 
+
+To fix #show to not do tooltips, track .macro_action
+
+
+Openable: Dreamweaver Provisions? 146747
+
  ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
 
 
