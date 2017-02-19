@@ -128,7 +128,11 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 		if(cast_action or use_action) then
 			action = SecureCmdOptionParse(cast_action or use_action)
-			tooltip = GetSpellLink(action) or select(2,GetItemInfo(action))
+			
+			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
+			if(action) then
+				tooltip = GetSpellLink(action) or select(2, GetItemInfo(action))
+			end
 		end
 
 	end

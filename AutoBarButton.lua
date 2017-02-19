@@ -1434,18 +1434,19 @@ function AutoBarButtonPowerShift.prototype:Refresh(parentBar, buttonDB)
 	self.macroActive = nil
 	if (AutoBar.CLASS == "DRUID") then
 --[[
-/run local f="Cat Form";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelPlayerBuff(f)
+/run local f="Cat Form";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelUnitBuff('player', f)
 /cast [form] Mangle
 /stopmacro [form]
 /cast !Cat Form
 --]]
-		ShapeshiftRefresh()
 		local macroTexture
+		local concatList = {}
+
 
 		if (GetSpellInfo(spellNameList["Cat Form"]) and GetSpellInfo(spellNameList["Mangle"])) then
 			concatList[1] = "/run local f=\""
 			concatList[2] = spellNameList["Cat Form"]
-			concatList[3] = "\";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelPlayerBuff(f)\n/cast [form] "
+			concatList[3] = "\";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelUnitBuff('player', f)\n/cast [form] "
 			concatList[4] = spellNameList["Mangle"]
 			concatList[5] = "\n/stopmacro [form]\n"
 			concatList[6] = "/cast !"
