@@ -66,7 +66,7 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
- - Updated data libraries
+ - Fix for Druids and the Powershift macro
 ]] .. "|n"
 
 
