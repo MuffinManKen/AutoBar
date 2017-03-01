@@ -313,16 +313,6 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-		if (not AutoBar.db.class.buttonList["AutoBarButtonPowerShift"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonPowerShift"] = {
-				buttonKey = "AutoBarButtonPowerShift",
-				buttonClass = "AutoBarButtonPowerShift",
-				barKey = "AutoBarClassBarDruid",
-				defaultButtonIndex = 5,
-				enabled = true,
-				noPopup = true,
-			}
-		end
 	end
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonHearth"]) then
@@ -1072,7 +1062,7 @@ function AutoBar:InitializeDefaults()
 	{
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
-		"AutoBarButtonSeal", "AutoBarButtonOrderHall"
+		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do

@@ -1421,49 +1421,6 @@ end
 
 
 
-local AutoBarButtonPowerShift = AceOO.Class(AutoBarButtonMacro)
-AutoBar.Class["AutoBarButtonPowerShift"] = AutoBarButtonPowerShift
-
-function AutoBarButtonPowerShift.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPowerShift.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
-end
-
-function AutoBarButtonPowerShift.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonPowerShift.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	if (AutoBar.CLASS == "DRUID") then
---[[
-/run local f="Cat Form";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelUnitBuff('player', f)
-/cast [form] Mangle
-/stopmacro [form]
-/cast !Cat Form
---]]
-		local macroTexture
-		local concatList = {}
-
-
-		if (GetSpellInfo(spellNameList["Cat Form"]) and GetSpellInfo(spellNameList["Mangle"])) then
-			concatList[1] = "/run local f=\""
-			concatList[2] = spellNameList["Cat Form"]
-			concatList[3] = "\";f=GetSpellCooldown(f)>0 or UnitMana('player')>15 or not IsUsableSpell(f) or CancelUnitBuff('player', f)\n/cast [form] "
-			concatList[4] = spellNameList["Mangle"]
-			concatList[5] = "\n/stopmacro [form]\n"
-			concatList[6] = "/cast !"
-			concatList[7] = spellNameList["Cat Form"]
-			concatList[8] = "\n"
-			macroTexture = spellIconList["Mangle"]
-			self.macroActive = true
-
-			local macroText = table.concat(concatList)
---AutoBar:Print("AutoBarButtonPowerShift:Refresh " .. tostring(macroText) .. " macroTexture " .. tostring(macroTexture))
-			self:AddMacro(macroText, macroTexture)
-		end
-	end
-end
-
-
-
 local AutoBarButtonCharge = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCharge"] = AutoBarButtonCharge
 
