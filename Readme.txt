@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.1.5.03:
+ - Updated data libraries
+ - Removed Powershift button
+
 v7.1.5.02:
  - Fix for Druids and the Powershift macro
 
