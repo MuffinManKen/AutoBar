@@ -8,6 +8,9 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.1.5.04:
+ - Updated data libraries
+
 v7.1.5.03:
  - Updated data libraries
  - Removed Powershift button
