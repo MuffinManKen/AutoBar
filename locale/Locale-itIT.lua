@@ -277,10 +277,7 @@ if (GetLocale() == "itIT") then
 		["AutoBarButtonBear"] = "Bear",
 		["AutoBarButtonBoomkinTree"] = "Tree of Life / Boomkin",
 		["AutoBarButtonCat"] = "Cat",
-		["AutoBarButtonPowerShift"] = "PowerShift",
 		["AutoBarButtonTravel"] = "Travel",
-		["AutoBarButtonFlight"] = "Flight",
-		["AutoBarButtonNormal"] = "Normal",
 
 		-- AutoBarClassButton.lua
 		["Num Pad "] = "Num Pad ",

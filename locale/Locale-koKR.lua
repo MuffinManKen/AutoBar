@@ -274,10 +274,7 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonBear"] = "곰",
 		["AutoBarButtonBoomkinTree"] = "생명의 나무 / 달빛야수",
 		["AutoBarButtonCat"] = "표범",
-		["AutoBarButtonPowerShift"] = "PowerShift",
 		["AutoBarButtonTravel"] = "치타",
-		["AutoBarButtonFlight"] = "폭풍까마귀",
-		["AutoBarButtonNormal"] = "보통",
 
 		-- AutoBarClassButton.lua
 		["Num Pad "] = "숫자패드 ",

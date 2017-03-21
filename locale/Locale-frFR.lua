@@ -272,10 +272,7 @@ if (GetLocale() == "frFR") then
 		["AutoBarButtonBear"] = "Ours",
 		["AutoBarButtonBoomkinTree"] = "Arbre de vie / Sélénien",
 		["AutoBarButtonCat"] = "Chat",
-		["AutoBarButtonPowerShift"] = "PowerShift",
 		["AutoBarButtonTravel"] = "Voyage",
-		["AutoBarButtonFlight"] = "Vol",
-		["AutoBarButtonNormal"] = "Normal",
 
 
 		-- AutoBarClassButton.lua

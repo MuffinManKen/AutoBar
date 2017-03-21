@@ -274,10 +274,7 @@ if (GetLocale() == "zhTW") then
 		["AutoBarButtonBear"] = "熊",
 		["AutoBarButtonBoomkinTree"] = "生命之樹/梟獸",
 		["AutoBarButtonCat"] = "獵豹",
-		["AutoBarButtonPowerShift"] = "能量變換",
 		["AutoBarButtonTravel"] = "旅行",
-		["AutoBarButtonFlight"] = "飛行",
-		["AutoBarButtonNormal"] = "正常",
 
 		-- AutoBarClassButton.lua
 		["Num Pad "] = "數字鍵盤",

@@ -274,10 +274,7 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonBear"] = "Медведь",
 		["AutoBarButtonBoomkinTree"] = "Древо Жизни / Лунный совух",
 		["AutoBarButtonCat"] = "Кошка",
-		["AutoBarButtonPowerShift"] = "PowerShift",
 		["AutoBarButtonTravel"] = "Походный",
-		["AutoBarButtonFlight"] = "Птица",
-		["AutoBarButtonNormal"] = "Нормальный",
 
 		-- AutoBarClassButton.lua
 		["Num Pad "] = "Цифровая клавиша ",

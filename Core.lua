@@ -226,7 +226,6 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
 	BINDING_NAME_AutoBarButtonBoomkinTree_X = L["AutoBarButtonBoomkinTree"]
 	BINDING_NAME_AutoBarButtonCat_X = L["AutoBarButtonCat"]
-	BINDING_NAME_AutoBarButtonPowerShift_X = L["AutoBarButtonPowerShift"]
 	BINDING_NAME_AutoBarButtonTravel_X = L["AutoBarButtonTravel"]
 
 	BINDING_HEADER_AutoBarClassBarHunter = L["AutoBarClassBarHunter"]
