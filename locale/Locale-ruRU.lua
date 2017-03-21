@@ -224,7 +224,6 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonCooldownPotionHealth"] = "Перезарядка Зелья: Здоровья",
 		["AutoBarButtonCooldownPotionMana"] = "Перезарядка Зелья: Маны",
 		["AutoBarButtonCooldownPotionRejuvenation"] = "Перезарядка Зелья: Омоложения",
-		["AutoBarButtonCooldownStoneCombat"] = "Перезарядка Камней: Боевые",
 		["AutoBarButtonCooldownStoneHealth"] = "Перезарядка Камней: Здоровья",
 		["AutoBarButtonCooldownStoneMana"] = "Перезарядка Камней: Маны",
 		["AutoBarButtonCooldownStoneRejuvenation"] = "Перезарядка Камней: Омоложения",
@@ -479,7 +478,6 @@ if (GetLocale() == "ruRU") then
 		["Consumable.Cooldown.Drums"] = "Перезарядка: Барабаны";
 		["Consumable.Cooldown.Potion"] = "Перезарядка: Зелья";
 		["Consumable.Cooldown.Potion.Combat"] = "Перезарядка: Зелья - Боевые";
-		["Consumable.Cooldown.Stone.Combat"] = "Перезарядка: Камни - Боевые";
 		["Consumable.Cooldown.Stone"] = "Перезарядка: Камни";
 		["Consumable.Leatherworking.Drums"] = "Барабаны";
 		["Consumable.Tailor.Net"] = "Сети";

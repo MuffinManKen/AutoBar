@@ -427,16 +427,7 @@ function AutoBar:InitializeDefaults()
 			shuffle = true,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneCombat"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneCombat"] = {
-			buttonKey = "AutoBarButtonCooldownStoneCombat",
-			buttonClass = "AutoBarButtonCooldownStoneCombat",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 12,
-			enabled = true,
-			shuffle = true,
-		}
-	end
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"] = {
 			buttonKey = "AutoBarButtonCooldownDrums",
@@ -1063,6 +1054,7 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
+		"AutoBarButtonCooldownStoneCombat"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do

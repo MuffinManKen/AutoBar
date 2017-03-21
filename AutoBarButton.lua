@@ -2388,16 +2388,6 @@ function AutoBarButtonCooldownPotionCombat.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonCooldownStoneCombat = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownStoneCombat"] = AutoBarButtonCooldownStoneCombat
-
-function AutoBarButtonCooldownStoneCombat.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneCombat.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Consumable.Cooldown.Stone.Combat")
-end
-
-
 local AutoBarButtonCooldownPotionHealth = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionHealth"] = AutoBarButtonCooldownPotionHealth
 

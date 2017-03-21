@@ -222,7 +222,6 @@ if (GetLocale() == "frFR") then
 		["AutoBarButtonCooldownPotionHealth"] = "Cooldown de potion : Vie",
 		["AutoBarButtonCooldownPotionMana"] = "Cooldown de potion : Mana",
 		["AutoBarButtonCooldownPotionRejuvenation"] = "Cooldown de potion : Restauration",
-		["AutoBarButtonCooldownStoneCombat"] = "Stone Cooldown: Combat",
 		["AutoBarButtonCooldownStoneHealth"] = "Cooldown de pierre : Vie",
 		["AutoBarButtonCooldownStoneMana"] = "Cooldown de pierre : Mana",
 		["AutoBarButtonCooldownStoneRejuvenation"] = "Cooldown de pierre : Restauration",
@@ -479,7 +478,6 @@ if (GetLocale() == "frFR") then
 		["Consumable.Cooldown.Drums"] = "Cooldown: Drums";
 		["Consumable.Cooldown.Potion"] = "Cooldown: Potion";
 		["Consumable.Cooldown.Potion.Combat"] = "Cooldown: Potion - Combat";
-		["Consumable.Cooldown.Stone.Combat"] = "Cooldown: Stone - Combat";
 		["Consumable.Cooldown.Stone"] = "Cooldown: Stone";
 		["Consumable.Leatherworking.Drums"] = "Tambours";
 		["Consumable.Tailor.Net"] = "Filets";

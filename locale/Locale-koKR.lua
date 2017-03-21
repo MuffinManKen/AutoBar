@@ -224,7 +224,6 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonCooldownPotionHealth"] = "물약 대기시간: 생명력",
 		["AutoBarButtonCooldownPotionMana"] = "물약 대기시간: 마나",
 		["AutoBarButtonCooldownPotionRejuvenation"] = "물약 대기시간: 회복",
-		["AutoBarButtonCooldownStoneCombat"] = "조각상 대기시간: 전투",
 		["AutoBarButtonCooldownStoneHealth"] = "조각상 대기시간: 생명력",
 		["AutoBarButtonCooldownStoneMana"] = "조각상 대기시간: 마나",
 		["AutoBarButtonCooldownStoneRejuvenation"] = "조각상 대기시간: 회복",
@@ -479,7 +478,6 @@ if (GetLocale() == "koKR") then
 		["Consumable.Cooldown.Drums"] = "대기시간: 북소리";
 		["Consumable.Cooldown.Potion"] = "대기시간: 물약";
 		["Consumable.Cooldown.Potion.Combat"] = "대기시간: 물약 - 전투";
-		["Consumable.Cooldown.Stone.Combat"] = "대기시간: 석 - 전투";
 		["Consumable.Cooldown.Stone"] = "대기시간: 석";
 		["Consumable.Leatherworking.Drums"] = "북소리";
 		["Consumable.Tailor.Net"] = "그물";

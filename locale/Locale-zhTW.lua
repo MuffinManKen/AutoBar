@@ -224,7 +224,6 @@ if (GetLocale() == "zhTW") then
 		["AutoBarButtonCooldownPotionHealth"] = "藥水冷卻: 生命力",
 		["AutoBarButtonCooldownPotionMana"] = "藥水冷卻: 法力",
 		["AutoBarButtonCooldownPotionRejuvenation"] = "藥水冷卻: 活力",
-		["AutoBarButtonCooldownStoneCombat"] = "石頭冷卻: 戰鬥",
 		["AutoBarButtonCooldownStoneHealth"] = "石頭冷卻: 生命力",
 		["AutoBarButtonCooldownStoneMana"] = "石頭冷卻: 法力",
 		["AutoBarButtonCooldownStoneRejuvenation"] = "石頭冷卻: 活力",
@@ -479,7 +478,6 @@ if (GetLocale() == "zhTW") then
 		["Consumable.Cooldown.Drums"] = "冷卻: 戰鼓";
 		["Consumable.Cooldown.Potion"] = "冷卻: 藥水";
 		["Consumable.Cooldown.Potion.Combat"] = "冷卻: 藥水 - 戰鬥";
-		["Consumable.Cooldown.Stone.Combat"] = "冷卻: 石 - 戰鬥";
 		["Consumable.Cooldown.Stone"] = "冷卻: 石";
 		["Consumable.Leatherworking.Drums"] = "戰鼓";
 		["Consumable.Tailor.Net"] = "網";

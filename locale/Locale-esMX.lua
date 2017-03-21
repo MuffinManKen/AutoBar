@@ -222,7 +222,6 @@ if (GetLocale() == "esMX") then
 		["AutoBarButtonCooldownPotionHealth"] = "Reutilización: Salud",
 		["AutoBarButtonCooldownPotionMana"] = "Reutilización: Maná",
 		["AutoBarButtonCooldownPotionRejuvenation"] = "Reutilización: Rejuvenecer",
-		["AutoBarButtonCooldownStoneCombat"] = "Stone Cooldown: Combat",
 		["AutoBarButtonCooldownStoneHealth"] = "Reutilización: Piedra Salud",
 		["AutoBarButtonCooldownStoneMana"] = "Reutilización: Piedra Maná",
 		["AutoBarButtonCooldownStoneRejuvenation"] = "Reutilización: Piedra Rejuvenecer",
@@ -478,7 +477,6 @@ if (GetLocale() == "esMX") then
 		["Consumable.Cooldown.Drums"] = "Reutilización: Tambores";
 		["Consumable.Cooldown.Potion"] = "Reutilización: Poción";
 		["Consumable.Cooldown.Potion.Combat"] = "Reutilización: Poción - Combate";
-		["Consumable.Cooldown.Stone.Combat"] = "Reutilización: Piedra - Combate";
 		["Consumable.Cooldown.Stone"] = "Reutilización: Piedra";
 		["Consumable.Leatherworking.Drums"] = "Tambores";
 		["Consumable.Tailor.Net"] = "Redes";
