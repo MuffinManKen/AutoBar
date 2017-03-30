@@ -3,7 +3,7 @@
 
 ## Notes: Library of compressed itemid sets.
 ## Author: MuffinManKen
-## Interface: 70000
+## Interface: 70200
 ## X-Category: Library
 ## X-Website: http://www.MuffinManGames.com
 ## OptionalDeps: LibPeriodicTable-3.1
