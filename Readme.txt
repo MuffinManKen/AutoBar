@@ -8,6 +8,12 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.2.0.00:
+ - TOC bump for patch 7.2
+ - Updated data libraries
+ - Removed all references to Combat Stones, including the Category and Button
+ - Localization cleanup; removed things that no longer exist
+
 v7.1.5.04:
  - Updated data libraries
 
