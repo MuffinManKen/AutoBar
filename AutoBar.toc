@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: AutoBar
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
 ## Version: 7.1.5.04
