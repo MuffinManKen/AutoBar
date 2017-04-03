@@ -347,15 +347,17 @@ function AutoBar:OnInitialize()
 				return
 			end
 
-			local timer_name = event .. "_last_tick"
-			local now = GetTime()
-			AutoBar[timer_name] = AutoBar[timer_name] or 0
+			if(AutoBar.db.account.throttle_event_limit > 0) then
+				local timer_name = event .. "_last_tick"
+				local now = GetTime()
+				AutoBar[timer_name] = AutoBar[timer_name] or 0
 
-			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
-				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")") end
-				return
+				if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
+					if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
+					return
+				end
+				AutoBar[timer_name] = now
 			end
-			AutoBar[timer_name] = now
 
 			AutoBar.events[event](AutoBar, ...)
 		end)
@@ -552,7 +554,7 @@ local timerIndexList = {
 }
 local IDelayedCallback = AceOO.Interface { Callback = "function" }
 
-local DELAY_TIME = 0.06
+local DELAY_TIME = 0.08
 local DELAY_TIME_INCREMENTAL = 0.01
 
 local Delayed = AceOO.Class(IDelayedCallback)
