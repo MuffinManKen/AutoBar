@@ -2010,13 +2010,6 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			bad_mounts[44151] = true	--Turbo Flying Machine
 		end
 
-		--Block Falcosaur mounts because Blizzard fucked them up
-		bad_mounts[213165] = true	--Viridian Sharptalon
-		bad_mounts[213164] = true	--Brilliant Direbeak
-		bad_mounts[213163] = true	--Snowfeather Hunter
-		bad_mounts[213158] = true	--Predatory Bloodgazer
-		
-
 --		if (not category.castList) then
 			category.castList = {}
 --		end
