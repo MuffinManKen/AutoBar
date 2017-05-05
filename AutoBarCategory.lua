@@ -160,24 +160,28 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
 
 	--Shaman
+	spellNameList["Earthbind Totem"] = AutoBar:LoggedGetSpellInfo(2484)
+	spellNameList["Earthgrab Totem"], _, spellIconList["Earthgrab Totem"] = AutoBar:LoggedGetSpellInfo(51485)
+	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533)
 	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
-	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533) --*
+	spellNameList["Wind Rush Totem"], _, spellIconList["Wind Rush Totem"] = AutoBar:LoggedGetSpellInfo(192077)
+
 
 	--Warlock
-	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
-	spellNameList["Unending Breath"] = AutoBar:LoggedGetSpellInfo(5697)
-	spellNameList["Soulstone"] = AutoBar:LoggedGetSpellInfo(20707) 
-	spellNameList["Command Demon"] = AutoBar:LoggedGetSpellInfo(119898) 
-	spellNameList["Grimoire of Sacrifice"] = AutoBar:LoggedGetSpellInfo(108503) 
 	spellNameList["Call Dreadstalkers"] = AutoBar:LoggedGetSpellInfo(104316) 
-	spellNameList["Demonic Empowerment"] = AutoBar:LoggedGetSpellInfo(193396) 
-	spellNameList["Demonwrath"] = AutoBar:LoggedGetSpellInfo(193440) 
-	spellNameList["Summon Darkglare"] = AutoBar:LoggedGetSpellInfo(205180) 
+	spellNameList["Command Demon"] = AutoBar:LoggedGetSpellInfo(119898) 
+	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
 	spellNameList["Curse of Tongues"] = AutoBar:LoggedGetSpellInfo(199890) 
 	spellNameList["Curse of Weakness"] = AutoBar:LoggedGetSpellInfo(199892) 
-	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
-	spellNameList["Grimoire: Felhunter"] = AutoBar:LoggedGetSpellInfo(111897) 
 	spellNameList["Dark Pact"], _, spellIconList["Dark Pact"]  = AutoBar:LoggedGetSpellInfo(108416)
+	spellNameList["Demonic Empowerment"] = AutoBar:LoggedGetSpellInfo(193396) 
+	spellNameList["Demonwrath"] = AutoBar:LoggedGetSpellInfo(193440) 
+	spellNameList["Grimoire of Sacrifice"] = AutoBar:LoggedGetSpellInfo(108503) 
+	spellNameList["Grimoire: Felhunter"] = AutoBar:LoggedGetSpellInfo(111897) 
+	spellNameList["Soulstone"] = AutoBar:LoggedGetSpellInfo(20707) 
+	spellNameList["Summon Darkglare"] = AutoBar:LoggedGetSpellInfo(205180) 
+	spellNameList["Unending Breath"] = AutoBar:LoggedGetSpellInfo(5697)
+	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
 
 
 	--Warrior
@@ -1445,20 +1449,19 @@ function AutoBarCategory:Initialize2()
 	})
 
 
-	spellNameList["Earthgrab Totem"], _, spellIconList["Earthgrab Totem"] = AutoBar:LoggedGetSpellInfo(51485)
 	local spellAncestralProtectionTotem = AutoBar:LoggedGetSpellInfo(207399)
 	local spellEarthenShieldTotem = AutoBar:LoggedGetSpellInfo(198838)
 	local spellEarthquakeTotem = AutoBar:LoggedGetSpellInfo(61882)
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new(
 			"Spell.Totem.Earth", spellIconList["Earthgrab Totem"], {
-			"SHAMAN", spellNameList["Earthgrab Totem"], --* 
-			"SHAMAN", spellAncestralProtectionTotem,  --*
-			"SHAMAN", spellEarthenShieldTotem,    --* 
-			"SHAMAN", spellEarthquakeTotem,    --* 
+			"SHAMAN", spellNameList["Earthgrab Totem"],
+			"SHAMAN", spellNameList["Earthbind Totem"],
+			"SHAMAN", spellAncestralProtectionTotem,
+			"SHAMAN", spellEarthenShieldTotem,
+			"SHAMAN", spellEarthquakeTotem,
 			})
 			
 
-	spellNameList["Wind Rush Totem"], _, spellIconList["Wind Rush Totem"] = AutoBar:LoggedGetSpellInfo(192077) --*
 	local spellLightningSurgeTotem = AutoBar:LoggedGetSpellInfo(192058)
 	local spellVoodooTotem = AutoBar:LoggedGetSpellInfo(196932)
 	local spellCloudburstTotem = AutoBar:LoggedGetSpellInfo(157153)
