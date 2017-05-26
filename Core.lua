@@ -66,10 +66,10 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
- - TOC bump for patch 7.2
+ - Unblocked Falcosaur mounts since Blizzard silently unbroke them
+ - Performance improvements
  - Updated data libraries
- - Removed all references to Combat Stones, including the Category and Button
- - Localization cleanup; removed things that no longer exist
+ - Added  Earthbind Totem to Earth Totem Category
 ]] .. "|n"
 
 

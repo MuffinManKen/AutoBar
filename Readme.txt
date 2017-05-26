@@ -8,6 +8,12 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.2.0.01:
+ - Unblocked Falcosaur mounts since Blizzard silently unbroke them
+ - Performance improvements
+ - Updated data libraries
+ - Added  Earthbind Totem to Earth Totem Category
+
 v7.2.0.00:
  - TOC bump for patch 7.2
  - Updated data libraries
