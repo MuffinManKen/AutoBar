@@ -196,6 +196,30 @@ AutoBar.categoryValidateList = {}
 	--Other
 	spellNameList["Shadowmeld"], _, spellIconList["Shadowmeld"] = AutoBar:LoggedGetSpellInfo(58984)
 
+	--Skills
+	spellNameList["First Aid"], _, spellIconList["First Aid"] = AutoBar:LoggedGetSpellInfo(27028)
+	spellNameList["Alchemy"] = AutoBar:LoggedGetSpellInfo(28596)
+	spellNameList["BasicCampfire"] = AutoBar:LoggedGetSpellInfo(818)
+	spellNameList["Blacksmithing"] = AutoBar:LoggedGetSpellInfo(29844)
+	spellNameList["Cooking"] = AutoBar:LoggedGetSpellInfo(33359)
+	if (GetLocale() == "deDE") then
+		spellNameList["Kochen"] = AutoBar:LoggedGetSpellInfo(51296)
+		spellNameList["Alchemie"] = AutoBar:LoggedGetSpellInfo(51304)
+	end
+	spellNameList["Archaeology"], _, spellIconList["Archaeology"] = AutoBar:LoggedGetSpellInfo(78670)
+	spellNameList["Disenchant"] = AutoBar:LoggedGetSpellInfo(13262)
+	spellNameList["Enchanting"] = AutoBar:LoggedGetSpellInfo(28029)
+	spellNameList["Engineering"] = AutoBar:LoggedGetSpellInfo(30350)
+	spellNameList["Inscription"] = AutoBar:LoggedGetSpellInfo(45357)
+	spellNameList["Jewelcrafting"] = AutoBar:LoggedGetSpellInfo(28897)
+	spellNameList["Leatherworking"] = AutoBar:LoggedGetSpellInfo(32549)
+	spellNameList["Milling"] = AutoBar:LoggedGetSpellInfo(51005)
+	spellNameList["Prospecting"] = AutoBar:LoggedGetSpellInfo(31252)
+	spellNameList["Runeforging"] = AutoBar:LoggedGetSpellInfo(53428)
+	spellNameList["Smelting"] = AutoBar:LoggedGetSpellInfo(2656)
+	spellNameList["Survey"] = AutoBar:LoggedGetSpellInfo(80451)
+	spellNameList["Tailoring"] = AutoBar:LoggedGetSpellInfo(26790)
+
 
 
 local function sortList(a, b)
@@ -812,6 +836,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"] = AutoBarItems:new( "Muffin.Skill.Fishing.Lure", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Misc"] = AutoBarItems:new( "Muffin.Skill.Fishing.Misc", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Misc")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Rare Fish"] = AutoBarItems:new( "Muffin.Skill.Fishing.Rare Fish", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Rare Fish")
+
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Crate"] = AutoBarItems:new( "Muffin.Skill.Archaeology.Crate", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Crate")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Mission"] = AutoBarItems:new( "Muffin.Skill.Archaeology.Mission", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Mission")
 
 	AutoBarCategoryList["Consumable.Cooldown.Stone.Mana.Other"] = AutoBarItems:new( "Consumable.Cooldown.Stone.Mana.Other", "Spell_Shadow_SealOfKings", "Consumable.Cooldown.Stone.Mana.Other")
 
@@ -1498,28 +1525,6 @@ function AutoBarCategory:Initialize2()
 			"ROGUE", spellNameList["Leeching Poison"],
 			})
 
-	spellNameList["First Aid"], _, spellIconList["First Aid"] = AutoBar:LoggedGetSpellInfo(27028)
-	spellNameList["Alchemy"] = AutoBar:LoggedGetSpellInfo(28596)
-	spellNameList["BasicCampfire"] = AutoBar:LoggedGetSpellInfo(818)
-	spellNameList["Blacksmithing"] = AutoBar:LoggedGetSpellInfo(29844)
-	spellNameList["Cooking"] = AutoBar:LoggedGetSpellInfo(33359)
-	if (GetLocale() == "deDE") then
-		spellNameList["Kochen"] = AutoBar:LoggedGetSpellInfo(51296)
-		spellNameList["Alchemie"] = AutoBar:LoggedGetSpellInfo(51304)
-	end
-	spellNameList["Archaeology"] = AutoBar:LoggedGetSpellInfo(78670)
-	spellNameList["Disenchant"] = AutoBar:LoggedGetSpellInfo(13262)
-	spellNameList["Enchanting"] = AutoBar:LoggedGetSpellInfo(28029)
-	spellNameList["Engineering"] = AutoBar:LoggedGetSpellInfo(30350)
-	spellNameList["Inscription"] = AutoBar:LoggedGetSpellInfo(45357)
-	spellNameList["Jewelcrafting"] = AutoBar:LoggedGetSpellInfo(28897)
-	spellNameList["Leatherworking"] = AutoBar:LoggedGetSpellInfo(32549)
-	spellNameList["Milling"] = AutoBar:LoggedGetSpellInfo(51005)
-	spellNameList["Prospecting"] = AutoBar:LoggedGetSpellInfo(31252)
-	spellNameList["Runeforging"] = AutoBar:LoggedGetSpellInfo(53428)
-	spellNameList["Smelting"] = AutoBar:LoggedGetSpellInfo(2656)
-	spellNameList["Survey"] = AutoBar:LoggedGetSpellInfo(80451)
-	spellNameList["Tailoring"] = AutoBar:LoggedGetSpellInfo(26790)
 	local craftList = {
 		"*", spellNameList["Alchemy"],
 		"*", spellNameList["Archaeology"],
@@ -1547,8 +1552,14 @@ function AutoBarCategory:Initialize2()
 		tinsert(craftList, spellNameList["Kochen"])
 	end
 
-	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new(
-			"Spell.Crafting", spellIconList["First Aid"], craftList)
+	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"], craftList)
+			
+	AutoBarCategoryList["Spell.Archaeology"] = AutoBarSpells:new("Spell.Archaeology", spellIconList["Archaeology"],
+	{
+		"*",	AutoBar:GetSpellNameByName("Archaeology"),
+		"*",	AutoBar:GetSpellNameByName("Survey"),
+	})
+
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{

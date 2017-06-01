@@ -1603,6 +1603,39 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Fishing")
 end
 
+local AutoBarButtonArchaeology = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonArchaeology"] = AutoBarButtonArchaeology
+
+function AutoBarButtonArchaeology.prototype:init(parentBar, buttonDB)
+	AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Skill.Archaeology.Crate")
+	self:AddCategory("Muffin.Skill.Archaeology.Mission")
+	
+	if(buttonDB.archbtn_show_spells == nil) then 
+		buttonDB.archbtn_show_spells = false;
+	elseif(buttonDB.archbtn_show_spells) then
+		self:AddCategory("Spell.Archaeology")
+	end
+	
+end
+
+function AutoBarButtonArchaeology.prototype:AddOptions(optionList, passValue)
+	self:SetOptionBoolean(optionList, passValue, "archbtn_show_spells", L["ArchBtnShowSpells"])
+end
+
+function AutoBarButtonArchaeology.prototype:Refresh(parentBar, buttonDB)
+	AutoBarButtonArchaeology.super.prototype.Refresh(self, parentBar, buttonDB)
+
+	if(buttonDB.archbtn_show_spells == false) then 
+		self:DeleteCategory("Spell.Archaeology")
+	elseif(buttonDB.archbtn_show_spells) then
+		self:AddCategory("Spell.Archaeology")
+	end
+
+end
+
+
 local AutoBarButtonFood = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFood"] = AutoBarButtonFood
 

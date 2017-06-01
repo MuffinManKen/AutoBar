@@ -44,6 +44,7 @@ atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
 atl("ToyBoxOnlyFavourites", "Only Show Favourites");
 atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
+atl("ArchBtnShowSpells", "Show Spells")
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
 atl("Muffin.Mount", "Muffin.Mount");
@@ -51,6 +52,7 @@ atl("Muffin.Mount", "Muffin.Mount");
 atl("AutoBarButtonRaidTarget", "Raid Targets")
 
 atl("Muffin.Skill.Fishing.Lure", "Muffin.Skill.Fishing.Lure");
+atl("AutoBarButtonArchaeology", "Archaeology")
 
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
 
@@ -153,8 +155,10 @@ local quick_sets =
 	"Spell.Pet Battle",
 	"Toys.ToyBox",
 	"Tradeskill.Tool.Fishing.Bait",
-
-
+	"Muffin.Skill.Archaeology.Crate",
+	"Muffin.Skill.Archaeology.Mission",
+	"Spell.Archaeology",
+	"Dynamic.Quest"
 
 }
 

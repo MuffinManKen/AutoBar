@@ -591,6 +591,16 @@ function AutoBar:InitializeDefaults()
 			enabled = true,
 		}
 	end
+	if (not AutoBar.db.account.buttonList["AutoBarButtonArchaeology"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonArchaeology"] = {
+			buttonKey = "AutoBarButtonArchaeology",
+			buttonClass = "AutoBarButtonArchaeology",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = "*",
+			enabled = true,
+		}
+	end
+	
 	if (not AutoBar.db.account.buttonList["AutoBarButtonPets"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonPets"] = {
 			buttonKey = "AutoBarButtonPets",
