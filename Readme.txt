@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.2.0.02:
+ - Updated data libraries
+ - Added Archaeology button
+
 v7.2.0.01:
  - Unblocked Falcosaur mounts since Blizzard silently unbroke them
  - Performance improvements

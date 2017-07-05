@@ -66,10 +66,8 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 
 WHATSNEW_TEXT = "" ..
 [[
- - Unblocked Falcosaur mounts since Blizzard silently unbroke them
- - Performance improvements
  - Updated data libraries
- - Added  Earthbind Totem to Earth Totem Category
+ - Added Archaeology button
 ]] .. "|n"
 
 
