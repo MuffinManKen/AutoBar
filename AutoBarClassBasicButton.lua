@@ -307,10 +307,10 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 
 		local displayCount1 = count1
 		local displayCount2 = count2
-		if (count1 > 99) then
+		if (count1 > 999) then
 			displayCount1 = "*"
 		end
-		if (count2 > 99) then
+		if (count2 > 999) then
 			displayCount2 = "*"
 		end
 
