@@ -213,7 +213,6 @@ if (GetLocale() == "deDE") then
 		["AutoBarButtonBattleStandards"] = "Kampf Standards",
 		["AutoBarButtonBuff"] = "Buffs",
 		["AutoBarButtonBuffWeapon1"] = "Buff Waffe Waffenhand",
-		["AutoBarButtonBuffWeapon2"] = "Buff Waffe Schildhand",
 		["AutoBarButtonCharge"] = "Ansturm",
 		["AutoBarButtonClassBuff"] = "Klassen Buff",
 		["AutoBarButtonClassPet"] = "klassen Begleiter",

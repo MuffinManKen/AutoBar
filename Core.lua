@@ -178,7 +178,6 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonFoodCombo_X = L["AutoBarButtonFoodCombo"]
 	BINDING_NAME_AutoBarButtonBuff_X = L["AutoBarButtonBuff"]
 	BINDING_NAME_AutoBarButtonBuffWeapon1_X = L["AutoBarButtonBuffWeapon1"]
-	BINDING_NAME_AutoBarButtonBuffWeapon2_X = L["AutoBarButtonBuffWeapon2"]
 
 	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
 	BINDING_NAME_AutoBarButtonCharge_X = L["AutoBarButtonCharge"]

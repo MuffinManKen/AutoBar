@@ -211,7 +211,6 @@ if (GetLocale() == "frFR") then
 		["AutoBarButtonBattleStandards"] = "Etendards de bataille",
 		["AutoBarButtonBuff"] = "Buff",
 		["AutoBarButtonBuffWeapon1"] = "Buff d'arme main droite",
-		["AutoBarButtonBuffWeapon2"] = "Buff d'arme main gauche",
 		["AutoBarButtonCharge"] = "Charge",
 		["AutoBarButtonClassBuff"] = "Buff de classe",
 		["AutoBarButtonClassPet"] = "Familier de classe",

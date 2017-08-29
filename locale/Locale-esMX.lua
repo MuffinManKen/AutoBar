@@ -211,7 +211,6 @@ if (GetLocale() == "esMX") then
 		["AutoBarButtonBattleStandards"] = "Normas de Batalla",
 		["AutoBarButtonBuff"] = "Buff",
 		["AutoBarButtonBuffWeapon1"] = "Buff: Arma Mano Principal",
-		["AutoBarButtonBuffWeapon2"] = "Buff: Arma Mano Secundaria",
 		["AutoBarButtonCharge"] = "Cargar",
 		["AutoBarButtonClassBuff"] = "Buff: Clase",
 		["AutoBarButtonClassPet"] = "Mascota de Clase",

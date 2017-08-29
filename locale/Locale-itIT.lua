@@ -213,7 +213,6 @@ if (GetLocale() == "itIT") then
 		["AutoBarButtonBattleStandards"] = "Battle Standards",
 		["AutoBarButtonBuff"] = "Buff",
 		["AutoBarButtonBuffWeapon1"] = "Buff Weapon Main Hand",
-		["AutoBarButtonBuffWeapon2"] = "Buff Weapon Off Hand",
 		["AutoBarButtonCharge"] = "Charge",
 		["AutoBarButtonClassBuff"] = "Class Buff",
 		["AutoBarButtonClassPet"] = "Class Pet",

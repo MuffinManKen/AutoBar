@@ -213,7 +213,6 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonBattleStandards"] = "Боевые Стандарты",
 		["AutoBarButtonBuff"] = "Баффы",
 		["AutoBarButtonBuffWeapon1"] = "Усиление оружия ПР",
-		["AutoBarButtonBuffWeapon2"] = "Усиление оружия ЛР",
 		["AutoBarButtonCharge"] = "Рывок",
 		["AutoBarButtonClassBuff"] = "Классовые Баффы",
 		["AutoBarButtonClassPet"] = "Классовые питомцы",

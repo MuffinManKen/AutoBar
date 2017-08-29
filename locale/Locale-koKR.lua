@@ -213,7 +213,6 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonBattleStandards"] = "전투 깃발",
 		["AutoBarButtonBuff"] = "버프",
 		["AutoBarButtonBuffWeapon1"] = "주무기 버프",
-		["AutoBarButtonBuffWeapon2"] = "보조무기 버프",
 		["AutoBarButtonCharge"] = "돌진",
 		["AutoBarButtonClassBuff"] = "직업 버프",
 		["AutoBarButtonClassPet"] = "직업 소환수",

@@ -213,7 +213,6 @@ if (GetLocale() == "zhCN") then
 		["AutoBarButtonBattleStandards"] = "战斗姿势",
 		["AutoBarButtonBuff"] = "增益",
 		["AutoBarButtonBuffWeapon1"] = "增益: 主手武器",
-		["AutoBarButtonBuffWeapon2"] = "增益: 副手武器",
 		["AutoBarButtonCharge"] = "冲锋",
 		["AutoBarButtonClassBuff"] = "增益法术",
 		["AutoBarButtonClassPet"] = "战斗宠物",
