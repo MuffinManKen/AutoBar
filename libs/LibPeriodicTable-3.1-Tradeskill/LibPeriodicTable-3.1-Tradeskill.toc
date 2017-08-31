@@ -1,4 +1,4 @@
-﻿## Interface: 70200
+﻿## Interface: 70300
 ## LoadOnDemand: 1
 ## Title: Lib: PeriodicTable-3.1 [|cffeda55fTradeskill|r]
 ## Notes: PeriodicTable data module.
