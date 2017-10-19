@@ -1,6 +1,6 @@
 --[[
 Name: Dewdrop-2.0
-Revision: $Rev: 324 $
+Revision: $Rev: 326 $
 Author(s): ckknight (ckknight@gmail.com)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://wiki.wowace.com/index.php/Dewdrop-2.0
@@ -11,7 +11,7 @@ License: LGPL v2.1
 ]]
 
 local MAJOR_VERSION = "Dewdrop-2.0"
-local MINOR_VERSION = tonumber(strmatch("$Revision: 324 $", "%d+")) + 90000
+local MINOR_VERSION = tonumber(strmatch("$Revision: 326 $", "%d+")) + 90000
 
 if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
 if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
@@ -171,8 +171,9 @@ local buttons
 -- master secureframe that we pop onto menu items on mouseover. This requires
 -- some dark magic with OnLeave etc, but it's not too bad.
 
-local secureFrame = CreateFrame("Button", nil, nil, "SecureActionButtonTemplate")
-secureFrame:Hide()
+local eventFrame = CreateFrame("Button")
+local secureFrame
+local createSecureFrame
 
 local function secureFrame_Show(self)
   local owner = self.owner
@@ -209,23 +210,29 @@ local function secureFrame_Hide(self)
   self.secure = nil
 end
 
-secureFrame:SetScript("OnEvent",
+eventFrame:SetScript("OnEvent",
 	function(this, event)
 		if event=="PLAYER_REGEN_ENABLED" then
-			this.combat = false
-			if not this:IsShown() and this.owner then
-				secureFrame_Show(this)
+			createSecureFrame()
+			secureFrame.combat = false
+			if not secureFrame:IsShown() and secureFrame.owner then
+				secureFrame_Show(secureFrame)
 			end
-		elseif event=="PLAYER_REGEN_DISABLED" then
-			this.combat = true
-			if this:IsShown() then
-				secureFrame_Hide(this)
+		elseif event=="PLAYER_REGEN_DISABLED" and secureFrame then
+			secureFrame.combat = true
+			if secureFrame:IsShown() then
+				secureFrame_Hide(secureFrame)
 			end
 		end
 	end
 )
-secureFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-secureFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+eventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+eventFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+
+function createSecureFrame()
+  if secureFrame or InCombatLockdown() then return end
+  secureFrame = CreateFrame("Button", nil, nil, "SecureActionButtonTemplate")
+  secureFrame:Hide()
 
 secureFrame:SetScript("OnLeave",
 	function(this)
@@ -266,6 +273,8 @@ function secureFrame:Deactivate()
 	self.owner = nil
 end
 
+end
+createSecureFrame()
 -- END secure frame utilities
 
 
@@ -354,8 +363,8 @@ local function CheckSize(self, level)
 			extra = extra + 24
 		end
 		button.text:SetFont(STANDARD_TEXT_FONT, button.textHeight)
-		if button.text:GetWidth() + extra > width then
-			width = button.text:GetWidth() + extra
+		if button.text:GetStringWidth() + extra > width then
+			width = button.text:GetStringWidth() + extra
 		end
 	end
 	level:SetWidth(width + 20)
