@@ -8,6 +8,13 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.3.0.00:
+ - Updated data libraries
+ - Fixed harmless warnings in the FrameXML.log
+ - Remove references to the long-removed Offhand Buff button
+ - Item # of uses can go over 99 without being replaced by *
+ - Removed more unused locale entries
+
 v7.2.0.02:
  - Updated data libraries
  - Added Archaeology button
