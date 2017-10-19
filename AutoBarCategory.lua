@@ -1625,7 +1625,7 @@ function AutoBarCategory:Initialize2()
 			})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 	
-	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount")
+	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount." .. AutoBar.NiceClass)
 	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
