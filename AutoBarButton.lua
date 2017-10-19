@@ -1975,7 +1975,9 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	if(buttonDB.mount_show_class == true) then
 		self:AddCategory("Misc.Mount.Summoned")
 		local class = AutoBar.CLASS
-		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then self:AddCategory("Muffin.Mount") end
+		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then 
+			self:AddCategory("Muffin.Mount")
+		end
 	end
 
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
