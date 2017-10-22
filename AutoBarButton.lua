@@ -2044,6 +2044,12 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			bad_mounts[44153] = true	--Flying Machine
 			bad_mounts[44151] = true	--Turbo Flying Machine
 		end
+		
+		if(AutoBar.CLASS ~= "WARLOCK") then
+			bad_mounts[238452] = true	--Netherlord's Brimstone Wrathsteed
+			bad_mounts[238454] = true	--Netherlord's Accursed Wrathsteed
+			bad_mounts[232412] = true	--Netherlord's Chaotic Wrathsteed
+		end
 
 --		if (not category.castList) then
 			category.castList = {}
