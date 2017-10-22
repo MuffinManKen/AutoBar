@@ -8,6 +8,11 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.3.0.01:
+ - Updated data libraries
+ - Mounts button should remember last used mount
+ - Added better handling of Class mounts for Warlocks (TODO: Other classes)
+
 v7.3.0.00:
  - Updated data libraries
  - Fixed harmless warnings in the FrameXML.log

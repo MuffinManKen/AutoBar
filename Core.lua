@@ -67,10 +67,8 @@ AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possess
 WHATSNEW_TEXT = "" ..
 [[
  - Updated data libraries
- - Fixed harmless warnings in the FrameXML.log
- - Remove references to the long-removed Offhand Buff button
- - Item # of uses can go over 99 without being replaced by *
- - Removed more unused locale entries
+ - Mounts button should remember last used mount
+ - Added better handling of Class mounts for Warlocks (TODO: Other classes)
 ]] .. "|n"
 
 
