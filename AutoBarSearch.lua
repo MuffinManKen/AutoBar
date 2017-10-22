@@ -1056,11 +1056,11 @@ function Sorted.prototype:SetBest(buttonKey)
 		if (buttonData.arrangeOnUse) then
 			itemId = buttonData.arrangeOnUse
 			if (self:SwapToFront(sortedItems, itemId)) then
-				return
+				return;
 			end
 
 			-- Remove item if not found
-			buttonData.arrangeOnUse = nil
+			--buttonData.arrangeOnUse = nil
 		end
 	end
 
