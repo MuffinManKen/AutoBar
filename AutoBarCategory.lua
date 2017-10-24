@@ -982,6 +982,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new("Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
 
 	AutoBarCategoryList["Muffin.Order Hall.Artifact Power"] = AutoBarItems:new("Muffin.Order Hall.Artifact Power", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Artifact Power")
+	AutoBarCategoryList["Muffin.Order Hall.Nethershard"] = AutoBarItems:new("Muffin.Order Hall.Nethershard", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Nethershard")
 	AutoBarCategoryList["Muffin.Order Hall.Troop Recruit"] = AutoBarItems:new("Muffin.Order Hall.Troop Recruit", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Troop Recruit")
 	AutoBarCategoryList["Muffin.Order Hall.Buff"] = AutoBarItems:new("Muffin.Order Hall.Buff", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Buff")
 	AutoBarCategoryList["Muffin.Order Hall.Champion"] = AutoBarItems:new("Muffin.Order Hall.Champion", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Champion")
