@@ -2323,7 +2323,7 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 		}
 	end
 
-	local buttonClass = AutoBar.buttonList[buttonKey]
+	local buttonClass = AutoBar.buttonList[buttonKey] or AutoBar.buttonListDisabled[buttonKey]
 	if (buttonClass) then
 		buttonClass:AddOptions(existingConfig.args, passValue)
 	end
