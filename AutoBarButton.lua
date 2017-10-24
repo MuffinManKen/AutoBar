@@ -978,6 +978,7 @@ local function set_button_option(p_info, p_value)
 	button_db[p_info[# p_info]] = p_value
 	button_db.is_dirty = true
 	AutoBarChanged()
+	AutoBar:ButtonsChanged();
 end
 
 -- Call specific option type methods to do the actual setting
