@@ -1989,90 +1989,54 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
 
 	if (not AutoBarCategoryList["Spell.Mount"]) then
---		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {})
---		category:SetNoSpellCheck(true)
 		--AutoBarButtonMount.prototype:init hasn't run, so skip
 		--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
 		return true;
 	end
 
+	local thisIsSpam = true
 	local category = AutoBarCategoryList["Spell.Mount"]
 
 	AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
+	
+	-- Get the player's current mount filter settings
+	local setting_filter_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED);
+	local setting_filter_not_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED);
+	local setting_filter_unusable = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE);
+	
+	--Set the mount filter settings the way we want
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true);
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
 
-	local companion_type = "MOUNT"
-	local count = GetNumCompanions(companion_type)
-	local thisIsSpam = true
-	local faction_id = -1 --Illegal value, probably
-	local needs_update = (count ~= AutoBar.last_mount_count) or buttonDB.is_dirty
+	local num_mounts = C_MountJournal.GetNumDisplayedMounts();
+	local needs_update = (num_mounts ~= AutoBar.last_mount_count) or buttonDB.is_dirty
 
---print("NumMounts:" .. count .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
+--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
 --print(debugstack(1, 3, 3));
 
 	--If the number of known mounts has changed, do stuff
 	if (needs_update) then
 --print("   Gonna do stuff");
-		AutoBar.last_mount_count = count;
+		AutoBar.last_mount_count = num_mounts;
 		buttonDB.is_dirty = false
 		
-		if(AutoBar.player_faction_name == "Horde") then
-			faction_id = 0
-		elseif (AutoBar.player_faction_name == "Alliance") then
-			faction_id = 1
-		end
-		
-		local bad_mounts={}
-		local prof1_idx, prof2_idx = GetProfessions()
-		local prof1_id = prof1_idx and select(7, GetProfessionInfo(prof1_idx))
-		local prof2_id = prof2_idx and select(7, GetProfessionInfo(prof2_idx))
+		category.castList = {}
 
-		local is_tailor = (prof1_id == 197) or (prof2_id == 197)
-		if(not is_tailor) then
-			bad_mounts[169952] = true	--Creeping Carpet
-			bad_mounts[61309] = true	--Magnificent Flying Carpet
-			bad_mounts[75596] = true	--Frosty Flying Carpet
-			bad_mounts[61451] = true	--Magnificent Flying Carpet
-		end
-
-		local is_engineer = (prof1_id == 202) or (prof2_id == 202)
-		if(not is_engineer) then
-			bad_mounts[44153] = true	--Flying Machine
-			bad_mounts[44151] = true	--Turbo Flying Machine
-		end
-		
-		local is_engineer = (prof1_id == 202) or (prof2_id == 202)
-		if(not is_engineer) then
-			bad_mounts[44153] = true	--Flying Machine
-			bad_mounts[44151] = true	--Turbo Flying Machine
-		end
-		
-		if(AutoBar.CLASS ~= "WARLOCK") then
-			bad_mounts[238452] = true	--Netherlord's Brimstone Wrathsteed
-			bad_mounts[238454] = true	--Netherlord's Accursed Wrathsteed
-			bad_mounts[232412] = true	--Netherlord's Chaotic Wrathsteed
-		end
-
---		if (not category.castList) then
-			category.castList = {}
---		end
-
-		local initialized = not category.unInitialized --or (# category.castList ~= count)
+		thisIsSpam = not category.unInitialized --or (# category.castList ~= count)
 		local spell_name
-		thisIsSpam = initialized
-		local mount_ids = C_MountJournal.GetMountIDs(); --All mount ids in the journal
---print("AutoBarButtonMount.prototype:Refresh initialized:", initialized, "thisIsSpam:", thisIsSpam, "castlist:", # category.castList, "Mounts:", count, "MountIDs:", #mount_ids)
 
-		for k, v in pairs(mount_ids) do
-			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_filtered, is_collected = C_MountJournal.GetMountInfoByID(v)
+		for idx = 0, num_mounts do
+			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
 			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
 			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
-			local faction_ok = (not faction_specific) or (faction_specific and (faction_id == faction))
---if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Red Mechanostrider" or name == "Creeping Carpet" or (is_filtered and is_collected)) then 
---print(string.format("%5s  %5s  Usable:%5s", v, spell_id, tostring(usable)), name)
---print("   FacSpecific:",faction_specific, "Faction:", faction, "Filtered:", is_filtered, "Collected:", is_collected)
---print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
+--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then 
+--if (is_collected and is_hidden ) then 
+--	print(string.format("%5s  %5s  Usable:%5s", mount_id, spell_id, tostring(usable)), name)
+--	print("   FacSpecific:",faction_specific, "Faction:", faction, "Hidden:", is_hidden, "Collected:", is_collected)
+--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 --end;
-			if (is_collected and user_selected and faction_ok and not qiraji_filtered and not bad_mounts[spell_id]) then
+			if (is_collected and user_selected and not qiraji_filtered) then
 				spell_name = GetSpellInfo(spell_id)
 				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 				spellIconList[spell_name] = icon
@@ -2090,8 +2054,16 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		
 		AutoBarCategoryList["Spell.Mount"]:Refresh()
 	end
+	
+	-- Reset the player's current mount filter settings to their original settings
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, setting_filter_collected);
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, setting_filter_not_collected);
+	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, setting_filter_unusable);
+
 	return thisIsSpam
 end
+
+
 
 function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
