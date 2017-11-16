@@ -8,6 +8,13 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.3.0.03:
+ - Updated data libraries
+ - Nethershard-yielding items appear on Order Hall Resource button
+ - UI Fix: Button options (Show Favourites, etc) are visible even when a button is not enabled
+ - UI Fix: When changing button options, the buttons should update immediately
+ - Mount button should be better at showing proper mounts accounting for faction/professions/etc
+
 v7.3.0.02beta:
  - Nethershard-yielding items appear on Order Hall Resource button
  - UI Fix: Button options (Show Favourites, etc) are visible even when a button is not enabled
