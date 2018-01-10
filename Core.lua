@@ -412,7 +412,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
-	AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 
 
 
@@ -431,6 +430,7 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
 	AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
+	AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -635,6 +635,7 @@ function Delayed.prototype:Start(arg1, customDelay)
 --print("***Delayed.prototype:Start "..self.name.." end ");
 end
 
+
 function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
 	AutoBar:LogEventStart("GET_ITEM_INFO_RECEIVED", p_item_id)
 --print("GET_ITEM_INFO_RECEIVED", p_item_id)
@@ -695,11 +696,9 @@ end
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
 	AutoBar.inCombat = nil
-	local scanned = false;
 	if (not AutoBar.initialized) then
 --print("   PLAYER_ENTERING_WORLD")
 		AutoBar.delay["UpdateCategories"]:Start()
-		scanned = true;
 		AutoBar.initialized = true;
 	end
 
@@ -989,24 +988,26 @@ function AutoBar.events:PET_BATTLE_CLOSE(arg1)
 
 end
 
-function AutoBar.events:TOYS_UPDATED(p_arg1, p_arg2)
-	AutoBar:LogEventStart("TOYS_UPDATED", p_arg1, p_arg2)
+function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
+	AutoBar:LogEventStart("TOYS_UPDATED", p_item_id, p_new)
 
-	local need_update = false;
-	
-	AutoBarSearch.dirtyBags.toybox = true
-	local button = AutoBar.buttonList["AutoBarButtonToyBox"]
-	if (button) then
-		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
-	end
+--	local need_update = false;
+--	
+--	AutoBarSearch.dirtyBags.toybox = true
+--	local button = AutoBar.buttonList["AutoBarButtonToyBox"]
+--	if (button) then
+--		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
+--	end
+--
+--	print("TOYS_UPDATED", p_item_id, p_new, "need update:", need_update)
+--
+--	if(need_update) then
+--		AutoBar.delay["UpdateCategories"]:Start()
+--	end
 
-	--print("TOYS_UPDATED", p_arg1, p_arg2, "need update:", need_update)
+AutoBar.delay["UpdateSpells"]:Start()
 
-	if(need_update) then
-		AutoBar.delay["UpdateCategories"]:Start()
-	end
-
-	AutoBar:LogEventEnd("TOYS_UPDATED", p_arg1, p_arg2)
+	AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
 end
 
