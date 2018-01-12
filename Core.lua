@@ -35,6 +35,8 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- The Update functions can be called directly or via AutoBar.delay["UpdateButtons"].
 -- Delayed calls allow multiple updates to clump & get dealt with at once, especially after combat ends.
 
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local AceOO = AceLibrary("AceOO-2.0")
@@ -62,12 +64,6 @@ AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
-
-
-WHATSNEW_TEXT = "" ..
-[[
- - Updated data libraries
-]] .. "|n"
 
 
 
@@ -710,72 +706,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 	AutoBar:DumpWarningLog()
 
-	local this_version = GetAddOnMetadata("AutoBar", "Version")
-
-	--only mark the dialog as seen if the frame was found. This protects against someone
-	--updating the addon while in-game
-	if(this_version ~= AutoBarDB.whatsnew_version) then
-		 AutoBarDB.whatsnew_version = this_version
-
-		WHATSNEW_TITLE = "What's New in AutoBar"
-
-		local frame = CreateFrame("Frame", "AutoBarWhatsNewFrame", UIParent)
-		frame:SetBackdrop({
-			bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
-		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		 	tile = true,
-		 	tileSize = 32,
-		 	edgeSize = 32,
-		 	insets = { left = 11, right = 11, top = 11, bottom = 10 }
-		})
-		frame:SetBackdropColor(0, 0, 0, 0.9);
-		frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-
-		local header_frame = CreateFrame("Frame", "AutoBarWhatsNewHeaderFrame", frame)
-		header_frame:SetBackdrop({
-			bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
-		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		 	tile = true,
-		 	tileSize = 28,
-		 	edgeSize = 28,
-		 	insets = { left = 5, right = 5, top = 5, bottom = 5 }
-		})
-		header_frame:SetBackdropColor(0, 0, 0, 0.9);
-		header_frame:SetPoint("CENTER", frame, "TOP", 0, 0)
-
-		local title_text = header_frame:CreateFontString("AutoBarWhatsNewTitleText", "ARTWORK", "GameFontNormal")
-		title_text:SetText(WHATSNEW_TITLE .. "|n" .. this_version)
-		title_text:SetJustifyH("CENTER")
-
-		local title_string_width = title_text:GetStringWidth()
-		local title_string_height = title_text:GetStringHeight()
-
-		header_frame:SetSize(title_string_width * 1.4, title_string_height * 1.9)
-		title_text:SetSize(title_string_width, title_string_height)
-
-		title_text:SetPoint("CENTER", header_frame, "CENTER", 0, 0)
-
-
-		local text = frame:CreateFontString("AutoBarWhatsNewFrameText", "ARTWORK", "GameFontNormal")
-		text:SetTextColor(0, 1, 0, 0.9)
-		text:SetText(WHATSNEW_TEXT)
-		text:SetPoint("LEFT", frame, "LEFT", 20, 0)
-		text:SetJustifyH("LEFT")
-
-		local string_width = text:GetStringWidth()
-		local string_height = text:GetStringHeight()
-
-		local ok_button = CreateFrame("Button", "AutoBarWhatsNewFrameOkButton", frame, "UIPanelButtonTemplate")
-		ok_button:SetText(OKAY)
-
-		frame:SetSize(math.max(string_width * 1.2, 300), math.max(string_height * 1.5, 100) + ok_button:GetHeight())
-		text:SetSize(string_width, string_height)
-
-		ok_button:SetPoint("BOTTOM", frame, "BOTTOM", 0, 15)
-		ok_button:SetScript("OnClick", function(self, button, down) frame:Hide() end)
-
-		frame:Show()
-	end
+	AB.show_whats_new();
 
 end
 

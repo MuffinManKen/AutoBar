@@ -27,6 +27,8 @@ AceGUIWidget-DragLink.lua
 
 AutoBarGlobals.lua
 
+whatsnew.lua
+
 Core.lua
 
 # Localization
