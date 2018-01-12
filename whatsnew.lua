@@ -21,7 +21,9 @@ function AB.show_whats_new()
 
 		local WHATSNEW_TITLE = "What's New in " .. addon_name
 
-		local frame = CreateFrame("Frame", addon_name .. "WhatsNewFrame", UIParent)
+		local muff_fac = _G["MuffinFactionizerWhatsNewFrame"];
+
+		local frame = CreateFrame("Frame", addon_name .. "WhatsNewFrame", muff_fac or UIParent)
 		frame:SetBackdrop({
 			bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 			edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
@@ -31,7 +33,11 @@ function AB.show_whats_new()
 			insets = { left = 11, right = 11, top = 11, bottom = 10 }
 		})
 		frame:SetBackdropColor(0, 0, 0, 0.9);
-		frame:SetPoint("CENTER", UIParent, "CENTER")
+		if (muff_fac) then
+			frame:SetPoint("BOTTOM", muff_fac, "TOP", 0, 20);
+		else
+			frame:SetPoint("CENTER", UIParent, "CENTER")
+		end
 		frame:EnableMouse(true)
 		frame:SetMovable(true)
 		frame:RegisterForDrag("LeftButton");
