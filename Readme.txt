@@ -8,6 +8,12 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.3.0.06:
+ - Updated data libraries
+ - Improved handling of Hearth toys
+ - What's new dialog is movable, Okay button is bigger, and it gained a mascot.
+ - Plug: Check out MuffinFactionizer for your Reputation/Faction needs
+
 v7.3.0.05:
  - Updated data libraries
 
