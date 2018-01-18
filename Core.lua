@@ -922,21 +922,23 @@ end
 function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
 	AutoBar:LogEventStart("TOYS_UPDATED", p_item_id, p_new)
 
---	local need_update = false;
---	
---	AutoBarSearch.dirtyBags.toybox = true
---	local button = AutoBar.buttonList["AutoBarButtonToyBox"]
---	if (button) then
---		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
---	end
---
---	print("TOYS_UPDATED", p_item_id, p_new, "need update:", need_update)
---
---	if(need_update) then
---		AutoBar.delay["UpdateCategories"]:Start()
---	end
+	if(p_item_id ~= nil or p_new ~= nil) then
+	--	local need_update = false;
+	--	
+	--	AutoBarSearch.dirtyBags.toybox = true
+	--	local button = AutoBar.buttonList["AutoBarButtonToyBox"]
+	--	if (button) then
+	--		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
+	--	end
+	--
+		print("TOYS_UPDATED", p_item_id, p_new);
+	--
+	--	if(need_update) then
+	--		AutoBar.delay["UpdateCategories"]:Start()
+	--	end
 
-AutoBar.delay["UpdateSpells"]:Start()
+		AutoBar.delay["UpdateSpells"]:Start()
+	end
 
 	AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
