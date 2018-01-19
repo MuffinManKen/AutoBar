@@ -486,7 +486,7 @@ function AutoBarButton.prototype:SetupButton()
 	local popupHeader = frame.popupHeader
 	local popupKeyHandler = frame.popupKeyHandler
 
-	--if (buttonKey == "AutoBarButtonPets") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "type_id", type_id, "info_data", info_data) end;
+	--if (buttonKey == "AutoBarButtonHearth") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "type_id", type_id, "info_data", info_data) end;
 	if ((bag or slot or spell or macroId or type_id) and self.buttonDB.enabled) then
 		frame:Show()
 		local sortedItems = AutoBarSearch.sorted:GetList(buttonKey)
