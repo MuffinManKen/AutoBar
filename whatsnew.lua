@@ -5,8 +5,7 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 local WHATSNEW_TEXT = "" ..
 [[
  - Updated data libraries
- - Improved handling of Hearth toys
- - What's new dialog is movable, Okay button is bigger, and it gained a mascot.
+ - Work-around for new Blizzard performance bug
  - Plug: Check out MuffinFactionizer for your Reputation/Faction needs
 ]] .. "|n"
 
