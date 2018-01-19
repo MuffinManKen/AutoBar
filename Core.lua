@@ -448,6 +448,8 @@ end
 local logItems = {}	-- n = startTime
 local logMemory = {}	-- n = startMemory
 
+local event_name_colour = "|cFFFFFF7F"
+
 function AutoBar:LogEvent(eventName, arg1)
 	if (AutoBar.db.account.logMemory) then
 		UpdateAddOnMemoryUsage()
@@ -456,9 +458,9 @@ function AutoBar:LogEvent(eventName, arg1)
 	end
 	if (AutoBar.db.account.logEvents) then
 		if (arg1) then
-			print(eventName, "arg1" , arg1, "time:", GetTime(), memString, memory)
+			print(event_name_colour .. eventName .. "|r", "arg1" , arg1, "time:", GetTime(), memString, memory)
 		else
-			print(eventName, "time:", GetTime())
+			print(event_name_colour .. eventName .. "|r", "time:", GetTime())
 		end
 	end
 end
@@ -487,9 +489,9 @@ function AutoBar:LogEventEnd(eventName, arg1)
 			logItems[eventName] = nil
 			if (elapsed > 0.005) then
 				if (arg1) then
-					print(eventName, arg1, "time:", elapsed)
+					print(event_name_colour .. eventName .. "|r", arg1, "time:", elapsed)
 				else
-					print(eventName, "time:", elapsed)
+					print(event_name_colour .. eventName .. "|r", "time:", elapsed)
 				end
 			end
 		else
