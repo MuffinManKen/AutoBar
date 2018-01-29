@@ -933,8 +933,6 @@ function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
 	--		need_update = button:Refresh(button.parentBar, button.buttonDB, true)
 	--	end
 	--
-		print("TOYS_UPDATED", p_item_id, p_new);
-	--
 	--	if(need_update) then
 	--		AutoBar.delay["UpdateCategories"]:Start()
 	--	end
