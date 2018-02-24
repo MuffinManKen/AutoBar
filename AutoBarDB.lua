@@ -302,12 +302,34 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-		if (not AutoBar.db.class.buttonList["AutoBarButtonBoomkinTree"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonBoomkinTree"] = {
-				buttonKey = "AutoBarButtonBoomkinTree",
-				buttonClass = "AutoBarButtonBoomkinTree",
-				barKey = "AutoBarClassBarDruid",
+		if (not AutoBar.db.class.buttonList["AutoBarButtonStagForm"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonStagForm"] = {
+				buttonKey = "AutoBarButtonStagForm",
+				buttonClass = "AutoBarButtonStagForm",
+				barKey = AutoBar.classBar,
 				defaultButtonIndex = 4,
+				enabled = true,
+				noPopup = true,
+			}
+		end
+
+		if (not AutoBar.db.class.buttonList["AutoBarButtonMoonkin"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonMoonkin"] = {
+				buttonKey = "AutoBarButtonMoonkin",
+				buttonClass = "AutoBarButtonMoonkin",
+				barKey = AutoBar.classBar,
+				defaultButtonIndex = 5,
+				enabled = true,
+				noPopup = true,
+			}
+		end
+
+		if (not AutoBar.db.class.buttonList["AutoBarButtonTreeForm"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonTreeForm"] = {
+				buttonKey = "AutoBarButtonTreeForm",
+				buttonClass = "AutoBarButtonTreeForm",
+				barKey = AutoBar.classBar,
+				defaultButtonIndex = 6,
 				enabled = true,
 				noPopup = true,
 			}
@@ -1064,7 +1086,7 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
-		"AutoBarButtonCooldownStoneCombat"
+		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do

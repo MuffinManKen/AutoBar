@@ -629,6 +629,7 @@ function AutoBarButton:SetupAttributesClear(frame)
 	frame:SetAttribute("macroBody", nil)
 	frame:SetAttribute("macro2", nil)
 	frame:SetAttribute("macrotext2", nil)
+	frame:SetAttribute("itemLink", nil)
 	frame:SetAttribute("AutoBarGUID", nil)
 end
 
@@ -1036,30 +1037,30 @@ function AutoBarButton.prototype:AddMacro(macroText, macroTexture)
 	self.macroText = macroText
 	self.macroTexture = macroTexture
 	local buttonKey = self.buttonDB.buttonKey
---AutoBar:Print("AutoBarButtonMacro.prototype:AddMacro RegisterMacro " .. tostring(buttonKey))
+--AutoBar:Print("AutoBarButton.prototype:AddMacro RegisterMacro " .. tostring(buttonKey))
 	AutoBarSearch:RegisterMacro(buttonKey, nil, L[buttonKey], macroText)
 end
 
 
-AutoBarButtonMacro = AceOO.Class(AutoBarButton)
-
-function AutoBarButtonMacro.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMacro.super.prototype.init(self, parentBar, buttonDB)
-end
-
--- Set the state attributes of the button
-function AutoBarButtonMacro.prototype:SetupButton()
-	local frame = self.frame
-
-	if (self.macroText and self.buttonDB.enabled) then
---AutoBar:Print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
-		frame:Show()
---- ToDo, disable popup
-		self:SetupAttributes(self, nil, nil, nil, self.buttonDB.buttonKey)
-	else
-		frame:Hide()
-	end
-end
+--AutoBarButtonMacro = AceOO.Class(AutoBarButton)
+--
+--function AutoBarButtonMacro.prototype:init(parentBar, buttonDB)
+--	AutoBarButtonMacro.super.prototype.init(self, parentBar, buttonDB)
+--end
+--
+---- Set the state attributes of the button
+--function AutoBarButtonMacro.prototype:SetupButton()
+--	local frame = self.frame
+--
+--	if (self.macroText and self.buttonDB.enabled) then
+----AutoBar:Print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
+--		frame:Show()
+----- ToDo, disable popup
+--		self:SetupAttributes(self, nil, nil, nil, self.buttonDB.buttonKey)
+--	else
+--		frame:Hide()
+--	end
+--end
 
 
 local AutoBarButtonAspect = AceOO.Class(AutoBarButton)
@@ -1269,157 +1270,48 @@ spellAquaticForm, _, spellAquaticFormIcon = AutoBar:LoggedGetSpellInfo(1066)
 spellTreeOfLifeForm, _, spellTreeOfLifeFormIcon = AutoBar:LoggedGetSpellInfo(114282)
 
 
-local shapeshift = {
-}
-local shapeshiftIn = {}
-local shapeshiftSet = {}
-local formIndexList = {}
-local concatList = {}
-local excludeList = {}
 
-local function ShapeshiftRefresh()
-	wipe(shapeshift)
-	wipe(shapeshiftIn)
-	wipe(shapeshiftSet)
-	wipe(formIndexList)
 
-	local numShapeshiftForms = GetNumShapeshiftForms()
-	for index = 1, numShapeshiftForms, 1 do
-		local _, name, _, _ = GetShapeshiftFormInfo(index)
-		shapeshift[name] = " [stance:" .. index .. "] " .. name .. ";"
-		shapeshiftIn[name] = " [stance:" .. index .. "]"
-		shapeshiftSet[name] = " [nostance:" .. index .. "] " .. name .. ";"
-		formIndexList[name] = index
-	end
-end
-
-local function GetCancelList(excludeList)
-	ShapeshiftRefresh()
-	wipe(concatList)
-
-	local index = 1
-	concatList[index] = "/cancelform [stance:"
-	index = index + 1
-
-	for excludeForm in pairs(excludeList) do
-		formIndexList[excludeForm] = nil
-	end
-
-	local needsSlash = false
-
-	for formName, formIndex in pairs(formIndexList) do
-		if (formName and formIndex) then
-			if (needsSlash) then
-				concatList[index] = "/"
-				index = index + 1
-				concatList[index] = tostring(formIndex)
-			else
-				concatList[index] = tostring(formIndex)
-				needsSlash = true
-			end
-			index = index + 1
-		end
-	end
-	concatList[index] = "]\n/dismount [mounted]\n/cast "
-	index = index + 1
-
-	return concatList
-end
-
-local AutoBarButtonBear = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonBear = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBear"] = AutoBarButtonBear
 
 function AutoBarButtonBear.prototype:init(parentBar, buttonDB)
 	AutoBarButtonBear.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
+
+	self:AddCategory("Spell.BearForm")
+
 end
 
-function AutoBarButtonBear.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonBear.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	if (AutoBar.CLASS == "DRUID") then
-		wipe(excludeList)
-		excludeList[spellNameList["Bear Form"]] = true
-		local concatList = GetCancelList(excludeList)
-		local macroTexture
+local AutoBarButtonMoonkin = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonMoonkin"] = AutoBarButtonMoonkin
 
-		if (shapeshiftSet[spellNameList["Bear Form"]]) then
-			concatList[# concatList + 1] = shapeshiftSet[spellNameList["Bear Form"]]
-			macroTexture = spellIconList["Bear Form"]
-			self.macroActive = true
-		end
+function AutoBarButtonMoonkin.prototype:init(parentBar, buttonDB)
+	AutoBarButtonMoonkin.super.prototype.init(self, parentBar, buttonDB)
 
-		if (self.macroActive) then
-			local macroText = table.concat(concatList)
-			self:AddMacro(macroText, macroTexture)
-		end
-	end
+	self:AddCategory("Spell.MoonkinForm")
+
 end
 
-local AutoBarButtonBoomkinTree = AceOO.Class(AutoBarButtonMacro)
-AutoBar.Class["AutoBarButtonBoomkinTree"] = AutoBarButtonBoomkinTree
+local AutoBarButtonTreeForm = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonTreeForm"] = AutoBarButtonTreeForm
 
-function AutoBarButtonBoomkinTree.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBoomkinTree.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
-end
+function AutoBarButtonTreeForm.prototype:init(parentBar, buttonDB)
+	AutoBarButtonTreeForm.super.prototype.init(self, parentBar, buttonDB)
 
-function AutoBarButtonBoomkinTree.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonBoomkinTree.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	if (AutoBar.CLASS == "DRUID") then
-		wipe(excludeList)
-		excludeList[spellMoonkinForm] = true
-		excludeList[spellTreeOfLifeForm] = true
-		local concatList = GetCancelList(excludeList)
-		local macroTexture
+	self:AddCategory("Spell.TreeForm")
 
-		if (shapeshiftSet[spellMoonkinForm]) then
-			concatList[# concatList + 1] = shapeshiftSet[spellMoonkinForm]
-			macroTexture = spellMoonkinFormIcon
-			self.macroActive = true
-		elseif (shapeshiftSet[spellTreeOfLifeForm]) then
-			concatList[# concatList + 1] = shapeshiftSet[spellTreeOfLifeForm]
-			macroTexture = spellTreeOfLifeFormIcon
-			self.macroActive = true
-		end
-
-		if (self.macroActive) then
-			local macroText = table.concat(concatList)
-			self:AddMacro(macroText, macroTexture)
-		end
-	end
 end
 
 
-local AutoBarButtonCat = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonCat = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCat"] = AutoBarButtonCat
 
 function AutoBarButtonCat.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCat.super.prototype.init(self, parentBar, buttonDB)
-	self:Refresh(parentBar, buttonDB)
+
+	self:AddCategory("Spell.CatForm")
+
 end
-
-function AutoBarButtonCat.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonCat.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	if (AutoBar.CLASS == "DRUID") then
-		wipe(excludeList)
-		excludeList[spellNameList["Cat Form"]] = true
-		local concatList = GetCancelList(excludeList)
-		local macroTexture
-
-		if (shapeshiftSet[spellNameList["Cat Form"]]) then
-			concatList[# concatList + 1] = shapeshiftSet[spellNameList["Cat Form"]]
-			macroTexture = spellIconList["Cat Form"]
-			self.macroActive = true
-
-			local macroText = table.concat(concatList)
-			self:AddMacro(macroText, macroTexture)
-		end
-	end
-end
-
 
 
 local AutoBarButtonCharge = AceOO.Class(AutoBarButton)
@@ -1442,86 +1334,24 @@ function AutoBarButtonInterrupt.prototype:init(parentBar, buttonDB)
 
 end
 
-
-local AutoBarButtonTravel = AceOO.Class(AutoBarButtonMacro)
+local AutoBarButtonTravel = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTravel"] = AutoBarButtonTravel
 
 function AutoBarButtonTravel.prototype:init(parentBar, buttonDB)
 	AutoBarButtonTravel.super.prototype.init(self, parentBar, buttonDB)
 
-	self:Refresh(parentBar, buttonDB)
+	self:AddCategory("Spell.Travel")
+
 end
 
-function AutoBarButtonTravel.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonTravel.super.prototype.Refresh(self, parentBar, buttonDB)
-	self.macroActive = nil
-	wipe(concatList)
+local AutoBarButtonStagForm = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonStagForm"] = AutoBarButtonStagForm
 
-	local macroTexture
-	if (AutoBar.CLASS == "DRUID") then
-		wipe(excludeList)
-		excludeList[spellAquaticForm] = true
-		excludeList[spellNameList["Cat Form"]] = true
-		excludeList[spellNameList["Travel Form"]] = true
-		excludeList[spellNameList["Swift Flight Form"]] = true
-		excludeList[spellNameList["Flight Form"]] = true
-		local concatList = GetCancelList(excludeList)
+function AutoBarButtonStagForm.prototype:init(parentBar, buttonDB)
+	AutoBarButtonStagForm.super.prototype.init(self, parentBar, buttonDB)
 
-		local index = # concatList + 1
-		if (shapeshift[spellAquaticForm]) then
-			concatList[index] = " [swimming] "
-			concatList[index+1] = spellAquaticForm
-			concatList[index+2] = ";"
-			index = index + 3
-			self.macroActive = true
-		end
+	self:AddCategory("Spell.StagForm")
 
-		if (shapeshift[spellNameList["Cat Form"]]) then
-			concatList[index] = " [indoors] "
-			concatList[index+1] = spellNameList["Cat Form"]
-			concatList[index+2] = ";"
-			index = index + 3
-			self.macroActive = true
-		end
-
-		if (shapeshift[spellNameList["Swift Flight Form"]]) then
-			concatList[index] = " [flyable,nocombat] "
-			concatList[index+1] = spellNameList["Swift Flight Form"]
-			concatList[index+2] = ";"
-			index = index + 3
-			self.macroActive = true
-		elseif (shapeshift[spellNameList["Flight Form"]]) then
-			concatList[index] = " [flyable,nocombat] "
-			concatList[index+1] = spellNameList["Flight Form"]
-			concatList[index+2] = ";"
-			index = index + 3
-			self.macroActive = true
-		end
-
-		if (shapeshiftSet[spellNameList["Travel Form"]]) then
-			concatList[index] = " [outdoors] "
-			concatList[index+1] = spellNameList["Travel Form"]
-			index = index + 2
-			self.macroActive = true
-		end
-
-		macroTexture = spellIconList["Travel Form"]
-	elseif (AutoBar.CLASS == "SHAMAN") then
-		if (GetSpellInfo(spellNameList["Ghost Wolf"])) then
-			local index = 1
-			concatList[index] = "/dismount [mounted]\n"
-			concatList[index + 1] = "/cast "
-			concatList[index + 2] = spellNameList["Ghost Wolf"]
-			index = index + 3
-
-			macroTexture = spellIconList["Ghost Wolf"]
-			self.macroActive = true
-		end
-	end
-	if (self.macroActive) then
-		local macroText = table.concat(concatList)
-		self:AddMacro(macroText, macroTexture)
-	end
 end
 
 

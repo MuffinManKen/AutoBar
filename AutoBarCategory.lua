@@ -68,6 +68,9 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Bear Form"], _, spellIconList["Bear Form"] = AutoBar:LoggedGetSpellInfo(5487)
 	spellNameList["Mangle"], _, spellIconList["Mangle"] = AutoBar:LoggedGetSpellInfo(33917)
 	spellNameList["Cat Form"], _, spellIconList["Cat Form"] = AutoBar:LoggedGetSpellInfo(768)
+	spellNameList["Moonkin Form"], _, spellIconList["Moonkin Form"] = AutoBar:LoggedGetSpellInfo(197625)
+	spellNameList["Treant Form"], _, spellIconList["Treant Form"] = AutoBar:LoggedGetSpellInfo(114282)
+	spellNameList["Stag Form"], _, spellIconList["Stag Form"] = AutoBar:LoggedGetSpellInfo(210053)
 
 	--Hunter
 	spellNameList["Aspect of the Chameleon"]= AutoBar:LoggedGetSpellInfo(61648)
@@ -780,7 +783,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
 	AutoBarCategoryList["Muffin.Toys.Portal"] = AutoBarToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
 	AutoBarCategoryList["Muffin.Toys.Fishing"] = AutoBarToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
-
 
 
 	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
@@ -1666,6 +1668,38 @@ function AutoBarCategory:Initialize2()
 		"ROGUE", AutoBar:GetSpellNameByName("Kick"),
 		"WARLOCK", AutoBar:GetSpellNameByName("Grimoire: Felhunter"),
 	})
+
+	AutoBarCategoryList["Spell.CatForm"] = AutoBarSpells:new( "Spell.CatForm", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Cat Form"),
+	})
+
+	AutoBarCategoryList["Spell.BearForm"] = AutoBarSpells:new( "Spell.BearForm", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Bear Form"),
+	})
+
+	AutoBarCategoryList["Spell.MoonkinForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Moonkin Form"),
+	})
+
+	AutoBarCategoryList["Spell.TreeForm"] = AutoBarSpells:new( "Spell.TreeForm", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Treant Form"),
+	})
+
+	AutoBarCategoryList["Spell.StagForm"] = AutoBarSpells:new( "Spell.StagForm", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Stag Form"),
+	})
+
+	AutoBarCategoryList["Spell.Travel"] = AutoBarSpells:new( "Spell.Travel", spellIconList["Charge"],
+	{
+		"DRUID", AutoBar:GetSpellNameByName("Travel Form"),
+		"SHAMAN", AutoBar:GetSpellNameByName("Ghost Wolf"),
+	})
+
 end
 
 

@@ -51,6 +51,18 @@ atl("Muffin.Mount", "Muffin.Mount");
 
 atl("AutoBarButtonRaidTarget", "Raid Targets")
 
+atl("AutoBarButtonMoonkin", "Moonkin")
+atl("AutoBarButtonTreeForm", "Tree")
+atl("AutoBarButtonStagForm", "Stag")
+
+atl("Spell.Travel", "Spell.Travel")
+atl("Spell.CatForm", "Spell.CatForm")
+atl("Spell.TreeForm", "Spell.TreeForm")
+atl("Spell.MoonkinForm", "Spell.MoonkinForm")
+atl("Spell.BearForm", "Spell.BearForm")
+atl("Spell.StagForm", "Spell.StagForm")
+
+
 atl("Muffin.Skill.Fishing.Lure", "Muffin.Skill.Fishing.Lure");
 atl("AutoBarButtonArchaeology", "Archaeology")
 
