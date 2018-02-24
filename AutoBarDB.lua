@@ -201,6 +201,7 @@ function AutoBar:InitializeDefaults()
 			log_throttled_events = false,
 			throttle_event_limit = 0.0,
 			handle_spell_changed = true,
+			hack_PetActionBarFrame = true,
 			selfCastRightClick = true,
 			showEmptyButtons = false,
 			style = "Dreamlayout",
@@ -210,6 +211,11 @@ function AutoBar:InitializeDefaults()
 	if(self.defaults.handle_spell_changed == nil) then
 		handle_spell_changed = true
 	end
+	if(self.defaults.hack_PetActionBarFrame == nil) then
+		hack_PetActionBarFrame = true
+	end
+
+
 	self:RegisterDefaults('account', self.defaults)
 
 	AutoBar.Class.Bar:OptionsInitialize()

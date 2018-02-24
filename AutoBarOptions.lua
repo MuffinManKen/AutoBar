@@ -1425,6 +1425,12 @@ function AutoBar:CreateOptionsAce3()
 							name = "Allow SPELLS_CHANGED",
 							desc = "If unchecked some spell-related messages will be ignored. This will improve performance, but may cause side-effects",
 						},
+						hack_PetActionBarFrame = {
+							type = "toggle",
+							order = 505,
+							name = "Hack PetActionBarFrame",
+							desc = "Blizzard's PetActionBarFrame is larger than it looks and can block access to other things near it. When enabled this will make the frame ignore the Mouse",
+						},
 						log_throttled_events = {
 							type = "toggle",
 							order = 540,

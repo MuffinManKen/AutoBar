@@ -710,6 +710,10 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 	AB.show_whats_new();
 
+	if(hack_PetActionBarFrame) then
+		PetActionBarFrame:EnableMouse(false);
+	end
+
 end
 
 
