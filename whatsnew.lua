@@ -4,8 +4,13 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated data libraries
- - Work-around for new Blizzard performance bug
+ - Updated libraries
+ - Removed a debug print statement
+ - Simplified Druid shapeshift buttons
+ - Toys should appear more reliably. (I hope!)
+ - Added "Hack PetActionBarFrame" to fix an issue where Blizzard frame extends too far and blocks access to other things.  If you put anything too close to the Pet Action Bar, you can't click it.
+ - You can no longer add duplicate items to an AutoBar Category
+ - You can no longer add Toys to an AutoBar Category
  - Plug: Check out MuffinFactionizer for your Reputation/Faction needs
 ]] .. "|n"
 
