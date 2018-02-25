@@ -60,6 +60,14 @@ function AutoBarButton:AddCategoryItem(category, itemType, itemId, itemInfo)
 	local itemsListDB = categoryInfo.customCategoriesDB.items
 	local itemIndex = # itemsListDB + 1
 --AutoBar:Print("AutoBarButton.prototype:DropLink " .. tostring(categoryInfo.description) .. "itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
+
+	for index = # itemsListDB, 1, -1 do
+		if(itemsListDB[index].itemId == itemId) then
+			AutoBar:Print("AutoBar: Item " .. itemInfo .. " already exists in Category " .. tostring(categoryInfo.description) .. " not adding it again");
+			return
+		end
+	end
+
 	local itemDB = {
 		itemType = itemType,
 		itemId = itemId,
