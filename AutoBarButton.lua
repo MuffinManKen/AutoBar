@@ -90,6 +90,12 @@ end
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
 function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
+
+	if(itemType == "item" and PlayerHasToy(itemId)) then
+		AutoBar:Print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
+		return;
+	end
+
 	if (itemType == "item" or itemType == "spell" or itemType == "macro") then
 		-- Select a Custom Category to use
 		local categoryInfo, categoryKey, dropped
