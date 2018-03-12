@@ -56,4 +56,25 @@ function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
 	return texture;
 end
 
+function AutoBarGlobalCodeSpace:MakeSet(list)
+   local set = {}
+   for _, l in ipairs(list) do set[l] = true end
+   return set
+ end
+
+
+local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
+122484,	--Blackrock foundry spoils
+71715,	--A Treatise on Strategy
+113258,  --Blingtron 5000 Gift package
+}
+
+function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
+
+	local is_usable, not_enough_mana = IsUsableItem(p_item_id)	
+
+	is_usable = is_usable or usable_items_override_set[p_item_id];
+
+	return is_usable, not_enough_mana;
+end
 

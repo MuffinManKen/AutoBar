@@ -49,6 +49,7 @@ local _
 AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
 
 local AutoBar = AutoBar
+local ABGCS = AutoBarGlobalCodeSpace
 
 -- List of [spellName] = <GetSpellInfo Name>
 AutoBar.spellNameList = {}
@@ -1635,13 +1636,8 @@ function AutoBar:StupidLog(p_text)
 
 end
 
-function AutoBar:MakeSet(list)
-   local set = {}
-   for _, l in ipairs(list) do set[l] = true end
-   return set
- end
 
-AutoBar.set_mana_users = AutoBar:MakeSet{"DRUID","MAGE","MONK","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+AutoBar.set_mana_users = ABGCS:MakeSet{"DRUID","MAGE","MONK","PRIEST","PALADIN","SHAMAN","WARLOCK"}
 
 function AutoBar:ClassUsesMana(class_name)
 

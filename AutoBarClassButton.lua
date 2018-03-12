@@ -378,7 +378,7 @@ function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targ
 			local itemType = self.frame:GetAttribute("type")
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
-				local isUsable = IsUsableItem(itemId)
+				local isUsable = ABGCS:IsUsableItem(itemId)
 				if (isUsable) then
 					-- It is usable so we have some in inventory so switch
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)

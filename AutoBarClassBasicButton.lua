@@ -344,7 +344,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 
 		if (itemType == "item") then
 			local itemId = frame:GetAttribute("itemId")
-			isUsable, notEnoughMana = IsUsableItem(itemId)
+			isUsable, notEnoughMana = ABGCS:IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
 				local _, _, enabled = GetItemCooldown(itemId)
