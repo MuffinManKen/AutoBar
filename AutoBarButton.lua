@@ -863,14 +863,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("type2", nil)
 		end
 	end
-	if (self.buttonDB.invertButtons) then
-		-- Only supports items for now (off hand buffing)
-		local temp
-		temp = frame:GetAttribute("target-slot1")
-		frame:SetAttribute("target-slot1", frame:GetAttribute("target-slot2"))
-		frame:SetAttribute("target-slot2", temp)
 
-	end
 	if (frame.menu) then
 		frame:SetAttribute("type2", "menu")
 	end
