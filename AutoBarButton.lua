@@ -75,13 +75,11 @@ function AutoBarButton:AddCategoryItem(category, itemType, itemId, itemInfo)
 	}
 	itemsListDB[itemIndex] = itemDB
 	if (itemType == "spell") then
-		local spellName, spellRank = GetSpellBookItemName(itemId, itemInfo)
+		local spellName = GetSpellBookItemName(itemId, itemInfo)
 		itemDB.spellName = spellName
-		itemDB.spellRank = spellRank
 		itemDB.spellClass = AutoBar.CLASS
 	else
 		itemDB.spellName = nil
-		itemDB.spellRank = nil
 		itemDB.spellClass = nil
 	end
 end

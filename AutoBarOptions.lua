@@ -2606,7 +2606,6 @@ local function setCategoryItem(info, value, ...)
 		sourceItemDB.itemId, itemDB.itemId = itemDB.itemId, sourceItemDB.itemId
 		sourceItemDB.itemInfo, itemDB.itemInfo = itemDB.itemInfo, sourceItemDB.itemInfo
 		sourceItemDB.spellName, itemDB.spellName = itemDB.spellName, sourceItemDB.spellName
-		sourceItemDB.spellRank, itemDB.spellRank = itemDB.spellRank, sourceItemDB.spellRank
 		sourceItemDB.spellClass, itemDB.spellClass = itemDB.spellClass, sourceItemDB.spellClass
 		sourceItemDB.texture, itemDB.texture = itemDB.texture, sourceItemDB.texture
 	elseif (value) then
