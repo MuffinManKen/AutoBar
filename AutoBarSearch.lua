@@ -278,7 +278,9 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 	if (bag or slot) then
 		-- Filter out too high level items
 		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
-		if (itemMinLevel <= AutoBar.playerLevel) then
+		local usable = ABGCS:IsUsableItem(itemId);
+		local item_spell = GetItemSpell(itemId);
+		if (itemMinLevel <= AutoBar.playerLevel and (usable or not item_spell)) then
 			AutoBarSearch.found:Add(itemId, bag, slot)
 		end
 	else
