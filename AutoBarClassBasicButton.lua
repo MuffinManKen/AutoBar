@@ -76,9 +76,10 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		GameTooltip:SetSpellByID(spell_info.spell_id);
 		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 	elseif (itemLink) then
-		if (GameTooltip:SetHyperlink(itemLink)) then
+		GameTooltip:SetHyperlink(itemLink)
+--		if (GameTooltip:SetHyperlink(itemLink)) then
 			button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
-		end
+--		end
 	elseif (buttonType == "macro") then
 		-- There is no accesible GameTooltip function for macros so make one with its name and the macro text
 		local macroName = button:GetAttribute("macroName")
