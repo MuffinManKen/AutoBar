@@ -140,7 +140,7 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, GetSpellInfo(p_action)) or select(10, GetItemInfo(p_action))
+		texture = select(3, GetSpellInfo(p_action)) or ABGCS:GetIconForItemID(p_action)
 	end
 	
 	--We haven't found a texture. This might be because it's just not cached yet.
@@ -195,7 +195,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
-			_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))
+			texture = ABGCS:GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
 				AutoBar:SetMissingItemFlag(itemID);
 			end

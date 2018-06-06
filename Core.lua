@@ -135,7 +135,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	end
 
 	if(action) then 
-		icon = select(3, GetSpellInfo(action)) or select(10, GetItemInfo(action))
+		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip
