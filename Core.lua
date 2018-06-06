@@ -636,7 +636,8 @@ end
 
 function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
 	AutoBar:LogEventStart("GET_ITEM_INFO_RECEIVED", p_item_id)
---print("GET_ITEM_INFO_RECEIVED", p_item_id)
+--local item_name = GetItemInfo(p_item_id)
+--print("GET_ITEM_INFO_RECEIVED", p_item_id, item_name)
 	AutoBar:ClearMissingItemFlag();
 	AutoBar.delay["UpdateScan"]:Start()
 
