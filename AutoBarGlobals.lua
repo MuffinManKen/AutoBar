@@ -76,6 +76,7 @@ local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
 122484,	--Blackrock foundry spoils
 71715,	--A Treatise on Strategy
 113258,  --Blingtron 5000 Gift package
+132892,  --Blingtron 6000 Gift package
 
 150924, -- Greater Tribute of the Broken Isles
 
