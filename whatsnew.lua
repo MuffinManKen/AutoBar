@@ -4,9 +4,8 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated libraries
- - Tries to be smarter about what items really are usable
- - Plug: Check out MuffinFactionizer for your Reputation/Faction needs
+ - Workarounds for Blizzards latest rounds of quietly breaking things
+ - Some small performance improvements
 ]] .. "|n"
 
 function AB.show_whats_new()

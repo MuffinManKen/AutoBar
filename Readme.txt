@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.3.5.03:
+ - Workarounds for Blizzards latest rounds of quietly breaking things
+ - Some small performance improvements
+
 v7.3.5.02:
  - Updated libraries
  - Tries to be smarter about what items really are usable
