@@ -50,10 +50,19 @@ function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
 	_, _, texture =  C_ToyBox.GetToyInfo(item_id)
 
 	if(texture == nil) then
-		_,_,_,_,_,_,_,_,_, texture = GetItemInfo(item_id)
+		texture = AutoBarGlobalCodeSpace:GetIconForItemID(item_id);
 	end
 
 	return texture;
+end
+
+function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
+	local i_texture, ii_texture, _;
+	_,_,_,_,_,_,_,_,_, texture = GetItemInfo(p_item_id)
+
+	_, _, _, _, ii_texture, _, _ = GetItemInfoInstant(p_item_id)
+
+	return ii_texture or texture;
 end
 
 function AutoBarGlobalCodeSpace:MakeSet(list)

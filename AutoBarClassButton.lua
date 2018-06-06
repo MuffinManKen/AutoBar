@@ -384,10 +384,10 @@ function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targ
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)
 					if (didShuffle) then
 						local texture
-						_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))
+						texture = ABGCS:GetIconForItemID(tonumber(itemId))
 						self.frame.icon:SetTexture(texture)
-						_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(buttonItemId))
-						frame.icon:SetTexture("itemId", buttonItemId)
+						texture = ABGCS:GetIconForItemID(tonumber(buttonItemId))
+						frame.icon:SetTexture(texture)
 						return true
 	--					self:UpdateButton()
 	--					popupButton:UpdateButton()

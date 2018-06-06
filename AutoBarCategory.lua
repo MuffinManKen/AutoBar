@@ -660,7 +660,7 @@ function AutoBarCustom.prototype:init(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		_,_,_,_,_,_,_,_,_, texture = GetItemInfo(tonumber(itemId))
+		texture = ABGCS:GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
 			_, _, texture = GetSpellInfo(spellName)

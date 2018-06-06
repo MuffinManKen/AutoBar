@@ -2622,7 +2622,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = select(10, GetItemInfo(tonumber(itemId)))
+		local macroTexture = ABGCS:GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
