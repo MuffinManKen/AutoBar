@@ -505,7 +505,12 @@ end
 function AutoBarToyCategory.prototype:Refresh()
 	local list_index = 1
 
+--	if(self.categoryKey == "Muffin.Toys.Hearth") then 
+--		print("Refreshing Toy Category", self.categoryKey, #self.items, #self.all_items);
+--	end
+
 	for _, toy_id in ipairs(self.all_items) do
+--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
 		if (toy_id and PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id)) then
 			AutoBarSearch:RegisterToy(toy_id)
 			self.items[list_index] = ABGCS:ToyGUID(toy_id)
@@ -514,9 +519,10 @@ function AutoBarToyCategory.prototype:Refresh()
 	end
 
 	--trim any missing ones of the end. You never forget Toys, so is this needed?
-	for i = list_index, # self.items, 1 do
-		self.items[i] = nil
-	end
+	--Nope.  WoW API sometimes says existing items aren't there, so this would then trim them.  If we've ever seen it, keep it.
+	--for i = list_index, # self.items, 1 do
+	--	self.items[i] = nil
+	--end
 end
 
 AutoBarMacroTextCategory = AceOO.Class(AutoBarCategory)
