@@ -76,14 +76,26 @@ local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
 122484,	--Blackrock foundry spoils
 71715,	--A Treatise on Strategy
 113258,  --Blingtron 5000 Gift package
+
+150924, -- Greater Tribute of the Broken Isles
+
+118529, -- Cache of Highmaul Treasures
 }
+
+local is_usable_item_cache = {}
 
 function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
 
-	local is_usable, not_enough_mana = IsUsableItem(p_item_id)	
+	if(p_item_id == nil) then
+		return nil;
+	end
 
-	is_usable = is_usable or usable_items_override_set[p_item_id];
+	local is_usable, not_enough_mana = IsUsableItem(p_item_id);
 
-	return is_usable, not_enough_mana;
+	
+
+	is_usable_item_cache[p_item_id] = is_usable or is_usable_item_cache[p_item_id] or usable_items_override_set[p_item_id];
+
+	return is_usable_item_cache[p_item_id], not_enough_mana;
 end
 
