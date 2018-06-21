@@ -171,6 +171,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533)
 	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
 	spellNameList["Wind Rush Totem"], _, spellIconList["Wind Rush Totem"] = AutoBar:LoggedGetSpellInfo(192077)
+	spellNameList["Ghost Wolf"], _, spellIconList["Ghost Wolf"] = AutoBar:LoggedGetSpellInfo(2645)
 
 
 	--Warlock
@@ -191,12 +192,11 @@ AutoBar.categoryValidateList = {}
 
 
 	--Warrior
-	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
-	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
-	spellNameList["Demoralizing Shout"] = AutoBar:LoggedGetSpellInfo(1160)
+	spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100, "Charge")
 	spellNameList["Commanding Shout"] = AutoBar:LoggedGetSpellInfo(97462)
 	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(197690)
-	spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100)
+	spellNameList["Demoralizing Shout"] = AutoBar:LoggedGetSpellInfo(1160)
+	spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
 	spellNameList["Intercept"], _, spellIconList["Intercept"] = AutoBar:LoggedGetSpellInfo(198304)
 	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
 	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
