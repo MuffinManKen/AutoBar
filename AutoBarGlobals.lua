@@ -100,3 +100,17 @@ function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
 	return is_usable_item_cache[p_item_id], not_enough_mana;
 end
 
+
+function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
+
+	local name, rank, icon = GetSpellInfo(p_spell_id);
+
+	if(name == nil) then
+		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+	else
+		AutoBar.spellNameList[p_spell_name] = name;
+		AutoBar.spellIconList[p_spell_name] = icon;
+	end
+	
+
+end
