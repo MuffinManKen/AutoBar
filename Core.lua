@@ -64,7 +64,37 @@ AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
+-- Single parent for key binding overides, and event handling
+AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 
+AutoBar.frame:SetScript("OnEvent",
+	function(self, event, ...)
+
+		-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
+		if(event == "BAG_UPDATE") then
+			AutoBar.events[event](AutoBar, ...)
+			return
+		end
+
+		--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
+		if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
+			return
+		end
+
+		if(AutoBar.db.account.throttle_event_limit > 0) then
+			local timer_name = event .. "_last_tick"
+			local now = GetTime()
+			AutoBar[timer_name] = AutoBar[timer_name] or 0
+
+			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
+				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
+				return
+			end
+			AutoBar[timer_name] = now
+		end
+
+		AutoBar.events[event](AutoBar, ...)
+	end)
 
 
 --/run AutoBar:FrameInsp(ActionButton3)
@@ -322,36 +352,7 @@ function AutoBar:OnInitialize()
 	AutoBar.inCombat = nil		-- For item use restrictions
 	AutoBar.inBG = false		-- For battleground only items
 
-	-- Single parent for key binding overides, and event handling
-	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
-	AutoBar.frame:SetScript("OnEvent",
-		function(self, event, ...)
-
-			-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
-			if(event == "BAG_UPDATE") then
-				AutoBar.events[event](AutoBar, ...)
-				return
-			end
-
-			--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
-			if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
-				return
-			end
-
-			if(AutoBar.db.account.throttle_event_limit > 0) then
-				local timer_name = event .. "_last_tick"
-				local now = GetTime()
-				AutoBar[timer_name] = AutoBar[timer_name] or 0
-
-				if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
-					if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
-					return
-				end
-				AutoBar[timer_name] = now
-			end
-
-			AutoBar.events[event](AutoBar, ...)
-		end)
+	
 
 	-- List of barKey = barDB (the correct DB to use between char, class or account)
 	AutoBar.barButtonsDBList = {}
