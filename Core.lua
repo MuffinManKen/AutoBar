@@ -52,6 +52,30 @@ local ABGData = AutoBarGlobalDataObject
 local spellNameList = ABGData.spell_name_list
 local spellIconList = ABGData.spell_icon_list
 
+AutoBar.inWorld = false
+AutoBar.inCombat = nil		-- For item use restrictions
+AutoBar.inBG = false		-- For battleground only items
+AutoBar.initialized = true;
+
+-- List of barKey = barDB (the correct DB to use between char, class or account)
+AutoBar.barButtonsDBList = {}
+AutoBar.barLayoutDBList = {}
+AutoBar.barPositionDBList = {}
+
+-- List of Bar Names
+AutoBar.barValidateList = {}
+
+-- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
+AutoBar.buttonDBList = {}
+
+-- List of buttonKey for Buttons not currently placed on a Bar
+AutoBar.unplacedButtonList = {}
+
+-- List of buttonName = AutoBarButton
+AutoBar.buttonList = {}
+
+-- List of buttonName = AutoBarButton for disabled buttons
+AutoBar.buttonListDisabled = {}
 
 AutoBar.events = {}
 
@@ -246,31 +270,9 @@ function AutoBar:OnInitialize()
 
 	AutoBar:RegisterDB("AutoBarDB", nil, "class")
 
-	AutoBar.inWorld = false
-	AutoBar.inCombat = nil		-- For item use restrictions
-	AutoBar.inBG = false		-- For battleground only items
 
 	
 
-	-- List of barKey = barDB (the correct DB to use between char, class or account)
-	AutoBar.barButtonsDBList = {}
-	AutoBar.barLayoutDBList = {}
-	AutoBar.barPositionDBList = {}
-
-	-- List of Bar Names
-	AutoBar.barValidateList = {}
-
-	-- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
-	AutoBar.buttonDBList = {}
-
-	-- List of buttonKey for Buttons not currently placed on a Bar
-	AutoBar.unplacedButtonList = {}
-
-	-- List of buttonName = AutoBarButton
-	AutoBar.buttonList = {}
-
-	-- List of buttonName = AutoBarButton for disabled buttons
-	AutoBar.buttonListDisabled = {}
 
 --	AutoBar.db.account.performance = true
 	AutoBar:LogEvent("OnInitialize")
@@ -592,7 +594,6 @@ end
 
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
-	AutoBar.inCombat = nil
 	if (not AutoBar.initialized) then
 --print("   PLAYER_ENTERING_WORLD")
 		AutoBar.delay["UpdateCategories"]:Start()
