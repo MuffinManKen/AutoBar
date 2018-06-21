@@ -24,18 +24,6 @@ AutoBarButton = AceOO.Class(AutoBar.Class.Button)
 AutoBarButton.dirtyButton = {}
 
 
-spellNameList["Lay on Hands"], _, spellIconList["Lay on Hands"] = AutoBar:LoggedGetSpellInfo(633)
-spellNameList["Last Stand"], _, spellIconList["Last Stand"] = AutoBar:LoggedGetSpellInfo(12975)
-
-spellNameList["Rune Tap"], _, spellIconList["Rune Tap"] = AutoBar:LoggedGetSpellInfo(194679)
-spellNameList["Ghost Wolf"], _, spellIconList["Ghost Wolf"] = AutoBar:LoggedGetSpellInfo(2645)
-
-
-spellNameList["Heroic Leap"], _, spellIconList["Heroic Leap"]  = AutoBar:LoggedGetSpellInfo(6544)
-spellNameList["Intervene"], _, spellIconList["Intervene"]  = AutoBar:LoggedGetSpellInfo(3411)
-spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
-
-
 function AutoBarButton.prototype:init(parentBar, buttonDB)
 	AutoBarButton.super.prototype.init(self, parentBar, buttonDB)
 end
