@@ -573,17 +573,15 @@ end
 
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
-print("   PLAYER_ENTERING_WORLD")
+--print("   PLAYER_ENTERING_WORLD")
 
 	if (not AutoBar.initialized) then
 		AutoBar:InitializeZero();
-		AutoBar.delay["UpdateCategories"]:Start()
 		AutoBar.initialized = true;
 	end
 
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
-		AutoBar.delay["UpdateCategories"]:Start()
 
 		AutoBar:DumpWarningLog()
 
