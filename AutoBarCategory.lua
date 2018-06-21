@@ -47,6 +47,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Anti-Magic Shell"] = AutoBar:LoggedGetSpellInfo(48707)
 	spellNameList["Icebound Fortitude"] = AutoBar:LoggedGetSpellInfo(48792)
 	spellNameList["Mind Freeze"] = AutoBar:LoggedGetSpellInfo(47528)
+	ABGCS:CacheSpellData(194679, "Rune Tap");
 
 	--DemonHunter
 	spellNameList["Fel Rush"] = AutoBar:LoggedGetSpellInfo(195072)
@@ -142,6 +143,7 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Greater Blessing of Wisdom"] = AutoBar:LoggedGetSpellInfo(203539) 
 	spellNameList["Hand of Hindrance"] = AutoBar:LoggedGetSpellInfo(183218)
 	spellNameList["Rebuke"] = AutoBar:LoggedGetSpellInfo(96231)
+	ABGCS:CacheSpellData(633, "Lay on Hands");
 
 	--Priest
 	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
@@ -196,6 +198,9 @@ AutoBar.categoryValidateList = {}
 	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(197690)
 	spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100)
 	spellNameList["Intercept"], _, spellIconList["Intercept"] = AutoBar:LoggedGetSpellInfo(198304)
+	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
+	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
+	ABGCS:CacheSpellData(12975, "Last Stand");
 
 	--Other
 	spellNameList["Shadowmeld"], _, spellIconList["Shadowmeld"] = AutoBar:LoggedGetSpellInfo(58984)
