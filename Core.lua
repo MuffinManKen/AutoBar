@@ -45,7 +45,7 @@ local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local L
 local _
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
+AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0");
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
