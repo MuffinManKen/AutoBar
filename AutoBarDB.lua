@@ -54,7 +54,7 @@
 
 local AutoBar = AutoBar
 
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 
 local ROW_COLUMN_MAX = 32
 local CLASS_COLUMN_DEFAULT = 10

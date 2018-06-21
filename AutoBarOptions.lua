@@ -37,7 +37,7 @@
 
 local AutoBar = AutoBar
 
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LDB = LibStub("LibDataBroker-1.1", true)
 local ldbIcon = LibStub("LibDBIcon-1.0", true)

@@ -27,10 +27,6 @@ AceGUIWidget-DragLink.lua
 
 AutoBarGlobals.lua
 
-whatsnew.lua
-
-Core.lua
-
 # Localization
 locale/Locale-enUS.lua
 locale/Locale-deDE.lua
@@ -44,6 +40,13 @@ locale/Locale-ruRU.lua
 locale/Locale-zhCN.lua
 locale/Locale-zhTW.lua
 locale/Locale-default.lua
+
+Bindings.lua
+
+whatsnew.lua
+
+Core.lua
+
 
 AutoBarDB.lua
 AutoBarOptions.lua

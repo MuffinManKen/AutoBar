@@ -1,24 +1,26 @@
 
+local L = AutoBarGlobalDataObject.locale
+
 local function atl(key, name)
-	AutoBar.locale[key] = AutoBar.locale[key] or name;
+	L[key] = L[key] or name;
 end
 
 local function atld(key)
-	AutoBar.locale[key] = AutoBar.locale[key] or key;
+	L[key] = L[key] or key;
 end
 
 local function atl_table(p_table)
 	for i,v in ipairs(p_table) do
-		AutoBar.locale[v] = AutoBar.locale[v] or v;
+		L[v] = L[v] or v;
 	end
 	
 end
 
 atl("ResetCategoryDescription", "Removes ALL custom categories")
 
-atl("AutoBar.Food.Health.Basic", AutoBar.locale["Consumable.Food.Edible.Basic.Non-Conjured"]);
-atl("AutoBar.Food.Mana.Basic", AutoBar.locale["Consumable.Water.Basic"]);
-atl("AutoBar.Food.Combo.Basic", AutoBar.locale["Consumable.Food.Edible.Combo.Non-Conjured"]);
+atl("AutoBar.Food.Health.Basic", L["Consumable.Food.Edible.Basic.Non-Conjured"]);
+atl("AutoBar.Food.Mana.Basic", L["Consumable.Water.Basic"]);
+atl("AutoBar.Food.Combo.Basic", L["Consumable.Food.Edible.Combo.Non-Conjured"]);
 atl("AutoBar.SunsongRanch", "Sunsong Ranch");
 atl("AutoBarButtonSunsongRanch", "Sunsong Ranch");
 atl("Muffin.Potion.Buff","Muffin.Potion.Buff");

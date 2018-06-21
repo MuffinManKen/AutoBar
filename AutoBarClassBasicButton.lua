@@ -14,7 +14,7 @@ local ABGData = AutoBarGlobalDataObject
 
 
 local AceOO = AceLibrary("AceOO-2.0")
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local _G = getfenv(0)
 local _

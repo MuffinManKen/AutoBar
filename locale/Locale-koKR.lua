@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "koKR") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 		["AutoBar"] = "AutoBar",
 		["CONFIG_WINDOW"] = "설정 창",
 		["SLASHCMD_LONG"] = "autobar",

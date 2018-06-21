@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "esES") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 		["AutoBar"] = "AutoBar",
 		["CONFIG_WINDOW"] = "Ventana de Configuración",
 		["SLASHCMD_LONG"] = "autobar",

@@ -9,6 +9,9 @@ AutoBarGlobalDataObject = {
 	TYPE_MACRO_TEXT = 1,
 	TYPE_TOY = 2,
 	TYPE_BATTLE_PET = 3,
+
+	locale = {},
+
 }
 
 

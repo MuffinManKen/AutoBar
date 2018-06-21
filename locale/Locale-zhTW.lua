@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "zhTW") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 		["AutoBar"] = "AutoBar",
 		["CONFIG_WINDOW"] = "設定視窗",
 		["SLASHCMD_LONG"] = "autobar",

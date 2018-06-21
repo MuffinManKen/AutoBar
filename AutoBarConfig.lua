@@ -11,7 +11,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 local AutoBar = AutoBar
 
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local _
 
 AutoBarConfig = {}

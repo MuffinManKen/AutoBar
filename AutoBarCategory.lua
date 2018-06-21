@@ -29,7 +29,7 @@ local spellIconList = ABGData.spell_icon_list
 
 AutoBarCategoryList = {}
 
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local PT = LibStub("LibPeriodicTable-3.1")
 local AceOO = AceLibrary("AceOO-2.0")
 local _

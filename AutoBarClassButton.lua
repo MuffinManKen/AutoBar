@@ -12,7 +12,7 @@ local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
 
 local AceOO = AceLibrary("AceOO-2.0")
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local _
