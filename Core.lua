@@ -97,21 +97,8 @@ AutoBar.frame:SetScript("OnEvent",
 	end)
 
 
---/run AutoBar:FrameInsp(ActionButton3)
-function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 
-	local frame = p_frame
 
-	print("Type:", frame:GetAttribute("type"),"type1:", frame:GetAttribute("type1"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
-	print("Item:", frame:GetAttribute("item"))
-	print("State:", frame:GetAttribute("state"))
-	print("Attribute:", frame:GetAttribute("attribute"))
-	print("Action:", frame:GetAttribute("action"),"Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"), "ActionPage:", frame:GetAttribute("actionpage"))
-	print("Macro:", frame:GetAttribute("macro"), "MacroText:", frame:GetAttribute("macrotext"))
-	print("Spell:", frame:GetAttribute("spell"), "Spell1:", frame:GetAttribute("spell1"), "Spell2:", frame:GetAttribute("spell2"))
-	print("Unit:", frame:GetAttribute("unit"), "HelpButton:", frame:GetAttribute("helpbutton"), "harmbutton:", frame:GetAttribute("harmbutton"))
-
-end
 
 
 function AutoBar:GetSpellNameByName(p_name)
