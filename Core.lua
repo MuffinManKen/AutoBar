@@ -55,7 +55,7 @@ local spellIconList = ABGData.spell_icon_list
 AutoBar.inWorld = false
 AutoBar.inCombat = nil		-- For item use restrictions
 AutoBar.inBG = false		-- For battleground only items
-AutoBar.initialized = true;
+AutoBar.initialized = false;
 
 -- List of barKey = barDB (the correct DB to use between char, class or account)
 AutoBar.barButtonsDBList = {}
@@ -162,7 +162,8 @@ AutoBar.frame:SetScript("OnEvent",
 	function(self, event, ...)
 
 		-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
-		if(event == "BAG_UPDATE") then
+		-- PLAYER_ENTERING_WORLD runs before the throttling stuff is set up and doesn't need it anyway
+		if(event == "BAG_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
 			AutoBar.events[event](AutoBar, ...)
 			return
 		end
@@ -187,6 +188,7 @@ AutoBar.frame:SetScript("OnEvent",
 		AutoBar.events[event](AutoBar, ...)
 	end)
 
+AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 
 
@@ -262,7 +264,7 @@ function AutoBar:ConfigToggle()
 end
 
 
-function AutoBar:OnInitialize()
+function AutoBar:InitializeZero()
 
 	AutoBar.player_faction_name = UnitFactionGroup("player")
 	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
@@ -272,34 +274,15 @@ function AutoBar:OnInitialize()
 
 	AutoBar:RegisterDB("AutoBarDB", nil, "class")
 
-
-	
-
-
---	AutoBar.db.account.performance = true
 	AutoBar:LogEvent("OnInitialize")
 	AutoBar:InitializeDB()
 	AutoBarCategory:Upgrade()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()
---	AutoBar.db.account.performance = false
---print("--> FullyInitialized")
-	AutoBar:RegisterEvent("AceEvent_FullyInitialized", "FullyInitialized")
-end
 
-function AutoBar:FullyInitialized()
---print("<-- FullyInitialized")
 	AutoBar.enableBindings = true
 	AutoBar:UpdateCategories()
---	AutoBar.delay["UpdateObjects"]:Start()
-end
 
-function AutoBar:OnEnable(first)
-	self:LogEvent("OnEnable")
-
-	-- Called when the addon is enabled
-	AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	AutoBar.frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
@@ -310,8 +293,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
-
-
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -342,10 +323,6 @@ function AutoBar:OnEnable(first)
 end
 
 
-function AutoBar:OnDisable()
-	-- Called when the addon is disabled
-	AutoBar:LogEvent("OnDisable")
-end
 
 local logItems = {}	-- n = startTime
 local logMemory = {}	-- n = startMemory
@@ -596,25 +573,29 @@ end
 
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
+print("   PLAYER_ENTERING_WORLD")
+
 	if (not AutoBar.initialized) then
---print("   PLAYER_ENTERING_WORLD")
+		AutoBar:InitializeZero();
 		AutoBar.delay["UpdateCategories"]:Start()
 		AutoBar.initialized = true;
 	end
 
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
---print("   PLAYER_ENTERING_WORLD")
 		AutoBar.delay["UpdateCategories"]:Start()
+
+		AutoBar:DumpWarningLog()
+
+		AB.show_whats_new();
 	end
 
-	AutoBar:DumpWarningLog()
-
-	AB.show_whats_new();
 
 	if(hack_PetActionBarFrame) then
 		PetActionBarFrame:EnableMouse(false);
 	end
+
+	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 end
 
@@ -1010,7 +991,7 @@ function AutoBar:UpdateCategories()
 		local delete = true
 		for index, stickyFrame in pairs(otherStickyFrames) do
 			if (_G[stickyFrame]) then
---print("AutoBar:OnEnable " .. tostring(index) .. "  " .. tostring(stickyFrame))
+--print("AutoBar:UpdateCategories " .. tostring(index) .. "  " .. tostring(stickyFrame))
 				LibStickyFrames:RegisterFrame(_G[stickyFrame])
 			else
 				delete = false
