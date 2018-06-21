@@ -7,11 +7,11 @@
 --
 
 local AutoBar = AutoBar
-local spellNameList = AutoBar.spellNameList
-local spellIconList = AutoBar.spellIconList
 
-local ABGData = AutoBarGlobalDataObject
 local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
+local spellNameList = ABGData.spell_name_list
+local spellIconList = ABGData.spell_icon_list
 
 local AceOO = AceLibrary("AceOO-2.0")
 local LibKeyBound = LibStub("LibKeyBound-1.0")

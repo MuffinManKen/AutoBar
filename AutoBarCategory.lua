@@ -22,8 +22,9 @@
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 
-local spellNameList = AutoBar.spellNameList
-local spellIconList = AutoBar.spellIconList
+local ABGData = AutoBarGlobalDataObject
+local spellNameList = ABGData.spell_name_list
+local spellIconList = ABGData.spell_icon_list
 
 
 AutoBarCategoryList = {}

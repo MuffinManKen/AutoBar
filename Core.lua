@@ -49,11 +49,10 @@ AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0");
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
+local spellNameList = ABGData.spell_name_list
+local spellIconList = ABGData.spell_icon_list
 
--- List of [spellName] = <GetSpellInfo Name>
-AutoBar.spellNameList = {}
--- List of [spellName] = <GetSpellInfo Icon>
-AutoBar.spellIconList = {}
 
 AutoBar.events = {}
 
@@ -87,8 +86,8 @@ end
 
 function AutoBar:GetSpellNameByName(p_name)
 
-	if (AutoBar.spellNameList[p_name]) then
-		return AutoBar.spellNameList[p_name]
+	if (spellNameList[p_name]) then
+		return spellNameList[p_name]
 	end
 
 	AutoBar:Print("Unknown Spell Name:" .. p_name)
