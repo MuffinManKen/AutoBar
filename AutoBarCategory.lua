@@ -37,196 +37,222 @@ local _
 AutoBar.categoryValidateList = {}
 
 	--All
-	spellNameList["Revive Battle Pets"] = AutoBar:LoggedGetSpellInfo(125439)
+	ABGCS:CacheSpellData(125439, "Revive Battle Pets");
 
 	--DeathKnight
-	spellNameList["Path of Frost"] = AutoBar:LoggedGetSpellInfo(3714)
-	spellNameList["Dark Transformation"] = AutoBar:LoggedGetSpellInfo(63560)
-	spellNameList["Chains of Ice"] = AutoBar:LoggedGetSpellInfo(45524)
-	spellNameList["Anti-Magic Shell"] = AutoBar:LoggedGetSpellInfo(48707)
-	spellNameList["Icebound Fortitude"] = AutoBar:LoggedGetSpellInfo(48792)
-	spellNameList["Mind Freeze"] = AutoBar:LoggedGetSpellInfo(47528)
+	ABGCS:CacheSpellData(3714, "Path of Frost");
+	ABGCS:CacheSpellData(63560, "Dark Transformation");
+	ABGCS:CacheSpellData(45524, "Chains of Ice");
+	ABGCS:CacheSpellData(48707, "Anti-Magic Shell");
+	ABGCS:CacheSpellData(48792, "Icebound Fortitude");
+	ABGCS:CacheSpellData(47528, "Mind Freeze");
 	ABGCS:CacheSpellData(194679, "Rune Tap");
+	ABGCS:CacheSpellData(49028, "Rune Weapon");
+	ABGCS:CacheSpellData(46584, "Raise Dead");
+	ABGCS:CacheSpellData(49206, "Summon Gargoyle");
+	ABGCS:CacheSpellData(42650, "Army of the Dead");
 
 	--DemonHunter
-	spellNameList["Fel Rush"] = AutoBar:LoggedGetSpellInfo(195072)
-	spellNameList["Vengeful Retreat"] = AutoBar:LoggedGetSpellInfo(198793)
-	spellNameList["Blur"] = AutoBar:LoggedGetSpellInfo(198589)
-	spellNameList["Darkness"] = AutoBar:LoggedGetSpellInfo(196718)
-	spellNameList["Sigil of Flame"] = AutoBar:LoggedGetSpellInfo(204596)
-	spellNameList["Sigil of Misery"] = AutoBar:LoggedGetSpellInfo(207684)
-	spellNameList["Sigil of Silence"] = AutoBar:LoggedGetSpellInfo(202137)
-	spellNameList["Consume Magic"] = AutoBar:LoggedGetSpellInfo(183752)
+	ABGCS:CacheSpellData(195072, "Fel Rush");
+	ABGCS:CacheSpellData(198793, "Vengeful Retreat");
+	ABGCS:CacheSpellData(198589, "Blur");
+	ABGCS:CacheSpellData(196718, "Darkness");
+	ABGCS:CacheSpellData(204596, "Sigil of Flame");
+	ABGCS:CacheSpellData(207684, "Sigil of Misery");
+	ABGCS:CacheSpellData(202137, "Sigil of Silence");
+	ABGCS:CacheSpellData(183752, "Consume Magic");
 
 
 	--Druid
-	spellNameList["Barkskin"], _, spellIconList["Barkskin"] = AutoBar:LoggedGetSpellInfo(22812)
-	spellNameList["Disorienting Roar"] = AutoBar:LoggedGetSpellInfo(99)
-	spellNameList["Ironbark"] = AutoBar:LoggedGetSpellInfo(102342)
-	spellNameList["Prowl"] = AutoBar:LoggedGetSpellInfo(5215)
-	spellNameList["Frenzied Regeneration"], _, spellIconList["Frenzied Regeneration"] = AutoBar:LoggedGetSpellInfo(22842)
-	spellNameList["Wild Charge"], _, spellIconList["Wild Charge"] = AutoBar:LoggedGetSpellInfo(102401)
-	spellNameList["Bear Form"], _, spellIconList["Bear Form"] = AutoBar:LoggedGetSpellInfo(5487)
-	spellNameList["Mangle"], _, spellIconList["Mangle"] = AutoBar:LoggedGetSpellInfo(33917)
-	spellNameList["Cat Form"], _, spellIconList["Cat Form"] = AutoBar:LoggedGetSpellInfo(768)
-	spellNameList["Moonkin Form"], _, spellIconList["Moonkin Form"] = AutoBar:LoggedGetSpellInfo(197625)
-	spellNameList["Treant Form"], _, spellIconList["Treant Form"] = AutoBar:LoggedGetSpellInfo(114282)
-	spellNameList["Stag Form"], _, spellIconList["Stag Form"] = AutoBar:LoggedGetSpellInfo(210053)
+	ABGCS:CacheSpellData(22812, "Barkskin");
+	ABGCS:CacheSpellData(99, "Disorienting Roar");
+	ABGCS:CacheSpellData(102342, "Ironbark");
+	ABGCS:CacheSpellData(5215, "Prowl");
+	ABGCS:CacheSpellData(22842, "Frenzied Regeneration");
+	ABGCS:CacheSpellData(102401, "Wild Charge");
+	ABGCS:CacheSpellData(5487, "Bear Form");
+	ABGCS:CacheSpellData(33917, "Mangle");
+	ABGCS:CacheSpellData(768, "Cat Form");
+	ABGCS:CacheSpellData(197625, "Moonkin Form");
+	ABGCS:CacheSpellData(114282, "Treant Form");
+	ABGCS:CacheSpellData(210053, "Stag Form");
+	ABGCS:CacheSpellData(33943, "Flight Form");
+	ABGCS:CacheSpellData(40120, "Swift Flight Form");
+	ABGCS:CacheSpellData(783, "Travel Form");
 
 	--Hunter
-	spellNameList["Aspect of the Chameleon"]= AutoBar:LoggedGetSpellInfo(61648)
-	spellNameList["Aspect of the Cheetah"], _, spellIconList["Aspect of the Cheetah"] = AutoBar:LoggedGetSpellInfo(186257)
-	spellNameList["Aspect of the Eagle"]= AutoBar:LoggedGetSpellInfo(186289)
-	spellNameList["Aspect of the Turtle"]= AutoBar:LoggedGetSpellInfo(186265)
-	spellNameList["Aspect of the Wild"]= AutoBar:LoggedGetSpellInfo(193530)
-	spellNameList["Beast Lore"] = AutoBar:LoggedGetSpellInfo(1462)
-	spellNameList["Bestial Wrath"] = AutoBar:LoggedGetSpellInfo(19574)
-	spellNameList["Binding Shot"] = AutoBar:LoggedGetSpellInfo(109248)
-	spellNameList["Call Pet 1"], _, spellCallPet1Icon = AutoBar:LoggedGetSpellInfo(883)
-	spellNameList["Call Pet 2"] = AutoBar:LoggedGetSpellInfo(83242)
-	spellNameList["Call Pet 3"] = AutoBar:LoggedGetSpellInfo(83243)
-	spellNameList["Call Pet 4"] = AutoBar:LoggedGetSpellInfo(83244)
-	spellNameList["Call Pet 5"] = AutoBar:LoggedGetSpellInfo(83245)
-	spellNameList["Camouflage"] = AutoBar:LoggedGetSpellInfo(199483)
-	spellNameList["Concussive Shot"] = AutoBar:LoggedGetSpellInfo(5116)
-	spellNameList["Counter Shot"] = AutoBar:LoggedGetSpellInfo(147362)
-	spellNameList["Dire Beast"] = AutoBar:LoggedGetSpellInfo(120679)
-	spellNameList["Dire Frenzy"] = AutoBar:LoggedGetSpellInfo(217200)
-	spellNameList["Disengage"], _, spellIconList["Disengage"] = AutoBar:LoggedGetSpellInfo(781)
-	spellNameList["Dismiss Pet"] = AutoBar:LoggedGetSpellInfo(2641)
-	spellNameList["Eagle Eye"] = AutoBar:LoggedGetSpellInfo(6197)
-	spellNameList["Feed Pet"], _, spellIconList["Feed Pet"] = AutoBar:LoggedGetSpellInfo(6991)
-	spellNameList["Feign Death"], _, spellIconList["Feign Death"] = AutoBar:LoggedGetSpellInfo(5384)
-	spellNameList["Fetch"] = AutoBar:LoggedGetSpellInfo(125050)
-	spellNameList["Harpoon"], _, spellIconList["Harpoon"]  = AutoBar:LoggedGetSpellInfo(190925)
-	spellNameList["Intimidation"] = AutoBar:LoggedGetSpellInfo(7093)
-	spellNameList["Kill Command"] = AutoBar:LoggedGetSpellInfo(34026)
-	spellNameList["Master's Call"] = AutoBar:LoggedGetSpellInfo(53271)
-	spellNameList["Mend Pet"] = AutoBar:LoggedGetSpellInfo(136)
-	spellNameList["Play Dead"] = AutoBar:LoggedGetSpellInfo(209997)
-	spellNameList["Ranger's Net"] = AutoBar:LoggedGetSpellInfo(200108)
-	spellNameList["Revive Pet"] = AutoBar:LoggedGetSpellInfo(982)
-	spellNameList["Sentinel"] = AutoBar:LoggedGetSpellInfo(206817)
-	spellNameList["Tame Beast"] = AutoBar:LoggedGetSpellInfo(1515)
-	spellNameList["Wake Up"] = AutoBar:LoggedGetSpellInfo(210000)
-	spellNameList["Wing Clip"] = AutoBar:LoggedGetSpellInfo(195645)
-
+	ABGCS:CacheSpellData(61648, "Aspect of the Chameleon");
+	ABGCS:CacheSpellData(186257, "Aspect of the Cheetah");
+	ABGCS:CacheSpellData(186289, "Aspect of the Eagle");
+	ABGCS:CacheSpellData(186265, "Aspect of the Turtle");
+	ABGCS:CacheSpellData(193530, "Aspect of the Wild");
+	ABGCS:CacheSpellData(1462, "Beast Lore");
+	ABGCS:CacheSpellData(19574, "Bestial Wrath");
+	ABGCS:CacheSpellData(109248, "Binding Shot");
+	ABGCS:CacheSpellData(883, "Call Pet 1"); 
+	ABGCS:CacheSpellData(83242, "Call Pet 2");
+	ABGCS:CacheSpellData(83243, "Call Pet 3");
+	ABGCS:CacheSpellData(83244, "Call Pet 4");
+	ABGCS:CacheSpellData(83245, "Call Pet 5");
+	ABGCS:CacheSpellData(199483, "Camouflage");
+	ABGCS:CacheSpellData(5116, "Concussive Shot");
+	ABGCS:CacheSpellData(147362, "Counter Shot");
+	ABGCS:CacheSpellData(120679, "Dire Beast");
+	ABGCS:CacheSpellData(217200, "Dire Frenzy");
+	ABGCS:CacheSpellData(781, "Disengage");
+	ABGCS:CacheSpellData(2641, "Dismiss Pet");
+	ABGCS:CacheSpellData(6197, "Eagle Eye");
+	ABGCS:CacheSpellData(6991, "Feed Pet");
+	ABGCS:CacheSpellData(5384, "Feign Death");
+	ABGCS:CacheSpellData(125050, "Fetch");
+	ABGCS:CacheSpellData(190925, "Harpoon");
+	ABGCS:CacheSpellData(7093, "Intimidation");
+	ABGCS:CacheSpellData(34026, "Kill Command");
+	ABGCS:CacheSpellData(53271, "Master's Call");
+	ABGCS:CacheSpellData(136, "Mend Pet");
+	ABGCS:CacheSpellData(209997, "Play Dead");
+	ABGCS:CacheSpellData(200108, "Ranger's Net");
+	ABGCS:CacheSpellData(982, "Revive Pet");
+	ABGCS:CacheSpellData(206817, "Sentinel");
+	ABGCS:CacheSpellData(1515, "Tame Beast");
+	ABGCS:CacheSpellData(210000, "Wake Up");
+	ABGCS:CacheSpellData(195645, "Wing Clip");
+	ABGCS:CacheSpellData(187650, "Freezing Trap");
+	ABGCS:CacheSpellData(191433, "Explosive Trap");
+	ABGCS:CacheSpellData(187698, "Tar Trap");
+	ABGCS:CacheSpellData(194277, "Caltrops");
+	ABGCS:CacheSpellData(162488, "Steel Trap");
 
 
 	--Mage
-	spellNameList["Ice Barrier"], _, spellIconList["Ice Barrier"] = AutoBar:LoggedGetSpellInfo(11426)
-	spellNameList["Prismatic Barrier"] = AutoBar:LoggedGetSpellInfo(235450)
-	spellNameList["Blazing Barrier"] = AutoBar:LoggedGetSpellInfo(235313)
-	spellNameList["Temporal Shield"] = AutoBar:LoggedGetSpellInfo(198111)
-	spellNameList["Slow Fall"] = AutoBar:LoggedGetSpellInfo(130)
-	spellNameList["Conjure Refreshment"], _, spellIconList["Conjure Refreshment"] = AutoBar:LoggedGetSpellInfo(42955)
-	spellNameList["Conjure Refreshment Table"] = AutoBar:LoggedGetSpellInfo(43987)
-	spellNameList["Invisibility"], _, spellIconList["Invisibility"] = AutoBar:LoggedGetSpellInfo(66)
-	spellNameList["Greater Invisibility"], _, spellIconList["Greater Invisibility"] = AutoBar:LoggedGetSpellInfo(110959)
-	spellNameList["Ice Block"], _, spellIconList["Ice Block"] = AutoBar:LoggedGetSpellInfo(27619)
+	ABGCS:CacheSpellData(11426, "Ice Barrier");
+	ABGCS:CacheSpellData(235450, "Prismatic Barrier");
+	ABGCS:CacheSpellData(235313, "Blazing Barrier");
+	ABGCS:CacheSpellData(198111, "Temporal Shield");
+	ABGCS:CacheSpellData(130, "Slow Fall");
+	ABGCS:CacheSpellData(42955, "Conjure Refreshment");
+	ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
+	ABGCS:CacheSpellData(66, "Invisibility");
+	ABGCS:CacheSpellData(110959, "Greater Invisibility");
+	ABGCS:CacheSpellData(27619, "Ice Block");
+	ABGCS:CacheSpellData(31687, "Summon Water Elemental");
 
 	--Monk
-	spellNameList["Zen Pilgrimage"] = AutoBar:LoggedGetSpellInfo(126892)
-	spellNameList["Zen Pilgrimage: Return"] = AutoBar:LoggedGetSpellInfo(126895)
-	spellNameList["Fortifying Brew"] = AutoBar:LoggedGetSpellInfo(115203)
-	
+	ABGCS:CacheSpellData(126892, "Zen Pilgrimage");
+	ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return");
+	ABGCS:CacheSpellData(115203, "Fortifying Brew");
+	ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
+
 	--Paladin
-	spellNameList["Ardent Defender"] = AutoBar:LoggedGetSpellInfo(31850) 
-	spellNameList["Divine Shield"] = AutoBar:LoggedGetSpellInfo(642) 
-	spellNameList["Blessing of Freedom"] = AutoBar:LoggedGetSpellInfo(1044) 
-	spellNameList["Blessing of Protection"] = AutoBar:LoggedGetSpellInfo(1022) 
-	spellNameList["Blessing of Sacrifice"] = AutoBar:LoggedGetSpellInfo(6940) 
-	spellNameList["Blessing of Spellwarding"] = AutoBar:LoggedGetSpellInfo(204018) 
-	spellNameList["Blessing of Salvation"] = AutoBar:LoggedGetSpellInfo(204013) 
-	spellNameList["Greater Blessing of Kings"] = AutoBar:LoggedGetSpellInfo(203538) 
-	spellNameList["Greater Blessing of Wisdom"] = AutoBar:LoggedGetSpellInfo(203539) 
-	spellNameList["Hand of Hindrance"] = AutoBar:LoggedGetSpellInfo(183218)
-	spellNameList["Rebuke"] = AutoBar:LoggedGetSpellInfo(96231)
+	ABGCS:CacheSpellData(31850, "Ardent Defender"); 
+	ABGCS:CacheSpellData(642, "Divine Shield"); 
+	ABGCS:CacheSpellData(1044, "Blessing of Freedom"); 
+	ABGCS:CacheSpellData(1022, "Blessing of Protection"); 
+	ABGCS:CacheSpellData(6940, "Blessing of Sacrifice"); 
+	ABGCS:CacheSpellData(204018, "Blessing of Spellwarding"); 
+	ABGCS:CacheSpellData(204013, "Blessing of Salvation"); 
+	ABGCS:CacheSpellData(203538, "Greater Blessing of Kings"); 
+	ABGCS:CacheSpellData(203539, "Greater Blessing of Wisdom"); 
+	ABGCS:CacheSpellData(183218, "Hand of Hindrance");
+	ABGCS:CacheSpellData(96231, "Rebuke");
 	ABGCS:CacheSpellData(633, "Lay on Hands");
 
 	--Priest
-	spellNameList["Power Word: Shield"] = AutoBar:LoggedGetSpellInfo(17)
-	spellNameList["Shadowfiend"] = AutoBar:LoggedGetSpellInfo(34433)
-	spellNameList["Dispersion"] = AutoBar:LoggedGetSpellInfo(47585)
-	spellNameList["Guardian Spirit"] = AutoBar:LoggedGetSpellInfo(47788)
-	spellNameList["Pain Suppression"] = AutoBar:LoggedGetSpellInfo(33206)
+	ABGCS:CacheSpellData(17, "Power Word: Shield");
+	ABGCS:CacheSpellData(34433, "Shadowfiend");
+	ABGCS:CacheSpellData(47585, "Dispersion");
+	ABGCS:CacheSpellData(47788, "Guardian Spirit");
+	ABGCS:CacheSpellData(33206, "Pain Suppression");
 
 	--Rogue
-	spellNameList["Agonizing Poison"] = AutoBar:LoggedGetSpellInfo(200802)
-	spellNameList["Crippling Poison"], _, spellIconList["Crippling Poison"]  = AutoBar:LoggedGetSpellInfo(3408)
-	spellNameList["Deadly Poison"], _, spellIconList["Deadly Poison"] = AutoBar:LoggedGetSpellInfo(2823)
-	spellNameList["Evasion"] = AutoBar:LoggedGetSpellInfo(4086)
-	spellNameList["Kick"] = AutoBar:LoggedGetSpellInfo(1766)
-	spellNameList["Leeching Poison"] = AutoBar:LoggedGetSpellInfo(108211)
-	spellNameList["Riposte"] = AutoBar:LoggedGetSpellInfo(199754)
-	spellNameList["Shadowstep"], _, spellIconList["Shadowstep"] = AutoBar:LoggedGetSpellInfo(36554)
-	spellNameList["Stealth"], _, spellIconList["Stealth"] = AutoBar:LoggedGetSpellInfo(1784)
-	spellNameList["Vanish"], _, spellIconList["Vanish"] = AutoBar:LoggedGetSpellInfo(1856)
-	spellNameList["Wound Poison"] = AutoBar:LoggedGetSpellInfo(8679)
+	ABGCS:CacheSpellData(200802, "Agonizing Poison");
+	ABGCS:CacheSpellData(3408, "Crippling Poison");
+	ABGCS:CacheSpellData(2823, "Deadly Poison");
+	ABGCS:CacheSpellData(4086, "Evasion");
+	ABGCS:CacheSpellData(1766, "Kick");
+	ABGCS:CacheSpellData(108211, "Leeching Poison");
+	ABGCS:CacheSpellData(199754, "Riposte");
+	ABGCS:CacheSpellData(36554, "Shadowstep");
+	ABGCS:CacheSpellData(1784, "Stealth");
+	ABGCS:CacheSpellData(1856, "Vanish");
+	ABGCS:CacheSpellData(8679, "Wound Poison");
 
 	--Shaman
-	spellNameList["Earthbind Totem"] = AutoBar:LoggedGetSpellInfo(2484)
-	spellNameList["Earthgrab Totem"], _, spellIconList["Earthgrab Totem"] = AutoBar:LoggedGetSpellInfo(51485)
-	spellNameList["Feral Spirit"] = AutoBar:LoggedGetSpellInfo(51533)
-	spellNameList["Water Walking"] = AutoBar:LoggedGetSpellInfo(546)
-	spellNameList["Wind Rush Totem"], _, spellIconList["Wind Rush Totem"] = AutoBar:LoggedGetSpellInfo(192077)
-	spellNameList["Ghost Wolf"], _, spellIconList["Ghost Wolf"] = AutoBar:LoggedGetSpellInfo(2645)
+	ABGCS:CacheSpellData(2484, "Earthbind Totem");
+	ABGCS:CacheSpellData(51485, "Earthgrab Totem");
+	ABGCS:CacheSpellData(51533, "Feral Spirit");
+	ABGCS:CacheSpellData(546, "Water Walking");
+	ABGCS:CacheSpellData(192077, "Wind Rush Totem");
+	ABGCS:CacheSpellData(2645, "Ghost Wolf");
+	ABGCS:CacheSpellData(198103, "Earth Elemental");
+	ABGCS:CacheSpellData(198067, "Fire Elemental");
+	ABGCS:CacheSpellData(192249, "Storm Elemental");
 
 
 	--Warlock
-	spellNameList["Call Dreadstalkers"] = AutoBar:LoggedGetSpellInfo(104316) 
-	spellNameList["Command Demon"] = AutoBar:LoggedGetSpellInfo(119898) 
-	spellNameList["Curse of Fragility"] = AutoBar:LoggedGetSpellInfo(199954) 
-	spellNameList["Curse of Tongues"] = AutoBar:LoggedGetSpellInfo(199890) 
-	spellNameList["Curse of Weakness"] = AutoBar:LoggedGetSpellInfo(199892) 
-	spellNameList["Dark Pact"], _, spellIconList["Dark Pact"]  = AutoBar:LoggedGetSpellInfo(108416)
-	spellNameList["Demonic Empowerment"] = AutoBar:LoggedGetSpellInfo(193396) 
-	spellNameList["Demonwrath"] = AutoBar:LoggedGetSpellInfo(193440) 
-	spellNameList["Grimoire of Sacrifice"] = AutoBar:LoggedGetSpellInfo(108503) 
-	spellNameList["Grimoire: Felhunter"] = AutoBar:LoggedGetSpellInfo(111897) 
-	spellNameList["Soulstone"] = AutoBar:LoggedGetSpellInfo(20707) 
-	spellNameList["Summon Darkglare"] = AutoBar:LoggedGetSpellInfo(205180) 
-	spellNameList["Unending Breath"] = AutoBar:LoggedGetSpellInfo(5697)
-	spellNameList["Unending Resolve"] = AutoBar:LoggedGetSpellInfo(104773)
+	ABGCS:CacheSpellData(104316, "Call Dreadstalkers"); 
+	ABGCS:CacheSpellData(119898, "Command Demon"); 
+	ABGCS:CacheSpellData(199954, "Curse of Fragility"); 
+	ABGCS:CacheSpellData(199890, "Curse of Tongues"); 
+	ABGCS:CacheSpellData(199892, "Curse of Weakness"); 
+	ABGCS:CacheSpellData(108416, "Dark Pact");
+	ABGCS:CacheSpellData(193396, "Demonic Empowerment"); 
+	ABGCS:CacheSpellData(193440, "Demonwrath"); 
+	ABGCS:CacheSpellData(108503, "Grimoire of Sacrifice"); 
+	ABGCS:CacheSpellData(111897, "Grimoire: Felhunter"); 
+	ABGCS:CacheSpellData(20707, "Soulstone"); 
+	ABGCS:CacheSpellData(205180, "Summon Darkglare"); 
+	ABGCS:CacheSpellData(5697, "Unending Breath");
+	ABGCS:CacheSpellData(104773, "Unending Resolve");
+	ABGCS:CacheSpellData(6201, "Create Healthstone");
+	ABGCS:CacheSpellData(29893, "Ritual of Souls");
+	ABGCS:CacheSpellData(126, "RitualSouls");
+	ABGCS:CacheSpellData(30146, "Eye of Kilrogg");
+	ABGCS:CacheSpellData(691, "Summon Felhunter");
+	ABGCS:CacheSpellData(688, "Summon Imp");
+	ABGCS:CacheSpellData(712, "Summon Succubus");
+	ABGCS:CacheSpellData(697, "Summon Voidwalker");
+	ABGCS:CacheSpellData(1122, "Summon Infernal");
+	ABGCS:CacheSpellData(30146, "Summon Felguard");
 
 
 	--Warrior
-	spellNameList["Charge"], _, spellIconList["Charge"] = AutoBar:LoggedGetSpellInfo(100, "Charge")
-	spellNameList["Commanding Shout"] = AutoBar:LoggedGetSpellInfo(97462)
-	spellNameList["Defensive Stance"] = AutoBar:LoggedGetSpellInfo(197690)
-	spellNameList["Demoralizing Shout"] = AutoBar:LoggedGetSpellInfo(1160)
-	spellNameList["Enraged Regeneration"] = AutoBar:LoggedGetSpellInfo(184364)
-	spellNameList["Intercept"], _, spellIconList["Intercept"] = AutoBar:LoggedGetSpellInfo(198304)
-	spellNameList["Shield Block"] = AutoBar:LoggedGetSpellInfo(2565) 
-	spellNameList["Shield Wall"] = AutoBar:LoggedGetSpellInfo(871) 
+	ABGCS:CacheSpellData(100, "Charge");
+	ABGCS:CacheSpellData(97462, "Commanding Shout");
+	ABGCS:CacheSpellData(197690, "Defensive Stance");
+	ABGCS:CacheSpellData(1160, "Demoralizing Shout");
+	ABGCS:CacheSpellData(184364, "Enraged Regeneration");
+	ABGCS:CacheSpellData(198304, "Intercept");
+	ABGCS:CacheSpellData(2565, "Shield Block"); 
+	ABGCS:CacheSpellData(871, "Shield Wall"); 
 	ABGCS:CacheSpellData(12975, "Last Stand");
 
 	--Other
-	spellNameList["Shadowmeld"], _, spellIconList["Shadowmeld"] = AutoBar:LoggedGetSpellInfo(58984)
+	ABGCS:CacheSpellData(58984, "Shadowmeld");
 
 	--Skills
-	spellNameList["First Aid"], _, spellIconList["First Aid"] = AutoBar:LoggedGetSpellInfo(27028)
-	spellNameList["Alchemy"] = AutoBar:LoggedGetSpellInfo(28596)
-	spellNameList["BasicCampfire"] = AutoBar:LoggedGetSpellInfo(818)
-	spellNameList["Blacksmithing"] = AutoBar:LoggedGetSpellInfo(29844)
-	spellNameList["Cooking"] = AutoBar:LoggedGetSpellInfo(33359)
+	ABGCS:CacheSpellData(27028, "First Aid");
+	ABGCS:CacheSpellData(28596, "Alchemy");
+	ABGCS:CacheSpellData(818, "BasicCampfire");
+	ABGCS:CacheSpellData(29844, "Blacksmithing");
+	ABGCS:CacheSpellData(33359, "Cooking");
 	if (GetLocale() == "deDE") then
-		spellNameList["Kochen"] = AutoBar:LoggedGetSpellInfo(51296)
-		spellNameList["Alchemie"] = AutoBar:LoggedGetSpellInfo(51304)
+		ABGCS:CacheSpellData(51296, "Kochen");
+		ABGCS:CacheSpellData(51304, "Alchemie");
 	end
-	spellNameList["Archaeology"], _, spellIconList["Archaeology"] = AutoBar:LoggedGetSpellInfo(78670)
-	spellNameList["Disenchant"] = AutoBar:LoggedGetSpellInfo(13262)
-	spellNameList["Enchanting"] = AutoBar:LoggedGetSpellInfo(28029)
-	spellNameList["Engineering"] = AutoBar:LoggedGetSpellInfo(30350)
-	spellNameList["Inscription"] = AutoBar:LoggedGetSpellInfo(45357)
-	spellNameList["Jewelcrafting"] = AutoBar:LoggedGetSpellInfo(28897)
-	spellNameList["Leatherworking"] = AutoBar:LoggedGetSpellInfo(32549)
-	spellNameList["Milling"] = AutoBar:LoggedGetSpellInfo(51005)
-	spellNameList["Prospecting"] = AutoBar:LoggedGetSpellInfo(31252)
-	spellNameList["Runeforging"] = AutoBar:LoggedGetSpellInfo(53428)
-	spellNameList["Smelting"] = AutoBar:LoggedGetSpellInfo(2656)
-	spellNameList["Survey"] = AutoBar:LoggedGetSpellInfo(80451)
-	spellNameList["Tailoring"] = AutoBar:LoggedGetSpellInfo(26790)
+	ABGCS:CacheSpellData(78670, "Archaeology");
+	ABGCS:CacheSpellData(13262, "Disenchant");
+	ABGCS:CacheSpellData(28029, "Enchanting");
+	ABGCS:CacheSpellData(30350, "Engineering");
+	ABGCS:CacheSpellData(45357, "Inscription");
+	ABGCS:CacheSpellData(28897, "Jewelcrafting");
+	ABGCS:CacheSpellData(32549, "Leatherworking");
+	ABGCS:CacheSpellData(51005, "Milling");
+	ABGCS:CacheSpellData(31252, "Prospecting");
+	ABGCS:CacheSpellData(53428, "Runeforging");
+	ABGCS:CacheSpellData(2656, "Smelting");
+	ABGCS:CacheSpellData(80451, "Survey");
+	ABGCS:CacheSpellData(26790, "Tailoring");
 
 
 
@@ -466,8 +492,6 @@ end
 
 
 
-local spellFeedPet = AutoBar:LoggedGetSpellInfo(6991)
-
 -- Category consisting of regular items
 AutoBarPetFood = AceOO.Class(AutoBarItems)
 
@@ -476,7 +500,7 @@ AutoBarPetFood = AceOO.Class(AutoBarItems)
 function AutoBarPetFood.prototype:init(description, shortTexture, ptItems, ptPriorityItems)
 	AutoBarPetFood.super.prototype.init(self, description, "Interface\\Icons\\" .. shortTexture, ptItems, ptPriorityItems)
 
-	self.castSpell = spellFeedPet
+	self.castSpell = AutoBar:LoggedGetSpellInfo(6991, "Feed Pet")
 end
 
 -- Reset the item list based on changed settings.
@@ -1209,12 +1233,9 @@ function AutoBarCategory:Initialize()
 
 
 
-	local spellCreateHealthstone, spellCreateHealthstoneIcon, spellRitualOfSouls
-	spellCreateHealthstone, _, spellCreateHealthstoneIcon = AutoBar:LoggedGetSpellInfo(6201)
-	spellRitualOfSouls = AutoBar:LoggedGetSpellInfo(29893)
-	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellCreateHealthstoneIcon, nil,
+	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
-		"WARLOCK", spellCreateHealthstone, spellRitualOfSouls,
+		"WARLOCK", AutoBar:GetSpellNameByName("Create Healthstone"), AutoBar:GetSpellNameByName("Ritual of Souls"),
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
@@ -1276,64 +1297,36 @@ function AutoBarCategory:Initialize()
 			"WARRIOR", spellNameList["Demoralizing Shout"],
 	})
 
-	
-
-	--Shaman
-	local spellEarthElemental = AutoBar:LoggedGetSpellInfo(198103)
-	local spellFireElemental = AutoBar:LoggedGetSpellInfo(198067)
-	local spellStormElemental = AutoBar:LoggedGetSpellInfo(192249)
-
-	--Mage
-	local spellSummonWaterElemental = AutoBar:LoggedGetSpellInfo(31687)
-
-	--Monk
-	local spellStormEarthFire = AutoBar:LoggedGetSpellInfo(137639)
-
-	--Warlock
-	local spellEyeOfKilrogg = AutoBar:LoggedGetSpellInfo(126)
-	local spellSummonFelguard = AutoBar:LoggedGetSpellInfo(30146)
-	local spellSummonFelhunter = AutoBar:LoggedGetSpellInfo(691)
-	local spellSummonImp = AutoBar:LoggedGetSpellInfo(688)
-	local spellSummonSuccubus = AutoBar:LoggedGetSpellInfo(712)
-	local spellSummonVoidwalker = AutoBar:LoggedGetSpellInfo(697)
-	local spellSummonInfernal = AutoBar:LoggedGetSpellInfo(1122)
-	local spellSummonDoomguard = AutoBar:LoggedGetSpellInfo(18540)
-	
-	--DeathKnight
-	local spellRuneWeapon = AutoBar:LoggedGetSpellInfo(49028)
-	local spellRaiseDead = AutoBar:LoggedGetSpellInfo(46584)
-	local spellSummonGargoyle = AutoBar:LoggedGetSpellInfo(49206)
-	local spellArmyoftheDead =  AutoBar:LoggedGetSpellInfo(42650)
-
-	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellCallPet1Icon,
+	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
-			"DEATHKNIGHT", spellArmyoftheDead,
-			"DEATHKNIGHT", spellRuneWeapon,
-			"DEATHKNIGHT", spellRaiseDead,
-			"DEATHKNIGHT", spellSummonGargoyle,			
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Rune Weapon"),
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Raise Dead"),
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Army of the Dead"),
+		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Summon Gargoyle"),
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 1"), 
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 2"), 
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 3"), 
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 4"), 
 		"HUNTER", AutoBar:GetSpellNameByName("Call Pet 5"), 
-			"MAGE", spellSummonWaterElemental,
-			"MONK", spellStormEarthFire,
+		"MAGE", AutoBar:GetSpellNameByName("Summon Water Elemental"),
+		"MONK", AutoBar:GetSpellNameByName("Storm, Earth, and Fire"),
 		"PRIEST", AutoBar:GetSpellNameByName("Shadowfiend"), 
-			"SHAMAN", spellEarthElemental,
-			"SHAMAN", spellFireElemental,
-			"SHAMAN", spellStormElemental,
-			"SHAMAN", spellNameList["Feral Spirit"],
-		"WARLOCK", spellSummonDoomguard,
-		"WARLOCK", spellEyeOfKilrogg,
-		"WARLOCK", spellSummonInfernal,
-		"WARLOCK", spellSummonFelguard,
-		"WARLOCK", spellSummonFelhunter,
-		"WARLOCK", spellSummonImp,
-		"WARLOCK", spellSummonSuccubus,
-		"WARLOCK", spellSummonVoidwalker,
+		"SHAMAN", AutoBar:GetSpellNameByName("Earth Elemental"),
+		"SHAMAN", AutoBar:GetSpellNameByName("Fire Elemental"),
+		"SHAMAN", AutoBar:GetSpellNameByName("Storm Elemental"),
+		"SHAMAN", AutoBar:GetSpellNameByName("Feral Spirit"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Eye of Kilrogg"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Infernal"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Felguard"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Felhunter"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Imp"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Succubus"),
+		"WARLOCK", AutoBar:GetSpellNameByName("Summon Voidwalker"),
 	})
 
-	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellCallPet1Icon, 
+
+
+	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellIconList["Call Pet 1"], 
 	{
 		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Dark Transformation"),
 		"HUNTER", AutoBar:GetSpellNameByName("Kill Command"),
@@ -1391,7 +1384,7 @@ function AutoBarCategory:Initialize()
 	local spellTeleportShattrath = AutoBar:LoggedGetSpellInfo(35715)
 	spellNameList["Teleport: Dalaran"] = AutoBar:LoggedGetSpellInfo(53140)
 	spellNameList["Portal: Dalaran"] = AutoBar:LoggedGetSpellInfo(53142)
-	spellNameList["Death Gate"] = AutoBar:LoggedGetSpellInfo(50977)
+	ABGCS:CacheSpellData(50977, "Death Gate");
 	local spellTeleportBrokenDalaran = AutoBar:LoggedGetSpellInfo(224869)
 	local spellPortalBrokenDalaran = AutoBar:LoggedGetSpellInfo(224871)
 	local spellTeleportHallofGuardian = AutoBar:LoggedGetSpellInfo(204287)
@@ -1514,7 +1507,7 @@ function AutoBarCategory:Initialize2()
 			"SHAMAN", spellCloudburstTotem, --*
 			})
 
-	spellNameList["Liquid Magma Totem"], _, spellIconList["Liquid Magma Totem"] = AutoBar:LoggedGetSpellInfo(192222) --*
+	ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); --*
 	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new(
 			"Spell.Totem.Fire", spellIconList["Liquid Magma Totem"], {
 			"SHAMAN", spellNameList["Liquid Magma Totem"], --*
@@ -1582,9 +1575,9 @@ function AutoBarCategory:Initialize2()
 		"HUNTER",	AutoBar:GetSpellNameByName("Sentinel"),
 	})
 
-	spellNameList["Silence"] = AutoBar:LoggedGetSpellInfo(15487)
-	spellNameList["Blind"] = AutoBar:LoggedGetSpellInfo(2094)
-	spellNameList["Sap"] = AutoBar:LoggedGetSpellInfo(6770)
+	ABGCS:CacheSpellData(15487, "Silence");
+	ABGCS:CacheSpellData(2094, "Blind");
+	ABGCS:CacheSpellData(6770, "Sap");
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"DEATHKNIGHT", AutoBar:GetSpellNameByName("Chains of Ice"),
@@ -1597,8 +1590,8 @@ function AutoBarCategory:Initialize2()
 		"WARLOCK", AutoBar:GetSpellNameByName("Curse of Fragility"),
 	})
 
-	spellNameList["Fishing"], _, spellIconList["Fishing"] = AutoBar:LoggedGetSpellInfo(131474)
-	spellNameList["Undercurrent"] = AutoBar:LoggedGetSpellInfo(201891)
+	ABGCS:CacheSpellData(131474, "Fishing");
+	ABGCS:CacheSpellData(201891, "Undercurrent");
 	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new("Spell.Fishing", spellIconList["Fishing"],
 	{
 		"*", AutoBar:GetSpellNameByName("Fishing"),
@@ -1606,11 +1599,6 @@ function AutoBarCategory:Initialize2()
 	})
 
 
-	spellNameList["Freezing Trap"] = AutoBar:LoggedGetSpellInfo(187650)
-	spellNameList["Explosive Trap"], _, spellIconList["Explosive Trap"] = AutoBar:LoggedGetSpellInfo(191433)
-	spellNameList["Tar Trap"] = AutoBar:LoggedGetSpellInfo(187698)
-	spellNameList["Caltrops"] = AutoBar:LoggedGetSpellInfo(194277)
-	spellNameList["Steel Trap"] = AutoBar:LoggedGetSpellInfo(162488)
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
 	{
@@ -1624,11 +1612,8 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", AutoBar:GetSpellNameByName("Steel Trap"),
 	})
 
-	spellNameList["Flight Form"] = AutoBar:LoggedGetSpellInfo(33943)
-	spellNameList["Swift Flight Form"] = AutoBar:LoggedGetSpellInfo(40120)
-	spellNameList["Travel Form"], _, spellIconList["Travel Form"] = AutoBar:LoggedGetSpellInfo(783)
-	spellNameList["GhostWolf"] = AutoBar:LoggedGetSpellInfo(2645)
-	spellNameList["Running Wild"] = AutoBar:LoggedGetSpellInfo(87840)
+	ABGCS:CacheSpellData(2645, "GhostWolf");
+	ABGCS:CacheSpellData(87840, "Running Wild");
 	
 	AutoBarCategoryList["Misc.Mount.Summoned"] = AutoBarSpells:new(
 			"Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"], {
