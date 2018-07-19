@@ -91,7 +91,7 @@ function AutoBar:GetSpellNameByName(p_name)
 		return AutoBar.spellNameList[p_name]
 	end
 
-	AutoBar:Print("Unknown Spell Name:" .. p_name)
+	AutoBar:LogWarning("Unknown Spell Name:" .. p_name)
 
 	return nil
 end
