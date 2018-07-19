@@ -633,9 +633,6 @@ function AutoBarButton:SetupAttributesClear(frame)
 	frame:SetAttribute("AutoBarGUID", nil)
 end
 
-local spellHealingTouch, spellHealingTouchIcon
-spellHealingTouch, _, spellHealingTouchIcon = AutoBar:LoggedGetSpellInfo(5185)
-
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB = AutoBar:LoggedGetSpellInfo(51005)
