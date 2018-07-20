@@ -27,6 +27,8 @@ AceGUIWidget-DragLink.lua
 
 AutoBarGlobals.lua
 
+CachedSpellData.lua
+
 # Localization
 locale/Locale-enUS.lua
 locale/Locale-deDE.lua
