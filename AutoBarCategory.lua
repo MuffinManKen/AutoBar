@@ -38,6 +38,7 @@ AutoBar.categoryValidateList = {}
 
 	--All
 	ABGCS:CacheSpellData(125439, "Revive Battle Pets");
+	ABGCS:CacheSpellData(83958, "Mobile Banking");
 
 	--DeathKnight
 	ABGCS:CacheSpellData(3714, "Path of Frost");
@@ -211,6 +212,7 @@ AutoBar.categoryValidateList = {}
 	ABGCS:CacheSpellData(47585, "Dispersion");
 	ABGCS:CacheSpellData(47788, "Guardian Spirit");
 	ABGCS:CacheSpellData(33206, "Pain Suppression");
+	ABGCS:CacheSpellData(15487, "Silence");
 
 	--Rogue
 	ABGCS:CacheSpellData(200802, "Agonizing Poison");
@@ -224,6 +226,9 @@ AutoBar.categoryValidateList = {}
 	ABGCS:CacheSpellData(1784, "Stealth");
 	ABGCS:CacheSpellData(1856, "Vanish");
 	ABGCS:CacheSpellData(8679, "Wound Poison");
+	ABGCS:CacheSpellData(2094, "Blind");
+	ABGCS:CacheSpellData(6770, "Sap");
+
 
 	--Shaman
 	ABGCS:CacheSpellData(2484, "Earthbind Totem");
@@ -236,6 +241,16 @@ AutoBar.categoryValidateList = {}
 	ABGCS:CacheSpellData(198067, "Fire Elemental");
 	ABGCS:CacheSpellData(192249, "Storm Elemental");
 	ABGCS:CacheSpellData(556, "Astral Recall");
+	ABGCS:CacheSpellData(207399, "Ancestral Protection Totem");
+	ABGCS:CacheSpellData(198838, "Earthen Shield Totem");
+	ABGCS:CacheSpellData(61882, "Earthquake Totem");
+	ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
+	ABGCS:CacheSpellData(196932, "Voodoo Totem");
+	ABGCS:CacheSpellData(157153, "Cloudburst Totem");
+	ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); 
+	ABGCS:CacheSpellData(5394, "Healing Stream Totem");
+	ABGCS:CacheSpellData(108280, "Healing Tide Totem");
+	ABGCS:CacheSpellData(98008, "Spirit Link Totem");
 
 
 	--Warlock
@@ -299,6 +314,8 @@ AutoBar.categoryValidateList = {}
 	ABGCS:CacheSpellData(2656, "Smelting");
 	ABGCS:CacheSpellData(80451, "Survey");
 	ABGCS:CacheSpellData(26790, "Tailoring");
+	ABGCS:CacheSpellData(131474, "Fishing");
+	ABGCS:CacheSpellData(201891, "Undercurrent");
 
 
 local function sortList(a, b)
@@ -1284,16 +1301,16 @@ function AutoBarCategory:Initialize()
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
-			"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"), ABGCS:GetSpellNameByName("Conjure Refreshment Table"),
-			})
+		"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"), ABGCS:GetSpellNameByName("Conjure Refreshment Table"),
+	})
 
 
 	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
 	{
-			"DRUID", ABGCS:GetSpellNameByName("Prowl"),
-			"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
-			"MAGE", ABGCS:GetSpellNameByName("Greater Invisibility"),
+		"DRUID", ABGCS:GetSpellNameByName("Prowl"),
 		"HUNTER", ABGCS:GetSpellNameByName("Camouflage"),
+		"MAGE", ABGCS:GetSpellNameByName("Greater Invisibility"),
+		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
 		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),
 		"*", ABGCS:GetSpellNameByName("Shadowmeld"),
 	})
@@ -1315,11 +1332,11 @@ function AutoBarCategory:Initialize()
 		"ROGUE", ABGCS:GetSpellNameByName("Wound Poison"), 
 	})
 
-	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new(
-			"Spell.Poison.Nonlethal", spellIconList["Crippling Poison"], {
-			"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"), 
-			"ROGUE", ABGCS:GetSpellNameByName("Leeching Poison"), 
-			})
+	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
+	{
+		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"), 
+		"ROGUE", ABGCS:GetSpellNameByName("Leeching Poison"), 
+	})
 
 
 
@@ -1429,8 +1446,8 @@ function AutoBarCategory:Initialize()
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stormshield"), ABGCS:GetSpellNameByName("Portal: Stormshield"),
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Warspear"), ABGCS:GetSpellNameByName("Portal: Warspear"),
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Hall of the Guardian"), ABGCS:GetSpellNameByName("Teleport: Hall of the Guardian"),
-		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage"), nil,
-		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage: Return"), nil,
+		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage"), ABGCS:GetSpellNameByName("Zen Pilgrimage"),
+		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage: Return"), ABGCS:GetSpellNameByName("Zen Pilgrimage: Return"),
 		"DEATHKNIGHT", ABGCS:GetSpellNameByName("Death Gate"), ABGCS:GetSpellNameByName("Death Gate"),	
 		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
@@ -1467,68 +1484,56 @@ end
 -- Create category list using PeriodicTable data.
 -- Split up to avoid Lua upValue limitations
 function AutoBarCategory:Initialize2()
-	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new(
-			"Spell.Stance", spellIconList["Defensive Stance"], {
-			"WARRIOR", ABGCS:GetSpellNameByName("Defensive Stance"),
-			})
-
-
-			
-	local spellMobileBanking, _, iconMobileBanking  = AutoBar:LoggedGetSpellInfo(83958)
-	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new(
-			"Spell.Guild", iconMobileBanking, {
-			"*", spellMobileBanking,
+	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new( "Spell.Stance", spellIconList["Defensive Stance"], {
+		"WARRIOR", ABGCS:GetSpellNameByName("Defensive Stance"),
 	})
 
 
-	local spellAncestralProtectionTotem = AutoBar:LoggedGetSpellInfo(207399)
-	local spellEarthenShieldTotem = AutoBar:LoggedGetSpellInfo(198838)
-	local spellEarthquakeTotem = AutoBar:LoggedGetSpellInfo(61882)
-	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new(
-			"Spell.Totem.Earth", spellIconList["Earthgrab Totem"], {
-			"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
-			"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
-			"SHAMAN", spellAncestralProtectionTotem,
-			"SHAMAN", spellEarthenShieldTotem,
-			"SHAMAN", spellEarthquakeTotem,
-			})
+			
+	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new("Spell.Guild", iconMobileBanking,
+	{
+		"*", ABGCS:GetSpellNameByName("Mobile Banking"),
+	})
+
+
+	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
+	{
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthen Shield Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthquake Totem"),
+	})
 			
 
-	local spellLightningSurgeTotem = AutoBar:LoggedGetSpellInfo(192058)
-	local spellVoodooTotem = AutoBar:LoggedGetSpellInfo(196932)
-	local spellCloudburstTotem = AutoBar:LoggedGetSpellInfo(157153)
-	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new(
-			"Spell.Totem.Air", spellIconList["Wind Rush Totem"], {
-			"SHAMAN", ABGCS:GetSpellNameByName("Wind Rush Totem"), 	--*
-			"SHAMAN", spellLightningSurgeTotem, 			--*
-			"SHAMAN", spellVoodooTotem, --*
-			"SHAMAN", spellCloudburstTotem, --*
-			})
+	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
+	{
+		"SHAMAN", ABGCS:GetSpellNameByName("Wind Rush Totem"), 	
+		"SHAMAN", ABGCS:GetSpellNameByName("Lightning Surge Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Voodoo Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Cloudburst Totem"),
+	})
 
-	ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); --*
-	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new(
-			"Spell.Totem.Fire", spellIconList["Liquid Magma Totem"], {
-			"SHAMAN", ABGCS:GetSpellNameByName("Liquid Magma Totem"), --*
-			})
+	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
+	{
+		"SHAMAN", ABGCS:GetSpellNameByName("Liquid Magma Totem"), 
+	})
 
-	local spellHealingStreamTotem, _,  spellHealingStreamTotemIcon = AutoBar:LoggedGetSpellInfo(5394)
-	local spellHealingTideTotem = AutoBar:LoggedGetSpellInfo(108280)
-	local spellSpiritLinkTotem = AutoBar:LoggedGetSpellInfo(98008)
-	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new(
-			"Spell.Totem.Water", spellHealingStreamTotemIcon, {
-			"SHAMAN", spellHealingStreamTotem, --*
-			"SHAMAN", spellHealingTideTotem,   --*
-			"SHAMAN", spellSpiritLinkTotem, --*
-			})
+	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellHealingStreamTotemIcon,
+	{
+		"SHAMAN", ABGCS:GetSpellNameByName("Healing Stream Totem"), 
+		"SHAMAN", ABGCS:GetSpellNameByName("Healing Tide Totem"), 
+		"SHAMAN", ABGCS:GetSpellNameByName("Spirit Link Totem"), 
+	})
 
 
-	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new(
-			"Spell.Buff.Weapon", spellIconList["Deadly Poison"], {
-			"ROGUE", ABGCS:GetSpellNameByName("Deadly Poison"),
-			"ROGUE", ABGCS:GetSpellNameByName("Wound Poison"),
-			"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
-			"ROGUE", ABGCS:GetSpellNameByName("Leeching Poison"),
-			})
+	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
+	{
+		"ROGUE", ABGCS:GetSpellNameByName("Deadly Poison"),
+		"ROGUE", ABGCS:GetSpellNameByName("Wound Poison"),
+		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
+		"ROGUE", ABGCS:GetSpellNameByName("Leeching Poison"),
+	})
 
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"], 
 	{
@@ -1566,9 +1571,6 @@ function AutoBarCategory:Initialize2()
 		"HUNTER",	ABGCS:GetSpellNameByName("Sentinel"),
 	})
 
-	ABGCS:CacheSpellData(15487, "Silence");
-	ABGCS:CacheSpellData(2094, "Blind");
-	ABGCS:CacheSpellData(6770, "Sap");
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"DEATHKNIGHT", ABGCS:GetSpellNameByName("Chains of Ice"),
@@ -1581,14 +1583,11 @@ function AutoBarCategory:Initialize2()
 		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Fragility"),
 	})
 
-	ABGCS:CacheSpellData(131474, "Fishing");
-	ABGCS:CacheSpellData(201891, "Undercurrent");
 	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new("Spell.Fishing", spellIconList["Fishing"],
 	{
 		"*", ABGCS:GetSpellNameByName("Fishing"),
 		"*", ABGCS:GetSpellNameByName("Undercurrent"),
 	})
-
 
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
@@ -1608,7 +1607,7 @@ function AutoBarCategory:Initialize2()
 	{
 		"DRUID", ABGCS:GetSpellNameByName("Flight Form"),
 		"DRUID", ABGCS:GetSpellNameByName("Swift Flight Form"),
-		"SHAMAN", ABGCS:GetSpellNameByName("GhostWolf"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Ghost Wolf"),
 		"*", ABGCS:GetSpellNameByName("Running Wild"),
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
