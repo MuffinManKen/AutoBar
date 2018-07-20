@@ -143,13 +143,30 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 
 end
 
-function AutoBarGlobalCodeSpace:GetSpellNameByName(p_name)
+function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
 
-	if (AutoBarGlobalDataObject.spell_name_list[p_name]) then
-		return AutoBarGlobalDataObject.spell_name_list[p_name]
+	if (AutoBarGlobalDataObject.spell_name_list[p_spell_name]) then
+		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. p_name)
+	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
+end
+
+function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
+
+	if (AutoBarGlobalDataObject.spell_icon_list[p_spell_name]) then
+		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
+	end
+
+	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+
+	return nil
+end
+
+function AutoBarGlobalCodeSpace:GetSpellIconByNameFast(p_spell_name)
+
+	return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
+
 end

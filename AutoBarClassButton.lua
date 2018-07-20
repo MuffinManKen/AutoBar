@@ -9,7 +9,6 @@
 --
 
 local AutoBar = AutoBar
-local spellIconList = AutoBar.spellIconList
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale

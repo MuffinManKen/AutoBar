@@ -49,7 +49,6 @@ AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0");
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-local spellIconList = ABGData.spell_icon_list
 
 AutoBar.inWorld = false
 AutoBar.inCombat = nil		-- For item use restrictions

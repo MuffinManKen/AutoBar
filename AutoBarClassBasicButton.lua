@@ -220,12 +220,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			_, _, texture = GetSpellInfo(spellName)
-
-			-- Spells like mounts and critters are immune to the normal spell api
-			if (not texture) then
-				texture = spellIconList[spellName]
-			end
+			texture = ABGCS.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
