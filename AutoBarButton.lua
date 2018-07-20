@@ -10,7 +10,6 @@ local AutoBar = AutoBar
 
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-local spellNameList = ABGData.spell_name_list
 local spellIconList = ABGData.spell_icon_list
 
 local AceOO = AceLibrary("AceOO-2.0")

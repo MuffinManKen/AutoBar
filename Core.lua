@@ -49,7 +49,6 @@ AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0");
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-local spellNameList = ABGData.spell_name_list
 local spellIconList = ABGData.spell_icon_list
 
 AutoBar.inWorld = false
@@ -191,19 +190,6 @@ AutoBar.frame:SetScript("OnEvent",
 AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 
-
-
-
-function AutoBar:GetSpellNameByName(p_name)
-
-	if (spellNameList[p_name]) then
-		return spellNameList[p_name]
-	end
-
-	AutoBar:LogWarning("Unknown Spell Name:" .. p_name)
-
-	return nil
-end
 
 -- Process a macro to determine what its "action" is:
 --		a spell

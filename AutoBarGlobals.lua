@@ -136,9 +136,20 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 	if(name == nil) then
 		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
-		AutoBar.spellNameList[p_spell_name] = name;
-		AutoBar.spellIconList[p_spell_name] = icon;
+		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
+		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
 	end
 	
 
+end
+
+function AutoBarGlobalCodeSpace:GetSpellNameByName(p_name)
+
+	if (AutoBarGlobalDataObject.spell_name_list[p_name]) then
+		return AutoBarGlobalDataObject.spell_name_list[p_name]
+	end
+
+	AutoBar:LogWarning("Unknown Spell Name:" .. p_name)
+
+	return nil
 end
