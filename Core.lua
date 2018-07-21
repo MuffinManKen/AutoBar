@@ -900,7 +900,7 @@ end
 -- UpdateCustomButtons
 --		Based on the current db, add or remove Custom Buttons
 -- UpdateSpells
---		Rescan all registerred spells
+--		Rescan all registered spells
 --		This is on a less frequent cycle than UpdateScan.  Called on leveling or spellbook changes.
 --		ToDo: Also trigger on spec changes
 -- UpdateObjects
