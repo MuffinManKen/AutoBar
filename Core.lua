@@ -265,8 +265,10 @@ function AutoBar:InitializeZero()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()
 
-	AutoBar.enableBindings = true
 	AutoBar:UpdateCategories()
+	self:RegisterOverrideBindings()
+	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
+
 
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
@@ -1245,12 +1247,6 @@ function AutoBar:UpdateButtons()
 		button:UpdateHotkeys()
 		button:UpdateIcon()
 		button:UpdateUsable()
-	end
-	if (self.enableBindings) then
-		self:RegisterOverrideBindings()
-		AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
-		self.enableBindings = nil
---print("<-- enableBindings")
 	end
 	self:LogEventEnd("AutoBar:UpdateButtons", " #buttons " .. tostring(# self.buttonList))
 end
