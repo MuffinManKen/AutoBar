@@ -972,6 +972,8 @@ local otherStickyFrames = {
 -- Based on the current db, add or remove Custom Categories
 -- ToDo: support scheme for mutable categories like pet food.
 function AutoBar:UpdateCategories()
+
+	--TODO: Review sticky frame handling. This code could be cleaned up
 	if (otherStickyFrames) then
 		local delete = true
 		for index, stickyFrame in pairs(otherStickyFrames) do
