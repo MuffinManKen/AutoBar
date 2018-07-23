@@ -36,6 +36,8 @@
 
 
 local AutoBar = AutoBar
+local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
@@ -176,14 +178,14 @@ function AutoBar:OpenOptions()
 end
 
 function AutoBarChanged()
-	AutoBar:UpdateObjects()
+	ABGCS:UpdateObjects()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 local function ButtonCategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 end
 
 
@@ -192,7 +194,7 @@ function AutoBar:ButtonsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateButtonOptions(AutoBar.optionsMain.args.buttons.args)
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -202,7 +204,7 @@ function AutoBar:BarButtonChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshBarDBLists()
 	AutoBar:RefreshUnplacedButtonList()
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AutoBar:CreateOptionsAce3()
 	AceCfgReg:NotifyChange("AutoBar")
 end
@@ -214,14 +216,14 @@ function AutoBar:BarsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateOptionsAce3()
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 function AutoBar:CategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -528,7 +530,7 @@ local function ResetBars()
 
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -536,7 +538,7 @@ end
 local function ResetButtons()
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -545,7 +547,7 @@ local function ResetAutoBar()
 	local customCategories = AutoBar.db.account.customCategories
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	AutoBar:UpdateCategories()
+	ABGCS:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
