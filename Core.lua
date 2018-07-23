@@ -489,9 +489,9 @@ end
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE_COOLDOWN")
 
-	if (not AutoBar:IsInLockDown()) then
-		ABGCS:ABScheduleResourcesUpdate(false, true, true);
-	end
+--	if (not AutoBar:IsInLockDown()) then
+--		ABGCS:ABScheduleResourcesUpdate(false, true, true);
+--	end
 
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
@@ -1176,7 +1176,7 @@ end
 -- AutoBar Scheduler
 --
 -------------------------------------------------------------------------
-
+--AutoBarGlobalDataObject.TickScheduler
 ABGData.TickScheduler = 
 {
 
@@ -1201,7 +1201,7 @@ ABGData.TickScheduler =
 function ABGCS:ABScheduleCategoryUpdate()
 	local tick = ABGData.TickScheduler;
 
-print("ABGCS:ABScheduleCategoryUpdate");
+--print("ABGCS:ABScheduleCategoryUpdate");
 	tick.ScheduledUpdate = tick.UpdateCategoriesID;
 
 end
@@ -1210,7 +1210,7 @@ function ABGCS:ABScheduleResourcesUpdate(p_update_spells, p_update_items, p_upda
 	local tick = ABGData.TickScheduler;
 
 	if(tick.ScheduledUpdate ~= tick.UpdateCategoriesID) then --UpdateCategories takes precendence
-print("ABGCS:ABScheduleResourcesUpdate", p_update_spells, p_update_items, p_update_objects);
+--print("ABGCS:ABScheduleResourcesUpdate", p_update_spells, p_update_items, p_update_objects);
 		tick.ScheduledUpdate = tick.UpdateResourcesID;
 		tick.UpdateSpellFlag = tick.UpdateSpellFlag or p_update_spells;
 		tick.UpdateItemsFlag = tick.UpdateItemsFlag or p_update_items;
@@ -1235,27 +1235,27 @@ function AutoBar:ABSchedulerTick()
 	end
 
 	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
-print("     ", "Calling ABGCS:UpdateCategories")
+--print("     ", "Calling ABGCS:UpdateCategories")
 		ABGCS:UpdateCategories();
 	elseif(tick.ScheduledUpdate == tick.UpdateResourcesID) then
 		ABGCS:UpdateResources();
 	else
-print("     ", "Not sure what's happening", tick.ScheduledUpdate)
+--print("     ", "Not sure what's happening", tick.ScheduledUpdate)
 	end
 
 end
 
 function ABGCS:UpdateCategories(p_force_sequential)
 	local tick = ABGData.TickScheduler;
-	print("ABGCS:UpdateCategories", p_force_sequential);
+--	print("ABGCS:UpdateCategories", p_force_sequential);
 
 	--TODO: Review sticky frame handling. This code could be cleaned up
 	--TODO: Split this out to its own function
-	if (otherStickyFrames) then
+	if (tick.OtherStickyFrames) then
 		local delete = true
-		for index, stickyFrame in pairs(otherStickyFrames) do
+		for index, stickyFrame in pairs(tick.OtherStickyFrames) do
 			if (_G[stickyFrame]) then
-print("     ABGCS:UpdateCategories " .. tostring(index) .. "  " .. tostring(stickyFrame))
+--print("     ABGCS:UpdateCategories " .. tostring(index) .. "  " .. tostring(stickyFrame))
 				LibStickyFrames:RegisterFrame(_G[stickyFrame])
 			else
 				delete = false
@@ -1271,7 +1271,6 @@ print("     ABGCS:UpdateCategories " .. tostring(index) .. "  " .. tostring(stic
 		tick.ScheduledUpdate = nil;
 		AutoBarCategory:UpdateCustomCategories()
 		if(p_force_sequential) then
-			--TODO: Run the updates sequentially
 			ABGCS:UpdateSpells();
 			ABGCS:UpdateObjects();
 			ABGCS:UpdateItems();
@@ -1291,7 +1290,7 @@ end
 -- TODO: If Update Objects always needs to run after Spell or Items, then just set it when either one is set then have just 2 params
 function ABGCS:UpdateResources()
 	local tick = ABGData.TickScheduler;
-	print("ABGCS:UpdateResources", "Spell:", tick.UpdateSpellFlag, "Item:", tick.UpdateItemsFlag, "Objects:", tick.UpdateObjectsFlag);
+--	print("ABGCS:UpdateResources", "Spell:", tick.UpdateSpellFlag, "Item:", tick.UpdateItemsFlag, "Objects:", tick.UpdateObjectsFlag);
 
 	tick.UpdateSpellFlag = ABGCS:UpdateSpells();
 	tick.UpdateObjectsFlag = ABGCS:UpdateObjects();
