@@ -23,13 +23,13 @@ local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0");
+AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
-local ABSchedulerTickLength = 2.03
+local ABSchedulerTickLength = 0.07
 
 AutoBar.inWorld = false
 AutoBar.inCombat = nil		-- For item use restrictions
