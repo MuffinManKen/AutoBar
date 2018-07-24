@@ -5,8 +5,7 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 local WHATSNEW_TEXT = "" ..
 [[
  - BETA: This is Beta code, if that makes you nervous don't use it
- - Ugly, ugly hacks to work around some issues
- - Mostly removed AceEvent-2
+ - Fixed AutoBar issue when entering combat
 ]] .. "|n"
 
 function AB.show_whats_new()
