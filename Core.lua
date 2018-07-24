@@ -58,8 +58,6 @@ AutoBar.buttonListDisabled = {}
 
 AutoBar.events = {}
 
-AutoBar.delay = {}
-
 AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
 AutoBar.warning_log = {}
@@ -600,18 +598,10 @@ end
 
 
 
-local regenEnableUpdate = "UpdateRescan"
-function AutoBar:SetRegenEnableUpdate(scanType)
-	if (timerIndexList[scanType] < timerIndexList[regenEnableUpdate]) then
-		regenEnableUpdate = scanType
-	end
-end
-
-
 function AutoBar.events:PLAYER_REGEN_ENABLED(arg1)
 	AutoBar:LogEvent("PLAYER_REGEN_ENABLED", arg1)
 	AutoBar.inCombat = nil
-	AutoBar.delay[regenEnableUpdate]:Start()
+
 --print("PLAYER_REGEN_ENABLED " .. tostring(self))
 end
 
@@ -634,26 +624,13 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 		LibKeyBound:Deactivate()
 	end
 --print("   PLAYER_REGEN_DISABLED")
-	if (self:IsEventScheduled("UpdateRescan")) then
-		self:CancelScheduledEvent("UpdateRescan")
-		AutoBarSearch.stuff:Reset()
-	elseif (self:IsEventScheduled("UpdateScan")) then
-		self:CancelScheduledEvent("UpdateScan")
-		AutoBarSearch.stuff:Scan()
-	elseif (self:IsEventScheduled("UpdateActive")) then
-		self:CancelScheduledEvent("UpdateActive")
-	elseif (self:IsEventScheduled("UpdateButtons")) then
-		self:CancelScheduledEvent("UpdateButtons")
-	end
+
 	ABGCS:UpdateActive()
 	AceCfgDlg:Close(appName)
-	AutoBar:SetRegenEnableUpdate("UpdateRescan")
 end
 
 function AutoBar.events:PET_BATTLE_CLOSE(arg1)
 	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-
-	AutoBar.delay[regenEnableUpdate]:Start()
 
 	-- AutoBar.in_pet_battle = false
 
