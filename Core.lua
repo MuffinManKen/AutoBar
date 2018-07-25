@@ -28,6 +28,7 @@ AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
+local tick = ABGData.TickScheduler
 
 local ABSchedulerTickLength = 0.07
 
@@ -369,7 +370,7 @@ function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
 --local item_name = GetItemInfo(p_item_id)
 --print("GET_ITEM_INFO_RECEIVED", p_item_id, item_name)
 	AutoBar:ClearMissingItemFlag();
-	ABGCS:ABScheduleResourcesUpdate(false, true, true);
+	ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 
 	AutoBar:LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
 
@@ -396,7 +397,7 @@ function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
 	
 	if(link) then
 		add_item_to_dynamic_category(link, "Dynamic.Quest")
-		ABGCS:ABScheduleResourcesUpdate(false, true, true);
+		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 	end
 
 	AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
@@ -447,7 +448,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	ABGCS:ABScheduleCategoryUpdate();
+	ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
 
 	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
 end
@@ -477,7 +478,7 @@ function AutoBar.events:BAG_UPDATE_DELAYED()
 			button:UpdateCount()
 		end
 	else
-		ABGCS:ABScheduleResourcesUpdate(false, true, true);
+		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 	end
 
 	AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
@@ -486,10 +487,6 @@ end
 
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE_COOLDOWN")
-
---	if (not AutoBar:IsInLockDown()) then
---		ABGCS:ABScheduleResourcesUpdate(false, true, true);
---	end
 
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
@@ -515,29 +512,27 @@ end
 
 function AutoBar.events:ACTIONBAR_UPDATE_USABLE(arg1)
 	AutoBar:LogEvent("ACTIONBAR_UPDATE_USABLE", arg1)
-	if (AutoBar.inWorld) then
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateUsable()
-			end
-		else
-			ABGCS:ABScheduleResourcesUpdate(false, true, true);
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateUsable()
 		end
+	else
+		ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 	end
 end
 
 
 function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 	AutoBar:LogEvent("UPDATE_SHAPESHIFT_FORMS", arg1)
-	if (AutoBar.inWorld) then
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateUsable()
-			end
-		else
-			ABGCS:ABScheduleResourcesUpdate(true, false, true);
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateUsable()
 		end
 	end
+
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
@@ -547,22 +542,20 @@ function AutoBar.events:COMPANION_LEARNED(...)
 
 	AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
 
-	if (AutoBar.inWorld) then
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button and (companionType == "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
-		end
-
-		button = AutoBar.buttonList["AutoBarButtonPets"]
-		if (button and (companionType == "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB)
-		end
-
-		if(need_update) then
-			ABGCS:ABScheduleCategoryUpdate();
-		end
-
+	local button = AutoBar.buttonList["AutoBarButtonMount"]
+	if (button and (companionType == "MOUNT")) then
+		button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 	end
+
+	button = AutoBar.buttonList["AutoBarButtonPets"]
+	if (button and (companionType ~= "MOUNT")) then
+		button:Refresh(button.parentBar, button.buttonDB)
+	end
+
+	if(need_update) then
+		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+	end
+
 
 	AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
 end
@@ -576,7 +569,7 @@ end
 
 function AutoBar.events:LEARNED_SPELL_IN_TAB(arg1)
 	AutoBar:LogEvent("LEARNED_SPELL_IN_TAB", arg1)
-	ABGCS:ABScheduleResourcesUpdate(true, false, true);
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
@@ -586,7 +579,7 @@ function AutoBar.events:SPELLS_CHANGED(arg1)
 		return
 	end
 	AutoBar:LogEvent("SPELLS_CHANGED", arg1)
-	ABGCS:ABScheduleResourcesUpdate(true, false, true);
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
@@ -648,9 +641,9 @@ function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
 			need_update = button:Refresh(button.parentBar, button.buttonDB, true)
 		end
 
---		if(need_update) then
-			ABGCS:ABScheduleCategoryUpdate();
---		end
+		if(need_update) then
+			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+		end
 
 	end
 
@@ -1153,47 +1146,16 @@ end
 -- AutoBar Scheduler
 --
 -------------------------------------------------------------------------
---AutoBarGlobalDataObject.TickScheduler
-ABGData.TickScheduler = 
-{
 
-	UpdateCategoriesID = 1,
-	UpdateResourcesID = 2,
+function ABGCS:ABScheduleUpdate(p_update_id)
 
-
-	-- When UpdateResources runs, which things need to be updated?
-	UpdateSpellFlag = true,
-	UpdateObjectsFlag = true,
-	UpdateItemsFlag = true,
-
-	FullScanItemsFlag = true,
-
-	ScheduledUpdate = nil,
-
-	OtherStickyFrames = {
-		"GridLayoutFrame",
-	}
-}
-
-function ABGCS:ABScheduleCategoryUpdate()
-	local tick = ABGData.TickScheduler;
-
---print("ABGCS:ABScheduleCategoryUpdate");
-	tick.ScheduledUpdate = tick.UpdateCategoriesID;
-
-end
-
-function ABGCS:ABScheduleResourcesUpdate(p_update_spells, p_update_items, p_update_objects)
-	local tick = ABGData.TickScheduler;
-
-	if(tick.ScheduledUpdate ~= tick.UpdateCategoriesID) then --UpdateCategories takes precendence
---print("ABGCS:ABScheduleResourcesUpdate", p_update_spells, p_update_items, p_update_objects);
-		tick.ScheduledUpdate = tick.UpdateResourcesID;
-		tick.UpdateSpellFlag = tick.UpdateSpellFlag or p_update_spells;
-		tick.UpdateItemsFlag = tick.UpdateItemsFlag or p_update_items;
-		tick.UpdateObjectsFlag = tick.UpdateObjectsFlag or p_update_objects;
+--print("ABGCS:ABScheduleUpdate", p_update_id);
+	if ((tick.ScheduledUpdate == nil) or (p_update_id < tick.ScheduledUpdate)) then
+		tick.ScheduledUpdate = p_update_id;
 	end
+
 end
+
 
 function AutoBar:ABSchedulerTick()
 --print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate)
@@ -1204,27 +1166,27 @@ function AutoBar:ABSchedulerTick()
 		return;
 	end
 
-	local tick = ABGData.TickScheduler;
-
 	if(tick.ScheduledUpdate == nil) then	--Nothing scheduled to do, so return
---print("     ","Nothing to do")
 		return;
 	end
 
 	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
---print("     ", "Calling ABGCS:UpdateCategories")
 		ABGCS:UpdateCategories();
-	elseif(tick.ScheduledUpdate == tick.UpdateResourcesID) then
-		ABGCS:UpdateResources();
+	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
+		ABGCS:UpdateSpells();
+	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
+		ABGCS:UpdateObjects();
+	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
+		ABGCS:UpdateItems();
 	else
 --print("     ", "Not sure what's happening", tick.ScheduledUpdate)
 	end
 
+	tick.ScheduledUpdate = nil
 end
 
-function ABGCS:UpdateCategories(p_force_sequential)
-	local tick = ABGData.TickScheduler;
---	print("ABGCS:UpdateCategories", p_force_sequential);
+function ABGCS:UpdateCategories()
+--	print("ABGCS:UpdateCategories");
 
 	--TODO: Review sticky frame handling. This code could be cleaned up
 	--TODO: Split this out to its own function
@@ -1247,51 +1209,12 @@ function ABGCS:UpdateCategories(p_force_sequential)
 		AutoBar:LogEventStart("ABGCS:UpdateCategories")
 		tick.ScheduledUpdate = nil;
 		AutoBarCategory:UpdateCustomCategories()
-		if(p_force_sequential) then
-			ABGCS:UpdateSpells();
-			ABGCS:UpdateObjects();
-			ABGCS:UpdateItems();
-		else
-			ABGCS:ABScheduleResourcesUpdate(true, true, true);
-		end
+		ABGCS:UpdateSpells();
 		AutoBar:LogEventEnd("ABGCS:UpdateCategories")
-
-		
 	else
-		AutoBar:LogEvent("ABGCS:UpdateCategories InCombatLockdown")
+		AutoBar:LogEvent("ABGCS:UpdateCategories InCombatLockdown. Scheduling UpdateCategories")
+		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID)
 	end
-
-end
-
---AutoBarGlobalCodeSpace:UpdateItems();
--- TODO: If Update Objects always needs to run after Spell or Items, then just set it when either one is set then have just 2 params
-function ABGCS:UpdateResources()
-	local tick = ABGData.TickScheduler;
---	print("ABGCS:UpdateResources", "Spell:", tick.UpdateSpellFlag, "Item:", tick.UpdateItemsFlag, "Objects:", tick.UpdateObjectsFlag);
-
-	tick.UpdateSpellFlag = ABGCS:UpdateSpells();
-	tick.UpdateObjectsFlag = ABGCS:UpdateObjects();
-	tick.UpdateItemsFlag = ABGCS:UpdateItems();
-tick.ScheduledUpdate = nil;
-
-	ABGCS:UpdateAttributes();
-	ABGCS:UpdateActive();
-	ABGCS:UpdateButtons();
-
--- TODO: I don't know why, but running them like below does not work. Come back to this later and fix it.  May have just been that
---			Update Attributes etc were running from Items and thus missing everything else.
-
---	if(tick.UpdateItemsFlag) then
---		tick.UpdateItemsFlag = ABGCS:UpdateItems();
---	elseif(tick.UpdateSpellFlag) then
---		tick.UpdateSpellFlag = ABGCS:UpdateSpells();
---	elseif(tick.UpdateObjectsFlag) then
---		tick.UpdateObjectsFlag = ABGCS:UpdateObjects();
---	else
---print("     ", "Done updating resources.")
---		tick.ScheduledUpdate = nil;	
---	end
-
 
 end
 
@@ -1302,26 +1225,9 @@ function ABGCS:UpdateSpells()
 	AutoBarSearch.stuff:ScanMacros()
 	AutoBarCategory:UpdateCategories()
 
+	ABGCS:UpdateObjects();
+
 	AutoBar:LogEventEnd("ABGCS:UpdateSpells")
-
-	return false;
-end
-
-function ABGCS:UpdateItems()
-	local tick = ABGData.TickScheduler;
-
-	AutoBar:LogEventStart("ABGCS:UpdateItems")
-
-	if(tick.FullScanItemsFlag) then
-		AutoBarSearch:Reset();
-		tick.FullScanItemsFlag = false;
-	else
-		AutoBarSearch:UpdateScan()
-	end
-
-	AutoBar:LogEventEnd("ABGCS:UpdateItems")
-
-	return false;
 
 end
 
@@ -1351,7 +1257,29 @@ function ABGCS:UpdateObjects()
 			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
 		end
 	end
+
+	ABGCS:UpdateItems(true);
+
 	AutoBar:LogEventEnd("ABGCS:UpdateObjects")
+
+	return false;
+
+end
+
+function ABGCS:UpdateItems(p_full_scan)
+
+	AutoBar:LogEventStart("ABGCS:UpdateItems")
+
+	if(tick.FullScanItemsFlag or p_full_scan) then
+		AutoBarSearch:Reset();
+		tick.FullScanItemsFlag = false;
+	else
+		AutoBarSearch:UpdateScan()
+	end
+
+	ABGCS:UpdateAttributes()
+
+	AutoBar:LogEventEnd("ABGCS:UpdateItems")
 
 	return false;
 
@@ -1364,6 +1292,9 @@ function ABGCS:UpdateAttributes()
 	for barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
 	end
+
+	ABGCS:UpdateActive()
+
 	AutoBar:LogEventEnd("ABGCS:UpdateAttributes")
 end
 
@@ -1374,6 +1305,8 @@ function ABGCS:UpdateActive()
 		bar:UpdateActive()
 		bar:RefreshLayout()
 	end
+
+	ABGCS:UpdateButtons()
 
 	AutoBar:LogEventEnd("ABGCS:UpdateActive")
 end

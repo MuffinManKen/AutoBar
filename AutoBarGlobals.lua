@@ -20,6 +20,23 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
+AutoBarGlobalDataObject.TickScheduler = 
+{
+
+	UpdateCategoriesID = 1,
+	UpdateSpellsID = 2,
+	UpdateObjectsID = 3,
+	UpdateItemsID = 4,
+
+
+	FullScanItemsFlag = true,
+
+	ScheduledUpdate = nil,
+
+	OtherStickyFrames = {
+		"GridLayoutFrame",
+	}
+}
 
 
 -- All global code with be a child of this table.  
