@@ -1891,11 +1891,7 @@ function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
 end
 
-function AutoBarButtonMount.prototype:Learned(parentBar, buttonDB, updateMount)
---	AutoBarButtonMount.super.prototype.Learned(self, parentBar, buttonDB)
 
-
-end
 --[[
 /dump GetSpellInfo(43688)
 /dump GetSpellInfo("Amani War Bear")
