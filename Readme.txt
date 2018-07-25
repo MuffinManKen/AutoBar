@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.9.9.02: BETA
+ - BETA: This is Beta code, if that makes you nervous don't use it
+ - Fixed AutoBar issue with Mounts
+
 v7.9.9.01: BETA
  - BETA: This is Beta code, if that makes you nervous don't use it
  - Fixed AutoBar issue when entering combat
