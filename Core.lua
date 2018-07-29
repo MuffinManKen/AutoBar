@@ -187,7 +187,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 		local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
 		if(show_tt_action) then
 			action = show_tt_action
-			tooltip = GetSpellLink(action) or select(2,GetItemInfo(action))
+			tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
 		end
 	end
 	
@@ -201,7 +201,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 			
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
-				tooltip = GetSpellLink(action) or select(2, GetItemInfo(action))
+				tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
 			end
 		end
 
@@ -210,6 +210,8 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	if(action) then 
 		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
+
+	if(tooltip == "") then tooltip = nil; end; -- If not found, GetSpellLink can return an empty string
 
 	return action, icon, tooltip
 end
