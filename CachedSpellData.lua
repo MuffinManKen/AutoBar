@@ -1,7 +1,9 @@
 
 local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
 
-
+-- NOTE: This entire set of code runs in ~2ms, so any need to try to optimize it
+local cache_timer_start = debugprofilestop();
 --All
 ABGCS:CacheSpellData(125439, "Revive Battle Pets");
 ABGCS:CacheSpellData(83958, "Mobile Banking");
@@ -281,3 +283,6 @@ ABGCS:CacheSpellData(26790, "Tailoring");
 ABGCS:CacheSpellData(131474, "Fishing");
 ABGCS:CacheSpellData(201891, "Undercurrent");
 
+local cache_timer_stop = debugprofilestop();
+
+ABGData.timing["CacheSpellData.lua"] = cache_timer_stop - cache_timer_start;

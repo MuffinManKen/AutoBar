@@ -12,6 +12,7 @@ AutoBarGlobalDataObject = {
 
 	locale = {},
 
+	timing = {},
 }
 
 
