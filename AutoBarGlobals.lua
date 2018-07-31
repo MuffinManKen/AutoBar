@@ -28,7 +28,9 @@ AutoBarGlobalDataObject.TickScheduler =
 	UpdateSpellsID = 2,
 	UpdateObjectsID = 3,
 	UpdateItemsID = 4,
-
+	UpdateAttributesID = 5,
+	UpdateActiveID = 6,
+	UpdateButtonsID = 7,
 
 	FullScanItemsFlag = true,
 

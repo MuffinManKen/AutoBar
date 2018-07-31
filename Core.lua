@@ -565,7 +565,7 @@ end
 
 function AutoBar.events:UPDATE_BINDINGS()
 	self:RegisterOverrideBindings()
-	ABGCS:UpdateButtons()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
@@ -588,7 +588,7 @@ end
 
 function AutoBar.events:PLAYER_CONTROL_GAINED()
 	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
-	ABGCS:UpdateButtons()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
@@ -655,7 +655,7 @@ end
 
 function AutoBar.events:PLAYER_ALIVE(arg1)
 	AutoBar:LogEvent("PLAYER_ALIVE", arg1)
-	ABGCS:UpdateButtons()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
@@ -666,16 +666,14 @@ function AutoBar.events:UNIT_AURA(arg1)
 		end
 	else
 		AutoBar:LogEvent("UNIT_AURA", arg1)
-		ABGCS:UpdateButtons()
+		ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 	end
 end
 
 
 function AutoBar.events:PLAYER_UNGHOST(arg1)
-	if (not InCombatLockdown()) then
-		AutoBar:LogEvent("PLAYER_UNGHOST", arg1)
-		ABGCS:UpdateButtons()
-	end
+	AutoBar:LogEvent("PLAYER_UNGHOST", arg1)
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
