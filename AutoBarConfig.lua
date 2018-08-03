@@ -11,7 +11,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 local AutoBar = AutoBar
 
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local _
 
 AutoBarConfig = {}
@@ -26,11 +26,23 @@ AutoBarConfig.DebugFrame:SetName("Debug", "AutoBar")
 AutoBarConfig.DebugFrame:SetLayout("Fill")
 InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
 
+--local function print_map_ids()
+--local res = "";
+--	for i = 1, 4000 do
+--		local map_info = C_Map.GetMapInfo(i);
+--		if(map_info) then
+--			res = res .. "|n" .. tostring(i) .. "   " .. map_info.name;
+--		end
+--	end
+--
+--	return res;
+--end
 
 local function set_nameless_category_text(p_widget)
 
 	local edit_box = p_widget:GetUserData("edit_box")
 	edit_box:SetText(AutoBar:FindNamelessCategories())
+--	edit_box:SetText(print_map_ids())
 
 end
 

@@ -2,6 +2,12 @@
 
  ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
 
+/run hearth = AutoBarCategoryList["Spell.Mount"]
+
+/dump AutoBar.buttonList["AutoBarButtonMount"]
+/dump AutoBar.buttonList["AutoBarButtonMount"].buttonDB
+
+/dump AutoBar.buttonList["AutoBarButtonReputation"]
 
 /run hearth = AutoBarCategoryList["Misc.Hearth"]
 /watch hearth

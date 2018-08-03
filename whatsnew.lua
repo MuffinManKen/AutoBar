@@ -4,8 +4,9 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Workarounds for Blizzards latest rounds of quietly breaking things
- - Some small performance improvements
+ - BETA: This is Beta code, if that makes you nervous don't use it
+ - Improved handling of macro icons
+ - Hopefully fixed more stuff
 ]] .. "|n"
 
 function AB.show_whats_new()

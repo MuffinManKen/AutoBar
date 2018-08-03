@@ -8,6 +8,23 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v7.9.9.03: BETA
+ - Improved handling of macro icons
+ - Hopefully fixed more stuff
+
+v7.9.9.02: BETA
+ - BETA: This is Beta code, if that makes you nervous don't use it
+ - Fixed AutoBar issue with Mounts
+
+v7.9.9.01: BETA
+ - BETA: This is Beta code, if that makes you nervous don't use it
+ - Fixed AutoBar issue when entering combat
+
+v7.9.9.00: BETA
+ - BETA: This is Beta code, if that makes you nervous don't use it
+ - Ugly, ugly hacks to work around some issues
+ - Mostly removed AceEvent-2
+
 v7.3.5.03:
  - Workarounds for Blizzards latest rounds of quietly breaking things
  - Some small performance improvements

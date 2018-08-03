@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "deDE") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 	    ["AutoBar"] = "AutoBar",
 	    ["CONFIG_WINDOW"] = "Einstellungen",
 	    ["SLASHCMD_LONG"] = "autobar",

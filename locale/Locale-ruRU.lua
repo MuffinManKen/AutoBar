@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "ruRU") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 		["AutoBar"] = "АвтоПанель",
 		["CONFIG_WINDOW"] = "Окно настроек",
 		["SLASHCMD_LONG"] = "autobar",

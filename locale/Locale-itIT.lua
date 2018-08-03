@@ -5,7 +5,7 @@
 --
 
 if (GetLocale() == "itIT") then
-	AutoBar.locale = {
+	AutoBarGlobalDataObject.locale = {
 		["AutoBar"] = "AutoBar",
 		["CONFIG_WINDOW"] = "Configuration Window",
 		["SLASHCMD_LONG"] = "autobar",

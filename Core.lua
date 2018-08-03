@@ -14,27 +14,6 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- http://muffinmangames.com
 
 
-
---
--- The Update Cycle / Hierarchy
---
-
--- Initialize
--- UpdateCategories
--- UpdateCustomBars
--- UpdateCustomButtons
--- UpdateSpells
--- UpdateObjects
--- UpdateRescan
--- UpdateScan
--- UpdateAttributes
--- UpdateActive
--- UpdateButtons
-
--- In normal operation after one each of UpdateCategories through UpdateObjects, only UpdateRescan & down are required.
--- The Update functions can be called directly or via AutoBar.delay["UpdateButtons"].
--- Delayed calls allow multiple updates to clump & get dealt with at once, especially after combat ends.
-
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local LibKeyBound = LibStub("LibKeyBound-1.0")
@@ -42,22 +21,43 @@ local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local AceOO = AceLibrary("AceOO-2.0")
 local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
-local L
 local _
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
+AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
+local tick = ABGData.TickScheduler
 
--- List of [spellName] = <GetSpellInfo Name>
-AutoBar.spellNameList = {}
--- List of [spellName] = <GetSpellInfo Icon>
-AutoBar.spellIconList = {}
+local ABSchedulerTickLength = 0.07
+
+AutoBar.inWorld = false
+AutoBar.inCombat = nil		-- For item use restrictions
+AutoBar.inBG = false		-- For battleground only items
+AutoBar.initialized = false;
+
+-- List of barKey = barDB (the correct DB to use between char, class or account)
+AutoBar.barButtonsDBList = {}
+AutoBar.barLayoutDBList = {}
+AutoBar.barPositionDBList = {}
+
+-- List of Bar Names
+AutoBar.barValidateList = {}
+
+-- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
+AutoBar.buttonDBList = {}
+
+-- List of buttonKey for Buttons not currently placed on a Bar
+AutoBar.unplacedButtonList = {}
+
+-- List of buttonName = AutoBarButton
+AutoBar.buttonList = {}
+
+-- List of buttonName = AutoBarButton for disabled buttons
+AutoBar.buttonListDisabled = {}
 
 AutoBar.events = {}
-
-AutoBar.delay = {}
 
 AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
@@ -65,36 +65,109 @@ AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
+AutoBar.dockingFramesValidateList = {
+	["NONE"] = L["None"],
+	["BT3Bar1"] = L["AUTOBAR_CONFIG_BT3BAR"]..1,
+	["BT3Bar2"] = L["AUTOBAR_CONFIG_BT3BAR"]..2,
+	["BT3Bar3"] = L["AUTOBAR_CONFIG_BT3BAR"]..3,
+	["BT3Bar4"] = L["AUTOBAR_CONFIG_BT3BAR"]..4,
+	["BT3Bar6"] = L["AUTOBAR_CONFIG_BT3BAR"]..6,
+	["BT3Bar10"] = L["AUTOBAR_CONFIG_BT3BAR"]..10,
+	["MainMenuBarArtFrame"] = L["AUTOBAR_CONFIG_DOCKTOMAIN"],
+	["ChatFrame1"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAME"],
+	["ChatFrameMenuButton"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"],
+	["MainMenuBar"] = L["AUTOBAR_CONFIG_DOCKTOACTIONBAR"],
+	["CharacterMicroButton"] = L["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"],
+}
+
+AutoBar.dockingFrames = {
+	["NONE"] = {
+		text = L["None"],
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["BT3Bar1"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..1,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["BT3Bar2"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..2,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["BT3Bar3"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..3,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["BT3Bar4"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..4,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "BOTTOMLEFT" },
+	},
+	["BT3Bar6"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..6,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["BT3Bar10"] = {
+		text = L["AUTOBAR_CONFIG_BT3BAR"]..10,
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["MainMenuBarArtFrame"] = {
+		text = L["AUTOBAR_CONFIG_DOCKTOMAIN"],
+		offset = { x = 0, y = 0, point = "CENTER", relative = "TOPRIGHT" },
+	},
+	["ChatFrame1"] = {
+		text = L["AUTOBAR_CONFIG_DOCKTOCHATFRAME"],
+		offset = { x = 0, y = 25, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["ChatFrameMenuButton"] = {
+		text = L["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"],
+		offset = { x = 0, y = 25, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["MainMenuBar"] = {
+		text = L["AUTOBAR_CONFIG_DOCKTOACTIONBAR"],
+		offset = { x = 7, y = 40, point = "CENTER", relative = "TOPLEFT" },
+	},
+	["CharacterMicroButton"] = {
+		text = L["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"],
+		offset = { x = 0, y = 0, point = "CENTER", relative = "BOTTOMLEFT" },
+	},
+}
 
 
 
---/run AutoBar:FrameInsp(ActionButton3)
-function AutoBar:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
+-- Single parent for key binding overides, and event handling
+AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 
-	local frame = p_frame
+AutoBar.frame:SetScript("OnEvent",
+	function(self, event, ...)
 
-	print("Type:", frame:GetAttribute("type"),"type1:", frame:GetAttribute("type1"), "type2:", frame:GetAttribute("type2"), "ItemID:", frame:GetAttribute("itemID"), "Category:", frame:GetAttribute("category") )
-	print("Item:", frame:GetAttribute("item"))
-	print("State:", frame:GetAttribute("state"))
-	print("Attribute:", frame:GetAttribute("attribute"))
-	print("Action:", frame:GetAttribute("action"),"Action1:", frame:GetAttribute("action1"), "Action2:", frame:GetAttribute("action2"), "ActionPage:", frame:GetAttribute("actionpage"))
-	print("Macro:", frame:GetAttribute("macro"), "MacroText:", frame:GetAttribute("macrotext"))
-	print("Spell:", frame:GetAttribute("spell"), "Spell1:", frame:GetAttribute("spell1"), "Spell2:", frame:GetAttribute("spell2"))
-	print("Unit:", frame:GetAttribute("unit"), "HelpButton:", frame:GetAttribute("helpbutton"), "harmbutton:", frame:GetAttribute("harmbutton"))
+		-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
+		-- PLAYER_ENTERING_WORLD runs before the throttling stuff is set up and doesn't need it anyway
+		if(event == "BAG_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
+			AutoBar.events[event](AutoBar, ...)
+			return
+		end
 
-end
+		--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
+		if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
+			return
+		end
 
+		if(AutoBar.db.account.throttle_event_limit > 0) then
+			local timer_name = event .. "_last_tick"
+			local now = GetTime()
+			AutoBar[timer_name] = AutoBar[timer_name] or 0
 
-function AutoBar:GetSpellNameByName(p_name)
+			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
+				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
+				return
+			end
+			AutoBar[timer_name] = now
+		end
 
-	if (AutoBar.spellNameList[p_name]) then
-		return AutoBar.spellNameList[p_name]
-	end
+		AutoBar.events[event](AutoBar, ...)
+	end)
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. p_name)
+AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
-	return nil
-end
 
 -- Process a macro to determine what its "action" is:
 --		a spell
@@ -113,7 +186,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 		local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
 		if(show_tt_action) then
 			action = show_tt_action
-			tooltip = GetSpellLink(action) or select(2,GetItemInfo(action))
+			tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
 		end
 	end
 	
@@ -127,7 +200,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 			
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
-				tooltip = GetSpellLink(action) or select(2, GetItemInfo(action))
+				tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
 			end
 		end
 
@@ -136,6 +209,8 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	if(action) then 
 		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
+
+	if(tooltip == "") then tooltip = nil; end; -- If not found, GetSpellLink can return an empty string
 
 	return action, icon, tooltip
 end
@@ -155,161 +230,7 @@ function AutoBar:ConfigToggle()
 end
 
 
-function AutoBar:OnInitialize()
-	L = AutoBar.locale
-	BINDING_HEADER_AUTOBAR_SEP = L["AutoBar"];
-	BINDING_NAME_AUTOBAR_CONFIG = L["CONFIG_WINDOW"];
-
-	BINDING_HEADER_AutoBarButtonHeader = L["AutoBarButtonHeader"]
-	BINDING_NAME_AutoBarButtonHearth_X = L["AutoBarButtonHearth"]
-	BINDING_NAME_AutoBarButtonMount_X = L["AutoBarButtonMount"]
-	BINDING_NAME_AutoBarButtonBandages_X = L["AutoBarButtonBandages"]
-	BINDING_NAME_AutoBarButtonCrafting_X = L["AutoBarButtonCrafting"]
-	BINDING_NAME_AutoBarButtonHeal_X = L["AutoBarButtonHeal"]
-	BINDING_NAME_AutoBarButtonRecovery_X = L["AutoBarButtonRecovery"]
-	BINDING_NAME_AutoBarButtonFood_X = L["AutoBarButtonFood"]
-	BINDING_NAME_AutoBarButtonWater_X = L["AutoBarButtonWater"]
-	BINDING_NAME_AutoBarButtonFoodBuff_X = L["AutoBarButtonFoodBuff"]
-	BINDING_NAME_AutoBarButtonFoodCombo_X = L["AutoBarButtonFoodCombo"]
-	BINDING_NAME_AutoBarButtonBuff_X = L["AutoBarButtonBuff"]
-	BINDING_NAME_AutoBarButtonBuffWeapon1_X = L["AutoBarButtonBuffWeapon1"]
-
-	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
-	BINDING_NAME_AutoBarButtonCharge_X = L["AutoBarButtonCharge"]
-	BINDING_NAME_AutoBarButtonClassBuff_X = L["AutoBarButtonClassBuff"]
-	BINDING_NAME_AutoBarButtonShields_X = L["AutoBarButtonShields"]
-	BINDING_NAME_AutoBarButtonClassPet_X = L["AutoBarButtonClassPet"]
-	BINDING_NAME_AutoBarButtonFreeAction_X = L["AutoBarButtonFreeAction"]
-	BINDING_NAME_AutoBarButtonER_X = L["AutoBarButtonER"]
-	BINDING_NAME_AutoBarButtonExplosive_X = L["AutoBarButtonExplosive"]
-	BINDING_NAME_AutoBarButtonFishing_X = L["AutoBarButtonFishing"]
-	BINDING_NAME_AutoBarButtonBattleStandards_X = L["AutoBarButtonBattleStandards"]
-	BINDING_NAME_AutoBarButtonTrinket1_X = L["AutoBarButtonTrinket1"]
-	BINDING_NAME_AutoBarButtonTrinket2_X = L["AutoBarButtonTrinket2"]
-	BINDING_NAME_AutoBarButtonPets_X = L["AutoBarButtonPets"]
-	BINDING_NAME_AutoBarButtonQuest_X = L["AutoBarButtonQuest"]
-	BINDING_NAME_AutoBarButtonMiscFun_X = L["AutoBarButtonMiscFun"]
-	BINDING_NAME_AutoBarButtonGuildSpell_X = L["AutoBarButtonGuildSpell"]
-	BINDING_NAME_AutoBarButtonSpeed_X = L["AutoBarButtonSpeed"]
-	BINDING_NAME_AutoBarButtonStance_X = L["AutoBarButtonStance"]
-	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
-	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
-	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
-	BINDING_NAME_AutoBarButtonOrderHall_X = L["AutoBarButtonOrderHall"]
-
---	BINDING_NAME_AutoBarButtonToyBox_X = L["AutoBarButtonToyBox"]
-
-	BINDING_HEADER_AutoBarCooldownHeader = L["AutoBarCooldownHeader"]
-	BINDING_NAME_AutoBarButtonCooldownDrums_X = L["AutoBarButtonCooldownDrums"]
-	BINDING_NAME_AutoBarButtonCooldownPotionCombat_X = L["AutoBarButtonCooldownPotionCombat"]
-	BINDING_NAME_AutoBarButtonCooldownPotionHealth_X = L["AutoBarButtonCooldownPotionHealth"]
-	BINDING_NAME_AutoBarButtonCooldownStoneHealth_X = L["AutoBarButtonCooldownStoneHealth"]
-	BINDING_NAME_AutoBarButtonCooldownPotionMana_X = L["AutoBarButtonCooldownPotionMana"]
-	BINDING_NAME_AutoBarButtonCooldownStoneMana_X = L["AutoBarButtonCooldownStoneMana"]
-	BINDING_NAME_AutoBarButtonCooldownPotionRejuvenation_X = L["AutoBarButtonCooldownPotionRejuvenation"]
-	BINDING_NAME_AutoBarButtonCooldownStoneRejuvenation_X = L["AutoBarButtonCooldownStoneRejuvenation"]
-
-	BINDING_HEADER_AutoBarClassBarHeader = L["AutoBarClassBarHeader"]
-	BINDING_NAME_AutoBarButtonDebuff_X = L["AutoBarButtonDebuff"]
-
-	BINDING_HEADER_AutoBarClassBarDeathKnight = L["AutoBarClassBarDeathKnight"]
-	BINDING_HEADER_AutoBarClassBarMonk = L["AutoBarClassBarMonk"]
-	BINDING_HEADER_AutoBarClassBarDemonHunter = L["AutoBarClassBarDemonHunter"]
-
-	BINDING_HEADER_AutoBarClassBarDruid = L["AutoBarClassBarDruid"]
-	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
-	BINDING_NAME_AutoBarButtonBoomkinTree_X = L["AutoBarButtonBoomkinTree"]
-	BINDING_NAME_AutoBarButtonCat_X = L["AutoBarButtonCat"]
-	BINDING_NAME_AutoBarButtonTravel_X = L["AutoBarButtonTravel"]
-
-	BINDING_HEADER_AutoBarClassBarHunter = L["AutoBarClassBarHunter"]
-	BINDING_NAME_AutoBarButtonFoodPet_X = L["AutoBarButtonFoodPet"]
-	BINDING_NAME_AutoBarButtonTrap_X = L["AutoBarButtonTrap"]
-
-	BINDING_HEADER_AutoBarClassBarMage = L["AutoBarClassBarMage"]
-
-	BINDING_HEADER_AutoBarClassBarPaladin = L["AutoBarClassBarPaladin"]
-
-	BINDING_HEADER_AutoBarClassBarPriest = L["AutoBarClassBarPriest"]
-
-	BINDING_HEADER_AutoBarClassBarRogue = L["AutoBarClassBarRogue"]
-	BINDING_NAME_AutoBarButtonPickLock_X = L["AutoBarButtonPickLock"]
-
-	BINDING_HEADER_AutoBarClassBarShaman = L["AutoBarClassBarShaman"]
-	BINDING_NAME_AutoBarButtonTotemAir_X = L["AutoBarButtonTotemAir"]
-	BINDING_NAME_AutoBarButtonTotemEarth_X = L["AutoBarButtonTotemEarth"]
-	BINDING_NAME_AutoBarButtonTotemFire_X = L["AutoBarButtonTotemFire"]
-	BINDING_NAME_AutoBarButtonTotemWater_X = L["AutoBarButtonTotemWater"]
-
-	BINDING_HEADER_AutoBarClassBarWarlock = L["AutoBarClassBarWarlock"]
-
-	BINDING_HEADER_AutoBarClassBarWarrior = L["AutoBarClassBarWarrior"]
-
-	AutoBar.dockingFramesValidateList = {
-		["NONE"] = L["None"],
-		["BT3Bar1"] = L["AUTOBAR_CONFIG_BT3BAR"]..1,
-		["BT3Bar2"] = L["AUTOBAR_CONFIG_BT3BAR"]..2,
-		["BT3Bar3"] = L["AUTOBAR_CONFIG_BT3BAR"]..3,
-		["BT3Bar4"] = L["AUTOBAR_CONFIG_BT3BAR"]..4,
-		["BT3Bar6"] = L["AUTOBAR_CONFIG_BT3BAR"]..6,
-		["BT3Bar10"] = L["AUTOBAR_CONFIG_BT3BAR"]..10,
-		["MainMenuBarArtFrame"] = L["AUTOBAR_CONFIG_DOCKTOMAIN"],
-		["ChatFrame1"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAME"],
-		["ChatFrameMenuButton"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"],
-		["MainMenuBar"] = L["AUTOBAR_CONFIG_DOCKTOACTIONBAR"],
-		["CharacterMicroButton"] = L["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"],
-	}
-
-	AutoBar.dockingFrames = {
-		["NONE"] = {
-			text = L["None"],
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["BT3Bar1"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..1,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["BT3Bar2"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..2,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["BT3Bar3"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..3,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["BT3Bar4"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..4,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "BOTTOMLEFT" },
-		},
-		["BT3Bar6"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..6,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["BT3Bar10"] = {
-			text = L["AUTOBAR_CONFIG_BT3BAR"]..10,
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["MainMenuBarArtFrame"] = {
-			text = L["AUTOBAR_CONFIG_DOCKTOMAIN"],
-			offset = { x = 0, y = 0, point = "CENTER", relative = "TOPRIGHT" },
-		},
-		["ChatFrame1"] = {
-			text = L["AUTOBAR_CONFIG_DOCKTOCHATFRAME"],
-			offset = { x = 0, y = 25, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["ChatFrameMenuButton"] = {
-			text = L["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"],
-			offset = { x = 0, y = 25, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["MainMenuBar"] = {
-			text = L["AUTOBAR_CONFIG_DOCKTOACTIONBAR"],
-			offset = { x = 7, y = 40, point = "CENTER", relative = "TOPLEFT" },
-		},
-		["CharacterMicroButton"] = {
-			text = L["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"],
-			offset = { x = 0, y = 0, point = "CENTER", relative = "BOTTOMLEFT" },
-		},
-	}
+function AutoBar:InitializeZero()
 
 	AutoBar.player_faction_name = UnitFactionGroup("player")
 	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
@@ -319,85 +240,17 @@ function AutoBar:OnInitialize()
 
 	AutoBar:RegisterDB("AutoBarDB", nil, "class")
 
-	AutoBar.inWorld = false
-	AutoBar.inCombat = nil		-- For item use restrictions
-	AutoBar.inBG = false		-- For battleground only items
-
-	-- Single parent for key binding overides, and event handling
-	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
-	AutoBar.frame:SetScript("OnEvent",
-		function(self, event, ...)
-
-			-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
-			if(event == "BAG_UPDATE") then
-				AutoBar.events[event](AutoBar, ...)
-				return
-			end
-
-			--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
-			if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
-				return
-			end
-
-			if(AutoBar.db.account.throttle_event_limit > 0) then
-				local timer_name = event .. "_last_tick"
-				local now = GetTime()
-				AutoBar[timer_name] = AutoBar[timer_name] or 0
-
-				if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
-					if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
-					return
-				end
-				AutoBar[timer_name] = now
-			end
-
-			AutoBar.events[event](AutoBar, ...)
-		end)
-
-	-- List of barKey = barDB (the correct DB to use between char, class or account)
-	AutoBar.barButtonsDBList = {}
-	AutoBar.barLayoutDBList = {}
-	AutoBar.barPositionDBList = {}
-
-	-- List of Bar Names
-	AutoBar.barValidateList = {}
-
-	-- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
-	AutoBar.buttonDBList = {}
-
-	-- List of buttonKey for Buttons not currently placed on a Bar
-	AutoBar.unplacedButtonList = {}
-
-	-- List of buttonName = AutoBarButton
-	AutoBar.buttonList = {}
-
-	-- List of buttonName = AutoBarButton for disabled buttons
-	AutoBar.buttonListDisabled = {}
-
---	AutoBar.db.account.performance = true
-	AutoBar:LogEvent("OnInitialize")
+	AutoBar:LogEvent("InitializeZero")
 	AutoBar:InitializeDB()
 	AutoBarCategory:Upgrade()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()
---	AutoBar.db.account.performance = false
---print("--> FullyInitialized")
-	AutoBar:RegisterEvent("AceEvent_FullyInitialized", "FullyInitialized")
-end
 
-function AutoBar:FullyInitialized()
---print("<-- FullyInitialized")
-	AutoBar.enableBindings = true
-	AutoBar:UpdateCategories()
---	AutoBar.delay["UpdateObjects"]:Start()
-end
+	ABGCS:UpdateCategories(true)
+	self:RegisterOverrideBindings()
+	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 
-function AutoBar:OnEnable(first)
-	self:LogEvent("OnEnable")
 
-	-- Called when the addon is enabled
-	AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-	AutoBar.frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
@@ -408,8 +261,6 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
 	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
-
-
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -440,10 +291,6 @@ function AutoBar:OnEnable(first)
 end
 
 
-function AutoBar:OnDisable()
-	-- Called when the addon is disabled
-	AutoBar:LogEvent("OnDisable")
-end
 
 local logItems = {}	-- n = startTime
 local logMemory = {}	-- n = startMemory
@@ -518,128 +365,13 @@ function AutoBar:RegisterOverrideBindings()
 end
 
 
--- Layered delayed callback objects
--- Timers lower down the list are superceded and cancelled by those higher up
-local timerList = {
-	{name = "AutoBarInit", 			timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCategories", 	timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCustomBars", 	timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCustomButtons",timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateSpells", 		timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateObjects", 		timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateRescan", 		timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateScan", 			timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateAttributes", 	timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateActive", 		timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateButtons", 		timer = nil, runPostCombat = false, callback = nil},
-}
-local timerIndexList = {
-	["AutoBarInit"] = 1,
-	["UpdateCategories"] = 2,
-	["UpdateCustomBars"] = 3,
-	["UpdateCustomButtons"] = 4,
-	["UpdateSpells"] = 5,
-	["UpdateObjects"] = 6,
-	["UpdateRescan"] = 7,
-	["UpdateScan"] = 8,
-	["UpdateAttributes"] = 9,
-	["UpdateActive"] = 10,
-	["UpdateButtons"] = 11,
-}
-local IDelayedCallback = AceOO.Interface { Callback = "function" }
-
-local DELAY_TIME = 0.08
-local DELAY_TIME_INCREMENTAL = 0.01
-
-local Delayed = AceOO.Class(IDelayedCallback)
-Delayed.virtual = true
-Delayed.prototype.postCombat = false -- Set to true to trigger call after combat
-Delayed.prototype.timerList = timerList
-Delayed.prototype.timerListIndex = 0
-Delayed.prototype.timerInfo = 0
-Delayed.prototype.name = "No Name"
-
-function Delayed.prototype:init(timerListIndex)
-	Delayed.super.prototype.init(self)
-	self.timerListIndex = timerListIndex
-	self.timerInfo = timerList[timerListIndex]
-	self.name = timerList[timerListIndex].name
---	print("Delayed.prototype:init " .. tostring(self.name))
-end
-
-function Delayed.prototype:Callback()
-	self.timerInfo.timer = nil
-end
-
--- Start the timer if appropriate
-function Delayed.prototype:Start(arg1, customDelay)
-	AutoBar:LogEvent("--> DELAYED ", self.name)
-
-	-- If in combat delay call till after combat
-	if (InCombatLockdown() or C_PetBattles.IsInBattle()) then
-		self.timerInfo.runPostCombat = true
-		return
-	end
-
-	local currentTime = GetTime()
-	local function MyCallback()
-		local myself = self
-		local arg1 = arg1
-		-- If in combat delay call till after combat
-		if (InCombatLockdown()or C_PetBattles.IsInBattle()) then
-			self.timerInfo.runPostCombat = true
-			return
-		end
-
---print("***MyCallback "..myself.name.." at  " .. tostring(GetTime()).." arg1  " .. tostring(arg1))
-		myself:Callback(arg1)
-	end
-
---print("***Delayed.prototype:Start "..self.name.." here ");
-	if (self.timerInfo.timer) then
---print("***Delayed.prototype:Start "..self.name.." extend timer at " .. currentTime);
-		-- Timer not expired, extend it
-		if (currentTime - self.timerInfo.timer > DELAY_TIME - DELAY_TIME_INCREMENTAL) then
-			-- Almost or already exceeding DELAY_TIME, so use a small incremental delay
-			AutoBar:CancelScheduledEvent(self.name)
-			AutoBar:ScheduleEvent(self.name, MyCallback, DELAY_TIME_INCREMENTAL)
-		else
-			-- Still more than DELAY_TIME_INCREMENTAL before the original timer so do not change it
-		end
-	else
-		-- Cancel if higher level timer already in progress
-		for i, timerInfo in ipairs(self.timerList) do
-			if (i < self.timerListIndex and timerInfo.timer) then
---print("***Delayed.prototype:Start cancel "..self.name.." because " .. timerInfo.name)
-				return
-			elseif (i == self.timerListIndex) then
-				break
-			end
-		end
-
-		-- Start new Timer
-		self.timerInfo.timer = currentTime;
-		AutoBar:ScheduleEvent(self.name, MyCallback, customDelay or DELAY_TIME)
---print("***Delayed.prototype:Start start "..self.name.." delay at " .. currentTime)
-
-		-- Cancel Superceded timers
-		for i, timerInfo in ipairs(self.timerList) do
-			if (i > self.timerListIndex and timerInfo.timer) then
-				AutoBar:CancelScheduledEvent(timerInfo.name)
-				timerInfo.timer = nil
-			end
-		end
-	end
---print("***Delayed.prototype:Start "..self.name.." end ");
-end
-
 
 function AutoBar.events:GET_ITEM_INFO_RECEIVED(p_item_id)
 	AutoBar:LogEventStart("GET_ITEM_INFO_RECEIVED", p_item_id)
 --local item_name = GetItemInfo(p_item_id)
 --print("GET_ITEM_INFO_RECEIVED", p_item_id, item_name)
 	AutoBar:ClearMissingItemFlag();
-	AutoBar.delay["UpdateScan"]:Start()
+	ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 
 	AutoBar:LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
 
@@ -666,7 +398,7 @@ function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
 	
 	if(link) then
 		add_item_to_dynamic_category(link, "Dynamic.Quest")
-		AutoBar.delay["UpdateScan"]:Start()
+		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 	end
 
 	AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
@@ -693,28 +425,33 @@ function AutoBar.events:QUEST_LOG_UPDATE(p_arg1)
 end
 
 
+
 function AutoBar.events:PLAYER_ENTERING_WORLD()
-	AutoBar.inCombat = nil
-	if (not AutoBar.initialized) then
 --print("   PLAYER_ENTERING_WORLD")
-		AutoBar.delay["UpdateCategories"]:Start()
+
+	if (not AutoBar.initialized) then
+		AutoBar:InitializeZero();
 		AutoBar.initialized = true;
 	end
 
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
---print("   PLAYER_ENTERING_WORLD")
-		AutoBar.delay["UpdateCategories"]:Start()
+
+		AutoBar:DumpWarningLog()
+
+		AB.show_whats_new();
 	end
 
-	AutoBar:DumpWarningLog()
-
-	AB.show_whats_new();
 
 	if(hack_PetActionBarFrame) then
 		PetActionBarFrame:EnableMouse(false);
 	end
 
+	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
+	ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+
+	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
 end
 
 
@@ -742,7 +479,7 @@ function AutoBar.events:BAG_UPDATE_DELAYED()
 			button:UpdateCount()
 		end
 	else
-		AutoBar.delay["UpdateScan"]:Start()
+		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
 	end
 
 	AutoBar:LogEventEnd("BAG_UPDATE_DELAYED")
@@ -751,10 +488,6 @@ end
 
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE_COOLDOWN")
-
-	if (not AutoBar:IsInLockDown()) then
-		AutoBar.delay["UpdateScan"]:Start(arg1)
-	end
 
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
@@ -780,29 +513,27 @@ end
 
 function AutoBar.events:ACTIONBAR_UPDATE_USABLE(arg1)
 	AutoBar:LogEvent("ACTIONBAR_UPDATE_USABLE", arg1)
-	if (AutoBar.inWorld) then
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateUsable()
-			end
-		else
-			AutoBar.delay["UpdateScan"]:Start(arg1)
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateUsable()
 		end
+	else
+		ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 	end
 end
 
 
 function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 	AutoBar:LogEvent("UPDATE_SHAPESHIFT_FORMS", arg1)
-	if (AutoBar.inWorld) then
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateUsable()
-			end
-		else
-			AutoBar.delay["UpdateScan"]:Start(arg1)
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateUsable()
 		end
 	end
+
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
@@ -812,22 +543,20 @@ function AutoBar.events:COMPANION_LEARNED(...)
 
 	AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
 
-	if (AutoBar.inWorld) then
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button and (companionType == "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
-		end
-
-		button = AutoBar.buttonList["AutoBarButtonPets"]
-		if (button and (companionType == "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB)
-		end
-
-		if(need_update) then
-			AutoBar.delay["UpdateCategories"]:Start()
-		end
-
+	local button = AutoBar.buttonList["AutoBarButtonMount"]
+	if (button and (companionType == "MOUNT")) then
+		button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 	end
+
+	button = AutoBar.buttonList["AutoBarButtonPets"]
+	if (button and (companionType ~= "MOUNT")) then
+		button:Refresh(button.parentBar, button.buttonDB)
+	end
+
+	if(need_update) then
+		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+	end
+
 
 	AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
 end
@@ -835,13 +564,13 @@ end
 
 function AutoBar.events:UPDATE_BINDINGS()
 	self:RegisterOverrideBindings()
-	AutoBar.delay["UpdateButtons"]:Start()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
 function AutoBar.events:LEARNED_SPELL_IN_TAB(arg1)
 	AutoBar:LogEvent("LEARNED_SPELL_IN_TAB", arg1)
-	AutoBar.delay["UpdateSpells"]:Start(arg1)
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
@@ -851,34 +580,22 @@ function AutoBar.events:SPELLS_CHANGED(arg1)
 		return
 	end
 	AutoBar:LogEvent("SPELLS_CHANGED", arg1)
-	if (AutoBar:IsInLockDown()) then
-		AutoBar:SetRegenEnableUpdate("UpdateSpells")
-	else
-		AutoBar.delay["UpdateSpells"]:Start(arg1)
-	end
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
 
 
 function AutoBar.events:PLAYER_CONTROL_GAINED()
 	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
-	AutoBar.delay["UpdateButtons"]:Start()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
-
-
-local regenEnableUpdate = "UpdateRescan"
-function AutoBar:SetRegenEnableUpdate(scanType)
-	if (timerIndexList[scanType] < timerIndexList[regenEnableUpdate]) then
-		regenEnableUpdate = scanType
-	end
-end
 
 
 function AutoBar.events:PLAYER_REGEN_ENABLED(arg1)
 	AutoBar:LogEvent("PLAYER_REGEN_ENABLED", arg1)
 	AutoBar.inCombat = nil
-	AutoBar.delay[regenEnableUpdate]:Start()
+
 --print("PLAYER_REGEN_ENABLED " .. tostring(self))
 end
 
@@ -901,26 +618,13 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 		LibKeyBound:Deactivate()
 	end
 --print("   PLAYER_REGEN_DISABLED")
-	if (self:IsEventScheduled("UpdateRescan")) then
-		self:CancelScheduledEvent("UpdateRescan")
-		AutoBarSearch.stuff:Reset()
-	elseif (self:IsEventScheduled("UpdateScan")) then
-		self:CancelScheduledEvent("UpdateScan")
-		AutoBarSearch.stuff:Scan()
-	elseif (self:IsEventScheduled("UpdateActive")) then
-		self:CancelScheduledEvent("UpdateActive")
-	elseif (self:IsEventScheduled("UpdateButtons")) then
-		self:CancelScheduledEvent("UpdateButtons")
-	end
-	AutoBar:UpdateActive()
+
+	ABGCS:UpdateActive()
 	AceCfgDlg:Close(appName)
-	AutoBar:SetRegenEnableUpdate("UpdateRescan")
 end
 
 function AutoBar.events:PET_BATTLE_CLOSE(arg1)
 	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-
-	AutoBar.delay[regenEnableUpdate]:Start()
 
 	-- AutoBar.in_pet_battle = false
 
@@ -938,11 +642,10 @@ function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
 			need_update = button:Refresh(button.parentBar, button.buttonDB, true)
 		end
 
---		if(need_update) then
-			AutoBar.delay["UpdateCategories"]:Start()
---		end
+		if(need_update) then
+			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+		end
 
-		--AutoBar.delay["UpdateSpells"]:Start()
 	end
 
 	AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
@@ -951,7 +654,7 @@ end
 
 function AutoBar.events:PLAYER_ALIVE(arg1)
 	AutoBar:LogEvent("PLAYER_ALIVE", arg1)
-	AutoBar.delay["UpdateButtons"]:Start()
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
@@ -962,16 +665,14 @@ function AutoBar.events:UNIT_AURA(arg1)
 		end
 	else
 		AutoBar:LogEvent("UNIT_AURA", arg1)
-		AutoBar.delay["UpdateButtons"]:Start()
+		ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 	end
 end
 
 
 function AutoBar.events:PLAYER_UNGHOST(arg1)
-	if (not InCombatLockdown()) then
-		AutoBar:LogEvent("PLAYER_UNGHOST", arg1)
-		AutoBar.delay["UpdateButtons"]:Start()
-	end
+	AutoBar:LogEvent("PLAYER_UNGHOST", arg1)
+	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
 
@@ -988,7 +689,7 @@ function AutoBar.events:UPDATE_BATTLEFIELD_STATUS()
 		end
 		if (AutoBar.inBG ~= bgStatus) then
 			AutoBar.inBG = bgStatus
-			AutoBar.delay["UpdateActive"]:Start()
+			ABGCS:UpdateActive();
 		end
 	end
 end
@@ -1033,7 +734,7 @@ end
 -- UpdateCustomButtons
 --		Based on the current db, add or remove Custom Buttons
 -- UpdateSpells
---		Rescan all registerred spells
+--		Rescan all registered spells
 --		This is on a less frequent cycle than UpdateScan.  Called on leveling or spellbook changes.
 --		ToDo: Also trigger on spec changes
 -- UpdateObjects
@@ -1081,338 +782,7 @@ function AutoBar:Initialize()
 --AutoBarSearch:Test()
 end
 
--- Complete reload of everything.  Dump most old data structures.
-local DelayedInitialize = AceOO.Class(Delayed)
 
-function DelayedInitialize.prototype:init(timerListIndex)
-	DelayedInitialize.super.prototype.init(self, timerListIndex)
-end
-
-function DelayedInitialize.prototype:Callback()
---print("   DelayedInitialize.prototype:Callback  self " .. tostring(self))
-	DelayedInitialize.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedInitialize <--")
-	AutoBar:Initialize()
-	AutoBar:UpdateCategories()
-end
-
-
-
-local otherStickyFrames = {
-	"GridLayoutFrame",
-}
-
--- Based on the current db, add or remove Custom Categories
--- ToDo: support scheme for mutable categories like pet food.
-function AutoBar:UpdateCategories()
-	if (otherStickyFrames) then
-		local delete = true
-		for index, stickyFrame in pairs(otherStickyFrames) do
-			if (_G[stickyFrame]) then
---print("AutoBar:OnEnable " .. tostring(index) .. "  " .. tostring(stickyFrame))
-				LibStickyFrames:RegisterFrame(_G[stickyFrame])
-			else
-				delete = false
-			end
-		end
-		if (delete) then
-			otherStickyFrames = nil
-		end
-	end
-
-	if (not InCombatLockdown()) then
-		self:LogEventStart("AutoBar:UpdateCategories")
-		AutoBarCategory:UpdateCustomCategories()
-		self:UpdateCustomBars()
-		self:LogEventEnd("AutoBar:UpdateCategories")
-	else
-		self:LogEvent("AutoBar:UpdateCategories InCombatLockdown")
-		AutoBar:SetRegenEnableUpdate("UpdateCategories")
-	end
-end
-
-local DelayedUpdateCategories = AceOO.Class(Delayed)
-
-function DelayedUpdateCategories.prototype:init()
-	DelayedUpdateCategories.super.prototype.init(self, timerIndexList["UpdateCategories"])
-end
-
-function DelayedUpdateCategories.prototype:Callback()
-	DelayedUpdateCategories.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateCategories <--")
-	if (not InCombatLockdown()) then
-		AutoBar:UpdateCategories()
-	end
-end
-
-
-
--- Based on the current db, add Custom Bars that match player CLASS
--- Update shared state
-function AutoBar:UpdateCustomBars()
-	self:LogEventStart("AutoBar:UpdateCustomBars")
-	self:UpdateCustomButtons()
-
-	self:LogEventEnd("AutoBar:UpdateCustomBars")
-end
-
-local DelayedUpdateCustomBars = AceOO.Class(Delayed)
-
-function DelayedUpdateCustomBars.prototype:init()
-	DelayedUpdateCustomBars.super.prototype.init(self, timerIndexList["UpdateCustomBars"])
-end
-
-function DelayedUpdateCustomBars.prototype:Callback()
-	DelayedUpdateCustomBars.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateCustomBars <--")
-	AutoBar:UpdateCustomBars()
-end
-
-
-
--- Based on the current db, add Custom Buttons used by existing Bars
-function AutoBar:UpdateCustomButtons()
-	self:LogEventStart("AutoBar:UpdateCustomButtons")
-
-	self:UpdateSpells()
-
-	self:LogEventEnd("AutoBar:UpdateCustomButtons")
-end
-
-local DelayedUpdateCustomButtons = AceOO.Class(Delayed)
-
-function DelayedUpdateCustomButtons.prototype:init()
-	DelayedUpdateCustomButtons.super.prototype.init(self, timerIndexList["UpdateCustomButtons"])
-end
-
-function DelayedUpdateCustomButtons.prototype:Callback()
-	DelayedUpdateCustomButtons.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateCustomButtons <--")
-	AutoBar:UpdateCustomButtons()
-end
-
-
-
--- Rescan all registered spells
-function AutoBar:UpdateSpells()
-	self:LogEventStart("AutoBar:UpdateSpells")
-	AutoBarSearch.stuff:ScanSpells()
-	AutoBarSearch.stuff:ScanMacros()
-	AutoBarCategory:UpdateCategories()
---	AutoBar:RefreshButtons()
-	-- ToDo: update on learn.
-	self:UpdateObjects()
-	self:LogEventEnd("AutoBar:UpdateSpells")
-end
-
-local DelayedUpdateSpells = AceOO.Class(Delayed)
-
-function DelayedUpdateSpells.prototype:init()
-	DelayedUpdateSpells.super.prototype.init(self, timerIndexList["UpdateSpells"])
-end
-
-function DelayedUpdateSpells.prototype:Callback()
-	DelayedUpdateSpells.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateSpells <--")
-	AutoBar:UpdateSpells()
-end
-
-
--- Based on the current db, instantiate or refresh Bars, Buttons, Popups
-function AutoBar:UpdateObjects()
-	self:LogEventStart("AutoBar:UpdateObjects")
-	local barLayoutDBList = AutoBar.barLayoutDBList
-	local bar
-	for barKey, barDB in pairs(barLayoutDBList) do
-		if (barDB.enabled and barDB[AutoBar.CLASS]) then
---print("UpdateObjects barKey " .. tostring(barKey) .. " AutoBar.CLASS " .. tostring(AutoBar.CLASS) .. " barDB[AutoBar.CLASS] " .. tostring(barDB[AutoBar.CLASS]))
-			if (AutoBar.barList[barKey]) then
-				AutoBar.barList[barKey]:UpdateObjects()
-			else
-				AutoBar.barList[barKey] = AutoBar.Class.Bar:new(barKey)
---print("UpdateObjects barKey " .. tostring(barKey) .. " Name " .. tostring(AutoBar.barList[barKey].barName))
-			end
-			bar = AutoBar.barList[barKey]
-			LibStickyFrames:SetFrameEnabled(bar.frame, true)
-			LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
-			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
-		elseif (AutoBar.barList[barKey]) then
---print("UpdateObjects barKey " .. tostring(barKey) .. " Hide " .. tostring(AutoBar.barList[barKey].barName))
-			bar = AutoBar.barList[barKey]
-			bar.frame:Hide()
-			LibStickyFrames:SetFrameEnabled(bar.frame)
-			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
-		end
-	end
-	self:UpdateRescan()
-	self:LogEventEnd("AutoBar:UpdateObjects")
-end
--- /script AutoBar.barList["AutoBarClassBarExtras"].frame:Hide()
--- /dump AutoBar.barList["AutoBarClassBarHunter"].buttonList
-
-local DelayedUpdateObjects = AceOO.Class(Delayed)
-
-function DelayedUpdateObjects.prototype:init()
-	DelayedUpdateObjects.super.prototype.init(self, timerIndexList["UpdateObjects"])
-end
-
-function DelayedUpdateObjects.prototype:Callback()
-	DelayedUpdateObjects.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateObjects <--")
-	AutoBar:UpdateObjects()
-end
-
-
-
--- Rescan all bags and inventory from scratch based on current Buttons and their Categories
-function AutoBar:UpdateRescan()
-	self:LogEventStart("AutoBar:UpdateRescan")
-	AutoBarSearch:Reset()
-	self:UpdateAttributes()
-	self:LogEventEnd("AutoBar:UpdateRescan")
-end
-
-local DelayedUpdateRescan = AceOO.Class(Delayed)
-
-function DelayedUpdateRescan.prototype:init()
-	DelayedUpdateRescan.super.prototype.init(self, timerIndexList["UpdateRescan"])
-end
-
-function DelayedUpdateRescan.prototype:Callback()
-	DelayedUpdateRescan.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateRescan <--")
-	AutoBar:UpdateRescan()
-end
-
-
-
--- Scan all bags and inventory based on current Buttons and their Categories
-function AutoBar:UpdateScan()
-	self:LogEventStart("AutoBar:UpdateScan")
-	AutoBarSearch:UpdateScan()
-	self:UpdateAttributes()
-	self:LogEventEnd("AutoBar:UpdateScan")
-end
-
-local DelayedUpdateScan = AceOO.Class(Delayed)
-
-function DelayedUpdateScan.prototype:init()
-	DelayedUpdateScan.super.prototype.init(self, timerIndexList["UpdateScan"])
-end
-
-function DelayedUpdateScan.prototype:Callback()
-	DelayedUpdateScan.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateScan <--")
-	AutoBar:UpdateScan()
-end
-
-
-
--- Based on the current Scan results, update the Button and Popup Attributes
--- Create Popup Buttons as needed
-function AutoBar:UpdateAttributes()
-	self:LogEventStart("AutoBar:UpdateAttributes")
-	for barKey, bar in pairs(AutoBar.barList) do
-		bar:UpdateAttributes()
-	end
-	self:UpdateActive()
-	self:LogEventEnd("AutoBar:UpdateAttributes")
-end
-
-local DelayedUpdateAttributes = AceOO.Class(Delayed)
-
-function DelayedUpdateAttributes.prototype:init()
-	DelayedUpdateAttributes.super.prototype.init(self, timerIndexList["UpdateAttributes"])
-end
-
-function DelayedUpdateAttributes.prototype:Callback()
-	DelayedUpdateAttributes.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateAttributes <--")
-	AutoBar:UpdateAttributes()
-end
-
-
-
--- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
-function AutoBar:UpdateActive()
-	self:LogEventStart("AutoBar:UpdateActive")
-	for barKey, bar in pairs(AutoBar.barList) do
-		bar:UpdateActive()
-		bar:RefreshLayout()
-	end
-	self:UpdateButtons()
-	self:LogEventEnd("AutoBar:UpdateActive")
-end
-
-local DelayedUpdateActive = AceOO.Class(Delayed)
-
-function DelayedUpdateActive.prototype:init()
-	DelayedUpdateActive.super.prototype.init(self, timerIndexList["UpdateActive"])
-end
-
-function DelayedUpdateActive.prototype:Callback()
-	DelayedUpdateActive.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateActive <--")
-	AutoBar:UpdateActive()
-end
-
-
-
--- Based on the active Bars and their Buttons display them
-function AutoBar:UpdateButtons()
-	self:LogEventStart("AutoBar:UpdateButtons")
-	for buttonName, button in pairs(self.buttonListDisabled) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   AutoBar:UpdateButtons Disabled " .. buttonName); end;
-		button:Disable()
-		--I don't see why we should update all of these if they're disabled.
-		--button:UpdateCooldown()
-		--button:UpdateCount()
-		--button:UpdateHotkeys()
-		--button:UpdateIcon()
-		--button:UpdateUsable()
-	end
-	for buttonKey, button in pairs(self.buttonList) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   AutoBar:UpdateButtons Enabled " .. buttonKey); end;
-		assert(button.buttonDB.enabled, "In list but disabled " .. buttonKey)
-		button:SetupButton()
-		button:UpdateCooldown()
-		button:UpdateCount()
-		button:UpdateHotkeys()
-		button:UpdateIcon()
-		button:UpdateUsable()
-	end
-	if (self.enableBindings) then
-		self:RegisterOverrideBindings()
-		AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
-		self.enableBindings = nil
---print("<-- enableBindings")
-	end
-	self:LogEventEnd("AutoBar:UpdateButtons", " #buttons " .. tostring(# self.buttonList))
-end
-
-local DelayedUpdateButtons = AceOO.Class(Delayed)
-
-function DelayedUpdateButtons.prototype:init()
-	DelayedUpdateButtons.super.prototype.init(self, timerIndexList["UpdateButtons"])
-end
-
-function DelayedUpdateButtons.prototype:Callback()
-	DelayedUpdateButtons.super.prototype.Callback(self)
-	AutoBar:LogEvent("DelayedUpdateButtons <--")
-	AutoBar:UpdateButtons()
-end
-
-
-AutoBar.delayInitialize = DelayedInitialize:new(timerIndexList["AutoBarInit"])
-AutoBar.delay["UpdateCategories"] = DelayedUpdateCategories:new()
-AutoBar.delay["UpdateCustomBars"] = DelayedUpdateCustomBars:new()
-AutoBar.delay["UpdateCustomButtons"] = DelayedUpdateCustomButtons:new()
-AutoBar.delay["UpdateSpells"] = DelayedUpdateSpells:new()
-AutoBar.delay["UpdateObjects"] = DelayedUpdateObjects:new()
-AutoBar.delay["UpdateRescan"] = DelayedUpdateRescan:new()
-AutoBar.delay["UpdateScan"] = DelayedUpdateScan:new()
-AutoBar.delay["UpdateActive"] = DelayedUpdateActive:new()
-AutoBar.delay["UpdateButtons"] = DelayedUpdateButtons:new()
 
 
 --
@@ -1541,7 +911,7 @@ function AutoBar:MoveButtonsModeOn()
 			bar:MoveButtonsModeOn()
 		end
 	end
-	self:UpdateActive()
+	ABGCS:UpdateActive()
 	if (AutoBarFuBar) then
 		AutoBarFuBar:UpdateDisplay()
 	end
@@ -1554,7 +924,7 @@ function AutoBar:MoveButtonsModeOff()
 			bar:MoveButtonsModeOff()
 		end
 	end
-	self:UpdateActive()
+	ABGCS:UpdateActive()
 	if (AutoBarFuBar) then
 		AutoBarFuBar:UpdateDisplay()
 	end
@@ -1741,7 +1111,7 @@ function AutoBar:FindNamelessCategories()
 
 	local nameless = ""
 	for key in pairs(AutoBarCategoryList) do
-		if(AutoBar.locale[key] == nil) then
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
 			nameless = nameless .. "|n" .. key
 		end
 	end
@@ -1763,5 +1133,206 @@ function AutoBar:SetMissingItemFlag(p_item)
 	l_missing_item_count = l_missing_item_count + 1
 	--print("AutoBar.missing_items = true, (", p_item, ") - ", l_missing_item_count)
 
+end
+
+
+
+
+
+
+-------------------------------------------------------------------------
+--
+-- AutoBar Scheduler
+--
+-------------------------------------------------------------------------
+
+function ABGCS:ABScheduleUpdate(p_update_id)
+
+--print("ABGCS:ABScheduleUpdate", p_update_id);
+	if ((tick.ScheduledUpdate == nil) or (p_update_id < tick.ScheduledUpdate)) then
+		tick.ScheduledUpdate = p_update_id;
+	end
+
+end
+
+
+function AutoBar:ABSchedulerTick()
+--print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate)
+	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
+
+	--If we're in combat, catch it on the next tick so we don't cause a hitch in gameplay
+	if (AutoBar:IsInLockDown()) then
+		return;
+	end
+
+	if(tick.ScheduledUpdate == nil) then	--Nothing scheduled to do, so return
+		return;
+	end
+
+	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
+		ABGCS:UpdateCategories();
+	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
+		ABGCS:UpdateSpells();
+	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
+		ABGCS:UpdateObjects();
+	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
+		ABGCS:UpdateItems();
+	else
+--print("     ", "Not sure what's happening", tick.ScheduledUpdate)
+	end
+
+	tick.ScheduledUpdate = nil
+end
+
+function ABGCS:UpdateCategories()
+--	print("ABGCS:UpdateCategories");
+
+	--TODO: Review sticky frame handling. This code could be cleaned up
+	--TODO: Split this out to its own function
+	if (tick.OtherStickyFrames) then
+		local delete = true
+		for index, stickyFrame in pairs(tick.OtherStickyFrames) do
+			if (_G[stickyFrame]) then
+--print("     ABGCS:UpdateCategories " .. tostring(index) .. "  " .. tostring(stickyFrame))
+				LibStickyFrames:RegisterFrame(_G[stickyFrame])
+			else
+				delete = false
+			end
+		end
+		if (delete) then
+			otherStickyFrames = nil
+		end
+	end
+
+	if (not InCombatLockdown()) then
+		AutoBar:LogEventStart("ABGCS:UpdateCategories")
+		tick.ScheduledUpdate = nil;
+		AutoBarCategory:UpdateCustomCategories()
+		ABGCS:UpdateSpells();
+		AutoBar:LogEventEnd("ABGCS:UpdateCategories")
+	else
+		AutoBar:LogEvent("ABGCS:UpdateCategories InCombatLockdown. Scheduling UpdateCategories")
+		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID)
+	end
+
+end
+
+function ABGCS:UpdateSpells()
+	AutoBar:LogEventStart("ABGCS:UpdateSpells")
+
+	AutoBarSearch.stuff:ScanSpells()
+	AutoBarSearch.stuff:ScanMacros()
+	AutoBarCategory:UpdateCategories()
+
+	ABGCS:UpdateObjects();
+
+	AutoBar:LogEventEnd("ABGCS:UpdateSpells")
+
+end
+
+function ABGCS:UpdateObjects()
+
+	AutoBar:LogEventStart("ABGCS:UpdateObjects")
+	local barLayoutDBList = AutoBar.barLayoutDBList
+	local bar
+	for barKey, barDB in pairs(barLayoutDBList) do
+		if (barDB.enabled and barDB[AutoBar.CLASS]) then
+--print("UpdateObjects barKey " .. tostring(barKey) .. " AutoBar.CLASS " .. tostring(AutoBar.CLASS) .. " barDB[AutoBar.CLASS] " .. tostring(barDB[AutoBar.CLASS]))
+			if (AutoBar.barList[barKey]) then
+				AutoBar.barList[barKey]:UpdateObjects()
+			else
+				AutoBar.barList[barKey] = AutoBar.Class.Bar:new(barKey)
+--print("UpdateObjects barKey " .. tostring(barKey) .. " Name " .. tostring(AutoBar.barList[barKey].barName))
+			end
+			bar = AutoBar.barList[barKey]
+			LibStickyFrames:SetFrameEnabled(bar.frame, true)
+			LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
+			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+		elseif (AutoBar.barList[barKey]) then
+--print("UpdateObjects barKey " .. tostring(barKey) .. " Hide " .. tostring(AutoBar.barList[barKey].barName))
+			bar = AutoBar.barList[barKey]
+			bar.frame:Hide()
+			LibStickyFrames:SetFrameEnabled(bar.frame)
+			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+		end
+	end
+
+	ABGCS:UpdateItems(true);
+
+	AutoBar:LogEventEnd("ABGCS:UpdateObjects")
+
+	return false;
+
+end
+
+function ABGCS:UpdateItems(p_full_scan)
+
+	AutoBar:LogEventStart("ABGCS:UpdateItems")
+
+	if(tick.FullScanItemsFlag or p_full_scan) then
+		AutoBarSearch:Reset();
+		tick.FullScanItemsFlag = false;
+	else
+		AutoBarSearch:UpdateScan()
+	end
+
+	ABGCS:UpdateAttributes()
+
+	AutoBar:LogEventEnd("ABGCS:UpdateItems")
+
+	return false;
+
+end
+
+-- Based on the current Scan results, update the Button and Popup Attributes
+-- Create Popup Buttons as needed
+function ABGCS:UpdateAttributes()
+	AutoBar:LogEventStart("ABGCS:UpdateAttributes")
+	for barKey, bar in pairs(AutoBar.barList) do
+		bar:UpdateAttributes()
+	end
+
+	ABGCS:UpdateActive()
+
+	AutoBar:LogEventEnd("ABGCS:UpdateAttributes")
+end
+
+-- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
+function ABGCS:UpdateActive()
+	AutoBar:LogEventStart("ABGCS:UpdateActive")
+	for barKey, bar in pairs(AutoBar.barList) do
+		bar:UpdateActive()
+		bar:RefreshLayout()
+	end
+
+	ABGCS:UpdateButtons()
+
+	AutoBar:LogEventEnd("ABGCS:UpdateActive")
+end
+
+-- Based on the active Bars and their Buttons display them
+function ABGCS:UpdateButtons()
+	AutoBar:LogEventStart("AutoBar:UpdateButtons")
+	for buttonName, button in pairs(AutoBar.buttonListDisabled) do
+		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Disabled " .. buttonName); end;
+		button:Disable()
+		--I don't see why we should update all of these if they're disabled.
+		--button:UpdateCooldown()
+		--button:UpdateCount()
+		--button:UpdateHotkeys()
+		--button:UpdateIcon()
+		--button:UpdateUsable()
+	end
+	for buttonKey, button in pairs(AutoBar.buttonList) do
+		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Enabled " .. buttonKey); end;
+		assert(button.buttonDB.enabled, "In list but disabled " .. buttonKey)
+		button:SetupButton()
+		button:UpdateCooldown()
+		button:UpdateCount()
+		button:UpdateHotkeys()
+		button:UpdateIcon()
+		button:UpdateUsable()
+	end
+	AutoBar:LogEventEnd("ABGCS:UpdateButtons", " #buttons " .. tostring(# AutoBar.buttonList))
 end
 

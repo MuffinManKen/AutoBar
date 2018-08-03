@@ -7,15 +7,14 @@
 --
 
 local AutoBar = AutoBar
-local spellNameList = AutoBar.spellNameList
-local spellIconList = AutoBar.spellIconList
 
-local ABGData = AutoBarGlobalDataObject
 local ABGCS = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
+local spellIconList = ABGData.spell_icon_list
 
 local AceOO = AceLibrary("AceOO-2.0")
 local LibKeyBound = LibStub("LibKeyBound-1.0")
-local L = AutoBar.locale
+local L = AutoBarGlobalDataObject.locale
 local _G = getfenv(0)
 local _
 
@@ -622,15 +621,21 @@ function AutoBarButton:SetupAttributesClear(frame)
 	frame:SetAttribute("item2", nil)
 	frame:SetAttribute("spell", nil)
 	frame:SetAttribute("spell2", nil)
+	frame:SetAttribute("toy", nil)
 	frame:SetAttribute("macroId", nil)
 	frame:SetAttribute("macro", nil)
 	frame:SetAttribute("macrotext", nil)
+	frame:SetAttribute("macro_action", nil)
+	frame:SetAttribute("macro_icon", nil)
 	frame:SetAttribute("macroName", nil)
 	frame:SetAttribute("macroBody", nil)
 	frame:SetAttribute("macro2", nil)
 	frame:SetAttribute("macrotext2", nil)
 	frame:SetAttribute("itemLink", nil)
 	frame:SetAttribute("AutoBarGUID", nil)
+	frame:SetAttribute("icon", nil)
+	frame:SetAttribute("category", nil)
+	frame:SetAttribute("itemId", nil)
 end
 
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
@@ -1892,11 +1897,7 @@ function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
 end
 
-function AutoBarButtonMount.prototype:Learned(parentBar, buttonDB, updateMount)
---	AutoBarButtonMount.super.prototype.Learned(self, parentBar, buttonDB)
 
-
-end
 --[[
 /dump GetSpellInfo(43688)
 /dump GetSpellInfo("Amani War Bear")
