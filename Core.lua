@@ -1112,7 +1112,7 @@ function AutoBar:FindNamelessCategories()
 
 	local nameless = ""
 	for key in pairs(AutoBarCategoryList) do
-		if(AutoBar.locale[key] == nil) then
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
 			nameless = nameless .. "|n" .. key
 		end
 	end
