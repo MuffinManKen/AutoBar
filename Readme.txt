@@ -8,6 +8,9 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.00:
+ - Update for Battle for Azeroth
+
 v7.9.9.03: BETA
  - Improved handling of macro icons
  - Hopefully fixed more stuff
