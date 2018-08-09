@@ -315,7 +315,7 @@ end
 -- Scan the given bag.
 function Stuff.prototype:ScanBag(bag)
 	local slotList = self.dataList[bag]
-	local name, itemId, oldItemId
+	local itemId, oldItemId
 	local nSlots = GetContainerNumSlots(bag)
 
 --AutoBar:Print("Stuff.prototype:Scan bag " .. tostring(bag) .. " nSlots " .. tostring(nSlots) .. " slotList " .. tostring(slotList))
@@ -323,10 +323,10 @@ function Stuff.prototype:ScanBag(bag)
 	-- ToDo: Clear out excess slots if bag got smaller
 
 	for slot = 1, nSlots, 1 do
-		name, itemId = AutoBar.ItemLinkDecode(GetContainerItemLink(bag, slot))
+		itemId = GetContainerItemID(bag, slot)
 		oldItemId = slotList[slot]
 
---AutoBar:Print("Stuff.prototype:Scan name " .. tostring(name) .. " itemId " .. tostring(itemId) .. " oldItemId " .. tostring(oldItemId))
+--AutoBar:Print("Stuff.prototype:Scan  itemId " .. tostring(itemId) .. " oldItemId " .. tostring(oldItemId))
 		if (itemId) then
 			if (oldItemId and oldItemId ~= itemId) then
 				self:Delete(oldItemId, bag, slot)
