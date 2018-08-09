@@ -178,7 +178,7 @@ function AutoBar:OpenOptions()
 end
 
 function AutoBarChanged()
-	ABGCS:UpdateObjects()
+	ABGCS:UpdateObjects(tick.BehaveForceSeq)
 	AceCfgReg:NotifyChange("AutoBar")
 end
 

@@ -30,7 +30,7 @@ local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local tick = ABGData.TickScheduler
 
-local ABSchedulerTickLength = 0.07
+local ABSchedulerTickLength = 0.04
 
 AutoBar.inWorld = false
 AutoBar.inCombat = nil		-- For item use restrictions
@@ -246,7 +246,7 @@ function AutoBar:InitializeZero()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()
 
-	ABGCS:UpdateCategories(true)
+	ABGCS:UpdateCategories()
 	self:RegisterOverrideBindings()
 	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 
@@ -1164,26 +1164,28 @@ function AutoBar:ABSchedulerTick()
 		return;
 	end
 
-	if(tick.ScheduledUpdate == nil) then	--Nothing scheduled to do, so return
+	if(tick.ScheduledUpdate == nil or tick.ScheduledUpdate == tick.UpdateCompleteID) then	--Nothing scheduled to do, so return
 		return;
 	end
 
 	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
-		ABGCS:UpdateCategories();
+		tick.ScheduledUpdate = ABGCS:UpdateCategories(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
-		ABGCS:UpdateSpells();
+		tick.ScheduledUpdate = ABGCS:UpdateSpells(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
-		ABGCS:UpdateObjects();
+		tick.ScheduledUpdate = ABGCS:UpdateObjects(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
-		ABGCS:UpdateItems();
+		tick.ScheduledUpdate = ABGCS:UpdateItems(false, tick.BehaveTicker);
+	elseif(tick.ScheduledUpdate == tick.UpdateButtonsID) then
+		tick.ScheduledUpdate = ABGCS:UpdateButtons(tick.BehaveTicker);
 	else
---print("     ", "Not sure what's happening", tick.ScheduledUpdate)
+print("     ", "Not sure what's happening", tick.ScheduledUpdate)
 	end
 
-	tick.ScheduledUpdate = nil
+
 end
 
-function ABGCS:UpdateCategories()
+function ABGCS:UpdateCategories(p_behaviour)
 --	print("ABGCS:UpdateCategories");
 
 	--TODO: Review sticky frame handling. This code could be cleaned up
@@ -1203,33 +1205,35 @@ function ABGCS:UpdateCategories()
 		end
 	end
 
+	local ret = tick.UpdateCompleteID
 	if (not InCombatLockdown()) then
 		AutoBar:LogEventStart("ABGCS:UpdateCategories")
-		tick.ScheduledUpdate = nil;
 		AutoBarCategory:UpdateCustomCategories()
-		ABGCS:UpdateSpells();
+		ABGCS:UpdateSpells();	--We don't pass the behaviour flag along since we want calls to UpdateCategories to complete immediately
 		AutoBar:LogEventEnd("ABGCS:UpdateCategories")
 	else
 		AutoBar:LogEvent("ABGCS:UpdateCategories InCombatLockdown. Scheduling UpdateCategories")
-		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID)
+		ret = tick.UpdateCategoriesID
 	end
 
+	return ret;
 end
 
-function ABGCS:UpdateSpells()
+function ABGCS:UpdateSpells(p_behaviour)
 	AutoBar:LogEventStart("ABGCS:UpdateSpells")
 
 	AutoBarSearch.stuff:ScanSpells()
 	AutoBarSearch.stuff:ScanMacros()
 	AutoBarCategory:UpdateCategories()
 
-	ABGCS:UpdateObjects();
+	ABGCS:UpdateObjects();	--We don't pass the behaviour flag along since we want calls to UpdateSpells to complete immediately
 
 	AutoBar:LogEventEnd("ABGCS:UpdateSpells")
 
+	return tick.UpdateCompleteID;
 end
 
-function ABGCS:UpdateObjects()
+function ABGCS:UpdateObjects(p_behaviour)
 
 	AutoBar:LogEventStart("ABGCS:UpdateObjects")
 	local barLayoutDBList = AutoBar.barLayoutDBList
@@ -1256,61 +1260,67 @@ function ABGCS:UpdateObjects()
 		end
 	end
 
-	ABGCS:UpdateItems(true);
+	tick.FullScanItemsFlag = true
+
+	local ret = tick.UpdateItemsID;
+	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
+		ABGCS:UpdateItems();
+		ret = tick.UpdateCompleteID;
+	end
 
 	AutoBar:LogEventEnd("ABGCS:UpdateObjects")
 
-	return false;
+	return ret;
 
 end
 
-function ABGCS:UpdateItems(p_full_scan)
+
+function ABGCS:UpdateItems(p_behaviour)
 
 	AutoBar:LogEventStart("ABGCS:UpdateItems")
 
-	if(tick.FullScanItemsFlag or p_full_scan) then
+	if(tick.FullScanItemsFlag) then
 		AutoBarSearch:Reset();
 		tick.FullScanItemsFlag = false;
 	else
 		AutoBarSearch:UpdateScan()
 	end
 
-	ABGCS:UpdateAttributes()
+	ABGCS:UpdateAttributes(p_behaviour)
 
 	AutoBar:LogEventEnd("ABGCS:UpdateItems")
-
-	return false;
+	return tick.UpdateCompleteID;
 
 end
 
 -- Based on the current Scan results, update the Button and Popup Attributes
 -- Create Popup Buttons as needed
-function ABGCS:UpdateAttributes()
+function ABGCS:UpdateAttributes(p_behaviour)
 	AutoBar:LogEventStart("ABGCS:UpdateAttributes")
 	for barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
 	end
 
-	ABGCS:UpdateActive()
+	ABGCS:UpdateActive(p_behaviour)
 
 	AutoBar:LogEventEnd("ABGCS:UpdateAttributes")
 end
 
 -- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
-function ABGCS:UpdateActive()
+function ABGCS:UpdateActive(p_behaviour)
 	AutoBar:LogEventStart("ABGCS:UpdateActive")
 	for barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateActive()
 		bar:RefreshLayout()
 	end
 
-	ABGCS:UpdateButtons()
+	ABGCS:UpdateButtons(p_behaviour)
 
 	AutoBar:LogEventEnd("ABGCS:UpdateActive")
 end
 
 -- Based on the active Bars and their Buttons display them
-function ABGCS:UpdateButtons()
+function ABGCS:UpdateButtons(p_behaviour)
 	AutoBar:LogEventStart("AutoBar:UpdateButtons")
 	for buttonName, button in pairs(AutoBar.buttonListDisabled) do
 		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Disabled " .. buttonName); end;
@@ -1333,5 +1343,8 @@ function ABGCS:UpdateButtons()
 		button:UpdateUsable()
 	end
 	AutoBar:LogEventEnd("ABGCS:UpdateButtons", " #buttons " .. tostring(# AutoBar.buttonList))
+
+	return tick.UpdateCompleteID;
+
 end
 

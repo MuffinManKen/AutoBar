@@ -31,6 +31,9 @@ AutoBarGlobalDataObject.TickScheduler =
 	UpdateAttributesID = 5,
 	UpdateActiveID = 6,
 	UpdateButtonsID = 7,
+	UpdateCompleteID = 8,
+
+	BehaveTicker = 1,	-- Called by the ticker, so you may return the next step to be run rather than doing it immediately
 
 	FullScanItemsFlag = true,
 
