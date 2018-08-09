@@ -8,6 +8,11 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.01:
+ - Updated embedded libs
+ - Small optimization in bag scanning
+ - Scanner runs more often, but does less work each time to address "script ran too long errors"
+
 v8.0.0.00:
  - Update for Battle for Azeroth
 

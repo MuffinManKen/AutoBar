@@ -4,8 +4,10 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Update for Battle for Azeroth
- - Go to MuffinManGames.com to report any issues
+ - Updated embedded libs
+ - Small optimization in bag scanning
+ - Scanner runs more often, but does less work each time to address "script ran too long errors"
+ - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
 function AB.show_whats_new()
