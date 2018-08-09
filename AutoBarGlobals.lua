@@ -13,6 +13,8 @@ AutoBarGlobalDataObject = {
 	locale = {},
 
 	timing = {},
+
+	profile = {}
 }
 
 
@@ -193,4 +195,28 @@ function AutoBarGlobalCodeSpace:GetSpellIconByNameFast(p_spell_name)
 	return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 
 end
+
+local prof = AutoBarGlobalDataObject.profile
+function AutoBarGlobalCodeSpace:AddProfileData(p_name, p_time)
+
+	if(prof[p_name] == nil) then
+		prof[p_name] = {}
+		prof[p_name].calls = 0;
+		prof[p_name].total_time = 0;
+		prof[p_name].avg_time = 0;
+		prof[p_name].min_time = 99999;
+		prof[p_name].max_time = 0;
+	end
+
+	prof[p_name].calls = prof[p_name].calls + 1;
+	prof[p_name].total_time = prof[p_name].total_time + p_time;
+	if(prof[p_name].min_time > p_time) then prof[p_name].min_time = p_time; end;
+	if(prof[p_name].max_time < p_time) then prof[p_name].max_time = p_time; end;
+	prof[p_name].avg_time = prof[p_name].total_time / prof[p_name].calls
+
+
+end
+
+
+
 
