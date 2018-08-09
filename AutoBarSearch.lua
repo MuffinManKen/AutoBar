@@ -253,7 +253,7 @@ local Stuff = AceOO.Class()
 function Stuff.prototype:init()
 	Stuff.super.prototype.init(self)
 	self.dataList = {}
-	for bag = 0, 4, 1 do
+	for bag = 0, NUM_BAG_SLOTS, 1 do
 		self.dataList[bag] = {}
 	end
 	self.dataList.inventory = {}
@@ -425,7 +425,7 @@ end
 -- Scan bags only to support shuffling of stuff manually added or moved during combat.
 function Stuff.prototype:ScanCombat()
 	AutoBar:LogEventStart("Stuff.prototype:ScanCombat")
-	for bag = 0, 4, 1 do
+	for bag = 0, NUM_BAG_SLOTS, 1 do
 		self:ScanBag(bag)
 	end
 	AutoBar:LogEventEnd("Stuff.prototype:ScanCombat")
@@ -436,7 +436,7 @@ end
 function Stuff.prototype:Scan()
 	AutoBar:LogEventStart("Stuff:Scan")
 	AutoBar.playerLevel = UnitLevel("player")
-	for bag = 0, 4, 1 do
+	for bag = 0, NUM_BAG_SLOTS, 1 do
 		if (AutoBarSearch.dirtyBags[bag]) then
 			AutoBar:LogEventStart("AutoBar scanned bag")
 --AutoBar:Print("Stuff.prototype:Scan    scanning bag ", bag);
@@ -482,7 +482,7 @@ end
 -- Remove and Recycle all items
 function Stuff.prototype:Reset()
 	local slotList
-	for bag = 0, 4, 1 do
+	for bag = 0, NUM_BAG_SLOTS, 1 do
 		slotList = self.dataList[bag]
 		for i, itemId in pairs(slotList) do
 			slotList[i] = nil
@@ -498,7 +498,7 @@ end
 function Stuff.prototype:Contains(id)
 	local slotList
 	local contains = nil
-	for bag = 0, 4, 1 do
+	for bag = 0, NUM_BAG_SLOTS, 1 do
 		slotList = self.dataList[bag]
 		for i, itemId in pairs(slotList) do
 			if (itemId == id) then
@@ -1259,7 +1259,7 @@ function AutoBarSearch:Reset()
 
 	-- Add Items
 	AutoBarSearch.items:Populate()
-	for i = 0, 4, 1 do
+	for i = 0, NUM_BAG_SLOTS, 1 do
 		AutoBarSearch.dirtyBags[i] = true
 	end
 	AutoBarSearch.dirtyBags.inventory = true
@@ -1277,7 +1277,7 @@ end
 function AutoBarSearch:UpdateScan()
 --AutoBar:Print("AutoBarSearch:Reset Start")
 	-- ToDo: reimplement the dirty code
---	for i = 0, 4, 1 do
+--	for i = 0, NUM_BAG_SLOTS, 1 do
 --		AutoBarSearch.dirtyBags[i] = true
 --	end
 	AutoBarSearch.dirtyBags.inventory = true

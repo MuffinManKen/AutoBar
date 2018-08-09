@@ -462,8 +462,7 @@ end
 
 function AutoBar.events:BAG_UPDATE(arg1)
 	AutoBar:LogEventStart("BAG_UPDATE")
-
-	if (AutoBar.inWorld and arg1 <= NUM_BAG_FRAMES) then
+	if (AutoBar.inWorld and arg1 <= NUM_BAG_SLOTS) then
 		AutoBarSearch.dirtyBags[arg1] = true
 	end
 
