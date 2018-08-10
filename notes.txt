@@ -1,5 +1,11 @@
 
 
+local t1 = debugprofilestop()
+
+local t2 = debugprofilestop()
+AutoBarGlobalCodeSpace:AddProfileData("name", t2 - t1)
+
+
  ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
 
 /run hearth = AutoBarCategoryList["Spell.Mount"]
