@@ -4,9 +4,7 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated embedded libs
- - Small optimization in bag scanning
- - Scanner runs more often, but does less work each time to address "script ran too long errors"
+ - Fixed an error when opening the config window
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 

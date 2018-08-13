@@ -8,6 +8,9 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.02:
+ - Fixed an error when opening the config window
+
 v8.0.0.01:
  - Updated embedded libs
  - Small optimization in bag scanning
