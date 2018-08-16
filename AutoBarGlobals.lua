@@ -129,11 +129,13 @@ function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
 		return nil;
 	end
 
-	local is_usable, not_enough_mana = IsUsableItem(p_item_id);
+	return true;
 
-	is_usable_item_cache[p_item_id] = is_usable or is_usable_item_cache[p_item_id] or usable_items_override_set[p_item_id];
+--	local is_usable, not_enough_mana = IsUsableItem(p_item_id);
 
-	return is_usable_item_cache[p_item_id], not_enough_mana;
+--	is_usable_item_cache[p_item_id] = is_usable or is_usable_item_cache[p_item_id] or usable_items_override_set[p_item_id];
+
+--	return is_usable_item_cache[p_item_id], not_enough_mana;
 end
 
 
