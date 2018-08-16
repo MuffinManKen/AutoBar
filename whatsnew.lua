@@ -4,7 +4,8 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Fixed an error when opening the config window
+ - Updated data libs
+ - Fixed an issue where usable items weren't showing up on the bar (Blizzard lies!)
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 

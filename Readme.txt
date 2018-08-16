@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.03:
+ - Updated data libs
+ - Fixed an issue where usable items weren't showing up on the bar (Blizzard lies!)
+
 v8.0.0.02:
  - Fixed an error when opening the config window
 
