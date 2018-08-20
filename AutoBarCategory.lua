@@ -1164,12 +1164,15 @@ function AutoBarCategory:Initialize()
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stormshield"), ABGCS:GetSpellNameByName("Portal: Stormshield"),
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Warspear"), ABGCS:GetSpellNameByName("Portal: Warspear"),
 		"MAGE", ABGCS:GetSpellNameByName("Teleport: Hall of the Guardian"), ABGCS:GetSpellNameByName("Teleport: Hall of the Guardian"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Boralus"), ABGCS:GetSpellNameByName("Portal: Boralus"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Dazar'alor"), ABGCS:GetSpellNameByName("Portal: Dazar'alor"),
 		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage"), ABGCS:GetSpellNameByName("Zen Pilgrimage"),
 		"MONK", ABGCS:GetSpellNameByName("Zen Pilgrimage: Return"), ABGCS:GetSpellNameByName("Zen Pilgrimage: Return"),
 		"DEATHKNIGHT", ABGCS:GetSpellNameByName("Death Gate"), ABGCS:GetSpellNameByName("Death Gate"),	
 		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
 	})
+
 			
 	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellPortalShattrathIcon, nil,
 	{

@@ -156,6 +156,12 @@ ABGCS:CacheSpellData(121848, "Portal: Ancient Dalaran");
 
 ABGCS:CacheSpellData(204287, "Teleport: Hall of the Guardian");
 
+ABGCS:CacheSpellData(281403, "Teleport: Boralus");
+ABGCS:CacheSpellData(281400, "Portal: Boralus");
+ABGCS:CacheSpellData(281404, "Teleport: Dazar'alor");
+ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
+
+
 --Monk
 ABGCS:CacheSpellData(126892, "Zen Pilgrimage");
 ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return");
