@@ -4,8 +4,8 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated data libs
- - Fixed an issue where usable items weren't showing up on the bar (Blizzard lies!)
+ - Added new Mage portals
+ - Added option to reverse the sorting order of mounts
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
