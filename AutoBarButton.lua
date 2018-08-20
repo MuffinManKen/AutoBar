@@ -1695,6 +1695,7 @@ function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 end
 
 local reverse_sort_func = function( a,b ) return a > b end
+local forward_sort_func = function( a,b ) return a < b end
 
 function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
 	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
@@ -1797,6 +1798,8 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
 	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
+	if(buttonDB.mount_reverse_sort == nil) then buttonDB.mount_reverse_sort = false end
+
 
 	if(buttonDB.mount_show_class == true) then
 		self:AddCategory("Misc.Mount.Summoned")
@@ -1873,7 +1876,12 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			
 		end
 
-		table.sort(category.castList, reverse_sort_func)
+		--This is backwards because the  original sort *is* a reverse sort, so this is a reverse-reverse sort.
+		if(buttonDB.mount_reverse_sort) then
+			table.sort(category.castList, forward_sort_func)
+		else
+			table.sort(category.castList, reverse_sort_func)
+		end
 
 		category.unInitialized = nil
 		
@@ -1895,6 +1903,7 @@ function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
+	self:SetOptionBoolean(optionList, passValue, "mount_reverse_sort", L["MountReverseSort"])
 end
 
 

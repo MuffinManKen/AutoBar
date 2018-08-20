@@ -44,6 +44,7 @@ atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
+atl("MountReverseSort", "Reverse the Sorting Order");
 atl("ToyBoxOnlyFavourites", "Only Show Favourites");
 atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
 atl("ArchBtnShowSpells", "Show Spells")
