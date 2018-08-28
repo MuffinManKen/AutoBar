@@ -48,7 +48,7 @@ local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local AceCfgCmd = LibStub("AceConfigCmd-3.0")
 local AceGUI = LibStub("AceGUI-3.0")
 
-local dewdrop = AceLibrary("Dewdrop-2.0")
+local dewdrop = nil
 
 local ROW_COLUMN_MAX = 32
 
@@ -56,7 +56,7 @@ local hintString = "|cffffffff%s:|r %s"
 local hintText = {
 	L["AutoBar"],
 	hintString:format(L["Left-Click"], L["Options GUI"]),
-	hintString:format(L["Right-Click"], L["Dropdown UI"]),
+	--hintString:format(L["Right-Click"], L["Dropdown UI"]),
 	hintString:format(L["Alt-Click"], L["Key Bindings"]),
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
@@ -78,7 +78,7 @@ function LDBOnClick(clickedFrame, button)
 			AutoBar:CreateOptionsAce3()
 			AceCfgDlg:Open("AutoBar")
 		end
-	elseif (button == "RightButton") then
+	elseif (button == "RightButton" and dewdrop) then
 		if (dewdrop:GetOpenedParent()) then
 			dewdrop:Close()
 		else
