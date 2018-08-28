@@ -8,6 +8,11 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.05:
+ - Data updates
+ - Removed ancient DewDropLib. You can no longer right-click on the minimap button to get a popup menu. Leave me a comment if you used this feature and I`ll find an alternate way to implement it
+ - Improved interactions between multiple What's New dialogs
+
 v8.0.0.04:
  - Added new Mage portals
  - Added option to reverse the sorting order of mounts

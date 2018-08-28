@@ -8,10 +8,11 @@ local WHATSNEW_TEXT = "" ..
  - Removed ancient DewDropLib. You can no longer right-click on the minimap button
 |t to get a popup menu. Leave me a comment if you used this feature and I`ll find an
 |t alternate way to implement it
+ - Improved interactions between multiple What`s New dialogs
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
-local DEBUG_SHOW = true
+local DEBUG_SHOW = false
 
 function AB.show_whats_new()
 
