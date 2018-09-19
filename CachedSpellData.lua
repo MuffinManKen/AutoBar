@@ -9,6 +9,8 @@ ABGCS:CacheSpellData(125439, "Revive Battle Pets");
 ABGCS:CacheSpellData(83958, "Mobile Banking");
 ABGCS:CacheSpellData(58984, "Shadowmeld");
 ABGCS:CacheSpellData(87840, "Running Wild");
+ABGCS:CacheSpellData(265225, "Mole Machine");
+
 
 --DeathKnight
 ABGCS:CacheSpellData(3714, "Path of Frost");

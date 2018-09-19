@@ -1171,6 +1171,7 @@ function AutoBarCategory:Initialize()
 		"DEATHKNIGHT", ABGCS:GetSpellNameByName("Death Gate"), ABGCS:GetSpellNameByName("Death Gate"),	
 		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
+		"*", ABGCS:GetSpellNameByName("Mole Machine"), ABGCS:GetSpellNameByName("Mole Machine"),
 	})
 
 			
