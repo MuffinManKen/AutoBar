@@ -270,6 +270,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 
 	if (start and duration and enabled and start > 0 and duration > 0) then
 		CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
+		self.frame.cooldown:SetSwipeColor(0, 0, 0);
 	else
 		CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 	end
