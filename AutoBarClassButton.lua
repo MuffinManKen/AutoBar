@@ -239,7 +239,7 @@ end
 
 function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	local name = self:GetButtonFrameName()
-	local frame = CreateFrame("Button", name, self.parentBar.frame, "ActionButtonTemplate SecureActionButtonTemplate SecureHandlerBaseTemplate")
+	local frame = CreateFrame("Button", name, self.parentBar.frame, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerBaseTemplate")
 	self.frame = frame
 
 	local buttonWidth = self.parentBar.buttonWidth or 36
