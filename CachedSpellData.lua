@@ -2,7 +2,7 @@
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
--- NOTE: This entire set of code runs in ~2ms, so any need to try to optimize it
+-- NOTE: This entire set of code runs in ~2ms, so no need to try to optimize it
 local cache_timer_start = debugprofilestop();
 --All
 ABGCS:CacheSpellData(125439, "Revive Battle Pets");
