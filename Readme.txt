@@ -8,6 +8,12 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.0.0.06:
+ - Data updates
+ - AutoBar's cooldown colour should match Blizzard's again
+ - Added new category with a button to summon a favourite random mount
+ - Added Mole Machine to portals (untested, I don't have access to it yet)
+
 v8.0.0.05:
  - Data updates
  - Removed ancient DewDropLib. You can no longer right-click on the minimap button to get a popup menu. Leave me a comment if you used this feature and I`ll find an alternate way to implement it

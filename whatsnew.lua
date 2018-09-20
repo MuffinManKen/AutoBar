@@ -4,11 +4,10 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated data libs
- - Removed ancient DewDropLib. You can no longer right-click on the minimap button
-|t to get a popup menu. Leave me a comment if you used this feature and I`ll find an
-|t alternate way to implement it
- - Improved interactions between multiple What`s New dialogs
+ - Data updates
+ - AutoBar`s cooldown colour should match Blizzard`s again
+ - Added new category with a button to summon a favourite random mount
+ - Added Mole Machine to portals (untested, I don`t have access to it yet)
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
