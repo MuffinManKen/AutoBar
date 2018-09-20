@@ -366,6 +366,7 @@ function AutoBar:InitializeDefaults()
 			mount_show_nonfavourites = false,
 			mount_show_class = true,
 			mount_reverse_sort = false,
+			mount_show_rng_fave = false,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBandages"]) then

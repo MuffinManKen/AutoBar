@@ -45,6 +45,7 @@ atl("MountShowFavourites", "Show Favourites");
 atl("MountShowNonFavourites", "Show Non-Favourites");
 atl("MountShowClass", "Show Class");
 atl("MountReverseSort", "Reverse the Sorting Order");
+atl("MountShowSummonRandom", "Summon a Random Favourite Mount");
 atl("ToyBoxOnlyFavourites", "Only Show Favourites");
 atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
 atl("ArchBtnShowSpells", "Show Spells")
@@ -110,6 +111,7 @@ atl("NewButtonTooltip", "Create a new custom button")
 atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet from your pet journal|r")
 atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet from your list of favourites in the pet journal|r")
 atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current battle pet|r")
+atl("Summon A Random Favourite Mount", "Summon Favourite Mount|n|cFFFFD100Summon a random mount from your list of favourites in the mount journal|r")
 
 atl("Raid 1","Raid Star")
 atl("Raid 2","Raid Circle")
@@ -173,8 +175,9 @@ local quick_sets =
 	"Muffin.Skill.Archaeology.Crate",
 	"Muffin.Skill.Archaeology.Mission",
 	"Spell.Archaeology",
-	"Dynamic.Quest"
-
+	"Dynamic.Quest",
+	"Macro.Mount.SummonRandomFave",
+	"Muffin.Order Hall.Nethershard",
 }
 
 atl_table(quick_sets);

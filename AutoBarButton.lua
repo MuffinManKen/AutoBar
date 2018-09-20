@@ -1787,6 +1787,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		end
 	end
 	self:AddCategory("Spell.Mount")
+	self:AddCategory("Macro.Mount.SummonRandomFave")
 
 	local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
 	if (not buttonData) then
@@ -1799,6 +1800,7 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
 	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
 	if(buttonDB.mount_reverse_sort == nil) then buttonDB.mount_reverse_sort = false end
+	if(buttonDB.mount_show_rng_fave == nil) then buttonDB.mount_show_rng_fave = false end
 
 
 	if(buttonDB.mount_show_class == true) then
@@ -1807,6 +1809,10 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then 
 			self:AddCategory("Muffin.Mount")
 		end
+	end
+
+	if(buttonDB.mount_show_rng_fave == true) then
+		self:AddCategory("Macro.Mount.SummonRandomFave")
 	end
 
 	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
@@ -1904,6 +1910,7 @@ function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
 	self:SetOptionBoolean(optionList, passValue, "mount_reverse_sort", L["MountReverseSort"])
+	self:SetOptionBoolean(optionList, passValue, "mount_show_rng_fave", L["MountShowSummonRandom"])
 end
 
 
