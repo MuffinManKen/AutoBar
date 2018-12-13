@@ -4,10 +4,7 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Data updates
- - AutoBar`s cooldown colour should match Blizzard`s again
- - Added new category with a button to summon a favourite random mount
- - Added Mole Machine to portals (untested, I don`t have access to it yet)
+ - Updated for Patch 8.1
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 

@@ -8,6 +8,9 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.1.0.00:
+ - Updated for Patch 8.1
+
 v8.0.0.06:
  - Data updates
  - AutoBar's cooldown colour should match Blizzard's again
