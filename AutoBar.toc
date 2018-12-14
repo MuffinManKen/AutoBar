@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80100
 ## Title: AutoBar
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
 ## Version: 8.1.0.00
