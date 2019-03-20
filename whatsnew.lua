@@ -4,7 +4,7 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated for Patch 8.1
+ - Updated mined data for Patch 8.1.5
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
