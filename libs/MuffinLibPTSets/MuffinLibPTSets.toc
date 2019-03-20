@@ -1,9 +1,8 @@
 ﻿## Title: Muffin|cFF00FF00LibPTSets
 ## Version: @project-version@
-
 ## Notes: Library of compressed itemid sets.
 ## Author: MuffinManKen
-## Interface: 80000
+## Interface: 80100
 ## X-Category: Library
 ## X-Website: http://www.MuffinManGames.com
 ## OptionalDeps: LibPeriodicTable-3.1
