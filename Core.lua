@@ -178,15 +178,19 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	local tooltip
 	local icon
 
+	--if debug then print("Finding icon for", p_macro_body); end;
 	--print(debugstack())
 	local show_action = string.match(p_macro_body, "#show%s+([^\n]+)")
 	if(show_action) then
 		action = show_action
+		--if debug then print("show_action:", show_action); end;
 	else
 		local show_tt_action = string.match(p_macro_body, "#showtooltip%s+([^\n]+)")
 		if(show_tt_action) then
+			--if debug then print("show_tt_action:", show_tt_action); end;
 			action = show_tt_action
 			tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
+			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
 	
