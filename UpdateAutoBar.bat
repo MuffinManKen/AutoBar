@@ -4,4 +4,10 @@ xcopy "D:\Projects\WoW\LibPeriodicTable\LibPeriodicTable-3.1-Consumable" "D:\Pro
 xcopy "D:\Projects\WoW\LibPeriodicTable\LibPeriodicTable-3.1-Misc" "D:\Projects\WoW\AutoBar\libs\LibPeriodicTable-3.1-Misc" /Y /S /I
 xcopy "D:\Projects\WoW\LibPeriodicTable\LibPeriodicTable-3.1-Tradeskill" "D:\Projects\WoW\AutoBar\libs\LibPeriodicTable-3.1-Tradeskill" /Y /S /I
 
+xcopy "D:\Projects\WoW\ace3\AceConfig-3.0" "D:\Projects\WoW\AutoBar\libs\AceConfig-3.0"  /Y /S /I
+xcopy "D:\Projects\WoW\ace3\AceConsole-3.0" "D:\Projects\WoW\AutoBar\libs\AceConsole-3.0"  /Y /S /I
+xcopy "D:\Projects\WoW\ace3\AceGUI-3.0" "D:\Projects\WoW\AutoBar\libs\AceGUI-3.0"  /Y /S /I
+
+
+
 pause
