@@ -4,11 +4,12 @@
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
+AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+AutoBar.warning_log = {}
+
 -- All global data will be a child of this table
 AutoBarGlobalDataObject = {
 	TYPE_MACRO_TEXT = 1,
-	TYPE_TOY = 2,
-	TYPE_BATTLE_PET = 3,
 
 	locale = {},
 
@@ -50,20 +51,19 @@ AutoBarGlobalDataObject.TickScheduler =
 -- All global code with be a child of this table.  
 AutoBarGlobalCodeSpace = {}
 
-
-function AutoBarGlobalCodeSpace:ToyGUID(p_toy_id)
-
-	local l = 7 - string.len(p_toy_id);
-	local guid = "toy:" .. string.rep("0", l) .. p_toy_id;
-
-	return guid;
+local function table_pack(...)
+  return { n = select("#", ...), ... }
 end
 
-function AutoBarGlobalCodeSpace:BPetGUID(p_bpet_id)
+function AutoBarGlobalCodeSpace:LogWarning(...)
 
-	local guid = "toy:" .. p_bpet_id;
+	local message = "";
+	local args = table_pack(...)
+	for i=1,args.n do
+		message = message .. tostring(args[i]) .. " "
+	end
+	table.insert(AutoBar.warning_log, message)
 
-	return guid;
 end
 
 local macro_text_guid_index = 0;
@@ -78,20 +78,7 @@ end
 
 --This should query a global guid registry and then the specific ones if not found. 
 function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
-	return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
-end
-
-function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
-	local texture;
-	local item_id = tonumber(p_toy_id)
-	
-	_, _, texture =  C_ToyBox.GetToyInfo(item_id)
-
-	if(texture == nil) then
-		texture = AutoBarGlobalCodeSpace:GetIconForItemID(item_id);
-	end
-
-	return texture;
+	return AutoBarSearch.macro_text[p_guid];
 end
 
 function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
@@ -161,7 +148,7 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 	local name, rank, icon = GetSpellInfo(p_spell_id);
 
 	if(name == nil) then
-		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
@@ -176,7 +163,7 @@ function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -187,7 +174,7 @@ function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 	end
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end

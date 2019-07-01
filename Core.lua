@@ -23,7 +23,7 @@ local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+--AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
@@ -61,9 +61,8 @@ AutoBar.events = {}
 
 AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
 
-AutoBar.warning_log = {}
 
-AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
+AutoBar.visibility_driver_string = "[vehicleui] hide; [possessbar] hide; show"
 
 AutoBar.dockingFramesValidateList = {
 	["NONE"] = L["None"],
@@ -222,7 +221,7 @@ end
 
 function AutoBar:IsInLockDown()
 
-	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle() or UnitInVehicle("player")
+	return AutoBar.inCombat or InCombatLockdown() --or UnitInVehicle("player")
 
 end
 
@@ -264,7 +263,6 @@ function AutoBar:InitializeZero()
 	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
-	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -277,11 +275,9 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
 	AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
-	AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -446,11 +442,6 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		AB.show_whats_new();
 	end
 
-
-	if(hack_PetActionBarFrame) then
-		PetActionBarFrame:EnableMouse(false);
-	end
-
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
@@ -540,31 +531,6 @@ function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 end
 
 
-function AutoBar.events:COMPANION_LEARNED(...)
-	local companionType = ...;
-	local need_update = false;
-
-	AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
-
-	local button = AutoBar.buttonList["AutoBarButtonMount"]
-	if (button and (companionType == "MOUNT")) then
-		button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
-	end
-
-	button = AutoBar.buttonList["AutoBarButtonPets"]
-	if (button and (companionType ~= "MOUNT")) then
-		button:Refresh(button.parentBar, button.buttonDB)
-	end
-
-	if(need_update) then
-		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
-	end
-
-
-	AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
-end
-
-
 function AutoBar.events:UPDATE_BINDINGS()
 	self:RegisterOverrideBindings()
 	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
@@ -626,34 +592,6 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 	AceCfgDlg:Close(appName)
 end
 
-function AutoBar.events:PET_BATTLE_CLOSE(arg1)
-	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-
-	-- AutoBar.in_pet_battle = false
-
-end
-
-function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
-	AutoBar:LogEventStart("TOYS_UPDATED", p_item_id, p_new)
-
-	if(p_item_id ~= nil or p_new ~= nil) then
-		local need_update = false;
-		
-		AutoBarSearch.dirtyBags.toybox = true
-		local button = AutoBar.buttonList["AutoBarButtonToyBox"]
-		if (button) then
-			need_update = button:Refresh(button.parentBar, button.buttonDB, true)
-		end
-
-		if(need_update) then
-			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
-		end
-
-	end
-
-	AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
-
-end
 
 function AutoBar.events:PLAYER_ALIVE(arg1)
 	AutoBar:LogEvent("PLAYER_ALIVE", arg1)
@@ -1018,20 +956,6 @@ function AutoBar:ClassUsesMana(class_name)
 
 end
 
-local function table_pack(...)
-  return { n = select("#", ...), ... }
-end
-
-function AutoBar:LogWarning(...)
-
-	local message = "";
-	local args = table_pack(...)
-	for i=1,args.n do
-		message = message .. tostring(args[i]) .. " "
-	end
-	table.insert(AutoBar.warning_log, message)
-
-end
 
 function AutoBar:DumpWarningLog()
 
@@ -1052,7 +976,7 @@ function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
 	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
 
 	if next(ret_val) == nil then
-		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		ABGCS:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	end
 
 	return unpack(ret_val)

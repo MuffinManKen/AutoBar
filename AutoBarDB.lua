@@ -201,7 +201,6 @@ function AutoBar:InitializeDefaults()
 			log_throttled_events = false,
 			throttle_event_limit = 0.0,
 			handle_spell_changed = true,
-			hack_PetActionBarFrame = true,
 			selfCastRightClick = true,
 			showEmptyButtons = false,
 			style = "Dreamlayout",
@@ -210,9 +209,6 @@ function AutoBar:InitializeDefaults()
 	end
 	if(self.defaults.handle_spell_changed == nil) then
 		handle_spell_changed = true
-	end
-	if(self.defaults.hack_PetActionBarFrame == nil) then
-		hack_PetActionBarFrame = true
 	end
 
 
@@ -353,22 +349,7 @@ function AutoBar:InitializeDefaults()
 			hearth_include_ancient_dalaran = false,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonMount"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonMount"] = {
-			buttonKey = "AutoBarButtonMount",
-			buttonClass = "AutoBarButtonMount",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 2,
-			enabled = true,
-			arrangeOnUse = true,
-			mount_show_qiraji = false,
-			mount_show_favourites = true,
-			mount_show_nonfavourites = false,
-			mount_show_class = true,
-			mount_reverse_sort = false,
-			mount_show_rng_fave = false,
-		}
-	end
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBandages"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonBandages"] = {
 			buttonKey = "AutoBarButtonBandages",
@@ -631,16 +612,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 	
-	if (not AutoBar.db.account.buttonList["AutoBarButtonPets"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonPets"] = {
-			buttonKey = "AutoBarButtonPets",
-			buttonClass = "AutoBarButtonPets",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = 5,
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"] = {
 			buttonKey = "AutoBarButtonBattleStandards",
@@ -682,18 +653,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonSunsongRanch"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonSunsongRanch"] = {
-			buttonKey = "AutoBarButtonSunsongRanch",
-			buttonClass = "AutoBarButtonSunsongRanch",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = 10,
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
-
 	if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
 				buttonKey = "AutoBarButtonMillHerbs",
@@ -706,51 +665,6 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-
-	if (not AutoBar.db.account.buttonList["AutoBarButtonGarrison"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonGarrison"] = {
-			buttonKey = "AutoBarButtonGarrison",
-			buttonClass = "AutoBarButtonGarrison",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = 12,
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
-	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHallTroop"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonOrderHallTroop"] = {
-			buttonKey = "AutoBarButtonOrderHallTroop",
-			buttonClass = "AutoBarButtonOrderHallTroop",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
-	if (not AutoBar.db.account.buttonList["AutoBarButtonOrderHallResource"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonOrderHallResource"] = {
-			buttonKey = "AutoBarButtonOrderHallResource",
-			buttonClass = "AutoBarButtonOrderHallResource",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
-	if (not AutoBar.db.account.buttonList["AutoBarButtonBattlePetItems"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonBattlePetItems"] = {
-			buttonKey = "AutoBarButtonBattlePetItems",
-			buttonClass = "AutoBarButtonBattlePetItems",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"] = {
 			buttonKey = "AutoBarButtonRaidTarget",
@@ -762,18 +676,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
-			buttonKey = "AutoBarButtonToyBox",
-			buttonClass = "AutoBarButtonToyBox",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = false,
-			arrangeOnUse = true,
-			toybox_only_show_favourites = false,
-		}
-	end
-	
 	if (not AutoBar.db.account.buttonList["AutoBarButtonReputation"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonReputation"] = {
 			buttonKey = "AutoBarButtonReputation",

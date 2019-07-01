@@ -24,19 +24,13 @@
 	<Script file="libs\LibPeriodicTable-3.1-Tradeskill\LibPeriodicTable-3.1-Tradeskill.lua"/>
 	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
 	<!--@end-no-lib-strip@-->
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.BattlePet.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Elixirs.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Explosives.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Flasks.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Food.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Garrison.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Gear.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Misc.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Mount.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.OrderHall.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Potions.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Archaeology.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Fishing.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.SunsongRanch.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Toys.lua"/>
 </Ui>

@@ -287,52 +287,6 @@ end
 function AutoBarPetFood.prototype:Refresh()
 end
 
-AutoBarToyCategory = AceOO.Class(AutoBarCategory)
-
-function AutoBarToyCategory.prototype:init(description, shortTexture, p_pt_name)
-	AutoBarToyCategory.super.prototype.init(self, description, shortTexture) -- Mandatory init.
-	self.is_toy = true
-	
-	-- Current active items
-	self.items = {}
-	--All items in the category
-	self.all_items = {}
-
-	if(p_pt_name) then
-		--print("pt_name", p_pt_name);
-		local rawList = nil
-		rawList = AddSetToRawItems(rawList, p_pt_name, false)
-		self.all_items = RawListToItemIDList(rawList)
-		--print("all_items", AutoBar:Dump(self.all_items))
-	end
-
-	self:Refresh()
-
-end
-
--- Reset the item list in case the player learned new toys
-function AutoBarToyCategory.prototype:Refresh()
-	local list_index = 1
-
---	if(self.categoryKey == "Muffin.Toys.Hearth") then 
---		print("Refreshing Toy Category", self.categoryKey, #self.items, #self.all_items);
---	end
-
-	for _, toy_id in ipairs(self.all_items) do
---		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
-		if (toy_id and PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id)) then
-			AutoBarSearch:RegisterToy(toy_id)
-			self.items[list_index] = ABGCS:ToyGUID(toy_id)
-			list_index = list_index + 1
-		end
-	end
-
-	--trim any missing ones of the end. You never forget Toys, so is this needed?
-	--Nope.  WoW API sometimes says existing items aren't there, so this would then trim them.  If we've ever seen it, keep it.
-	--for i = list_index, # self.items, 1 do
-	--	self.items[i] = nil
-	--end
-end
 
 AutoBarMacroTextCategory = AceOO.Class(AutoBarCategory)
 
@@ -593,23 +547,8 @@ end
 -- Create category list using PeriodicTable data.
 function AutoBarCategory:Initialize()
 
-	AutoBarCategoryList["Muffin.Toys.Hearth"] = AutoBarToyCategory:new( "Muffin.Toys.Hearth", spellIconList["Puntable Marmot"], "Muffin.Toys.Hearth")
-	AutoBarCategoryList["Muffin.Toys.Pet Battle"] = AutoBarToyCategory:new( "Muffin.Toys.Pet Battle", spellIconList["Puntable Marmot"], "Muffin.Toys.Pet Battle")
-	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
-	AutoBarCategoryList["Muffin.Toys.Portal"] = AutoBarToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
-	AutoBarCategoryList["Muffin.Toys.Fishing"] = AutoBarToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
-
 	AutoBarCategoryList["Macro.Mount.SummonRandomFave"] = AutoBarMacroTextCategory:new( "Macro.Mount.SummonRandomFave", "achievement_guildperk_mountup")
 	AutoBarCategoryList["Macro.Mount.SummonRandomFave"]:AddMacroText("/run C_MountJournal.SummonByID(0)",  "Interface/Icons/achievement_guildperk_mountup", L["Summon A Random Favourite Mount"])
-
-	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
-	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
-
-	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
-	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"]:AddMacroText("/randomfavoritepet",  "Interface/Icons/PetBattle_Health", L["Summon A Random Fave Pet"])
-
-	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
-	AutoBarCategoryList["Macro.BattlePet.DismissPet"]:AddMacroText("/dismisspet",  "Interface/Icons/Spell_BrokenHeart", L["Dismiss Battle Pet"])
 
 	AutoBarCategoryList["Macro.Raid Target"] = AutoBarMacroTextCategory:new( "Raid Target", "Spell_BrokenHeart")
 	for index = 1, 8 do
@@ -711,7 +650,7 @@ function AutoBarCategory:Initialize()
 
 
 
-	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Combo.Conjured", spellIconList["Conjure Refreshment"], "Consumable.Food.Edible.Combo.Conjured")
+	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Combo.Conjured", "inv_misc_food_73cinnamonroll", "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Consumable.Food.Feast"] = AutoBarItems:new("Consumable.Food.Feast", "INV_Misc_Fish_52", "Consumable.Food.Feast")
@@ -1004,15 +943,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Misc.Quest"] = AutoBarItems:new("Muffin.Misc.Quest", "INV_BannerPVP_02", "Muffin.Misc.Quest")
 
 	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02", "Misc.Usable.Replenished")
-
-	AutoBarCategoryList["Muffin.Battle Pet Items.Upgrade"] = AutoBarItems:new("Muffin.Battle Pet Items.Upgrade", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Upgrade")
-
-	AutoBarCategoryList["Muffin.Battle Pet Items.Level"] = AutoBarItems:new("Muffin.Battle Pet Items.Level", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Level")
-
-	AutoBarCategoryList["Muffin.Battle Pet Items.Bandages"] = AutoBarItems:new("Muffin.Battle Pet Items.Bandages", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Bandages")
-
-	AutoBarCategoryList["Muffin.Battle Pet Items.Pet Treat"] = AutoBarItems:new("Muffin.Battle Pet Items.Pet Treat", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Pet Treat")
-
 
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,

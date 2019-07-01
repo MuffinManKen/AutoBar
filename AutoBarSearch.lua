@@ -16,7 +16,6 @@ local AceOO = AceLibrary("AceOO-2.0")
 
 AutoBarSearch = {}
 AutoBarSearch.spells = {}
-AutoBarSearch.toys = {}
 AutoBarSearch.macros = {}
 AutoBarSearch.macro_text = {}
 
@@ -274,7 +273,6 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 		slotList[spell] = itemId
 	end
 
-	--if(spell == "toy:127670") then print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell)) end;
 	if (bag or slot) then
 		-- Filter out too high level items
 		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
@@ -340,21 +338,9 @@ function Stuff.prototype:ScanBag(bag)
 	end
 end
 
---As far as I know there is no way to get rid of a toy, so we don't need to ever delete anything
-function Stuff.prototype:ScanToyBox()
-
-	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
-		AutoBarSearch:RegisterToy(toy_data.item_id);
-		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AutoBar:Dump(toy_data))
-		self:Add(toy_guid, nil, nil, toy_guid)
-	end
-
-end
-
 function Stuff.prototype:ScanMacroText()
 
 	for macro_text_guid, macro_text_data in pairs(AutoBarSearch.macro_text) do
-		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
 		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AutoBar:Dump(macro_text_data))
 		self:Add(macro_text_guid, nil, nil, macro_text_guid)
 	end
@@ -450,12 +436,6 @@ function Stuff.prototype:Scan()
 --AutoBar:Print("Stuff.prototype:Scan    scanning macro_text ");
 		self:ScanMacroText()
 		AutoBarSearch.dirtyBags.macro_text = false
-	end
-	
-	if (AutoBarSearch.dirtyBags.toybox) then
---AutoBar:Print("Stuff.prototype:Scan    scanning toybox ");
-		self:ScanToyBox()
-		AutoBarSearch.dirtyBags.toybox = false
 	end
 
 	if (AutoBarSearch.dirtyBags.inventory) then
@@ -977,14 +957,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 		end
 	end
 	if (spell) then
-		if(spell:find("^toy")) then
-			type_id = ABGData.TYPE_TOY
-			info_data = AutoBarSearch.toys[spell]
-			spell = nil
-		elseif(spell:find("^bpet")) then
-			bpet_guid = spell
-			spell = nil
-		elseif(spell:find("^macrotext:")) then
+		if(spell:find("^macrotext:")) then
 			type_id = ABGData.TYPE_MACRO_TEXT
 			info_data = AutoBarSearch.macro_text[spell]
 			spell = nil
@@ -1185,26 +1158,6 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 
 end
 
-function AutoBarSearch:RegisterToy(p_toy_id)
-
-	local debug = false; --(p_toy_id == 127670)
-	local toy_guid = ABGCS:ToyGUID(p_toy_id)
-	local toy_info = AutoBarSearch.toys[toy_guid]
-
-	if (not toy_info) then
-		toy_info = {}
-		AutoBarSearch.toys[toy_guid] = toy_info
-	end
-	
-	toy_info.guid = toy_guid
-	toy_info.item_id = p_toy_id
-	toy_info.ab_type = ABGData.TYPE_TOY
-	toy_info.icon = select(3, C_ToyBox.GetToyInfo(tonumber(p_toy_id)))
-
-	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid); end
-
-end
-
 -- Register a macro or customMacro
 -- macroId is one of
 -- 	"macro" .. macroIndex
@@ -1263,7 +1216,6 @@ function AutoBarSearch:Reset()
 		AutoBarSearch.dirtyBags[i] = true
 	end
 	AutoBarSearch.dirtyBags.inventory = true
-	AutoBarSearch.dirtyBags.toybox = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
 	AutoBarSearch.dirtyBags.macro_text = true
@@ -1281,7 +1233,6 @@ function AutoBarSearch:UpdateScan()
 --		AutoBarSearch.dirtyBags[i] = true
 --	end
 	AutoBarSearch.dirtyBags.inventory = true
---	AutoBarSearch.dirtyBags.toybox = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
 	AutoBarSearch.dirty = true

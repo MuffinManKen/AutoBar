@@ -2,7 +2,7 @@
 
 --These 2 maps are a bi-directional map, so you can find the location of an item by it's ID
 -- or an ID by it's location
--- It tracks items, spells, and macros (and soon toys)
+-- It tracks items, spells, and macros
 AutoBarGlobalDataObject.LocationToIDMap = {}
 AutoBarGlobalDataObject.IDToLocationMap = {}
 
@@ -19,7 +19,6 @@ local function initialize_maps()
 
 	LocationToIDMap.inventory = {}
 	LocationToIDMap.spells = {}
-	LocationToIDMap.toys = {}
 
 
 end

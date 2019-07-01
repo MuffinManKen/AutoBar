@@ -29,18 +29,12 @@
 	BINDING_NAME_AutoBarButtonBattleStandards_X = L["AutoBarButtonBattleStandards"]
 	BINDING_NAME_AutoBarButtonTrinket1_X = L["AutoBarButtonTrinket1"]
 	BINDING_NAME_AutoBarButtonTrinket2_X = L["AutoBarButtonTrinket2"]
-	BINDING_NAME_AutoBarButtonPets_X = L["AutoBarButtonPets"]
 	BINDING_NAME_AutoBarButtonQuest_X = L["AutoBarButtonQuest"]
 	BINDING_NAME_AutoBarButtonMiscFun_X = L["AutoBarButtonMiscFun"]
 	BINDING_NAME_AutoBarButtonGuildSpell_X = L["AutoBarButtonGuildSpell"]
 	BINDING_NAME_AutoBarButtonSpeed_X = L["AutoBarButtonSpeed"]
 	BINDING_NAME_AutoBarButtonStance_X = L["AutoBarButtonStance"]
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
-	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
-	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
-	BINDING_NAME_AutoBarButtonOrderHall_X = L["AutoBarButtonOrderHall"]
-
---	BINDING_NAME_AutoBarButtonToyBox_X = L["AutoBarButtonToyBox"]
 
 	BINDING_HEADER_AutoBarCooldownHeader = L["AutoBarCooldownHeader"]
 	BINDING_NAME_AutoBarButtonCooldownDrums_X = L["AutoBarButtonCooldownDrums"]

@@ -65,8 +65,6 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 			GameTooltip:SetHyperlink(item_data.link)
 		elseif(item_data.tooltip) then
 			GameTooltip:AddLine(item_data.tooltip, 1, 1, 1)
-		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
-			GameTooltip:SetToyByItemID(item_data.item_id)
 		end
 		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow
 		GameTooltip:Show()
@@ -186,11 +184,6 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	if(item_data) then
 		if(item_data.icon) then
 			texture = item_data.icon -- Use cached icon if we have one
-		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
-			texture = ABGCS:GetIconForToyID(item_data.item_id)
-			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(item_id);
-			end
 		end
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
@@ -258,8 +251,6 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		if (itemId) then
 			start, duration, enabled = GetItemCooldown(itemId)
 		end
-	elseif (itemType == "toy" and item_data) then
-		start, duration, enabled = GetItemCooldown(item_data.item_id)
 --	elseif (itemType == "macro") then --ToDo some day
 --			local macroText = self.frame:GetAttribute("macrotext")
 --			SecureCmdOptionParse()?
@@ -289,9 +280,8 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
 				count1 = GetItemCount(tonumber(itemId), nil, true) or 0
--- 		Toys and Macros don't have counts, though a macro of an item could.
+-- 		Macros don't have counts, though a macro of an item could.
 --			elseif (itemType == "macro") then
---			elseif (itemType == "toy") then
 			elseif (itemType == "spell") then
 				local spellName = frame:GetAttribute("spell")
 				count1 = GetSpellCount(spellName) or 0
