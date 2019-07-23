@@ -191,6 +191,9 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 	local buttonKeyList = self.sharedButtonDB.buttonKeys
 	local buttonDB
 
+	assert(buttonList)
+	assert(buttonKeyList)
+
 	-- Create or Refresh the Bar's Buttons
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 
@@ -213,6 +216,8 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			else
+				assert(buttonKeyIndex)
+				assert(buttonDB)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
 				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
