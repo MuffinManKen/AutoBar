@@ -8,6 +8,10 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v8.2.0.00:
+ - Updated libraries
+ - Data updates
+
 v8.1.5.01:
  - More data updates
 

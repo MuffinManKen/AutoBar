@@ -5,6 +5,7 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 local WHATSNEW_TEXT = "" ..
 [[
  - More data updates
+ - Updated libraries
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
