@@ -1373,10 +1373,16 @@ function AutoBarCategory:Initialize2()
 	{
 		"DEATHKNIGHT", ABGCS:GetSpellNameByName("Mind Freeze"),
 		"DEMONHUNTER", ABGCS:GetSpellNameByName("Consume Magic"),
+		"DRUID", ABGCS:GetSpellNameByName("Skull Bash"),
 		"HUNTER", ABGCS:GetSpellNameByName("Counter Shot"),
+		"MAGE", ABGCS:GetSpellNameByName("Counterspell"),
+		"MONK", ABGCS:GetSpellNameByName("Spear Hand Strike"),
 		"PALADIN", ABGCS:GetSpellNameByName("Rebuke"),
+		"PRIEST", ABGCS:GetSpellNameByName("Silence"),
 		"ROGUE", ABGCS:GetSpellNameByName("Kick"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Wind Shear"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Grimoire: Felhunter"),
+		"WARRIOR", ABGCS:GetSpellNameByName("Pummel"),
 	})
 
 	AutoBarCategoryList["Spell.CatForm"] = AutoBarSpells:new( "Spell.CatForm", spellIconList["Charge"],

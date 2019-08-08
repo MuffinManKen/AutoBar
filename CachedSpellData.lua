@@ -39,22 +39,23 @@ ABGCS:CacheSpellData(183752, "Consume Magic");
 
 --Druid
 ABGCS:CacheSpellData(22812, "Barkskin");
+ABGCS:CacheSpellData(5487, "Bear Form");
+ABGCS:CacheSpellData(768, "Cat Form");
 ABGCS:CacheSpellData(99, "Disorienting Roar");
+ABGCS:CacheSpellData(193753, "Dreamwalk");
+ABGCS:CacheSpellData(33943, "Flight Form");
+ABGCS:CacheSpellData(22842, "Frenzied Regeneration");
 ABGCS:CacheSpellData(102342, "Ironbark");
 ABGCS:CacheSpellData(5215, "Prowl");
-ABGCS:CacheSpellData(22842, "Frenzied Regeneration");
-ABGCS:CacheSpellData(102401, "Wild Charge");
-ABGCS:CacheSpellData(5487, "Bear Form");
 ABGCS:CacheSpellData(33917, "Mangle");
-ABGCS:CacheSpellData(768, "Cat Form");
 ABGCS:CacheSpellData(197625, "Moonkin Form");
 ABGCS:CacheSpellData(114282, "Treant Form");
+ABGCS:CacheSpellData(106839, "Skull Bash");
 ABGCS:CacheSpellData(210053, "Stag Form");
-ABGCS:CacheSpellData(33943, "Flight Form");
 ABGCS:CacheSpellData(40120, "Swift Flight Form");
 ABGCS:CacheSpellData(783, "Travel Form");
 ABGCS:CacheSpellData(18960, "Teleport: Moonglade");
-ABGCS:CacheSpellData(193753, "Dreamwalk");
+ABGCS:CacheSpellData(102401, "Wild Charge");
 
 --Hunter
 ABGCS:CacheSpellData(61648, "Aspect of the Chameleon");
@@ -101,17 +102,19 @@ ABGCS:CacheSpellData(162488, "Steel Trap");
 
 
 --Mage
-ABGCS:CacheSpellData(11426, "Ice Barrier");
-ABGCS:CacheSpellData(235450, "Prismatic Barrier");
 ABGCS:CacheSpellData(235313, "Blazing Barrier");
-ABGCS:CacheSpellData(198111, "Temporal Shield");
-ABGCS:CacheSpellData(130, "Slow Fall");
 ABGCS:CacheSpellData(42955, "Conjure Refreshment");
 ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
-ABGCS:CacheSpellData(66, "Invisibility");
+ABGCS:CacheSpellData(2139, "Counterspell");
 ABGCS:CacheSpellData(110959, "Greater Invisibility");
+ABGCS:CacheSpellData(11426, "Ice Barrier");
 ABGCS:CacheSpellData(27619, "Ice Block");
+ABGCS:CacheSpellData(66, "Invisibility");
+ABGCS:CacheSpellData(235450, "Prismatic Barrier");
+ABGCS:CacheSpellData(130, "Slow Fall");
 ABGCS:CacheSpellData(31687, "Summon Water Elemental");
+ABGCS:CacheSpellData(198111, "Temporal Shield");
+
 ABGCS:CacheSpellData(33691, "Portal: Shattrath");
 ABGCS:CacheSpellData(35715, "Teleport: Shattrath");
 ABGCS:CacheSpellData(49361, "Portal: Stonard");
@@ -168,6 +171,7 @@ ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
 ABGCS:CacheSpellData(126892, "Zen Pilgrimage");
 ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return");
 ABGCS:CacheSpellData(115203, "Fortifying Brew");
+ABGCS:CacheSpellData(116705, "Spear Hand Strike");
 ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
 
 --Paladin
@@ -209,26 +213,28 @@ ABGCS:CacheSpellData(6770, "Sap");
 
 
 --Shaman
-ABGCS:CacheSpellData(2484, "Earthbind Totem");
-ABGCS:CacheSpellData(51485, "Earthgrab Totem");
-ABGCS:CacheSpellData(51533, "Feral Spirit");
-ABGCS:CacheSpellData(546, "Water Walking");
-ABGCS:CacheSpellData(192077, "Wind Rush Totem");
-ABGCS:CacheSpellData(2645, "Ghost Wolf");
-ABGCS:CacheSpellData(198103, "Earth Elemental");
-ABGCS:CacheSpellData(198067, "Fire Elemental");
-ABGCS:CacheSpellData(192249, "Storm Elemental");
 ABGCS:CacheSpellData(556, "Astral Recall");
+ABGCS:CacheSpellData(198103, "Earth Elemental");
+ABGCS:CacheSpellData(51533, "Feral Spirit");
+ABGCS:CacheSpellData(198067, "Fire Elemental");
+ABGCS:CacheSpellData(2645, "Ghost Wolf");
+ABGCS:CacheSpellData(192249, "Storm Elemental");
+ABGCS:CacheSpellData(546, "Water Walking");
+ABGCS:CacheSpellData(57994, "Wind Shear");
+
 ABGCS:CacheSpellData(207399, "Ancestral Protection Totem");
-ABGCS:CacheSpellData(198838, "Earthen Shield Totem");
-ABGCS:CacheSpellData(61882, "Earthquake Totem");
-ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
-ABGCS:CacheSpellData(196932, "Voodoo Totem");
 ABGCS:CacheSpellData(157153, "Cloudburst Totem");
-ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); 
+ABGCS:CacheSpellData(2484, "Earthbind Totem");
+ABGCS:CacheSpellData(198838, "Earthen Shield Totem");
+ABGCS:CacheSpellData(51485, "Earthgrab Totem");
+ABGCS:CacheSpellData(61882, "Earthquake Totem");
 ABGCS:CacheSpellData(5394, "Healing Stream Totem");
 ABGCS:CacheSpellData(108280, "Healing Tide Totem");
+ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
+ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); 
 ABGCS:CacheSpellData(98008, "Spirit Link Totem");
+ABGCS:CacheSpellData(196932, "Voodoo Totem");
+ABGCS:CacheSpellData(192077, "Wind Rush Totem");
 
 
 --Warlock
@@ -265,9 +271,10 @@ ABGCS:CacheSpellData(197690, "Defensive Stance");
 ABGCS:CacheSpellData(1160, "Demoralizing Shout");
 ABGCS:CacheSpellData(184364, "Enraged Regeneration");
 ABGCS:CacheSpellData(198304, "Intercept");
+ABGCS:CacheSpellData(12975, "Last Stand");
+ABGCS:CacheSpellData(6552, "Pummel");
 ABGCS:CacheSpellData(2565, "Shield Block"); 
 ABGCS:CacheSpellData(871, "Shield Wall"); 
-ABGCS:CacheSpellData(12975, "Last Stand");
 
 --Skills
 ABGCS:CacheSpellData(27028, "First Aid");
