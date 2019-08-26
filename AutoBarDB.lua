@@ -61,12 +61,9 @@ local CLASS_COLUMN_DEFAULT = 10
 
 
 local classBar = {
-	DEATHKNIGHT = "AutoBarClassBarDeathKnight",
-	DEMONHUNTER = "AutoBarClassBarDemonHunter",
 	DRUID = "AutoBarClassBarDruid",
 	HUNTER = "AutoBarClassBarHunter",
 	MAGE = "AutoBarClassBarMage",
-	MONK = "AutoBarClassBarMonk",
 	PALADIN = "AutoBarClassBarPaladin",
 	PRIEST = "AutoBarClassBarPriest",
 	ROGUE = "AutoBarClassBarRogue",
@@ -133,12 +130,9 @@ local function get_bar_default_settings()
 		showOnModifier = nil,
 		posX = 300,
 		posY = 200,
-		DEATHKNIGHT = true,
-		DEMONHUNTER = true,
 		DRUID = true,
 		HUNTER = true,
 		MAGE = true,
-		MONK = true,
 		PALADIN = true,
 		PRIEST = true,
 		ROGUE = true,
@@ -240,20 +234,12 @@ function AutoBar:InitializeDefaults()
 	--
 	-- Create the various class bars
 	--
-	if (AutoBar.CLASS == "DEMONHUNTER") then
-		-- ToDo: This temporarily forces existing configs to recognize DEMONHUNTER.  Remove after Legion
-		AutoBar.db.account.barList["AutoBarClassBarBasic"].DEMONHUNTER = true
-		AutoBar.db.account.barList["AutoBarClassBarExtras"].DEMONHUNTER = true
-	end
 
 	local class_bar_map = 
 	{
-		DEMONHUNTER = "AutoBarClassBarDemonHunter",
-		DEATHKNIGHT = "AutoBarClassBarDeathKnight",
 		DRUID = "AutoBarClassBarDruid",
 		HUNTER = "AutoBarClassBarHunter",
 		MAGE = "AutoBarClassBarMage",
-		MONK = "AutoBarClassBarMonk",
 		PALADIN = "AutoBarClassBarPaladin",
 		PRIEST = "AutoBarClassBarPriest",
 		ROGUE = "AutoBarClassBarRogue",
@@ -602,15 +588,6 @@ function AutoBar:InitializeDefaults()
 			enabled = true,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonArchaeology"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonArchaeology"] = {
-			buttonKey = "AutoBarButtonArchaeology",
-			buttonClass = "AutoBarButtonArchaeology",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = true,
-		}
-	end
 	
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"] = {
@@ -652,18 +629,6 @@ function AutoBar:InitializeDefaults()
 			arrangeOnUse = true,
 		}
 	end
-
-	if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
-			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
-				buttonKey = "AutoBarButtonMillHerbs",
-				buttonClass = "AutoBarButtonMillHerbs",
-				barKey = "AutoBarClassBarExtras",
-				defaultButtonIndex = 11,
-				enabled = true,
-				arrangeOnUse = true,
-				targeted = "Milling",
-			}
-		end
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"] = {
@@ -751,7 +716,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonDebuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonDebuff"] = {
 				buttonKey = "AutoBarButtonDebuff",
@@ -775,7 +740,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK" or AutoBar.CLASS == "DEATHKNIGHT") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPets2"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPets2"] = {
 				buttonKey = "AutoBarButtonClassPets2",
@@ -797,7 +762,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
-	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PRIEST" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PRIEST" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
 				buttonKey = "AutoBarButtonClassPet",
@@ -809,7 +774,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",

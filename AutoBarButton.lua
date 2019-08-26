@@ -632,7 +632,6 @@ end
 
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
-local SPELL_MILL_HERB = AutoBar:LoggedGetSpellInfo(51005)
 
 local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
@@ -693,15 +692,6 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		elseif (AutoBar.CLASS == "ROGUE" and targeted == "Lockpicking") then
 				frame:SetAttribute("type2", "spell")
 				frame:SetAttribute("spell2", SPELL_PICK_LOCK)
-				frame:SetAttribute("target-bag2", bag)
-				frame:SetAttribute("target-slot2", slot)
-		elseif (targeted == "Milling") then
-				frame:SetAttribute("type1", "spell")
-				frame:SetAttribute("spell1", SPELL_MILL_HERB)
-				frame:SetAttribute("target-bag1", bag)
-				frame:SetAttribute("target-slot1", slot)
-				frame:SetAttribute("type2", "item")
-				frame:SetAttribute("item2", "Draenic Mortar")
 				frame:SetAttribute("target-bag2", bag)
 				frame:SetAttribute("target-slot2", slot)
 		elseif (AutoBar.CLASS == "HUNTER" and targeted == "PET") then
@@ -1110,9 +1100,6 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Potion.Water Breathing")
 
-	self:AddCategory("Muffin.Order Hall.Buff")
-
-
 	-- Melee
 	if (AutoBar.CLASS ~= "MAGE" and AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "PRIEST") then
 		self:AddCategory("Consumable.Buff Group.Melee.Target")
@@ -1411,39 +1398,6 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Fishing")
 end
 
-local AutoBarButtonArchaeology = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonArchaeology"] = AutoBarButtonArchaeology
-
-function AutoBarButtonArchaeology.prototype:init(parentBar, buttonDB)
-	AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.Skill.Archaeology.Crate")
-	self:AddCategory("Muffin.Skill.Archaeology.Mission")
-	
-	if(buttonDB.archbtn_show_spells == nil) then 
-		buttonDB.archbtn_show_spells = false;
-	elseif(buttonDB.archbtn_show_spells) then
-		self:AddCategory("Spell.Archaeology")
-	end
-	
-end
-
-function AutoBarButtonArchaeology.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "archbtn_show_spells", L["ArchBtnShowSpells"])
-end
-
-function AutoBarButtonArchaeology.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonArchaeology.super.prototype.Refresh(self, parentBar, buttonDB)
-
-	if(buttonDB.archbtn_show_spells == false) then 
-		self:DeleteCategory("Spell.Archaeology")
-	elseif(buttonDB.archbtn_show_spells) then
-		self:AddCategory("Spell.Archaeology")
-	end
-
-end
-
-
 local AutoBarButtonFood = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFood"] = AutoBarButtonFood
 
@@ -1504,7 +1458,7 @@ function AutoBarButtonFoodBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Food.Health.Buff")
 
---	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "WARRIOR") then
+--	if (AutoBar.CLASS == "WARRIOR") then
 --		self:AddCategory("Consumable.Food.Buff.Strength")
 --		self:AddCategory("Consumable.Food.Buff.Attack Power")
 --		self:AddCategory("Consumable.Food.Buff.Dodge")
@@ -1632,12 +1586,8 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 
 	local class = AutoBar.CLASS
 
-	if (class == "DEATHKNIGHT" or class == "DRUID" or class == "MAGE" or class == "SHAMAN" or class == "WARLOCK" or class ==  "MONK") then
+	if (class == "DRUID" or class == "MAGE" or class == "SHAMAN" or class == "WARLOCK") then
 		self:AddCategory("Spell.Portals")
-	end
-
-	if(buttonDB.hearth_include_ancient_dalaran and class == "MAGE") then
-		self:AddCategory("Spell.AncientDalaranPortals")
 	end
 
 	self:AddCategory("Misc.Hearth")

@@ -49,10 +49,6 @@
 	BINDING_HEADER_AutoBarClassBarHeader = L["AutoBarClassBarHeader"]
 	BINDING_NAME_AutoBarButtonDebuff_X = L["AutoBarButtonDebuff"]
 
-	BINDING_HEADER_AutoBarClassBarDeathKnight = L["AutoBarClassBarDeathKnight"]
-	BINDING_HEADER_AutoBarClassBarMonk = L["AutoBarClassBarMonk"]
-	BINDING_HEADER_AutoBarClassBarDemonHunter = L["AutoBarClassBarDemonHunter"]
-
 	BINDING_HEADER_AutoBarClassBarDruid = L["AutoBarClassBarDruid"]
 	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
 	BINDING_NAME_AutoBarButtonBoomkinTree_X = L["AutoBarButtonBoomkinTree"]

@@ -5,36 +5,8 @@ local ABGData = AutoBarGlobalDataObject
 -- NOTE: This entire set of code runs in ~2ms, so no need to try to optimize it
 local cache_timer_start = debugprofilestop();
 --All
-ABGCS:CacheSpellData(125439, "Revive Battle Pets");
 ABGCS:CacheSpellData(83958, "Mobile Banking");
 ABGCS:CacheSpellData(58984, "Shadowmeld");
-ABGCS:CacheSpellData(87840, "Running Wild");
-ABGCS:CacheSpellData(265225, "Mole Machine");
-
-
---DeathKnight
-ABGCS:CacheSpellData(3714, "Path of Frost");
-ABGCS:CacheSpellData(63560, "Dark Transformation");
-ABGCS:CacheSpellData(45524, "Chains of Ice");
-ABGCS:CacheSpellData(48707, "Anti-Magic Shell");
-ABGCS:CacheSpellData(48792, "Icebound Fortitude");
-ABGCS:CacheSpellData(47528, "Mind Freeze");
-ABGCS:CacheSpellData(194679, "Rune Tap");
-ABGCS:CacheSpellData(49028, "Rune Weapon");
-ABGCS:CacheSpellData(46584, "Raise Dead");
-ABGCS:CacheSpellData(49206, "Summon Gargoyle");
-ABGCS:CacheSpellData(42650, "Army of the Dead");
-ABGCS:CacheSpellData(50977, "Death Gate");
-
---DemonHunter
-ABGCS:CacheSpellData(195072, "Fel Rush");
-ABGCS:CacheSpellData(198793, "Vengeful Retreat");
-ABGCS:CacheSpellData(198589, "Blur");
-ABGCS:CacheSpellData(196718, "Darkness");
-ABGCS:CacheSpellData(204596, "Sigil of Flame");
-ABGCS:CacheSpellData(207684, "Sigil of Misery");
-ABGCS:CacheSpellData(202137, "Sigil of Silence");
-ABGCS:CacheSpellData(183752, "Consume Magic");
 
 
 --Druid
@@ -106,14 +78,12 @@ ABGCS:CacheSpellData(235450, "Prismatic Barrier");
 ABGCS:CacheSpellData(235313, "Blazing Barrier");
 ABGCS:CacheSpellData(198111, "Temporal Shield");
 ABGCS:CacheSpellData(130, "Slow Fall");
-ABGCS:CacheSpellData(42955, "Conjure Refreshment");
-ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
+--ABGCS:CacheSpellData(42955, "Conjure Refreshment");
+--ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
 ABGCS:CacheSpellData(66, "Invisibility");
 ABGCS:CacheSpellData(110959, "Greater Invisibility");
 ABGCS:CacheSpellData(27619, "Ice Block");
 ABGCS:CacheSpellData(31687, "Summon Water Elemental");
-ABGCS:CacheSpellData(33691, "Portal: Shattrath");
-ABGCS:CacheSpellData(35715, "Teleport: Shattrath");
 ABGCS:CacheSpellData(49361, "Portal: Stonard");
 ABGCS:CacheSpellData(49358, "Teleport: Stonard");
 ABGCS:CacheSpellData(49360, "Portal: Theramore");
@@ -124,51 +94,12 @@ ABGCS:CacheSpellData(11420, "Portal: Thunder Bluff");
 ABGCS:CacheSpellData(3566, "Teleport: Thunder Bluff");
 ABGCS:CacheSpellData(10059, "Portal: Stormwind");
 ABGCS:CacheSpellData(3561, "Teleport: Stormwind");
-ABGCS:CacheSpellData(32267, "Portal: Silvermoon");
-ABGCS:CacheSpellData(32272, "Teleport: Silvermoon");
-ABGCS:CacheSpellData(32266, "Portal: Exodar");
-ABGCS:CacheSpellData(32271, "Teleport: Exodar");
 ABGCS:CacheSpellData(11419, "Portal: Darnassus");
 ABGCS:CacheSpellData(3565, "Teleport: Darnassus");
 ABGCS:CacheSpellData(11416, "Portal: Ironforge");
 ABGCS:CacheSpellData(3562, "Teleport: Ironforge");
 ABGCS:CacheSpellData(11417, "Portal: Orgrimmar");
 ABGCS:CacheSpellData(3567, "Teleport: Orgrimmar");
-ABGCS:CacheSpellData(53142, "Portal: Dalaran");
-ABGCS:CacheSpellData(53140, "Teleport: Dalaran");
-ABGCS:CacheSpellData(224871, "Portal: Dalaran - Broken Isles");
-ABGCS:CacheSpellData(224869, "Teleport: Dalaran - Broken Isles");
-
-ABGCS:CacheSpellData(88344, "Teleport: Tol Barad - Horde");
-ABGCS:CacheSpellData(88346, "Portal: Tol Barad - Horde");
-ABGCS:CacheSpellData(88342, "Teleport: Tol Barad - Alliance");
-ABGCS:CacheSpellData(88345, "Portal: Tol Barad - Alliance");
-
-ABGCS:CacheSpellData(132621, "Teleport: Vale of Eternal Blossoms - Alliance");
-ABGCS:CacheSpellData(132620, "Portal: Vale of Eternal Blossoms - Alliance");
-ABGCS:CacheSpellData(132627, "Teleport: Vale of Eternal Blossoms - Horde");
-ABGCS:CacheSpellData(132626, "Portal: Vale of Eternal Blossoms - Horde");
-
-ABGCS:CacheSpellData(176248, "Teleport: Stormshield");
-ABGCS:CacheSpellData(176246, "Portal: Stormshield");
-ABGCS:CacheSpellData(176242, "Teleport: Warspear");
-ABGCS:CacheSpellData(176244, "Portal: Warspear");
-ABGCS:CacheSpellData(120145, "Teleport: Ancient Dalaran");
-ABGCS:CacheSpellData(121848, "Portal: Ancient Dalaran");
-
-ABGCS:CacheSpellData(204287, "Teleport: Hall of the Guardian");
-
-ABGCS:CacheSpellData(281403, "Teleport: Boralus");
-ABGCS:CacheSpellData(281400, "Portal: Boralus");
-ABGCS:CacheSpellData(281404, "Teleport: Dazar'alor");
-ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
-
-
---Monk
-ABGCS:CacheSpellData(126892, "Zen Pilgrimage");
-ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return");
-ABGCS:CacheSpellData(115203, "Fortifying Brew");
-ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
 
 --Paladin
 ABGCS:CacheSpellData(31850, "Ardent Defender"); 
@@ -183,6 +114,13 @@ ABGCS:CacheSpellData(203539, "Greater Blessing of Wisdom");
 ABGCS:CacheSpellData(183218, "Hand of Hindrance");
 ABGCS:CacheSpellData(96231, "Rebuke");
 ABGCS:CacheSpellData(633, "Lay on Hands");
+
+ABGCS:CacheSpellData(19740, "Blessing of Might"); --y
+
+ABGCS:CacheSpellData(465, "Devotion Aura"); --y		TODO: Add Auras
+
+
+
 
 --Priest
 ABGCS:CacheSpellData(17, "Power Word: Shield");
@@ -232,11 +170,14 @@ ABGCS:CacheSpellData(98008, "Spirit Link Totem");
 
 
 --Warlock
+ABGCS:CacheSpellData(687, "Demon Skin");	--y
+
+
 ABGCS:CacheSpellData(104316, "Call Dreadstalkers"); 
 ABGCS:CacheSpellData(119898, "Command Demon"); 
 ABGCS:CacheSpellData(199954, "Curse of Fragility"); 
 ABGCS:CacheSpellData(199890, "Curse of Tongues"); 
-ABGCS:CacheSpellData(199892, "Curse of Weakness"); 
+ABGCS:CacheSpellData(702, "Curse of Weakness"); --y
 ABGCS:CacheSpellData(108416, "Dark Pact");
 ABGCS:CacheSpellData(193396, "Demonic Empowerment"); 
 ABGCS:CacheSpellData(193440, "Demonwrath"); 
@@ -251,7 +192,7 @@ ABGCS:CacheSpellData(29893, "Ritual of Souls");
 ABGCS:CacheSpellData(126, "RitualSouls");
 ABGCS:CacheSpellData(30146, "Eye of Kilrogg");
 ABGCS:CacheSpellData(691, "Summon Felhunter");
-ABGCS:CacheSpellData(688, "Summon Imp");
+ABGCS:CacheSpellData(688, "Summon Imp");   -- y
 ABGCS:CacheSpellData(712, "Summon Succubus");
 ABGCS:CacheSpellData(697, "Summon Voidwalker");
 ABGCS:CacheSpellData(1122, "Summon Infernal");
@@ -270,26 +211,21 @@ ABGCS:CacheSpellData(871, "Shield Wall");
 ABGCS:CacheSpellData(12975, "Last Stand");
 
 --Skills
-ABGCS:CacheSpellData(27028, "First Aid");
-ABGCS:CacheSpellData(28596, "Alchemy");
-ABGCS:CacheSpellData(818, "BasicCampfire");
-ABGCS:CacheSpellData(29844, "Blacksmithing");
-ABGCS:CacheSpellData(33359, "Cooking");
-ABGCS:CacheSpellData(78670, "Archaeology");
-ABGCS:CacheSpellData(13262, "Disenchant");
-ABGCS:CacheSpellData(28029, "Enchanting");
-ABGCS:CacheSpellData(30350, "Engineering");
-ABGCS:CacheSpellData(45357, "Inscription");
-ABGCS:CacheSpellData(28897, "Jewelcrafting");
-ABGCS:CacheSpellData(32549, "Leatherworking");
-ABGCS:CacheSpellData(51005, "Milling");
-ABGCS:CacheSpellData(31252, "Prospecting");
-ABGCS:CacheSpellData(53428, "Runeforging");
-ABGCS:CacheSpellData(2656, "Smelting");
-ABGCS:CacheSpellData(80451, "Survey");
-ABGCS:CacheSpellData(26790, "Tailoring");
-ABGCS:CacheSpellData(131474, "Fishing");
-ABGCS:CacheSpellData(201891, "Undercurrent");
+ABGCS:CacheSpellData(3273, "First Aid"); --y
+ABGCS:CacheSpellData(2259, "Alchemy"); --y
+ABGCS:CacheSpellData(818, "Basic Campfire"); --y
+ABGCS:CacheSpellData(2018, "Blacksmithing"); --y
+ABGCS:CacheSpellData(2550, "Cooking");	--y
+ABGCS:CacheSpellData(13262, "Disenchant"); --y
+ABGCS:CacheSpellData(7411, "Enchanting");  --y
+ABGCS:CacheSpellData(4036, "Engineering"); --y
+ABGCS:CacheSpellData(2108, "Leatherworking"); --y
+ABGCS:CacheSpellData(2656, "Smelting"); --y
+ABGCS:CacheSpellData(3908, "Tailoring"); --y
+ABGCS:CacheSpellData(7620, "Fishing"); --y
+ABGCS:CacheSpellData(2580, "Find Minerals"); --y
+ABGCS:CacheSpellData(2383, "Find Herbs"); --y
+
 
 local cache_timer_stop = debugprofilestop();
 

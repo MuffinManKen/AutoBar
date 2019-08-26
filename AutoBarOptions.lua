@@ -636,38 +636,6 @@ local function setCustomButtonName(info, value)
 	end
 end
 
-local function getDemonHunter(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].DEMONHUNTER
-end
-
-local function setDemonHunter(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].DEMONHUNTER = value
-	AutoBar:BarsChanged()
-end
-
-local function getMonk(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].MONK
-end
-
-local function setMonk(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].MONK = value
-	AutoBar:BarsChanged()
-end
-
-local function getDeathKnight(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].DEATHKNIGHT
-end
-
-local function setDeathKnight(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].DEATHKNIGHT = value
-	AutoBar:BarsChanged()
-end
 
 local function getDruid(info)
 	local barKey = info.arg.barKey
@@ -913,12 +881,9 @@ local function BarNew()
 		showOnModifier = nil,
 		posX = 300,
 		posY = 360,
-		DEATHKNIGHT = true,
-		DEMONHUNTER = true,
 		DRUID = true,
 		HUNTER = true,
 		MAGE = true,
-		MONK = true,
 		PALADIN = true,
 		PRIEST = true,
 		ROGUE = true,
@@ -1970,39 +1935,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 			disabled = getCombatLockdown,
 		}
 	end
-		if (not barOptions.args.demonhunter) then
-		barOptions.args.demonhunter = {
-			type = "toggle",
-			order = 109,
-			name = L["AutoBarClassBarDemonHunter"],
-			get = getDemonHunter,
-			set = setDemonHunter,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-		if (not barOptions.args.monk) then
-		barOptions.args.monk = {
-			type = "toggle",
-			order = 110,
-			name = L["AutoBarClassBarMonk"],
-			get = getMonk,
-			set = setMonk,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.deathKnight) then
-		barOptions.args.deathKnight = {
-			type = "toggle",
-			order = 111,
-			name = L["AutoBarClassBarDeathKnight"],
-			get = getDeathKnight,
-			set = setDeathKnight,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
+
 	if (not barOptions.args.druid) then
 		barOptions.args.druid = {
 			type = "toggle",
