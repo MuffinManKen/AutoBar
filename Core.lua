@@ -276,8 +276,6 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
-	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
-	AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -390,40 +388,6 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 
 	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
 end
-
-function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
-	AutoBar:LogEventStart("QUEST_ACCEPTED", p_quest_index)
-
-	local link = GetQuestLogSpecialItemInfo(p_quest_index)
-	
-	if(link) then
-		add_item_to_dynamic_category(link, "Dynamic.Quest")
-		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
-	end
-
-	AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
-end
-
-function AutoBar.events:QUEST_LOG_UPDATE(p_arg1)
-	AutoBar:LogEventStart("QUEST_LOG_UPDATE", p_arg1)
-	
-	--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
-	if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
-		AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
-		local _, num_quests = GetNumQuestLogEntries()
-
-		for i = 1, num_quests do 
-			local link = GetQuestLogSpecialItemInfo(i)
-			if(link) then
-				add_item_to_dynamic_category(link, "Dynamic.Quest")
-			end
-		end
-	end
-
-	AutoBar:LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
-
-end
-
 
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
