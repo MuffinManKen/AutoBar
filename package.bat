@@ -1,9 +1,9 @@
 
 cd ..
 
-del AutoBar.zip
+del AutoBarClassic.zip
 
-7z a AutoBar.zip AutoBar\ -mx9 -xr!.git -xr!.gitignore -xr!*.ctag -xr!*.prj -xr!*.pui -xr!*.bat -xr!notes.txt -xr!xcopy_ignore.txt
+7z a AutoBarClassic.zip AutoBar\ -mx9 -xr!.git -xr!.gitignore -xr!*.ctag -xr!*.prj -xr!*.pui -xr!*.bat -xr!notes.txt -xr!xcopy_ignore.txt
 
 
 
