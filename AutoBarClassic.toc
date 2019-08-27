@@ -1,5 +1,5 @@
 ## Interface: 11302
-## Title: AutoBar
+## Title: AutoBarClassic
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
 ## Version: 1.13.2.00
 ## X-Website: http://www.MuffinManGames.com
