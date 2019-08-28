@@ -942,7 +942,7 @@ function AutoBarCategory:Initialize()
 --		"HUNTER", ABGCS:GetSpellNameByName("Camouflage"),
 --		"MAGE", ABGCS:GetSpellNameByName("Greater Invisibility"),
 --		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
---		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),
+		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),
 --		"*", ABGCS:GetSpellNameByName("Shadowmeld"),
 	})
 
