@@ -938,10 +938,9 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
 	{
---		"DRUID", ABGCS:GetSpellNameByName("Prowl"),
---		"HUNTER", ABGCS:GetSpellNameByName("Camouflage"),
---		"MAGE", ABGCS:GetSpellNameByName("Greater Invisibility"),
+		"DRUID", ABGCS:GetSpellNameByName("Prowl"),
 		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
+		"MAGE", ABGCS:GetSpellNameByName("Lesser Invisibility"),
 		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),	--y
 		"*", ABGCS:GetSpellNameByName("Shadowmeld"),	--y
 	})
