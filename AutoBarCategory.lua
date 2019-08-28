@@ -1106,13 +1106,6 @@ function AutoBarCategory:Initialize2()
 	})
 
 
-			
-	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new("Spell.Guild", iconMobileBanking,
-	{
---		"*", ABGCS:GetSpellNameByName("Mobile Banking"),
-	})
-
-
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
 --		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),

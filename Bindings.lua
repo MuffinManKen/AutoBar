@@ -31,7 +31,6 @@
 	BINDING_NAME_AutoBarButtonTrinket2_X = L["AutoBarButtonTrinket2"]
 	BINDING_NAME_AutoBarButtonQuest_X = L["AutoBarButtonQuest"]
 	BINDING_NAME_AutoBarButtonMiscFun_X = L["AutoBarButtonMiscFun"]
-	BINDING_NAME_AutoBarButtonGuildSpell_X = L["AutoBarButtonGuildSpell"]
 	BINDING_NAME_AutoBarButtonSpeed_X = L["AutoBarButtonSpeed"]
 	BINDING_NAME_AutoBarButtonStance_X = L["AutoBarButtonStance"]
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]

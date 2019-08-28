@@ -1849,16 +1849,6 @@ end
 
 
 
-local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
-
-function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
-	AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.Guild")
-end
-
-
 --------------------------------------------------ADDING NEW FUNCTIONALITY HERE
 
 local totemAir = 4

@@ -619,17 +619,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"] = {
-			buttonKey = "AutoBarButtonGuildSpell",
-			buttonClass = "AutoBarButtonGuildSpell",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = 9,
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
-
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"] = {
 			buttonKey = "AutoBarButtonRaidTarget",
@@ -961,7 +950,8 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
-		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree"
+		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
+		"AutoBarButtonGuildSpell"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do
