@@ -1049,22 +1049,15 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new( "Spell.Portals", spellPortalShattrathIcon, nil,
 	{
---		"DRUID", ABGCS:GetSpellNameByName("Teleport: Moonglade"), ABGCS:GetSpellNameByName("Teleport: Moonglade"),
---		"DRUID", ABGCS:GetSpellNameByName("Dreamwalk"), ABGCS:GetSpellNameByName("Dreamwalk"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stonard"), ABGCS:GetSpellNameByName("Portal: Stonard"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Theramore"), ABGCS:GetSpellNameByName("Portal: Theramore"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Undercity"), ABGCS:GetSpellNameByName("Portal: Undercity"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Thunder Bluff"), ABGCS:GetSpellNameByName("Portal: Thunder Bluff"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stormwind"), ABGCS:GetSpellNameByName("Portal: Stormwind"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Silvermoon"), ABGCS:GetSpellNameByName("Portal: Silvermoon"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Exodar"), ABGCS:GetSpellNameByName("Portal: Exodar"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Darnassus"), ABGCS:GetSpellNameByName("Portal: Darnassus"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Ironforge"), ABGCS:GetSpellNameByName("Portal: Ironforge"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Orgrimmar"), ABGCS:GetSpellNameByName("Portal: Orgrimmar"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Shattrath"), ABGCS:GetSpellNameByName("Portal: Shattrath"),
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Dalaran"), ABGCS:GetSpellNameByName("Portal: Dalaran"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
---		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
+		"DRUID", ABGCS:GetSpellNameByName("Teleport: Moonglade"), ABGCS:GetSpellNameByName("Teleport: Moonglade"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Undercity"), ABGCS:GetSpellNameByName("Portal: Undercity"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Thunder Bluff"), ABGCS:GetSpellNameByName("Portal: Thunder Bluff"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stormwind"), ABGCS:GetSpellNameByName("Portal: Stormwind"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Darnassus"), ABGCS:GetSpellNameByName("Portal: Darnassus"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Ironforge"), ABGCS:GetSpellNameByName("Portal: Ironforge"),
+		"MAGE", ABGCS:GetSpellNameByName("Teleport: Orgrimmar"), ABGCS:GetSpellNameByName("Portal: Orgrimmar"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
 	})
 
 			

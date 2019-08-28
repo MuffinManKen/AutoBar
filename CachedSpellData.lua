@@ -26,7 +26,7 @@ ABGCS:CacheSpellData(33943, "Flight Form");
 ABGCS:CacheSpellData(40120, "Swift Flight Form");
 ABGCS:CacheSpellData(783, "Travel Form");
 ABGCS:CacheSpellData(18960, "Teleport: Moonglade");
-ABGCS:CacheSpellData(193753, "Dreamwalk");
+
 
 --Hunter
 ABGCS:CacheSpellData(61648, "Aspect of the Chameleon");
@@ -83,10 +83,6 @@ ABGCS:CacheSpellData(66, "Lesser Invisibility");
 ABGCS:CacheSpellData(885, "Invisibility");
 ABGCS:CacheSpellData(27619, "Ice Block");
 ABGCS:CacheSpellData(31687, "Summon Water Elemental");
-ABGCS:CacheSpellData(49361, "Portal: Stonard");
-ABGCS:CacheSpellData(49358, "Teleport: Stonard");
-ABGCS:CacheSpellData(49360, "Portal: Theramore");
-ABGCS:CacheSpellData(49359, "Teleport: Theramore");
 ABGCS:CacheSpellData(11418, "Portal: Undercity");
 ABGCS:CacheSpellData(3563, "Teleport: Undercity");
 ABGCS:CacheSpellData(11420, "Portal: Thunder Bluff");
