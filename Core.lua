@@ -401,7 +401,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
 
-		AutoBar:DumpWarningLog()
+		--AutoBar:DumpWarningLog()
 
 		AB.show_whats_new();
 	end

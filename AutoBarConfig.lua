@@ -67,15 +67,17 @@ end
 
 -- function that draws the widgets for the second tab
 local function DrawGroup2(container)
-  local desc = AceGUI:Create("Label")
-  desc:SetText("This is Tab 2")
-  desc:SetFullWidth(true)
-  container:AddChild(desc)
+
   
-  local button = AceGUI:Create("Button")
-  button:SetText("Tab 2 Button")
-  button:SetWidth(200)
-  container:AddChild(button)
+	local edit_box = AceGUI:Create("MultiLineEditBox")
+	edit_box:SetNumLines(28)
+	edit_box:SetFullWidth(true)
+	edit_box:DisableButton(true)
+	edit_box:SetLabel("")
+	container:AddChild(edit_box)
+
+	edit_box:SetText(AutoBarGlobalCodeSpace:GetWarningLogString())
+
 end
 
 -- Callback function for OnGroupSelected
@@ -91,7 +93,7 @@ end
 local tab =  AceGUI:Create("TabGroup")
 tab:SetLayout("Flow")
 -- Setup which tabs to show
-tab:SetTabs({{text="Nameless Categories", value="tab1"}, {text="Tab 2", value="tab2"}})
+tab:SetTabs({{text="Nameless Categories", value="tab1"}, {text="Warnings", value="tab2"}})
 -- Register callback
 tab:SetCallback("OnGroupSelected", SelectGroup)
 -- Set initial Tab (this will fire the OnGroupSelected callback)

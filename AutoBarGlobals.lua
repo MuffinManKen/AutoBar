@@ -66,6 +66,13 @@ function AutoBarGlobalCodeSpace:LogWarning(...)
 
 end
 
+function AutoBarGlobalCodeSpace:GetWarningLogString()
+
+	return table.concat(AutoBar.warning_log, "\n")
+
+end
+
+
 local macro_text_guid_index = 0;
 function AutoBarGlobalCodeSpace:MacroTextGUID(p_macro_text)
 
@@ -148,7 +155,7 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 	local name, rank, icon = GetSpellInfo(p_spell_id);
 
 	if(name == nil) then
-		--AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
@@ -163,7 +170,7 @@ function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	--AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -174,7 +181,7 @@ function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 	end
 
-	--AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
