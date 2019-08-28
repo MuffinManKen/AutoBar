@@ -941,11 +941,10 @@ function AutoBarCategory:Initialize()
 --		"DRUID", ABGCS:GetSpellNameByName("Prowl"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Camouflage"),
 --		"MAGE", ABGCS:GetSpellNameByName("Greater Invisibility"),
---		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
-		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),
---		"*", ABGCS:GetSpellNameByName("Shadowmeld"),
+		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
+		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),	--y
+		"*", ABGCS:GetSpellNameByName("Shadowmeld"),	--y
 	})
-
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
 	{
