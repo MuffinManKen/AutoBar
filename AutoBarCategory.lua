@@ -1045,8 +1045,6 @@ function AutoBarCategory:Initialize()
 --		"HUNTER", ABGCS:GetSpellNameByName("Wake Up"),
 	})
 
-
-
 	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new( "Spell.Portals", spellPortalShattrathIcon, nil,
 	{
 		"DRUID", ABGCS:GetSpellNameByName("Teleport: Moonglade"), ABGCS:GetSpellNameByName("Teleport: Moonglade"),
@@ -1061,11 +1059,6 @@ function AutoBarCategory:Initialize()
 	})
 
 			
-	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellPortalShattrathIcon, nil,
-	{
---		"MAGE", ABGCS:GetSpellNameByName("Teleport: Ancient Dalaran"), ABGCS:GetSpellNameByName("Teleport: Ancient Dalaran"),
-	})
-
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
 --		"DRUID", 		ABGCS:GetSpellNameByName("Barkskin"), 	ABGCS:GetSpellNameByName("Barkskin"),

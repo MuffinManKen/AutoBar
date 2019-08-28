@@ -1593,10 +1593,6 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Hearth")
 end
 
-function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
-end
-
 
 local AutoBarButtonPickLock = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonPickLock"] = AutoBarButtonPickLock

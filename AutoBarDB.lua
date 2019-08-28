@@ -332,7 +332,6 @@ function AutoBar:InitializeDefaults()
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 1,
 			enabled = true,
-			hearth_include_ancient_dalaran = false,
 		}
 	end
 
