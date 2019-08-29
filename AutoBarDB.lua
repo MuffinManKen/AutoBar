@@ -170,7 +170,6 @@ local function get_class_bar_default_settings(p_class_name)
 		showOnModifier = nil,
 		posX = 300,
 		posY = 280,
-		DEMONHUNTER = true,
 		buttonKeys = {},
 	}
 	
@@ -678,7 +677,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 	
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
+	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
 				buttonKey = "AutoBarButtonTrap",
@@ -786,20 +785,18 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (AutoBar.CLASS ~= "MONK") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonER"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonER"] = {
-				buttonKey = "AutoBarButtonER",
-				buttonClass = "AutoBarButtonER",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				noPopup = true,
-			}
-		end
+	if (not AutoBar.db.class.buttonList["AutoBarButtonER"]) then
+		AutoBar.db.class.buttonList["AutoBarButtonER"] = {
+			buttonKey = "AutoBarButtonER",
+			buttonClass = "AutoBarButtonER",
+			barKey = AutoBar.classBar,
+			defaultButtonIndex = "*",
+			enabled = true,
+			noPopup = true,
+		}
 	end
 
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "WARRIOR") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",
@@ -966,9 +963,10 @@ function AutoBar:InitializeDefaults()
 
 	end
 
-	if(AutoBar.CLASS == "MONK" and AutoBar.db.class.buttonList["AutoBarButtonER"]) then
-		AutoBar.db.class.buttonList["AutoBarButtonER"] = nil
-	end
+-- save as sample to remove buttons per class
+--	if(AutoBar.CLASS == "xx" and AutoBar.db.class.buttonList["AutoBarButtonER"]) then
+--		AutoBar.db.class.buttonList["AutoBarButtonER"] = nil
+--	end
 
 end
 

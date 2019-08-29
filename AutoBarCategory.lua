@@ -1066,7 +1066,6 @@ function AutoBarCategory:Initialize()
 --		"MAGE", 			ABGCS:GetSpellNameByName("Temporal Shield"), ABGCS:GetSpellNameByName("Temporal Shield"),
 --		"MAGE", 			ABGCS:GetSpellNameByName("Blazing Barrier"), ABGCS:GetSpellNameByName("Blazing Barrier"),
 --		"MAGE", 			ABGCS:GetSpellNameByName("Prismatic Barrier"), ABGCS:GetSpellNameByName("Prismatic Barrier"),
---		"MONK", 			ABGCS:GetSpellNameByName("Fortifying Brew"), ABGCS:GetSpellNameByName("Fortifying Brew"),
 --		"PALADIN", 		ABGCS:GetSpellNameByName("Ardent Defender"), ABGCS:GetSpellNameByName("Ardent Defender"),
 --		"PALADIN", 		ABGCS:GetSpellNameByName("Divine Shield"), ABGCS:GetSpellNameByName("Divine Shield"),
 --		"PRIEST", 		ABGCS:GetSpellNameByName("Power Word: Shield"), ABGCS:GetSpellNameByName("Power Word: Shield"),
@@ -1174,9 +1173,6 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
 	{
---		"DEMONHUNTER", ABGCS:GetSpellNameByName("Sigil of Flame"),
---		"DEMONHUNTER", ABGCS:GetSpellNameByName("Sigil of Misery"),
---		"DEMONHUNTER", ABGCS:GetSpellNameByName("Sigil of Silence"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Explosive Trap"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Freezing Trap"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Caltrops"),

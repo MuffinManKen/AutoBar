@@ -912,7 +912,7 @@ function AutoBar:StupidLog(p_text)
 end
 
 
-AutoBar.set_mana_users = ABGCS:MakeSet{"DRUID","MAGE","MONK","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+AutoBar.set_mana_users = ABGCS:MakeSet{"DRUID","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
 
 function AutoBar:ClassUsesMana(class_name)
 
