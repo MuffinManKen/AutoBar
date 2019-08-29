@@ -12,18 +12,13 @@ ABGCS:CacheSpellData(20580, "Shadowmeld");
 --Druid
 ABGCS:CacheSpellData(22812, "Barkskin");
 ABGCS:CacheSpellData(99, "Disorienting Roar");
-ABGCS:CacheSpellData(102342, "Ironbark");
 ABGCS:CacheSpellData(5215, "Prowl");
 ABGCS:CacheSpellData(22842, "Frenzied Regeneration");
-ABGCS:CacheSpellData(102401, "Wild Charge");
 ABGCS:CacheSpellData(5487, "Bear Form");
-ABGCS:CacheSpellData(33917, "Mangle");
+ABGCS:CacheSpellData(22570, "Mangle");
 ABGCS:CacheSpellData(768, "Cat Form");
-ABGCS:CacheSpellData(197625, "Moonkin Form");
-ABGCS:CacheSpellData(114282, "Treant Form");
-ABGCS:CacheSpellData(210053, "Stag Form");
-ABGCS:CacheSpellData(33943, "Flight Form");
-ABGCS:CacheSpellData(40120, "Swift Flight Form");
+ABGCS:CacheSpellData(24858, "Moonkin Form");
+ABGCS:CacheSpellData(775, "Tree Form");
 ABGCS:CacheSpellData(783, "Travel Form");
 ABGCS:CacheSpellData(18960, "Teleport: Moonglade");
 

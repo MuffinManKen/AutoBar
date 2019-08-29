@@ -971,9 +971,8 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
---		"DRUID", ABGCS:GetSpellNameByName("Ironbark"),
 --		"MAGE", ABGCS:GetSpellNameByName("Slow Fall"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),
+		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),	--y
 --		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Protection"),
 --		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Sacrifice"),
 --		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Spellwarding"),
@@ -1188,8 +1187,6 @@ function AutoBarCategory:Initialize2()
 	
 	AutoBarCategoryList["Misc.Mount.Summoned"] = AutoBarSpells:new( "Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"],
 	{
---		"DRUID", ABGCS:GetSpellNameByName("Flight Form"),
---		"DRUID", ABGCS:GetSpellNameByName("Swift Flight Form"),
 --		"SHAMAN", ABGCS:GetSpellNameByName("Ghost Wolf"),
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
@@ -1199,8 +1196,6 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
 	{
---		"DEMONHUNTER", ABGCS:GetSpellNameByName("Fel Rush"),
---		"DRUID", ABGCS:GetSpellNameByName("Wild Charge"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Harpoon"),
 --		"ROGUE", ABGCS:GetSpellNameByName("Shadowstep"),
 --		"WARRIOR", ABGCS:GetSpellNameByName("Charge"),
@@ -1248,7 +1243,7 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.TreeForm"] = AutoBarSpells:new( "Spell.TreeForm", spellIconList["Charge"],
 	{
---		"DRUID", ABGCS:GetSpellNameByName("Treant Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Tree Form"),
 	})
 
 	AutoBarCategoryList["Spell.StagForm"] = AutoBarSpells:new( "Spell.StagForm", spellIconList["Charge"],
