@@ -109,7 +109,7 @@ end
 
 local function get_bar_default_settings()
 
-	local settings = 
+	local settings =
 	{
 		enabled = true,
 		rows = 1,
@@ -139,7 +139,7 @@ local function get_bar_default_settings()
 		SHAMAN = true,
 		WARLOCK = true,
 		WARRIOR = true,
-		buttonKeys = {},	
+		buttonKeys = {},
 	}
 
 	return settings
@@ -148,7 +148,7 @@ end
 
 local function get_class_bar_default_settings(p_class_name)
 
-	local settings = 
+	local settings =
 	{
 		enabled = true,
 		share = "2",
@@ -172,7 +172,7 @@ local function get_class_bar_default_settings(p_class_name)
 		posY = 280,
 		buttonKeys = {},
 	}
-	
+
 	settings[p_class_name] = true
 
 	return settings
@@ -234,7 +234,7 @@ function AutoBar:InitializeDefaults()
 	-- Create the various class bars
 	--
 
-	local class_bar_map = 
+	local class_bar_map =
 	{
 		DRUID = "AutoBarClassBarDruid",
 		HUNTER = "AutoBarClassBarHunter",
@@ -586,7 +586,7 @@ function AutoBar:InitializeDefaults()
 			enabled = true,
 		}
 	end
-	
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonBattleStandards"] = {
 			buttonKey = "AutoBarButtonBattleStandards",
@@ -676,7 +676,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
-	
+
 	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
@@ -808,7 +808,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
-	
+
 	if (not AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonInterrupt"] = {
 			buttonKey = "AutoBarButtonInterrupt",
@@ -941,7 +941,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	local deprecated_buttons = 
+	local deprecated_buttons =
 	{
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
