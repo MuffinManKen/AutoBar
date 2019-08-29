@@ -947,11 +947,9 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
 	{
---		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Cheetah"), 
---		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Chameleon"), 
---		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Turtle"),
---		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Eagle"), 
---		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Wild"), 
+		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Cheetah"),
+		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Hawk"),
+		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Wild"),
 	})
 
 
@@ -996,7 +994,6 @@ function AutoBarCategory:Initialize()
 --		"HUNTER", ABGCS:GetSpellNameByName("Call Pet 4"),
 --		"HUNTER", ABGCS:GetSpellNameByName("Call Pet 5"),
 --		"MAGE", ABGCS:GetSpellNameByName("Summon Water Elemental"),
---		"MONK", ABGCS:GetSpellNameByName("Storm, Earth, and Fire"),
 --		"PRIEST", ABGCS:GetSpellNameByName("Shadowfiend"),
 --		"SHAMAN", ABGCS:GetSpellNameByName("Earth Elemental"),
 --		"SHAMAN", ABGCS:GetSpellNameByName("Fire Elemental"),
@@ -1148,7 +1145,6 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{
 --		"DRUID",		ABGCS:GetSpellNameByName("Disorienting Roar"),
---		"HUNTER",	ABGCS:GetSpellNameByName("Binding Shot"),
 --		"HUNTER",	ABGCS:GetSpellNameByName("Sentinel"),
 	})
 
@@ -1192,10 +1188,8 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
 	{
---		"HUNTER", ABGCS:GetSpellNameByName("Harpoon"),
---		"ROGUE", ABGCS:GetSpellNameByName("Shadowstep"),
---		"WARRIOR", ABGCS:GetSpellNameByName("Charge"),
---		"WARRIOR", ABGCS:GetSpellNameByName("Intercept"),
+		"WARRIOR", ABGCS:GetSpellNameByName("Charge"),
+		"WARRIOR", ABGCS:GetSpellNameByName("Intercept"),
 	})
 
 	AutoBarCategoryList["Spell.ER"] = AutoBarSpells:new( "Spell.ER", spellIconList["Charge"],
@@ -1216,7 +1210,6 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
---		"HUNTER", ABGCS:GetSpellNameByName("Counter Shot"),
 --		"PALADIN", ABGCS:GetSpellNameByName("Rebuke"),
 --		"ROGUE", ABGCS:GetSpellNameByName("Kick"),
 --		"WARLOCK", ABGCS:GetSpellNameByName("Grimoire: Felhunter"),
