@@ -192,7 +192,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
-	
+
 	if(not action) then
 		local cast_action = string.match(p_macro_body, "/cast%s+([^\n]+)")
 
@@ -200,7 +200,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 		if(cast_action or use_action) then
 			action = SecureCmdOptionParse(cast_action or use_action)
-			
+
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
 				tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
@@ -209,7 +209,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 	end
 
-	if(action) then 
+	if(action) then
 		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
 
@@ -953,10 +953,10 @@ function AutoBar:DebugItemCategory(p_category_name)
 	local pt_set = LibStub("LibPeriodicTable-3.1"):GetSetTable(p_category_name)
 	local set_size = AutoBar:tcount(pt_set) - 1 --PTSets have a "set" member which is the set name
 	print("Size of PT Set:", set_size)
-	
+
 	local items = AutoBarCategoryList[p_category_name].items
 	local item_size = AutoBar:tcount(items)
-	
+
 	print("# Category Items:", item_size)
 
 	if(item_size) then
@@ -990,7 +990,7 @@ end
 function AutoBar:SetDifference(p_set1, p_set2)
 	if(p_set1 == nil) then return {} end;
 	if(p_set2 == nil) then return p_set1 end;
-	
+
 	local s = {}
 	for e in pairs(p_set1) do
 		if not p_set2[e] then s[tostring(e)] = true end

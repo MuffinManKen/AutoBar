@@ -217,7 +217,7 @@ local snippetOnClick = [[
 		anchorButton:SetAttribute("macroName", self:GetAttribute("macroName"))
 		anchorButton:SetAttribute("macroBody", self:GetAttribute("macroBody"))
 	end
-	
+
 
 	-- Move the right click attributes
 	itemType = self:GetAttribute("type2")
@@ -260,7 +260,7 @@ local function UpdateHandlers(frame, sourceButton)
 	local buttonKey = frame.class.buttonName
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
-	
+
 	if(item_guid) then
 		itemId = item_guid
 	elseif (itemType) then
@@ -331,7 +331,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		splitRelativeSide = "BOTTOM"
 		splitPaddingY = -padding
 	end
-	
+
 	local max_popup_height = self.buttonDB.max_popup_height or MAX_POPUP_HEIGHT
 
 	-- For gigantic popups, split it up into a block
@@ -792,7 +792,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				button.macroActive = true
 				frame:SetAttribute("macroName", macroInfo.macroName)
 				frame:SetAttribute("macroBody", macroInfo.macroText)
-				
+
 				frame:SetAttribute("macro_action", macroInfo.macro_action)
 				--frame:SetAttribute("macro_tooltip", macroInfo.macro_tooltip)
 				frame:SetAttribute("itemLink", macroInfo.macro_tooltip)
@@ -1390,7 +1390,7 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
-	
+
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
 	self:AddCategory("Tradeskill.Tool.Fishing.Tool")
