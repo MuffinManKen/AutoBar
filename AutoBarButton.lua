@@ -1226,17 +1226,6 @@ function AutoBarButtonCustom.prototype:CreateButtonFrame()
 end
 
 
-local spellAquaticForm, spellAquaticFormIcon
-local spellTreeOfLifeForm, spellTreeOfLifeFormIcon
-local spellMoonkinForm, spellMoonkinFormIcon
-
-spellMoonkinForm, _, spellMoonkinFormIcon = AutoBar:LoggedGetSpellInfo(24858)
-spellAquaticForm, _, spellAquaticFormIcon = AutoBar:LoggedGetSpellInfo(1066)
-spellTreeOfLifeForm, _, spellTreeOfLifeFormIcon = AutoBar:LoggedGetSpellInfo(114282)
-
-
-
-
 local AutoBarButtonBear = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBear"] = AutoBarButtonBear
 
@@ -1306,16 +1295,6 @@ function AutoBarButtonTravel.prototype:init(parentBar, buttonDB)
 	AutoBarButtonTravel.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Travel")
-
-end
-
-local AutoBarButtonStagForm = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonStagForm"] = AutoBarButtonStagForm
-
-function AutoBarButtonStagForm.prototype:init(parentBar, buttonDB)
-	AutoBarButtonStagForm.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.StagForm")
 
 end
 

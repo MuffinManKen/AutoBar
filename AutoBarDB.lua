@@ -289,17 +289,6 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-		if (not AutoBar.db.class.buttonList["AutoBarButtonStagForm"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonStagForm"] = {
-				buttonKey = "AutoBarButtonStagForm",
-				buttonClass = "AutoBarButtonStagForm",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = 4,
-				enabled = true,
-				noPopup = true,
-			}
-		end
-
 		if (not AutoBar.db.class.buttonList["AutoBarButtonMoonkin"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonMoonkin"] = {
 				buttonKey = "AutoBarButtonMoonkin",
@@ -947,7 +936,7 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
-		"AutoBarButtonGuildSpell"
+		"AutoBarButtonGuildSpell", "AutoBarButtonStagForm"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do
