@@ -1092,6 +1092,7 @@ function AutoBarCategory:Initialize2()
 		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
 		"ROGUE", ABGCS:GetSpellNameByName("Instant Poison"),
 		"ROGUE", ABGCS:GetSpellNameByName("Mind-numbing Poison"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Rockbiter Weapon"),
 	})
 
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"],
