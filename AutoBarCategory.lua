@@ -1056,11 +1056,13 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
---		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Earthen Shield Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Earthquake Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
+
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthen Shield Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earthquake Totem"),
 	})
 
 
@@ -1171,6 +1173,7 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"ROGUE", ABGCS:GetSpellNameByName("Kick"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Earth Shock"),
 	})
 
 	AutoBarCategoryList["Spell.CatForm"] = AutoBarSpells:new( "Spell.CatForm", spellIconList["Charge"],

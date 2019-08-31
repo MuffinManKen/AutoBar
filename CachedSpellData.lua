@@ -104,9 +104,12 @@ ABGCS:CacheSpellData(6770, "Sap");
 
 --Shaman
 ABGCS:CacheSpellData(8017, "Rockbiter Weapon");
-
-
+ABGCS:CacheSpellData(8042, "Earth Shock");
 ABGCS:CacheSpellData(2484, "Earthbind Totem");
+ABGCS:CacheSpellData(8071, "Stoneskin Totem");
+
+
+
 ABGCS:CacheSpellData(51485, "Earthgrab Totem");
 ABGCS:CacheSpellData(51533, "Feral Spirit");
 ABGCS:CacheSpellData(546, "Water Walking");
