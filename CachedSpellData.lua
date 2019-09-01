@@ -107,6 +107,7 @@ ABGCS:CacheSpellData(8017, "Rockbiter Weapon");
 ABGCS:CacheSpellData(8042, "Earth Shock");
 ABGCS:CacheSpellData(2484, "Earthbind Totem");
 ABGCS:CacheSpellData(8071, "Stoneskin Totem");
+ABGCS:CacheSpellData(5730, "Stoneclaw Totem");
 
 
 

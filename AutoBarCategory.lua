@@ -1058,6 +1058,7 @@ function AutoBarCategory:Initialize2()
 	{
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Stoneclaw Totem"),
 
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
