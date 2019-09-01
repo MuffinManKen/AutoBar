@@ -1,0 +1,8 @@
+{
+	"zip_path" : "../AutoBarClassic.zip",
+	"zip_root" : "AutoBarClassic",
+	"ignored_files" : [".gitignore", "notes.txt"],
+	"ignored_suffixes" : [".bat", ".txt", ".json"],
+	"force_files" : ["Readme.txt"],
+	"force_dirs" : ["libs", "locale", "textures"]
+}
