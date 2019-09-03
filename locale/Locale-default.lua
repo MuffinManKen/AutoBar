@@ -35,10 +35,12 @@ atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
 atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
+atl("Spell.Track", "Spell.Track");
 atl("AutoBarButtonInterrupt", "Interrupts");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
+atl("AutoBarButtonTrack", "Track");
 
 atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");

@@ -667,6 +667,19 @@ function AutoBar:InitializeDefaults()
 	end
 
 	if (AutoBar.CLASS == "HUNTER") then
+		if (not AutoBar.db.class.buttonList["AutoBarButtonTrack"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonTrack"] = {
+				buttonKey = "AutoBarButtonTrack",
+				buttonClass = "AutoBarButtonTrack",
+				barKey = "AutoBarClassBarHunter",
+				defaultButtonIndex = "*",
+				enabled = true,
+				arrangeOnUse = true,
+			}
+		end
+	end
+
+	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
 				buttonKey = "AutoBarButtonTrap",
@@ -933,7 +946,7 @@ function AutoBar:InitializeDefaults()
 	local deprecated_buttons =
 	{
 		"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
-		"AutoBarButtonTrack", "AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
+		"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 		"AutoBarButtonGuildSpell", "AutoBarButtonStagForm"

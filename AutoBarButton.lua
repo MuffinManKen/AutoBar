@@ -2001,6 +2001,14 @@ function AutoBarButtonTotemWater.prototype:UpdateCooldown()
 	end
 end
 
+local AutoBarButtonTrack = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonTrack"] = AutoBarButtonTrack
+
+function AutoBarButtonTrack.prototype:init(parentBar, buttonDB)
+	AutoBarButtonTrack.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.Track")
+end
 
 local AutoBarButtonTrap = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTrap"] = AutoBarButtonTrap

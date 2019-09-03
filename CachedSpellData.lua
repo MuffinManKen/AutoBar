@@ -26,6 +26,7 @@ ABGCS:CacheSpellData(18960, "Teleport: Moonglade");
 --Hunter
 ABGCS:CacheSpellData(5118, "Aspect of the Cheetah");
 ABGCS:CacheSpellData(13165, "Aspect of the Hawk");
+ABGCS:CacheSpellData(13163, "Aspect of the Monkey");
 ABGCS:CacheSpellData(20043, "Aspect of the Wild");
 ABGCS:CacheSpellData(1462, "Beast Lore");
 ABGCS:CacheSpellData(19574, "Bestial Wrath");
@@ -42,8 +43,13 @@ ABGCS:CacheSpellData(982, "Revive Pet");
 ABGCS:CacheSpellData(1515, "Tame Beast");
 ABGCS:CacheSpellData(2974, "Wing Clip");
 
+ABGCS:CacheSpellData(19883, "Track Humanoids");
+ABGCS:CacheSpellData(19884, "Track Undead");
+ABGCS:CacheSpellData(1494, "Track Beasts");
+
 ABGCS:CacheSpellData(1499, "Freezing Trap");
 ABGCS:CacheSpellData(13813, "Explosive Trap");
+ABGCS:CacheSpellData(13795, "Immolation Trap");
 
 
 --Mage

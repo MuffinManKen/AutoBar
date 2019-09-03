@@ -949,6 +949,7 @@ function AutoBarCategory:Initialize()
 	{
 		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Cheetah"),
 		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Hawk"),
+		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Monkey"),
 		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Wild"),
 	})
 
@@ -1136,11 +1137,18 @@ function AutoBarCategory:Initialize2()
 	})
 
 
+	AutoBarCategoryList["Spell.Track"] = AutoBarSpells:new( "Spell.Track", spellIconList["Explosive Trap"],
+	{
+		"HUNTER", ABGCS:GetSpellNameByName("Track Humanoids"),
+		"HUNTER", ABGCS:GetSpellNameByName("Track Undead"),
+		"HUNTER", ABGCS:GetSpellNameByName("Track Beasts"),
+	})
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
 	{
 		"HUNTER", ABGCS:GetSpellNameByName("Explosive Trap"),
 		"HUNTER", ABGCS:GetSpellNameByName("Freezing Trap"),
+		"HUNTER", ABGCS:GetSpellNameByName("Immolation Trap"),
 	})
 
 
