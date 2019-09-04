@@ -1,9 +1,10 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<!--@no-lib-strip@-->
+
 	<Script file="libs\LibStub\LibStub.lua"/>
 	<Script file="libs\CallBackHandler-1.0\CallbackHandler-1.0.lua"/>
 
 	<Include file="libs\LibKeyBound-1.0\lib.xml"/>
+
 	<Include file="libs\AceConsole-3.0\AceConsole-3.0.xml"/>
 	<Include file="libs\AceDBOptions-3.0\AceDBOptions-3.0.xml"/>
 	<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>
@@ -14,16 +15,17 @@
 	<Script file="libs\AceEvent-2.0\AceEvent-2.0.lua"/>
 	<Script file="libs\AceAddon-2.0\AceAddon-2.0.lua"/>
 	<Script file="libs\AceDB-2.0\AceDB-2.0.lua"/>
-	<!--@end-no-lib-strip@-->
+
 	<Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
-	<!--@no-lib-strip@-->
+
 	<Script file="libs\LibDBIcon-1.0\LibDBIcon-1.0.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Consumable\LibPeriodicTable-3.1-Consumable.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Misc\LibPeriodicTable-3.1-Misc.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Tradeskill\LibPeriodicTable-3.1-Tradeskill.lua"/>
+
 	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
-	<!--@end-no-lib-strip@-->
+
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Elixirs.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Explosives.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Flasks.lua"/>

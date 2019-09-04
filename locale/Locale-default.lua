@@ -180,6 +180,7 @@ local quick_sets =
 	"Dynamic.Quest",
 	"Macro.Mount.SummonRandomFave",
 	"Muffin.Order Hall.Nethershard",
+	"Spell.AquaticForm",
 }
 
 atl_table(quick_sets);
