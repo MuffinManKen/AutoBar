@@ -1066,6 +1066,7 @@ function AutoBarCategory:Initialize2()
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneclaw Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Strength of Earth Totem"),
 
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
@@ -1102,6 +1103,7 @@ function AutoBarCategory:Initialize2()
 		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
 		"ROGUE", ABGCS:GetSpellNameByName("Instant Poison"),
 		"ROGUE", ABGCS:GetSpellNameByName("Mind-numbing Poison"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Weapon"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Rockbiter Weapon"),
 	})
 
