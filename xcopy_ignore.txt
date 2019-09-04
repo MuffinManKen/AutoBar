@@ -8,3 +8,4 @@ notes.txt
 .ctag
 .prj
 .pui
+.json
