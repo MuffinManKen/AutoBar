@@ -1756,7 +1756,7 @@ AutoBar.Class["AutoBarButtonCooldownStoneMana"] = AutoBarButtonCooldownStoneMana
 function AutoBarButtonCooldownStoneMana.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCooldownStoneMana.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
+	if (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
 	end
 end
