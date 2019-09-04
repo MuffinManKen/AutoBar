@@ -733,7 +733,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Potion.Combo"] = AutoBarItems:new("Muffin.Potion.Combo", "INV_Potion_76", "Muffin.Potion.Combo")
 
 
-	AutoBarCategoryList["Muffin.Reputation"] = AutoBarItems:new("Muffin.Reputation", "archaeology_5_0_mogucoin", "Muffin.Reputation")
+	AutoBarCategoryList["Muffin.Misc.Reputation"] = AutoBarItems:new("Muffin.Misc.Reputation", "archaeology_5_0_mogucoin", "Muffin.Misc.Reputation")
 
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Health.Anywhere"] = AutoBarItems:new("Consumable.Cooldown.Potion.Health.Anywhere", "INV_Alchemy_EndlessFlask_06", "Consumable.Cooldown.Potion.Health.Anywhere")
@@ -1051,6 +1051,12 @@ end
 -- Split up to avoid Lua upValue limitations
 function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new( "Spell.Stance", spellIconList["Defensive Stance"], {
+		"DRUID", ABGCS:GetSpellNameByName("Bear Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Cat Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Aquatic Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Moonkin Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Tree Form"),
+		"DRUID", ABGCS:GetSpellNameByName("Travel Form"),
 		"WARRIOR", ABGCS:GetSpellNameByName("Defensive Stance"),
 	})
 
@@ -1198,6 +1204,11 @@ function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.MoonkinForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCS:GetSpellNameByName("Moonkin Form"),
+	})
+
+	AutoBarCategoryList["Spell.AquaticForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
+	{
+		"DRUID", ABGCS:GetSpellNameByName("Aquatic Form"),
 	})
 
 	AutoBarCategoryList["Spell.TreeForm"] = AutoBarSpells:new( "Spell.TreeForm", spellIconList["Charge"],

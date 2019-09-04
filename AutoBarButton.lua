@@ -1267,6 +1267,16 @@ function AutoBarButtonCat.prototype:init(parentBar, buttonDB)
 
 end
 
+local AutoBarButtonAquatic = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonAquatic"] = AutoBarButtonAquatic
+
+function AutoBarButtonAquatic.prototype:init(parentBar, buttonDB)
+	AutoBarButtonAquatic.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.AquaticForm")
+
+end
+
 
 local AutoBarButtonCharge = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCharge"] = AutoBarButtonCharge
@@ -1611,7 +1621,7 @@ AutoBar.Class["AutoBarButtonReputation"] = AutoBarButtonReputation
 function AutoBarButtonReputation.prototype:init(parentBar, buttonDB)
 	AutoBarButtonReputation.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Muffin.Reputation")
+	self:AddCategory("Muffin.Misc.Reputation")
 end
 
 
@@ -1801,9 +1811,7 @@ AutoBar.Class["AutoBarButtonStance"] = AutoBarButtonStance
 function AutoBarButtonStance.prototype:init(parentBar, buttonDB)
 	AutoBarButtonStance.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.CLASS == "WARRIOR") then
-		self:AddCategory("Spell.Stance")
-	end
+	self:AddCategory("Spell.Stance")
 end
 
 function AutoBarButtonStance.prototype:GetLastUsed()

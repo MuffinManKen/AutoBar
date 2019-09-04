@@ -289,6 +289,17 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
+		if (not AutoBar.db.class.buttonList["AutoBarButtonAquatic"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonAquatic"] = {
+				buttonKey = "AutoBarButtonAquatic",
+				buttonClass = "AutoBarButtonAquatic",
+				barKey = AutoBar.classBar,
+				defaultButtonIndex = 3,
+				enabled = true,
+				noPopup = true,
+			}
+		end
+
 		if (not AutoBar.db.class.buttonList["AutoBarButtonMoonkin"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonMoonkin"] = {
 				buttonKey = "AutoBarButtonMoonkin",
@@ -931,7 +942,7 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonStance"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonStance"] = {
 				buttonKey = "AutoBarButtonStance",
