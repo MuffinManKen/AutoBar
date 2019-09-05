@@ -87,9 +87,9 @@ function AutoBar.Class.Button.prototype:Refresh(parentBar, buttonDB)
 		assert(self.buttonName == buttonDB.buttonKey, "AutoBar.Class.Button.prototype:Refresh Button Name changed")
 		self.buttonDBIndex = buttonDB.order
 	end
-	
+
 	self.buttonName = buttonDB.buttonKey
-	
+
 	if (self.buttonDB.hasCustomCategories) then
 		for categoryIndex, categoryKey in ipairs(self.buttonDB) do
 			self[categoryIndex] = categoryKey
@@ -260,7 +260,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 
 	frame:SetScript("OnEnter", funcOnEnter)
 	frame:SetScript("OnLeave", funcOnLeave)
-	
+
 	RegisterStateDriver(frame, "visibility", AutoBar.visibility_driver_string)
 
 ---	frame:SetScript("OnAttributeChanged", onAttributeChangedFunc)
