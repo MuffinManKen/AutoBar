@@ -942,15 +942,17 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
+	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID" or AutoBar.CLASS == "PALADIN") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonStance"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonStance"] = {
 				buttonKey = "AutoBarButtonStance",
 				buttonClass = "AutoBarButtonStance",
-				barKey = "AutoBarClassBarWarrior",
+				barKey = AutoBar.classBar,
 				defaultButtonIndex = "*",
 				enabled = true,
 			}
+		elseif (AutoBar.db.class.buttonList["AutoBarButtonStance"].barKey ~= AutoBar.classBar) then
+			AutoBar.db.class.buttonList["AutoBarButtonStance"].barKey = AutoBar.classBar
 		end
 	end
 

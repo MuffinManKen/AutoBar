@@ -1059,6 +1059,7 @@ function AutoBarCategory:Initialize2()
 		"DRUID", ABGCS:GetSpellNameByName("Moonkin Form"),
 		"DRUID", ABGCS:GetSpellNameByName("Tree Form"),
 		"DRUID", ABGCS:GetSpellNameByName("Travel Form"),
+		"PALADIN", ABGCS:GetSpellNameByName("Devotion Aura"),
 		"WARRIOR", ABGCS:GetSpellNameByName("Defensive Stance"),
 	})
 
