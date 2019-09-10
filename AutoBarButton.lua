@@ -839,7 +839,7 @@ end
 /dump AutoBar.buttonList["AutoBarButtonClassBuff"].frame:GetAttribute("spell")
 /dump AutoBar.buttonList["AutoBarButtonBuff"].frame:GetAttribute("target-slot2")
 /dump AutoBar.buttonList["AutoBarButtonCooldownStoneMana"].frame:GetAttribute("itemId")
-/dump AutoBar.buttonList["AutoBarButtonCooldownStoneHealth"].frame:GetAttribute("itemId")
+/dump AutoBar.buttonList["AutoBarButtonHealth"].frame:GetAttribute("itemId")
 /dump AutoBar.buttonList["AutoBarButtonMillHerbs"].frame.popupHeader.popupButtonList[10].frame:GetAttribute("type")
 --]]
 
@@ -1702,30 +1702,6 @@ function AutoBarButtonCooldownPotionCombat.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCooldownPotionCombat.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Cooldown.Potion.Combat")
-end
-
-
-local AutoBarButtonCooldownPotionHealth = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownPotionHealth"] = AutoBarButtonCooldownPotionHealth
-
-function AutoBarButtonCooldownPotionHealth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownPotionHealth.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
-end
-
-
-local AutoBarButtonCooldownStoneHealth = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownStoneHealth"] = AutoBarButtonCooldownStoneHealth
-
-function AutoBarButtonCooldownStoneHealth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneHealth.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
 end
 
 

@@ -392,16 +392,7 @@ function AutoBar:InitializeDefaults()
 			shuffle = true,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneHealth"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneHealth"] = {
-			buttonKey = "AutoBarButtonCooldownStoneHealth",
-			buttonClass = "AutoBarButtonCooldownStoneHealth",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 10,
-			enabled = true,
-			shuffle = true,
-		}
-	end
+
 	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneMana"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneMana"] = {
 			buttonKey = "AutoBarButtonCooldownStoneMana",
