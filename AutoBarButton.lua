@@ -1718,17 +1718,6 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonCooldownStoneMana = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownStoneMana"] = AutoBarButtonCooldownStoneMana
-
-function AutoBarButtonCooldownStoneMana.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneMana.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
-		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
-	end
-end
-
 
 local AutoBarButtonCooldownPotionRejuvenation = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionRejuvenation"] = AutoBarButtonCooldownPotionRejuvenation

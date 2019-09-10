@@ -393,16 +393,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneMana"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownStoneMana"] = {
-			buttonKey = "AutoBarButtonCooldownStoneMana",
-			buttonClass = "AutoBarButtonCooldownStoneMana",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 11,
-			enabled = true,
-			shuffle = true,
-		}
-	end
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"] = {
@@ -944,7 +934,7 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 		"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
-		"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs"
+		"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do
