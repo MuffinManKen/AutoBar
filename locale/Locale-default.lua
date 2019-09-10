@@ -182,6 +182,7 @@ local quick_sets =
 	"Muffin.Order Hall.Nethershard",
 	"Spell.AquaticForm",
 	"Muffin.Misc.StartsQuest",
+	"Muffin.Stone.Health",
 }
 
 atl_table(quick_sets);

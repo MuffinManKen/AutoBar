@@ -1548,22 +1548,10 @@ AutoBar.Class["AutoBarButtonHeal"] = AutoBarButtonHeal
 function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonHeal.super.prototype.init(self, parentBar, buttonDB)
 
-	--self:AddCategory("Consumable.Potion.Recovery.Healing.Endless")
-	--self:AddCategory("Consumable.Potion.Recovery.Healing.Basic")
-
-	--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
-
 	self:AddCategory("Muffin.Potion.Health")
 	self:AddCategory("Muffin.Potion.Combo")
+	self:AddCategory("Muffin.Stones.Health")
 
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
-
-	--self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
 end
 
 
