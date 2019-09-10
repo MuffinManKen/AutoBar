@@ -27,6 +27,7 @@
 	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
 
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Stones.lua"/>
+	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Poison.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Elixirs.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Explosives.lua"/>
 	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Flasks.lua"/>

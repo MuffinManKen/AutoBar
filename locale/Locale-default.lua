@@ -184,6 +184,8 @@ local quick_sets =
 	"Muffin.Misc.StartsQuest",
 	"Muffin.Stone.Mana",
 	"Muffin.Stone.Health",
+	"Muffin.Poison.Nonlethal",
+	"Muffin.Poison.Lethal",
 }
 
 atl_table(quick_sets);

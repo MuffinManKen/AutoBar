@@ -646,6 +646,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Stone.Mana"] = AutoBarItems:new("Muffin.Stones.Mana", "INV_Misc_Food_95_Grainbread", "Muffin.Stones.Mana")
 	AutoBarCategoryList["Muffin.Stone.Health"] = AutoBarItems:new("Muffin.Stones.Health", "INV_Misc_Food_95_Grainbread", "Muffin.Stones.Health")
 
+	AutoBarCategoryList["Muffin.Poison.Lethal"] = AutoBarItems:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
+	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = AutoBarItems:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
+
 
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"] = AutoBarItems:new( "Consumable.Food.Edible.Combo.Conjured", "inv_misc_food_73cinnamonroll", "Consumable.Food.Edible.Combo.Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Combo.Conjured"]:SetNonCombat(true)
