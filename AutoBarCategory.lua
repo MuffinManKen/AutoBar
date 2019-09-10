@@ -950,21 +950,6 @@ function AutoBarCategory:Initialize()
 		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Wild"),
 	})
 
-
-	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
-		"ROGUE", ABGCS:GetSpellNameByName("Instant Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Deadly Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Wound Poison"),
-	})
-
-	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
-	{
-		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Mind-numbing Poison"),
-	})
-
-
-
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
 		"MAGE", ABGCS:GetSpellNameByName("Slow Fall"),
@@ -1096,11 +1081,6 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
-		"ROGUE", ABGCS:GetSpellNameByName("Deadly Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Wound Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Crippling Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Instant Poison"),
-		"ROGUE", ABGCS:GetSpellNameByName("Mind-numbing Poison"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Weapon"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Rockbiter Weapon"),
 	})

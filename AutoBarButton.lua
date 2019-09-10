@@ -1046,7 +1046,7 @@ AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonLethal.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Spell.Poison.Lethal")
+	self:AddCategory("Muffin.Poison.Lethal")
 end
 
 local AutoBarButtonPoisonNonlethal = AceOO.Class(AutoBarButton)
@@ -1055,7 +1055,7 @@ AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonNonlethal.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Spell.Poison.Nonlethal")
+	self:AddCategory("Muffin.Poison.Nonlethal")
 end
 
 local AutoBarButtonBandages = AceOO.Class(AutoBarButton)
@@ -1124,6 +1124,9 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
+	self:AddCategory("Muffin.Poison.Lethal")
+	self:AddCategory("Muffin.Poison.Nonlethal")
+
 end
 
 
