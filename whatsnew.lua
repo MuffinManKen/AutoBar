@@ -4,10 +4,12 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Hunters: Tracking, Aspect of the Monkey, Immolation Trap, marked as Mana users
- - Druid: Aquatic form and Stance button
- - Shaman: Strength of Earth Totem, Flametongue Weapon
- - Updated some data for Openables, Quest Items, Rep
+ - Paladin: Devotion Aura
+ - Warlock: Healthstones
+ - Rogue: Disarm Trap
+ - Mage: Mana Stones
+ - Rogue Poisons
+ - Lots of cleanup
  - Updated libraries
  - NOTE: LOTS of items/spells are missing but there shouldn`t be any lua errors
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
