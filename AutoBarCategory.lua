@@ -1161,6 +1161,7 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", ABGCS:GetSpellNameByName("Explosive Trap"),
 		"HUNTER", ABGCS:GetSpellNameByName("Freezing Trap"),
 		"HUNTER", ABGCS:GetSpellNameByName("Immolation Trap"),
+		"ROGUE",  ABGCS:GetSpellNameByName("Disarm Trap"),
 	})
 
 

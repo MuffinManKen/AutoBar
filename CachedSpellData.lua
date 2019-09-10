@@ -96,15 +96,11 @@ ABGCS:CacheSpellData(17, "Power Word: Shield");
 ABGCS:CacheSpellData(15487, "Silence");
 
 --Rogue
-ABGCS:CacheSpellData(3408, "Crippling Poison");
-ABGCS:CacheSpellData(2823, "Deadly Poison");
+ABGCS:CacheSpellData(1842, "Disarm Trap");
 ABGCS:CacheSpellData(4086, "Evasion");
 ABGCS:CacheSpellData(1766, "Kick");
-ABGCS:CacheSpellData(8679, "Instant Poison");
-ABGCS:CacheSpellData(5761, "Mind-numbing Poison");
 ABGCS:CacheSpellData(1784, "Stealth");
 ABGCS:CacheSpellData(1856, "Vanish");
-ABGCS:CacheSpellData(13219, "Wound Poison");
 ABGCS:CacheSpellData(2094, "Blind");
 ABGCS:CacheSpellData(6770, "Sap");
 
