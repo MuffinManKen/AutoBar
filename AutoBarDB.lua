@@ -944,7 +944,7 @@ function AutoBar:InitializeDefaults()
 		"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 		"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 		"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
-		"AutoBarButtonCooldownPotionHealth"
+		"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs"
 	}
 
 	for _, dep in ipairs(deprecated_buttons) do

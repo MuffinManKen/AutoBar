@@ -840,7 +840,6 @@ end
 /dump AutoBar.buttonList["AutoBarButtonBuff"].frame:GetAttribute("target-slot2")
 /dump AutoBar.buttonList["AutoBarButtonCooldownStoneMana"].frame:GetAttribute("itemId")
 /dump AutoBar.buttonList["AutoBarButtonHealth"].frame:GetAttribute("itemId")
-/dump AutoBar.buttonList["AutoBarButtonMillHerbs"].frame.popupHeader.popupButtonList[10].frame:GetAttribute("type")
 --]]
 
 
@@ -1592,15 +1591,6 @@ function AutoBarButtonPickLock.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
-end
-
-local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
-
-function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Tradeskill.Gather.Herbalism")
 end
 
 
