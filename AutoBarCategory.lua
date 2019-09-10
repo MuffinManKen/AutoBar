@@ -645,6 +645,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Food.Combo.Buff"] = AutoBarItems:new("Muffin.Food.Combo.Buff", "INV_Misc_Food_95_Grainbread", "Muffin.Food.Combo.Buff")
 	AutoBarCategoryList["Muffin.Food.Combo.Buff"]:SetNonCombat(true)
 
+	AutoBarCategoryList["Muffin.Stone.Mana"] = AutoBarItems:new("Muffin.Stones.Mana", "INV_Misc_Food_95_Grainbread", "Muffin.Stones.Mana")
 	AutoBarCategoryList["Muffin.Stone.Health"] = AutoBarItems:new("Muffin.Stones.Health", "INV_Misc_Food_95_Grainbread", "Muffin.Stones.Health")
 
 

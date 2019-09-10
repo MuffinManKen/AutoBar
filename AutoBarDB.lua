@@ -353,33 +353,23 @@ function AutoBar:InitializeDefaults()
 			shuffle = true,
 		}
 	end
+	if (not AutoBar.db.account.buttonList["AutoBarButtonMana"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonMana"] = {
+			buttonKey = "AutoBarButtonMana",
+			buttonClass = "AutoBarButtonMana",
+			barKey = "AutoBarClassBarBasic",
+			defaultButtonIndex = 5,
+			enabled = true,
+			shuffle = true,
+		}
+	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRecovery"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRecovery"] = {
 			buttonKey = "AutoBarButtonRecovery",
 			buttonClass = "AutoBarButtonRecovery",
 			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 5,
-			enabled = false,
-		}
-	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownPotionHealth"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownPotionHealth"] = {
-			buttonKey = "AutoBarButtonCooldownPotionHealth",
-			buttonClass = "AutoBarButtonCooldownPotionHealth",
-			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 6,
 			enabled = false,
-			shuffle = true,
-		}
-	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownPotionMana"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownPotionMana"] = {
-			buttonKey = "AutoBarButtonCooldownPotionMana",
-			buttonClass = "AutoBarButtonCooldownPotionMana",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 7,
-			enabled = true,
-			shuffle = true,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownPotionRejuvenation"]) then

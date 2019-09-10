@@ -1554,6 +1554,19 @@ function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 
 end
 
+local AutoBarButtonMana = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonMana"] = AutoBarButtonMana
+
+function AutoBarButtonMana.prototype:init(parentBar, buttonDB)
+	AutoBarButtonMana.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Potion.Mana")
+	self:AddCategory("Muffin.Potion.Combo")
+	self:AddCategory("Muffin.Stones.Mana")
+
+end
+
+
 
 local AutoBarButtonHearth = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonHearth"] = AutoBarButtonHearth

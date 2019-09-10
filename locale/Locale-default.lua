@@ -182,6 +182,7 @@ local quick_sets =
 	"Muffin.Order Hall.Nethershard",
 	"Spell.AquaticForm",
 	"Muffin.Misc.StartsQuest",
+	"Muffin.Stone.Mana",
 	"Muffin.Stone.Health",
 }
 
