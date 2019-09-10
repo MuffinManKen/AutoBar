@@ -236,6 +236,7 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 			else
+				assert(AutoBar.Class[buttonDB.buttonClass] ~= nil)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonListDisabled[buttonKey] = buttonList[buttonKeyIndex]
 			end
@@ -529,7 +530,7 @@ function AutoBar.Class.Bar.prototype:RefreshLayout()
 	self:RefreshScale()
 	self:RefreshButtonLayout()
 	self:RefreshAlpha()
-	
+
 	--If it's in stickyMode or movebuttonsMode, show it regardless of whether it's hidden or not
 	if ((AutoBar.stickyMode or AutoBar.moveButtonsMode)) then
 		self.frame:Show()
