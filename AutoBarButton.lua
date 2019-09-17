@@ -1550,9 +1550,9 @@ AutoBar.Class["AutoBarButtonHeal"] = AutoBarButtonHeal
 function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonHeal.super.prototype.init(self, parentBar, buttonDB)
 
+	self:AddCategory("Muffin.Stones.Health")
 	self:AddCategory("Muffin.Potion.Health")
 	self:AddCategory("Muffin.Potion.Combo")
-	self:AddCategory("Muffin.Stones.Health")
 
 end
 
