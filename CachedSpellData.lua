@@ -78,6 +78,7 @@ ABGCS:CacheSpellData(11417, "Portal: Orgrimmar");
 ABGCS:CacheSpellData(3567, "Teleport: Orgrimmar");
 
 --Paladin
+ABGCS:CacheSpellData(498, "Divine Protection");
 ABGCS:CacheSpellData(642, "Divine Shield");
 ABGCS:CacheSpellData(1044, "Blessing of Freedom");
 ABGCS:CacheSpellData(1022, "Blessing of Protection");
