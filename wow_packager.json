@@ -1,5 +1,5 @@
 {
-	"zip_path" : "../AutoBarClassic.zip",
+	"zip_path" : "D:/Projects/Build/AutoBarClassic.zip",
 	"zip_root" : "AutoBarClassic",
 	"ignored_files" : [".gitignore", "notes.txt"],
 	"ignored_suffixes" : [".bat", ".txt", ".json", ".md"],
