@@ -953,6 +953,9 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
 		"MAGE", ABGCS:GetSpellNameByName("Slow Fall"),
+		"DRUID", ABGCS:GetSpellNameByName("Mark of the Wild"),
+		"DRUID", ABGCS:GetSpellNameByName("Gift of the Wild"),
+		"DRUID", ABGCS:GetSpellNameByName("Thorns"),
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),	--y
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Protection"),
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Sacrifice"),
