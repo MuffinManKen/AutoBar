@@ -745,7 +745,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
+	if (ABGCode:ClassInList(AutoBar.CLASS, "PALADIN", "WARLOCK", "MAGE")) then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",

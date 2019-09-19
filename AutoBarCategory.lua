@@ -953,10 +953,11 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
 		"MAGE", ABGCS:GetSpellNameByName("Slow Fall"),
+		"MAGE", ABGCS:GetSpellNameByName("Arcane Intellect"),
 		"DRUID", ABGCS:GetSpellNameByName("Mark of the Wild"),
 		"DRUID", ABGCS:GetSpellNameByName("Gift of the Wild"),
 		"DRUID", ABGCS:GetSpellNameByName("Thorns"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),	--y
+		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Protection"),
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Sacrifice"),
 		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Salvation"),
@@ -1020,7 +1021,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
 		"DRUID", 		ABGCS:GetSpellNameByName("Barkskin"), 	ABGCS:GetSpellNameByName("Barkskin"),
-		"MAGE", 			ABGCS:GetSpellNameByName("Ice Barrier"), ABGCS:GetSpellNameByName("Ice Barrier"),
+		"MAGE", 			ABGCS:GetSpellNameByName("Frost Armor"), ABGCS:GetSpellNameByName("Ice Barrier"),
 		"PALADIN", 		ABGCS:GetSpellNameByName("Divine Protection"), ABGCS:GetSpellNameByName("Divine Shield"),
 		"PALADIN", 		ABGCS:GetSpellNameByName("Divine Shield"), ABGCS:GetSpellNameByName("Divine Protection"),
 		"PRIEST", 		ABGCS:GetSpellNameByName("Power Word: Shield"), ABGCS:GetSpellNameByName("Power Word: Shield"),
