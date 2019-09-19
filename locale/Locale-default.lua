@@ -175,6 +175,7 @@ local quick_sets =
 	"Spell.ER",
 	"Spell.Interrupt",
 	"Spell.Mage.Conjure Food",
+	"Spell.Mage.Conjure Water",
 	"Spell.Pet Battle",
 	"Toys.ToyBox",
 	"Tradeskill.Tool.Fishing.Bait",

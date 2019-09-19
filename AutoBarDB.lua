@@ -385,7 +385,7 @@ function AutoBar:InitializeDefaults()
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 15,
 			enabled = true,
-			disableConjure = true,
+			disableConjure = false,
 			include_combo_basic = true
 		}
 	end
@@ -593,7 +593,7 @@ function AutoBar:InitializeDefaults()
 				barKey = "AutoBarClassBarBasic",
 				defaultButtonIndex = "AutoBarButtonFood",
 				enabled = true,
-				disableConjure = true,
+				disableConjure = false,
 				}
 		end
 

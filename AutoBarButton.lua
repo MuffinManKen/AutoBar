@@ -1181,6 +1181,7 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
+		self:AddCategory("Spell.Mage.Conjure Water")
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
 	end
@@ -2068,8 +2069,9 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	AutoBarButtonWater.super.prototype.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
-		self:AddCategory("Consumable.Water.Conjure")
+		self:AddCategory("Spell.Mage.Conjure Water")
 	end
+
 	if (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
@@ -2082,11 +2084,11 @@ end
 --	AutoBarButtonWater.super.prototype.Refresh(self, parentBar, buttonDB)
 --	if (AutoBar.CLASS == "MAGE") then
 --		if (buttonDB.disableConjure) then
---			self:DeleteCategory("Consumable.Water.Conjure")
+--			self:DeleteCategory("Spell.Mage.Conjure Water")
 --			buttonDB.castSpell = nil
 --			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(nil)
 --		else
---			self:AddCategory("Consumable.Water.Conjure")
+--			self:AddCategory("Spell.Mage.Conjure Water")
 --		end
 --	end
 --end

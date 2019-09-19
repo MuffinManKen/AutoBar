@@ -785,9 +785,6 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Food.Mana.Basic"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
---			"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"),
-			})
 
 	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
 --			"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"),
@@ -930,6 +927,10 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
 --		"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"), ABGCS:GetSpellNameByName("Conjure Refreshment Table"),
+	})
+
+	AutoBarCategoryList["Spell.Mage.Conjure Water"] = AutoBarSpells:new("Spell.Mage.Conjure Water", spellIconList["Conjure Refreshment"], {
+		"MAGE", ABGCS:GetSpellNameByName("Conjure Water"),
 	})
 
 
