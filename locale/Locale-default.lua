@@ -107,6 +107,10 @@ atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
 atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
 atl("AutoBarButtonReputation", "Reputation")
 
+atl("AutoBarButtonMana", "Mana")
+atl("AutoBarButtonBuffWeapon", "Buff Weapon")
+atl("AutoBarButtonAquatic", "Aquatic")
+
 atl("NewButton", "New Button")
 atl("NewButtonTooltip", "Create a new custom button")
 
