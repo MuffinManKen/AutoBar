@@ -285,7 +285,7 @@ function AutoBar:InitializeDefaults()
 		}
 	}
 
-	local my_class_buttons = class_button_map[AutoBar.CLASS]
+	local my_class_buttons = class_button_map[AutoBar.CLASS] or {}
 
 	for idx, button_name in ipairs(my_class_buttons) do
 		if (not AutoBar.db.class.buttonList[button_name]) then
