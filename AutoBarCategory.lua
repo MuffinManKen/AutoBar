@@ -925,8 +925,8 @@ function AutoBarCategory:Initialize()
 		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone"),
 	})
 
-	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
---		"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"), ABGCS:GetSpellNameByName("Conjure Refreshment Table"),
+	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
+		"MAGE", ABGCS:GetSpellNameByName("Conjure Food"),
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Water"] = AutoBarSpells:new("Spell.Mage.Conjure Water", spellIconList["Conjure Refreshment"], {
