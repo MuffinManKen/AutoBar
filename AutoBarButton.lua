@@ -8,7 +8,7 @@
 
 local AutoBar = AutoBar
 
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
@@ -1657,7 +1657,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+	if  (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 
@@ -1713,7 +1713,7 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if(AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+	if(ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Muffin.Potion.Mana")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
 	end
@@ -2048,7 +2048,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = ABGCS:GetIconForItemID((tonumber(itemId)))
+		local macroTexture = ABGCode:GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
@@ -2070,7 +2070,7 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
 		self:AddCategory("Consumable.Water.Conjure")
 	end
-	if (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+	if (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 

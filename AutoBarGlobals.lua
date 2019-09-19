@@ -7,6 +7,16 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 AutoBar.warning_log = {}
 
+-- All global code with be a child of this table.
+AutoBarGlobalCodeSpace = {}
+
+
+function AutoBarGlobalCodeSpace:MakeSet(list)
+   local set = {}
+   for _, l in ipairs(list) do set[l] = true end
+   return set
+ end
+
 -- All global data will be a child of this table
 AutoBarGlobalDataObject = {
 	TYPE_MACRO_TEXT = 1,
@@ -24,7 +34,29 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
-AutoBarGlobalDataObject.TickScheduler = 
+AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace:MakeSet{"DRUID","HUNTER","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+
+function AutoBarGlobalCodeSpace:ClassUsesMana(p_class_name)
+
+	return AutoBarGlobalDataObject.set_mana_users[p_class_name]
+
+end
+
+function AutoBarGlobalCodeSpace:ClassInList(p_class_name, ...)
+	local list = {...}
+
+	for i,v in ipairs(list) do
+		if (p_class_name == v) then
+			return true;
+		end
+	end
+
+	return false;
+
+end
+
+
+AutoBarGlobalDataObject.TickScheduler =
 {
 
 	UpdateCategoriesID = 1,
@@ -48,8 +80,6 @@ AutoBarGlobalDataObject.TickScheduler =
 }
 
 
--- All global code with be a child of this table.  
-AutoBarGlobalCodeSpace = {}
 
 local function table_pack(...)
   return { n = select("#", ...), ... }
@@ -83,7 +113,7 @@ function AutoBarGlobalCodeSpace:MacroTextGUID(p_macro_text)
 end
 
 
---This should query a global guid registry and then the specific ones if not found. 
+--This should query a global guid registry and then the specific ones if not found.
 function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
 	return AutoBarSearch.macro_text[p_guid];
 end
@@ -97,11 +127,6 @@ function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
 	return ii_texture or texture;
 end
 
-function AutoBarGlobalCodeSpace:MakeSet(list)
-   local set = {}
-   for _, l in ipairs(list) do set[l] = true end
-   return set
- end
 
 
 local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
@@ -160,7 +185,7 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
 	end
-	
+
 
 end
 
@@ -214,5 +239,26 @@ function AutoBarGlobalCodeSpace:AddProfileData(p_name, p_time)
 end
 
 
+function AutoBarGlobalCodeSpace:FindNamelessCategories()
 
+	local nameless = ""
+	for key in pairs(AutoBarCategoryList) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
 
+	return nameless
+end
+
+function AutoBarGlobalCodeSpace:FindNamelessButtons()
+
+	local nameless = ""
+	for key in pairs(AutoBar.Class) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
+
+	return nameless
+end

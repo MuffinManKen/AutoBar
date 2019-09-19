@@ -10,6 +10,7 @@
 local AceGUI = LibStub("AceGUI-3.0")
 
 local AutoBar = AutoBar
+local ABGCode = AutoBarGlobalCodeSpace
 
 local L = AutoBarGlobalDataObject.locale
 local _
@@ -40,35 +41,49 @@ InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
 
 local function set_nameless_category_text(p_widget)
 
-	local edit_box = p_widget:GetUserData("edit_box")
-	edit_box:SetText(AutoBar:FindNamelessCategories())
+	local edit_box_cat = p_widget:GetUserData("edit_box_cat")
+	edit_box_cat:SetText(ABGCode:FindNamelessCategories())
+
+	local edit_box_btn = p_widget:GetUserData("edit_box_btn")
+	edit_box_btn:SetText(ABGCode:FindNamelessButtons())
+
 --	edit_box:SetText(print_map_ids())
 
 end
 
 -- function that draws the widgets for the first tab
-local function DrawGroup1(container)
+local function DrawGroupNamelessCategories(container)
 
 	local button = AceGUI:Create("Button")
-	button:SetText("Find Nameless Categories")
+	button:SetText("Find Nameless Categories/Buttons")
 	button:SetWidth(200)
 	button:SetCallback("OnClick", set_nameless_category_text)
 	container:AddChild(button)
 
-	local edit_box = AceGUI:Create("MultiLineEditBox")
-	edit_box:SetNumLines(20)
-	edit_box:SetFullWidth(true)
-	edit_box:DisableButton(true)
-	container:AddChild(edit_box)
+	local edit_box_cat = AceGUI:Create("MultiLineEditBox")
+	edit_box_cat:SetNumLines(15)
+	edit_box_cat:SetFullWidth(true)
+	edit_box_cat:DisableButton(true)
+	edit_box_cat:SetLabel(nil)
+	container:AddChild(edit_box_cat)
 
-	button:SetUserData("edit_box", edit_box)
+	local edit_box_btn = AceGUI:Create("MultiLineEditBox")
+	edit_box_btn:SetNumLines(15)
+	edit_box_btn:SetFullWidth(true)
+	edit_box_btn:DisableButton(true)
+	edit_box_btn:SetLabel('')
+	container:AddChild(edit_box_btn)
+
+	button:SetUserData("edit_box_cat", edit_box_cat)
+	button:SetUserData("edit_box_btn", edit_box_btn)
 end
 
 
--- function that draws the widgets for the second tab
-local function DrawGroup2(container)
 
-  
+-- function that draws the widgets for the second tab
+local function DrawGroupWarnings(container)
+
+
 	local edit_box = AceGUI:Create("MultiLineEditBox")
 	edit_box:SetNumLines(28)
 	edit_box:SetFullWidth(true)
@@ -84,9 +99,9 @@ end
 local function SelectGroup(container, event, group)
    container:ReleaseChildren()
    if group == "tab1" then
-      DrawGroup1(container)
+      DrawGroupNamelessCategories(container)
    elseif group == "tab2" then
-      DrawGroup2(container)
+      DrawGroupWarnings(container)
    end
 end
 

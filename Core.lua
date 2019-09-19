@@ -912,15 +912,6 @@ function AutoBar:StupidLog(p_text)
 end
 
 
-AutoBar.set_mana_users = ABGCS:MakeSet{"DRUID","HUNTER","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
-
-function AutoBar:ClassUsesMana(class_name)
-
-	return AutoBar.set_mana_users[class_name]
-
-end
-
-
 function AutoBar:DumpWarningLog()
 
 	if next(AutoBar.warning_log) == nil then --Empty log
@@ -996,18 +987,6 @@ function AutoBar:SetDifference(p_set1, p_set2)
 		if not p_set2[e] then s[tostring(e)] = true end
 	end
 	return s
-end
-
-function AutoBar:FindNamelessCategories()
-
-	local nameless = ""
-	for key in pairs(AutoBarCategoryList) do
-		if(AutoBarGlobalDataObject.locale[key] == nil) then
-			nameless = nameless .. "|n" .. key
-		end
-	end
-
-	return nameless
 end
 
 function AutoBar:ClearMissingItemFlag()
