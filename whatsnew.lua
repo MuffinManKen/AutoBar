@@ -4,13 +4,11 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Paladin: Devotion Aura
- - Warlock: Healthstones
- - Rogue: Disarm Trap
- - Mage: Mana Stones
- - Rogue Poisons
- - Lots of cleanup
- - Updated libraries
+ - Fix: Issue with Health/Mana stones
+ - Druid: Added Mark/Gift of the Wild, Thorns
+ - Paladin: Divine Protection
+ - Mage: Frost Armor, Arcane Intellect, Conjure Food/Water
+ - Fix: Issue with Aquatic, Buff Weapon, and Mana buttons
  - NOTE: LOTS of items/spells are missing but there shouldn`t be any lua errors
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"

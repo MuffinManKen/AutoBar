@@ -8,6 +8,13 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v1.13.2.04:
+ - Fix: Issue with Health/Mana stones
+ - Druid: Added Mark/Gift of the Wild, Thorns
+ - Paladin: Divine Protection
+ - Mage: Frost Armor, Arcane Intellect, Conjure Food/Water
+ - Fix: Issue with Aquatic, Buff Weapon, and Mana buttons
+ -
 v1.13.2.03:
  - Paladin: Devotion Aura
  - Warlock: Healthstones
