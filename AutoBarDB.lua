@@ -276,8 +276,12 @@ function AutoBar:InitializeDefaults()
 		},
 		MAGE =
 		{
+			"AutoBarButtonShields",
 			"AutoBarButtonStealth",
 			"AutoBarButtonConjure",
+			"AutoBarButtonInterrupt",
+			"AutoBarButtonER",
+			"AutoBarButtonClassBuff",
 		}
 	}
 
@@ -646,7 +650,7 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "MAGE" or AutoBar.CLASS == "HUNTER") then
+	if (AutoBar.CLASS == "ROGUE"or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonStealth"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonStealth"] = {
 				buttonKey = "AutoBarButtonStealth",
@@ -670,7 +674,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "MAGE" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonConjure"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonConjure"] = {
 				buttonKey = "AutoBarButtonConjure",
@@ -716,7 +720,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (ABGCode:ClassInList(AutoBar.CLASS, "PALADIN", "WARLOCK", "MAGE")) then
+	if (ABGCode:ClassInList(AutoBar.CLASS, "PALADIN", "WARLOCK")) then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
