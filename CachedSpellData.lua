@@ -150,21 +150,55 @@ ABGCS:CacheSpellData(98008, "Spirit Link Totem");
 
 --Warlock
 ABGCS:CacheSpellData(687, "Demon Skin");	--y
+ABGCS:CacheSpellData(706, "Demon Armor");
 
+ABGCS:CacheSpellData(6201, "Create Healthstone (Minor)");
+ABGCS:CacheSpellData(6202, "Create Healthstone (Lesser)");
+ABGCS:CacheSpellData(5699, "Create Healthstone");
+ABGCS:CacheSpellData(11729, "Create Healthstone (Greater)");
+ABGCS:CacheSpellData(11730, "Create Healthstone (Major)");
 
+--ABGCS:CacheSpellData(00000, "XXX");
+
+ABGCS:CacheSpellData(6229, "Shadow Ward");
+
+ABGCS:CacheSpellData(6366, "Create Firestone (Lesser)");--TODO: Add this to a category
+ABGCS:CacheSpellData(17951, "Create Firestone");--TODO: Add this to a category
+ABGCS:CacheSpellData(17952, "Create Firestone (Greater)");--TODO: Add this to a category
+ABGCS:CacheSpellData(17953, "Create Firestone (Major)");--TODO: Add this to a category
+
+ABGCS:CacheSpellData(2362, "Create Spellstone");--TODO: Add this to a category
+ABGCS:CacheSpellData(17727, "Create Spellstone (Greater)");--TODO: Add this to a category
+
+ABGCS:CacheSpellData(132, "Detect Lesser Invisibility");	--TODO: Add this to a category
+ABGCS:CacheSpellData(2970, "Detect Invisibility");	--TODO: Add this to a category
+ABGCS:CacheSpellData(11743, "Detect Greater Invisibility");	--TODO: Add this to a category
+
+ABGCS:CacheSpellData(5500, "Sense Demons");
+
+ABGCS:CacheSpellData(704, "Curse of Recklessness");
 ABGCS:CacheSpellData(1714, "Curse of Tongues");
 ABGCS:CacheSpellData(702, "Curse of Weakness"); --y
+ABGCS:CacheSpellData(17862, "Curse of Shadow");
+ABGCS:CacheSpellData(1490, "Curse of the Elements");
+
+ABGCS:CacheSpellData(693, "Create Soulstone (Minor)");
+ABGCS:CacheSpellData(20752, "Create Soulstone (Lesser)");
+ABGCS:CacheSpellData(20755, "Create Soulstone");
+ABGCS:CacheSpellData(20755, "Create Soulstone (Greater)");
+ABGCS:CacheSpellData(20757, "Create Soulstone (Major)");
+
+ABGCS:CacheSpellData(698, "Ritual of Summoning");
+
+
 ABGCS:CacheSpellData(18220, "Dark Pact");
-ABGCS:CacheSpellData(20707, "Soulstone");
 ABGCS:CacheSpellData(5697, "Unending Breath");
-ABGCS:CacheSpellData(6201, "Create Healthstone");
 ABGCS:CacheSpellData(126, "Eye of Kilrogg");
 ABGCS:CacheSpellData(691, "Summon Felhunter");
 ABGCS:CacheSpellData(688, "Summon Imp");   -- y
 ABGCS:CacheSpellData(712, "Summon Succubus");
 ABGCS:CacheSpellData(697, "Summon Voidwalker");
 ABGCS:CacheSpellData(1122, "Summon Infernal");
-ABGCS:CacheSpellData(698, "Ritual of Summoning");
 
 --Warrior
 ABGCS:CacheSpellData(100, "Charge");

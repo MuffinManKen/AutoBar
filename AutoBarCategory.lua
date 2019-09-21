@@ -922,8 +922,22 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
 	{
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Minor)"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Lesser)"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Greater)"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Major)"),
 	})
+
+	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = AutoBarSpells:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone (Minor)"],
+	{
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Minor)"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Lesser)"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Greater)"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Major)"),
+	})
+
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
 		"MAGE", ABGCS:GetSpellNameByName("Conjure Food"),
@@ -966,7 +980,6 @@ function AutoBarCategory:Initialize()
 		"PALADIN", ABGCS:GetSpellNameByName("Greater Blessing of Wisdom"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Unending Breath"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Soulstone"),
 		"WARRIOR", ABGCS:GetSpellNameByName("Demoralizing Shout"),
 	})
 
@@ -1031,7 +1044,10 @@ function AutoBarCategory:Initialize()
 		"WARRIOR", 		ABGCS:GetSpellNameByName("Shield Wall"), ABGCS:GetSpellNameByName("Shield Block"),
 
 
+		"WARLOCK", ABGCS:GetSpellNameByName("Demon Armor"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Demon Skin"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Shadow Ward"),
+
 	})
 end
 
@@ -1119,6 +1135,9 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", ABGCS:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", ABGCS:GetSpellNameByName("Wing Clip"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Tongues"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Recklessness"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Shadow"),
+		"WARLOCK", ABGCS:GetSpellNameByName("Curse of the Elements"),
 		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Weakness"),	--y
 	})
 
@@ -1134,6 +1153,8 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", ABGCS:GetSpellNameByName("Track Humanoids"),
 		"HUNTER", ABGCS:GetSpellNameByName("Track Undead"),
 		"HUNTER", ABGCS:GetSpellNameByName("Track Beasts"),
+
+		"WARLOCK", ABGCS:GetSpellNameByName("Sense Demons"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],

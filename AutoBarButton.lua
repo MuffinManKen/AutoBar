@@ -1184,6 +1184,7 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Spell.Mage.Conjure Water")
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
+		self:AddCategory("Spell.Warlock.Create Soulstone")
 	end
 end
 

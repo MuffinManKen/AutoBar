@@ -623,12 +623,12 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "HUNTER") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrack"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrack"] = {
 				buttonKey = "AutoBarButtonTrack",
 				buttonClass = "AutoBarButtonTrack",
-				barKey = "AutoBarClassBarHunter",
+				barKey = AutoBar.classBar,
 				defaultButtonIndex = "*",
 				enabled = true,
 				arrangeOnUse = true,

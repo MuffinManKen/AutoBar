@@ -191,6 +191,7 @@ local quick_sets =
 	"Muffin.Stones.Health",
 	"Muffin.Poison.Nonlethal",
 	"Muffin.Poison.Lethal",
+	"Spell.Warlock.Create Soulstone",
 }
 
 atl_table(quick_sets);
