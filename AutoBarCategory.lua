@@ -919,6 +919,9 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Misc.Usable.Replenished"] = AutoBarItems:new("Misc.Usable.Replenished", "INV_BannerPVP_02", "Misc.Usable.Replenished")
 
+	AutoBarCategoryList["Muffin.Mount"] = AutoBarItems:new("Muffin.Mount", "ability_mount_ridinghorse", "Muffin.Mount")
+	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
+
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
 	{
@@ -1180,8 +1183,6 @@ function AutoBarCategory:Initialize2()
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount." .. AutoBar.NiceClass)
-	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
 	{

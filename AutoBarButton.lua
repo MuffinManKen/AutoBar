@@ -1029,6 +1029,14 @@ end
 --	end
 --end
 
+local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
+
+function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
+	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Mount")
+end
 
 local AutoBarButtonAspect = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonAspect"] = AutoBarButtonAspect
