@@ -1068,43 +1068,51 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
+		"SHAMAN", ABGCS:GetSpellNameByName("Earth Shock");
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneclaw Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Strength of Earth Totem"),
-
-		"SHAMAN", ABGCS:GetSpellNameByName("Earthgrab Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Ancestral Protection Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Earthen Shield Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Earthquake Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Tremor Totem");
 	})
 
 
 	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
---		"SHAMAN", ABGCS:GetSpellNameByName("Wind Rush Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Lightning Surge Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Voodoo Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Cloudburst Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Grace of Air Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Grounding Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Nature Resistance Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Sentry Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Tranquil Air Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Windfury Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Windwall Totem");
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
---		"SHAMAN", ABGCS:GetSpellNameByName("Liquid Magma Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Fire Nova Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Frost Resistance Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Magma Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Searing Totem");
 	})
 
 	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellHealingStreamTotemIcon,
 	{
---		"SHAMAN", ABGCS:GetSpellNameByName("Healing Stream Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Healing Tide Totem"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Spirit Link Totem"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Disease Cleansing Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Fire Resistance Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Healing Stream Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Mana Spring Totem");
+		"SHAMAN", ABGCS:GetSpellNameByName("Poison Cleansing Totem");
 	})
 
 
 	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
 		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Weapon"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Frostbrand Weapon"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Rockbiter Weapon"),
+		"SHAMAN", ABGCS:GetSpellNameByName("Windfury Weapon"),
 	})
 
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"],

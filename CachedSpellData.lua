@@ -116,40 +116,52 @@ ABGCS:CacheSpellData(6770, "Sap");
 
 --Shaman
 ABGCS:CacheSpellData(8024, "Flametongue Weapon");
+ABGCS:CacheSpellData(8033, "Frostbrand Weapon");
 ABGCS:CacheSpellData(8017, "Rockbiter Weapon");
+ABGCS:CacheSpellData(8232, "Windfury Weapon");
 
+	--Air totems
+ABGCS:CacheSpellData(8835, "Grace of Air Totem");
+ABGCS:CacheSpellData(8177, "Grounding Totem");
+ABGCS:CacheSpellData(10595, "Nature Resistance Totem");
+ABGCS:CacheSpellData(6495, "Sentry Totem");
+ABGCS:CacheSpellData(25908, "Tranquil Air Totem");
+ABGCS:CacheSpellData(8512, "Windfury Totem");
+ABGCS:CacheSpellData(8512, "Windwall Totem");
 
+	--Earth totems
 ABGCS:CacheSpellData(8042, "Earth Shock");
 ABGCS:CacheSpellData(2484, "Earthbind Totem");
-ABGCS:CacheSpellData(8071, "Stoneskin Totem");
 ABGCS:CacheSpellData(5730, "Stoneclaw Totem");
+ABGCS:CacheSpellData(8071, "Stoneskin Totem");
 ABGCS:CacheSpellData(8075, "Strength of Earth Totem");
+ABGCS:CacheSpellData(8143, "Tremor Totem");
 
+	--Fire totems
+ABGCS:CacheSpellData(1535, "Fire Nova Totem");
+ABGCS:CacheSpellData(16387, "Flametongue Totem");
+ABGCS:CacheSpellData(8181, "Frost Resistance Totem");
+ABGCS:CacheSpellData(8190, "Magma Totem");
+ABGCS:CacheSpellData(3599, "Searing Totem");
 
+	--Water totems
+ABGCS:CacheSpellData(8170, "Disease Cleansing Totem");
+ABGCS:CacheSpellData(10538, "Fire Resistance Totem");
+ABGCS:CacheSpellData(5394, "Healing Stream Totem");
+ABGCS:CacheSpellData(5675, "Mana Spring Totem");
+ABGCS:CacheSpellData(8166, "Poison Cleansing Totem");
 
-ABGCS:CacheSpellData(51485, "Earthgrab Totem");
 ABGCS:CacheSpellData(51533, "Feral Spirit");
 ABGCS:CacheSpellData(546, "Water Walking");
-ABGCS:CacheSpellData(192077, "Wind Rush Totem");
 ABGCS:CacheSpellData(2645, "Ghost Wolf");
 ABGCS:CacheSpellData(198103, "Earth Elemental");
 ABGCS:CacheSpellData(198067, "Fire Elemental");
 ABGCS:CacheSpellData(192249, "Storm Elemental");
 ABGCS:CacheSpellData(556, "Astral Recall");
-ABGCS:CacheSpellData(207399, "Ancestral Protection Totem");
-ABGCS:CacheSpellData(198838, "Earthen Shield Totem");
-ABGCS:CacheSpellData(61882, "Earthquake Totem");
-ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
-ABGCS:CacheSpellData(196932, "Voodoo Totem");
-ABGCS:CacheSpellData(157153, "Cloudburst Totem");
-ABGCS:CacheSpellData(192222, "Liquid Magma Totem");
-ABGCS:CacheSpellData(5394, "Healing Stream Totem");
-ABGCS:CacheSpellData(108280, "Healing Tide Totem");
-ABGCS:CacheSpellData(98008, "Spirit Link Totem");
 
 
 --Warlock
-ABGCS:CacheSpellData(687, "Demon Skin");	--y
+ABGCS:CacheSpellData(687, "Demon Skin");
 ABGCS:CacheSpellData(706, "Demon Armor");
 
 ABGCS:CacheSpellData(6201, "Create Healthstone (Minor)");
