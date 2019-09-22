@@ -8,6 +8,12 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v1.13.2.05:
+ - Updated Muffin LibPT
+ - Warlocks: Added lots of stuff
+ - Shaman: Added lots of stuff
+ - Mounts: Item-based mounts should work
+
 v1.13.2.04:
  - Fix: Issue with Health/Mana stones
  - Druid: Added Mark/Gift of the Wild, Thorns
