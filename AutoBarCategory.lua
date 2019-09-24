@@ -1164,6 +1164,8 @@ function AutoBarCategory:Initialize2()
 		"HUNTER", ABGCS:GetSpellNameByName("Track Humanoids"),
 		"HUNTER", ABGCS:GetSpellNameByName("Track Undead"),
 		"HUNTER", ABGCS:GetSpellNameByName("Track Beasts"),
+		"HUNTER", ABGCS:GetSpellNameByName("Track Hidden"),
+		"HUNTER", ABGCS:GetSpellNameByName("Track Elementals"),
 
 		"WARLOCK", ABGCS:GetSpellNameByName("Sense Demons"),
 	})
