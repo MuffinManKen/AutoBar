@@ -19,6 +19,8 @@
 --		spell
 --		limit
 
+-- GLOBALS: GetSpellInfo, GetMacroInfo, GetMacroIndexByName
+
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 
@@ -32,6 +34,8 @@ local L = AutoBarGlobalDataObject.locale
 local PT = LibStub("LibPeriodicTable-3.1")
 local AceOO = AceLibrary("AceOO-2.0")
 local _
+
+local tonumber, type, print, table, ipairs, pairs, assert = tonumber, type, print, table, ipairs, pairs, assert
 
 -- List of categoryKey, category.description pairs for button categories
 AutoBar.categoryValidateList = {}
@@ -1100,7 +1104,7 @@ function AutoBarCategory:Initialize2()
 		"SHAMAN", ABGCS:GetSpellNameByName("Searing Totem");
 	})
 
-	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellHealingStreamTotemIcon,
+	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
 		"SHAMAN", ABGCS:GetSpellNameByName("Disease Cleansing Totem");
 		"SHAMAN", ABGCS:GetSpellNameByName("Fire Resistance Totem");

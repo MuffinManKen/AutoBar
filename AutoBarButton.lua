@@ -6,6 +6,12 @@
 -- http://muffinmangames.com
 --
 
+-- GLOBALS: GetSpellBookItemName, ClearCursor, GetCursorInfo, SecureHandlerWrapScript, CreateFrame, RegisterStateDriver, RegisterAutoHide, InCombatLockdown, GetInventoryItemLink
+-- GLOBALS: GetContainerItemLink, GetShapeshiftForm, GetShapeshiftFormInfo, GetTotemInfo, PickupInventoryItem
+
+
+local tostring, print, assert, math, pairs, strfind, ipairs, tonumber = tostring, print, assert, math, pairs, strfind, ipairs, tonumber
+
 local AutoBar = AutoBar
 
 local ABGCode = AutoBarGlobalCodeSpace

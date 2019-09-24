@@ -51,6 +51,8 @@
 --	Bar & Button visual settings are inherited AutoBar -> Bar -> Button
 --  Plugin Buttons / Bars
 
+local tostring, print, assert, math, pairs, strfind, ipairs, tonumber, wipe, table, type = tostring, print, assert, math, pairs, strfind, ipairs, tonumber, wipe, table, type
+
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
@@ -202,7 +204,7 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 	if(self.defaults.handle_spell_changed == nil) then
-		handle_spell_changed = true
+		self.defaults.handle_spell_changed = true
 	end
 
 
@@ -1221,7 +1223,7 @@ function AutoBar:BarsCompact()
 end
 
 function AutoBar:ButtonPopulateNew(buttonDB)
-	newButtonDB = {}
+	local newButtonDB = {}
 	-- ToDo: Upgrade if there is ever a table inside
 	for key, value in pairs(buttonDB) do
 		newButtonDB[key] = value

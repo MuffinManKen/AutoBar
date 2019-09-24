@@ -3072,7 +3072,7 @@ function AutoBar:ButtonInsert(barDB, buttonDB)
 end
 
 function AutoBar:ButtonPopulate(buttonDB)
-	newButtonDB = {}
+	local newButtonDB = {}
 	-- ToDo: Upgrade if there is ever a table inside
 	for key, value in pairs(buttonDB) do
 		newButtonDB[key] = value
