@@ -524,8 +524,8 @@ end
 
 
 
-function AutoBar.events:PLAYER_CONTROL_GAINED()
-	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
+function AutoBar.events:PLAYER_CONTROL_GAINED(p_arg1)
+	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", p_arg1)
 	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
@@ -559,7 +559,7 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 --print("   PLAYER_REGEN_DISABLED")
 
 	ABGCS:UpdateActive()
-	AceCfgDlg:Close(appName)
+	AceCfgDlg:Close("AutoBar")
 end
 
 
@@ -1078,7 +1078,7 @@ function ABGCS:UpdateCategories(p_behaviour)
 			end
 		end
 		if (delete) then
-			otherStickyFrames = nil
+			tick.OtherStickyFrames = nil
 		end
 	end
 
