@@ -32,7 +32,7 @@ AutoBarCategoryList = {}
 
 local L = AutoBarGlobalDataObject.locale
 local PT = LibStub("LibPeriodicTable-3.1")
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local _
 
 local tonumber, type, print, table, ipairs, pairs, assert = tonumber, type, print, table, ipairs, pairs, assert

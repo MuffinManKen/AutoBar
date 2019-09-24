@@ -12,7 +12,7 @@ local ABGData = AutoBarGlobalDataObject
 
 local _
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
 AutoBarSearch = {}
 AutoBarSearch.spells = {}

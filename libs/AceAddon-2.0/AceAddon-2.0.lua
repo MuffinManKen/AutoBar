@@ -7,7 +7,7 @@ Website: http://www.wowace.com/
 Documentation: http://www.wowace.com/wiki/AceAddon-2.0
 SVN: http://svn.wowace.com/wowace/trunk/Ace2/AceAddon-2.0
 Description: Base for all Ace addons to inherit from.
-Dependencies: AceLibrary, AceOO-2.0, AceEvent-2.0, (optional) AceConsole-2.0
+Dependencies: MMGHACKAceLibrary, AceOO-2.0, AceEvent-2.0, (optional) AceConsole-2.0
 License: LGPL v2.1
 ]]
 
@@ -15,10 +15,10 @@ local MAJOR_VERSION = "AceAddon-2.0"
 local MINOR_VERSION = 90000 + tonumber(("$Revision: 1100 $"):match("(%d+)"))
 
 -- This ensures the code is only executed if the libary doesn't already exist, or is a newer version
-if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary.") end
-if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
+if not MMGHACKAceLibrary then error(MAJOR_VERSION .. " requires MMGHACKAceLibrary.") end
+if not MMGHACKAceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
 
-if not AceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0.") end
+if not MMGHACKAceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0.") end
 
 local function safecall(func,...)
 	local success, err = pcall(func,...)
@@ -496,7 +496,7 @@ end })
 
 -- Create the library object
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local AceAddon = AceOO.Class()
 local AceEvent
 local AceConsole
@@ -1253,21 +1253,21 @@ local function external(self, major, instance)
 							end
 						},
 						libs = {
-							desc = "List all libraries using AceLibrary",
+							desc = "List all libraries using MMGHACKAceLibrary",
 							name = "Libraries",
 							type = "execute",
 							func = function()
-								if type(AceLibrary) == "table" and type(AceLibrary.libs) == "table" then
+								if type(MMGHACKAceLibrary) == "table" and type(MMGHACKAceLibrary.libs) == "table" then
 									print("|cffffff7fLibrary list:|r")
-									for name, data in pairs(AceLibrary.libs) do
+									for name, data in pairs(MMGHACKAceLibrary.libs) do
 										local s
 										if data.minor then
 											s = " - " .. tostring(name) .. "." .. tostring(data.minor)
 										else
 											s = " - " .. tostring(name)
 										end
-										if rawget(AceLibrary(name), 'slashCommand') then
-											s = s .. " |cffffff7f(" .. tostring(AceLibrary(name).slashCommand) .. "|cffffff7f)"
+										if rawget(MMGHACKAceLibrary(name), 'slashCommand') then
+											s = s .. " |cffffff7f(" .. tostring(MMGHACKAceLibrary(name).slashCommand) .. "|cffffff7f)"
 										end
 										print(s)
 									end
@@ -1412,12 +1412,12 @@ local function external(self, major, instance)
 						print((" - |cffffff7fenabled addons [|r%d|cffffff7f]|r"):format(enabled))
 						print((" - |cffffff7fdisabled addons [|r%d|cffffff7f]|r"):format(disabled))
 						local libs = 0
-						if type(AceLibrary) == "table" and type(AceLibrary.libs) == "table" then
-							for _ in pairs(AceLibrary.libs) do
+						if type(MMGHACKAceLibrary) == "table" and type(MMGHACKAceLibrary.libs) == "table" then
+							for _ in pairs(MMGHACKAceLibrary.libs) do
 								libs = libs + 1
 							end
 						end
-						print((" - |cffffff7fAceLibrary instances [|r%d|cffffff7f]|r"):format(libs))
+						print((" - |cffffff7fMMGHACKAceLibrary instances [|r%d|cffffff7f]|r"):format(libs))
 					end
 				}
 			}
@@ -1442,4 +1442,4 @@ local function activate(self, oldLib, oldDeactivate)
 	end
 end
 
-AceLibrary:Register(AceAddon, MAJOR_VERSION, MINOR_VERSION, activate, nil, external)
+MMGHACKAceLibrary:Register(AceAddon, MAJOR_VERSION, MINOR_VERSION, activate, nil, external)

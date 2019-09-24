@@ -10,7 +10,7 @@
 	<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>
 	<Include file="libs\AceConfig-3.0\AceConfig-3.0.xml"/>
 
-	<Script file="libs\AceLibrary\AceLibrary.lua"/>
+	<Script file="libs\MMGHACKAceLibrary\MMGHACKAceLibrary.lua"/>
 	<Script file="libs\AceOO-2.0\AceOO-2.0.lua"/>
 	<Script file="libs\AceEvent-2.0\AceEvent-2.0.lua"/>
 	<Script file="libs\AceAddon-2.0\AceAddon-2.0.lua"/>

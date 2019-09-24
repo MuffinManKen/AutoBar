@@ -7,7 +7,6 @@ Website: http://www.wowace.com/wiki/PeriodicTable-3.1
 Documentation: http://www.wowace.com/wiki/PeriodicTable-3.1/API
 SVN: http://svn.wowace.com/wowace/trunk/PeriodicTable-3.1/PeriodicTable-3.1/
 Description: Library of compressed itemid sets.
-Dependencies: AceLibrary
 License: LGPL v2.1
 Copyright (C) 2007 Nymbia
 

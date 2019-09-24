@@ -8,7 +8,7 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local print, select, ipairs, tostring, table, pairs = print, select, ipairs, tostring, table, pairs
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+AutoBar = MMGHACKAceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 AutoBar.warning_log = {}
 
 -- All global code with be a child of this table.
