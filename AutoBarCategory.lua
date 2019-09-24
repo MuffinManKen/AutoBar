@@ -27,7 +27,7 @@ local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
-
+--TODO: Move AutoBarCategoryList into AutoBarGlobalDataObject
 AutoBarCategoryList = {}
 
 local L = AutoBarGlobalDataObject.locale
@@ -96,7 +96,7 @@ end
 
 
 -- Convert list of negative numbered spellId to spellName.
-function PTSpellIDsToSpellName(p_cast_list)
+local function PTSpellIDsToSpellName(p_cast_list)
 --print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
 
 	for i = 1, # p_cast_list do

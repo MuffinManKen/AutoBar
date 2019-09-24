@@ -7,6 +7,9 @@
 -- http://muffinmangames.com
 --
 
+-- GLOBALS: GameTooltip, GetCVar, GameTooltip_SetDefaultAnchor, GetScreenWidth, SecureHandlerWrapScript, GetSpellInfo, GetMacroInfo, GetItemCooldown
+-- GLOBALS: GetSpellCooldown, CooldownFrame_Set, GetItemCount, GetSpellCount, IsUsableSpell
+
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
 local ABGCS = AutoBarGlobalCodeSpace
@@ -16,8 +19,10 @@ local ABGData = AutoBarGlobalDataObject
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub("LibKeyBound-1.0")
-local _G = getfenv(0)
+local _G = _G
 local _
+
+local strmatch, select, tonumber, print = strmatch, select, tonumber, print
 
 if (not AutoBar.Class) then
 	AutoBar.Class = {}
@@ -140,7 +145,7 @@ local function get_texture_for_action(p_action)
 	if (p_action) then
 		texture = select(3, GetSpellInfo(p_action)) or ABGCS:GetIconForItemID(p_action)
 	end
-	
+
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 	if(texture == nil) then
@@ -153,22 +158,22 @@ end
 
 --local function get_texture_for_macro_body(p_macro_body)
 --	local debug = false
---	
+--
 --	local action = AutoBar:GetActionForMacroBody(p_macro_body);
 --	local texture = get_texture_for_action(action)
---	
+--
 --	if (debug) then
 --		print("   texture:", texture);
 --		print("   action:" .. action)
 --	end
---	
+--
 --	--We haven't found a texture. This might be because it's just not cached yet.
 --	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 --	if(texture == nil) then
 --		AutoBar.missing_items = true
 --		--print("AutoBar.missing_items = true")
 --	end
---	
+--
 --	return texture
 --end
 
@@ -190,7 +195,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if (itemId) then
 			texture = ABGCS:GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(itemID);
+				AutoBar:SetMissingItemFlag(itemId);
 			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)
@@ -240,7 +245,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	if (not itemType) then-- and not self.parentBar.faded
 		return;
 	end
-	
+
 	local item_guid = self.frame:GetAttribute("AutoBarGUID")
 	local item_data = ABGCS:InfoFromGUID(item_guid)
 

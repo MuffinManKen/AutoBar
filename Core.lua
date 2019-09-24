@@ -15,6 +15,7 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 
 -- GLOBALS: GetTime, GetItemInfo, GetSpellLink, SecureCmdOptionParse, GetSpellInfo, InCombatLockdown, UnitFactionGroup, UnitName, GetRealmName
 -- GLOBALS: UnitClass, GetAddOnMemoryUsage, UpdateAddOnMemoryUsage, ClearOverrideBindings, C_Timer, GetMaxBattlefieldID, GetBattlefieldStatus
+-- GLOBALS: NUM_BAG_SLOTS
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 

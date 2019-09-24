@@ -7,7 +7,7 @@
 --
 
 -- GLOBALS: GetSpellBookItemName, ClearCursor, GetCursorInfo, SecureHandlerWrapScript, CreateFrame, RegisterStateDriver, RegisterAutoHide, InCombatLockdown, GetInventoryItemLink
--- GLOBALS: GetContainerItemLink, GetShapeshiftForm, GetShapeshiftFormInfo, GetTotemInfo, PickupInventoryItem
+-- GLOBALS: GetContainerItemLink, GetShapeshiftForm, GetShapeshiftFormInfo, GetTotemInfo, PickupInventoryItem, CooldownFrame_Set
 
 
 local tostring, print, assert, math, pairs, strfind, ipairs, tonumber = tostring, print, assert, math, pairs, strfind, ipairs, tonumber

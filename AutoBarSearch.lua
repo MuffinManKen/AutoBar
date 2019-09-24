@@ -6,11 +6,16 @@ Website: http://www.wowace.com/
 -- Copyright 2007+ Toadkiller of Proudmoore.
 -- http://muffinmangames.com
 
+-- GLOBALS: GetItemInfo, GetItemSpell, GetMacroInfo, GetContainerNumSlots, GetContainerItemID, GetInventoryItemLink, UnitLevel, GetSpellLink, GetSpellInfo
+-- GLOBALS: UpdateAddOnMemoryUsage, GetAddOnMemoryUsage
+
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 local _
+
+local table, pairs, tostring, type, select, ipairs, strtrim, assert, print = table, pairs, tostring, type, select, ipairs, strtrim, assert, print
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
@@ -431,7 +436,7 @@ function Stuff.prototype:Scan()
 			AutoBarSearch.dirtyBags[bag] = nil
 		end
 	end
-	
+
 	if (AutoBarSearch.dirtyBags.macro_text) then
 --AutoBar:Print("Stuff.prototype:Scan    scanning macro_text ");
 		self:ScanMacroText()
@@ -443,13 +448,13 @@ function Stuff.prototype:Scan()
 		self:ScanInventory()
 		AutoBarSearch.dirtyBags.inventory = nil
 	end
-	
+
 	if (AutoBarSearch.dirtyBags.spells) then
 --AutoBar:Print("Stuff.prototype:Scan    scanning spells ");
 		self:ScanSpells()
 		AutoBarSearch.dirtyBags.spells = nil
 	end
-	
+
 	if (AutoBarSearch.dirtyBags.macros) then
 --AutoBar:Print("Stuff.prototype:Scan    scanning macros ");
 		self:ScanMacros()
@@ -1091,7 +1096,7 @@ end
 function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_spell_link)
 
 	local spellInfo = AutoBarSearch.spells[p_spell_name]
-	
+
 	--local debug = (p_spell_name == "Wild Charge")
 	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, noSpellCheck, p_spell_link, GetSpellLink(p_spell_name)); end
 
@@ -1099,20 +1104,20 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_s
 		spellInfo = {}
 		AutoBarSearch.spells[p_spell_name] = spellInfo
 	end
-	
+
 	if (p_spell_link) then
 		spellInfo.spellLink = p_spell_link
 	else
 		spellInfo.spellLink = GetSpellLink(p_spell_name)
 	end
-	
+
 	if (p_spell_id) then
 		spellInfo.spell_id = p_spell_id
 	else
 		spellInfo.spell_id = select(7, GetSpellInfo(p_spell_name))
 	end
 
-	
+
 	if (noSpellCheck) then
 		spellInfo.noSpellCheck = true
 	end
@@ -1130,7 +1135,7 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 		macro_text_info = {}
 		AutoBarSearch.macro_text[p_macro_guid] = macro_text_info
 	end
-	
+
 	if (p_macro_icon_override) then
 		macro_text_info.icon = p_macro_icon_override
 	else
@@ -1154,7 +1159,7 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 	macro_text_info.macro_text = p_macro_text
 	macro_text_info.ab_type = ABGData.TYPE_MACRO_TEXT
 
-	if (debug) then print("AutoBarSearch:RegisterMacroText", "GUID:", p_macro_guid, "icon:", p_macro_icon, "text:", p_macro_text); end
+	if (debug) then print("AutoBarSearch:RegisterMacroText", "GUID:", p_macro_guid, "icon:", p_macro_icon_override, "text:", p_macro_text); end
 
 end
 

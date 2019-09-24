@@ -9,13 +9,17 @@
 -- http://muffinmangames.com
 --
 
-local AutoBar = AutoBar
+--GLOBALS: UIParent, CreateFrame, GameFontNormal, RegisterStateDriver, UnregisterStateDriver, InCombatLockdown, IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown
 
+local AutoBar = AutoBar
+local _G = _G
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
+
+local assert, ipairs, print, pairs, math = assert, ipairs, print, pairs, math
 
 -- List of Bars for the current user
 AutoBar.barList = {}
