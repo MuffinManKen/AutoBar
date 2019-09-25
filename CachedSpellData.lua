@@ -123,6 +123,8 @@ ABGCS:CacheSpellData(8033, "Frostbrand Weapon");
 ABGCS:CacheSpellData(8017, "Rockbiter Weapon");
 ABGCS:CacheSpellData(8232, "Windfury Weapon");
 
+ABGCS:CacheSpellData(8042, "Earth Shock");
+
 	--Air totems
 ABGCS:CacheSpellData(8835, "Grace of Air Totem");
 ABGCS:CacheSpellData(8177, "Grounding Totem");
@@ -133,7 +135,6 @@ ABGCS:CacheSpellData(8512, "Windfury Totem");
 ABGCS:CacheSpellData(8512, "Windwall Totem");
 
 	--Earth totems
-ABGCS:CacheSpellData(8042, "Earth Shock");
 ABGCS:CacheSpellData(2484, "Earthbind Totem");
 ABGCS:CacheSpellData(5730, "Stoneclaw Totem");
 ABGCS:CacheSpellData(8071, "Stoneskin Totem");

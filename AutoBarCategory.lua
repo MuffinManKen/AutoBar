@@ -1075,7 +1075,6 @@ function AutoBarCategory:Initialize2()
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Earth Shock");
 		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneclaw Totem"),
 		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
