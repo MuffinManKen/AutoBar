@@ -22,7 +22,7 @@
 -- GLOBALS: GetSpellInfo, GetMacroInfo, GetMacroIndexByName
 
 local AutoBar = AutoBar
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCode = AutoBarGlobalCodeSpace
 
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
@@ -218,7 +218,7 @@ function AutoBarCategory:FilterClass(castList, p_items_per_line)
 	local spellName, index, filteredList2, filteredList3
 	local items_per_line = p_items_per_line or 2
 
-
+	--TODO: verify that each entry starts with either a proper class name or a "*"
 	-- Filter out CLASS spells from castList
 	index = 1
 	for i = 1, # castList, items_per_line do
@@ -314,7 +314,7 @@ end
 function AutoBarMacroTextCategory.prototype:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local next_index = #self.items + 1
-	local guid = ABGCS:MacroTextGUID(p_macro_text)
+	local guid = ABGCode:MacroTextGUID(p_macro_text)
 	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	self.items[next_index] = guid
 end
@@ -340,11 +340,16 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 --	AutoBar:StupidLog(AutoBar:Dump(p_pt_set))
 --	end
 
+
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (castList) then
 		self.castList = AutoBarCategory:FilterClass(castList)
 	end
+
 	if (rightClickList) then
+		if (#rightClickList % 3 ~= 0) then
+			ABGCode:LogWarning("Category:", description, " rightClickList should be divisible by 3, but isn't.")
+		end
 		self.castList, self.rightClickList = AutoBarCategory:FilterClass(rightClickList, 3)
 	end
 
@@ -433,7 +438,7 @@ function AutoBarCustom.prototype:init(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		texture = ABGCS:GetIconForItemID(tonumber(itemId))
+		texture = ABGCode:GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
 			_, _, texture = GetSpellInfo(spellName)
@@ -791,7 +796,7 @@ function AutoBarCategory:Initialize()
 
 
 	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
---			"MAGE", ABGCS:GetSpellNameByName("Conjure Refreshment"),
+--			"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
 			})
 
 	AutoBarCategoryList["Consumable.Water.Percentage"] = AutoBarItems:new("Consumable.Water.Percentage", "INV_Drink_04", "Consumable.Water.Percentage")
@@ -929,131 +934,131 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
 	{
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Minor)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Lesser)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Greater)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Healthstone (Major)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone (Minor)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone (Lesser)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone (Greater)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone (Major)"),
 	})
 
 	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = AutoBarSpells:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone (Minor)"],
 	{
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Minor)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Lesser)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Greater)"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Create Soulstone (Major)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Minor)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Lesser)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Greater)"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Major)"),
 	})
 
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
-		"MAGE", ABGCS:GetSpellNameByName("Conjure Food"),
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Food"),
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Water"] = AutoBarSpells:new("Spell.Mage.Conjure Water", spellIconList["Conjure Refreshment"], {
-		"MAGE", ABGCS:GetSpellNameByName("Conjure Water"),
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Water"),
 	})
 
 
 	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Prowl"),
-		"MAGE", ABGCS:GetSpellNameByName("Invisibility"),
-		"MAGE", ABGCS:GetSpellNameByName("Lesser Invisibility"),
-		"ROGUE", ABGCS:GetSpellNameByName("Stealth"),	--y
-		"*", ABGCS:GetSpellNameByName("Shadowmeld"),	--y
+		"DRUID", ABGCode:GetSpellNameByName("Prowl"),
+		"MAGE", ABGCode:GetSpellNameByName("Invisibility"),
+		"MAGE", ABGCode:GetSpellNameByName("Lesser Invisibility"),
+		"ROGUE", ABGCode:GetSpellNameByName("Stealth"),	--y
+		"*", ABGCode:GetSpellNameByName("Shadowmeld"),	--y
 	})
 
 	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Cheetah"),
-		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Hawk"),
-		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Monkey"),
-		"HUNTER", ABGCS:GetSpellNameByName("Aspect of the Wild"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Cheetah"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Hawk"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Monkey"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Wild"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
-		"MAGE", ABGCS:GetSpellNameByName("Slow Fall"),
-		"MAGE", ABGCS:GetSpellNameByName("Arcane Intellect"),
-		"DRUID", ABGCS:GetSpellNameByName("Mark of the Wild"),
-		"DRUID", ABGCS:GetSpellNameByName("Gift of the Wild"),
-		"DRUID", ABGCS:GetSpellNameByName("Thorns"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Might"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Protection"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Sacrifice"),
-		"PALADIN", ABGCS:GetSpellNameByName("Blessing of Salvation"),
-		"PALADIN", ABGCS:GetSpellNameByName("Greater Blessing of Kings"),
-		"PALADIN", ABGCS:GetSpellNameByName("Greater Blessing of Wisdom"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Water Walking"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Unending Breath"),
-		"WARRIOR", ABGCS:GetSpellNameByName("Demoralizing Shout"),
+		"MAGE", ABGCode:GetSpellNameByName("Slow Fall"),
+		"MAGE", ABGCode:GetSpellNameByName("Arcane Intellect"),
+		"DRUID", ABGCode:GetSpellNameByName("Mark of the Wild"),
+		"DRUID", ABGCode:GetSpellNameByName("Gift of the Wild"),
+		"DRUID", ABGCode:GetSpellNameByName("Thorns"),
+		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Might"),
+		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Protection"),
+		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Sacrifice"),
+		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Salvation"),
+		"PALADIN", ABGCode:GetSpellNameByName("Greater Blessing of Kings"),
+		"PALADIN", ABGCode:GetSpellNameByName("Greater Blessing of Wisdom"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Water Walking"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Unending Breath"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Demoralizing Shout"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Call Pet"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Earth Elemental"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Fire Elemental"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Storm Elemental"),
---		"SHAMAN", ABGCS:GetSpellNameByName("Feral Spirit"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Eye of Kilrogg"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Summon Infernal"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Summon Felhunter"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Summon Imp"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Summon Succubus"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Summon Voidwalker"),
+		"HUNTER", ABGCode:GetSpellNameByName("Call Pet"),
+--		"SHAMAN", ABGCode:GetSpellNameByName("Earth Elemental"),
+--		"SHAMAN", ABGCode:GetSpellNameByName("Fire Elemental"),
+--		"SHAMAN", ABGCode:GetSpellNameByName("Storm Elemental"),
+--		"SHAMAN", ABGCode:GetSpellNameByName("Feral Spirit"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Eye of Kilrogg"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Infernal"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Felhunter"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Imp"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Succubus"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Voidwalker"),
 	})
 
 
 
 	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellIconList["Call Pet 1"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Bestial Wrath"),
-		"HUNTER", ABGCS:GetSpellNameByName("Mend Pet"),
-		"HUNTER", ABGCS:GetSpellNameByName("Intimidation"),
+		"HUNTER", ABGCode:GetSpellNameByName("Bestial Wrath"),
+		"HUNTER", ABGCode:GetSpellNameByName("Mend Pet"),
+		"HUNTER", ABGCode:GetSpellNameByName("Intimidation"),
 	})
 
 	--Misc pet abilities
 	AutoBarCategoryList["Spell.Class.Pets3"] = AutoBarSpells:new(	"Spell.Class.Pets3", spellIconList["Feed Pet"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Dismiss Pet"),
-		"HUNTER", ABGCS:GetSpellNameByName("Eagle Eye"),
-		"HUNTER", ABGCS:GetSpellNameByName("Feed Pet"),
-		"HUNTER", ABGCS:GetSpellNameByName("Revive Pet"),
-		"HUNTER", ABGCS:GetSpellNameByName("Tame Beast"),
-		"HUNTER", ABGCS:GetSpellNameByName("Beast Lore"),
+		"HUNTER", ABGCode:GetSpellNameByName("Dismiss Pet"),
+		"HUNTER", ABGCode:GetSpellNameByName("Eagle Eye"),
+		"HUNTER", ABGCode:GetSpellNameByName("Feed Pet"),
+		"HUNTER", ABGCode:GetSpellNameByName("Revive Pet"),
+		"HUNTER", ABGCode:GetSpellNameByName("Tame Beast"),
+		"HUNTER", ABGCode:GetSpellNameByName("Beast Lore"),
 	})
 
 	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new( "Spell.Portals", spellPortalShattrathIcon, nil,
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Teleport: Moonglade"), ABGCS:GetSpellNameByName("Teleport: Moonglade"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Undercity"), ABGCS:GetSpellNameByName("Portal: Undercity"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Thunder Bluff"), ABGCS:GetSpellNameByName("Portal: Thunder Bluff"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Stormwind"), ABGCS:GetSpellNameByName("Portal: Stormwind"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Darnassus"), ABGCS:GetSpellNameByName("Portal: Darnassus"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Ironforge"), ABGCS:GetSpellNameByName("Portal: Ironforge"),
-		"MAGE", ABGCS:GetSpellNameByName("Teleport: Orgrimmar"), ABGCS:GetSpellNameByName("Portal: Orgrimmar"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Astral Recall"), ABGCS:GetSpellNameByName("Astral Recall"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Ritual of Summoning"), ABGCS:GetSpellNameByName("Ritual of Summoning"),
+		"DRUID", ABGCode:GetSpellNameByName("Teleport: Moonglade"), ABGCode:GetSpellNameByName("Teleport: Moonglade"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Undercity"), ABGCode:GetSpellNameByName("Portal: Undercity"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Thunder Bluff"), ABGCode:GetSpellNameByName("Portal: Thunder Bluff"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Stormwind"), ABGCode:GetSpellNameByName("Portal: Stormwind"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Darnassus"), ABGCode:GetSpellNameByName("Portal: Darnassus"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Ironforge"), ABGCode:GetSpellNameByName("Portal: Ironforge"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Orgrimmar"), ABGCode:GetSpellNameByName("Portal: Orgrimmar"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Astral Recall"), ABGCode:GetSpellNameByName("Astral Recall"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Ritual of Summoning"), ABGCode:GetSpellNameByName("Ritual of Summoning"),
 	})
 
 
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
-		"DRUID", 		ABGCS:GetSpellNameByName("Barkskin"), 	ABGCS:GetSpellNameByName("Barkskin"),
-		"MAGE", 			ABGCS:GetSpellNameByName("Frost Armor"), ABGCS:GetSpellNameByName("Ice Barrier"),
-		"PALADIN", 		ABGCS:GetSpellNameByName("Divine Protection"), ABGCS:GetSpellNameByName("Divine Shield"),
-		"PALADIN", 		ABGCS:GetSpellNameByName("Divine Shield"), ABGCS:GetSpellNameByName("Divine Protection"),
-		"PRIEST", 		ABGCS:GetSpellNameByName("Power Word: Shield"), ABGCS:GetSpellNameByName("Power Word: Shield"),
-		"ROGUE", 		ABGCS:GetSpellNameByName("Evasion"), 		ABGCS:GetSpellNameByName("Evasion"),
-		"WARRIOR", 		ABGCS:GetSpellNameByName("Shield Block"), ABGCS:GetSpellNameByName("Shield Wall"),
-		"WARRIOR", 		ABGCS:GetSpellNameByName("Shield Wall"), ABGCS:GetSpellNameByName("Shield Block"),
+		"DRUID", 		ABGCode:GetSpellNameByName("Barkskin"), 	ABGCode:GetSpellNameByName("Barkskin"),
+		"MAGE", 			ABGCode:GetSpellNameByName("Frost Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
+		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Protection"), ABGCode:GetSpellNameByName("Divine Shield"),
+		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Shield"), ABGCode:GetSpellNameByName("Divine Protection"),
+		"PRIEST", 		ABGCode:GetSpellNameByName("Power Word: Shield"), ABGCode:GetSpellNameByName("Power Word: Shield"),
+		"ROGUE", 		ABGCode:GetSpellNameByName("Evasion"), 		ABGCode:GetSpellNameByName("Evasion"),
+		"WARRIOR", 		ABGCode:GetSpellNameByName("Shield Block"), ABGCode:GetSpellNameByName("Shield Wall"),
+		"WARRIOR", 		ABGCode:GetSpellNameByName("Shield Wall"), ABGCode:GetSpellNameByName("Shield Block"),
 
 
-		"WARLOCK", ABGCS:GetSpellNameByName("Demon Armor"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Demon Skin"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Shadow Ward"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Demon Skin"),  ABGCode:GetSpellNameByName("Shadow Ward"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Demon Armor"), ABGCode:GetSpellNameByName("Shadow Ward"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Shadow Ward"), ABGCode:GetSpellNameByName("Shadow Ward"),
 
 	})
 end
@@ -1062,186 +1067,186 @@ end
 -- Split up to avoid Lua upValue limitations
 function AutoBarCategory:Initialize2()
 	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new( "Spell.Stance", spellIconList["Defensive Stance"], {
-		"DRUID", ABGCS:GetSpellNameByName("Bear Form"),
-		"DRUID", ABGCS:GetSpellNameByName("Cat Form"),
-		"DRUID", ABGCS:GetSpellNameByName("Aquatic Form"),
-		"DRUID", ABGCS:GetSpellNameByName("Moonkin Form"),
-		"DRUID", ABGCS:GetSpellNameByName("Tree Form"),
-		"DRUID", ABGCS:GetSpellNameByName("Travel Form"),
-		"PALADIN", ABGCS:GetSpellNameByName("Devotion Aura"),
-		"WARRIOR", ABGCS:GetSpellNameByName("Defensive Stance"),
+		"DRUID", ABGCode:GetSpellNameByName("Bear Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Cat Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Aquatic Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Moonkin Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Tree Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Travel Form"),
+		"PALADIN", ABGCode:GetSpellNameByName("Devotion Aura"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Defensive Stance"),
 	})
 
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Earthbind Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Stoneclaw Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Stoneskin Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Strength of Earth Totem"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Tremor Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Earthbind Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Stoneclaw Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Stoneskin Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Strength of Earth Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Tremor Totem");
 	})
 
 
 	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Grace of Air Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Grounding Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Nature Resistance Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Sentry Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Tranquil Air Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Windfury Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Windwall Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Grace of Air Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Grounding Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Nature Resistance Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Sentry Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Tranquil Air Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Windfury Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Windwall Totem");
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Fire Nova Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Frost Resistance Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Magma Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Searing Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Fire Nova Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Flametongue Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Frost Resistance Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Magma Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Searing Totem");
 	})
 
 	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Disease Cleansing Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Fire Resistance Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Healing Stream Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Mana Spring Totem");
-		"SHAMAN", ABGCS:GetSpellNameByName("Poison Cleansing Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Disease Cleansing Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Fire Resistance Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Healing Stream Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Mana Spring Totem");
+		"SHAMAN", ABGCode:GetSpellNameByName("Poison Cleansing Totem");
 	})
 
 
 	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Flametongue Weapon"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Frostbrand Weapon"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Rockbiter Weapon"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Windfury Weapon"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Flametongue Weapon"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Frostbrand Weapon"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Rockbiter Weapon"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Windfury Weapon"),
 	})
 
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"],
 	{
-		"*", ABGCS:GetSpellNameByName("Alchemy"),
-		"*", ABGCS:GetSpellNameByName("Basic Campfire"),
-		"*", ABGCS:GetSpellNameByName("Blacksmithing"),
-		"*", ABGCS:GetSpellNameByName("Cooking"),
-		"*", ABGCS:GetSpellNameByName("Disenchant"),
-		"*", ABGCS:GetSpellNameByName("Enchanting"),
-		"*", ABGCS:GetSpellNameByName("Engineering"),
-		"*", ABGCS:GetSpellNameByName("First Aid"),
-		"*", ABGCS:GetSpellNameByName("Leatherworking"),
-		"*", ABGCS:GetSpellNameByName("Smelting"),
-		"*", ABGCS:GetSpellNameByName("Tailoring"),
+		"*", ABGCode:GetSpellNameByName("Alchemy"),
+		"*", ABGCode:GetSpellNameByName("Basic Campfire"),
+		"*", ABGCode:GetSpellNameByName("Blacksmithing"),
+		"*", ABGCode:GetSpellNameByName("Cooking"),
+		"*", ABGCode:GetSpellNameByName("Disenchant"),
+		"*", ABGCode:GetSpellNameByName("Enchanting"),
+		"*", ABGCode:GetSpellNameByName("Engineering"),
+		"*", ABGCode:GetSpellNameByName("First Aid"),
+		"*", ABGCode:GetSpellNameByName("Leatherworking"),
+		"*", ABGCode:GetSpellNameByName("Smelting"),
+		"*", ABGCode:GetSpellNameByName("Tailoring"),
 
-		"*", ABGCS:GetSpellNameByName("Find Minerals"),
-		"*", ABGCS:GetSpellNameByName("Find Herbs"),
+		"*", ABGCode:GetSpellNameByName("Find Minerals"),
+		"*", ABGCode:GetSpellNameByName("Find Herbs"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{
-		"DRUID",		ABGCS:GetSpellNameByName("Disorienting Roar"),
+		"DRUID",		ABGCode:GetSpellNameByName("Disorienting Roar"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Concussive Shot"),
-		"HUNTER", ABGCS:GetSpellNameByName("Wing Clip"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Tongues"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Recklessness"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Shadow"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Curse of the Elements"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Curse of Weakness"),	--y
+		"HUNTER", ABGCode:GetSpellNameByName("Concussive Shot"),
+		"HUNTER", ABGCode:GetSpellNameByName("Wing Clip"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Tongues"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Recklessness"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Shadow"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of the Elements"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Weakness"),	--y
 	})
 
 
 	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new("Spell.Fishing", spellIconList["Fishing"],
 	{
-		"*", ABGCS:GetSpellNameByName("Fishing"), --y
+		"*", ABGCode:GetSpellNameByName("Fishing"), --y
 	})
 
 
 	AutoBarCategoryList["Spell.Track"] = AutoBarSpells:new( "Spell.Track", spellIconList["Explosive Trap"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Track Humanoids"),
-		"HUNTER", ABGCS:GetSpellNameByName("Track Undead"),
-		"HUNTER", ABGCS:GetSpellNameByName("Track Beasts"),
-		"HUNTER", ABGCS:GetSpellNameByName("Track Hidden"),
-		"HUNTER", ABGCS:GetSpellNameByName("Track Elementals"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Humanoids"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Undead"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Beasts"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Hidden"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Elementals"),
 
-		"WARLOCK", ABGCS:GetSpellNameByName("Sense Demons"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Sense Demons"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
 	{
-		"HUNTER", ABGCS:GetSpellNameByName("Explosive Trap"),
-		"HUNTER", ABGCS:GetSpellNameByName("Freezing Trap"),
-		"HUNTER", ABGCS:GetSpellNameByName("Immolation Trap"),
-		"ROGUE",  ABGCS:GetSpellNameByName("Disarm Trap"),
+		"HUNTER", ABGCode:GetSpellNameByName("Explosive Trap"),
+		"HUNTER", ABGCode:GetSpellNameByName("Freezing Trap"),
+		"HUNTER", ABGCode:GetSpellNameByName("Immolation Trap"),
+		"ROGUE",  ABGCode:GetSpellNameByName("Disarm Trap"),
 	})
 
 
 	AutoBarCategoryList["Misc.Mount.Summoned"] = AutoBarSpells:new( "Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"],
 	{
-		"SHAMAN", ABGCS:GetSpellNameByName("Ghost Wolf"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Ghost Wolf"),
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
 	{
-		"WARRIOR", ABGCS:GetSpellNameByName("Charge"),
-		"WARRIOR", ABGCS:GetSpellNameByName("Intercept"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Charge"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Intercept"),
 	})
 
 	AutoBarCategoryList["Spell.ER"] = AutoBarSpells:new( "Spell.ER", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Frenzied Regeneration"),
-		"HUNTER", ABGCS:GetSpellNameByName("Feign Death"),
-		"HUNTER", ABGCS:GetSpellNameByName("Disengage"),
-		"MAGE", ABGCS:GetSpellNameByName("Ice Block"),
-		"PALADIN", ABGCS:GetSpellNameByName("Lay on Hands"),
-		"ROGUE", ABGCS:GetSpellNameByName("Vanish"),
-		"WARLOCK", ABGCS:GetSpellNameByName("Dark Pact"),
-		"WARRIOR", ABGCS:GetSpellNameByName("Last Stand"),
+		"DRUID", ABGCode:GetSpellNameByName("Frenzied Regeneration"),
+		"HUNTER", ABGCode:GetSpellNameByName("Feign Death"),
+		"HUNTER", ABGCode:GetSpellNameByName("Disengage"),
+		"MAGE", ABGCode:GetSpellNameByName("Ice Block"),
+		"PALADIN", ABGCode:GetSpellNameByName("Lay on Hands"),
+		"ROGUE", ABGCode:GetSpellNameByName("Vanish"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Dark Pact"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Last Stand"),
 	})
 
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
-		"ROGUE", ABGCS:GetSpellNameByName("Kick"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Earth Shock"),
+		"ROGUE", ABGCode:GetSpellNameByName("Kick"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Earth Shock"),
 	})
 
 	AutoBarCategoryList["Spell.CatForm"] = AutoBarSpells:new( "Spell.CatForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Cat Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Cat Form"),
 	})
 
 	AutoBarCategoryList["Spell.BearForm"] = AutoBarSpells:new( "Spell.BearForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Bear Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Bear Form"),
 	})
 
 	AutoBarCategoryList["Spell.MoonkinForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Moonkin Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Moonkin Form"),
 	})
 
 	AutoBarCategoryList["Spell.AquaticForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Aquatic Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Aquatic Form"),
 	})
 
 	AutoBarCategoryList["Spell.TreeForm"] = AutoBarSpells:new( "Spell.TreeForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Tree Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Tree Form"),
 	})
 
 	AutoBarCategoryList["Spell.Travel"] = AutoBarSpells:new( "Spell.Travel", spellIconList["Charge"],
 	{
-		"DRUID", ABGCS:GetSpellNameByName("Travel Form"),
-		"SHAMAN", ABGCS:GetSpellNameByName("Ghost Wolf"),
+		"DRUID", ABGCode:GetSpellNameByName("Travel Form"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Ghost Wolf"),
 	})
 
 end
