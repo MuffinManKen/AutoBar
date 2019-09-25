@@ -4,10 +4,12 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 
 local WHATSNEW_TEXT = "" ..
 [[
- - Updated Muffin LibPT
- - Warlocks: Added lots of stuff
- - Shaman: Added lots of stuff
- - Mounts: Item-based mounts should work
+ - Hunter: Track Hidden & Elementals
+ - Shaman: Earth Shock isn`t a totem
+ - Warlock: Fixed Demon Skin
+ - Warrior: Berserker/Battle Stance
+ - Lots of cleanup
+ - Really ugly hack to try to workaround Bagnon conflicts
  - NOTE: LOTS of items/spells are missing but there shouldn`t be any lua errors
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"

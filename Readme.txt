@@ -8,6 +8,14 @@ https://muffinmangames.com
 *For skinning install the Masque addon
 
 Changes:
+v1.13.2.06:
+ - Hunter: Track Hidden & Elementals
+ - Shaman: Earth Shock isn't a totem
+ - Warlock: Fixed Demon Skin
+ - Warrior: Berserker/Battle Stance
+ - Lots of cleanup
+ - Really ugly hack to try to workaround Bagnon conflicts
+
 v1.13.2.05:
  - Updated Muffin LibPT
  - Warlocks: Added lots of stuff
