@@ -218,12 +218,16 @@ ABGCS:CacheSpellData(1122, "Summon Infernal");
 
 --Warrior
 ABGCS:CacheSpellData(100, "Charge");
-ABGCS:CacheSpellData(71, "Defensive Stance");
 ABGCS:CacheSpellData(1160, "Demoralizing Shout");
 ABGCS:CacheSpellData(20252, "Intercept");
 ABGCS:CacheSpellData(2565, "Shield Block");
 ABGCS:CacheSpellData(871, "Shield Wall");
 ABGCS:CacheSpellData(12975, "Last Stand");
+ABGCS:CacheSpellData(71, "Defensive Stance");
+ABGCS:CacheSpellData(2457, "Battle Stance");
+ABGCS:CacheSpellData(2458, "Berserker Stance");
+
+
 
 --Skills
 ABGCS:CacheSpellData(3273, "First Aid"); --y

@@ -1075,6 +1075,9 @@ function AutoBarCategory:Initialize2()
 		"DRUID", ABGCode:GetSpellNameByName("Travel Form"),
 		"PALADIN", ABGCode:GetSpellNameByName("Devotion Aura"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Defensive Stance"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Battle Stance"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Berserker Stance"),
+
 	})
 
 
