@@ -20,12 +20,18 @@
 ## SavedVariables: AutoBarDB
 
 # Libraries
-embeds.xml #todo
+embeds.xml
 
+classic/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
+classic/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
+classic/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Food.lua
+classic/MuffinLibPTSets/LibPT-Muffin.Gear.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Misc.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Poison.lua
+classic/MuffinLibPTSets/LibPT-Muffin.Potions.lua
+classic/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Stones.lua
 
 AceGUIWidget-DragLink.lua
@@ -35,28 +41,28 @@ AutoBarGlobals.lua
 classic/CachedSpellData_classic.lua
 
 # Localization
-locale/Locale-enUS.lua #todo
-locale/Locale-deDE.lua #todo
-locale/Locale-esES.lua #todo
-locale/Locale-esMX.lua #todo
-locale/Locale-frFR.lua #todo
-locale/Locale-itIT.lua #todo
-locale/Locale-koKR.lua #todo
-locale/Locale-ptBR.lua #todo
-locale/Locale-ruRU.lua #todo
-locale/Locale-zhCN.lua #todo
-locale/Locale-zhTW.lua #todo
-locale/Locale-default.lua #todo
+locale/Locale-enUS.lua
+locale/Locale-deDE.lua
+locale/Locale-esES.lua
+locale/Locale-esMX.lua
+locale/Locale-frFR.lua
+locale/Locale-itIT.lua
+locale/Locale-koKR.lua
+locale/Locale-ptBR.lua
+locale/Locale-ruRU.lua
+locale/Locale-zhCN.lua
+locale/Locale-zhTW.lua
+locale/Locale-default.lua
 
 Bindings.lua
 
-libs/muffin_whats_new.lua #todo
+libs/muffin_whats_new.lua
 whatsnew.lua
 
-Core.lua #todo
+Core.lua
 
 
-AutoBarDB.lua #todo
+AutoBarDB.lua
 AutoBarOptions.lua
 AutoBarSearchUtil.lua
 AutoBarSearch.lua
@@ -67,6 +73,7 @@ AutoBarClassPopupButton.lua
 AutoBarButton.lua
 AutoBarCategory.lua
 
+classic/ABCategoryData_classic.lua
 
 AutoBarConfig.lua
 

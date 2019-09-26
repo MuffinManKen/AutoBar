@@ -13,7 +13,7 @@ local function atl_table(p_table)
 	for i,v in ipairs(p_table) do
 		L[v] = L[v] or v;
 	end
-	
+
 end
 
 atl("ResetCategoryDescription", "Removes ALL custom categories")
@@ -53,7 +53,7 @@ atl("Muffin.Toys.Pet Battle_ShowOrnamental", "Show Ornamental" );
 atl("ArchBtnShowSpells", "Show Spells")
 
 atl("Muffin.Misc.Quest", "Muffin.Misc.Quest");
-atl("Muffin.Mount", "Muffin.Mount");
+atl("Muffin.Mounts", "Muffin.Mounts");
 
 atl("AutoBarButtonRaidTarget", "Raid Targets")
 
@@ -128,7 +128,7 @@ atl("Raid 6","Raid Square")
 atl("Raid 7","Raid X")
 atl("Raid 8","Raid Skull")
 
-local quick_sets = 
+local quick_sets =
 {
 	--Categories
 	"Battle Pet.Favourites",

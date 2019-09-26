@@ -574,8 +574,8 @@ do
 				insets = { left = 11, right = 11, top = 11, bottom = 11 },
 			})
 		else
-		local border = CreateFrame("Frame", nil, frame, "DialogBorderDarkTemplate")
-		border:SetAllPoints(frame)
+			local border = CreateFrame("Frame", nil, frame, "DialogBorderDarkTemplate")
+			border:SetAllPoints(frame)
 		end
 
 		local text = frame:CreateFontString(nil, "ARTWORK", "GameFontHighlight")

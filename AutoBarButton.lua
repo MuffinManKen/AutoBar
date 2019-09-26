@@ -648,7 +648,10 @@ end
 
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
-local SPELL_MILL_HERB = AutoBar:LoggedGetSpellInfo(51005)
+local SPELL_MILL_HERB
+if(WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+	SPELL_MILL_HERB = ABGCode:GetSpellNameByName("Milling")
+end
 
 local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
@@ -2186,7 +2189,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 
-		self:AddCategory("Muffin.Mount")
+		self:AddCategory("Muffin.Mounts")
 	end
 
 
@@ -2486,7 +2489,7 @@ else
 			self:AddCategory("Misc.Mount.Summoned")
 			local class = AutoBar.CLASS
 			if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then
-				self:AddCategory("Muffin.Mount")
+				self:AddCategory("Muffin.Mounts")
 			end
 		end
 

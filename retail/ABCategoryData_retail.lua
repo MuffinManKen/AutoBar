@@ -380,8 +380,8 @@ function ABGCode:InitializeCategories()
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Mount"] = AutoBarSpells:new("Muffin.Mount", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount." .. AutoBar.NiceClass)
-	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts"] = AutoBarSpells:new("Muffin.Mounts", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount." .. AutoBar.NiceClass)
+	AutoBarCategoryList["Muffin.Mounts"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
 	{

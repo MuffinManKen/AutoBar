@@ -11,8 +11,8 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = AutoBarItems:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = AutoBarItems:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
 
-	AutoBarCategoryList["Muffin.Mount"] = AutoBarItems:new("Muffin.Mount", "ability_mount_ridinghorse", "Muffin.Mount")
-	AutoBarCategoryList["Muffin.Mount"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts"] = AutoBarItems:new("Muffin.Mounts", "ability_mount_ridinghorse", "Muffin.Mounts")
+	AutoBarCategoryList["Muffin.Mounts"]:SetNonCombat(true)
 
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
