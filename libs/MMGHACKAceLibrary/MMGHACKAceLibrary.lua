@@ -1,13 +1,13 @@
 --[[
-Name: AceLibrary
+Name: MMGHACKAceLibrary
 Revision: $Rev: 1091 $
 Developed by: The Ace Development Team (http://www.wowace.com/index.php/The_Ace_Development_Team)
 Inspired By: Iriel (iriel@vigilance-committee.org)
              Tekkub (tekkub@gmail.com)
              Revision: $Rev: 1091 $
 Website: http://www.wowace.com/
-Documentation: http://www.wowace.com/index.php/AceLibrary
-SVN: http://svn.wowace.com/wowace/trunk/Ace2/AceLibrary
+Documentation: http://www.wowace.com/index.php/MMGHACKAceLibrary
+SVN: http://svn.wowace.com/wowace/trunk/Ace2/MMGHACKAceLibrary
 Description: Versioning library to handle other library instances, upgrading,
              and proper access.
              It also provides a base for libraries to work off of, providing
@@ -17,12 +17,12 @@ Dependencies: None
 License: LGPL v2.1
 ]]
 
-local ACELIBRARY_MAJOR = "AceLibrary"
-local ACELIBRARY_MINOR = 90000 + tonumber(("$Revision: 1091 $"):match("(%d+)"))
+local MMGHACKAceLibrary_MAJOR = "MMGHACKAceLibrary"
+local MMGHACKAceLibrary_MINOR = 90000 + tonumber(("$Revision: 1091 $"):match("(%d+)"))
 
 local _G = getfenv(0)
-local previous = _G[ACELIBRARY_MAJOR]
-if previous and not previous:IsNewVersion(ACELIBRARY_MAJOR, ACELIBRARY_MINOR) then return end
+local previous = _G[MMGHACKAceLibrary_MAJOR]
+if previous and not previous:IsNewVersion(MMGHACKAceLibrary_MAJOR, MMGHACKAceLibrary_MINOR) then return end
 
 do
 	-- LibStub is a simple versioning stub meant for use in Libraries.  http://www.wowace.com/wiki/LibStub for more info
@@ -57,7 +57,7 @@ do
 end
 local LibStub = _G.LibStub
 
--- If you don't want AceLibrary to enable libraries that are LoadOnDemand but
+-- If you don't want MMGHACKAceLibrary to enable libraries that are LoadOnDemand but
 -- disabled in the addon screen, set this to true.
 local DONT_ENABLE_LIBRARIES = nil
 
@@ -66,11 +66,11 @@ local function safecall(func,...)
     if not success then geterrorhandler()(err:find("%.lua:%d+:") and err or (debugstack():match("\n(.-: )in.-\n") or "") .. err) end
 end
 
--- @table AceLibrary
+-- @table MMGHACKAceLibrary
 -- @brief System to handle all versioning of libraries.
-local AceLibrary = {}
-local AceLibrary_mt = {}
-setmetatable(AceLibrary, AceLibrary_mt)
+local MMGHACKAceLibrary = {}
+local MMGHACKAceLibrary_mt = {}
+setmetatable(MMGHACKAceLibrary, MMGHACKAceLibrary_mt)
 
 local function error(self, message, ...)
 	if type(self) ~= "table" then
@@ -95,9 +95,9 @@ local function error(self, message, ...)
 	
 	if getmetatable(self) and getmetatable(self).__tostring then
 		message = ("%s: %s"):format(tostring(self), message)
-	elseif type(rawget(self, 'GetLibraryVersion')) == "function" and AceLibrary:HasInstance(self:GetLibraryVersion()) then
+	elseif type(rawget(self, 'GetLibraryVersion')) == "function" and MMGHACKAceLibrary:HasInstance(self:GetLibraryVersion()) then
 		message = ("%s: %s"):format(self:GetLibraryVersion(), message)
-	elseif type(rawget(self, 'class')) == "table" and type(rawget(self.class, 'GetLibraryVersion')) == "function" and AceLibrary:HasInstance(self.class:GetLibraryVersion()) then
+	elseif type(rawget(self, 'class')) == "table" and type(rawget(self.class, 'GetLibraryVersion')) == "function" and MMGHACKAceLibrary:HasInstance(self.class:GetLibraryVersion()) then
 		message = ("%s: %s"):format(self.class:GetLibraryVersion(), message)
 	end
 	
@@ -171,9 +171,9 @@ end
 
 local recurse = {}
 local function addToPositions(t, major)
-	if not AceLibrary.positions[t] or AceLibrary.positions[t] == major then
+	if not MMGHACKAceLibrary.positions[t] or MMGHACKAceLibrary.positions[t] == major then
 		rawset(t, recurse, true)
-		AceLibrary.positions[t] = major
+		MMGHACKAceLibrary.positions[t] = major
 		for k,v in pairs(t) do
 			if type(v) == "table" and not rawget(v, recurse) then
 				addToPositions(v, major)
@@ -302,7 +302,7 @@ do
 			if rawget(to, k) and type(from[k]) == "table" and type(to[k]) == "table" and not list[from[k]] then
 				if from[k] == to[k] then
 					list[from[k]] = to[k]
-				elseif AceLibrary.positions[from[v]] ~= major and AceLibrary.positions[from[v]] then
+				elseif MMGHACKAceLibrary.positions[from[v]] ~= major and MMGHACKAceLibrary.positions[from[v]] then
 					list[from[k]] = from[k]
 				elseif not list[from[k]] then
 					examine(to[k], from[k], list, major)
@@ -333,7 +333,7 @@ do
 			end
 		end
 		for k in pairs(from) do
-			if rawget(to, k) and to[k] ~= from[k] and AceLibrary.positions[to[k]] == major and from[k] ~= _G then
+			if rawget(to, k) and to[k] ~= from[k] and MMGHACKAceLibrary.positions[to[k]] == major and from[k] ~= _G then
 				if not list2[to[k]] then
 					deepTransfer(to[k], from[k], nil, major, list, list2)
 				end
@@ -376,10 +376,10 @@ end
 -- @return      If library is found and loaded, true is return. If not loadable, false is returned.
 --              If the library has been requested previously, nil is returned.
 local function TryToLoadStandalone(major)
-	if not AceLibrary.scannedlibs then AceLibrary.scannedlibs = {} end
-	if AceLibrary.scannedlibs[major] then return end
+	if not MMGHACKAceLibrary.scannedlibs then MMGHACKAceLibrary.scannedlibs = {} end
+	if MMGHACKAceLibrary.scannedlibs[major] then return end
 
-	AceLibrary.scannedlibs[major] = true
+	MMGHACKAceLibrary.scannedlibs[major] = true
 
 	local name, _, _, enabled, loadable = GetAddOnInfo(major)
 	
@@ -391,7 +391,7 @@ local function TryToLoadStandalone(major)
 		LoadAddOn(name)
 	end
 	
-	local field = "X-AceLibrary-" .. major 
+	local field = "X-MMGHACKAceLibrary-" .. major 
 	for i = 1, GetNumAddOns() do
 		if GetAddOnMetadata(i, field) then
 			name, _, _, enabled, loadable = GetAddOnInfo(i)
@@ -414,7 +414,7 @@ end
 -- @param minor An integer or an svn revision string representing the minor version
 -- @return      whether the supplied version would be newer than what is
 --              currently available.
-function AceLibrary:IsNewVersion(major, minor)
+function MMGHACKAceLibrary:IsNewVersion(major, minor)
 	argCheck(self, major, 2, "string")
 	TryToLoadStandalone(major)
 
@@ -443,7 +443,7 @@ end
 -- @param major A string representing the major version.
 -- @param minor (optional) An integer or an svn revision string representing the minor version.
 -- @return      Whether an instance exists.
-function AceLibrary:HasInstance(major, minor)
+function MMGHACKAceLibrary:HasInstance(major, minor)
 	argCheck(self, major, 2, "string")
 	if minor ~= false then
 		TryToLoadStandalone(major)
@@ -476,7 +476,7 @@ end
 -- @param major A string representing the major version.
 -- @param minor (optional) An integer or an svn revision string representing the minor version.
 -- @return      The library with the given major/minor version.
-function AceLibrary:GetInstance(major, minor)
+function MMGHACKAceLibrary:GetInstance(major, minor)
 	argCheck(self, major, 2, "string")
 	if minor ~= false then
 		TryToLoadStandalone(major)
@@ -508,8 +508,8 @@ function AceLibrary:GetInstance(major, minor)
 	return data
 end
 
--- Syntax sugar.  AceLibrary("FooBar-1.0")
-AceLibrary_mt.__call = AceLibrary.GetInstance
+-- Syntax sugar.  MMGHACKAceLibrary("FooBar-1.0")
+MMGHACKAceLibrary_mt.__call = MMGHACKAceLibrary.GetInstance
 
 local donothing = function() end
 
@@ -531,17 +531,17 @@ local tmp = {}
 --                       activateFunc.
 -- @param externalFunc   (optional) A function to be called whenever a new
 --                       library is registered.
-function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivateFunc, externalFunc)
+function MMGHACKAceLibrary:Register(newInstance, major, minor, activateFunc, deactivateFunc, externalFunc)
 	argCheck(self, newInstance, 2, "table")
 	argCheck(self, major, 3, "string")
-	if major ~= ACELIBRARY_MAJOR then
+	if major ~= MMGHACKAceLibrary_MAJOR then
 		for k,v in pairs(_G) do
 			if v == newInstance then
 				geterrorhandler()((debugstack():match("(.-: )in.-\n") or "") .. ("Cannot register library %q. It is part of the global table in _G[%q]."):format(major, k))
 			end
 		end
 	end
-	if major ~= ACELIBRARY_MAJOR and not major:find("^[%a%-][%a%d%-]*%-%d+%.%d+$") then
+	if major ~= MMGHACKAceLibrary_MAJOR and not major:find("^[%a%-][%a%d%-]*%-%d+%.%d+$") then
 		_G.error(string.format("Bad argument #3 to `Register'. Must be in the form of \"Name-1.0\". %q is not appropriate", major), 2)
 	end
 	if type(minor) == "string" then
@@ -572,9 +572,9 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 		copyTable(newInstance, instance)
 		crawlReplace(instance, instance, newInstance)
 		destroyTable(newInstance)
-		if AceLibrary == newInstance then
+		if MMGHACKAceLibrary == newInstance then
 			self = instance
-			AceLibrary = instance
+			MMGHACKAceLibrary = instance
 		end
 		self.libs[major] = {
 			instance = instance,
@@ -623,14 +623,14 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 			AceEvent = instance
 		end
 		if AceEvent then
-			AceEvent.TriggerEvent(self, "AceLibrary_Register", major, instance)
+			AceEvent.TriggerEvent(self, "MMGHACKAceLibrary_Register", major, instance)
 		end
 		
 		return instance
 	end
 	if minor <= data.minor then
 		-- This one is already obsolete, raise an error.
-		_G.error(("Obsolete library registered. %s is already registered at version %d. You are trying to register version %d. Hint: if not AceLibrary:IsNewVersion(%q, %d) then return end"):format(major, data.minor, minor, major, minor), 2)
+		_G.error(("Obsolete library registered. %s is already registered at version %d. You are trying to register version %d. Hint: if not MMGHACKAceLibrary:IsNewVersion(%q, %d) then return end"):format(major, data.minor, minor, major, minor), 2)
 		return
 	end
 	local instance = data.instance
@@ -638,7 +638,7 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 	local oldInstance = {}
 	
 	local libStubInstance = LibStub:GetLibrary(major, true)
-	if not libStubInstance then -- non-LibStub AceLibrary registered the library
+	if not libStubInstance then -- non-LibStub MMGHACKAceLibrary registered the library
 		-- pass
 	elseif libStubInstance ~= instance then	
 		error(self, "Cannot register library %q. It is already registered with LibStub.", major)
@@ -647,11 +647,11 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 	end
 	
 	addToPositions(newInstance, major)
-	local isAceLibrary = (AceLibrary == newInstance)
+	local isMMGHACKAceLibrary = (MMGHACKAceLibrary == newInstance)
 	local old_error, old_argCheck, old_pcall
-	if isAceLibrary then
+	if isMMGHACKAceLibrary then
 		self = instance
-		AceLibrary = instance
+		MMGHACKAceLibrary = instance
 		
 		old_error = instance.error
 		old_argCheck = instance.argCheck
@@ -679,7 +679,7 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 	if not rawget(instance, 'pcall') then
 		rawset(instance, 'pcall', pcall)
 	end
-	if isAceLibrary then
+	if isMMGHACKAceLibrary then
 		for _,v in pairs(self.libs) do
 			local i = type(v) == "table" and v.instance
 			if type(i) == "table" then
@@ -720,7 +720,7 @@ function AceLibrary:Register(newInstance, major, minor, activateFunc, deactivate
 	return instance
 end
 
-function AceLibrary:IterateLibraries()
+function MMGHACKAceLibrary:IterateLibraries()
 	local t = {}
 	for major, instance in LibStub:IterateLibraries() do
 		t[major] = instance
@@ -732,17 +732,17 @@ function AceLibrary:IterateLibraries()
 end
 
 local function manuallyFinalize(major, instance)
-	if AceLibrary.libs[major] then
+	if MMGHACKAceLibrary.libs[major] then
 		-- don't work on Ace libraries
 		return
 	end
-	local finalizedExternalLibs = AceLibrary.finalizedExternalLibs
+	local finalizedExternalLibs = MMGHACKAceLibrary.finalizedExternalLibs
 	if finalizedExternalLibs[major] then
 		return
 	end
 	finalizedExternalLibs[major] = true
 	
-	for k,data in pairs(AceLibrary.libs) do -- only Ace libraries
+	for k,data in pairs(MMGHACKAceLibrary.libs) do -- only Ace libraries
 		if k ~= major and data.externalFunc then
 			safecall(data.externalFunc, data.instance, major, instance)
 		end
@@ -750,13 +750,13 @@ local function manuallyFinalize(major, instance)
 end
 
 -- @function            Activate
--- @brief               The activateFunc for AceLibrary itself. Called when
---                      AceLibrary properly registers.
--- @param self          Reference to AceLibrary
--- @param oldLib        (optional) Reference to an old version of AceLibrary
+-- @brief               The activateFunc for MMGHACKAceLibrary itself. Called when
+--                      MMGHACKAceLibrary properly registers.
+-- @param self          Reference to MMGHACKAceLibrary
+-- @param oldLib        (optional) Reference to an old version of MMGHACKAceLibrary
 -- @param oldDeactivate (optional) Function to deactivate the old lib
 local function activate(self, oldLib, oldDeactivate)
-	AceLibrary = self
+	MMGHACKAceLibrary = self
 	if not self.libs then
 		self.libs = oldLib and oldLib.libs or {}
 		self.scannedlibs = oldLib and oldLib.scannedlibs or {}
@@ -778,7 +778,7 @@ local function activate(self, oldLib, oldDeactivate)
 	end
 	
 	-- Expose the library in the global environment
-	_G[ACELIBRARY_MAJOR] = self
+	_G[MMGHACKAceLibrary_MAJOR] = self
 	
 	if oldDeactivate then
 		oldDeactivate(oldLib)
@@ -786,14 +786,14 @@ local function activate(self, oldLib, oldDeactivate)
 end
 
 if not previous then
-	previous = AceLibrary
+	previous = MMGHACKAceLibrary
 end
 if not previous.libs then
 	previous.libs = {}
 end
-AceLibrary.libs = previous.libs
+MMGHACKAceLibrary.libs = previous.libs
 if not previous.positions then
 	previous.positions = setmetatable({}, { __mode = "k" })
 end
-AceLibrary.positions = previous.positions
-AceLibrary:Register(AceLibrary, ACELIBRARY_MAJOR, ACELIBRARY_MINOR, activate, nil)
+MMGHACKAceLibrary.positions = previous.positions
+MMGHACKAceLibrary:Register(MMGHACKAceLibrary, MMGHACKAceLibrary_MAJOR, MMGHACKAceLibrary_MINOR, activate, nil)

@@ -8,13 +8,20 @@
 -- http://muffinmangames.com
 --
 
+-- GLOBALS: SetCursor, ClearCursor, GetBindingKey, SetBinding, GetBindingText, SetOverrideBindingClick, InCombatLockdown, GameTooltip
+-- GLOBALS: RegisterStateDriver, CreateFrame, GetContainerItemInfo, GetItemCount, PickupContainerItem, IsConsumableItem, GetSpellTabInfo, GetSpellBookItemName
+-- GLOBALS: PickupItem, PickupSpellBookItem, PickupAction, PickupMacro, ItemHasRange, IsItemInRange, SpellHasRange, IsSpellInRange
+
 local AutoBar = AutoBar
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local _
+local _G = _G
+
+local print, select, assert, ipairs, pairs, tonumber, strmatch = print, select, assert, ipairs, pairs, tonumber, strmatch
 
 -- Basic Button with textures, highlighting, keybindText, tooltips etc.
 AutoBar.Class.Button = AceOO.Class(AutoBar.Class.BasicButton)
@@ -369,6 +376,7 @@ end
 -- For a given itemId, find and shuffle stacks of it to targetBag, targetSlot
 -- Return true if successful
 -- Return nil if not
+--TODO: Is this ever called??? ABGCS isn't defined here
 function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targetSlot)
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
@@ -606,7 +614,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 	end
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
-		if (debug_me) then print("AutoBar.Class.Button.prototype:IsActive itemId ", itemId, "itemtype:", itemType); end;
+		if (debug_me) then print("AutoBar.Class.Button.prototype:IsActive itemId ", self.frame:GetAttribute("itemId"), "itemtype:", itemType); end;
 		local category = self.frame:GetAttribute("category")
 		local categoryInfo = AutoBarCategoryList[category]
 		if (categoryInfo and categoryInfo.battleground and not AutoBar.inBG) then

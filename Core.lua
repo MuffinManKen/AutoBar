@@ -13,17 +13,22 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- Maintained by MuffinManKen.  Original author Saien of Hyjal
 -- http://muffinmangames.com
 
+-- GLOBALS: GetTime, GetItemInfo, GetSpellLink, SecureCmdOptionParse, GetSpellInfo, InCombatLockdown, UnitFactionGroup, UnitName, GetRealmName, UnitInVehicle
+-- GLOBALS: UnitClass, GetAddOnMemoryUsage, UpdateAddOnMemoryUsage, ClearOverrideBindings, C_Timer, GetMaxBattlefieldID, GetBattlefieldStatus, PetActionBarFrame
+-- GLOBALS: NUM_BAG_SLOTS, WOW_PROJECT_ID, WOW_PROJECT_MAINLINE
+-- GLOBALS: C_PetBattles
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
+local _G = _G
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
 
-AutoBar = AceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+local print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert = print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
@@ -58,10 +63,6 @@ AutoBar.buttonList = {}
 AutoBar.buttonListDisabled = {}
 
 AutoBar.events = {}
-
-AutoBarMountIsQiraji = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
-
-AutoBar.warning_log = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
@@ -193,7 +194,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
-	
+
 	if(not action) then
 		local cast_action = string.match(p_macro_body, "/cast%s+([^\n]+)")
 
@@ -201,7 +202,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 		if(cast_action or use_action) then
 			action = SecureCmdOptionParse(cast_action or use_action)
-			
+
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
 				tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
@@ -210,7 +211,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 	end
 
-	if(action) then 
+	if(action) then
 		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
 
@@ -222,7 +223,7 @@ end
 
 function AutoBar:IsInLockDown()
 
-	return AutoBar.inCombat or InCombatLockdown() or C_PetBattles.IsInBattle() or UnitInVehicle("player")
+	return AutoBar.inCombat or InCombatLockdown() or (C_PetBattles and C_PetBattles.IsInBattle()) or (UnitInVehicle and UnitInVehicle("player"))
 
 end
 
@@ -264,7 +265,14 @@ function AutoBar:InitializeZero()
 	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
-	AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
+	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+		AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
+		AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
+		AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
+		AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
+		AutoBar.frame:RegisterEvent("TOYS_UPDATED")
+	end
+
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -277,11 +285,7 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("SPELL_UPDATE_COOLDOWN")
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-	AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
-	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
-	AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
-	AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
 	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
@@ -302,14 +306,15 @@ local logMemory = {}	-- n = startMemory
 local event_name_colour = "|cFFFFFF7F"
 
 function AutoBar:LogEvent(eventName, arg1)
+	local memory
 	if (AutoBar.db.account.logMemory) then
 		UpdateAddOnMemoryUsage()
-		local memory = GetAddOnMemoryUsage("AutoBar")
+		memory = GetAddOnMemoryUsage("AutoBar")
 		print(eventName, "memory" , memory)
 	end
 	if (AutoBar.db.account.logEvents) then
 		if (arg1) then
-			print(event_name_colour .. eventName .. "|r", "arg1" , arg1, "time:", GetTime(), memString, memory)
+			print(event_name_colour .. eventName .. "|r", "arg1" , arg1, "time:", GetTime(), memory)
 		else
 			print(event_name_colour .. eventName .. "|r", "time:", GetTime())
 		end
@@ -395,39 +400,94 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
 end
 
-function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
-	AutoBar:LogEventStart("QUEST_ACCEPTED", p_quest_index)
+if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
-	local link = GetQuestLogSpecialItemInfo(p_quest_index)
-	
-	if(link) then
-		add_item_to_dynamic_category(link, "Dynamic.Quest")
-		ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
+	function AutoBar.events:QUEST_ACCEPTED(p_quest_index)
+		AutoBar:LogEventStart("QUEST_ACCEPTED", p_quest_index)
+
+		local link = GetQuestLogSpecialItemInfo(p_quest_index)
+
+		if(link) then
+			add_item_to_dynamic_category(link, "Dynamic.Quest")
+			ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
+		end
+
+		AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
 	end
 
-	AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
-end
+	function AutoBar.events:QUEST_LOG_UPDATE(p_arg1)
+		AutoBar:LogEventStart("QUEST_LOG_UPDATE", p_arg1)
 
-function AutoBar.events:QUEST_LOG_UPDATE(p_arg1)
-	AutoBar:LogEventStart("QUEST_LOG_UPDATE", p_arg1)
-	
-	--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
-	if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
-		AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
-		local _, num_quests = GetNumQuestLogEntries()
+		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
+		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
+			AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
+			local _, num_quests = GetNumQuestLogEntries()
 
-		for i = 1, num_quests do 
-			local link = GetQuestLogSpecialItemInfo(i)
-			if(link) then
-				add_item_to_dynamic_category(link, "Dynamic.Quest")
+			for i = 1, num_quests do
+				local link = GetQuestLogSpecialItemInfo(i)
+				if(link) then
+					add_item_to_dynamic_category(link, "Dynamic.Quest")
+				end
 			end
 		end
+
+		AutoBar:LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
+
 	end
 
-	AutoBar:LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
+	function AutoBar.events:COMPANION_LEARNED(...)
+		local companionType = ...;
+		local need_update = false;
+
+		AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
+
+		local button = AutoBar.buttonList["AutoBarButtonMount"]
+		if (button and (companionType == "MOUNT")) then
+			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
+		end
+
+		button = AutoBar.buttonList["AutoBarButtonPets"]
+		if (button and (companionType ~= "MOUNT")) then
+			button:Refresh(button.parentBar, button.buttonDB)
+		end
+
+		if(need_update) then
+			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+		end
+
+
+		AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
+	end
+
+	function AutoBar.events:PET_BATTLE_CLOSE(arg1)
+		AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
+		-- AutoBar.in_pet_battle = false
+
+	end
+
+	function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
+		AutoBar:LogEventStart("TOYS_UPDATED", p_item_id, p_new)
+
+		if(p_item_id ~= nil or p_new ~= nil) then
+			local need_update = false;
+
+			AutoBarSearch.dirtyBags.toybox = true
+			local button = AutoBar.buttonList["AutoBarButtonToyBox"]
+			if (button) then
+				need_update = button:Refresh(button.parentBar, button.buttonDB, true)
+			end
+
+			if(need_update) then
+				ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
+			end
+
+		end
+
+		AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
+
+	end
 
 end
-
 
 
 function AutoBar.events:PLAYER_ENTERING_WORLD()
@@ -441,7 +501,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
 
-		AutoBar:DumpWarningLog()
+		--AutoBar:DumpWarningLog()
 
 		AB.show_whats_new();
 	end
@@ -540,31 +600,6 @@ function AutoBar.events:UPDATE_SHAPESHIFT_FORMS(arg1)
 end
 
 
-function AutoBar.events:COMPANION_LEARNED(...)
-	local companionType = ...;
-	local need_update = false;
-
-	AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
-
-	local button = AutoBar.buttonList["AutoBarButtonMount"]
-	if (button and (companionType == "MOUNT")) then
-		button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
-	end
-
-	button = AutoBar.buttonList["AutoBarButtonPets"]
-	if (button and (companionType ~= "MOUNT")) then
-		button:Refresh(button.parentBar, button.buttonDB)
-	end
-
-	if(need_update) then
-		ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
-	end
-
-
-	AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
-end
-
-
 function AutoBar.events:UPDATE_BINDINGS()
 	self:RegisterOverrideBindings()
 	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
@@ -588,8 +623,8 @@ end
 
 
 
-function AutoBar.events:PLAYER_CONTROL_GAINED()
-	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", arg1)
+function AutoBar.events:PLAYER_CONTROL_GAINED(p_arg1)
+	AutoBar:LogEvent("PLAYER_CONTROL_GAINED", p_arg1)
 	ABGCS:ABScheduleUpdate(tick.UpdateButtonsID)
 end
 
@@ -623,37 +658,9 @@ function AutoBar.events:PLAYER_REGEN_DISABLED(arg1)
 --print("   PLAYER_REGEN_DISABLED")
 
 	ABGCS:UpdateActive()
-	AceCfgDlg:Close(appName)
+	AceCfgDlg:Close("AutoBar")
 end
 
-function AutoBar.events:PET_BATTLE_CLOSE(arg1)
-	AutoBar:LogEvent("PET_BATTLE_CLOSE", arg1)
-
-	-- AutoBar.in_pet_battle = false
-
-end
-
-function AutoBar.events:TOYS_UPDATED(p_item_id, p_new)
-	AutoBar:LogEventStart("TOYS_UPDATED", p_item_id, p_new)
-
-	if(p_item_id ~= nil or p_new ~= nil) then
-		local need_update = false;
-		
-		AutoBarSearch.dirtyBags.toybox = true
-		local button = AutoBar.buttonList["AutoBarButtonToyBox"]
-		if (button) then
-			need_update = button:Refresh(button.parentBar, button.buttonDB, true)
-		end
-
-		if(need_update) then
-			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
-		end
-
-	end
-
-	AutoBar:LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
-
-end
 
 function AutoBar.events:PLAYER_ALIVE(arg1)
 	AutoBar:LogEvent("PLAYER_ALIVE", arg1)
@@ -1010,29 +1017,6 @@ function AutoBar:StupidLog(p_text)
 end
 
 
-AutoBar.set_mana_users = ABGCS:MakeSet{"DRUID","MAGE","MONK","PRIEST","PALADIN","SHAMAN","WARLOCK"}
-
-function AutoBar:ClassUsesMana(class_name)
-
-	return AutoBar.set_mana_users[class_name]
-
-end
-
-local function table_pack(...)
-  return { n = select("#", ...), ... }
-end
-
-function AutoBar:LogWarning(...)
-
-	local message = "";
-	local args = table_pack(...)
-	for i=1,args.n do
-		message = message .. tostring(args[i]) .. " "
-	end
-	table.insert(AutoBar.warning_log, message)
-
-end
-
 function AutoBar:DumpWarningLog()
 
 	if next(AutoBar.warning_log) == nil then --Empty log
@@ -1052,7 +1036,7 @@ function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
 	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
 
 	if next(ret_val) == nil then
-		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		ABGCS:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	end
 
 	return unpack(ret_val)
@@ -1065,10 +1049,10 @@ function AutoBar:DebugItemCategory(p_category_name)
 	local pt_set = LibStub("LibPeriodicTable-3.1"):GetSetTable(p_category_name)
 	local set_size = AutoBar:tcount(pt_set) - 1 --PTSets have a "set" member which is the set name
 	print("Size of PT Set:", set_size)
-	
+
 	local items = AutoBarCategoryList[p_category_name].items
 	local item_size = AutoBar:tcount(items)
-	
+
 	print("# Category Items:", item_size)
 
 	if(item_size) then
@@ -1102,24 +1086,12 @@ end
 function AutoBar:SetDifference(p_set1, p_set2)
 	if(p_set1 == nil) then return {} end;
 	if(p_set2 == nil) then return p_set1 end;
-	
+
 	local s = {}
 	for e in pairs(p_set1) do
 		if not p_set2[e] then s[tostring(e)] = true end
 	end
 	return s
-end
-
-function AutoBar:FindNamelessCategories()
-
-	local nameless = ""
-	for key in pairs(AutoBarCategoryList) do
-		if(AutoBarGlobalDataObject.locale[key] == nil) then
-			nameless = nameless .. "|n" .. key
-		end
-	end
-
-	return nameless
 end
 
 function AutoBar:ClearMissingItemFlag()
@@ -1205,7 +1177,7 @@ function ABGCS:UpdateCategories(p_behaviour)
 			end
 		end
 		if (delete) then
-			otherStickyFrames = nil
+			tick.OtherStickyFrames = nil
 		end
 	end
 

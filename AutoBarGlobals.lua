@@ -2,7 +2,24 @@
 -- Separate tables for code and data. Splitting the code off from the data makes it easier to inspect data objects.
 -- The names are verbose to reduce likelihood of conflict with another addon
 
+-- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox
+
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+
+local print, select, ipairs, tostring, table, pairs, tonumber, string = print, select, ipairs, tostring, table, pairs, tonumber, string
+
+AutoBar = MMGHACKAceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+AutoBar.warning_log = {}
+
+-- All global code with be a child of this table.
+AutoBarGlobalCodeSpace = {}
+
+
+function AutoBarGlobalCodeSpace:MakeSet(list)
+   local set = {}
+   for _, l in ipairs(list) do set[l] = true end
+   return set
+ end
 
 -- All global data will be a child of this table
 AutoBarGlobalDataObject = {
@@ -14,7 +31,10 @@ AutoBarGlobalDataObject = {
 
 	timing = {},
 
-	profile = {}
+	profile = {},
+
+	QirajiMounts = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+
 }
 
 
@@ -23,7 +43,29 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
-AutoBarGlobalDataObject.TickScheduler = 
+AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace:MakeSet{"DRUID","HUNTER","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+
+function AutoBarGlobalCodeSpace:ClassUsesMana(p_class_name)
+
+	return AutoBarGlobalDataObject.set_mana_users[p_class_name]
+
+end
+
+function AutoBarGlobalCodeSpace:ClassInList(p_class_name, ...)
+	local list = {...}
+
+	for i,v in ipairs(list) do
+		if (p_class_name == v) then
+			return true;
+		end
+	end
+
+	return false;
+
+end
+
+
+AutoBarGlobalDataObject.TickScheduler =
 {
 
 	UpdateCategoriesID = 1,
@@ -47,9 +89,27 @@ AutoBarGlobalDataObject.TickScheduler =
 }
 
 
--- All global code with be a child of this table.  
-AutoBarGlobalCodeSpace = {}
 
+local function table_pack(...)
+  return { n = select("#", ...), ... }
+end
+
+function AutoBarGlobalCodeSpace:LogWarning(...)
+
+	local message = "";
+	local args = table_pack(...)
+	for i=1,args.n do
+		message = message .. tostring(args[i]) .. " "
+	end
+	table.insert(AutoBar.warning_log, message)
+
+end
+
+function AutoBarGlobalCodeSpace:GetWarningLogString()
+
+	return table.concat(AutoBar.warning_log, "\n")
+
+end
 
 function AutoBarGlobalCodeSpace:ToyGUID(p_toy_id)
 
@@ -61,7 +121,7 @@ end
 
 function AutoBarGlobalCodeSpace:BPetGUID(p_bpet_id)
 
-	local guid = "toy:" .. p_bpet_id;
+	local guid = "bpet:" .. p_bpet_id;
 
 	return guid;
 end
@@ -76,15 +136,11 @@ function AutoBarGlobalCodeSpace:MacroTextGUID(p_macro_text)
 end
 
 
---This should query a global guid registry and then the specific ones if not found. 
-function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
-	return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
-end
 
 function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
 	local texture;
 	local item_id = tonumber(p_toy_id)
-	
+
 	_, _, texture =  C_ToyBox.GetToyInfo(item_id)
 
 	if(texture == nil) then
@@ -95,19 +151,13 @@ function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
 end
 
 function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
-	local i_texture, ii_texture, _;
-	_,_,_,_,_,_,_,_,_, texture = GetItemInfo(p_item_id)
+	local i_texture = select(10, GetItemInfo(p_item_id))
 
-	_, _, _, _, ii_texture, _, _ = GetItemInfoInstant(p_item_id)
+	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
 
-	return ii_texture or texture;
+	return ii_texture or i_texture;
 end
 
-function AutoBarGlobalCodeSpace:MakeSet(list)
-   local set = {}
-   for _, l in ipairs(list) do set[l] = true end
-   return set
- end
 
 
 local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
@@ -161,12 +211,12 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 	local name, rank, icon = GetSpellInfo(p_spell_id);
 
 	if(name == nil) then
-		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
 	end
-	
+
 
 end
 
@@ -176,7 +226,7 @@ function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -187,7 +237,7 @@ function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 	end
 
-	AutoBar:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -220,5 +270,61 @@ function AutoBarGlobalCodeSpace:AddProfileData(p_name, p_time)
 end
 
 
+function AutoBarGlobalCodeSpace:FindNamelessCategories()
 
+	local nameless = ""
+	for key in pairs(AutoBarCategoryList) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
+
+	return nameless
+end
+
+function AutoBarGlobalCodeSpace:FindNamelessButtons()
+
+	local nameless = ""
+	for key in pairs(AutoBar.Class) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
+
+	return nameless
+end
+
+
+-------------------------------------------------------------------
+--
+-- WoW Classic
+--
+-------------------------------------------------------------------
+if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+
+	function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
+		return AutoBarSearch.macro_text[p_guid];
+	end
+
+	function AutoBarGlobalCodeSpace:PlayerHasToy(p_item_id)
+		return false;
+	end
+
+else
+-------------------------------------------------------------------
+--
+-- WoW Retail
+--
+-------------------------------------------------------------------
+
+	--This should query a global guid registry and then the specific ones if not found.
+	function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
+		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
+	end
+
+	function AutoBarGlobalCodeSpace:PlayerHasToy(p_item_id)
+		return PlayerHasToy(p_item_id);
+	end
+
+end
 

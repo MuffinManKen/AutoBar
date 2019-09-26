@@ -8,19 +8,19 @@ Documentation: http://www.wowace.com/index.php/AceEvent-2.0
 SVN: http://svn.wowace.com/wowace/trunk/Ace2/AceEvent-2.0
 Description: Mixin to allow for event handling, scheduling, and inter-addon
              communication.
-Dependencies: AceLibrary, AceOO-2.0
+Dependencies: MMGHACKAceLibrary, AceOO-2.0
 License: LGPL v2.1
 ]]
 
 local MAJOR_VERSION = "AceEvent-2.0"
 local MINOR_VERSION = 90000 + tonumber(("$Revision: 1097 $"):match("(%d+)"))
 
-if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
-if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
+if not MMGHACKAceLibrary then error(MAJOR_VERSION .. " requires MMGHACKAceLibrary") end
+if not MMGHACKAceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
 
-if not AceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0") end
+if not MMGHACKAceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0") end
 
-local AceOO = AceLibrary:GetInstance("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary:GetInstance("AceOO-2.0")
 local Mixin = AceOO.Mixin
 local AceEvent = Mixin {
 	"RegisterEvent",
@@ -995,4 +995,4 @@ local function activate(self, oldLib, oldDeactivate)
 	end
 end
 
-AceLibrary:Register(AceEvent, MAJOR_VERSION, MINOR_VERSION, activate)
+MMGHACKAceLibrary:Register(AceEvent, MAJOR_VERSION, MINOR_VERSION, activate)

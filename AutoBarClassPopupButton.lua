@@ -7,12 +7,14 @@
 -- http://muffinmangames.com
 --
 
+--GLOBALS: InCombatLockdown, GameTooltip, CreateFrame, SecureHandlerWrapScript
+
 local AutoBar = AutoBar
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
-local _G = getfenv(0)
+local _G = _G
 local _
 
 

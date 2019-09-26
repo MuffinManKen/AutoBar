@@ -8,17 +8,17 @@ Documentation: http://www.wowace.com/index.php/AceDB-2.0
 SVN: http://svn.wowace.com/wowace/trunk/Ace2/AceDB-2.0
 Description: Mixin to allow for fast, clean, and featureful saved variable
              access.
-Dependencies: AceLibrary, AceOO-2.0, AceEvent-2.0
+Dependencies: MMGHACKAceLibrary, AceOO-2.0, AceEvent-2.0
 License: LGPL v2.1
 ]]
 
 local MAJOR_VERSION = "AceDB-2.0"
 local MINOR_VERSION = 90000 + tonumber(("$Revision: 1094 $"):match("(%d+)"))
 
-if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
-if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
+if not MMGHACKAceLibrary then error(MAJOR_VERSION .. " requires MMGHACKAceLibrary") end
+if not MMGHACKAceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
 
-if not AceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0") end
+if not MMGHACKAceLibrary:HasInstance("AceOO-2.0") then error(MAJOR_VERSION .. " requires AceOO-2.0") end
 
 local function safecall(func,...)
 	local success, err = pcall(func,...)
@@ -269,7 +269,7 @@ do
 	end
 end
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local AceEvent
 local Mixin = AceOO.Mixin
 local AceDB = Mixin {
@@ -284,7 +284,7 @@ local AceDB = Mixin {
 						"IsActive",
 						"AcquireDBNamespace",
 					}
-local Dewdrop = AceLibrary:HasInstance("Dewdrop-2.0") and AceLibrary("Dewdrop-2.0")
+local Dewdrop = MMGHACKAceLibrary:HasInstance("Dewdrop-2.0") and MMGHACKAceLibrary("Dewdrop-2.0")
 
 local _G = getfenv(0)
 
@@ -642,7 +642,7 @@ local function DeserializeObject(t)
 	CrawlForDeserialization(t)
 	local className = t[0]
 	t[0] = nil
-	return AceLibrary(className):Deserialize(unpack(t))
+	return MMGHACKAceLibrary(className):Deserialize(unpack(t))
 end
 
 local function IsSerializable(t)
@@ -678,7 +678,7 @@ function CrawlForSerialization(t)
 end
 
 local function IsDeserializable(t)
-	return type(rawget(t, 0)) == "string" and AceLibrary:HasInstance(rawget(t, 0))
+	return type(rawget(t, 0)) == "string" and MMGHACKAceLibrary:HasInstance(rawget(t, 0))
 end
 
 function CrawlForDeserialization(t)
@@ -1373,7 +1373,7 @@ function AceDB:ResetDB(kind, a2)
 			if newactive then
 				local first = nil
 				if AceOO.inherits(self, "AceAddon-2.0") then
-					local AceAddon = AceLibrary("AceAddon-2.0")
+					local AceAddon = MMGHACKAceLibrary("AceAddon-2.0")
 					if not AceAddon.addonsStarted[self] then
 						return
 					end
@@ -1568,7 +1568,7 @@ function AceDB:SetProfile(name)
 	if active ~= newactive then
 		local first = nil
 		if AceOO.inherits(self, "AceAddon-2.0") then
-			local AceAddon = AceLibrary("AceAddon-2.0")
+			local AceAddon = MMGHACKAceLibrary("AceAddon-2.0")
 			if not AceAddon.addonsStarted[self] then
 				return
 			end
@@ -1701,7 +1701,7 @@ function AceDB:CopyProfileFrom(copyFrom)
 	local newactive = self:IsActive()
 	if active ~= newactive then
 		if AceOO.inherits(self, "AceAddon-2.0") then
-			local AceAddon = AceLibrary("AceAddon-2.0")
+			local AceAddon = MMGHACKAceLibrary("AceAddon-2.0")
 			if not AceAddon.addonsStarted[self] then
 				return
 			end
@@ -1842,7 +1842,7 @@ function AceDB:ToggleActive(state)
 	end
 	db.raw.disabled[profile] = disable or nil
 	if AceOO.inherits(self, "AceAddon-2.0") then
-		local AceAddon = AceLibrary("AceAddon-2.0")
+		local AceAddon = MMGHACKAceLibrary("AceAddon-2.0")
 		if not AceAddon.addonsStarted[self] then
 			return
 		end
@@ -2173,7 +2173,7 @@ end
 
 local function activate(self, oldLib, oldDeactivate)
 	AceDB = self
-	AceEvent = AceLibrary:HasInstance("AceEvent-2.0") and AceLibrary("AceEvent-2.0")
+	AceEvent = MMGHACKAceLibrary:HasInstance("AceEvent-2.0") and MMGHACKAceLibrary("AceEvent-2.0")
 
 	self.addonsToBeInitialized = oldLib and oldLib.addonsToBeInitialized or {}
 	self.addonsLoaded = oldLib and oldLib.addonsLoaded or {}
@@ -2217,5 +2217,5 @@ local function external(self, major, instance)
 	end
 end
 
-AceLibrary:Register(AceDB, MAJOR_VERSION, MINOR_VERSION, activate, nil, external)
-AceDB = AceLibrary(MAJOR_VERSION)
+MMGHACKAceLibrary:Register(AceDB, MAJOR_VERSION, MINOR_VERSION, activate, nil, external)
+AceDB = MMGHACKAceLibrary(MAJOR_VERSION)

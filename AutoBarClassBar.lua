@@ -9,13 +9,17 @@
 -- http://muffinmangames.com
 --
 
-local AutoBar = AutoBar
+--GLOBALS: UIParent, CreateFrame, GameFontNormal, RegisterStateDriver, UnregisterStateDriver, InCombatLockdown, IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AutoBar = AutoBar
+local _G = _G
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
+
+local assert, ipairs, print, pairs, math = assert, ipairs, print, pairs, math
 
 -- List of Bars for the current user
 AutoBar.barList = {}
@@ -191,6 +195,9 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 	local buttonKeyList = self.sharedButtonDB.buttonKeys
 	local buttonDB
 
+	assert(buttonList)
+	assert(buttonKeyList)
+
 	-- Create or Refresh the Bar's Buttons
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 
@@ -201,6 +208,7 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 		elseif (buttonDB.enabled) then
 			-- Recover from disabled cache
 assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjects mismatched keys")
+			if(AutoBar.Class[buttonDB.buttonClass] == nil) then print(buttonDB.buttonClass, "is nil"); end;
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
@@ -212,6 +220,8 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			else
+				assert(buttonKeyIndex)
+				assert(buttonDB)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
 				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
@@ -230,6 +240,7 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 			else
+				assert(AutoBar.Class[buttonDB.buttonClass] ~= nil)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonListDisabled[buttonKey] = buttonList[buttonKeyIndex]
 			end

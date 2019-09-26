@@ -35,10 +35,12 @@ atl("AutoBar.Garrison", "Garrison");
 atl("AutoBarButtonGarrison", "Garrison");
 atl("AutoBarButtonToyBox", "Toy Box");
 atl("Spell.Stealth", "Spell.Stealth");
+atl("Spell.Track", "Spell.Track");
 atl("AutoBarButtonInterrupt", "Interrupts");
 
 atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
+atl("AutoBarButtonTrack", "Track");
 
 atl("MountShowQiraji", "Show Qiraji");
 atl("MountShowFavourites", "Show Favourites");
@@ -105,6 +107,10 @@ atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
 atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
 atl("AutoBarButtonReputation", "Reputation")
 
+atl("AutoBarButtonMana", "Mana")
+atl("AutoBarButtonBuffWeapon", "Buff Weapon")
+atl("AutoBarButtonAquatic", "Aquatic")
+
 atl("NewButton", "New Button")
 atl("NewButtonTooltip", "Create a new custom button")
 
@@ -156,7 +162,7 @@ local quick_sets =
 	"Muffin.Order Hall.Troop Recruit",
 	"Muffin.Order Hall.Order Resources",
 	"Muffin.Potion.Mana",
-	"Muffin.Reputation",
+	"Muffin.Misc.Reputation",
 	"Muffin.Skill.Fishing.Misc",
 	"Muffin.Skill.Fishing.Rare Fish",
 	"Muffin.SunSongRanch",
@@ -169,6 +175,7 @@ local quick_sets =
 	"Spell.ER",
 	"Spell.Interrupt",
 	"Spell.Mage.Conjure Food",
+	"Spell.Mage.Conjure Water",
 	"Spell.Pet Battle",
 	"Toys.ToyBox",
 	"Tradeskill.Tool.Fishing.Bait",
@@ -178,6 +185,13 @@ local quick_sets =
 	"Dynamic.Quest",
 	"Macro.Mount.SummonRandomFave",
 	"Muffin.Order Hall.Nethershard",
+	"Spell.AquaticForm",
+	"Muffin.Misc.StartsQuest",
+	"Muffin.Stones.Mana",
+	"Muffin.Stones.Health",
+	"Muffin.Poison.Nonlethal",
+	"Muffin.Poison.Lethal",
+	"Spell.Warlock.Create Soulstone",
 }
 
 atl_table(quick_sets);

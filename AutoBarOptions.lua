@@ -34,6 +34,7 @@
 --  Deleted Buttons can be added back to a Bar
 --  Plugin & Custom Buttons are added here & must have non-clashing names
 
+-- GLOBALS: IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown, GameTooltip, InCombatLockdown, GetItemInfo, GetMacroInfo
 
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace
@@ -47,6 +48,8 @@ local AceCfgReg = LibStub("AceConfigRegistry-3.0")
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local AceCfgCmd = LibStub("AceConfigCmd-3.0")
 local AceGUI = LibStub("AceGUI-3.0")
+
+local ipairs, pairs, type, assert, tostring, wipe, strmatch, strsub, table = ipairs, pairs, type, assert, tostring, wipe, strmatch, strsub, table
 
 local dewdrop = nil
 
@@ -636,6 +639,7 @@ local function setCustomButtonName(info, value)
 	end
 end
 
+--TODO: Can this not just be a single call that returns the only active class bar???
 local function getDemonHunter(info)
 	local barKey = info.arg.barKey
 	return AutoBar.barLayoutDBList[barKey].DEMONHUNTER
@@ -2149,7 +2153,7 @@ end
 
 local function getBarLocation(info)
 	local buttonKey = info.arg.buttonKey
-	barKey = AutoBar.buttonDBList[buttonKey].barKey
+	local barKey = AutoBar.buttonDBList[buttonKey].barKey
 
 	return barKey or ""
 end
@@ -2625,7 +2629,7 @@ local function setCategoryItem(info, value, ...)
 			itemDB.itemType = "macro"
 			itemDB.value = value
 			itemDB.itemId = strsub(value, 7)
-		elseif (text ~= "") then
+		elseif (value ~= "") then
 			itemDB.itemType = "spell"
 			itemDB.value = value
 		end
@@ -3145,7 +3149,7 @@ function AutoBar:ButtonInsert(barDB, buttonDB)
 end
 
 function AutoBar:ButtonPopulate(buttonDB)
-	newButtonDB = {}
+	local newButtonDB = {}
 	-- ToDo: Upgrade if there is ever a table inside
 	for key, value in pairs(buttonDB) do
 		newButtonDB[key] = value

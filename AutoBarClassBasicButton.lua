@@ -7,17 +7,22 @@
 -- http://muffinmangames.com
 --
 
+-- GLOBALS: GameTooltip, GetCVar, GameTooltip_SetDefaultAnchor, GetScreenWidth, SecureHandlerWrapScript, GetSpellInfo, GetMacroInfo, GetItemCooldown
+-- GLOBALS: GetSpellCooldown, CooldownFrame_Set, GetItemCount, GetSpellCount, IsUsableSpell
+
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
 local ABGCS = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub("LibKeyBound-1.0")
-local _G = getfenv(0)
+local _G = _G
 local _
+
+local strmatch, select, tonumber, print = strmatch, select, tonumber, print
 
 if (not AutoBar.Class) then
 	AutoBar.Class = {}
@@ -197,7 +202,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if (itemId) then
 			texture = ABGCS:GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(itemID);
+				AutoBar:SetMissingItemFlag(itemId);
 			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)

@@ -6,13 +6,21 @@
 -- http://muffinmangames.com
 --
 
-local AutoBar = AutoBar
+-- GLOBALS: GetSpellBookItemName, ClearCursor, GetCursorInfo, SecureHandlerWrapScript, CreateFrame, RegisterStateDriver, RegisterAutoHide, InCombatLockdown, GetInventoryItemLink
+-- GLOBALS: GetContainerItemLink, GetShapeshiftForm, GetShapeshiftFormInfo, GetTotemInfo, PickupInventoryItem, CooldownFrame_Set, GetSpellInfo
+-- GLOBALS: C_MountJournal, LE_MOUNT_JOURNAL_FILTER_COLLECTED, LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, LE_MOUNT_JOURNAL_FILTER_UNUSABLE C_ToyBox, C_PetJournal
+-- GLOBALS: WOW_PROJECT_ID, WOW_PROJECT_CLASSIC, WOW_PROJECT_MAINLINE
 
-local ABGCS = AutoBarGlobalCodeSpace
+local tostring, print, assert, math, pairs, strfind, ipairs, tonumber, table = tostring, print, assert, math, pairs, strfind, ipairs, tonumber, table
+
+local AutoBar = AutoBar
+local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
+
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
-local AceOO = AceLibrary("AceOO-2.0")
+local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local L = AutoBarGlobalDataObject.locale
 local _G = getfenv(0)
@@ -76,7 +84,7 @@ end
 -- Handle rearranging of buttons when buttonLock is off
 function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 
-	if(itemType == "item" and PlayerHasToy(itemId)) then
+	if(itemType == "item" and ABGCode:PlayerHasToy(itemId)) then
 		AutoBar:Print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
 		return;
 	end
@@ -224,7 +232,7 @@ local snippetOnClick = [[
 		anchorButton:SetAttribute("macroName", self:GetAttribute("macroName"))
 		anchorButton:SetAttribute("macroBody", self:GetAttribute("macroBody"))
 	end
-	
+
 
 	-- Move the right click attributes
 	itemType = self:GetAttribute("type2")
@@ -267,7 +275,7 @@ local function UpdateHandlers(frame, sourceButton)
 	local buttonKey = frame.class.buttonName
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
-	
+
 	if(item_guid) then
 		itemId = item_guid
 	elseif (itemType) then
@@ -338,7 +346,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		splitRelativeSide = "BOTTOM"
 		splitPaddingY = -padding
 	end
-	
+
 	local max_popup_height = self.buttonDB.max_popup_height or MAX_POPUP_HEIGHT
 
 	-- For gigantic popups, split it up into a block
@@ -819,7 +827,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 				button.macroActive = true
 				frame:SetAttribute("macroName", macroInfo.macroName)
 				frame:SetAttribute("macroBody", macroInfo.macroText)
-				
+
 				frame:SetAttribute("macro_action", macroInfo.macro_action)
 				--frame:SetAttribute("macro_tooltip", macroInfo.macro_tooltip)
 				frame:SetAttribute("itemLink", macroInfo.macro_tooltip)
@@ -866,7 +874,7 @@ end
 /dump AutoBar.buttonList["AutoBarButtonClassBuff"].frame:GetAttribute("spell")
 /dump AutoBar.buttonList["AutoBarButtonBuff"].frame:GetAttribute("target-slot2")
 /dump AutoBar.buttonList["AutoBarButtonCooldownStoneMana"].frame:GetAttribute("itemId")
-/dump AutoBar.buttonList["AutoBarButtonCooldownStoneHealth"].frame:GetAttribute("itemId")
+/dump AutoBar.buttonList["AutoBarButtonHealth"].frame:GetAttribute("itemId")
 /dump AutoBar.buttonList["AutoBarButtonMillHerbs"].frame.popupHeader.popupButtonList[10].frame:GetAttribute("type")
 --]]
 
@@ -1074,7 +1082,11 @@ AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonLethal.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Spell.Poison.Lethal")
+	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+		self:AddCategory("Muffin.Poison.Lethal")
+	else
+		self:AddCategory("Spell.Poison.Lethal")
+	end
 end
 
 local AutoBarButtonPoisonNonlethal = AceOO.Class(AutoBarButton)
@@ -1083,7 +1095,12 @@ AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonNonlethal.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Spell.Poison.Nonlethal")
+	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+		self:AddCategory("Muffin.Poison.Nonlethal")
+	else
+		self:AddCategory("Spell.Poison.Nonlethal")
+	end
+
 end
 
 local AutoBarButtonBandages = AceOO.Class(AutoBarButton)
@@ -1127,8 +1144,9 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Potion.Water Breathing")
 
-	self:AddCategory("Muffin.Order Hall.Buff")
-
+	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+		self:AddCategory("Muffin.Order Hall.Buff")
+	end
 
 	-- Melee
 	if (AutoBar.CLASS ~= "MAGE" and AutoBar.CLASS ~= "WARLOCK" and AutoBar.CLASS ~= "PRIEST") then
@@ -1155,6 +1173,12 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
+
+	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+		self:AddCategory("Muffin.Poison.Lethal")
+		self:AddCategory("Muffin.Poison.Nonlethal")
+	end
+
 end
 
 
@@ -1209,8 +1233,15 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
+		if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+			self:AddCategory("Spell.Mage.Conjure Water")
+		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
+		if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+			self:AddCategory("Spell.Warlock.Create Soulstone")
+		end
+
 	end
 end
 
@@ -1254,17 +1285,6 @@ function AutoBarButtonCustom.prototype:CreateButtonFrame()
 	self.frame.ClearBindings = nil
 	self.frame.GetBindings = nil
 end
-
-
-local spellAquaticForm, spellAquaticFormIcon
-local spellTreeOfLifeForm, spellTreeOfLifeFormIcon
-local spellMoonkinForm, spellMoonkinFormIcon
-
-spellMoonkinForm, _, spellMoonkinFormIcon = AutoBar:LoggedGetSpellInfo(24858)
-spellAquaticForm, _, spellAquaticFormIcon = AutoBar:LoggedGetSpellInfo(1066)
-spellTreeOfLifeForm, _, spellTreeOfLifeFormIcon = AutoBar:LoggedGetSpellInfo(114282)
-
-
 
 
 local AutoBarButtonBear = AceOO.Class(AutoBarButton)
@@ -1339,16 +1359,6 @@ function AutoBarButtonTravel.prototype:init(parentBar, buttonDB)
 
 end
 
-local AutoBarButtonStagForm = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonStagForm"] = AutoBarButtonStagForm
-
-function AutoBarButtonStagForm.prototype:init(parentBar, buttonDB)
-	AutoBarButtonStagForm.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.StagForm")
-
-end
-
 
 local AutoBarButtonDebuff = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonDebuff"] = AutoBarButtonDebuff
@@ -1420,47 +1430,16 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
-	self:AddCategory("Muffin.Toys.Fishing")
-	
+	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+		self:AddCategory("Muffin.Toys.Fishing")
+	end
+
 	self:AddCategory("Tradeskill.Tool.Fishing.Gear")
 	self:AddCategory("Tradeskill.Tool.Fishing.Other")
 	self:AddCategory("Tradeskill.Tool.Fishing.Tool")
 	self:AddCategory("Tradeskill.Tool.Fishing.Bait")
 	self:AddCategory("Spell.Fishing")
 end
-
-local AutoBarButtonArchaeology = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonArchaeology"] = AutoBarButtonArchaeology
-
-function AutoBarButtonArchaeology.prototype:init(parentBar, buttonDB)
-	AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.Skill.Archaeology.Crate")
-	self:AddCategory("Muffin.Skill.Archaeology.Mission")
-	
-	if(buttonDB.archbtn_show_spells == nil) then 
-		buttonDB.archbtn_show_spells = false;
-	elseif(buttonDB.archbtn_show_spells) then
-		self:AddCategory("Spell.Archaeology")
-	end
-	
-end
-
-function AutoBarButtonArchaeology.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "archbtn_show_spells", L["ArchBtnShowSpells"])
-end
-
-function AutoBarButtonArchaeology.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonArchaeology.super.prototype.Refresh(self, parentBar, buttonDB)
-
-	if(buttonDB.archbtn_show_spells == false) then 
-		self:DeleteCategory("Spell.Archaeology")
-	elseif(buttonDB.archbtn_show_spells) then
-		self:AddCategory("Spell.Archaeology")
-	end
-
-end
-
 
 local AutoBarButtonFood = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFood"] = AutoBarButtonFood
@@ -1623,23 +1602,24 @@ AutoBar.Class["AutoBarButtonHeal"] = AutoBarButtonHeal
 function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonHeal.super.prototype.init(self, parentBar, buttonDB)
 
-	--self:AddCategory("Consumable.Potion.Recovery.Healing.Endless")
-	--self:AddCategory("Consumable.Potion.Recovery.Healing.Basic")
-
-	--self:AddCategory("Consumable.Potion.Recovery.Rejuvenation.Basic")
-
+	self:AddCategory("Muffin.Stones.Health")
 	self:AddCategory("Muffin.Potion.Health")
 	self:AddCategory("Muffin.Potion.Combo")
 
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
-
-	--self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
-	--self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
 end
+
+local AutoBarButtonMana = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonMana"] = AutoBarButtonMana
+
+function AutoBarButtonMana.prototype:init(parentBar, buttonDB)
+	AutoBarButtonMana.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Muffin.Potion.Mana")
+	self:AddCategory("Muffin.Potion.Combo")
+	self:AddCategory("Muffin.Stones.Mana")
+
+end
+
 
 
 local AutoBarButtonHearth = AceOO.Class(AutoBarButton)
@@ -1659,390 +1639,22 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	end
 
 	self:AddCategory("Misc.Hearth")
-	self:AddCategory("Muffin.Toys.Hearth")
-	self:AddCategory("Muffin.Toys.Portal")
+	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+		self:AddCategory("Muffin.Toys.Hearth")
+		self:AddCategory("Muffin.Toys.Portal")
+	end
 end
 
-function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
-end
-
--------------------------- AutoBarButtonToyBox ---------------------
-local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
-
-_, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
-
-function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
-	AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
---print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
-
-	if (not AutoBarCategoryList["Toys.ToyBox"]) then
-		AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", spellIconList["Puntable Marmot"])
-		local category = AutoBarCategoryList["Toys.ToyBox"]
-		category.unInitialized = true
-	end
-	self:AddCategory("Toys.ToyBox")
-
-	if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
-		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
-	end
-
-	if(buttonDB.toybox_only_show_favourites == nil) then buttonDB.toybox_only_show_favourites = false end
-
-	self:Refresh(parentBar, buttonDB)
-	--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Toys.ToyBox"].items .. " entries");
-end
-
-local reverse_sort_func = function( a,b ) return a > b end
-local forward_sort_func = function( a,b ) return a < b end
-
-function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
-	AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
-
-	if (not AutoBarCategoryList["Toys.ToyBox"]) then
-		--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(p_force_update));
-		return true;
-	end
-	
-	local made_update = false
-
-	local category = AutoBarCategoryList["Toys.ToyBox"]
-
-	AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
-
-	C_ToyBox.SetCollectedShown(true)
-	C_ToyBox.SetAllSourceTypeFilters(true)
-	C_ToyBox.SetFilterString("")
-
-	local toy_total = C_ToyBox.GetNumTotalDisplayedToys()
-	local toy_total_learned = C_ToyBox.GetNumLearnedDisplayedToys()
-
-
---print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
-
-	--If the number of known Toys has changed, do stuff
-	if ((toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) or p_force_update) then
-		--print("   Gonna do toybox stuff");
-		made_update = true
-		AutoBar.last_ToyBox_count = toy_total_learned;
-
-		category.items = {}
-		category.all_items = {}
-
-		local initialized = not category.unInitialized
-
-		if(toy_total_learned <= 0) then
-			return
-		end
-
-		for i = 1, toy_total do
-			local item_id = C_ToyBox.GetToyFromIndex(i)
-			local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(item_id)
-			local user_selected = (buttonDB.toybox_only_show_favourites and toy_is_fave) or not buttonDB.toybox_only_show_favourites
-			if (PlayerHasToy(item_id) and user_selected) then
-				--print("  Adding ", toy_name, item_id, toy_is_fave);
-				local link = C_ToyBox.GetToyLink(item_id)
---				AutoBarSearch:RegisterToy(item_id, link)
-				if(not link) then
-					AutoBar:SetMissingItemFlag(item_id)
-				end
-				category.all_items[#category.all_items + 1] = item_id
-			end
-		end
-		
-		category.unInitialized = false
-		
-		AutoBarCategoryList["Toys.ToyBox"]:Refresh()
-
-	end
-	
-	return made_update
-end
-
-function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "toybox_only_show_favourites", L["ToyBoxOnlyFavourites"])
-end
-
--------------------------- AutoBarButtonMount ---------------------
-
-local AutoBarButtonMount = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
-
-_, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
-
-function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
---print("AutoBarButtonMount.prototype:init");
-
-	if (not AutoBarCategoryList["Spell.Mount"]) then
-		AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
-		local category = AutoBarCategoryList["Spell.Mount"]
-		category:SetNonCombat(true)
-		category:SetNoSpellCheck(true)
-		category.unInitialized = true
-		if (not category.castList) then
-			category.castList = {}
-			--print("  Spell.Mount was null, making it empty");
-		end
-	end
-	self:AddCategory("Spell.Mount")
-	self:AddCategory("Macro.Mount.SummonRandomFave")
-
-	local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
-	if (not buttonData) then
-		buttonData = {}
-		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
-	end
-
-	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
-	if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
-	if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
-	if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
-	if(buttonDB.mount_reverse_sort == nil) then buttonDB.mount_reverse_sort = false end
-	if(buttonDB.mount_show_rng_fave == nil) then buttonDB.mount_show_rng_fave = false end
-
-
-	if(buttonDB.mount_show_class == true) then
-		self:AddCategory("Misc.Mount.Summoned")
-		local class = AutoBar.CLASS
-		if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then 
-			self:AddCategory("Muffin.Mount")
-		end
-	end
-
-	if(buttonDB.mount_show_rng_fave == true) then
-		self:AddCategory("Macro.Mount.SummonRandomFave")
-	end
-
-	--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
-	--AutoBarCategoryList["Spell.Mount"]:Refresh()
-end
-
-function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
-	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
-
-	if (not AutoBarCategoryList["Spell.Mount"]) then
-		--AutoBarButtonMount.prototype:init hasn't run, so skip
-		--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
-		return true;
-	end
-
-	local thisIsSpam = true
-	local category = AutoBarCategoryList["Spell.Mount"]
-
-	AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
-	
-	-- Get the player's current mount filter settings
-	local setting_filter_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED);
-	local setting_filter_not_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED);
-	local setting_filter_unusable = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE);
-	
-	--Set the mount filter settings the way we want
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true);
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
-
-	local num_mounts = C_MountJournal.GetNumDisplayedMounts();
-	local needs_update = (num_mounts ~= AutoBar.last_mount_count) or buttonDB.is_dirty
-
---print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
---print(debugstack(1, 3, 3));
-
-	--If the number of known mounts has changed, do stuff
-	if (needs_update) then
---print("   Gonna do stuff");
-		AutoBar.last_mount_count = num_mounts;
-		buttonDB.is_dirty = false
-		
-		category.castList = {}
-
-		thisIsSpam = not category.unInitialized --or (# category.castList ~= count)
-		local spell_name
-
-		for idx = 0, num_mounts do
-			local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
-			local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
-			local qiraji_filtered = (not buttonDB.mount_show_qiraji and AutoBarMountIsQiraji[spell_id]) or false;
---if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then 
---if (is_collected and is_hidden ) then 
---	print(string.format("%5s  %5s  Usable:%5s", mount_id, spell_id, tostring(usable)), name)
---	print("   FacSpecific:",faction_specific, "Faction:", faction, "Hidden:", is_hidden, "Collected:", is_collected)
---	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
---end;
-			if (is_collected and user_selected and not qiraji_filtered) then
-				spell_name = GetSpellInfo(spell_id)
-				--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
-				spellIconList[spell_name] = icon
-				AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
-				local spellInfo = AutoBarSearch.spells[spell_name]
-				spellInfo.spellLink = "spell:" .. spell_id
-				category.castList[# category.castList + 1] = spell_name
-			end
-			
-		end
-
-		--This is backwards because the  original sort *is* a reverse sort, so this is a reverse-reverse sort.
-		if(buttonDB.mount_reverse_sort) then
-			table.sort(category.castList, forward_sort_func)
-		else
-			table.sort(category.castList, reverse_sort_func)
-		end
-
-		category.unInitialized = nil
-		
-		AutoBarCategoryList["Spell.Mount"]:Refresh()
-	end
-	
-	-- Reset the player's current mount filter settings to their original settings
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, setting_filter_collected);
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, setting_filter_not_collected);
-	C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, setting_filter_unusable);
-
-	return thisIsSpam
-end
-
-
-
-function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
-	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
-	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
-	self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
-	self:SetOptionBoolean(optionList, passValue, "mount_reverse_sort", L["MountReverseSort"])
-	self:SetOptionBoolean(optionList, passValue, "mount_show_rng_fave", L["MountShowSummonRandom"])
-end
-
-
---[[
-/dump GetSpellInfo(43688)
-/dump GetSpellInfo("Amani War Bear")
-/dump AutoBarCategoryList["Spell.Mount"]
-/script AutoBarSearch.sorted:Update("AutoBarButtonMount")
-/dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
---]]
-
---- Temporary until Blizzard makes their code work for mounts & critters
-function AutoBarButtonMount.prototype:UpdateUsable()
-	local frame = self.frame
-	local itemType = frame:GetAttribute("type")
-	if (itemType) then
-		if (AutoBar.inCombat) then
-			frame.icon:SetVertexColor(0.4, 0.4, 0.4)
-		else
-			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-		end
-
-		local popupHeader = self.frame.popupHeader
-		if (popupHeader) then
-			for _, popupButton in pairs(popupHeader.popupButtonList) do
-				frame = popupButton.frame
-				if (AutoBar.inCombat) then
-					frame.icon:SetVertexColor(0.4, 0.4, 0.4)
-				else
-					frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-					frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-				end
-			end
-		end
+if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
 	end
 end
 
 
 
-local AutoBarButtonPets = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonPets"] = AutoBarButtonPets
-
-_, _, spellIconList["Phoenix Hatchling"] = AutoBar:LoggedGetSpellInfo(46599)
-
-function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
-
-	if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-		AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", spellIconList["Phoenix Hatchling"])
-	end
-	self:AddCategory("Battle Pet.Favourites")
-	
-	self:AddCategory("Macro.BattlePet.SummonRandom")
-	self:AddCategory("Macro.BattlePet.DismissPet")
-	self:AddCategory("Macro.BattlePet.SummonRandomFave")
-
-	self:Refresh(parentBar, buttonDB)
-end
-
-function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
-	AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
-
-	if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-		--AutoBarButtonPets.prototype:init hasn't run, so skip
-		--print("Skipping AutoBarButtonPets.prototype:Refresh);
-		return true;
-	end
-
-	local category = AutoBarCategoryList["Battle Pet.Favourites"]
-	if (not category.castList) then
-		category.castList = {}
-	end
-	local castList = category.castList
-
-	AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
-
-	local _, total_pet_count = C_PetJournal.GetNumPets()
-
-	--print("NumCritters:" .. total_pet_count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
-
-	if (total_pet_count ~= AutoBar.last_critter_count) then
-		--print("   Gonna do critter stuff");
-		AutoBar.last_critter_count = total_pet_count;
-
-		for index = 1, total_pet_count, 1 do
-			local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
-			local pet_id = pet_data[1]
-			local owned = pet_data[3]
-			local favourite = pet_data[6]
-			local icon = pet_data[9]
-			--local link = C_PetJournal.GetBattlePetLink(pet_id)
-			--local description = pet_data[13]
-			local name = pet_data[4] or pet_data[8]
-			local user_selected = owned and favourite
-
-			if(user_selected) then
-				local summon_macro = "/summonpet " .. pet_id
-				category:AddMacroText(summon_macro, icon, "Summon " .. name, nil)
-			end
---			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
---			spellName = GetSpellInfo(spellID)
---			spellIconList[spellName] = icon
---			AutoBarSearch:RegisterSpell(spellName, spellID, true)
---			local spellInfo = AutoBarSearch.spells[spellName]
---			spellInfo.spellLink = "spell:" .. spellID
---			category.castList[index] = spellName
-		end
-	end
 
 
-end
-
-
---- Temporary until Blizzard makes their code work for mounts & critters
-function AutoBarButtonPets.prototype:UpdateUsable()
-	local frame = self.frame
-	local itemType = frame:GetAttribute("type")
-	if (itemType) then
-		frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-		frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-
-		local popupHeader = self.frame.popupHeader
-		if (popupHeader) then
-			for _, popupButton in pairs(popupHeader.popupButtonList) do
-				frame = popupButton.frame
-				frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-				frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-			end
-		end
-	end
-end
 
 
 local AutoBarButtonPickLock = AceOO.Class(AutoBarButton)
@@ -2053,15 +1665,6 @@ function AutoBarButtonPickLock.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
-end
-
-local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
-
-function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Tradeskill.Gather.Herbalism")
 end
 
 
@@ -2077,83 +1680,15 @@ function AutoBarButtonMiscFun.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Usable.Replenished")
 end
 
-local AutoBarButtonSunsongRanch = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonSunsongRanch"] = AutoBarButtonSunsongRanch
-
-function AutoBarButtonSunsongRanch.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSunsongRanch.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.SunSongRanch")
-end
-
-local AutoBarButtonGarrison = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonGarrison"] = AutoBarButtonGarrison
-
-function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
-	AutoBarButtonGarrison.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.Garrison")
-end
-
 local AutoBarButtonReputation = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonReputation"] = AutoBarButtonReputation
 
 function AutoBarButtonReputation.prototype:init(parentBar, buttonDB)
 	AutoBarButtonReputation.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Muffin.Reputation")
+	self:AddCategory("Muffin.Misc.Reputation")
 end
 
-
-local AutoBarButtonOrderHallTroop = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonOrderHallTroop"] = AutoBarButtonOrderHallTroop
-
-function AutoBarButtonOrderHallTroop.prototype:init(parentBar, buttonDB)
-	AutoBarButtonOrderHallTroop.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.Order Hall.Troop Recruit")
-	self:AddCategory("Muffin.Order Hall.Champion")
-
-end
-
-local AutoBarButtonOrderHallResource = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonOrderHallResource"] = AutoBarButtonOrderHallResource
-
-function AutoBarButtonOrderHallResource.prototype:init(parentBar, buttonDB)
-	AutoBarButtonOrderHallResource.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Muffin.Order Hall.Artifact Power")
-	self:AddCategory("Muffin.Order Hall.Ancient Mana")
-	self:AddCategory("Muffin.Order Hall.Order Resources")
-	self:AddCategory("Muffin.Order Hall.Nethershard")
-
-end
-
-local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
-
-function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBattlePetItems.super.prototype.init(self, parentBar, buttonDB)
-
-	if(buttonDB.show_ornamental == nil) then buttonDB.show_ornamental = true end
-
-	self:AddCategory("Muffin.Battle Pet Items.Level")
-	self:AddCategory("Muffin.Battle Pet Items.Upgrade")
-	self:AddCategory("Muffin.Battle Pet Items.Bandages")
-	self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
-
-	self:AddCategory("Muffin.Toys.Pet Battle")
-	self:AddCategory("Spell.Pet Battle")
-	
-	if(buttonDB.show_ornamental == true) then
-		self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
-	end
-
-end
-
-function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
-	self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
-end
 
 local AutoBarButtonQuest = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonQuest"] = AutoBarButtonQuest
@@ -2163,6 +1698,7 @@ function AutoBarButtonQuest.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Usable.StartsQuest")
 	self:AddCategory("Muffin.Misc.Quest")
+	self:AddCategory("Muffin.Misc.StartsQuest")
 	self:AddCategory("Misc.Usable.BossItem")
 	self:AddCategory("Dynamic.Quest")
 end
@@ -2192,7 +1728,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if  (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+	if  (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 
@@ -2233,30 +1769,6 @@ function AutoBarButtonCooldownPotionCombat.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonCooldownPotionHealth = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownPotionHealth"] = AutoBarButtonCooldownPotionHealth
-
-function AutoBarButtonCooldownPotionHealth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownPotionHealth.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Basic")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.PvP")
-	self:AddCategory("Consumable.Cooldown.Potion.Health.Anywhere")
-end
-
-
-local AutoBarButtonCooldownStoneHealth = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownStoneHealth"] = AutoBarButtonCooldownStoneHealth
-
-function AutoBarButtonCooldownStoneHealth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneHealth.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Other")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Statue")
-	self:AddCategory("Consumable.Cooldown.Stone.Health.Warlock")
-end
-
-
 local AutoBarButtonCooldownPotionMana = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionMana"] = AutoBarButtonCooldownPotionMana
 
@@ -2272,24 +1784,13 @@ function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if(AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+	if(ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Muffin.Potion.Mana")
 		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
 	end
 
 end
 
-
-local AutoBarButtonCooldownStoneMana = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownStoneMana"] = AutoBarButtonCooldownStoneMana
-
-function AutoBarButtonCooldownStoneMana.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneMana.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
-		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
-	end
-end
 
 
 local AutoBarButtonCooldownPotionRejuvenation = AceOO.Class(AutoBarButton)
@@ -2341,9 +1842,7 @@ AutoBar.Class["AutoBarButtonStance"] = AutoBarButtonStance
 function AutoBarButtonStance.prototype:init(parentBar, buttonDB)
 	AutoBarButtonStance.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.CLASS == "WARRIOR") then
 		self:AddCategory("Spell.Stance")
-	end
 end
 
 function AutoBarButtonStance.prototype:GetLastUsed()
@@ -2362,16 +1861,6 @@ function AutoBarButtonStealth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Stealth")
 end
 
-
-
-local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
-
-function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
-	AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.Guild")
-end
 
 
 --------------------------------------------------ADDING NEW FUNCTIONALITY HERE
@@ -2622,7 +2111,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = ABGCS:GetIconForItemID((tonumber(itemId)))
+		local macroTexture = ABGCode:GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
@@ -2642,9 +2131,10 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	AutoBarButtonWater.super.prototype.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
-		self:AddCategory("Consumable.Water.Conjure")
+		self:AddCategory("Spell.Mage.Conjure Water")
 	end
-	if (AutoBar:ClassUsesMana(AutoBar.CLASS)) then
+
+	if (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 
@@ -2656,11 +2146,11 @@ end
 --	AutoBarButtonWater.super.prototype.Refresh(self, parentBar, buttonDB)
 --	if (AutoBar.CLASS == "MAGE") then
 --		if (buttonDB.disableConjure) then
---			self:DeleteCategory("Consumable.Water.Conjure")
+--			self:DeleteCategory("Spell.Mage.Conjure Water")
 --			buttonDB.castSpell = nil
 --			AutoBarCategoryList["Consumable.Water.Basic"]:SetCastList(nil)
 --		else
---			self:AddCategory("Consumable.Water.Conjure")
+--			self:AddCategory("Spell.Mage.Conjure Water")
 --		end
 --	end
 --end
@@ -2683,12 +2173,552 @@ function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 end
 
 
+-------------------------------------------------------------------
+--
+-- WoW Classic
+--
+-------------------------------------------------------------------
+if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
---[[
-/script print(AutoBarProfile.basic[2].castSpell)
-/script print(AutoBar.buttons[2].castSpell)
-/script AutoBarSAB1Border:Hide()
-/dump AutoBar.buttonList["AutoBarButtonMount"].frame:GetScript("OnEvent")
-/dump AutoBarCategoryList["Spell.Portals"]
-/dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
---]]
+	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
+
+	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
+		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Mount")
+	end
+
+
+	local AutoBarButtonAquatic = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonAquatic"] = AutoBarButtonAquatic
+
+	function AutoBarButtonAquatic.prototype:init(parentBar, buttonDB)
+		AutoBarButtonAquatic.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Spell.AquaticForm")
+
+	end
+
+	local AutoBarButtonTrack = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonTrack"] = AutoBarButtonTrack
+
+	function AutoBarButtonTrack.prototype:init(parentBar, buttonDB)
+		AutoBarButtonTrack.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Spell.Track")
+	end
+
+
+else
+-------------------------------------------------------------------
+--
+-- WoW Retail
+--
+-------------------------------------------------------------------
+
+	local AutoBarButtonArchaeology = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonArchaeology"] = AutoBarButtonArchaeology
+
+	function AutoBarButtonArchaeology.prototype:init(parentBar, buttonDB)
+		AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Skill.Archaeology.Crate")
+		self:AddCategory("Muffin.Skill.Archaeology.Mission")
+
+		if(buttonDB.archbtn_show_spells == nil) then
+			buttonDB.archbtn_show_spells = false;
+		elseif(buttonDB.archbtn_show_spells) then
+			self:AddCategory("Spell.Archaeology")
+		end
+
+	end
+
+	function AutoBarButtonArchaeology.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "archbtn_show_spells", L["ArchBtnShowSpells"])
+	end
+
+	function AutoBarButtonArchaeology.prototype:Refresh(parentBar, buttonDB)
+		AutoBarButtonArchaeology.super.prototype.Refresh(self, parentBar, buttonDB)
+
+		if(buttonDB.archbtn_show_spells == false) then
+			self:DeleteCategory("Spell.Archaeology")
+		elseif(buttonDB.archbtn_show_spells) then
+			self:AddCategory("Spell.Archaeology")
+		end
+
+	end
+
+
+	local AutoBarButtonStagForm = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonStagForm"] = AutoBarButtonStagForm
+
+	function AutoBarButtonStagForm.prototype:init(parentBar, buttonDB)
+		AutoBarButtonStagForm.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Spell.StagForm")
+
+	end
+
+	local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
+
+	function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
+		AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Spell.Guild")
+	end
+
+	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
+
+	function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
+		AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Tradeskill.Gather.Herbalism")
+	end
+
+	local AutoBarButtonSunsongRanch = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonSunsongRanch"] = AutoBarButtonSunsongRanch
+
+	function AutoBarButtonSunsongRanch.prototype:init(parentBar, buttonDB)
+		AutoBarButtonSunsongRanch.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.SunSongRanch")
+	end
+
+	local AutoBarButtonGarrison = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonGarrison"] = AutoBarButtonGarrison
+
+	function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
+		AutoBarButtonGarrison.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Garrison")
+	end
+
+	local AutoBarButtonOrderHallTroop = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonOrderHallTroop"] = AutoBarButtonOrderHallTroop
+
+	function AutoBarButtonOrderHallTroop.prototype:init(parentBar, buttonDB)
+		AutoBarButtonOrderHallTroop.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Order Hall.Troop Recruit")
+		self:AddCategory("Muffin.Order Hall.Champion")
+
+	end
+
+	local AutoBarButtonOrderHallResource = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonOrderHallResource"] = AutoBarButtonOrderHallResource
+
+	function AutoBarButtonOrderHallResource.prototype:init(parentBar, buttonDB)
+		AutoBarButtonOrderHallResource.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Order Hall.Artifact Power")
+		self:AddCategory("Muffin.Order Hall.Ancient Mana")
+		self:AddCategory("Muffin.Order Hall.Order Resources")
+		self:AddCategory("Muffin.Order Hall.Nethershard")
+
+	end
+
+	local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
+
+	function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
+		AutoBarButtonBattlePetItems.super.prototype.init(self, parentBar, buttonDB)
+
+		if(buttonDB.show_ornamental == nil) then buttonDB.show_ornamental = true end
+
+		self:AddCategory("Muffin.Battle Pet Items.Level")
+		self:AddCategory("Muffin.Battle Pet Items.Upgrade")
+		self:AddCategory("Muffin.Battle Pet Items.Bandages")
+		self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
+
+		self:AddCategory("Muffin.Toys.Pet Battle")
+		self:AddCategory("Spell.Pet Battle")
+
+		if(buttonDB.show_ornamental == true) then
+			self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
+		end
+
+	end
+
+	function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
+	end
+
+	-------------------------- AutoBarButtonToyBox ---------------------
+	local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
+
+	_, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
+
+	function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
+		AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
+	--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
+
+		if (not AutoBarCategoryList["Toys.ToyBox"]) then
+			AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", spellIconList["Puntable Marmot"])
+			local category = AutoBarCategoryList["Toys.ToyBox"]
+			category.unInitialized = true
+		end
+		self:AddCategory("Toys.ToyBox")
+
+		if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
+			AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
+		end
+
+		if(buttonDB.toybox_only_show_favourites == nil) then buttonDB.toybox_only_show_favourites = false end
+
+		self:Refresh(parentBar, buttonDB)
+		--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Toys.ToyBox"].items .. " entries");
+	end
+
+	local reverse_sort_func = function( a,b ) return a > b end
+	local forward_sort_func = function( a,b ) return a < b end
+
+	function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
+		AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
+
+		if (not AutoBarCategoryList["Toys.ToyBox"]) then
+			--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(p_force_update));
+			return true;
+		end
+
+		local made_update = false
+
+		local category = AutoBarCategoryList["Toys.ToyBox"]
+
+		AutoBar.last_ToyBox_count = AutoBar.last_ToyBox_count or 0;
+
+		C_ToyBox.SetCollectedShown(true)
+		C_ToyBox.SetAllSourceTypeFilters(true)
+		C_ToyBox.SetFilterString("")
+
+		local toy_total = C_ToyBox.GetNumTotalDisplayedToys()
+		local toy_total_learned = C_ToyBox.GetNumLearnedDisplayedToys()
+
+
+	--print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
+
+		--If the number of known Toys has changed, do stuff
+		if ((toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) or p_force_update) then
+			--print("   Gonna do toybox stuff");
+			made_update = true
+			AutoBar.last_ToyBox_count = toy_total_learned;
+
+			category.items = {}
+			category.all_items = {}
+
+			local initialized = not category.unInitialized
+
+			if(toy_total_learned <= 0) then
+				return
+			end
+
+			for i = 1, toy_total do
+				local item_id = C_ToyBox.GetToyFromIndex(i)
+				local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(item_id)
+				local user_selected = (buttonDB.toybox_only_show_favourites and toy_is_fave) or not buttonDB.toybox_only_show_favourites
+				if (ABGCode:PlayerHasToy(item_id) and user_selected) then
+					--print("  Adding ", toy_name, item_id, toy_is_fave);
+					local link = C_ToyBox.GetToyLink(item_id)
+	--				AutoBarSearch:RegisterToy(item_id, link)
+					if(not link) then
+						AutoBar:SetMissingItemFlag(item_id)
+					end
+					category.all_items[#category.all_items + 1] = item_id
+				end
+			end
+
+			category.unInitialized = false
+
+			AutoBarCategoryList["Toys.ToyBox"]:Refresh()
+
+		end
+
+		return made_update
+	end
+
+	function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "toybox_only_show_favourites", L["ToyBoxOnlyFavourites"])
+	end
+
+	-------------------------- AutoBarButtonMount ---------------------
+
+	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
+
+	_, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
+
+	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
+		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
+	--print("AutoBarButtonMount.prototype:init");
+
+		if (not AutoBarCategoryList["Spell.Mount"]) then
+			AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
+			local category = AutoBarCategoryList["Spell.Mount"]
+			category:SetNonCombat(true)
+			category:SetNoSpellCheck(true)
+			category.unInitialized = true
+			if (not category.castList) then
+				category.castList = {}
+				--print("  Spell.Mount was null, making it empty");
+			end
+		end
+		self:AddCategory("Spell.Mount")
+		self:AddCategory("Macro.Mount.SummonRandomFave")
+
+		local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
+		if (not buttonData) then
+			buttonData = {}
+			AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
+		end
+
+		if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
+		if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
+		if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
+		if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
+		if(buttonDB.mount_reverse_sort == nil) then buttonDB.mount_reverse_sort = false end
+		if(buttonDB.mount_show_rng_fave == nil) then buttonDB.mount_show_rng_fave = false end
+
+
+		if(buttonDB.mount_show_class == true) then
+			self:AddCategory("Misc.Mount.Summoned")
+			local class = AutoBar.CLASS
+			if(class == "PALADIN" or class == "DEATHKNIGHT" or class == "WARLOCK") then
+				self:AddCategory("Muffin.Mount")
+			end
+		end
+
+		if(buttonDB.mount_show_rng_fave == true) then
+			self:AddCategory("Macro.Mount.SummonRandomFave")
+		end
+
+		--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
+		--AutoBarCategoryList["Spell.Mount"]:Refresh()
+	end
+
+	function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
+		AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
+
+		if (not AutoBarCategoryList["Spell.Mount"]) then
+			--AutoBarButtonMount.prototype:init hasn't run, so skip
+			--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+			return true;
+		end
+
+		local thisIsSpam = true
+		local category = AutoBarCategoryList["Spell.Mount"]
+
+		AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
+
+		-- Get the player's current mount filter settings
+		local setting_filter_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED);
+		local setting_filter_not_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED);
+		local setting_filter_unusable = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE);
+
+		--Set the mount filter settings the way we want
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true);
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
+
+		local num_mounts = C_MountJournal.GetNumDisplayedMounts();
+		local needs_update = (num_mounts ~= AutoBar.last_mount_count) or buttonDB.is_dirty
+
+	--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
+	--print(debugstack(1, 3, 3));
+
+		--If the number of known mounts has changed, do stuff
+		if (needs_update) then
+	--print("   Gonna do stuff");
+			AutoBar.last_mount_count = num_mounts;
+			buttonDB.is_dirty = false
+
+			category.castList = {}
+
+			thisIsSpam = not category.unInitialized --or (# category.castList ~= count)
+			local spell_name
+
+			for idx = 0, num_mounts do
+				local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
+				local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
+				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[spell_id]) or false;
+	--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
+	--if (is_collected and is_hidden ) then
+	--	print(string.format("%5s  %5s  Usable:%5s", mount_id, spell_id, tostring(usable)), name)
+	--	print("   FacSpecific:",faction_specific, "Faction:", faction, "Hidden:", is_hidden, "Collected:", is_collected)
+	--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
+	--end;
+				if (is_collected and user_selected and not qiraji_filtered) then
+					spell_name = GetSpellInfo(spell_id)
+					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+					spellIconList[spell_name] = icon
+					AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
+					local spellInfo = AutoBarSearch.spells[spell_name]
+					spellInfo.spellLink = "spell:" .. spell_id
+					category.castList[# category.castList + 1] = spell_name
+				end
+
+			end
+
+			--This is backwards because the  original sort *is* a reverse sort, so this is a reverse-reverse sort.
+			if(buttonDB.mount_reverse_sort) then
+				table.sort(category.castList, forward_sort_func)
+			else
+				table.sort(category.castList, reverse_sort_func)
+			end
+
+			category.unInitialized = nil
+
+			AutoBarCategoryList["Spell.Mount"]:Refresh()
+		end
+
+		-- Reset the player's current mount filter settings to their original settings
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, setting_filter_collected);
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, setting_filter_not_collected);
+		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, setting_filter_unusable);
+
+		return thisIsSpam
+	end
+
+
+
+	function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
+		self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
+		self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
+		self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
+		self:SetOptionBoolean(optionList, passValue, "mount_reverse_sort", L["MountReverseSort"])
+		self:SetOptionBoolean(optionList, passValue, "mount_show_rng_fave", L["MountShowSummonRandom"])
+	end
+
+
+	--[[
+	/dump GetSpellInfo(43688)
+	/dump GetSpellInfo("Amani War Bear")
+	/dump AutoBarCategoryList["Spell.Mount"]
+	/script AutoBarSearch.sorted:Update("AutoBarButtonMount")
+	/dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
+	--]]
+
+	--- Temporary until Blizzard makes their code work for mounts & critters
+	function AutoBarButtonMount.prototype:UpdateUsable()
+		local frame = self.frame
+		local itemType = frame:GetAttribute("type")
+		if (itemType) then
+			if (AutoBar.inCombat) then
+				frame.icon:SetVertexColor(0.4, 0.4, 0.4)
+			else
+				frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+				frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+			end
+
+			local popupHeader = self.frame.popupHeader
+			if (popupHeader) then
+				for _, popupButton in pairs(popupHeader.popupButtonList) do
+					frame = popupButton.frame
+					if (AutoBar.inCombat) then
+						frame.icon:SetVertexColor(0.4, 0.4, 0.4)
+					else
+						frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+						frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+					end
+				end
+			end
+		end
+	end
+
+	local AutoBarButtonPets = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonPets"] = AutoBarButtonPets
+
+	_, _, spellIconList["Phoenix Hatchling"] = AutoBar:LoggedGetSpellInfo(46599)
+
+	function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
+		AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
+
+		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
+			AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", spellIconList["Phoenix Hatchling"])
+		end
+		self:AddCategory("Battle Pet.Favourites")
+
+		self:AddCategory("Macro.BattlePet.SummonRandom")
+		self:AddCategory("Macro.BattlePet.DismissPet")
+		self:AddCategory("Macro.BattlePet.SummonRandomFave")
+
+		self:Refresh(parentBar, buttonDB)
+	end
+
+	function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
+		AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
+
+		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
+			--AutoBarButtonPets.prototype:init hasn't run, so skip
+			--print("Skipping AutoBarButtonPets.prototype:Refresh);
+			return true;
+		end
+
+		local category = AutoBarCategoryList["Battle Pet.Favourites"]
+		if (not category.castList) then
+			category.castList = {}
+		end
+		local castList = category.castList
+
+		AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
+
+		local _, total_pet_count = C_PetJournal.GetNumPets()
+
+		--print("NumCritters:" .. total_pet_count .. "  Last Critter Count:" .. AutoBar.last_critter_count)
+
+		if (total_pet_count ~= AutoBar.last_critter_count) then
+			--print("   Gonna do critter stuff");
+			AutoBar.last_critter_count = total_pet_count;
+
+			for index = 1, total_pet_count, 1 do
+				local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
+				local pet_id = pet_data[1]
+				local owned = pet_data[3]
+				local favourite = pet_data[6]
+				local icon = pet_data[9]
+				--local link = C_PetJournal.GetBattlePetLink(pet_id)
+				--local description = pet_data[13]
+				local name = pet_data[4] or pet_data[8]
+				local user_selected = owned and favourite
+
+				if(user_selected) then
+					local summon_macro = "/summonpet " .. pet_id
+					category:AddMacroText(summon_macro, icon, "Summon " .. name, nil)
+				end
+	--			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
+	--			spellName = GetSpellInfo(spellID)
+	--			spellIconList[spellName] = icon
+	--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
+	--			local spellInfo = AutoBarSearch.spells[spellName]
+	--			spellInfo.spellLink = "spell:" .. spellID
+	--			category.castList[index] = spellName
+			end
+		end
+
+
+	end
+
+
+	--- Temporary until Blizzard makes their code work for mounts & critters
+	function AutoBarButtonPets.prototype:UpdateUsable()
+		local frame = self.frame
+		local itemType = frame:GetAttribute("type")
+		if (itemType) then
+			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+
+			local popupHeader = self.frame.popupHeader
+			if (popupHeader) then
+				for _, popupButton in pairs(popupHeader.popupButtonList) do
+					frame = popupButton.frame
+					frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+					frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+				end
+			end
+		end
+	end
+
+end

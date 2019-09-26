@@ -1,5 +1,5 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<!--@no-lib-strip@-->
+
 	<Script file="libs\LibStub\LibStub.lua"/>
 	<Script file="libs\CallBackHandler-1.0\CallbackHandler-1.0.lua"/>
 
@@ -9,34 +9,19 @@
 	<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>
 	<Include file="libs\AceConfig-3.0\AceConfig-3.0.xml"/>
 
-	<Script file="libs\AceLibrary\AceLibrary.lua"/>
+	<Script file="libs\MMGHACKAceLibrary\MMGHACKAceLibrary.lua"/>
 	<Script file="libs\AceOO-2.0\AceOO-2.0.lua"/>
 	<Script file="libs\AceEvent-2.0\AceEvent-2.0.lua"/>
 	<Script file="libs\AceAddon-2.0\AceAddon-2.0.lua"/>
 	<Script file="libs\AceDB-2.0\AceDB-2.0.lua"/>
-	<!--@end-no-lib-strip@-->
+
 	<Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
-	<!--@no-lib-strip@-->
+
 	<Script file="libs\LibDBIcon-1.0\LibDBIcon-1.0.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Consumable\LibPeriodicTable-3.1-Consumable.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Misc\LibPeriodicTable-3.1-Misc.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Tradeskill\LibPeriodicTable-3.1-Tradeskill.lua"/>
 	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
-	<!--@end-no-lib-strip@-->
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.BattlePet.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Elixirs.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Explosives.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Flasks.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Food.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Garrison.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Gear.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Misc.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Mount.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.OrderHall.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Potions.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Archaeology.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Skill.Fishing.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.SunsongRanch.lua"/>
-	<Script file="libs\MuffinLibPTSets\LibPT-Muffin.Toys.lua"/>
+
 </Ui>

@@ -7,7 +7,7 @@ Website: http://www.wowace.com/
 Documentation: http://www.wowace.com/index.php/AceOO-2.0
 SVN: http://svn.wowace.com/wowace/trunk/Ace2/AceOO-2.0
 Description: Library to provide an object-orientation framework.
-Dependencies: AceLibrary
+Dependencies: MMGHACKAceLibrary
 License: MIT
 ]]
 
@@ -15,12 +15,12 @@ local MAJOR_VERSION = "AceOO-2.0"
 local MINOR_VERSION = 90000 + tonumber(("$Revision: 1091 $"):match("(%d+)"))
 
 -- This ensures the code is only executed if the libary doesn't already exist, or is a newer version
-if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary.") end
-if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
+if not MMGHACKAceLibrary then error(MAJOR_VERSION .. " requires MMGHACKAceLibrary.") end
+if not MMGHACKAceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
 
 local AceOO = {
-	error = AceLibrary.error,
-	argCheck = AceLibrary.argCheck
+	error = MMGHACKAceLibrary.error,
+	argCheck = MMGHACKAceLibrary.argCheck
 }
 
 -- @function	getuid
@@ -42,10 +42,10 @@ local function getlibrary(o)
 	if type(o) == "table" then
 		return o
 	elseif type(o) == "string" then
-		if not AceLibrary:HasInstance(o) then
+		if not MMGHACKAceLibrary:HasInstance(o) then
 			AceOO:error("Library %q does not exist.", o)
 		end
-		return AceLibrary(o)
+		return MMGHACKAceLibrary(o)
 	end
 end
 
@@ -213,10 +213,10 @@ end
 local function inherits(object, parent)
 	object = getlibrary(object)
 	if type(parent) == "string" then
-		if not AceLibrary:HasInstance(parent) then
+		if not MMGHACKAceLibrary:HasInstance(parent) then
 			return false
 		else
-			parent = AceLibrary(parent)
+			parent = MMGHACKAceLibrary(parent)
 		end
 	end
 	AceOO:argCheck(parent, 2, "table")
@@ -976,5 +976,5 @@ local function activate(self, oldLib, oldDeactivate)
 	end
 end
 
-AceLibrary:Register(AceOO, MAJOR_VERSION, MINOR_VERSION, activate)
-AceOO = AceLibrary(MAJOR_VERSION)
+MMGHACKAceLibrary:Register(AceOO, MAJOR_VERSION, MINOR_VERSION, activate)
+AceOO = MMGHACKAceLibrary(MAJOR_VERSION)
