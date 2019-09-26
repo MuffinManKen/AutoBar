@@ -1,0 +1,20 @@
+{
+"classic" :
+	{
+		"zip_path" : "D:/Projects/Build/AutoBarClassic.zip",
+		"zip_root" : "AutoBarClassic",
+		"ignored_files" : [".gitignore"],
+		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc"],
+		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
+		"force_dirs" : ["classic", "libs", "locale", "textures"]
+	},
+"retail" :
+	{
+		"zip_path" : "D:/Projects/Build/AutoBar.zip",
+		"zip_root" : "AutoBar",
+		"ignored_files" : [".gitignore"],
+		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc"],
+		"force_files" : ["AutoBar.toc", "Readme.txt"],
+		"force_dirs" : ["retail", "libs", "locale", "textures"]
+	}
+}
