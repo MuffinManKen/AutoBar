@@ -66,7 +66,7 @@ ABGCS:CacheSpellData(193530, "Aspect of the Wild");
 ABGCS:CacheSpellData(1462, "Beast Lore");
 ABGCS:CacheSpellData(19574, "Bestial Wrath");
 ABGCS:CacheSpellData(109248, "Binding Shot");
-ABGCS:CacheSpellData(883, "Call Pet 1"); 
+ABGCS:CacheSpellData(883, "Call Pet 1");
 ABGCS:CacheSpellData(83242, "Call Pet 2");
 ABGCS:CacheSpellData(83243, "Call Pet 3");
 ABGCS:CacheSpellData(83244, "Call Pet 4");
@@ -175,15 +175,15 @@ ABGCS:CacheSpellData(116705, "Spear Hand Strike");
 ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
 
 --Paladin
-ABGCS:CacheSpellData(31850, "Ardent Defender"); 
-ABGCS:CacheSpellData(642, "Divine Shield"); 
-ABGCS:CacheSpellData(1044, "Blessing of Freedom"); 
-ABGCS:CacheSpellData(1022, "Blessing of Protection"); 
-ABGCS:CacheSpellData(6940, "Blessing of Sacrifice"); 
-ABGCS:CacheSpellData(204018, "Blessing of Spellwarding"); 
-ABGCS:CacheSpellData(204013, "Blessing of Salvation"); 
-ABGCS:CacheSpellData(203538, "Greater Blessing of Kings"); 
-ABGCS:CacheSpellData(203539, "Greater Blessing of Wisdom"); 
+ABGCS:CacheSpellData(31850, "Ardent Defender");
+ABGCS:CacheSpellData(642, "Divine Shield");
+ABGCS:CacheSpellData(1044, "Blessing of Freedom");
+ABGCS:CacheSpellData(1022, "Blessing of Protection");
+ABGCS:CacheSpellData(6940, "Blessing of Sacrifice");
+ABGCS:CacheSpellData(204018, "Blessing of Spellwarding");
+ABGCS:CacheSpellData(204013, "Blessing of Salvation");
+ABGCS:CacheSpellData(203538, "Greater Blessing of Kings");
+ABGCS:CacheSpellData(203539, "Greater Blessing of Wisdom");
 ABGCS:CacheSpellData(183218, "Hand of Hindrance");
 ABGCS:CacheSpellData(96231, "Rebuke");
 ABGCS:CacheSpellData(633, "Lay on Hands");
@@ -197,7 +197,6 @@ ABGCS:CacheSpellData(33206, "Pain Suppression");
 ABGCS:CacheSpellData(15487, "Silence");
 
 --Rogue
-ABGCS:CacheSpellData(200802, "Agonizing Poison");
 ABGCS:CacheSpellData(3408, "Crippling Poison");
 ABGCS:CacheSpellData(2823, "Deadly Poison");
 ABGCS:CacheSpellData(4086, "Evasion");
@@ -231,25 +230,25 @@ ABGCS:CacheSpellData(61882, "Earthquake Totem");
 ABGCS:CacheSpellData(5394, "Healing Stream Totem");
 ABGCS:CacheSpellData(108280, "Healing Tide Totem");
 ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
-ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); 
+ABGCS:CacheSpellData(192222, "Liquid Magma Totem");
 ABGCS:CacheSpellData(98008, "Spirit Link Totem");
 ABGCS:CacheSpellData(196932, "Voodoo Totem");
 ABGCS:CacheSpellData(192077, "Wind Rush Totem");
 
 
 --Warlock
-ABGCS:CacheSpellData(104316, "Call Dreadstalkers"); 
-ABGCS:CacheSpellData(119898, "Command Demon"); 
-ABGCS:CacheSpellData(199954, "Curse of Fragility"); 
-ABGCS:CacheSpellData(199890, "Curse of Tongues"); 
-ABGCS:CacheSpellData(199892, "Curse of Weakness"); 
+ABGCS:CacheSpellData(104316, "Call Dreadstalkers");
+ABGCS:CacheSpellData(119898, "Command Demon");
+ABGCS:CacheSpellData(199954, "Curse of Fragility");
+ABGCS:CacheSpellData(199890, "Curse of Tongues");
+ABGCS:CacheSpellData(199892, "Curse of Weakness");
 ABGCS:CacheSpellData(108416, "Dark Pact");
-ABGCS:CacheSpellData(193396, "Demonic Empowerment"); 
-ABGCS:CacheSpellData(193440, "Demonwrath"); 
-ABGCS:CacheSpellData(108503, "Grimoire of Sacrifice"); 
-ABGCS:CacheSpellData(111897, "Grimoire: Felhunter"); 
-ABGCS:CacheSpellData(20707, "Soulstone"); 
-ABGCS:CacheSpellData(205180, "Summon Darkglare"); 
+ABGCS:CacheSpellData(193396, "Demonic Empowerment");
+ABGCS:CacheSpellData(193440, "Demonwrath");
+ABGCS:CacheSpellData(108503, "Grimoire of Sacrifice");
+ABGCS:CacheSpellData(111897, "Grimoire: Felhunter");
+ABGCS:CacheSpellData(20707, "Soulstone");
+ABGCS:CacheSpellData(205180, "Summon Darkglare");
 ABGCS:CacheSpellData(5697, "Unending Breath");
 ABGCS:CacheSpellData(104773, "Unending Resolve");
 ABGCS:CacheSpellData(6201, "Create Healthstone");
@@ -273,8 +272,8 @@ ABGCS:CacheSpellData(184364, "Enraged Regeneration");
 ABGCS:CacheSpellData(198304, "Intercept");
 ABGCS:CacheSpellData(12975, "Last Stand");
 ABGCS:CacheSpellData(6552, "Pummel");
-ABGCS:CacheSpellData(2565, "Shield Block"); 
-ABGCS:CacheSpellData(871, "Shield Wall"); 
+ABGCS:CacheSpellData(2565, "Shield Block");
+ABGCS:CacheSpellData(871, "Shield Wall");
 
 --Skills
 ABGCS:CacheSpellData(27028, "First Aid");

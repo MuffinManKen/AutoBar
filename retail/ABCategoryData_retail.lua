@@ -93,7 +93,6 @@ function ABGCode:InitializeCategories()
 
 
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
-		"ROGUE", ABGCode:GetSpellNameByName("Agonizing Poison"),
 		"ROGUE", ABGCode:GetSpellNameByName("Deadly Poison"),
 		"ROGUE", ABGCode:GetSpellNameByName("Wound Poison"),
 	})
@@ -380,7 +379,7 @@ function ABGCode:InitializeCategories()
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Mounts"] = AutoBarSpells:new("Muffin.Mounts", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mount." .. AutoBar.NiceClass)
+	AutoBarCategoryList["Muffin.Mounts"] = AutoBarSpells:new("Muffin.Mounts", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mounts." .. AutoBar.NiceClass)
 	AutoBarCategoryList["Muffin.Mounts"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],

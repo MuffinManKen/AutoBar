@@ -1,2 +1,2 @@
 AutoBar.toc
-retail
+retail\

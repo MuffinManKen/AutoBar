@@ -1,2 +1,2 @@
 AutoBarClassic.toc
-classic
+classic\

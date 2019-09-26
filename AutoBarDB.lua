@@ -1089,7 +1089,8 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
 			"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
-			"AutoBarButtonTrack",
+			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
+			"AutoBarButtonCooldownStoneMana",
 		}
 	end
 
