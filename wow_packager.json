@@ -1,7 +1,8 @@
 {
 "classic" :
 	{
-		"zip_path" : "D:/Projects/Build/AutoBarClassic.zip",
+		"toc_file" : "AutoBarClassic.toc",
+		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%.zip",
 		"zip_root" : "AutoBarClassic",
 		"ignored_files" : [".gitignore"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc"],
@@ -10,7 +11,8 @@
 	},
 "retail" :
 	{
-		"zip_path" : "D:/Projects/Build/AutoBar.zip",
+		"toc_file" : "AutoBar.toc",
+		"zip_path" : "D:/Projects/Build/AutoBar_%VER%.zip",
 		"zip_root" : "AutoBar",
 		"ignored_files" : [".gitignore"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc"],
