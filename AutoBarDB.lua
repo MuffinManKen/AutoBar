@@ -301,6 +301,15 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonER",
 			"AutoBarButtonClassBuff",
 		},
+		WARRIOR =
+		{
+			"AutoBarButtonShields",
+			"AutoBarButtonCharge",
+			"AutoBarButtonInterrupt",
+			"AutoBarButtonER",
+			"AutoBarButtonStance",
+			"AutoBarButtonClassBuff",
+		}
 	}
 
 	local my_class_buttons = class_button_map[AutoBar.CLASS] or {}
@@ -922,7 +931,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE" or AutoBar.CLASS == "WARRIOR") then
+	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",

@@ -79,16 +79,12 @@ function ABGCode:InitializeCategories()
 		"PALADIN", ABGCode:GetSpellNameByName("Greater Blessing of Wisdom"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Unending Breath"),
-		"WARRIOR", ABGCode:GetSpellNameByName("Demoralizing Shout"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Battle Shout"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
 		"HUNTER", ABGCode:GetSpellNameByName("Call Pet"),
---		"SHAMAN", ABGCode:GetSpellNameByName("Earth Elemental"),
---		"SHAMAN", ABGCode:GetSpellNameByName("Fire Elemental"),
---		"SHAMAN", ABGCode:GetSpellNameByName("Storm Elemental"),
---		"SHAMAN", ABGCode:GetSpellNameByName("Feral Spirit"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Eye of Kilrogg"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Infernal"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Felhunter"),

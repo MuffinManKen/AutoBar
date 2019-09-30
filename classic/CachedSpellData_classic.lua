@@ -213,6 +213,7 @@ ABGCS:CacheSpellData(697, "Summon Voidwalker");
 ABGCS:CacheSpellData(1122, "Summon Infernal");
 
 --Warrior
+ABGCS:CacheSpellData(6673, "Battle Shout");
 ABGCS:CacheSpellData(100, "Charge");
 ABGCS:CacheSpellData(1160, "Demoralizing Shout");
 ABGCS:CacheSpellData(20252, "Intercept");
