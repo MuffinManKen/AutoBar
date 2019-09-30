@@ -697,6 +697,18 @@ function AutoBar:InitializeDefaults()
 				arrangeOnUse = true,
 			}
 		end
+
+		if (not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
+			AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
+				buttonKey = "AutoBarButtonToyBox",
+				buttonClass = "AutoBarButtonToyBox",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = "*",
+				enabled = false,
+				arrangeOnUse = true,
+				toybox_only_show_favourites = false,
+			}
+		end
 	end
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
@@ -724,18 +736,6 @@ function AutoBar:InitializeDefaults()
 			mount_show_class = true,
 			mount_reverse_sort = false,
 			mount_show_rng_fave = false,
-		}
-	end
-
-	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and not AutoBar.db.account.buttonList["AutoBarButtonToyBox"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonToyBox"] = {
-			buttonKey = "AutoBarButtonToyBox",
-			buttonClass = "AutoBarButtonToyBox",
-			barKey = "AutoBarClassBarExtras",
-			defaultButtonIndex = "*",
-			enabled = false,
-			arrangeOnUse = true,
-			toybox_only_show_favourites = false,
 		}
 	end
 
