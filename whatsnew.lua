@@ -8,13 +8,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Hunter: Track Hidden & Elementals
-	 - Shaman: Earth Shock isn`t a totem
-	 - Warlock: Fixed Demon Skin
-	 - Warrior: Berserker/Battle Stance
-	 - Lots of cleanup
-	 - Really ugly hack to try to workaround Bagnon conflicts
-	 - NOTE: LOTS of items/spells are missing but there shouldn`t be any lua errors
+	 - Warrior: Battle Shout & some cleanup
+	 - Updated Quest/Starts Quest items
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
