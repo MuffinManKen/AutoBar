@@ -1236,12 +1236,12 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
-		if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+		if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 			self:AddCategory("Spell.Mage.Conjure Water")
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
-		if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+		if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 			self:AddCategory("Spell.Warlock.Create Soulstone")
 		end
 
