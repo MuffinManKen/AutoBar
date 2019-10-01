@@ -8,8 +8,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Warrior: Battle Shout & some cleanup
-	 - Updated Quest/Starts Quest items
+	 - Mage: Fixes for Food/Water conjuring
+	 - Druid: Fixes
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
