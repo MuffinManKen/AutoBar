@@ -1451,8 +1451,9 @@ function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFood.super.prototype.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
-		self:AddCategory("Consumable.Food.Conjure")
+		self:AddCategory("Spell.Mage.Conjure Food")
 	end
+
 	self:AddCategory("Muffin.Food.Health.Basic")
 
 	if (buttonDB.include_combo_basic) then
