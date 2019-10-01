@@ -278,65 +278,55 @@ function AutoBar:InitializeDefaults()
 	{
 		DRUID =
 		{
-			"AutoBarButtonBear",
-			"AutoBarButtonCat",
-			"AutoBarButtonTravel",
-			"AutoBarButtonAquatic",
-			"AutoBarButtonMoonkin",
-			"AutoBarButtonTreeForm",
-			"AutoBarButtonStealth",
-			"AutoBarButtonDebuff",
-			"AutoBarButtonClassBuff",
-			"AutoBarButtonStance",
-			"AutoBarButtonShields",
-			"AutoBarButtonInterrupt",
-			"AutoBarButtonER",
+			{button_name = "AutoBarButtonBear", },
+			{button_name = "AutoBarButtonCat", },
+			{button_name = "AutoBarButtonTravel", },
+			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonStagForm", project_id = WOW_PROJECT_MAINLINE},
+			{button_name = "AutoBarButtonMoonkin", },
+			{button_name = "AutoBarButtonTreeForm", },
+			{button_name = "AutoBarButtonStealth", },
+			{button_name = "AutoBarButtonDebuff", },
+			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonStance", },
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonER", },
 		},
 		MAGE =
 		{
-			"AutoBarButtonShields",
-			"AutoBarButtonStealth",
-			"AutoBarButtonConjure",
-			"AutoBarButtonInterrupt",
-			"AutoBarButtonER",
-			"AutoBarButtonClassBuff",
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonStealth", },
+			{button_name = "AutoBarButtonConjure", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonClassBuff", },
 		},
 		WARRIOR =
 		{
-			"AutoBarButtonShields",
-			"AutoBarButtonCharge",
-			"AutoBarButtonInterrupt",
-			"AutoBarButtonER",
-			"AutoBarButtonStance",
-			"AutoBarButtonClassBuff",
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonCharge", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonStance", },
+			{button_name = "AutoBarButtonClassBuff", },
 		}
 	}
 
 	local my_class_buttons = class_button_map[AutoBar.CLASS] or {}
 
-	for idx, button_name in ipairs(my_class_buttons) do
-		if (not AutoBar.db.class.buttonList[button_name]) then
-			AutoBar.db.class.buttonList[button_name] = {
-				buttonKey = button_name,
-				buttonClass = button_name,
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = idx,
-				enabled = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "DRUID" and WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonStagForm"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonStagForm"] = {
-				buttonKey = "AutoBarButtonStagForm",
-				buttonClass = "AutoBarButtonStagForm",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = 4,
-				enabled = true,
-				noPopup = true,
-			}
+	for idx, button_def in ipairs(my_class_buttons) do
+		if(button_def.project_id == nil) or (button_def.project_id == WOW_PROJECT_ID) then
+			local button_name = button_def.button_name
+			if (not AutoBar.db.class.buttonList[button_name]) then
+				AutoBar.db.class.buttonList[button_name] = {
+					buttonKey = button_name,
+					buttonClass = button_name,
+					barKey = AutoBar.classBar,
+					defaultButtonIndex = idx,
+					enabled = true,
+				}
+			end
 		end
 	end
 
@@ -651,16 +641,16 @@ function AutoBar:InitializeDefaults()
 
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
-				AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
-					buttonKey = "AutoBarButtonMillHerbs",
-					buttonClass = "AutoBarButtonMillHerbs",
-					barKey = "AutoBarClassBarExtras",
-					defaultButtonIndex = 11,
-					enabled = true,
-					arrangeOnUse = true,
-					targeted = "Milling",
-				}
-			end
+			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
+				buttonKey = "AutoBarButtonMillHerbs",
+				buttonClass = "AutoBarButtonMillHerbs",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = 11,
+				enabled = true,
+				arrangeOnUse = true,
+				targeted = "Milling",
+			}
+		end
 
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonGarrison"]) then
@@ -1099,7 +1089,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
-			"AutoBarButtonCooldownStoneMana",
+			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic"
 		}
 	end
 
