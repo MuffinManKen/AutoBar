@@ -1465,11 +1465,12 @@ function AutoBar:CreateOptionsAce3()
 						    func = AutoBar.CategoryNew,
 						},
 						categoryReset = {
-						    type = "execute",
+							type = "execute",
 							order = 2,
-						    name = L["Reset"],
-						    desc = L["ResetCategoryDescription"],
-						    func = CategoryReset,
+							name = L["Reset"],
+							desc = L["ResetCategoryDescription"],
+							func = CategoryReset,
+							disabled = true,
 						},
 					}
 				},
@@ -2973,11 +2974,12 @@ function AutoBar:CreateSmallOptions()
 						    func = AutoBar.CategoryNew,
 						},
 						categoryReset = {
-						    type = "execute",
+							type = "execute",
 							order = 2,
-						    name = L["Reset"],
-						    desc = L["ResetCategoryDescription"],
-						    func = CategoryReset,
+							name = L["Reset"],
+							desc = L["ResetCategoryDescription"],
+							func = CategoryReset,
+							disabled = true,
 						},
 					}
 				},
