@@ -302,6 +302,15 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonClassBuff", },
 		},
+		PALADIN =
+		{
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonDebuff", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonStance", },
+		},
 		ROGUE =
 		{
 			{button_name = "AutoBarButtonShields", },
@@ -837,7 +846,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PALADIN" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonDebuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonDebuff"] = {
 				buttonKey = "AutoBarButtonDebuff",
@@ -895,7 +904,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (ABGCode:ClassInList(AutoBar.CLASS, "DEATHKNIGHT", "PALADIN", "WARLOCK")) then
+	if (ABGCode:ClassInList(AutoBar.CLASS, "DEATHKNIGHT", "WARLOCK")) then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
@@ -1043,20 +1052,6 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-
-	if (AutoBar.CLASS == "WARRIOR"or AutoBar.CLASS == "PALADIN") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonStance"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonStance"] = {
-				buttonKey = "AutoBarButtonStance",
-				buttonClass = "AutoBarButtonStance",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		elseif (AutoBar.db.class.buttonList["AutoBarButtonStance"].barKey ~= AutoBar.classBar) then
-			AutoBar.db.class.buttonList["AutoBarButtonStance"].barKey = AutoBar.classBar
-		end
-	end
 
 	--classic-only: "AutoBarButtonTrack",
 	local deprecated_buttons
