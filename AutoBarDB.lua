@@ -322,6 +322,18 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonTrap", },
 		},
+		WARLOCK =
+		{
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonClassPets2", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonConjure", },
+			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonDebuff", },
+			{button_name = "AutoBarButtonTrack", },
+			{button_name = "AutoBarButtonClassPet", },
+		},
 		WARRIOR =
 		{
 			{button_name = "AutoBarButtonShields", },
@@ -807,7 +819,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrack"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrack"] = {
 				buttonKey = "AutoBarButtonTrack",
@@ -846,7 +858,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK") then
+	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonDebuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonDebuff"] = {
 				buttonKey = "AutoBarButtonDebuff",
@@ -858,19 +870,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "WARLOCK") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonConjure"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonConjure"] = {
-				buttonKey = "AutoBarButtonConjure",
-				buttonClass = "AutoBarButtonConjure",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "WARLOCK" or AutoBar.CLASS == "DEATHKNIGHT") then
+	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "DEATHKNIGHT") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPets2"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPets2"] = {
 				buttonKey = "AutoBarButtonClassPets2",
@@ -892,7 +892,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
-	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PRIEST" or AutoBar.CLASS == "WARLOCK") then
+	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PRIEST") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
 				buttonKey = "AutoBarButtonClassPet",
@@ -904,7 +904,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (ABGCode:ClassInList(AutoBar.CLASS, "DEATHKNIGHT", "WARLOCK")) then
+	if (ABGCode:ClassInList(AutoBar.CLASS, "DEATHKNIGHT")) then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
