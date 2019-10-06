@@ -24,13 +24,21 @@ function ABGCode:InitializeCategories()
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone (Major)"),
 	})
 
-	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = AutoBarSpells:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone (Minor)"],
+	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = AutoBarSpells:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone"],
 	{
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Minor)"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Lesser)"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Greater)"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Soulstone (Major)"),
+	})
+
+	AutoBarCategoryList["Spell.Mage.Create Manastone"] = AutoBarSpells:new( "Spell.Mage.Create Manastone", spellIconList["Conjure Mana Jade"],
+	{
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Mana Jade"),
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Mana Ruby"),
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Mana Agate"),
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Mana Citrine"),
 	})
 
 
@@ -131,6 +139,7 @@ function ABGCode:InitializeCategories()
 	{
 		"DRUID", 		ABGCode:GetSpellNameByName("Barkskin"), 	ABGCode:GetSpellNameByName("Barkskin"),
 		"MAGE", 			ABGCode:GetSpellNameByName("Frost Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
+		"MAGE", 			ABGCode:GetSpellNameByName("Ice Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
 		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Protection"), ABGCode:GetSpellNameByName("Divine Shield"),
 		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Shield"), ABGCode:GetSpellNameByName("Divine Protection"),
 		"PRIEST", 		ABGCode:GetSpellNameByName("Power Word: Shield"), ABGCode:GetSpellNameByName("Power Word: Shield"),

@@ -61,9 +61,16 @@ ABGCS:CacheSpellData(13795, "Immolation Trap");
 
 --Mage
 ABGCS:CacheSpellData(168, "Frost Armor");
+ABGCS:CacheSpellData(7302, "Ice Armor");
 ABGCS:CacheSpellData(1459, "Arcane Intellect");
 ABGCS:CacheSpellData(5504, "Conjure Water");
 ABGCS:CacheSpellData(587, "Conjure Food");
+
+ABGCS:CacheSpellData(759, "Conjure Mana Agate");
+ABGCS:CacheSpellData(10054, "Conjure Mana Ruby");
+ABGCS:CacheSpellData(3552, "Conjure Mana Jade");
+ABGCS:CacheSpellData(10053, "Conjure Mana Citrine");
+
 
 ABGCS:CacheSpellData(11426, "Ice Barrier");
 ABGCS:CacheSpellData(130, "Slow Fall");
