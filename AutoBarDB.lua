@@ -302,6 +302,17 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonClassBuff", },
 		},
+		ROGUE =
+		{
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonStealth", },
+			{button_name = "AutoBarButtonPoisonLethal", },
+			{button_name = "AutoBarButtonPoisonNonlethal", },
+			{button_name = "AutoBarButtonInterrupt", },
+			{button_name = "AutoBarButtonCharge", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonTrap", },
+		},
 		WARRIOR =
 		{
 			{button_name = "AutoBarButtonShields", },
@@ -800,7 +811,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE") then
+	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
 				buttonKey = "AutoBarButtonTrap",
@@ -814,7 +825,7 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS == "ROGUE"or AutoBar.CLASS == "HUNTER") then
+	if (AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonStealth"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonStealth"] = {
 				buttonKey = "AutoBarButtonStealth",
@@ -921,7 +932,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "ROGUE") then
+	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
 				buttonKey = "AutoBarButtonCharge",
@@ -973,27 +984,6 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-		if (not AutoBar.db.class.buttonList["AutoBarButtonPoisonLethal"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonPoisonLethal"] = {
-				buttonKey = "AutoBarButtonPoisonLethal",
-				buttonClass = "AutoBarButtonPoisonLethal",
-				barKey = "AutoBarClassBarRogue",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonPoisonNonlethal"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonPoisonNonlethal"] = {
-				buttonKey = "AutoBarButtonPoisonNonlethal",
-				buttonClass = "AutoBarButtonPoisonNonlethal",
-				barKey = "AutoBarClassBarRogue",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
 	end
 
 	if (AutoBar.CLASS == "SHAMAN") then
