@@ -258,13 +258,14 @@ function ABGCode:InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Track"] = AutoBarSpells:new( "Spell.Track", spellIconList["Explosive Trap"],
+	AutoBarCategoryList["Spell.Track"] = AutoBarSpells:new( "Spell.Track", spellIconList["Track Beasts"],
 	{
 		"HUNTER", ABGCode:GetSpellNameByName("Track Humanoids"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Undead"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Beasts"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Hidden"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Elementals"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Demons"),
 
 		"WARLOCK", ABGCode:GetSpellNameByName("Sense Demons"),
 	})

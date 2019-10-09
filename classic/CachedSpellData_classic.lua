@@ -51,6 +51,7 @@ ABGCS:CacheSpellData(19883, "Track Humanoids");
 ABGCS:CacheSpellData(19884, "Track Undead");
 ABGCS:CacheSpellData(1494, "Track Beasts");
 ABGCS:CacheSpellData(19885, "Track Hidden");
+ABGCS:CacheSpellData(19878, "Track Demons");
 ABGCS:CacheSpellData(19880, "Track Elementals");
 
 
