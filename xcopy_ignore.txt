@@ -4,6 +4,7 @@
 .pkgmeta\
 .prj\
 .pui\
+.py\
 CVS
 ChangeList.txt
 media
