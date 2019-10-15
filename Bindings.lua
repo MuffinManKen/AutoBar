@@ -1,6 +1,6 @@
 	L = AutoBarGlobalDataObject.locale
 
-	BINDING_HEADER_AUTOBAR_SEP = L["AutoBar"];
+	BINDING_HEADER_AUTOBAR_SEP = "AutoBar";
 	BINDING_NAME_AUTOBAR_CONFIG = L["CONFIG_WINDOW"];
 
 	BINDING_HEADER_AutoBarButtonHeader = L["AutoBarButtonHeader"]

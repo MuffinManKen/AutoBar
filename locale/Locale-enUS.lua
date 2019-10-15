@@ -6,7 +6,6 @@
 
 if (GetLocale() == "enUS") then
 	AutoBarGlobalDataObject.locale = {
-		["AutoBar"] = "AutoBar",
 		["CONFIG_WINDOW"] = "Configuration Window",
 		["SLASHCMD_LONG"] = "autobar",
 		["SLASHCMD_SHORT"] = "atb",

@@ -57,9 +57,8 @@ local ROW_COLUMN_MAX = 32
 
 local hintString = "|cffffffff%s:|r %s"
 local hintText = {
-	L["AutoBar"],
+	"AutoBar",
 	hintString:format(L["Left-Click"], L["Options GUI"]),
-	--hintString:format(L["Right-Click"], L["Dropdown UI"]),
 	hintString:format(L["Alt-Click"], L["Key Bindings"]),
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
@@ -100,7 +99,7 @@ function AutoBar:InitializeOptions()
 	self:CreateSmallOptions()
 
 	self.options.args.config = {
-		name = L["AutoBar"],
+		name = "AutoBar",
 		desc = L["Toggle the config panel"],
 		wfHidden = true,
 		type = "execute",
@@ -112,7 +111,7 @@ function AutoBar:InitializeOptions()
 			type = "launcher",
 			icon = "Interface\\Icons\\INV_Ingot_Eternium",
 			tocname = "AutoBar",
-			label = L["AutoBar"],
+			label = "AutoBar",
 			OnClick = LDBOnClick,
 			OnTooltipShow = function(tooltip)
 				if (dewdrop and dewdrop:GetOpenedParent()) then
@@ -1218,7 +1217,7 @@ end
 
 
 function AutoBar:CreateOptionsAce3()
-	local name = L["AutoBar"]
+	local name = "AutoBar"
 	if (not AutoBar.optionsMain) then
 		AutoBar.optionsMain = {
 			type = "group",
@@ -1227,14 +1226,14 @@ function AutoBar:CreateOptionsAce3()
 				main = {
 					type = "group",
 					order = 10,
-					name = L["AutoBar"],
+					name = "AutoBar",
 					get = getAutoBarValue,
 					set = setAutoBarValue,
 					args = {
 						header0 = {
 							type = "header",
 							order = 0,
-							name = L["AutoBar"] .. " " .. AutoBar.version,
+							name = "AutoBar" .. " " .. AutoBar.version,
 						},
 						moveBarsMode = {
 							type = "execute",
@@ -1539,7 +1538,7 @@ function AutoBar:CreateOptionsAce3()
 				config = {
 					type = "execute",
 					order = 50,
-					name = L["AutoBar"],
+					name = "AutoBar",
 					desc = L["Toggle the config panel"],
 					guiHidden = true,
 					func = AutoBar.OpenOptions,
@@ -2911,7 +2910,7 @@ end
 
 
 function AutoBar:CreateSmallOptions()
-	local name = L["AutoBar"]
+	local name = "AutoBar"
 	if (not AutoBar.options) then
 		AutoBar.options = {
 			type = "group",
