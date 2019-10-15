@@ -23,9 +23,6 @@ if (GetLocale() == "enUS") then
 		["Always keep Popups open for %s"] = "Always keep Popups open for %s";
 		["Always Show"] = "Always Show";
 		["Always Show %s, even if empty."] = "Always Show %s, even if empty.";
-		["Announce to Party"] = "Announce to Party",
-		["Announce to Raid"] = "Announce to Raid",
-		["Announce to Say"] = "Announce to Say",
 		["Bar Location"] = "Bar Location",
 		["Bar the Button is located on"] = "Bar the Button is located on",
 		["Bars"] = "Bars",
