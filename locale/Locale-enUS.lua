@@ -315,45 +315,19 @@ if (GetLocale() == "enUS") then
 		["Default"] = "Default",
 		["Zoomed"] = "Zoomed",
 		["Dreamlayout"] = "Dreamlayout",
-		["AUTOBAR_CONFIG_DISABLERIGHTCLICKSELFCAST"] = "Disable Right Click Self Cast";
-		["AUTOBAR_CONFIG_REMOVECAT"] = "Delete Current Category";
 		["Columns"] = "Columns";
-		["AUTOBAR_CONFIG_GAPPING"] = "Icon Gapping";
-		["AUTOBAR_CONFIG_ALPHA"] = "Icon Alpha";
-		["AUTOBAR_CONFIG_WIDTHHEIGHTUNLOCKED"] = "Button Height\nand Width Unlocked";
-		["AUTOBAR_CONFIG_SHOWCATEGORYICON"] = "Show Category Icons";
 		["AUTOBAR_CONFIG_BT3BAR"] = "BarTender3 Bar";
 		["AUTOBAR_CONFIG_DOCKTOMAIN"] = "Main Menu";
 		["AUTOBAR_CONFIG_DOCKTOCHATFRAME"] = "Chat Frame";
 		["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"] = "Chat Frame Menu";
 		["AUTOBAR_CONFIG_DOCKTOACTIONBAR"] = "Action Bar";
 		["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"] = "Menu Buttons";
-		["AUTOBAR_CONFIG_NOTFOUND"] = "(Not Found: Item ";
-		["AUTOBAR_CONFIG_SLOTEDITTEXT"] = " Layer (click to edit)";
-		["AUTOBAR_CONFIG_CHARACTER"] = "Character";
 		["Shared"] = "Shared";
 		["Account"] = "Account";
 		["Class"] = "Class";
-		["AUTOBAR_CONFIG_BASIC"] = "Basic";
-		["AUTOBAR_CONFIG_USECHARACTER"] = "Use Character Layer";
-		["AUTOBAR_CONFIG_USESHARED"] = "Use Shared Layer";
-		["AUTOBAR_CONFIG_USECLASS"] = "Use Class Layer";
-		["AUTOBAR_CONFIG_USEBASIC"] = "Use Basic Layer";
-		["AUTOBAR_CONFIG_HIDECONFIGTOOLTIPS"] = "Hide Config Tooltips";
-		["AUTOBAR_CONFIG_OSKIN"] = "Use oSkin";
 		["Log Events"] = "Log Events";
 		["Log Memory"] = "Log Memory";
 		["Log Performance"] = "Log Performance";
-		["AUTOBAR_CONFIG_CHARACTERLAYOUT"] = "Character Layout";
-		["AUTOBAR_CONFIG_SHAREDLAYOUT"] = "Shared Layout";
-		["AUTOBAR_CONFIG_SHARED1"] = "Shared 1";
-		["AUTOBAR_CONFIG_SHARED2"] = "Shared 2";
-		["AUTOBAR_CONFIG_SHARED3"] = "Shared 3";
-		["AUTOBAR_CONFIG_SHARED4"] = "Shared 4";
-		["AUTOBAR_CONFIG_EDITCHARACTER"] = "Edit Character Layer";
-		["AUTOBAR_CONFIG_EDITSHARED"] = "Edit Shared Layer";
-		["AUTOBAR_CONFIG_EDITCLASS"] = "Edit Class Layer";
-		["AUTOBAR_CONFIG_EDITBASIC"] = "Edit Basic Layer";
 		["Share the config"] = "Share the config";
 
 		-- AutoBarCategory
@@ -462,7 +436,6 @@ if (GetLocale() == "enUS") then
 		["Custom"] = "Custom";
 		["Misc.Minipet.Normal"] = "Pet";
 		["Misc.Minipet.Snowball"] = "Holiday Pet";
-		["AUTOBAR_CLASS_UNGORORESTORE"] = "Un'Goro: Crystal Restore";
 
 		["Consumable.Anti-Venom"] = "Anti-Venom";
 
@@ -487,19 +460,11 @@ if (GetLocale() == "enUS") then
 		["Misc.Battle Standard.Alterac Valley"] = "Battle Standard AV";
 		["Consumable.Cooldown.Stone.Health.Other"] = "Heal Items: Other";
 		["Consumable.Cooldown.Stone.Mana.Other"] = "Demonic and Dark Runes";
-		["AUTOBAR_CLASS_ARCANE_PROTECTION"] = "Arcane Protection";
-		["AUTOBAR_CLASS_FIRE_PROTECTION"] = "Fire Protection";
-		["AUTOBAR_CLASS_FROST_PROTECTION"] = "Frost Protection";
-		["AUTOBAR_CLASS_NATURE_PROTECTION"] = "Nature Protection";
-		["AUTOBAR_CLASS_SHADOW_PROTECTION"] = "Shadow Protection";
-		["AUTOBAR_CLASS_SPELL_REFLECTION"] = "Spell Protection";
-		["AUTOBAR_CLASS_HOLY_PROTECTION"] = "Holy Protection";
-		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "Invulnerability Potions";
 		["Consumable.Buff.Free Action"] = "Buff: Free Action";
 
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
-		
+
 		["Spell.Guild"] = "Guild Spells";
 		["Autobar.SunsongRanch"] = "Sunsong Ranch";
 
@@ -531,7 +496,6 @@ if (GetLocale() == "enUS") then
 		["Misc.Openable"] = "Openable";
 		["Consumable.Water.Basic"] = "Water";
 		["Consumable.Water.Percentage"] = "Water: % mana gain";
-		["AUTOBAR_CLASS_WATER_CONJURED"] = "Water: Mage Conjured";
 		["Consumable.Water.Conjure"] = "Conjure Water";
 		["Consumable.Water.Buff.Spirit"] = "Water: Spirit Bonus";
 		["Consumable.Water.Buff"] = "Water: Bonus";
@@ -541,7 +505,6 @@ if (GetLocale() == "enUS") then
 		["Consumable.Buff Type.Battle"] = "Buff: Battle Elixir";
 		["Consumable.Buff Type.Guardian"] = "Buff: Guardian Elixir";
 		["Consumable.Buff Type.Flask"] = "Buff: Flask";
-		["AUTOBAR_CLASS_SOULSHARDS"] = "Soul Shards";
 		["Muffin.Explosives"] = "Explosives";
 
 		["Misc.Spell.Mount.Ahn'Qiraj"]="Mounts: Qiraji",
@@ -558,38 +521,5 @@ if (GetLocale() == "enUS") then
 		["Misc.Mount.Flying"] = "Mounts: Flying";
 	}
 
---AUTOBAR_CHAT_MESSAGE1 = "Config for this character is old version. Clearing. No attempt to upgrade config is being done.";
---
---  AutoBar_Config.xml
---AUTOBAR_CONFIG_TAB_BAR = "Bar";
---AUTOBAR_CONFIG_TAB_POPUP = "Popup";
---AUTOBAR_CONFIG_TAB_PROFILE = "Profile";
---AUTOBAR_CONFIG_TAB_KEYS = "Keys";
-
---AUTOBAR_TOOLTIP1 = " (Count: ";
---AUTOBAR_TOOLTIP2 = " [Custom Item]";
---AUTOBAR_TOOLTIP6 = " [Limited Usage]";
---AUTOBAR_TOOLTIP7 = " [Cooldown]";
-AUTOBAR_TOOLTIP8 = "\n(Left Click to apply to Main Hand weapon\nRight Click to apply to OffHand weapon)";
---AUTOBAR_CONFIG_TIPAFFECTSCHARACTER = "Changes affect only this Character.";
---AUTOBAR_CONFIG_TIPAFFECTSALL = "Changes affect all Characters.";
---AUTOBAR_CONFIG_SETUPSINGLE = "Single (Classic) Setup";
---AUTOBAR_CONFIG_SETUPSHARED = "Shared Setup";
---AUTOBAR_CONFIG_SETUPSTANDARD = "Standard Setup";
---AUTOBAR_CONFIG_SETUPBLANKSLATE = "Blank Slate";
---AUTOBAR_CONFIG_SETUPSINGLETIP = "Click for Single Character settings similar to the classic AutoBar.";
---AUTOBAR_CONFIG_SETUPSHAREDTIP = "Click for shared settings.\nEnables the character specific as well as shared layers.";
---AUTOBAR_CONFIG_SETUPSTANDARDTIP = "Enable editing and use of all layers.";
---AUTOBAR_CONFIG_SETUPBLANKSLATETIP = "Clear out all character and shared slots.";
---AUTOBAR_CONFIG_RESETSINGLETIP = "Click to reset to the Single Character defaults.";
---AUTOBAR_CONFIG_RESETSHAREDTIP = "Click to reset to the Shared Character defaults.\nClass specific slots are copied to the Character layer.\nDefault slots are copied to the Shared layer.";
---AUTOBAR_CONFIG_RESETSTANDARDTIP = "Click to reset to the standard defaults.\nClass specific slots are in the Class layer.\nDefault slots are in the Basic layer.\nShared and Character layers are cleared.";
-
---  AutoBarConfig.lua
---AUTOBAR_TOOLTIP15 = "\nWeapon Target\n(Left click main weapon\nRight click offhand weapon.)";
-AUTOBAR_TOOLTIP17 = "\nNon combat only.";
-AUTOBAR_TOOLTIP18 = "\nCombat only.";
---AUTOBAR_TOOLTIP21 = "Require HP restore";
---AUTOBAR_TOOLTIP22 = "Require Mana restore";
 
 end
