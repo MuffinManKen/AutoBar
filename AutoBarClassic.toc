@@ -1,7 +1,7 @@
 ## Interface: 11302
 ## Title: AutoBarClassic
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
-## Version: 1.13.2.08
+## Version: 1.13.2.09
 ## X-Website: http://www.MuffinManGames.com
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
 ## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
