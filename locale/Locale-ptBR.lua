@@ -494,9 +494,9 @@ if (GetLocale() == "ptBR") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "Invulnerability Potions";
 		["Consumable.Buff.Free Action"] = "Buff: Free Action";
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
-		
+
 		["Spell.Guild"] = "Guild Spells";
 
 		["Spell.Aspect"] = "Aspect";

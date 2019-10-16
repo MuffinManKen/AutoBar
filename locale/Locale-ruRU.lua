@@ -492,7 +492,7 @@ if (GetLocale() == "ruRU") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "Зелья неуязвимости";
 		["Consumable.Buff.Free Action"] = "Бафф: Свободные команды";
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
 		["Spell.Aspect"] = "Аура / Дух";

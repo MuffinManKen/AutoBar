@@ -491,7 +491,7 @@ if (GetLocale() == "esMX") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "Pociones de Invulnerabilidad";
 		["Consumable.Buff.Free Action"] = "Poción de Acción Libre";
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
 		["Spell.Aspect"] = "Aspecto";

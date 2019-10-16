@@ -10,9 +10,7 @@ if (GetLocale() == "enUS") then
 		["SLASHCMD_LONG"] = "autobar",
 		["SLASHCMD_SHORT"] = "atb",
 		["Button"] = "Button",
-		["LOAD_ERROR"] = "|cff00ff00Error Loading the AutoBarConfig mod. Make sure you download and enable it.|r Error: ",
 		["Toggle the config panel"] = "Toggle the config panel",
-		["Empty"] = "Empty",
 
 		-- Config
 		["Alpha"] = "Alpha",
@@ -71,7 +69,6 @@ if (GetLocale() == "enUS") then
 		["General"] = "General",
 		["Hide"] = "Hide",
 		["Hide %s"] = "Hide %s",
-		["Item"] = "Item",
 		["Items"] = "Items",
 		["Location"] = "Location",
 		["Macro Text"] = "Macro Text",
@@ -83,7 +80,6 @@ if (GetLocale() == "enUS") then
 		["No Popup"] = "No Popup";
 		["No Popup for %s"] = "No Popup for %s";
 		["Non Combat Only"] = "Non Combat Only",
-		["Not directly usable"] = "Not directly usable",
 		["Number of columns for %s"] = "Number of columns for %s",
 		["Dropdown UI"] = "Dropdown UI",
 		["Options GUI"] = "Options GUI",
@@ -113,7 +109,6 @@ if (GetLocale() == "enUS") then
 		["Number of rows for %s"] = "Number of rows for %s",
 		["RightClick SelfCast"] = "RightClick SelfCast",
 		["SelfCast using Right click"] = "SelfCast using Right click",
-		["Key Bindings"] = KEY_BINDINGS,
 		["Assign Bindings for Buttons on your Bars."] = "Assign Bindings for Buttons on your Bars.",
 		["Scale"] = "Scale",
 		["Change the scale of the bar."] = "Change the scale of the bar.",
@@ -169,32 +164,17 @@ if (GetLocale() == "enUS") then
 		["BOTTOMRIGHT"] = "Bottom Right",
 
 		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "FuBarPlugin Config",
-		["Configure the FuBar Plugin"] = "Configure the FuBar Plugin",
 
-		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "Left-Click",
 		["Right-Click"] = "Right-Click",
 		["Alt-Click"] = "Alt-Click",
 		["Ctrl-Click"] = "Ctrl-Click",
 		["Shift-Click"] = "Shift-Click",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-Click",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade is required to Skin the Buttons",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Basic",
 		["AutoBarClassBarExtras"] = "Extras",
-		["AutoBarClassBarDeathKnight"] = "Death Knight",
-		["AutoBarClassBarMonk"] = "Monk",
-		["AutoBarClassBarDruid"] = "Druid",
-		["AutoBarClassBarHunter"] = "Hunter",
-		["AutoBarClassBarMage"] = "Mage",
-		["AutoBarClassBarPaladin"] = "Paladin",
-		["AutoBarClassBarPriest"] = "Priest",
-		["AutoBarClassBarRogue"] = "Rogue",
-		["AutoBarClassBarShaman"] = "Shaman",
-		["AutoBarClassBarWarlock"] = "Warlock",
-		["AutoBarClassBarWarrior"] = "Warrior",
 
 		-- Button Names
 		["Buttons"] = "Buttons",
@@ -261,7 +241,6 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonTrap"] = "Trap",
 		["AutoBarButtonTrinket1"] = "Trinket 1",
 		["AutoBarButtonTrinket2"] = "Trinket 2",
-		["AutoBarButtonWarlockStones"] = "Warlock Stones",
 		["AutoBarButtonWater"] = "Water",
 		["AutoBarButtonWaterBuff"] = "Water Buff",
 
@@ -272,45 +251,18 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonTravel"] = "Travel",
 
 		-- AutoBarClassButton.lua
-		["Num Pad "] = "Num Pad ",
-		["Mouse Button "] = "Mouse Button ",
-		["Middle Mouse"] = KEY_BUTTON3,
-		["Backspace"] = KEY_BACKSPACE,
 		["Spacebar"] = KEY_SPACE,
-		["Delete"] = KEY_DELETE,
-		["Home"] = KEY_HOME,
-		["End"] = KEY_END,
-		["Insert"] = KEY_INSERT,
-		["Page Up"] = KEY_PAGEUP,
-		["Page Down"] = KEY_PAGEDOWN,
-		["Down Arrow"] = KEY_DOWN,
 		["Up Arrow"] = KEY_UP,
-		["Left Arrow"] = KEY_LEFT,
 		["Right Arrow"] = KEY_RIGHT,
 		["|c00FF9966C|r"] = "|c00FF9966C|r",
 		["|c00CCCC00S|r"] = "|c00CCCC00S|r",
 		["|c009966CCA|r"] = "|c009966CCA|r",
-		["NP"] = "NP",
-		["M"] = "M",
-		["MM"] = "MM",
-		["Bs"] = "Bs",
 		["Sp"] = "Sp",
-		["De"] = "De",
-		["Ho"] = "Ho",
-		["En"] = "En",
-		["Ins"] = "Ins",
-		["Pu"] = "Pu",
-		["Pd"] = "Pd",
-		["D"] = "D",
 		["U"] = "U",
-		["L"] = "L",
-		["R"] = "R",
 
 		--  AutoBarConfig.lua
-		["EMPTY"] = "Empty";
 		["Default"] = "Default",
 		["Zoomed"] = "Zoomed",
-		["Dreamlayout"] = "Dreamlayout",
 		["Columns"] = "Columns";
 		["AUTOBAR_CONFIG_BT3BAR"] = "BarTender3 Bar";
 		["AUTOBAR_CONFIG_DOCKTOMAIN"] = "Main Menu";
@@ -458,8 +410,7 @@ if (GetLocale() == "enUS") then
 		["Consumable.Cooldown.Stone.Mana.Other"] = "Demonic and Dark Runes";
 		["Consumable.Buff.Free Action"] = "Buff: Free Action";
 
-		["Misc.Lockboxes"] = LOCKED;
-		["AutoBar.Trinket"] = INVTYPE_TRINKET;
+		["Misc.Lockboxes"] = "Lockboxes";
 
 		["Spell.Guild"] = "Guild Spells";
 		["Autobar.SunsongRanch"] = "Sunsong Ranch";

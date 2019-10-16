@@ -493,7 +493,7 @@ if (GetLocale() == "deDE") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "Unverwundbarkeitstränke",
 		["Consumable.Buff.Free Action"] = "Bewegungsbefreiende Tränke",
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
 		["Spell.Aspect"] = "Aspekt",

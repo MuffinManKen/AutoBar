@@ -492,7 +492,7 @@ if (GetLocale() == "koKR") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "제한된 무적 물약";
 		["Consumable.Buff.Free Action"] = "버프: 자유 행동";
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
 		["Spell.Aspect"] = "오라 / 상";

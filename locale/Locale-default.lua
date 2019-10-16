@@ -16,6 +16,33 @@ local function atl_table(p_table)
 
 end
 
+local function get_class_name(p_class_id)
+
+	local class_info = C_CreatureInfo.GetClassInfo(p_class_id)
+	if(class_info) then
+		return class_info.className
+	end
+
+	return ""
+end
+
+atl("Delete", KEY_DELETE)
+atl("Key Bindings", KEY_BINDINGS)
+
+
+L["AutoBarClassBarDeathKnight"] = get_class_name(6)
+L["AutoBarClassBarDemonHunter"] = get_class_name(12)
+L["AutoBarClassBarMonk"] = get_class_name(10)
+L["AutoBarClassBarDruid"] = get_class_name(11)
+L["AutoBarClassBarHunter"] = get_class_name(3)
+L["AutoBarClassBarMage"] = get_class_name(8)
+L["AutoBarClassBarPaladin"] = get_class_name(2)
+L["AutoBarClassBarPriest"] = get_class_name(5)
+L["AutoBarClassBarRogue"] = get_class_name(4)
+L["AutoBarClassBarShaman"] = get_class_name(7)
+L["AutoBarClassBarWarlock"] = get_class_name(9)
+L["AutoBarClassBarWarrior"] = get_class_name(1)
+
 atl("ResetCategoryDescription", "Removes ALL custom categories")
 
 atl("AutoBar.Food.Health.Basic", L["Consumable.Food.Edible.Basic.Non-Conjured"]);

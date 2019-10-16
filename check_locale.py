@@ -26,8 +26,8 @@ for x in p.iterdir():
 		loc_keys[x.name] = set_data
 
 
-for s in loc_keys:
-	print(s, len(loc_keys[s]))
+#for s in loc_keys:
+#	print(s, len(loc_keys[s]))
 
 #pprint.pprint(loc_keys)
 

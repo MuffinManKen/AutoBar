@@ -492,7 +492,7 @@ if (GetLocale() == "zhCN") then
 		["AUTOBAR_CLASS_INVULNERABILITY_POTIONS"] = "有限无敌药水";
 		["Consumable.Buff.Free Action"] = "增益：自由行动";
 
-		["Misc.Lockboxes"] = LOCKED;
+		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
 		["Spell.Aspect"] = "光环 / 守护";

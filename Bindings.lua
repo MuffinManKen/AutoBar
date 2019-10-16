@@ -22,6 +22,7 @@
 	BINDING_NAME_AutoBarButtonClassBuff_X = L["AutoBarButtonClassBuff"]
 	BINDING_NAME_AutoBarButtonShields_X = L["AutoBarButtonShields"]
 	BINDING_NAME_AutoBarButtonClassPet_X = L["AutoBarButtonClassPet"]
+	BINDING_NAME_AutoBarButtonClassPets2_X = L["AutoBarButtonClassPets2"]
 	BINDING_NAME_AutoBarButtonFreeAction_X = L["AutoBarButtonFreeAction"]
 	BINDING_NAME_AutoBarButtonER_X = L["AutoBarButtonER"]
 	BINDING_NAME_AutoBarButtonExplosive_X = L["AutoBarButtonExplosive"]
