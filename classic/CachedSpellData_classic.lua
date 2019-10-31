@@ -108,6 +108,11 @@ ABGCS:CacheSpellData(633, "Lay on Hands");
 ABGCS:CacheSpellData(19740, "Blessing of Might"); --y
 
 ABGCS:CacheSpellData(465, "Devotion Aura"); --y		TODO: Add Auras
+ABGCS:CacheSpellData(7294, "Retribution Aura");
+ABGCS:CacheSpellData(19746, "Concentration Aura");
+ABGCS:CacheSpellData(19891, "Fire Resistance Aura");
+ABGCS:CacheSpellData(19888, "Frost Resistance Aura");
+ABGCS:CacheSpellData(19876, "Shadow Resistance Aura");
 
 
 

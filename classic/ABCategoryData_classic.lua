@@ -162,12 +162,16 @@ function ABGCode:InitializeCategories()
 		"DRUID", ABGCode:GetSpellNameByName("Tree Form"),
 		"DRUID", ABGCode:GetSpellNameByName("Travel Form"),
 		"PALADIN", ABGCode:GetSpellNameByName("Devotion Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Retribution Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Concentration Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Fire Resistance Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Frost Resistance Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Shadow Resistance Aura"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Battle Stance"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Berserker Stance"),
 
 	})
-
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
