@@ -107,14 +107,19 @@ ABGCS:CacheSpellData(633, "Lay on Hands");
 
 ABGCS:CacheSpellData(19740, "Blessing of Might"); --y
 
-ABGCS:CacheSpellData(465, "Devotion Aura"); --y		TODO: Add Auras
+ABGCS:CacheSpellData(465, "Devotion Aura");
 ABGCS:CacheSpellData(7294, "Retribution Aura");
 ABGCS:CacheSpellData(19746, "Concentration Aura");
 ABGCS:CacheSpellData(19891, "Fire Resistance Aura");
 ABGCS:CacheSpellData(19888, "Frost Resistance Aura");
 ABGCS:CacheSpellData(19876, "Shadow Resistance Aura");
 
-
+ABGCS:CacheSpellData(20375, "Seal of Command");
+ABGCS:CacheSpellData(20164, "Seal of Justice");
+ABGCS:CacheSpellData(20165, "Seal of Light");
+ABGCS:CacheSpellData(20154, "Seal of Righteousness");
+ABGCS:CacheSpellData(21082, "Seal of the Crusader");
+ABGCS:CacheSpellData(20166, "Seal of Wisdom");
 
 
 --Priest

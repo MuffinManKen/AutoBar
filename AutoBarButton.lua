@@ -1840,6 +1840,14 @@ function AutoBarButtonSpeed.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Buff.Speed")
 end
 
+local AutoBarButtonSeal = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonSeal"] = AutoBarButtonSeal
+
+function AutoBarButtonSeal.prototype:init(parentBar, buttonDB)
+	AutoBarButtonSeal.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Spell.Seal")
+end
 
 local AutoBarButtonStance = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonStance"] = AutoBarButtonStance

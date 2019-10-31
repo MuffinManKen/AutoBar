@@ -310,6 +310,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonStance", },
+			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_CLASSIC},
 		},
 		ROGUE =
 		{
@@ -1061,7 +1062,7 @@ function AutoBar:InitializeDefaults()
 		{
 			"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
-			"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
+			"AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",

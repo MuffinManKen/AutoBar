@@ -170,7 +170,15 @@ function ABGCode:InitializeCategories()
 		"WARRIOR", ABGCode:GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Battle Stance"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Berserker Stance"),
+	})
 
+	AutoBarCategoryList["Spell.Seal"] = AutoBarSpells:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of Command"),
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of Justice"),
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of Light"),
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of Righteousness"),
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of the Crusader"),
+		"PALADIN", ABGCode:GetSpellNameByName("Seal of Wisdom"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
