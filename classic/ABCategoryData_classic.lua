@@ -274,6 +274,7 @@ function ABGCode:InitializeCategories()
 	{
 		"HUNTER", ABGCode:GetSpellNameByName("Explosive Trap"),
 		"HUNTER", ABGCode:GetSpellNameByName("Freezing Trap"),
+		"HUNTER", ABGCode:GetSpellNameByName("Frost Trap"),
 		"HUNTER", ABGCode:GetSpellNameByName("Immolation Trap"),
 		"ROGUE",  ABGCode:GetSpellNameByName("Disarm Trap"),
 	})

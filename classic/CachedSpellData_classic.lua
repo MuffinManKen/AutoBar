@@ -56,6 +56,7 @@ ABGCS:CacheSpellData(19880, "Track Elementals");
 
 
 ABGCS:CacheSpellData(1499, "Freezing Trap");
+ABGCS:CacheSpellData(13809, "Frost Trap");
 ABGCS:CacheSpellData(13813, "Explosive Trap");
 ABGCS:CacheSpellData(13795, "Immolation Trap");
 
