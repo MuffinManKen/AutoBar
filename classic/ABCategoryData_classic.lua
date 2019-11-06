@@ -76,6 +76,7 @@ function ABGCode:InitializeCategories()
 	{
 		"MAGE", ABGCode:GetSpellNameByName("Slow Fall"),
 		"MAGE", ABGCode:GetSpellNameByName("Arcane Intellect"),
+		"MAGE", ABGCode:GetSpellNameByName("Dampen Magic"),
 		"DRUID", ABGCode:GetSpellNameByName("Mark of the Wild"),
 		"DRUID", ABGCode:GetSpellNameByName("Gift of the Wild"),
 		"DRUID", ABGCode:GetSpellNameByName("Thorns"),

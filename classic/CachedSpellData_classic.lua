@@ -76,6 +76,8 @@ ABGCS:CacheSpellData(10053, "Conjure Mana Citrine");
 
 ABGCS:CacheSpellData(11426, "Ice Barrier");
 ABGCS:CacheSpellData(130, "Slow Fall");
+ABGCS:CacheSpellData(604, "Dampen Magic");
+
 --ABGCS:CacheSpellData(42955, "Conjure Refreshment");
 --ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
 ABGCS:CacheSpellData(66, "Lesser Invisibility");
