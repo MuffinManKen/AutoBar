@@ -8,10 +8,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Updated Mined data
-	 - Paladin: Seals and Auras
-	 - Hunter: Frost Trap
-	 - Lots of localization cleanup. Lots more to go.
+	 - Basic (non-buff) food should be more correct now
+	 - Mounts have been mined, but I can`t test them
+	 - Mage: Dampen Magic
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
