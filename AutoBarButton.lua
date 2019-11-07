@@ -2199,7 +2199,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 
-		self:AddCategory("Muffin.Mounts")
+		self:AddCategory("Muffin.Mounts.Item")
+		self:AddCategory("Muffin.Mounts.Paladin")
+		self:AddCategory("Muffin.Mounts.Warlock")
 	end
 
 

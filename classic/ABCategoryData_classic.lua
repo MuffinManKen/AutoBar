@@ -11,8 +11,12 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = AutoBarItems:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = AutoBarItems:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
 
-	AutoBarCategoryList["Muffin.Mounts"] = AutoBarItems:new("Muffin.Mounts", "ability_mount_ridinghorse", "Muffin.Mounts")
-	AutoBarCategoryList["Muffin.Mounts"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts.Item"] = AutoBarItems:new("Muffin.Mounts.Item", "ability_mount_ridinghorse", "Muffin.Mounts.Item")
+	AutoBarCategoryList["Muffin.Mounts.Item"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts.Paladin"] = AutoBarSpells:new("Muffin.Mounts.Paladin", "ability_mount_ridinghorse", "Muffin.Mounts.Paladin")
+	AutoBarCategoryList["Muffin.Mounts.Paladin"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts.Warlock"] = AutoBarSpells:new("Muffin.Mounts.Warlock", "ability_mount_ridinghorse", "Muffin.Mounts.Warlock")
+	AutoBarCategoryList["Muffin.Mounts.Warlock"]:SetNonCombat(true)
 
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
