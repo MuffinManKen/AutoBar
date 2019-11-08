@@ -44,15 +44,11 @@ end
 
 -- OnEnter function.  Added to a button to allow calling it via control:CallMethod("TooltipSet")
 function AutoBar.Class.BasicButton.TooltipShow(button)
-	if (GetCVar("UberTooltips") == "1") then
-		GameTooltip_SetDefaultAnchor(GameTooltip, button)
+	local x = button:GetRight()
+	if (x >= (GetScreenWidth() / 2)) then
+		GameTooltip:SetOwner(button, "ANCHOR_LEFT")
 	else
-		local x = button:GetRight()
-		if (x >= (GetScreenWidth() / 2)) then
-			GameTooltip:SetOwner(button, "ANCHOR_LEFT")
-		else
-			GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
-		end
+		GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
 	end
 
 	local itemLink = button:GetAttribute("itemLink")
@@ -147,7 +143,7 @@ local function get_texture_for_action(p_action)
 	if (p_action) then
 		texture = select(3, GetSpellInfo(p_action)) or ABGCS:GetIconForItemID(p_action)
 	end
-	
+
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 	if(texture == nil) then
@@ -160,22 +156,22 @@ end
 
 --local function get_texture_for_macro_body(p_macro_body)
 --	local debug = false
---	
+--
 --	local action = AutoBar:GetActionForMacroBody(p_macro_body);
 --	local texture = get_texture_for_action(action)
---	
+--
 --	if (debug) then
 --		print("   texture:", texture);
 --		print("   action:" .. action)
 --	end
---	
+--
 --	--We haven't found a texture. This might be because it's just not cached yet.
 --	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 --	if(texture == nil) then
 --		AutoBar.missing_items = true
 --		--print("AutoBar.missing_items = true")
 --	end
---	
+--
 --	return texture
 --end
 
@@ -252,7 +248,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	if (not itemType) then-- and not self.parentBar.faded
 		return;
 	end
-	
+
 	local item_guid = self.frame:GetAttribute("AutoBarGUID")
 	local item_data = ABGCS:InfoFromGUID(item_guid)
 
