@@ -8,7 +8,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Mined: Elixirs, Flasks, Explosives
+	 - Added Mage Abilities: Mage Armor, Amplify Magic, Arcane Brilliance
+	 - TOC Bump for WoW 1.13.3
+	 - Fixed missing names for some Mount Categories
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
