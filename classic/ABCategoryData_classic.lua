@@ -80,6 +80,8 @@ function ABGCode:InitializeCategories()
 	{
 		"MAGE", ABGCode:GetSpellNameByName("Slow Fall"),
 		"MAGE", ABGCode:GetSpellNameByName("Arcane Intellect"),
+		"MAGE", ABGCode:GetSpellNameByName("Arcane Brilliance"),
+		"MAGE", ABGCode:GetSpellNameByName("Amplify Magic"),
 		"MAGE", ABGCode:GetSpellNameByName("Dampen Magic"),
 		"DRUID", ABGCode:GetSpellNameByName("Mark of the Wild"),
 		"DRUID", ABGCode:GetSpellNameByName("Gift of the Wild"),
@@ -145,6 +147,7 @@ function ABGCode:InitializeCategories()
 		"DRUID", 		ABGCode:GetSpellNameByName("Barkskin"), 	ABGCode:GetSpellNameByName("Barkskin"),
 		"MAGE", 			ABGCode:GetSpellNameByName("Frost Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
 		"MAGE", 			ABGCode:GetSpellNameByName("Ice Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
+		"MAGE", 			ABGCode:GetSpellNameByName("Mage Armor"), ABGCode:GetSpellNameByName("Ice Barrier"),
 		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Protection"), ABGCode:GetSpellNameByName("Divine Shield"),
 		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Shield"), ABGCode:GetSpellNameByName("Divine Protection"),
 		"PRIEST", 		ABGCode:GetSpellNameByName("Power Word: Shield"), ABGCode:GetSpellNameByName("Power Word: Shield"),
