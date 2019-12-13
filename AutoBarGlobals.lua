@@ -2,7 +2,7 @@
 -- Separate tables for code and data. Splitting the code off from the data makes it easier to inspect data objects.
 -- The names are verbose to reduce likelihood of conflict with another addon
 
--- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox
+-- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox, type, GetSpellLink
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
@@ -310,6 +310,24 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 		return false;
 	end
 
+	function AutoBarGlobalCodeSpace:GetSpellLink(p_spell, p_rank)
+		local spell_link
+
+		if(type(p_spell) == "string") then
+			local spell_id = select(7, GetSpellInfo(p_spell))
+			spell_link = "spell:" .. spell_id;
+		else
+			spell_link = GetSpellLink(p_spell, p_rank)
+			if spell_link == "" then
+				spell_link = nil;
+			end
+
+		end
+
+		return spell_link;
+
+	end
+
 else
 -------------------------------------------------------------------
 --
@@ -325,6 +343,18 @@ else
 	function AutoBarGlobalCodeSpace:PlayerHasToy(p_item_id)
 		return PlayerHasToy(p_item_id);
 	end
+
+	function AutoBarGlobalCodeSpace:GetSpellLink(p_spell, p_rank)
+		local spell = GetSpellLink(p_spell, p_rank)
+
+		if spell == "" then
+			spell = nil;
+		end
+
+		return spell;
+
+	end
+
 
 end
 

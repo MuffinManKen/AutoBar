@@ -190,7 +190,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 		if(show_tt_action) then
 			--if debug then print("show_tt_action:", show_tt_action); end;
 			action = show_tt_action
-			tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
+			tooltip = select(2, GetItemInfo(action)) or ABGCS:GetSpellLink(action)
 			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
@@ -205,7 +205,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
-				tooltip = select(2, GetItemInfo(action)) or GetSpellLink(action)
+				tooltip = select(2, GetItemInfo(action)) or ABGCS:GetSpellLink(action)
 			end
 		end
 
@@ -214,8 +214,6 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 	if(action) then
 		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
 	end
-
-	if(tooltip == "") then tooltip = nil; end; -- If not found, GetSpellLink can return an empty string
 
 	return action, icon, tooltip
 end
