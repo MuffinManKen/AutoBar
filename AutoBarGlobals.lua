@@ -315,7 +315,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 		if(type(p_spell) == "string") then
 			local spell_id = select(7, GetSpellInfo(p_spell))
-			spell_link = "spell:" .. spell_id;
+			if(spell_id) then
+				spell_link = "spell:" .. spell_id;
+			end
 		else
 			spell_link = GetSpellLink(p_spell, p_rank)
 			if spell_link == "" then
