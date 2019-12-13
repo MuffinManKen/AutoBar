@@ -8,9 +8,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Added Mage Abilities: Mage Armor, Amplify Magic, Arcane Brilliance
-	 - TOC Bump for WoW 1.13.3
-	 - Fixed missing names for some Mount Categories
+	 - Fixed Tooltip bug when using Macros (Thanks, Travis P!)
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
