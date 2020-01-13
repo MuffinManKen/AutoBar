@@ -222,6 +222,8 @@ assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjec
 			else
 				assert(buttonKeyIndex)
 				assert(buttonDB)
+				assert(buttonDB.buttonClass)
+				assert(AutoBar.Class[buttonDB.buttonClass])
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
 				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
