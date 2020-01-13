@@ -190,11 +190,16 @@ ABGCS:CacheSpellData(633, "Lay on Hands");
 
 --Priest
 ABGCS:CacheSpellData(17, "Power Word: Shield");
+ABGCS:CacheSpellData(62618, "Power Word: Barrier");
+
 ABGCS:CacheSpellData(34433, "Shadowfiend");
 ABGCS:CacheSpellData(47585, "Dispersion");
 ABGCS:CacheSpellData(47788, "Guardian Spirit");
 ABGCS:CacheSpellData(33206, "Pain Suppression");
 ABGCS:CacheSpellData(15487, "Silence");
+ABGCS:CacheSpellData(1706, "Levitate");
+ABGCS:CacheSpellData(21562, "Power Word: Fortitude");
+
 
 --Rogue
 ABGCS:CacheSpellData(3408, "Crippling Poison");

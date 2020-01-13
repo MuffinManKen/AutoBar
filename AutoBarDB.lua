@@ -312,6 +312,14 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonStance", },
 			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_CLASSIC},
 		},
+		PRIEST =
+		{
+			{button_name = "AutoBarButtonShields", },
+			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonClassPet",},
+			{button_name = "AutoBarButtonInterrupt", },
+		},
 		ROGUE =
 		{
 			{button_name = "AutoBarButtonShields", },
@@ -893,7 +901,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
-	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "PRIEST") then
+	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER") then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
 				buttonKey = "AutoBarButtonClassPet",
