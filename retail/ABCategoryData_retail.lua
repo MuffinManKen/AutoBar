@@ -286,7 +286,7 @@ function ABGCode:InitializeCategories()
 		"SHAMAN", ABGCode:GetSpellNameByName("Liquid Magma Totem"),
 	})
 
-	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellHealingStreamTotemIcon,
+	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
 		"SHAMAN", ABGCode:GetSpellNameByName("Healing Stream Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Healing Tide Totem"),
