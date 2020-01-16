@@ -30,9 +30,6 @@ function AB.show_whats_new()
 	if((this_version ~= AutoBarDB.whatsnew_version) or DEBUG_SHOW) then
 		AutoBarDB.whatsnew_version = this_version
 
-		local text = gsub(WHATSNEW_TEXT, "\t", "")
-		text = gsub(text, "`", "'")
-
 		local q_entry = {}
 		q_entry.addon_name = ADDON_NAME
 		q_entry.addon_version = this_version

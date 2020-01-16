@@ -45,7 +45,7 @@ local function build_queue_frame()
 	frame:SetMovable(true)
 	frame:RegisterForDrag("LeftButton");
 	frame:SetHitRectInsets(0, 0, -20, 0);
-	frame:SetScript('OnDragStart', function(f) f:StartMoving() end) 
+	frame:SetScript('OnDragStart', function(f) f:StartMoving() end)
 	frame:SetScript('OnDragStop', function(f) f:StopMovingOrSizing() end)
 
 	local muffin_texture = frame:CreateTexture("MuffinWhatsNewFrameMuffinTexture", "ARTWORK");
@@ -148,7 +148,7 @@ local function queue_show_whats_new_internal()
 	header_text:SetSize(header_text_width, header_text_height)
 	header_frame:SetSize(header_text_width * 1.4, header_text_height * 1.9)
 
-	body_text:SetText(gsub(back.body_text, "|t", "   ")) -- Implement our own tabs since WoW doesn't seem to do so
+	body_text:SetText(back.body_text)
 	local body_width = body_text:GetStringWidth()
 	local body_height = body_text:GetStringHeight()
 	body_text:SetSize(body_width, body_height)
@@ -167,6 +167,10 @@ local function add_entry(p_q_entry)
 
 	p_q_entry.addon_name = p_q_entry.addon_name or ADDON_NAME
 	p_q_entry.addon_version = p_q_entry.addon_version or GetAddOnMetadata(ADDON_NAME, "Version")
+
+	p_q_entry.body_text = gsub(p_q_entry.body_text, "`", "'")	--Replace backticks with ticks
+	p_q_entry.body_text = gsub(p_q_entry.body_text, "\t", "")	--Remove code-required indenting
+	p_q_entry.body_text = gsub(p_q_entry.body_text, "|t", "   ")	--Implement our own tabs since WoW doesn't seem to do so
 
 	tinsert(MUFFIN_WHATS_NEW_QUEUE.q, p_q_entry)
 end
