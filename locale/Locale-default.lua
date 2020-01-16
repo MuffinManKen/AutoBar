@@ -155,6 +155,7 @@ atl("Raid 6","Raid Square")
 atl("Raid 7","Raid X")
 atl("Raid 8","Raid Skull")
 
+atl("OnlyFavouriteHearth", "Only show favourite Hearth toys")
 local quick_sets =
 {
 	--Categories

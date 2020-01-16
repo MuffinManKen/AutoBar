@@ -1645,6 +1645,8 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Hearth")
 	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
+
 		self:AddCategory("Muffin.Toys.Hearth")
 		self:AddCategory("Muffin.Toys.Portal")
 	end
@@ -1653,7 +1655,15 @@ end
 if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
+		self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
 	end
+
+	function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
+		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
+
+		AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
+	end
+
 end
 
 

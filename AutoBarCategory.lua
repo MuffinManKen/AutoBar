@@ -1054,17 +1054,17 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
 		for _, toy_id in ipairs(self.all_items) do
 	--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode:PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
-			if (toy_id and ABGCode:PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id)) then
+			local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
+			local user_selected = (self.only_favourites and toy_is_fave) or not self.only_favourites
+			if (toy_id and ABGCode:PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
 				AutoBarSearch:RegisterToy(toy_id)
 				self.items[list_index] = ABGCode:ToyGUID(toy_id)
 				list_index = list_index + 1
 			end
 		end
 
-		--trim any missing ones of the end. You never forget Toys, so is this needed?
-		--Nope.  WoW API sometimes says existing items aren't there, so this would then trim them.  If we've ever seen it, keep it.
-		--for i = list_index, # self.items, 1 do
-		--	self.items[i] = nil
-		--end
+		for i = list_index, # self.items, 1 do
+			self.items[i] = nil
+		end
 	end
 end
