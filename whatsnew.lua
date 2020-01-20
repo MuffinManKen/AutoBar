@@ -15,7 +15,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Fixes for Priests
+	 - Updates for WoW 8.3
+	 - On the Hearth button, you can now choose to only show Favourite hearth toys
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
