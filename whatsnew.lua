@@ -8,7 +8,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Fixed Tooltip bug when using Macros (Thanks, Travis P!)
+	 - Updated some items
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
