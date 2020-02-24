@@ -74,6 +74,8 @@ function ABGCode:InitializeCategories()
 		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Hawk"),
 		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Monkey"),
 		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Wild"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Pack"),
+		"HUNTER", ABGCode:GetSpellNameByName("Aspect of the Beast"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
@@ -286,7 +288,8 @@ function ABGCode:InitializeCategories()
 		"HUNTER", ABGCode:GetSpellNameByName("Track Hidden"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Elementals"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Demons"),
-
+		"HUNTER", ABGCode:GetSpellNameByName("Track Dragonkin"),
+		"HUNTER", ABGCode:GetSpellNameByName("Track Giants"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Sense Demons"),
 	})
 

@@ -32,6 +32,9 @@ ABGCS:CacheSpellData(5118, "Aspect of the Cheetah");
 ABGCS:CacheSpellData(13165, "Aspect of the Hawk");
 ABGCS:CacheSpellData(13163, "Aspect of the Monkey");
 ABGCS:CacheSpellData(20043, "Aspect of the Wild");
+ABGCS:CacheSpellData(13159, "Aspect of the Pack");
+ABGCS:CacheSpellData(13161, "Aspect of the Beast");
+
 ABGCS:CacheSpellData(1462, "Beast Lore");
 ABGCS:CacheSpellData(19574, "Bestial Wrath");
 ABGCS:CacheSpellData(883, "Call Pet");
@@ -53,7 +56,8 @@ ABGCS:CacheSpellData(1494, "Track Beasts");
 ABGCS:CacheSpellData(19885, "Track Hidden");
 ABGCS:CacheSpellData(19878, "Track Demons");
 ABGCS:CacheSpellData(19880, "Track Elementals");
-
+ABGCS:CacheSpellData(19879, "Track Dragonkin");
+ABGCS:CacheSpellData(19882, "Track Giants");
 
 ABGCS:CacheSpellData(1499, "Freezing Trap");
 ABGCS:CacheSpellData(13809, "Frost Trap");
