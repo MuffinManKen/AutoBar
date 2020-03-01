@@ -16,9 +16,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Updates for WoW 8.3
-	 - On the Hearth button, you can now choose to only show Favourite hearth toys
-	 - Fixed bug in the what`s new dialog
+	 - Updated LibPeriodicTable
+	 - Monks are now get a Water button since Heal spec uses it
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
