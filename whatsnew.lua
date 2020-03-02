@@ -17,7 +17,7 @@ else
 	WHATSNEW_TEXT = "" ..
 	[[
 	 - Updated LibPeriodicTable
-	 - Monks are now get a Water button since Heal spec uses it
+	 - Monks now get a Water button since Heal spec uses it
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
