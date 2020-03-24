@@ -7,7 +7,7 @@
 --
 
 -- Custom Category:
---  AutoBar.db.account.customCategories[customCategoryIndex]
+--  AutoBarDB2.custom_categories[customCategoryIndex]
 --	A separate list of Categories that is global to all players
 --	Users add custom Categories to list.
 --	Custom Categories can have specific items and spells dragged into their list.
@@ -499,7 +499,7 @@ end
 
 
 function AutoBar:GetCategoriesItemDB(categoryKey, itemIndex)
-	local config = AutoBar.db.account.customCategories[categoryKey]
+	local config = AutoBarDB2.custom_categories[categoryKey]
 	if (itemIndex) then
 		config = config.items[itemIndex]
 	end
@@ -547,7 +547,6 @@ end
 
 
 local function ResetAutoBar()
-	local customCategories = AutoBar.db.account.customCategories
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
 	ABGCS:UpdateCategories()
@@ -1084,30 +1083,29 @@ end
 
 
 local function CategoryReset()
-	AutoBar.db.account.customCategories = {}
+	AutoBarDB2.custom_categories = {}
 	AutoBar:CategoriesChanged()
 end
 
 
 function AutoBar:CategoryNew()
 	local newCategoryName, categoryKey = AutoBarCustom:GetNewName(L["Custom"], 1)
-	local customCategories = AutoBar.db.account.customCategories
+	local customCategories = AutoBarDB2.custom_categories
 	customCategories[categoryKey] = {
 		name = newCategoryName,
 		desc = newCategoryName,
 		categoryKey = categoryKey,
 		items = {},
 	}
-	AutoBarCategoryList[categoryKey] = AutoBarCustom:new(AutoBar.db.account.customCategories[categoryKey])
+	AutoBarCategoryList[categoryKey] = AutoBarCustom:new(AutoBarDB2.custom_categories[categoryKey])
 	AutoBar:CategoriesChanged()
 	return categoryKey
 end
--- /dump AutoBar.db.account.customCategories
 
 
 local function CategoryDelete(info)
 	local categoryKey = info.arg.categoryKey
-	local categoriesListDB = AutoBar.db.account.customCategories
+	local categoriesListDB = AutoBarDB2.custom_categories
 --print("CategoryDelete", categoryKey, categoriesListDB[categoryKey])
 	categoriesListDB[categoryKey] = nil
 	AutoBarCategoryList[categoryKey] = nil
@@ -1116,11 +1114,11 @@ local function CategoryDelete(info)
 	AutoBar:CategoriesChanged()
 end
 --DevTools_Dump(categoriesListDB)
--- /dump AutoBar.db.account.customCategories
+-- /dump AutoBarDB2.custom_categories
 
 local function CategoryItemNew(info)
 	local categoryKey = info.arg.categoryKey
-	local itemsListDB = AutoBar.db.account.customCategories[categoryKey].items
+	local itemsListDB = AutoBarDB2.custom_categories[categoryKey].items
 	local itemIndex = # itemsListDB + 1
 	itemsListDB[itemIndex] = {}
 	AutoBar:CategoriesChanged()
@@ -1151,7 +1149,7 @@ end
 
 local function CategoryMacroNew(info)
 	local categoryKey = info.arg.categoryKey
-	local itemsListDB = AutoBar.db.account.customCategories[categoryKey].items
+	local itemsListDB = AutoBarDB2.custom_categories[categoryKey].items
 	local itemIndex = # itemsListDB + 1
 	local name = GetNewMacroName(itemsListDB)
 	local macroCustom = {
@@ -1167,7 +1165,7 @@ end
 local function CategoryItemDelete(info)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
 	local itemsList = AutoBar.optionsMain.args.categories.args[categoryKey].args.items.args
-	local itemsListDB = AutoBar.db.account.customCategories[categoryKey].items
+	local itemsListDB = AutoBarDB2.custom_categories[categoryKey].items
 	for i = itemIndex, # itemsListDB, 1 do
 		itemsList[itemIndex .. "a"] = itemsList[(i + 1) .. "a"]
 		itemsList[itemIndex .. "n"] = itemsList[(i + 1) .. "n"]
@@ -2686,10 +2684,6 @@ end
 
 
 
---[[
-/dump AutoBar.db.account.customCategories["CustomArrangeTest"].items
---]]
-
 local deleteIcon = "Interface\\Icons\\INV_Enchant_VoidSphere"
 local validCustomCategoryKeys = {}
 
@@ -2700,7 +2694,7 @@ function AutoBar:CreateCustomCategoryOptions(options)
 		return
 	end
 
-	local customCategories = AutoBar.db.account.customCategories
+	local customCategories = AutoBarDB2.custom_categories
 	for categoryKey, categoryDB in pairs(customCategories) do
 		local name = categoryDB.name or L["Custom"]
 		local passValue
@@ -2900,7 +2894,7 @@ function AutoBar:CreateCustomCategoryOptions(options)
 --]]
 end
 --[[
-/dump AutoBar.db.account.customCategories["CustomArrangeTest"].items
+/dump AutoBarDB2.custom_categories["CustomArrangeTest"].items
 --]]
 
 

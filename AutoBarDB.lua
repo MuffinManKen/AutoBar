@@ -7,7 +7,7 @@
 --
 
 -- Custom Category:
---  AutoBar.db.account.customCategories[categoryKey]
+--  AutoBarDB2.custom_categories[categoryKey]
 --	A separate list of Categories that is global to all players
 --	Users can add their own custom Categories to the list.
 --	Custom Categories can have specific items and spells dragged into their list.
@@ -90,11 +90,16 @@ end
 function AutoBar:InitializeDB(overide)
 	AutoBar.classBar = classBar[AutoBar.CLASS]
 
+	AutoBarDB2 = AutoBarDB2 or {}
+	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBar.db.account.customCategories or {}
+	AutoBar.db.account.customCategories = nil
+
 	AutoBar:UpgradeVersion()
 	AutoBar:InitializeDefaults()
 
 -- ToDo: Temporary, implement buttonKey field.  Remove sometime after beta.
 	AutoBar:VerifyDB()
+
 
 	AutoBar:RefreshButtonDBList()
 	AutoBar:RefreshBarDBLists()
@@ -108,11 +113,11 @@ end
 -- Character specific data for a particular Button
 -- For instance, the arrangeOnUse item.
 function AutoBar:GetCategoryDB(categoryKey)
-	return AutoBar.db.account.customCategories[categoryKey]
+	return AutoBarDB2.custom_categories[categoryKey]
 end
 
 function AutoBar:GetCategoryItemDB(categoryKey, itemIndex)
-	return AutoBar.db.account.customCategories[categoryKey].items[itemIndex]
+	return AutoBarDB2.custom_categories[categoryKey].items[itemIndex]
 end
 
 local function get_bar_default_settings()
@@ -1466,7 +1471,7 @@ end
 -- /dump (# AutoBar.db.class.barList["AutoBarClassBarHunter"].buttonKeys)
 -- /dump AutoBar.options.args.categories
 --AutoBar:Print("AutoBar:DragStop" .. frame:GetName() .. " x/y " .. tostring().. " / " ..tostring())
--- /script AutoBar.db.account.customCategories = nil
+-- /script AutoBarDB2.custom_categories = nil
 
 
 -- Upgrade from old DB versions

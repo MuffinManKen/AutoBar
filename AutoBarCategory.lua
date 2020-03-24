@@ -481,7 +481,7 @@ function AutoBarCustom.prototype:ChangeName(newName)
 		self.description = newName
 		self.categoryKey = newCategoryKey
 
-		local customCategories = AutoBar.db.account.customCategories
+		local customCategories = AutoBarDB2.custom_categories
 		customCategories[newCategoryKey] = customCategories[oldCustomKey]
 		customCategories[oldCustomKey] = nil
 	end
@@ -495,7 +495,7 @@ end
 function AutoBarCustom:GetNewName(baseName, index)
 	local newName = baseName .. index
 	local newKey = AutoBarCustom:GetCustomKey(newName)
-	local customCategories = AutoBar.db.account.customCategories
+	local customCategories = AutoBarDB2.custom_categories
 	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
 		index = index + 1
 		newName = baseName .. index
@@ -932,47 +932,9 @@ function AutoBarCategory:Initialize2()
 end
 
 
-local customCategoriesVersion = 3
--- Learned new spells etc.  Refresh all categories
 function AutoBarCategory:Upgrade()
-	if (not AutoBar.db.account.customCategories) then
-		AutoBar.db.account.customCategories = {}
-	end
-	if (not AutoBar.db.account.customCategoriesVersion) then
-		local newCustomCategories = {}
-		local categoryKey
-		local customCategories = AutoBar.db.account.customCategories
-		for _, customCategoryDB in pairs(customCategories) do
-			customCategoryDB.name = customCategoryDB.name:gsub("%.", "")
-			categoryKey = AutoBarCustom:GetCustomKey(customCategoryDB.name)
-			customCategoryDB.categoryKey = categoryKey
-			newCustomCategories[categoryKey] = customCategoryDB
-		end
-		AutoBar.db.account.customCategories = newCustomCategories
-		AutoBar.db.account.customCategoriesVersion = 1
-	end
-	if (AutoBar.db.account.customCategoriesVersion < customCategoriesVersion) then
-		local customCategories = AutoBar.db.account.customCategories
-		local newCustomCategories = {}
-		local categoryKey
-		if (AutoBar.db.account.customCategoriesVersion < 3) then
-			for index, customCategoryDB in pairs(customCategories) do
-				customCategoryDB.name = AutoBar:GetValidatedName(customCategoryDB.name)
-				categoryKey = AutoBarCustom:GetCustomKey(customCategoryDB.name)
-				if (categoryKey ~= index) then
-					customCategoryDB.categoryKey = categoryKey
-					AutoBar.Class.Button:RenameCategory(index, categoryKey)
-				end
-				if (customCategoryDB.categoryKey ~= categoryKey) then
-					AutoBar.Class.Button:RenameCategory(customCategoryDB.categoryKey, categoryKey)
-					customCategoryDB.categoryKey = categoryKey
-				end
-				newCustomCategories[categoryKey] = customCategoryDB
-			end
-			AutoBar.db.account.customCategories = newCustomCategories
-			AutoBar.db.account.customCategoriesVersion = 3
-		end
-	end
+
+
 end
 
 -- Learned new spells etc.  Refresh all categories
@@ -984,7 +946,7 @@ end
 
 
 function AutoBarCategory:UpdateCustomCategories()
-	local customCategories = AutoBar.db.account.customCategories
+	local customCategories = AutoBarDB2.custom_categories
 
 	for categoryKey, customCategoriesDB in pairs(customCategories) do
 		assert(customCategoriesDB and (categoryKey == customCategoriesDB.categoryKey), "customCategoriesDB nil or bad categoryKey")
