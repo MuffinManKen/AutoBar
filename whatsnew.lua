@@ -8,8 +8,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Hunters: Added more Aspects and Tracking
-	 - Updated my dataminer, lots of items added
+	 - Paladin: Added Sanctity Aura and Sense Undead
+	 - Updated Quest Items
+	 - TOC bump
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
