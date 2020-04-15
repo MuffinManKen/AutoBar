@@ -80,12 +80,9 @@ function LDBOnClick(clickedFrame, button)
 			AutoBar:CreateOptionsAce3()
 			AceCfgDlg:Open("AutoBar")
 		end
-	elseif (button == "RightButton" and dewdrop) then
-		if (dewdrop:GetOpenedParent()) then
-			dewdrop:Close()
-		else
-			dewdrop:Open(clickedFrame, "children", function() dewdrop:FeedAceOptionsTable(AutoBar.options) end, "point", "TOPRIGHT", "relativePoint", "BOTTOMLEFT", "cursorX", -20, "cursorY", -20)
-		end
+	elseif (button == "RightButton") then
+		InterfaceOptionsFrame_OpenToCategory("AutoBar")
+		InterfaceOptionsFrame_OpenToCategory("AutoBar")
 	end
 end
 

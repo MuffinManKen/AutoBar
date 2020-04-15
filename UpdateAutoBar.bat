@@ -9,6 +9,7 @@ xcopy "D:\Projects\Current\WoW\ace3\AceConfig-3.0" ".\libs\AceConfig-3.0"  /Y /S
 xcopy "D:\Projects\Current\WoW\ace3\AceConsole-3.0" ".\libs\AceConsole-3.0"  /Y /S /I
 xcopy "D:\Projects\Current\WoW\ace3\AceGUI-3.0" ".\libs\AceGUI-3.0"  /Y /S /I
 
+copy "D:\Projects\Current\WoW\MuffinUIToolkit\muffin_ui_toolkit.lua" ".\libs\"
 
 
 pause

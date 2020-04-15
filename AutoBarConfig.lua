@@ -6,21 +6,88 @@
 
 -- http://muffinmangames.com
 --
-
-local AceGUI = LibStub("AceGUI-3.0")
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 
 local L = AutoBarGlobalDataObject.locale
 local _
+local UI = AB.UITK
+AB.AutoBarConfig = {}
 
-AutoBarConfig = {}
-AutoBarConfig.Debug = {} --table to store stuff related to the Debug Frame
+local ABC = AB.AutoBarConfig
+ABC.Debug = {} --table to store stuff related to the Debug Frame
 
-AutoBarConfig.OptionsFrame = AceGUI:Create("BlizOptionsGroup")
-AutoBarConfig.OptionsFrame:SetName("AutoBar")
-InterfaceOptions_AddCategory(AutoBarConfig.OptionsFrame.frame);
+
+ABC.main_panel = CreateFrame( "Frame", "AutoBarConfig", UIParent );
+ABC.main_panel.name = "AutoBar";
+InterfaceOptions_AddCategory(ABC.main_panel);
+
+-- Categories panel
+local max_categories_in_list = 29
+
+local function update_visible_categories()
+
+
+end
+
+
+ABC.categories_panel = CreateFrame( "Frame", "AutoBarConfig_Categories", ABC.main_panel);
+ABC.categories_panel.name = "Custom Categories";
+ABC.categories_panel.parent = ABC.main_panel.name;
+ABC.categories_panel:SetBackdrop({
+	bgFile = "Interface/ChatFrame/ChatFrameBackground",
+	tile = false,
+	insets = { left = 3, right = 3, top = 3, bottom = 3 },
+})
+ABC.categories_panel:SetBackdropColor(0.1, 0.1, 0.15, 0.9);
+ABC.categories_panel:EnableMouse(true)
+ABC.categories_panel:EnableMouseWheel(true)
+ABC.categories_panel:SetScript("OnMouseWheel", function(self, p_delta)
+	local s_min, s_max = ABC.category_slider:GetMinMaxValues()
+	local val = ABC.category_slider:GetValue()
+	local new_value = Clamp(val - (p_delta * 3), s_min, s_max)
+	ABC.category_slider:SetValue(new_value)
+end)
+InterfaceOptions_AddCategory(ABC.categories_panel);
+
+
+ABC.category_slider = UI.create_slider(ABC.categories_panel, {min = 1, max = max_categories_in_list});
+
+ABC.categories_panel.buttonlist = {}
+
+for i = 1, max_categories_in_list do
+	local b = CreateFrame("Button", nil, ABC.categories_panel);
+	b:SetSize(180, 16)
+	if(i == 1) then
+		b:SetPoint("TOPLEFT", 6, -6)
+	else
+		b:SetPoint("TOPLEFT", ABC.categories_panel.buttonlist[i-1], "BOTTOMLEFT", 0, -2)
+	end
+	b:SetBackdrop({bgFile = "Interface/ChatFrame/ChatFrameBackground", tile = false})
+	b:SetBackdropColor(0, 0.7, 0, 1)
+	b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	ABC.categories_panel.buttonlist[i] = b
+
+end
+
+ABC.category_slider.my_button_up:SetPoint("TOPLEFT", ABC.categories_panel.buttonlist[1], "TOPRIGHT", 5, 0)
+local height = (max_categories_in_list - 2) * 16 + (max_categories_in_list * 2)
+ABC.category_slider:SetSize(20, height);
+
+
+ABC.category_slider:SetScript("OnValueChanged", function (self, value)
+	update_visible_categories()
+end)
+
+
+
+
+
+
+local AceGUI = LibStub("AceGUI-3.0")
+
 
 AutoBarConfig.DebugFrame = AceGUI:Create("BlizOptionsGroup")
 AutoBarConfig.DebugFrame:SetName("Debug", "AutoBar")
@@ -92,7 +159,7 @@ local function DrawGroupWarnings(container)
 	container:AddChild(edit_box)
 
 	edit_box:SetText(AutoBarGlobalCodeSpace:GetWarningLogString())
-  
+
 end
 
 -- Callback function for OnGroupSelected

@@ -22,6 +22,8 @@
 # Libraries
 embeds.xml
 
+libs/muffin_ui_toolkit.lua
+
 classic/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
 classic/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
