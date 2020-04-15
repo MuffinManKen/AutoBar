@@ -176,6 +176,7 @@ function ABGCode:InitializeCategories()
 		"PALADIN", ABGCode:GetSpellNameByName("Concentration Aura"),
 		"PALADIN", ABGCode:GetSpellNameByName("Fire Resistance Aura"),
 		"PALADIN", ABGCode:GetSpellNameByName("Frost Resistance Aura"),
+		"PALADIN", ABGCode:GetSpellNameByName("Sanctity Aura"),
 		"PALADIN", ABGCode:GetSpellNameByName("Shadow Resistance Aura"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Battle Stance"),
@@ -290,6 +291,7 @@ function ABGCode:InitializeCategories()
 		"HUNTER", ABGCode:GetSpellNameByName("Track Demons"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Dragonkin"),
 		"HUNTER", ABGCode:GetSpellNameByName("Track Giants"),
+		"PALADIN", ABGCode:GetSpellNameByName("Sense Undead"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Sense Demons"),
 	})
 

@@ -123,7 +123,10 @@ ABGCS:CacheSpellData(7294, "Retribution Aura");
 ABGCS:CacheSpellData(19746, "Concentration Aura");
 ABGCS:CacheSpellData(19891, "Fire Resistance Aura");
 ABGCS:CacheSpellData(19888, "Frost Resistance Aura");
+ABGCS:CacheSpellData(20218, "Sanctity Aura");
 ABGCS:CacheSpellData(19876, "Shadow Resistance Aura");
+
+ABGCS:CacheSpellData(5502, "Sense Undead");
 
 ABGCS:CacheSpellData(20375, "Seal of Command");
 ABGCS:CacheSpellData(20164, "Seal of Justice");

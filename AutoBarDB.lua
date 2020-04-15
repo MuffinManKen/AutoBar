@@ -316,6 +316,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonStance", },
 			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 		},
 		PRIEST =
 		{
