@@ -226,7 +226,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellPortalShattrathIcon, nil,
 	{
-		"MAGE", ABGCode:GetSpellNameByName("Teleport: Ancient Dalaran"), ABGCode:GetSpellNameByName("Teleport: Ancient Dalaran"),
+		"MAGE", ABGCode:GetSpellNameByName("Teleport: Ancient Dalaran"), ABGCode:GetSpellNameByName("Portal: Ancient Dalaran"),
 	})
 
 	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,

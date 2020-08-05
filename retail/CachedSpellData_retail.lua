@@ -157,7 +157,7 @@ ABGCS:CacheSpellData(176246, "Portal: Stormshield");
 ABGCS:CacheSpellData(176242, "Teleport: Warspear");
 ABGCS:CacheSpellData(176244, "Portal: Warspear");
 ABGCS:CacheSpellData(120145, "Teleport: Ancient Dalaran");
-ABGCS:CacheSpellData(121848, "Portal: Ancient Dalaran");
+ABGCS:CacheSpellData(120146, "Portal: Ancient Dalaran");
 
 ABGCS:CacheSpellData(204287, "Teleport: Hall of the Guardian");
 
