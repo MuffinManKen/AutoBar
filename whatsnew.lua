@@ -17,8 +17,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Updated LibPeriodicTable
-	 - Monks now get a Water button since Heal spec uses it
+	 - Added Challenger`s Path teleports
+	 - Fixed Portal to Ancient Dalaran
+	 - Changed Ancient Dalaran port to a different icon
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
