@@ -210,6 +210,10 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 
 	local name, rank, icon = GetSpellInfo(p_spell_id);
 
+	if (p_spell_id == 120145) then	-- Ancient Dalaran Port
+		icon = 628678;
+	end
+
 	if(name == nil) then
 		AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
