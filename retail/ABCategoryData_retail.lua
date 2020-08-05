@@ -221,6 +221,15 @@ function ABGCode:InitializeCategories()
 		"SHAMAN", ABGCode:GetSpellNameByName("Astral Recall"), ABGCode:GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Ritual of Summoning"), ABGCode:GetSpellNameByName("Ritual of Summoning"),
 		"*", ABGCode:GetSpellNameByName("Mole Machine"), ABGCode:GetSpellNameByName("Mole Machine"),
+		"*", ABGCode:GetSpellNameByName("Path of the Jade Serpent"), ABGCode:GetSpellNameByName("Path of the Jade Serpent"),
+		"*", ABGCode:GetSpellNameByName("Path of the Stout Brew"), ABGCode:GetSpellNameByName("Path of the Stout Brew"),
+		"*", ABGCode:GetSpellNameByName("Path of the Shado-Pan"), ABGCode:GetSpellNameByName("Path of the Shado-Pan"),
+		"*", ABGCode:GetSpellNameByName("Path of the Mogu King"), ABGCode:GetSpellNameByName("Path of the Mogu King"),
+		"*", ABGCode:GetSpellNameByName("Path of the Setting Sun"), ABGCode:GetSpellNameByName("Path of the Setting Sun"),
+		"*", ABGCode:GetSpellNameByName("Path of the Scarlet Blade"), ABGCode:GetSpellNameByName("Path of the Scarlet Blade"),
+		"*", ABGCode:GetSpellNameByName("Path of the Scarlet Mitre"), ABGCode:GetSpellNameByName("Path of the Scarlet Mitre"),
+		"*", ABGCode:GetSpellNameByName("Path of the Necromancer"), ABGCode:GetSpellNameByName("Path of the Necromancer"),
+		"*", ABGCode:GetSpellNameByName("Path of the Black Ox"), ABGCode:GetSpellNameByName("Path of the Black Ox"),
 	})
 
 

@@ -10,6 +10,15 @@ ABGCS:CacheSpellData(83958, "Mobile Banking");
 ABGCS:CacheSpellData(58984, "Shadowmeld");
 ABGCS:CacheSpellData(87840, "Running Wild");
 ABGCS:CacheSpellData(265225, "Mole Machine");
+ABGCS:CacheSpellData(131204, "Path of the Jade Serpent");
+ABGCS:CacheSpellData(131205, "Path of the Stout Brew");
+ABGCS:CacheSpellData(131206, "Path of the Shado-Pan");
+ABGCS:CacheSpellData(131222, "Path of the Mogu King");
+ABGCS:CacheSpellData(131225, "Path of the Setting Sun");
+ABGCS:CacheSpellData(131231, "Path of the Scarlet Blade");
+ABGCS:CacheSpellData(131229, "Path of the Scarlet Mitre");
+ABGCS:CacheSpellData(131232, "Path of the Necromancer");
+ABGCS:CacheSpellData(131228, "Path of the Black Ox");
 
 
 --DeathKnight
