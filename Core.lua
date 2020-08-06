@@ -422,6 +422,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 			local _, num_quests = GetNumQuestLogEntries()
 
 			for i = 1, num_quests do
+			--AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
+			local num_entries, num_quests = C_QuestLog.GetNumQuestLogEntries()
+			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
