@@ -407,7 +407,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
 		if(link) then
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
-			ABGCS:ABScheduleUpdate(tick.UpdateItemsID)
+			ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 		end
 
 		AutoBar:LogEventEnd("QUEST_ACCEPTED", p_quest_index)
@@ -425,6 +425,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
+					ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 				end
 			end
 		end
