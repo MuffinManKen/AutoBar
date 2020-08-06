@@ -126,7 +126,7 @@ local function get_bar_default_settings()
 	{
 		enabled = true,
 		rows = 1,
-		columns = ROW_COLUMN_MAX,
+		columns = 16, --ROW_COLUMN_MAX,
 		alignButtons = "3",
 		alpha = 1,
 		buttonWidth = 36,
