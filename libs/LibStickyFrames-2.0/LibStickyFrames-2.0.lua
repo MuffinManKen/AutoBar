@@ -215,7 +215,7 @@ function RetrieveOverlay(frame)
 	if overlay then
 		overlayCache[overlay] = nil
 	else
-		overlay = CreateFrame("Button", nil, frame)
+		overlay = CreateFrame("Button", nil, frame, "BackdropTemplate")
 		overlay:EnableMouse(true)
 		overlay:RegisterForDrag("LeftButton")
 		overlay:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp", "RightButtonDown")
@@ -373,7 +373,7 @@ function GetInsetOffset(frameA, pointA, frameB, pointB)
 	if isBA then
 		y = y * -1
 	end
-	
+
 	return x, y
 end
 
@@ -982,7 +982,7 @@ do
 	--[[
 	lib:SetFramePoints(frame, pointA, frameB, pointB, x, y) - Sets the frames points and
 	shows the anchor
-	
+
 	pointA:	The point on frame that is sticking
 	frameB:	The frame to stick to
 	pointB:	The point on frameTo to stick to
@@ -1132,7 +1132,7 @@ end
 
 --[[
 lib:StopFrameMoving() - This stops the OnUpdate, leaving the frame at its last position.
-This will leave it anchored to the last frame it was able to attach to or the UIParent. 
+This will leave it anchored to the last frame it was able to attach to or the UIParent.
 You can call lib:AnchorFrame(frame) to anchor it back "TOPLEFT" of the UIParent.
 --]]
 function StopFrameMoving(self)

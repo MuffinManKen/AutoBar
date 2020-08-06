@@ -82,7 +82,7 @@ end
 
 function UITK.create_slider(p_parent_frame, p_range)
 
-	local slider = CreateFrame("Slider", nil, p_parent_frame);
+	local slider = CreateFrame("Slider", nil, p_parent_frame, "BackdropTemplate");
 	slider:SetBackdrop({
 		bgFile = "Interface/Buttons/UI-SliderBar-Background",
 		tile = true,
