@@ -17,9 +17,10 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Added Challenger`s Path teleports
-	 - Fixed Portal to Ancient Dalaran
-	 - Changed Ancient Dalaran port to a different icon
+	 - Many fixes!
+	 - New bars are 1x16 by default
+	 - Dynamic Detection of Quest Items is working now
+	 - Absolutely no new items have been added, that will happen later.
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
