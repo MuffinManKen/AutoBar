@@ -137,6 +137,7 @@ ABGCS:CacheSpellData(20166, "Seal of Wisdom");
 
 
 --Priest
+ABGCS:CacheSpellData(1243, "Power Word: Fortitude");
 ABGCS:CacheSpellData(17, "Power Word: Shield");
 ABGCS:CacheSpellData(15487, "Silence");
 

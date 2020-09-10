@@ -94,6 +94,7 @@ function ABGCode:InitializeCategories()
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Salvation"),
 		"PALADIN", ABGCode:GetSpellNameByName("Greater Blessing of Kings"),
 		"PALADIN", ABGCode:GetSpellNameByName("Greater Blessing of Wisdom"),
+		"PRIEST", ABGCode:GetSpellNameByName("Power Word: Fortitude");
 		"SHAMAN", ABGCode:GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Battle Shout"),
