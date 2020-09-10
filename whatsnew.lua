@@ -8,9 +8,10 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Paladin: Added Sanctity Aura and Sense Undead
-	 - Updated Quest Items
-	 - TOC bump
+	 - Priest: Added Power Word: Fortitude
+	 - New bars are 1x16 by default
+	 - Dynamic Detection of Quest Items is working now
+	 - Fix for spell-based buttons not re-ordering
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
