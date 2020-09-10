@@ -33,7 +33,7 @@ local function update_visible_categories()
 end
 
 
-ABC.categories_panel = CreateFrame( "Frame", "AutoBarConfig_Categories", ABC.main_panel, "BackdropTemplate");
+ABC.categories_panel = CreateFrame( "Frame", "AutoBarConfig_Categories", ABC.main_panel, BackdropTemplateMixin and "BackdropTemplate");
 ABC.categories_panel.name = "Custom Categories";
 ABC.categories_panel.parent = ABC.main_panel.name;
 ABC.categories_panel:SetBackdrop({
@@ -58,7 +58,7 @@ ABC.category_slider = UI.create_slider(ABC.categories_panel, {min = 1, max = max
 ABC.categories_panel.buttonlist = {}
 
 for i = 1, max_categories_in_list do
-	local b = CreateFrame("Button", nil, ABC.categories_panel, "BackdropTemplate");
+	local b = CreateFrame("Button", nil, ABC.categories_panel, BackdropTemplateMixin and "BackdropTemplate");
 	b:SetSize(180, 16)
 	if(i == 1) then
 		b:SetPoint("TOPLEFT", 6, -6)

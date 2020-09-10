@@ -121,7 +121,11 @@ end
 
 function AutoBar.Class.Bar.prototype:CreateBarFrame()
 	local name = self.barKey .. "Driver"
-	local driver = CreateFrame("Button", name, UIParent, "SecureHandlerStateTemplate, BackdropTemplate")
+	local driver_template = "SecureHandlerStateTemplate"
+	if (BackdropTemplateMixin) then
+		driver_template = "SecureHandlerStateTemplate, BackdropTemplate"
+	end
+	local driver = CreateFrame("Button", name, UIParent, driver_template)
 	driver.class = self
 	driver:SetClampedToScreen(AutoBar.db.account.clampedToScreen)
 	driver:EnableMouse(false)

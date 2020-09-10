@@ -30,7 +30,7 @@ end
 local function build_queue_frame()
 	d_print("build_queue_frame:", ADDON_NAME)
 
-	local frame = CreateFrame("Frame", "MuffinWhatsNewFrame", UIParent, "BackdropTemplate")
+	local frame = CreateFrame("Frame", "MuffinWhatsNewFrame", UIParent, BackdropTemplateMixin and "BackdropTemplate")
 	frame:SetBackdrop({
 		bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",

@@ -215,7 +215,7 @@ function RetrieveOverlay(frame)
 	if overlay then
 		overlayCache[overlay] = nil
 	else
-		overlay = CreateFrame("Button", nil, frame, "BackdropTemplate")
+		overlay = CreateFrame("Button", nil, frame, BackdropTemplateMixin and "BackdropTemplate")
 		overlay:EnableMouse(true)
 		overlay:RegisterForDrag("LeftButton")
 		overlay:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp", "RightButtonDown")
