@@ -902,12 +902,12 @@ end
 
 -- Update any dirty lists.
 -- If index is specified then sort it only and do not change dirty state
-function Sorted.prototype:Update(buttonKey)
+function Sorted.prototype:Update(p_button_key)
 	local oldDirty = nil
-	if (buttonKey) then
+	if (p_button_key) then
 		oldDirty = self.dirty
 		self.dirty = true
-		self.dirtyList[buttonKey] = true
+		self.dirtyList[p_button_key] = true
 	end
 	if (self.dirty) then
 		for buttonKey, sortList in pairs(self.dataList) do
