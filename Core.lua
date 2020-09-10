@@ -257,6 +257,7 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
+	AutoBar.frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
 
 	if(AutoBar.db.account.handle_spell_changed) then
 		AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
@@ -609,6 +610,12 @@ end
 
 function AutoBar.events:LEARNED_SPELL_IN_TAB(arg1)
 	AutoBar:LogEvent("LEARNED_SPELL_IN_TAB", arg1)
+	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
+end
+
+function AutoBar.events:UNIT_SPELLCAST_SUCCEEDED(p_unit, p_guid, p_spell_id)
+	AutoBar:LogEvent("UNIT_SPELLCAST_SUCCEEDED", p_unit, p_guid, p_spell_id)
+	assert(p_unit == "player")
 	ABGCS:ABScheduleUpdate(tick.UpdateSpellsID)
 end
 
