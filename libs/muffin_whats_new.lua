@@ -54,7 +54,7 @@ local function build_queue_frame()
 	muffin_texture:SetTexture("Interface\\Addons\\" .. ADDON_NAME .. "\\Textures\\muffin.tga")
 	muffin_texture:SetBlendMode("BLEND")
 
-	local header_frame = CreateFrame("Frame", "MuffinWhatsNewHeaderFrame", frame)
+	local header_frame = CreateFrame("Frame", "MuffinWhatsNewHeaderFrame", frame, BackdropTemplateMixin and "BackdropTemplate")
 	header_frame:SetBackdrop({
 		bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
