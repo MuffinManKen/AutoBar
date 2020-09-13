@@ -219,10 +219,10 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 	if(self.defaults.handle_spell_changed == nil) then
-		handle_spell_changed = true
+		self.defaults.handle_spell_changed = true
 	end
 	if(self.defaults.hack_PetActionBarFrame == nil) then
-		hack_PetActionBarFrame = true
+		self.defaults.hack_PetActionBarFrame = true
 	end
 
 
