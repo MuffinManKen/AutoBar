@@ -288,7 +288,6 @@ if (GetLocale() == "frFR") then
 		["|c00FF9966C|r"] = "|c00FF9966C|r",
 		["|c00CCCC00S|r"] = "|c00CCCC00S|r",
 		["|c009966CCA|r"] = "|c009966CCA|r",
-		["|c00CCCC00S|r"] = "|c00CCCC00S|r",
 		["NP"] = "PN",
 		["M"] = "S",
 		["MM"] = "SM",
