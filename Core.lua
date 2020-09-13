@@ -27,6 +27,7 @@ local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
+local L = AutoBarGlobalDataObject.locale
 
 local print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert = print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert
 
@@ -1084,7 +1085,7 @@ function AutoBar:tcount(p_table)
 
 	local n = #p_table
 	if (n == 0) then
-		for k in pairs(p_table) do
+		for _k in pairs(p_table) do
 			n = n + 1;
 		end
 	end
