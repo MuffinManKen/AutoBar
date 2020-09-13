@@ -2687,11 +2687,12 @@ local validCustomCategoryKeys = {}
 -- Create CustomCategoryOptions for those that do not exist yet
 -- Also refresh the item list for each
 function AutoBar:CreateCustomCategoryOptions(options)
-	if (not self.db.account.customCategories) then
+	local customCategories = AutoBarDB2.custom_categories
+
+	if (not customCategories) then
 		return
 	end
 
-	local customCategories = AutoBarDB2.custom_categories
 	for categoryKey, categoryDB in pairs(customCategories) do
 		local name = categoryDB.name or L["Custom"]
 		local passValue
