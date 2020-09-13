@@ -18,9 +18,10 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Many fixes!
+	 - So Many fixes!
 	 - New bars are 1x16 by default
 	 - Dynamic Detection of Quest Items is working now
+	 - Custom Categories are visible again in the Categories tab
 	 - Absolutely no new items have been added, that will happen later.
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
