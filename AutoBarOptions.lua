@@ -63,7 +63,7 @@ local hintText = {
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
 }
-function LDBOnClick(clickedFrame, button)
+local function LDBOnClick(clickedFrame, button)
 	if (button == "LeftButton") then
 		if (dewdrop and dewdrop:GetOpenedParent()) then
 			dewdrop:Close()
