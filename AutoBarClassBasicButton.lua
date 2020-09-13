@@ -190,7 +190,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
 			texture = ABGCS:GetIconForToyID(item_data.item_id)
 			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(item_id);
+				AutoBar:SetMissingItemFlag(item_data.item_id);
 			end
 		end
 	elseif (itemType == "item") then
