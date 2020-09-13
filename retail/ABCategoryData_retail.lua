@@ -233,7 +233,7 @@ function ABGCode:InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellPortalShattrathIcon, nil,
+	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellIconList["Portal: Ancient Dalaran"], nil,
 	{
 		"MAGE", ABGCode:GetSpellNameByName("Teleport: Ancient Dalaran"), ABGCode:GetSpellNameByName("Portal: Ancient Dalaran"),
 	})
@@ -266,7 +266,7 @@ function ABGCode:InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new("Spell.Guild", iconMobileBanking,
+	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new("Spell.Guild", spellIconList["Mobile Banking"],
 	{
 		"*", ABGCode:GetSpellNameByName("Mobile Banking"),
 	})
