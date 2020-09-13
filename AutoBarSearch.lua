@@ -1329,6 +1329,7 @@ end
 
 
 -- Test harness		/script AutoBarSearch:Test()
+--[[
 function AutoBarSearch:Test()
 	if (true and true) then
 		AutoBarSearch.trace = true
@@ -1505,6 +1506,7 @@ function AutoBarSearch:Test()
 		AutoBar:Print("usedKB = " .. usedKB)
 	end
 end
+--]]
 
 --[[
 /dump AutoBarSearch:CanCastSpell("Amani War Bear")
