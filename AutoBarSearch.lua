@@ -973,7 +973,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId, type_id, info_data
+	local bag, slot, spell, itemId, macroId, type_id, info_data, bpet_guid
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -988,7 +988,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 			info_data = AutoBarSearch.toys[spell]
 			spell = nil
 		elseif(spell:find("^bpet")) then
-			bpet_guid = spell
+			bpet_guid = spell		--TODO: This isn't used?
 			spell = nil
 		elseif(spell:find("^macrotext:")) then
 			type_id = ABGData.TYPE_MACRO_TEXT
