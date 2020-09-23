@@ -1014,15 +1014,18 @@ end
 
 
 -- Add category to the end of the buttons list
-function AutoBarButton.prototype:AddCategory(categoryName)
+function AutoBarButton.prototype:AddCategory(p_category_name)
+	if not AutoBarCategoryList[p_category_name] then
+		ABGCode:LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
+	end
 	for _, category in ipairs(self) do
-		if (category == categoryName) then
+		if (category == p_category_name) then
 			-- Ignore.  ToDo shuffle to end.
 			return
 		end
 	end
 	-- Add to end
-	self[# self + 1] = categoryName
+	self[# self + 1] = p_category_name
 end
 
 -- Delete category from the buttons list
