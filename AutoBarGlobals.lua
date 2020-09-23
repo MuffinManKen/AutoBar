@@ -298,6 +298,14 @@ function AutoBarGlobalCodeSpace:FindNamelessButtons()
 	return nameless
 end
 
+function AutoBarGlobalCodeSpace:GetNumQuestLogEntries()
+
+	if (C_QuestLog and C_QuestLog.GetNumQuestLogEntries) then
+		return C_QuestLog.GetNumQuestLogEntries()
+	else
+		return GetNumQuestLogEntries()
+	end
+end
 
 -------------------------------------------------------------------
 --

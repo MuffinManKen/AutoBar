@@ -421,13 +421,10 @@ print("New Quest:", p_quest_index, "|tLink:", link)
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
 		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
-			--AutoBar.frame:UnregisterEvent("QUEST_LOG_UPDATE")
-			local num_entries, num_quests = C_QuestLog.GetNumQuestLogEntries()
-print("NumQuests:", num_entries, num_quests)
+			local num_entries, num_quests = ABGCS:GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
 			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
-print("found link:", link)
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
 					ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 				end
