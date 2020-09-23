@@ -1180,9 +1180,12 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
 
-	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 		self:AddCategory("Muffin.Poison.Lethal")
 		self:AddCategory("Muffin.Poison.Nonlethal")
+	else
+		self:AddCategory("Spell.Poison.Lethal")
+		self:AddCategory("Spell.Poison.Nonlethal")
 	end
 
 end
