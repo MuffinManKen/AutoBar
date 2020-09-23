@@ -392,7 +392,6 @@ if (GetLocale() == "koKR") then
 		["Consumable.Buff Group.Melee.Self"] = "버프: 근접";
 		["Consumable.Buff Group.Melee.Target"] = "버프: 근접 대상";
 		["Consumable.Buff.Other.Self"] = "버프: 기타";
-		["Consumable.Buff.Other.Target"] = "버프: 기타 대상";
 		["Consumable.Buff.Chest"] = "버프: 가슴";
 		["Consumable.Buff.Shield"] = "버프: 방패";
 		["Consumable.Weapon Buff"] = "버프: 무기";

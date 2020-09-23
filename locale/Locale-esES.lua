@@ -390,7 +390,6 @@ if (GetLocale() == "esES") then
 		["Consumable.Buff Group.Melee.Self"] = "Buff: Cuerpo a Cuerpo";
 		["Consumable.Buff Group.Melee.Target"] = "Buff: Objetivo Cuerpo a Cuerpo";
 		["Consumable.Buff.Other.Self"] = "Buff: Otro";
-		["Consumable.Buff.Other.Target"] = "Buff: Otro Objetivo";
 		["Consumable.Buff.Chest"] = "Buff: Pecho";
 		["Consumable.Buff.Shield"] = "Buff: Escudo";
 		["Consumable.Weapon Buff"] = "Buff: Arma";

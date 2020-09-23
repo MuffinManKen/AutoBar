@@ -392,7 +392,6 @@ if (GetLocale() == "zhTW") then
 		["Consumable.Buff Group.Melee.Self"] = "增益: 近戰";
 		["Consumable.Buff Group.Melee.Target"] = "增益: 近戰目標";
 		["Consumable.Buff.Other.Self"] = "增益: 其他";
-		["Consumable.Buff.Other.Target"] = "增益: 其他目標";
 		["Consumable.Buff.Chest"] = "增益: 胸甲";
 		["Consumable.Buff.Shield"] = "增益: 盾牌";
 		["Consumable.Weapon Buff"] = "增益: 武器";

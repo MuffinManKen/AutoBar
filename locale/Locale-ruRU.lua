@@ -392,7 +392,6 @@ if (GetLocale() == "ruRU") then
 		["Consumable.Buff Group.Melee.Self"] = "Бафф: Рукопашный";
 		["Consumable.Buff Group.Melee.Target"] = "Бафф: Рукопашный на цель";
 		["Consumable.Buff.Other.Self"] = "Бафф: Другое";
-		["Consumable.Buff.Other.Target"] = "Бафф: Другое на цель";
 		["Consumable.Buff.Chest"] = "Бафф: Грудь";
 		["Consumable.Buff.Shield"] = "Бафф: Щит";
 		["Consumable.Weapon Buff"] = "Бафф: Оружие";

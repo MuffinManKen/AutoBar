@@ -395,7 +395,6 @@ if (GetLocale() == "itIT") then
 		["Consumable.Buff Group.Melee.Self"] = "Buff: Melee";
 		["Consumable.Buff Group.Melee.Target"] = "Buff: Melee Target";
 		["Consumable.Buff.Other.Self"] = "Buff: Other";
-		["Consumable.Buff.Other.Target"] = "Buff: Other Target";
 		["Consumable.Buff.Chest"] = "Buff: Chest";
 		["Consumable.Buff.Shield"] = "Buff: Shield";
 		["Consumable.Weapon Buff"] = "Buff: Weapon";
@@ -497,7 +496,7 @@ if (GetLocale() == "itIT") then
 
 		["Misc.Lockboxes"] = "Lockboxes";
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
-		
+
 		["Spell.Guild"] = "Guild Spells";
 
 		["Spell.Aspect"] = "Aspect";

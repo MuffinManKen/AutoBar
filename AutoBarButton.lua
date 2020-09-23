@@ -1142,7 +1142,6 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Buff.Chest")
 	self:AddCategory("Consumable.Buff.Shield")
-	self:AddCategory("Consumable.Buff.Other.Target")
 	self:AddCategory("Consumable.Buff.Other.Self")
 	self:AddCategory("Consumable.Buff Group.General.Target")
 	self:AddCategory("Consumable.Buff Group.General.Self")

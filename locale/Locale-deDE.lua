@@ -392,7 +392,6 @@ if (GetLocale() == "deDE") then
 		["Consumable.Buff Group.Melee.Self"] = "Buff: Nahkampf",
 		["Consumable.Buff Group.Melee.Target"] = "Buff: Nahkampf Ziel",
 		["Consumable.Buff.Other.Self"] = "Buff: Anderes",
-		["Consumable.Buff.Other.Target"] = "Buff: Anderes Ziel",
 		["Consumable.Buff.Chest"] = "Buff: Brust",
 		["Consumable.Buff.Shield"] = "Buff: Schild",
 		["Consumable.Weapon Buff"] = "Buff: Waffe",
