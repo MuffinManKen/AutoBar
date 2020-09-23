@@ -224,6 +224,8 @@ local quick_sets =
 	"Muffin.Mounts.Warlock",
 	"Muffin.Mounts.Item",
 	"Muffin.Mounts.Paladin",
+	"Muffin.Skill.Archaeology.Lodestone",
+	"Muffin.Skill.Archaeology.Map",
 }
 
 atl_table(quick_sets);

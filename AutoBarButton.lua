@@ -2255,6 +2255,8 @@ else
 		AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Skill.Archaeology.Crate")
+		self:AddCategory("Muffin.Skill.Archaeology.Lodestone")
+		self:AddCategory("Muffin.Skill.Archaeology.Map")
 		self:AddCategory("Muffin.Skill.Archaeology.Mission")
 
 		if(buttonDB.archbtn_show_spells == nil) then

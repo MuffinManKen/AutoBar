@@ -53,6 +53,9 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Muffin.Order Hall.Ancient Mana"] = AutoBarItems:new("Muffin.Order Hall.Ancient Mana", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Ancient Mana")
 	AutoBarCategoryList["Muffin.Order Hall.Order Resources"] = AutoBarItems:new("Muffin.Order Hall.Order Resources", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Order Resources")
 
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Lodestone"] = AutoBarItems:new("Muffin.Skill.Archaeology.Lodestone", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Lodestone")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Map"] = AutoBarItems:new("Muffin.Skill.Archaeology.Map", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Map")
+
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone"), ABGCode:GetSpellNameByName("Ritual of Souls"),
