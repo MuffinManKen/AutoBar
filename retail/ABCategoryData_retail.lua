@@ -333,10 +333,9 @@ function ABGCode:InitializeCategories()
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Runeforging"),
 	})
 
-	AutoBarCategoryList["Spell.Archaeology"] = AutoBarSpells:new("Spell.Archaeology", spellIconList["Archaeology"],
+	AutoBarCategoryList["Spell.Archaeology"] = AutoBarSpells:new("Spell.Archaeology", spellIconList["Archaeology"], nil,
 	{
-		"*",	ABGCode:GetSpellNameByName("Archaeology"),
-		"*",	ABGCode:GetSpellNameByName("Survey"),
+		"*",	ABGCode:GetSpellNameByName("Survey"), ABGCode:GetSpellNameByName("Archaeology"),
 	})
 
 
