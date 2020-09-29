@@ -1466,11 +1466,9 @@ function AutoBar:PopulateBars(ignorePlace)
 	end
 end
 
--- /dump AutoBar.options.args.bars.args["AutoBarClassBarBasic"].args.buttons.args[1]
 -- /dump AutoBar.db.class.barList["AutoBarClassBarHunter"]
 -- /dump AutoBar.db.class.barList["AutoBarClassBarHunter"].buttonKeys
 -- /dump (# AutoBar.db.class.barList["AutoBarClassBarHunter"].buttonKeys)
--- /dump AutoBar.options.args.categories
 --AutoBar:Print("AutoBar:DragStop" .. frame:GetName() .. " x/y " .. tostring().. " / " ..tostring())
 -- /script AutoBarDB2.custom_categories = nil
 
