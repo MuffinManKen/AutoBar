@@ -2456,6 +2456,19 @@ local function CategoryRemove(info)
 	AutoBar:BarButtonChanged()
 end
 
+local function getKeysSortedByValue(tbl, sortFunction)	--TODO: Move this to the global space
+  local keys = {}
+  for key in pairs(tbl) do
+    table.insert(keys, key)
+  end
+
+  table.sort(keys, function(a, b)
+    return sortFunction(tbl[a], tbl[b])
+  end)
+
+  return keys
+end
+
 local validCategoryKeys = {}
 function AutoBar:CreateButtonCategoryOptions(barKey, buttonIndex, categoryOptions, buttonKey)
 --print("AutoBar:CreateButtonCategoryOptions barKey:", barKey, "buttonIndex:", buttonIndex)
@@ -2491,15 +2504,17 @@ function AutoBar:CreateButtonCategoryOptions(barKey, buttonIndex, categoryOption
 			categoryOptions[keyCategory].name = name
 		else
 			passValue = {["barKey"] = barKey, ["buttonKey"] = buttonKey, ["buttonIndex"] = buttonIndex, ["categoryIndex"] = categoryIndex, ["categoryKey"] = categoryKey}
+			local sortedKeys = getKeysSortedByValue(AutoBar.categoryValidateList, function(a, b) return a < b end)
 			categoryOptions[keyCategory] = {
 				order = categoryIndex * 2,
-			    type = 'select',
-			    name = L["Category"],
-			    desc = L["Category"],
-			    width = "double",
+				type = 'select',
+				name = L["Category"],
+				desc = L["Category"],
+				width = "double",
 				get = getButtonCategory,
 				set = setButtonCategory,
-			    values = AutoBar.categoryValidateList,
+				values = AutoBar.categoryValidateList,
+				sorting = sortedKeys,
 				arg = passValue,
 			}
 			categoryOptions[keyDelete] = {
