@@ -8,10 +8,11 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Priest: Added Power Word: Fortitude
-	 - New bars are 1x16 by default
-	 - Dynamic Detection of Quest Items is working now
-	 - Fix for spell-based buttons not re-ordering
+	 - A bunch of minor fixes
+	 - Minor locale cleanup
+	 - Fixed issues with Rogue Poisons showing up on the Weapon buff button
+	 - Custom Categories are visible again in the Categories tab
+	 - When adding Categories to a Custom button, Categories are now sorted!
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
