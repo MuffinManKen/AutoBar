@@ -17,9 +17,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Added Challenger`s Path teleports
-	 - Fixed Portal to Ancient Dalaran
-	 - Changed Ancient Dalaran port to a different icon
+	 - Fixed bug where custom categories were not visible
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
