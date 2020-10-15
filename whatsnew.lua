@@ -19,11 +19,15 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - So Many fixes!
+	 - Shadowlands Fixes
 	 - New bars are 1x16 by default
 	 - Dynamic Detection of Quest Items is working now
-	 - Custom Categories are visible again in the Categories tab
-	 - Absolutely no new items have been added, that will happen later.
+	 - Fixed issue with Spell-based buttons not re-ordering on use
+	 - Minor locale cleanup
+	 - When adding Categories to a Custom button, Categories are now sorted!
+	 - Fixed issues with Rogue Poisons showing up on the Weapon buff button
+	 - Lodestones and Maps show up on the Archaeology button
+	 - Tradeskill buttons should work reliably again
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
