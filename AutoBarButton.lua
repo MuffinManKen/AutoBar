@@ -843,7 +843,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 			-- Tooltip
 			local spellInfo = AutoBarSearch.spells[spell]
-			if (spellInfo.spellLink) then
+			if (spellInfo and spellInfo.spellLink) then
 				frame:SetAttribute("itemLink", spellInfo.spellLink)
 			end
 		elseif (castSpell) then
@@ -1272,6 +1272,26 @@ function AutoBarButtonCrafting.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCrafting.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Crafting")
+end
+
+function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+--print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell])
+
+
+	if(spell == ABGData.spell_name_list["Jewelcrafting"]) then
+		spell = 195116
+	elseif (spell == ABGData.spell_name_list["Alchemy"]) then
+		spell = 195095
+	elseif (spell == ABGData.spell_name_list["Leatherworking"]) then
+		spell = 195119
+	elseif (spell == ABGData.spell_name_list["Inscription"]) then
+		spell = 195115
+	end
+
+--print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell])
+
+	AutoBarButtonCrafting.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+
 end
 
 
