@@ -48,7 +48,7 @@ function UITK.show_tooltip(self)
 	if(self.tooltip_title) then
 		GameTooltip:SetText(self.tooltip_title, 1, 1, 0.5, 1.0, 1)
 		GameTooltip:AddLine(self.tooltip_text, 1, 1, 1, 1.0, 1)
-	else
+	elseif(self.tooltip_text) then
 		GameTooltip:SetText(self.tooltip_text, nil, nil, nil, nil, 1);
 	end
 
@@ -71,8 +71,8 @@ function UITK.create_checkbox(p_frame, p_name, p_text, p_options)
 	cb.fnt_string:SetPoint("LEFT", cb, "RIGHT", 0, 2)
 	cb.fnt_string:SetText(p_text)
 
-	cb.tooltip_title = p_options.tip_title
-	cb.tooltip_text = p_options.tip
+	cb.tooltip_title = opts.tip_title
+	cb.tooltip_text = opts.tip
 
 	cb:SetScript("OnEnter", function(self) UITK.show_tooltip(self); end)
 	cb:SetScript("OnLeave", function(self) GameTooltip_Hide(); end)
