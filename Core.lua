@@ -408,7 +408,6 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 		local link = GetQuestLogSpecialItemInfo(p_quest_index)
 
 		if(link) then
-print("New Quest:", p_quest_index, "|tLink:", link)
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
 			ABGCS:ABScheduleUpdate(tick.UpdateObjectsID)
 		end
