@@ -82,7 +82,7 @@ local classBar = {
 
 function AutoBar:GetValidatedName(name)
 	name = name:gsub("%.", "")
-	name = name:gsub("\"", "")
+	name = name:gsub("\"", "")	--" --(uedit doesnt understand escaped quotes)
 	name = name:gsub(" ", "")
 	return name
 end
