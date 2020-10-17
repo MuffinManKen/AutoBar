@@ -184,16 +184,19 @@ ABGCS:CacheSpellData(116705, "Spear Hand Strike");
 ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
 
 --Paladin
-ABGCS:CacheSpellData(31850, "Ardent Defender");
-ABGCS:CacheSpellData(642, "Divine Shield");
-ABGCS:CacheSpellData(1044, "Blessing of Freedom");
-ABGCS:CacheSpellData(1022, "Blessing of Protection");
-ABGCS:CacheSpellData(6940, "Blessing of Sacrifice");
-ABGCS:CacheSpellData(204018, "Blessing of Spellwarding");
-ABGCS:CacheSpellData(204013, "Blessing of Salvation");
-ABGCS:CacheSpellData(183218, "Hand of Hindrance");
-ABGCS:CacheSpellData(96231, "Rebuke");
-ABGCS:CacheSpellData(633, "Lay on Hands");
+ABGCS:CacheSpellData(31850, "Ardent Defender"); --y
+ABGCS:CacheSpellData(642, "Divine Shield"); --y
+ABGCS:CacheSpellData(1044, "Blessing of Freedom"); --y
+ABGCS:CacheSpellData(1022, "Blessing of Protection"); --y
+ABGCS:CacheSpellData(6940, "Blessing of Sacrifice"); --y
+ABGCS:CacheSpellData(204018, "Blessing of Spellwarding"); --y
+ABGCS:CacheSpellData(183218, "Hand of Hindrance"); --y
+ABGCS:CacheSpellData(96231, "Rebuke"); --y
+ABGCS:CacheSpellData(633, "Lay on Hands"); --y
+ABGCS:CacheSpellData(32223, "Crusader Aura"); --y
+ABGCS:CacheSpellData(465, "Devotion Aura"); --y
+ABGCS:CacheSpellData(183435, "Retribution Aura"); --y
+
 
 --Priest
 ABGCS:CacheSpellData(17, "Power Word: Shield");
