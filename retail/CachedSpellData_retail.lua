@@ -191,8 +191,6 @@ ABGCS:CacheSpellData(1022, "Blessing of Protection");
 ABGCS:CacheSpellData(6940, "Blessing of Sacrifice");
 ABGCS:CacheSpellData(204018, "Blessing of Spellwarding");
 ABGCS:CacheSpellData(204013, "Blessing of Salvation");
-ABGCS:CacheSpellData(203538, "Greater Blessing of Kings");
-ABGCS:CacheSpellData(203539, "Greater Blessing of Wisdom");
 ABGCS:CacheSpellData(183218, "Hand of Hindrance");
 ABGCS:CacheSpellData(96231, "Rebuke");
 ABGCS:CacheSpellData(633, "Lay on Hands");
