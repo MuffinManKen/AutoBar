@@ -103,7 +103,7 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
 	{
 		"ROGUE", ABGCode:GetSpellNameByName("Crippling Poison"),
-		"ROGUE", ABGCode:GetSpellNameByName("Leeching Poison"),
+		"ROGUE", ABGCode:GetSpellNameByName("Numbing Poison"),
 	})
 
 
@@ -254,7 +254,6 @@ function ABGCode:InitializeCategories()
 		"PALADIN", 		ABGCode:GetSpellNameByName("Divine Shield"), ABGCode:GetSpellNameByName("Divine Shield"),
 		"PRIEST", 		ABGCode:GetSpellNameByName("Power Word: Shield"), ABGCode:GetSpellNameByName("Power Word: Barrier"),
 		"ROGUE", 		ABGCode:GetSpellNameByName("Evasion"), 		ABGCode:GetSpellNameByName("Evasion"),
-		"ROGUE", 		ABGCode:GetSpellNameByName("Riposte"), 		ABGCode:GetSpellNameByName("Riposte"),
 		"WARLOCK", 		ABGCode:GetSpellNameByName("Unending Resolve"), ABGCode:GetSpellNameByName("Unending Resolve"),
 		"WARRIOR", 		ABGCode:GetSpellNameByName("Shield Block"), ABGCode:GetSpellNameByName("Shield Wall"),
 		"WARRIOR", 		ABGCode:GetSpellNameByName("Shield Wall"), ABGCode:GetSpellNameByName("Shield Block"),
@@ -401,6 +400,7 @@ function ABGCode:InitializeCategories()
 		"DRUID", ABGCode:GetSpellNameByName("Wild Charge"),
 		"HUNTER", ABGCode:GetSpellNameByName("Harpoon"),
 		"ROGUE", ABGCode:GetSpellNameByName("Shadowstep"),
+		"ROGUE", ABGCode:GetSpellNameByName("Blade Rush"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Charge"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Intercept"),
 	})

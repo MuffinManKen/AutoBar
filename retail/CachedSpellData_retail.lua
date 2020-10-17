@@ -212,18 +212,17 @@ ABGCS:CacheSpellData(21562, "Power Word: Fortitude");
 
 
 --Rogue
-ABGCS:CacheSpellData(3408, "Crippling Poison");
-ABGCS:CacheSpellData(2823, "Deadly Poison");
-ABGCS:CacheSpellData(4086, "Evasion");
-ABGCS:CacheSpellData(1766, "Kick");
-ABGCS:CacheSpellData(108211, "Leeching Poison");
-ABGCS:CacheSpellData(199754, "Riposte");
-ABGCS:CacheSpellData(36554, "Shadowstep");
-ABGCS:CacheSpellData(1784, "Stealth");
-ABGCS:CacheSpellData(1856, "Vanish");
-ABGCS:CacheSpellData(8679, "Wound Poison");
-ABGCS:CacheSpellData(2094, "Blind");
-ABGCS:CacheSpellData(6770, "Sap");
+ABGCS:CacheSpellData(3408, "Crippling Poison"); --y
+ABGCS:CacheSpellData(2823, "Deadly Poison"); --y
+ABGCS:CacheSpellData(5761, "Numbing Poison"); --y
+ABGCS:CacheSpellData(8679, "Wound Poison"); --y
+ABGCS:CacheSpellData(5277, "Evasion"); --y
+ABGCS:CacheSpellData(1766, "Kick"); --y
+ABGCS:CacheSpellData(36554, "Shadowstep"); --y
+ABGCS:CacheSpellData(1784, "Stealth"); --y
+ABGCS:CacheSpellData(1856, "Vanish"); --y
+ABGCS:CacheSpellData(271877, "Blade Rush"); --y
+
 
 
 --Shaman

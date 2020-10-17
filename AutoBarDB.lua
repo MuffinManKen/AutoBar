@@ -335,7 +335,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonCharge", },
 			{button_name = "AutoBarButtonER", },
-			{button_name = "AutoBarButtonTrap", },
+			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_CLASSIC},
 		},
 		WARLOCK =
 		{
@@ -1109,6 +1109,11 @@ function AutoBar:InitializeDefaults()
 	if(AutoBar.CLASS == "WARLOCK" and AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonInterrupt"] = nil
 	end
+	if(AutoBar.CLASS == "ROGUE" and AutoBar.db.class.buttonList["AutoBarButtonTrap"] and (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC)) then
+		AutoBar.db.class.buttonList["AutoBarButtonTrap"] = nil
+	end
+
+
 
 -- save as sample to remove buttons per class
 --	if(AutoBar.CLASS == "xx" and AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
