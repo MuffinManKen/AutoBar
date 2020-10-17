@@ -58,7 +58,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
-		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone"), ABGCode:GetSpellNameByName("Ritual of Souls"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone"), ABGCode:GetSpellNameByName("Create Soulwell"),
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
@@ -145,8 +145,6 @@ function ABGCode:InitializeCategories()
 		"SHAMAN", ABGCode:GetSpellNameByName("Fire Elemental"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Storm Elemental"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Feral Spirit"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Eye of Kilrogg"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Summon Infernal"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Felguard"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Felhunter"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Imp"),
@@ -167,11 +165,12 @@ function ABGCode:InitializeCategories()
 		"HUNTER", ABGCode:GetSpellNameByName("Mend Pet"),
 		"HUNTER", ABGCode:GetSpellNameByName("Intimidation"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Command Demon"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Eye of Kilrogg"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Infernal"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Call Dreadstalkers"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Grimoire of Sacrifice"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Demonic Empowerment"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Demonwrath"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Summon Darkglare"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Summon Demonic Tyrant"),
 	})
 
 	--Misc pet abilities
@@ -356,7 +355,7 @@ function ABGCode:InitializeCategories()
 		"PALADIN", ABGCode:GetSpellNameByName("Hand of Hindrance"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Tongues"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Weakness"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Fragility"),
+		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Exhaustion"),
 	})
 
 
@@ -433,7 +432,6 @@ function ABGCode:InitializeCategories()
 		"PRIEST", ABGCode:GetSpellNameByName("Silence"),
 		"ROGUE", ABGCode:GetSpellNameByName("Kick"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Wind Shear"),
-		"WARLOCK", ABGCode:GetSpellNameByName("Grimoire: Felhunter"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Pummel"),
 	})
 

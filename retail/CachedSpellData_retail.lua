@@ -249,31 +249,29 @@ ABGCS:CacheSpellData(192077, "Wind Rush Totem");
 
 
 --Warlock
-ABGCS:CacheSpellData(104316, "Call Dreadstalkers");
-ABGCS:CacheSpellData(119898, "Command Demon");
-ABGCS:CacheSpellData(199954, "Curse of Fragility");
-ABGCS:CacheSpellData(199890, "Curse of Tongues");
-ABGCS:CacheSpellData(199892, "Curse of Weakness");
-ABGCS:CacheSpellData(108416, "Dark Pact");
-ABGCS:CacheSpellData(193396, "Demonic Empowerment");
-ABGCS:CacheSpellData(193440, "Demonwrath");
-ABGCS:CacheSpellData(108503, "Grimoire of Sacrifice");
-ABGCS:CacheSpellData(111897, "Grimoire: Felhunter");
-ABGCS:CacheSpellData(20707, "Soulstone");
-ABGCS:CacheSpellData(205180, "Summon Darkglare");
-ABGCS:CacheSpellData(5697, "Unending Breath");
-ABGCS:CacheSpellData(104773, "Unending Resolve");
-ABGCS:CacheSpellData(6201, "Create Healthstone");
-ABGCS:CacheSpellData(29893, "Ritual of Souls");
-ABGCS:CacheSpellData(126, "RitualSouls");
-ABGCS:CacheSpellData(30146, "Eye of Kilrogg");
-ABGCS:CacheSpellData(691, "Summon Felhunter");
-ABGCS:CacheSpellData(688, "Summon Imp");
-ABGCS:CacheSpellData(712, "Summon Succubus");
-ABGCS:CacheSpellData(697, "Summon Voidwalker");
-ABGCS:CacheSpellData(1122, "Summon Infernal");
-ABGCS:CacheSpellData(30146, "Summon Felguard");
-ABGCS:CacheSpellData(698, "Ritual of Summoning");
+ABGCS:CacheSpellData(104316, "Call Dreadstalkers"); --y
+ABGCS:CacheSpellData(119898, "Command Demon"); --y
+ABGCS:CacheSpellData(1714, "Curse of Tongues");	--y
+ABGCS:CacheSpellData(702, "Curse of Weakness");	--y
+ABGCS:CacheSpellData(334275, "Curse of Exhaustion");	--y
+
+ABGCS:CacheSpellData(108416, "Dark Pact"); --y
+ABGCS:CacheSpellData(108503, "Grimoire of Sacrifice"); --y
+ABGCS:CacheSpellData(20707, "Soulstone");	--y
+ABGCS:CacheSpellData(5697, "Unending Breath");	--y
+ABGCS:CacheSpellData(104773, "Unending Resolve"); --y
+ABGCS:CacheSpellData(6201, "Create Healthstone");--y
+ABGCS:CacheSpellData(29893, "Create Soulwell");	--y
+ABGCS:CacheSpellData(126, "Eye of Kilrogg");--y
+ABGCS:CacheSpellData(691, "Summon Felhunter");--y
+ABGCS:CacheSpellData(688, "Summon Imp");--y
+ABGCS:CacheSpellData(712, "Summon Succubus");--y
+ABGCS:CacheSpellData(697, "Summon Voidwalker");	--y
+ABGCS:CacheSpellData(1122, "Summon Infernal"); --y
+ABGCS:CacheSpellData(30146, "Summon Felguard"); --y
+ABGCS:CacheSpellData(205180, "Summon Darkglare");--y
+ABGCS:CacheSpellData(265187, "Summon Demonic Tyrant");
+ABGCS:CacheSpellData(698, "Ritual of Summoning"); --y
 
 --Warrior
 ABGCS:CacheSpellData(100, "Charge");
