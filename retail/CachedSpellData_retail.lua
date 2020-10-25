@@ -197,16 +197,15 @@ ABGCS:CacheSpellData(183435, "Retribution Aura"); --y
 
 
 --Priest
-ABGCS:CacheSpellData(17, "Power Word: Shield");
-ABGCS:CacheSpellData(62618, "Power Word: Barrier");
-
-ABGCS:CacheSpellData(34433, "Shadowfiend");
-ABGCS:CacheSpellData(47585, "Dispersion");
-ABGCS:CacheSpellData(47788, "Guardian Spirit");
-ABGCS:CacheSpellData(33206, "Pain Suppression");
-ABGCS:CacheSpellData(15487, "Silence");
-ABGCS:CacheSpellData(1706, "Levitate");
-ABGCS:CacheSpellData(21562, "Power Word: Fortitude");
+ABGCS:CacheSpellData(17, "Power Word: Shield"); --y
+ABGCS:CacheSpellData(62618, "Power Word: Barrier"); --y
+ABGCS:CacheSpellData(34433, "Shadowfiend"); --y
+ABGCS:CacheSpellData(47585, "Dispersion"); --y
+ABGCS:CacheSpellData(47788, "Guardian Spirit"); --y
+ABGCS:CacheSpellData(33206, "Pain Suppression"); --y
+ABGCS:CacheSpellData(15487, "Silence"); --y
+ABGCS:CacheSpellData(1706, "Levitate"); --y
+ABGCS:CacheSpellData(21562, "Power Word: Fortitude"); --y
 
 
 --Rogue
