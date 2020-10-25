@@ -117,7 +117,6 @@ function ABGCode:InitializeCategories()
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Protection"),
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Sacrifice"),
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Spellwarding"),
-		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Salvation"),
 		"PRIEST", ABGCode:GetSpellNameByName("Levitate"),
 		"PRIEST", ABGCode:GetSpellNameByName("Power Word: Fortitude"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Water Walking"),
@@ -310,7 +309,6 @@ function ABGCode:InitializeCategories()
 		"ROGUE", ABGCode:GetSpellNameByName("Deadly Poison"),
 		"ROGUE", ABGCode:GetSpellNameByName("Wound Poison"),
 		"ROGUE", ABGCode:GetSpellNameByName("Crippling Poison"),
-		"ROGUE", ABGCode:GetSpellNameByName("Leeching Poison"),
 	})
 
 	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"],
