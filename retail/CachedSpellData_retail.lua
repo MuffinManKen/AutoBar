@@ -22,28 +22,28 @@ ABGCS:CacheSpellData(131228, "Path of the Black Ox");
 
 
 --DeathKnight
-ABGCS:CacheSpellData(3714, "Path of Frost");
-ABGCS:CacheSpellData(63560, "Dark Transformation");
-ABGCS:CacheSpellData(45524, "Chains of Ice");
-ABGCS:CacheSpellData(48707, "Anti-Magic Shell");
-ABGCS:CacheSpellData(48792, "Icebound Fortitude");
-ABGCS:CacheSpellData(47528, "Mind Freeze");
-ABGCS:CacheSpellData(194679, "Rune Tap");
-ABGCS:CacheSpellData(49028, "Rune Weapon");
-ABGCS:CacheSpellData(46584, "Raise Dead");
-ABGCS:CacheSpellData(49206, "Summon Gargoyle");
-ABGCS:CacheSpellData(42650, "Army of the Dead");
-ABGCS:CacheSpellData(50977, "Death Gate");
+ABGCS:CacheSpellData(3714, "Path of Frost"); --y
+ABGCS:CacheSpellData(63560, "Dark Transformation"); --y
+ABGCS:CacheSpellData(45524, "Chains of Ice"); --y
+ABGCS:CacheSpellData(48707, "Anti-Magic Shell"); --y
+ABGCS:CacheSpellData(48792, "Icebound Fortitude"); --y
+ABGCS:CacheSpellData(47528, "Mind Freeze"); --y
+ABGCS:CacheSpellData(194679, "Rune Tap"); --y
+ABGCS:CacheSpellData(49028, "Dancing Rune Weapon"); --y
+ABGCS:CacheSpellData(46584, "Raise Dead"); --y
+ABGCS:CacheSpellData(49206, "Summon Gargoyle"); --y
+ABGCS:CacheSpellData(42650, "Army of the Dead"); --y
+ABGCS:CacheSpellData(50977, "Death Gate"); --y
 
 --DemonHunter
-ABGCS:CacheSpellData(195072, "Fel Rush");
-ABGCS:CacheSpellData(198793, "Vengeful Retreat");
-ABGCS:CacheSpellData(198589, "Blur");
-ABGCS:CacheSpellData(196718, "Darkness");
-ABGCS:CacheSpellData(204596, "Sigil of Flame");
-ABGCS:CacheSpellData(207684, "Sigil of Misery");
-ABGCS:CacheSpellData(202137, "Sigil of Silence");
-ABGCS:CacheSpellData(183752, "Consume Magic");
+ABGCS:CacheSpellData(195072, "Fel Rush"); --y
+ABGCS:CacheSpellData(198793, "Vengeful Retreat"); --y
+ABGCS:CacheSpellData(198589, "Blur"); --y
+ABGCS:CacheSpellData(196718, "Darkness"); --y
+ABGCS:CacheSpellData(204596, "Sigil of Flame"); --y
+ABGCS:CacheSpellData(207684, "Sigil of Misery"); --y
+ABGCS:CacheSpellData(202137, "Sigil of Silence"); --y
+ABGCS:CacheSpellData(183752, "Disrupt"); --y
 
 
 --Druid
@@ -168,8 +168,8 @@ ABGCS:CacheSpellData(281400, "Portal: Boralus");
 ABGCS:CacheSpellData(281404, "Teleport: Dazar'alor");
 ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
 
-ABGCS:CacheSpellData(344587, "Teleport: Oribos");
-ABGCS:CacheSpellData(344597, "Portal: Oribos");
+--ABGCS:CacheSpellData(344587, "Teleport: Oribos");
+--ABGCS:CacheSpellData(344597, "Portal: Oribos");
 
 
 

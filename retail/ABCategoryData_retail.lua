@@ -128,7 +128,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
-		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Rune Weapon"),
+		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Dancing Rune Weapon"),
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Raise Dead"),
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Army of the Dead"),
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Summon Gargoyle"),
@@ -421,7 +421,7 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Mind Freeze"),
-		"DEMONHUNTER", ABGCode:GetSpellNameByName("Consume Magic"),
+		"DEMONHUNTER", ABGCode:GetSpellNameByName("Disrupt"),
 		"DRUID", ABGCode:GetSpellNameByName("Skull Bash"),
 		"HUNTER", ABGCode:GetSpellNameByName("Counter Shot"),
 		"MAGE", ABGCode:GetSpellNameByName("Counterspell"),
