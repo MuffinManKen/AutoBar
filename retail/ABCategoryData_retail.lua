@@ -61,8 +61,8 @@ function ABGCode:InitializeCategories()
 		"WARLOCK", ABGCode:GetSpellNameByName("Create Healthstone"), ABGCode:GetSpellNameByName("Create Soulwell"),
 	})
 
-	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], nil, {
-		"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"), ABGCode:GetSpellNameByName("Conjure Refreshment Table"),
+	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
 	})
 
 	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
@@ -214,6 +214,7 @@ function ABGCode:InitializeCategories()
 		"MAGE", ABGCode:GetSpellNameByName("Teleport: Hall of the Guardian"), ABGCode:GetSpellNameByName("Teleport: Hall of the Guardian"),
 		"MAGE", ABGCode:GetSpellNameByName("Teleport: Boralus"), ABGCode:GetSpellNameByName("Portal: Boralus"),
 		"MAGE", ABGCode:GetSpellNameByName("Teleport: Dazar'alor"), ABGCode:GetSpellNameByName("Portal: Dazar'alor"),
+--		"MAGE", ABGCode:GetSpellNameByName("Teleport: Oribos"), ABGCode:GetSpellNameByName("Portal: Oribos"),
 		"MONK", ABGCode:GetSpellNameByName("Zen Pilgrimage"), ABGCode:GetSpellNameByName("Zen Pilgrimage"),
 		"MONK", ABGCode:GetSpellNameByName("Zen Pilgrimage: Return"), ABGCode:GetSpellNameByName("Zen Pilgrimage: Return"),
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Death Gate"), ABGCode:GetSpellNameByName("Death Gate"),

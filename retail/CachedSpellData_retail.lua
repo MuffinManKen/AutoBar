@@ -105,18 +105,17 @@ ABGCS:CacheSpellData(162488, "Steel Trap"); --y
 
 
 --Mage
-ABGCS:CacheSpellData(235313, "Blazing Barrier");
-ABGCS:CacheSpellData(42955, "Conjure Refreshment");
-ABGCS:CacheSpellData(43987, "Conjure Refreshment Table");
-ABGCS:CacheSpellData(2139, "Counterspell");
-ABGCS:CacheSpellData(110959, "Greater Invisibility");
-ABGCS:CacheSpellData(11426, "Ice Barrier");
-ABGCS:CacheSpellData(27619, "Ice Block");
-ABGCS:CacheSpellData(66, "Invisibility");
-ABGCS:CacheSpellData(235450, "Prismatic Barrier");
-ABGCS:CacheSpellData(130, "Slow Fall");
-ABGCS:CacheSpellData(31687, "Summon Water Elemental");
-ABGCS:CacheSpellData(198111, "Temporal Shield");
+ABGCS:CacheSpellData(235313, "Blazing Barrier"); --y
+ABGCS:CacheSpellData(42955, "Conjure Refreshment"); --y
+ABGCS:CacheSpellData(2139, "Counterspell"); --y
+ABGCS:CacheSpellData(110959, "Greater Invisibility"); --y
+ABGCS:CacheSpellData(11426, "Ice Barrier"); --y
+ABGCS:CacheSpellData(27619, "Ice Block"); --y
+ABGCS:CacheSpellData(66, "Invisibility"); --y
+ABGCS:CacheSpellData(235450, "Prismatic Barrier"); --y
+ABGCS:CacheSpellData(130, "Slow Fall"); --y
+ABGCS:CacheSpellData(31687, "Summon Water Elemental"); --y
+ABGCS:CacheSpellData(198111, "Temporal Shield"); --y
 
 ABGCS:CacheSpellData(33691, "Portal: Shattrath");
 ABGCS:CacheSpellData(35715, "Teleport: Shattrath");
@@ -168,6 +167,10 @@ ABGCS:CacheSpellData(281403, "Teleport: Boralus");
 ABGCS:CacheSpellData(281400, "Portal: Boralus");
 ABGCS:CacheSpellData(281404, "Teleport: Dazar'alor");
 ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
+
+ABGCS:CacheSpellData(344587, "Teleport: Oribos");
+ABGCS:CacheSpellData(344597, "Portal: Oribos");
+
 
 
 --Monk
