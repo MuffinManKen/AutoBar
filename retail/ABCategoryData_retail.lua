@@ -159,7 +159,6 @@ function ABGCode:InitializeCategories()
 		"HUNTER", ABGCode:GetSpellNameByName("Kill Command"),
 		"HUNTER", ABGCode:GetSpellNameByName("Bestial Wrath"),
 		"HUNTER", ABGCode:GetSpellNameByName("Dire Beast"),
-		"HUNTER", ABGCode:GetSpellNameByName("Dire Frenzy"),
 		"HUNTER", ABGCode:GetSpellNameByName("Master's Call"),
 		"HUNTER", ABGCode:GetSpellNameByName("Mend Pet"),
 		"HUNTER", ABGCode:GetSpellNameByName("Intimidation"),
@@ -177,6 +176,7 @@ function ABGCode:InitializeCategories()
 	{
 		"HUNTER", ABGCode:GetSpellNameByName("Dismiss Pet"),
 		"HUNTER", ABGCode:GetSpellNameByName("Eagle Eye"),
+		"HUNTER", ABGCode:GetSpellNameByName("Eyes of the Beast"),
 		"HUNTER", ABGCode:GetSpellNameByName("Feed Pet"),
 		"HUNTER", ABGCode:GetSpellNameByName("Revive Pet"),
 		"HUNTER", ABGCode:GetSpellNameByName("Tame Beast"),
@@ -343,7 +343,6 @@ function ABGCode:InitializeCategories()
 	{
 		"DRUID",		ABGCode:GetSpellNameByName("Incapacitating Roar"),
 		"HUNTER",	ABGCode:GetSpellNameByName("Binding Shot"),
-		"HUNTER",	ABGCode:GetSpellNameByName("Sentinel"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
@@ -352,7 +351,6 @@ function ABGCode:InitializeCategories()
 		"DRUID",	ABGCode:GetSpellNameByName("Entangling Roots"),
 		"HUNTER", ABGCode:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", ABGCode:GetSpellNameByName("Wing Clip"),
-		"HUNTER", ABGCode:GetSpellNameByName("Ranger's Net"),
 		"PALADIN", ABGCode:GetSpellNameByName("Hand of Hindrance"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Tongues"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Curse of Weakness"),
@@ -373,9 +371,7 @@ function ABGCode:InitializeCategories()
 		"DEMONHUNTER", ABGCode:GetSpellNameByName("Sigil of Flame"),
 		"DEMONHUNTER", ABGCode:GetSpellNameByName("Sigil of Misery"),
 		"DEMONHUNTER", ABGCode:GetSpellNameByName("Sigil of Silence"),
-		"HUNTER", ABGCode:GetSpellNameByName("Explosive Trap"),
 		"HUNTER", ABGCode:GetSpellNameByName("Freezing Trap"),
-		"HUNTER", ABGCode:GetSpellNameByName("Caltrops"),
 		"HUNTER", ABGCode:GetSpellNameByName("Tar Trap"),
 		"HUNTER", ABGCode:GetSpellNameByName("Steel Trap"),
 	})

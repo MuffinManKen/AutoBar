@@ -65,47 +65,43 @@ ABGCS:CacheSpellData(18960, "Teleport: Moonglade"); --y
 ABGCS:CacheSpellData(102401, "Wild Charge"); --y
 
 --Hunter
-ABGCS:CacheSpellData(61648, "Aspect of the Chameleon");
-ABGCS:CacheSpellData(186257, "Aspect of the Cheetah");
-ABGCS:CacheSpellData(186289, "Aspect of the Eagle");
-ABGCS:CacheSpellData(186265, "Aspect of the Turtle");
-ABGCS:CacheSpellData(193530, "Aspect of the Wild");
-ABGCS:CacheSpellData(1462, "Beast Lore");
-ABGCS:CacheSpellData(19574, "Bestial Wrath");
-ABGCS:CacheSpellData(109248, "Binding Shot");
-ABGCS:CacheSpellData(883, "Call Pet 1");
-ABGCS:CacheSpellData(83242, "Call Pet 2");
-ABGCS:CacheSpellData(83243, "Call Pet 3");
-ABGCS:CacheSpellData(83244, "Call Pet 4");
-ABGCS:CacheSpellData(83245, "Call Pet 5");
-ABGCS:CacheSpellData(199483, "Camouflage");
-ABGCS:CacheSpellData(5116, "Concussive Shot");
-ABGCS:CacheSpellData(147362, "Counter Shot");
-ABGCS:CacheSpellData(120679, "Dire Beast");
-ABGCS:CacheSpellData(217200, "Dire Frenzy");
-ABGCS:CacheSpellData(781, "Disengage");
-ABGCS:CacheSpellData(2641, "Dismiss Pet");
-ABGCS:CacheSpellData(6197, "Eagle Eye");
-ABGCS:CacheSpellData(6991, "Feed Pet");
-ABGCS:CacheSpellData(5384, "Feign Death");
-ABGCS:CacheSpellData(125050, "Fetch");
-ABGCS:CacheSpellData(190925, "Harpoon");
-ABGCS:CacheSpellData(7093, "Intimidation");
-ABGCS:CacheSpellData(34026, "Kill Command");
-ABGCS:CacheSpellData(53271, "Master's Call");
-ABGCS:CacheSpellData(136, "Mend Pet");
-ABGCS:CacheSpellData(209997, "Play Dead");
-ABGCS:CacheSpellData(200108, "Ranger's Net");
-ABGCS:CacheSpellData(982, "Revive Pet");
-ABGCS:CacheSpellData(206817, "Sentinel");
-ABGCS:CacheSpellData(1515, "Tame Beast");
-ABGCS:CacheSpellData(210000, "Wake Up");
-ABGCS:CacheSpellData(195645, "Wing Clip");
-ABGCS:CacheSpellData(187650, "Freezing Trap");
-ABGCS:CacheSpellData(191433, "Explosive Trap");
-ABGCS:CacheSpellData(187698, "Tar Trap");
-ABGCS:CacheSpellData(194277, "Caltrops");
-ABGCS:CacheSpellData(162488, "Steel Trap");
+ABGCS:CacheSpellData(61648, "Aspect of the Chameleon"); --y
+ABGCS:CacheSpellData(186257, "Aspect of the Cheetah"); --y
+ABGCS:CacheSpellData(186289, "Aspect of the Eagle"); --y
+ABGCS:CacheSpellData(186265, "Aspect of the Turtle"); --y
+ABGCS:CacheSpellData(193530, "Aspect of the Wild"); --y
+ABGCS:CacheSpellData(1462, "Beast Lore"); --y
+ABGCS:CacheSpellData(19574, "Bestial Wrath"); --y
+ABGCS:CacheSpellData(109248, "Binding Shot"); --y
+ABGCS:CacheSpellData(883, "Call Pet 1"); --y
+ABGCS:CacheSpellData(83242, "Call Pet 2"); --y
+ABGCS:CacheSpellData(83243, "Call Pet 3"); --y
+ABGCS:CacheSpellData(83244, "Call Pet 4"); --y
+ABGCS:CacheSpellData(83245, "Call Pet 5"); --y
+ABGCS:CacheSpellData(199483, "Camouflage"); --y
+ABGCS:CacheSpellData(5116, "Concussive Shot"); --y
+ABGCS:CacheSpellData(147362, "Counter Shot"); --y
+ABGCS:CacheSpellData(120679, "Dire Beast"); --y
+ABGCS:CacheSpellData(781, "Disengage"); --y
+ABGCS:CacheSpellData(2641, "Dismiss Pet"); --y
+ABGCS:CacheSpellData(6197, "Eagle Eye"); --y
+ABGCS:CacheSpellData(321297, "Eyes of the Beast"); --y
+ABGCS:CacheSpellData(6991, "Feed Pet"); --y
+ABGCS:CacheSpellData(5384, "Feign Death"); --y
+ABGCS:CacheSpellData(125050, "Fetch"); --y
+ABGCS:CacheSpellData(190925, "Harpoon");  --y
+ABGCS:CacheSpellData(7093, "Intimidation"); --y
+ABGCS:CacheSpellData(34026, "Kill Command"); --y
+ABGCS:CacheSpellData(53271, "Master's Call"); --y
+ABGCS:CacheSpellData(136, "Mend Pet"); --y
+ABGCS:CacheSpellData(209997, "Play Dead"); --y
+ABGCS:CacheSpellData(982, "Revive Pet"); --y
+ABGCS:CacheSpellData(1515, "Tame Beast"); --y
+ABGCS:CacheSpellData(210000, "Wake Up"); --y
+ABGCS:CacheSpellData(195645, "Wing Clip"); --y
+ABGCS:CacheSpellData(187650, "Freezing Trap"); --y
+ABGCS:CacheSpellData(187698, "Tar Trap"); --y
+ABGCS:CacheSpellData(162488, "Steel Trap"); --y
 
 
 --Mage
