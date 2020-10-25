@@ -341,7 +341,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{
-		"DRUID",		ABGCode:GetSpellNameByName("Disorienting Roar"),
+		"DRUID",		ABGCode:GetSpellNameByName("Incapacitating Roar"),
 		"HUNTER",	ABGCode:GetSpellNameByName("Binding Shot"),
 		"HUNTER",	ABGCode:GetSpellNameByName("Sentinel"),
 	})
@@ -349,6 +349,7 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Chains of Ice"),
+		"DRUID",	ABGCode:GetSpellNameByName("Entangling Roots"),
 		"HUNTER", ABGCode:GetSpellNameByName("Concussive Shot"),
 		"HUNTER", ABGCode:GetSpellNameByName("Wing Clip"),
 		"HUNTER", ABGCode:GetSpellNameByName("Ranger's Net"),
@@ -382,8 +383,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Misc.Mount.Summoned"] = AutoBarSpells:new( "Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"],
 	{
-		"DRUID", ABGCode:GetSpellNameByName("Flight Form"),
-		"DRUID", ABGCode:GetSpellNameByName("Swift Flight Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Travel Form"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Ghost Wolf"),
 		"*", ABGCode:GetSpellNameByName("Running Wild"),
 	})
@@ -458,7 +458,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.StagForm"] = AutoBarSpells:new( "Spell.StagForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCode:GetSpellNameByName("Stag Form"),
+		"DRUID", ABGCode:GetSpellNameByName("Mount Form"),
 	})
 
 	AutoBarCategoryList["Spell.Travel"] = AutoBarSpells:new( "Spell.Travel", spellIconList["Charge"],

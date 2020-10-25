@@ -47,24 +47,22 @@ ABGCS:CacheSpellData(183752, "Consume Magic");
 
 
 --Druid
-ABGCS:CacheSpellData(22812, "Barkskin");
-ABGCS:CacheSpellData(5487, "Bear Form");
-ABGCS:CacheSpellData(768, "Cat Form");
-ABGCS:CacheSpellData(99, "Disorienting Roar");
-ABGCS:CacheSpellData(193753, "Dreamwalk");
-ABGCS:CacheSpellData(33943, "Flight Form");
-ABGCS:CacheSpellData(22842, "Frenzied Regeneration");
-ABGCS:CacheSpellData(102342, "Ironbark");
-ABGCS:CacheSpellData(5215, "Prowl");
-ABGCS:CacheSpellData(33917, "Mangle");
-ABGCS:CacheSpellData(197625, "Moonkin Form");
-ABGCS:CacheSpellData(114282, "Treant Form");
-ABGCS:CacheSpellData(106839, "Skull Bash");
-ABGCS:CacheSpellData(210053, "Stag Form");
-ABGCS:CacheSpellData(40120, "Swift Flight Form");
-ABGCS:CacheSpellData(783, "Travel Form");
-ABGCS:CacheSpellData(18960, "Teleport: Moonglade");
-ABGCS:CacheSpellData(102401, "Wild Charge");
+ABGCS:CacheSpellData(22812, "Barkskin"); --y
+ABGCS:CacheSpellData(5487, "Bear Form"); --y
+ABGCS:CacheSpellData(768, "Cat Form"); --y
+ABGCS:CacheSpellData(193753, "Dreamwalk"); --y
+ABGCS:CacheSpellData(339, "Entangling Roots"); --y
+ABGCS:CacheSpellData(22842, "Frenzied Regeneration"); --y
+ABGCS:CacheSpellData(99, "Incapacitating Roar"); --y
+ABGCS:CacheSpellData(102342, "Ironbark"); --y
+ABGCS:CacheSpellData(5215, "Prowl"); --y
+ABGCS:CacheSpellData(197625, "Moonkin Form"); --y
+ABGCS:CacheSpellData(114282, "Treant Form"); --y
+ABGCS:CacheSpellData(106839, "Skull Bash"); --y
+ABGCS:CacheSpellData(210053, "Mount Form"); --y
+ABGCS:CacheSpellData(783, "Travel Form"); --y
+ABGCS:CacheSpellData(18960, "Teleport: Moonglade"); --y
+ABGCS:CacheSpellData(102401, "Wild Charge"); --y
 
 --Hunter
 ABGCS:CacheSpellData(61648, "Aspect of the Chameleon");

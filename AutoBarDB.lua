@@ -293,7 +293,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonStealth", },
 			{button_name = "AutoBarButtonDebuff", },
 			{button_name = "AutoBarButtonClassBuff", },
-			{button_name = "AutoBarButtonStance", },
+			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonShields", },
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonER", },
@@ -1111,6 +1111,10 @@ function AutoBar:InitializeDefaults()
 	end
 	if(AutoBar.CLASS == "ROGUE" and AutoBar.db.class.buttonList["AutoBarButtonTrap"] and (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC)) then
 		AutoBar.db.class.buttonList["AutoBarButtonTrap"] = nil
+	end
+	if(AutoBar.CLASS == "DRUID" and (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC)) then
+		AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = nil
+		AutoBar.db.class.buttonList["AutoBarButtonStance"] = nil
 	end
 
 
