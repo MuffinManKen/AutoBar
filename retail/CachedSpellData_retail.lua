@@ -174,11 +174,11 @@ ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
 
 
 --Monk
-ABGCS:CacheSpellData(126892, "Zen Pilgrimage");
-ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return");
-ABGCS:CacheSpellData(115203, "Fortifying Brew");
-ABGCS:CacheSpellData(116705, "Spear Hand Strike");
-ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire");
+ABGCS:CacheSpellData(126892, "Zen Pilgrimage"); --y
+ABGCS:CacheSpellData(126895, "Zen Pilgrimage: Return"); --y
+ABGCS:CacheSpellData(115203, "Fortifying Brew"); --y
+ABGCS:CacheSpellData(116705, "Spear Hand Strike"); --y
+ABGCS:CacheSpellData(137639, "Storm, Earth, and Fire"); --y
 
 --Paladin
 ABGCS:CacheSpellData(31850, "Ardent Defender"); --y
@@ -222,28 +222,27 @@ ABGCS:CacheSpellData(271877, "Blade Rush"); --y
 
 
 --Shaman
-ABGCS:CacheSpellData(556, "Astral Recall");
-ABGCS:CacheSpellData(198103, "Earth Elemental");
-ABGCS:CacheSpellData(51533, "Feral Spirit");
-ABGCS:CacheSpellData(198067, "Fire Elemental");
-ABGCS:CacheSpellData(2645, "Ghost Wolf");
-ABGCS:CacheSpellData(192249, "Storm Elemental");
-ABGCS:CacheSpellData(546, "Water Walking");
-ABGCS:CacheSpellData(57994, "Wind Shear");
+ABGCS:CacheSpellData(556, "Astral Recall"); --y
+ABGCS:CacheSpellData(198103, "Earth Elemental"); --y
+ABGCS:CacheSpellData(51533, "Feral Spirit"); --y
+ABGCS:CacheSpellData(198067, "Fire Elemental"); --y
+ABGCS:CacheSpellData(2645, "Ghost Wolf"); --y
+ABGCS:CacheSpellData(192249, "Storm Elemental"); --y
+ABGCS:CacheSpellData(546, "Water Walking"); --y
+ABGCS:CacheSpellData(57994, "Wind Shear"); --y
 
-ABGCS:CacheSpellData(207399, "Ancestral Protection Totem");
-ABGCS:CacheSpellData(157153, "Cloudburst Totem");
-ABGCS:CacheSpellData(2484, "Earthbind Totem");
-ABGCS:CacheSpellData(198838, "Earthen Shield Totem");
-ABGCS:CacheSpellData(51485, "Earthgrab Totem");
-ABGCS:CacheSpellData(61882, "Earthquake Totem");
-ABGCS:CacheSpellData(5394, "Healing Stream Totem");
-ABGCS:CacheSpellData(108280, "Healing Tide Totem");
-ABGCS:CacheSpellData(192058, "Lightning Surge Totem");
-ABGCS:CacheSpellData(192222, "Liquid Magma Totem");
-ABGCS:CacheSpellData(98008, "Spirit Link Totem");
-ABGCS:CacheSpellData(196932, "Voodoo Totem");
-ABGCS:CacheSpellData(192077, "Wind Rush Totem");
+ABGCS:CacheSpellData(207399, "Ancestral Protection Totem"); --y
+ABGCS:CacheSpellData(157153, "Cloudburst Totem"); --y
+ABGCS:CacheSpellData(192058, "Capacitor Totem"); --y
+ABGCS:CacheSpellData(2484, "Earthbind Totem"); --y
+ABGCS:CacheSpellData(198838, "Earthen Wall Totem"); --y
+ABGCS:CacheSpellData(51485, "Earthgrab Totem"); --y
+ABGCS:CacheSpellData(5394, "Healing Stream Totem"); --y
+ABGCS:CacheSpellData(108280, "Healing Tide Totem"); --y
+ABGCS:CacheSpellData(192222, "Liquid Magma Totem"); --y
+ABGCS:CacheSpellData(16191, "Mana Tide Totem"); --y
+ABGCS:CacheSpellData(98008, "Spirit Link Totem"); --y
+ABGCS:CacheSpellData(192077, "Wind Rush Totem"); --y
 
 
 --Warlock

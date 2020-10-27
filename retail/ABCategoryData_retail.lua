@@ -276,20 +276,17 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
+		"SHAMAN", ABGCode:GetSpellNameByName("Ancestral Protection Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Earthgrab Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Earthbind Totem"),
-		"SHAMAN", ABGCode:GetSpellNameByName("Ancestral Protection Totem"),
-		"SHAMAN", ABGCode:GetSpellNameByName("Earthen Shield Totem"),
-		"SHAMAN", ABGCode:GetSpellNameByName("Earthquake Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Earthen Wall Totem"),
 	})
 
 
 	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
-		"SHAMAN", ABGCode:GetSpellNameByName("Wind Rush Totem"),
-		"SHAMAN", ABGCode:GetSpellNameByName("Lightning Surge Totem"),
-		"SHAMAN", ABGCode:GetSpellNameByName("Voodoo Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Cloudburst Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Wind Rush Totem"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
@@ -301,6 +298,7 @@ function ABGCode:InitializeCategories()
 	{
 		"SHAMAN", ABGCode:GetSpellNameByName("Healing Stream Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Healing Tide Totem"),
+		"SHAMAN", ABGCode:GetSpellNameByName("Mana Tide Totem"),
 		"SHAMAN", ABGCode:GetSpellNameByName("Spirit Link Totem"),
 	})
 
