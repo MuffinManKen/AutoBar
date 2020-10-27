@@ -356,6 +356,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonStance", },
 			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonDebuff", project_id = WOW_PROJECT_MAINLINE},
 		}
 	}
 

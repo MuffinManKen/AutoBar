@@ -271,16 +271,17 @@ ABGCS:CacheSpellData(265187, "Summon Demonic Tyrant");
 ABGCS:CacheSpellData(698, "Ritual of Summoning"); --y
 
 --Warrior
-ABGCS:CacheSpellData(100, "Charge");
-ABGCS:CacheSpellData(97462, "Commanding Shout");
-ABGCS:CacheSpellData(197690, "Defensive Stance");
-ABGCS:CacheSpellData(1160, "Demoralizing Shout");
-ABGCS:CacheSpellData(184364, "Enraged Regeneration");
-ABGCS:CacheSpellData(198304, "Intercept");
-ABGCS:CacheSpellData(12975, "Last Stand");
-ABGCS:CacheSpellData(6552, "Pummel");
-ABGCS:CacheSpellData(2565, "Shield Block");
-ABGCS:CacheSpellData(871, "Shield Wall");
+ABGCS:CacheSpellData(6673, "Battle Shout"); --y
+ABGCS:CacheSpellData(100, "Charge"); --y
+ABGCS:CacheSpellData(97462, "Rallying Cry"); --y
+ABGCS:CacheSpellData(197690, "Defensive Stance"); --y
+ABGCS:CacheSpellData(1160, "Demoralizing Shout"); --y
+ABGCS:CacheSpellData(184364, "Enraged Regeneration"); --y
+ABGCS:CacheSpellData(3411, "Intervene"); --y
+ABGCS:CacheSpellData(12975, "Last Stand"); --y
+ABGCS:CacheSpellData(6552, "Pummel"); --y
+ABGCS:CacheSpellData(2565, "Shield Block"); --y
+ABGCS:CacheSpellData(871, "Shield Wall"); --y
 
 --Skills
 ABGCS:CacheSpellData(27028, "First Aid");

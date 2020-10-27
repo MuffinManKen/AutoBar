@@ -122,8 +122,8 @@ function ABGCode:InitializeCategories()
 		"SHAMAN", ABGCode:GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Unending Breath"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Soulstone"),
-		"WARRIOR", ABGCode:GetSpellNameByName("Commanding Shout"),
-		"WARRIOR", ABGCode:GetSpellNameByName("Demoralizing Shout"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Battle Shout"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Rallying Cry"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
@@ -342,6 +342,7 @@ function ABGCode:InitializeCategories()
 	{
 		"DRUID",		ABGCode:GetSpellNameByName("Incapacitating Roar"),
 		"HUNTER",	ABGCode:GetSpellNameByName("Binding Shot"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Demoralizing Shout"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
@@ -395,7 +396,7 @@ function ABGCode:InitializeCategories()
 		"ROGUE", ABGCode:GetSpellNameByName("Shadowstep"),
 		"ROGUE", ABGCode:GetSpellNameByName("Blade Rush"),
 		"WARRIOR", ABGCode:GetSpellNameByName("Charge"),
-		"WARRIOR", ABGCode:GetSpellNameByName("Intercept"),
+		"WARRIOR", ABGCode:GetSpellNameByName("Intervene"),
 	})
 
 	AutoBarCategoryList["Spell.ER"] = AutoBarSpells:new( "Spell.ER", spellIconList["Charge"],
