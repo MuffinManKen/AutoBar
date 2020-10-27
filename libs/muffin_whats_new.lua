@@ -50,7 +50,7 @@ local function build_queue_frame()
 
 	local muffin_texture = frame:CreateTexture("MuffinWhatsNewFrameMuffinTexture", "ARTWORK");
 	muffin_texture:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -8, 10)
-	muffin_texture:SetSize(48, 48);
+	muffin_texture:SetSize(64, 64);
 	muffin_texture:SetTexture("Interface\\Addons\\" .. ADDON_NAME .. "\\Textures\\muffin.tga")
 	muffin_texture:SetBlendMode("BLEND")
 

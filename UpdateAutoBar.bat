@@ -12,6 +12,8 @@ xcopy "D:\Projects\Current\WoW\ace3\AceGUI-3.0" ".\libs\AceGUI-3.0"  /Y /S /I
 copy "D:\Projects\Current\WoW\MuffinUIToolkit\muffin_ui_toolkit.lua" ".\libs\"
 copy "D:\Projects\Current\WoW\MuffinWhatsNew\muffin_whats_new.lua" ".\libs\"
 
+copy "D:\Projects\Current\WoW\MuffinIcons\*.tga" ".\textures\"
+
 
 xcopy "D:\Projects\Current\WoW\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
 
