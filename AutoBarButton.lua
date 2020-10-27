@@ -1286,6 +1286,16 @@ function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spel
 		spell = 195119
 	elseif (spell == ABGData.spell_name_list["Inscription"]) then
 		spell = 195115
+	elseif (spell == ABGData.spell_name_list["Blacksmithing"]) then
+		spell = 195097
+	elseif (spell == ABGData.spell_name_list["Cooking"]) then
+		spell = 158765
+	elseif (spell == ABGData.spell_name_list["Enchanting"]) then
+		spell = 195096
+	elseif (spell == ABGData.spell_name_list["Tailoring"]) then
+		spell = 195126
+	elseif (spell == ABGData.spell_name_list["Engineering"]) then
+		spell = 195112
 	end
 
 --print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell])
@@ -1293,7 +1303,15 @@ function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spel
 	AutoBarButtonCrafting.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 end
-
+--[[
+		"*", ABGCode:GetSpellNameByName("Archaeology"),
+		"*", ABGCode:GetSpellNameByName("Cooking Fire"),
+		"*", ABGCode:GetSpellNameByName("Disenchant"),
+		"*", ABGCode:GetSpellNameByName("Milling"),
+		"*", ABGCode:GetSpellNameByName("Prospecting"),
+		"*", ABGCode:GetSpellNameByName("Smelting"),
+		"*", ABGCode:GetSpellNameByName("Survey"),
+--]]
 
 AutoBarButtonCustom = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCustom"] = AutoBarButtonCustom

@@ -284,9 +284,8 @@ ABGCS:CacheSpellData(2565, "Shield Block"); --y
 ABGCS:CacheSpellData(871, "Shield Wall"); --y
 
 --Skills
-ABGCS:CacheSpellData(27028, "First Aid");
 ABGCS:CacheSpellData(28596, "Alchemy");
-ABGCS:CacheSpellData(818, "BasicCampfire");
+ABGCS:CacheSpellData(818, "Cooking Fire");
 ABGCS:CacheSpellData(29844, "Blacksmithing");
 ABGCS:CacheSpellData(33359, "Cooking");
 ABGCS:CacheSpellData(78670, "Archaeology");
