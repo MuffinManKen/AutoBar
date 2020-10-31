@@ -210,6 +210,7 @@ ABGCS:CacheSpellData(21562, "Power Word: Fortitude"); --y
 --Rogue
 ABGCS:CacheSpellData(3408, "Crippling Poison"); --y
 ABGCS:CacheSpellData(2823, "Deadly Poison"); --y
+ABGCS:CacheSpellData(315584, "Instant Poison"); --y
 ABGCS:CacheSpellData(5761, "Numbing Poison"); --y
 ABGCS:CacheSpellData(8679, "Wound Poison"); --y
 ABGCS:CacheSpellData(5277, "Evasion"); --y

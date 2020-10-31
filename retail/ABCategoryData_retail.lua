@@ -97,6 +97,7 @@ function ABGCode:InitializeCategories()
 
 	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
 		"ROGUE", ABGCode:GetSpellNameByName("Deadly Poison"),
+		"ROGUE", ABGCode:GetSpellNameByName("Instant Poison"),
 		"ROGUE", ABGCode:GetSpellNameByName("Wound Poison"),
 	})
 
