@@ -19,9 +19,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 else
 	WHATSNEW_TEXT = "" ..
 	[[
-	 - Updated Class bar abilities
-	 - Fixed more (all?) Tradeskill buttons
-	 - Spiffy icons for Patrons
+	 - Rogues: Instant Poison
+	 - More work on fixing Crafting buttons
 	 - Go to MuffinManGames.com to report any issues or for information on my Patreon
 	]] .. "|n"
 
