@@ -476,7 +476,7 @@ end
 local snippetOnAttributeChanged = [[
 	if (name == "icon") then
 		control:CallMethod("UpdateIcon", value)
-	elseif (name == "sourcebutton") then -- or name == "sourceButton" Some retard code is lowercasing this.  How silly.
+	elseif (name == "sourcebutton") then -- or name == "sourceButton" Some code is lowercasing this.  How silly.
 		control:CallMethod("UpdateHandlers", self:GetAttribute("sourceButton"))
 	end
 ]]
