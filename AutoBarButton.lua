@@ -1274,35 +1274,68 @@ function AutoBarButtonCrafting.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Crafting")
 end
 
-function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
---print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell])
-
-
-	if(spell == ABGData.spell_name_list["Jewelcrafting"]) then
-		spell = 195116
-	elseif (spell == ABGData.spell_name_list["Alchemy"]) then
-		spell = 195095
-	elseif (spell == ABGData.spell_name_list["Leatherworking"]) then
-		spell = 195119
-	elseif (spell == ABGData.spell_name_list["Inscription"]) then
-		spell = 195115
-	elseif (spell == ABGData.spell_name_list["Blacksmithing"]) then
-		spell = 195097
-	elseif (spell == ABGData.spell_name_list["Cooking"]) then
-		spell = 158765
-	elseif (spell == ABGData.spell_name_list["Enchanting"]) then
-		spell = 195096
-	elseif (spell == ABGData.spell_name_list["Tailoring"]) then
-		spell = 195126
-	elseif (spell == ABGData.spell_name_list["Engineering"]) then
-		spell = 195112
+if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+	--TODO: Clean up all this crap once I know it's working
+	local function find_known_spell(p_list)
+		for _i, id in ipairs(p_list) do
+			if IsSpellKnown(id) then
+				return id
+			end
+		end
 	end
 
---print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell])
+	local cooking_spell_id
+	local jc_spell_id
+	local alchemy_spell_id
+	local lw_spell_id
+	local scribe_spell_id
+	local smith_spell_id
+	local chant_spell_id
+	local tailor_spell_id
+	local eng_spell_id
 
-	AutoBarButtonCrafting.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
+		local debug --= true or (spell == "Cooking")
+
+		if (debug) then print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell], ABGData.spell_name_list["Cooking"]); end
+
+			if(spell == ABGData.spell_name_list["Jewelcrafting"]) then
+				jc_spell_id = jc_spell_id or find_known_spell({25229, 158750, 195116, 25230, 28894, 28895, 28897, 51311, 73318, 110420, 264532})
+				spell = jc_spell_id
+			elseif (spell == ABGData.spell_name_list["Alchemy"]) then
+				alchemy_spell_id = alchemy_spell_id or find_known_spell({2259, 195095, 156606, 3101, 3464, 11611, 28596, 51304, 80731, 105206, 264211})
+				spell = alchemy_spell_id
+			elseif (spell == ABGData.spell_name_list["Leatherworking"]) then
+				lw_spell_id = lw_spell_id or find_known_spell({2108, 158752, 195119, 3104, 3811, 10662, 32549, 51302, 81199, 110423, 264577})
+				spell = lw_spell_id
+			elseif (spell == ABGData.spell_name_list["Inscription"]) then
+				scribe_spell_id = scribe_spell_id or find_known_spell({45357, 195115, 158748, 45358, 45359, 45360, 45361, 45363, 86008, 110417, 264494})
+				spell = scribe_spell_id
+			elseif (spell == ABGData.spell_name_list["Blacksmithing"]) then
+				smith_spell_id = smith_spell_id or find_known_spell({2018, 195097, 158737, 3100, 3538, 9785, 29844, 51300, 76666, 110396, 264434})
+				spell = smith_spell_id
+			elseif (spell == ABGData.spell_name_list["Cooking"]) then
+				cooking_spell_id = cooking_spell_id or find_known_spell({2550, 158765, 3102, 3413, 18260, 33359, 51296, 88053, 104381, 195128 })
+				spell = cooking_spell_id
+			elseif (spell == ABGData.spell_name_list["Enchanting"]) then
+				chant_spell_id = chant_spell_id or find_known_spell({7411, 195096, 158716, 7412, 7413, 13920, 28029, 51313, 74258, 110400, 264455})
+				spell = chant_spell_id
+			elseif (spell == ABGData.spell_name_list["Tailoring"]) then
+				tailor_spell_id = tailor_spell_id or find_known_spell({3908, 195126, 158758, 3909, 3910, 12180, 26790, 51309, 75156, 110426, 264616})
+				spell = tailor_spell_id
+			elseif (spell == ABGData.spell_name_list["Engineering"]) then
+				eng_spell_id = eng_spell_id or find_known_spell({4036, 195112, 49383, 158739, 4037, 4038, 12656, 30350, 51306, 82774, 110403, 264475})
+				spell = eng_spell_id
+			end
+
+		if (debug) then print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell], ABGData.spell_name_list["Cooking"]); end
+
+		AutoBarButtonCrafting.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+
+	end
 end
+
 --[[
 		"*", ABGCode:GetSpellNameByName("Archaeology"),
 		"*", ABGCode:GetSpellNameByName("Cooking Fire"),
