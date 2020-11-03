@@ -114,6 +114,7 @@ function ABGCode:InitializeCategories()
 		"DEATHKNIGHT", ABGCode:GetSpellNameByName("Path of Frost"),
 		"DRUID", ABGCode:GetSpellNameByName("Ironbark"),
 		"MAGE", ABGCode:GetSpellNameByName("Slow Fall"),
+		"MAGE", ABGCode:GetSpellNameByName("Arcane Intellect"),
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Freedom"),
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Protection"),
 		"PALADIN", ABGCode:GetSpellNameByName("Blessing of Sacrifice"),
