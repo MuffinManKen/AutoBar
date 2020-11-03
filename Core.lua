@@ -502,7 +502,13 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 
 		--AutoBar:DumpWarningLog()
 
-		AB.show_whats_new();
+		AutoBarDB.whatsnew_version = MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry({
+			text = AB.WHATSNEW_TEXT,
+			version = AutoBarDB.whatsnew_version,
+			force_show = true,
+		})
+
+		MUFFIN_WHATS_NEW_QUEUE.Show()
 	end
 
 

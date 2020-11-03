@@ -23,6 +23,7 @@
 embeds.xml
 
 libs/muffin_ui_toolkit.lua
+libs/muffin_whats_new.lua
 
 retail/MuffinLibPTSets/LibPT-Muffin.BattlePet.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
@@ -47,6 +48,7 @@ AceGUIWidget-DragLink.lua
 AutoBarGlobals.lua
 
 retail/CachedSpellData_retail.lua
+retail/whatsnew.lua
 
 
 # Localization
@@ -65,8 +67,6 @@ locale/Locale-default.lua
 
 Bindings.lua
 
-libs/muffin_whats_new.lua
-whatsnew.lua
 
 Core.lua
 

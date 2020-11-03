@@ -1,4 +1,4 @@
-local ADDON_NAME = ... -- Pulls back the Addon-Local Variables and store them locally.
+local ADDON_NAME, ADDON_DATA = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local font_size = 13
 local font_name = "Fonts\\FRIZQT__.TTF"
@@ -175,11 +175,35 @@ local function add_entry(p_q_entry)
 	tinsert(MUFFIN_WHATS_NEW_QUEUE.q, p_q_entry)
 end
 
+local function add_conditional_entry(p_args)
+	d_print(" add_conditional_entry:", p_args)
+
+	assert(p_args);
+	assert(p_args.text);
+	assert(p_args.version);
+
+	local this_version = GetAddOnMetadata(ADDON_NAME, "Version")
+	local stored_version = p_args.version
+	local force_show = p_args.force_show
+
+	if((this_version ~= stored_version) or force_show) then
+
+		local q_entry = {}
+		q_entry.addon_name = ADDON_NAME
+		q_entry.addon_version = this_version
+		q_entry.body_text = p_args.text
+
+		add_entry(q_entry)
+
+	end
+
+	return this_version;
+end
 
 if(not MUFFIN_WHATS_NEW_QUEUE) then
 
 	MUFFIN_WHATS_NEW_QUEUE = {}
-	MUFFIN_WHATS_NEW_QUEUE.version = 1
+	MUFFIN_WHATS_NEW_QUEUE.version = 2
 	MUFFIN_WHATS_NEW_QUEUE.q = {}
 	MUFFIN_WHATS_NEW_QUEUE.frame = nil --Shared frame for showing all of the what's news
 	MUFFIN_WHATS_NEW_QUEUE.header_frame = nil	--Header frame for the what's new dialog
@@ -192,7 +216,12 @@ if(not MUFFIN_WHATS_NEW_QUEUE) then
 	MUFFIN_WHATS_NEW_QUEUE.Show = queue_show_whats_new
 	MUFFIN_WHATS_NEW_QUEUE.show_whats_new_internal = queue_show_whats_new_internal
 	MUFFIN_WHATS_NEW_QUEUE.AddEntry = add_entry
+	MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry = add_conditional_entry
 
 	d_print("Initialized MUFFIN_WHATS_NEW_QUEUE")
+
+elseif MUFFIN_WHATS_NEW_QUEUE.version < 2 then
+
+	MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry = add_conditional_entry
 
 end
