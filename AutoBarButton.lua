@@ -2640,7 +2640,6 @@ else
 			category.castList = {}
 
 			thisIsSpam = not category.unInitialized --or (# category.castList ~= count)
-			local spell_name
 
 			for idx = 0, num_mounts do
 				local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
@@ -2653,8 +2652,9 @@ else
 	--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 	--end;
 				if (is_collected and user_selected and not qiraji_filtered) then
-					spell_name = GetSpellInfo(spell_id)
+					local spell_name = GetSpellInfo(spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+					if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
 					spellIconList[spell_name] = icon
 					AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
 					local spellInfo = AutoBarSearch.spells[spell_name]
