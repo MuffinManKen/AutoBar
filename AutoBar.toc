@@ -48,7 +48,7 @@ AceGUIWidget-DragLink.lua
 AutoBarGlobals.lua
 
 retail/CachedSpellData_retail.lua
-retail/whatsnew.lua
+retail/whats_new.lua
 
 
 # Localization

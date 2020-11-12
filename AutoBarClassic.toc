@@ -42,7 +42,7 @@ AceGUIWidget-DragLink.lua
 AutoBarGlobals.lua
 
 classic/CachedSpellData_classic.lua
-classic/whatsnew.lua
+classic/whats_new.lua
 
 # Localization
 locale/Locale-enUS.lua
