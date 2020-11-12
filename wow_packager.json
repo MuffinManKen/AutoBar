@@ -7,7 +7,8 @@
 		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
-		"force_dirs" : ["classic", "libs", "locale", "textures"]
+		"force_dirs" : ["classic", "libs", "locale", "textures"],
+		"whats_new" : "classic/whats_new.lua"
 	},
 "retail" :
 	[
@@ -19,7 +20,9 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBar.toc", "Readme.txt"],
 		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin.tga" : "textures/muffin.tga"}
+		"renames" : {"textures/muffin.tga" : "textures/muffin.tga"},
+		"whats_new" : "retail/whats_new.lua",
+		"skip_ftp" : true
 	},
 	{
 		"toc_file" : "AutoBar.toc",
@@ -29,7 +32,8 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBar.toc", "Readme.txt"],
 		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_rare.tga" : "textures/muffin.tga"}
+		"renames" : {"textures/muffin_rare.tga" : "textures/muffin.tga"},
+		"whats_new" : "retail/whats_new.lua"
 	},
 	{
 		"toc_file" : "AutoBar.toc",
@@ -39,7 +43,8 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBar.toc", "Readme.txt"],
 		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_uncommon.tga" : "textures/muffin.tga"}
+		"renames" : {"textures/muffin_uncommon.tga" : "textures/muffin.tga"},
+		"whats_new" : "retail/whats_new.lua"
 	},
 	{
 		"toc_file" : "AutoBar.toc",
@@ -49,7 +54,8 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBar.toc", "Readme.txt"],
 		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_epic.tga" : "textures/muffin.tga"}
+		"renames" : {"textures/muffin_epic.tga" : "textures/muffin.tga"},
+		"whats_new" : "retail/whats_new.lua"
 	},
 	{
 		"toc_file" : "AutoBar.toc",
@@ -59,7 +65,8 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBar.toc", "Readme.txt"],
 		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_legend.tga" : "textures/muffin.tga"}
+		"renames" : {"textures/muffin_legend.tga" : "textures/muffin.tga"},
+		"whats_new" : "retail/whats_new.lua"
 	}
 
 
