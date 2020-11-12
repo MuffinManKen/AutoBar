@@ -53,15 +53,13 @@
 
 -- GLOBALS: WOW_PROJECT_ID, WOW_PROJECT_MAINLINE, WOW_PROJECT_CLASSIC
 
-local tostring, print, assert, math, pairs, strfind, ipairs, tonumber, wipe, table, type = tostring, print, assert, math, pairs, strfind, ipairs, tonumber, wipe, table, type
 
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-local L = AutoBarGlobalDataObject.locale
+local L = ABGData.locale
 
-local ROW_COLUMN_MAX = 32
 local CLASS_COLUMN_DEFAULT = 10
 
 
@@ -126,7 +124,7 @@ local function get_bar_default_settings()
 	{
 		enabled = true,
 		rows = 1,
-		columns = 16, --ROW_COLUMN_MAX,
+		columns = 16,
 		alignButtons = "3",
 		alpha = 1,
 		buttonWidth = 36,
@@ -246,7 +244,7 @@ function AutoBar:InitializeDefaults()
 	end
 	if (not AutoBar.db.account.barList["AutoBarClassBarExtras"]) then
 		AutoBar.db.account.barList["AutoBarClassBarExtras"] = get_bar_default_settings();
-		AutoBar.db.account.barList["AutoBarClassBarExtras"].columns = 9 --ROW_COLUMN_MAX,
+		AutoBar.db.account.barList["AutoBarClassBarExtras"].columns = 9
 		AutoBar.db.account.barList["AutoBarClassBarExtras"].posX = 300
 		AutoBar.db.account.barList["AutoBarClassBarExtras"].posY = 360
 	end
@@ -1175,16 +1173,16 @@ end
 -- Populate AutoBar.buttonDBList with the correct DB from char, class or account
 function AutoBar:RefreshButtonDBList()
 	local buttonDBList = AutoBar.buttonDBList
-	for buttonKey, buttonDB in pairs(buttonDBList) do
+	for buttonKey, _buttonDB in pairs(buttonDBList) do
 		buttonDBList[buttonKey] = nil
 	end
-	for buttonKey, buttonDB in pairs(AutoBar.db.char.buttonList) do
+	for buttonKey, _buttonDB in pairs(AutoBar.db.char.buttonList) do
 		buttonDBList[buttonKey] = AutoBar:GetButtonDB(buttonKey)
 	end
-	for buttonKey, buttonDB in pairs(AutoBar.db.class.buttonList) do
+	for buttonKey, _buttonDB in pairs(AutoBar.db.class.buttonList) do
 		buttonDBList[buttonKey] = AutoBar:GetButtonDB(buttonKey)
 	end
-	for buttonKey, buttonDB in pairs(AutoBar.db.account.buttonList) do
+	for buttonKey, _buttonDB in pairs(AutoBar.db.account.buttonList) do
 		buttonDBList[buttonKey] = AutoBar:GetButtonDB(buttonKey)
 	end
 end
