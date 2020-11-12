@@ -53,8 +53,6 @@ local ipairs, pairs, type, assert, tostring, wipe, strmatch, strsub, table = ipa
 
 local dewdrop = nil
 
-local ROW_COLUMN_MAX = 32
-
 local hintString = "|cffffffff%s:|r %s"
 local hintText = {
 	"AutoBar",
@@ -871,7 +869,7 @@ local function BarNew()
 		desc = newBarName,
 		enabled = true,
 		rows = 1,
-		columns = ROW_COLUMN_MAX,
+		columns = 16,
 		alignButtons = "3",
 		alpha = 1,
 		buttonWidth = 36,
