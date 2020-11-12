@@ -100,9 +100,10 @@ atl("Muffin.Skill.Fishing.Lure", "Muffin.Skill.Fishing.Lure");
 atl("AutoBarButtonArchaeology", "Archaeology")
 
 atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
+atl("Spell.ChallengePortals", "Spell.ChallengePortals");
 
 atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
-atl("Spell.AncientDalaranPortals", "Spell.AncientDalaranPortals");
+atl("HearthIncludeChallengePortals", "Include Challenge Portals");
 
 atl("Include Basic Combo Food", "Include Basic Combo Food");
 

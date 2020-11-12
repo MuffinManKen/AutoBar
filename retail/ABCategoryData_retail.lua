@@ -223,6 +223,10 @@ function ABGCode:InitializeCategories()
 		"SHAMAN", ABGCode:GetSpellNameByName("Astral Recall"), ABGCode:GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode:GetSpellNameByName("Ritual of Summoning"), ABGCode:GetSpellNameByName("Ritual of Summoning"),
 		"*", ABGCode:GetSpellNameByName("Mole Machine"), ABGCode:GetSpellNameByName("Mole Machine"),
+	})
+
+	AutoBarCategoryList["Spell.ChallengePortals"] = AutoBarSpells:new("Spell.ChallengePortals", "spell_arcane_portalironforge", nil,
+	{
 		"*", ABGCode:GetSpellNameByName("Path of the Jade Serpent"), ABGCode:GetSpellNameByName("Path of the Jade Serpent"),
 		"*", ABGCode:GetSpellNameByName("Path of the Stout Brew"), ABGCode:GetSpellNameByName("Path of the Stout Brew"),
 		"*", ABGCode:GetSpellNameByName("Path of the Shado-Pan"), ABGCode:GetSpellNameByName("Path of the Shado-Pan"),
@@ -233,7 +237,6 @@ function ABGCode:InitializeCategories()
 		"*", ABGCode:GetSpellNameByName("Path of the Necromancer"), ABGCode:GetSpellNameByName("Path of the Necromancer"),
 		"*", ABGCode:GetSpellNameByName("Path of the Black Ox"), ABGCode:GetSpellNameByName("Path of the Black Ox"),
 	})
-
 
 	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellIconList["Portal: Ancient Dalaran"], nil,
 	{

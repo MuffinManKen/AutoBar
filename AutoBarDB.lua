@@ -384,6 +384,7 @@ function AutoBar:InitializeDefaults()
 			enabled = true,
 			hearth_include_ancient_dalaran = false,
 			only_favourite_hearth = false,
+			hearth_include_challenge_portals = true,
 		}
 	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonBandages"]) then
