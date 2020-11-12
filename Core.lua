@@ -505,7 +505,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		AutoBarDB.whatsnew_version = MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry({
 			text = AB.WHATSNEW_TEXT,
 			version = AutoBarDB.whatsnew_version,
-			force_show = true,
+			force_show = false,
 		})
 
 		MUFFIN_WHATS_NEW_QUEUE.Show()
