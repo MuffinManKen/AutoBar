@@ -18,7 +18,7 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- GLOBALS: NUM_BAG_SLOTS, WOW_PROJECT_ID, WOW_PROJECT_MAINLINE
 -- GLOBALS: C_PetBattles
 
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local _G = _G
 local LibKeyBound = LibStub("LibKeyBound-1.0")
@@ -503,6 +503,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 		--AutoBar:DumpWarningLog()
 
 		AutoBarDB.whatsnew_version = MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry({
+			addon_name = ADDON_NAME,
 			text = AB.WHATSNEW_TEXT,
 			version = AutoBarDB.whatsnew_version,
 			force_show = false,

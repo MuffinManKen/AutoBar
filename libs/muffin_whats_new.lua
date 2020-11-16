@@ -1,4 +1,4 @@
-local ADDON_NAME, ADDON_DATA = ... -- Pulls back the Addon-Local Variables and store them locally.
+local ADDON_NAME, _ADDON_DATA = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local font_size = 13
 local font_name = "Fonts\\FRIZQT__.TTF"
@@ -116,21 +116,21 @@ local function queue_show_whats_new()
 end
 
 local function queue_show_whats_new_internal()
-	d_print("queue_show_whats_new_internal:", ADDON_NAME)
+	d_print("queue_show_whats_new_internal")
 
 	-- if the queue is empty, don't do anything
 	if (next(MUFFIN_WHATS_NEW_QUEUE.q) == nil) then
-		d_print("  queue is empty, nothing to do ", ADDON_NAME)
+		d_print("  queue is empty, nothing to do ")
 		return;
 	end
 
 	-- An addon is already showing something, so don't clobber it
 	if(MUFFIN_WHATS_NEW_QUEUE.frame:IsShown()) then
-		d_print("  frame is Visible, nothing to do ", ADDON_NAME)
+		d_print("  frame is Visible, nothing to do ")
 		return
 	end
 
-	d_print("  frame is not Visible, getting ready to show it ", ADDON_NAME)
+	d_print("  frame is not Visible, getting ready to show it ")
 
 	local frame = MUFFIN_WHATS_NEW_QUEUE.frame
 	local header_frame = MUFFIN_WHATS_NEW_QUEUE.header_frame
@@ -166,7 +166,7 @@ local function add_entry(p_q_entry)
 	assert(MUFFIN_WHATS_NEW_QUEUE.q ~= nil)
 
 	p_q_entry.addon_name = p_q_entry.addon_name or ADDON_NAME
-	p_q_entry.addon_version = p_q_entry.addon_version or GetAddOnMetadata(ADDON_NAME, "Version")
+	p_q_entry.addon_version = p_q_entry.addon_version or GetAddOnMetadata(p_q_entry.addon_name, "Version")
 
 	p_q_entry.body_text = gsub(p_q_entry.body_text, "`", "'")	--Replace backticks with ticks
 	p_q_entry.body_text = gsub(p_q_entry.body_text, "\t", "")	--Remove code-required indenting
@@ -182,19 +182,24 @@ local function add_conditional_entry(p_args)
 	assert(p_args.text);
 	assert(p_args.version);
 
-	local this_version = GetAddOnMetadata(ADDON_NAME, "Version")
+	local addon_name = p_args.addon_name or ADDON_NAME;	--Dumb hack
+	local this_version = GetAddOnMetadata(addon_name, "Version")
 	local stored_version = p_args.version
 	local force_show = p_args.force_show
+	d_print("this_version:", this_version, "stored:", stored_version, addon_name)
 
 	if((this_version ~= stored_version) or force_show) then
 
 		local q_entry = {}
-		q_entry.addon_name = ADDON_NAME
+		q_entry.addon_name = addon_name
 		q_entry.addon_version = this_version
 		q_entry.body_text = p_args.text
 
-		add_entry(q_entry)
+		q_entry.body_text = gsub(q_entry.body_text, "`", "'")	--Replace backticks with ticks
+		q_entry.body_text = gsub(q_entry.body_text, "\t", "")	--Remove code-required indenting
+		q_entry.body_text = gsub(q_entry.body_text, "|t", "   ")	--Implement our own tabs since WoW doesn't seem to do so
 
+		tinsert(MUFFIN_WHATS_NEW_QUEUE.q, q_entry)
 	end
 
 	return this_version;
