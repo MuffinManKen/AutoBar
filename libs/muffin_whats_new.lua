@@ -180,11 +180,10 @@ local function add_conditional_entry(p_args)
 
 	assert(p_args);
 	assert(p_args.text);
-	assert(p_args.version);
 
 	local addon_name = p_args.addon_name or ADDON_NAME;	--Dumb hack
 	local this_version = GetAddOnMetadata(addon_name, "Version")
-	local stored_version = p_args.version
+	local stored_version = p_args.version or 0
 	local force_show = p_args.force_show
 	d_print("this_version:", this_version, "stored:", stored_version, addon_name)
 
