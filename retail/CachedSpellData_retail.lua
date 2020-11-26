@@ -169,8 +169,8 @@ ABGCS:CacheSpellData(281400, "Portal: Boralus");
 ABGCS:CacheSpellData(281404, "Teleport: Dazar'alor");
 ABGCS:CacheSpellData(281402, "Portal: Dazar'alor");
 
---ABGCS:CacheSpellData(344587, "Teleport: Oribos");
---ABGCS:CacheSpellData(344597, "Portal: Oribos");
+ABGCS:CacheSpellData(344587, "Teleport: Oribos");
+ABGCS:CacheSpellData(344597, "Portal: Oribos");
 
 
 
