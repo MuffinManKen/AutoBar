@@ -32,6 +32,7 @@ retail/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Food.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Garrison.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+retail/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Misc.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
 retail/MuffinLibPTSets/LibPT-Muffin.OrderHall.lua

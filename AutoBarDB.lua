@@ -1130,6 +1130,7 @@ local changedCategoryKey = {
 	["Consumable.Buff Type.Both"] = "Consumable.Buff Type.Flask",
 	["Muffin.Reputation"] = "Muffin.Misc.Reputation",
 	["Muffin.Mount"] = "Muffin.Mounts",
+	["Tradeskill.Gather.Herbalism"] = "Muffin.Herbs.Millable",
 }
 function AutoBar:VerifyDB()
 	-- Temporary, implement buttonKey field

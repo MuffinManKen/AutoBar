@@ -65,7 +65,6 @@ atl("Spell.Stealth", "Spell.Stealth");
 atl("Spell.Track", "Spell.Track");
 atl("AutoBarButtonInterrupt", "Interrupts");
 
-atl("Tradeskill.Gather.Herbalism", "Herbs");
 atl("AutoBarButtonMillHerbs", "Milling");
 atl("AutoBarButtonTrack", "Track");
 
@@ -227,6 +226,8 @@ local quick_sets =
 	"Muffin.Mounts.Paladin",
 	"Muffin.Skill.Archaeology.Lodestone",
 	"Muffin.Skill.Archaeology.Map",
+	"Muffin.Skill.Fishing.Bait",
+	"Muffin.Herbs.Millable",
 }
 
 atl_table(quick_sets);

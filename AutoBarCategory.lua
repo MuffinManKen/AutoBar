@@ -78,7 +78,7 @@ local function AddSetToRawItems(p_raw_list, p_set, p_priority)
 				index = index + 1
 			end
 		else
-			print("AutoBar could not find the PT3.1 p_set ", p_set, ".  Make sure you have all the libraries AutoBar needs to function.")
+			print("AutoBar could not find the PT3.1 p_set ", p_set, "  Make sure you have all the libraries AutoBar needs to function.")
 		end
 	end
 	return p_raw_list
@@ -587,7 +587,7 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
 
-	AutoBarCategoryList["Tradeskill.Gather.Herbalism"] = AutoBarItems:new( "Tradeskill.Gather.Herbalism", "INV_Misc_HERB_01", "Tradeskill.Gather.Herbalism")
+	AutoBarCategoryList["Muffin.Herbs.Millable"] = AutoBarItems:new( "Muffin.Herbs.Millable", "INV_Misc_HERB_01", "Muffin.Herbs.Millable")
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
 
@@ -598,7 +598,10 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Tool"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Tool", "INV_Fishingpole_01", "Tradeskill.Tool.Fishing.Tool")
 
+	AutoBarCategoryList["Muffin.Skill.Fishing.Bait"] = AutoBarItems:new( "Muffin.Skill.Fishing.Bait", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
+	AutoBarCategoryList["Muffin.Skill.Fishing.Bait"]:SetTargeted("WEAPON")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"] = AutoBarItems:new( "Muffin.Skill.Fishing.Lure", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
+	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"]:SetTargeted("WEAPON")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Misc"] = AutoBarItems:new( "Muffin.Skill.Fishing.Misc", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Misc")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Rare Fish"] = AutoBarItems:new( "Muffin.Skill.Fishing.Rare Fish", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Rare Fish")
 

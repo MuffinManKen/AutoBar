@@ -1507,6 +1507,7 @@ AutoBar.Class["AutoBarButtonFishing"] = AutoBarButtonFishing
 function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	AutoBarButtonFishing.super.prototype.init(self, parentBar, buttonDB)
 
+	self:AddCategory("Muffin.Skill.Fishing.Bait")
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
@@ -2384,7 +2385,7 @@ else
 	function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
 		AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
 
-		self:AddCategory("Tradeskill.Gather.Herbalism")
+		self:AddCategory("Muffin.Herbs.Millable")
 	end
 
 	local AutoBarButtonSunsongRanch = AceOO.Class(AutoBarButton)
