@@ -1510,6 +1510,7 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Bait")
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
+	self:AddCategory("Muffin.Skill.Fishing.Pole")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
 	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
 		self:AddCategory("Muffin.Toys.Fishing")

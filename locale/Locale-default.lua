@@ -227,6 +227,7 @@ local quick_sets =
 	"Muffin.Skill.Archaeology.Lodestone",
 	"Muffin.Skill.Archaeology.Map",
 	"Muffin.Skill.Fishing.Bait",
+	"Muffin.Skill.Fishing.Pole",
 	"Muffin.Herbs.Millable",
 }
 

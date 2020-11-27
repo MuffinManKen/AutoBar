@@ -603,6 +603,7 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"] = AutoBarItems:new( "Muffin.Skill.Fishing.Lure", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"]:SetTargeted("WEAPON")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Misc"] = AutoBarItems:new( "Muffin.Skill.Fishing.Misc", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Misc")
+	AutoBarCategoryList["Muffin.Skill.Fishing.Pole"] = AutoBarItems:new( "Muffin.Skill.Fishing.Pole", "INV_Fishingpole_01", "Muffin.Skill.Fishing.Pole")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Rare Fish"] = AutoBarItems:new( "Muffin.Skill.Fishing.Rare Fish", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Rare Fish")
 
 
