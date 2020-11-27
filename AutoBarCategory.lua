@@ -598,7 +598,7 @@ function AutoBarCategory:Initialize()
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Tool"] = AutoBarItems:new( "Tradeskill.Tool.Fishing.Tool", "INV_Fishingpole_01", "Tradeskill.Tool.Fishing.Tool")
 
-	AutoBarCategoryList["Muffin.Skill.Fishing.Bait"] = AutoBarItems:new( "Muffin.Skill.Fishing.Bait", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
+	AutoBarCategoryList["Muffin.Skill.Fishing.Bait"] = AutoBarItems:new( "Muffin.Skill.Fishing.Bait", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Bait")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Bait"]:SetTargeted("WEAPON")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"] = AutoBarItems:new( "Muffin.Skill.Fishing.Lure", "INV_Misc_Food_26", "Muffin.Skill.Fishing.Lure")
 	AutoBarCategoryList["Muffin.Skill.Fishing.Lure"]:SetTargeted("WEAPON")
