@@ -1241,9 +1241,9 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
+		self:AddCategory("Spell.Mage.Create Manastone")
 		if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 			self:AddCategory("Spell.Mage.Conjure Water")
-			self:AddCategory("Spell.Mage.Create Manastone")
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
@@ -1821,7 +1821,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Potion.Mana")
 		self:AddCategory("Muffin.Potion.Combo")
-
+		self:AddCategory("Muffin.Stones.Mana")
 
 		self:AddCategory("Consumable.Cooldown.Stone.Mana.Other")
 		--self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")

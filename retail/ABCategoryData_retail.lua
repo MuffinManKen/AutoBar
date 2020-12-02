@@ -66,12 +66,17 @@ function ABGCode:InitializeCategories()
 	})
 
 	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
-			"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
-			})
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
+	})
 
 	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
-			"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
-			})
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Refreshment"),
+	})
+
+	AutoBarCategoryList["Spell.Mage.Create Manastone"] = AutoBarSpells:new( "Spell.Mage.Create Manastone", "inv_misc_gem_sapphire_02",
+	{
+		"MAGE", ABGCode:GetSpellNameByName("Conjure Mana Gem"),
+	})
 
 
 	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],

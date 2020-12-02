@@ -412,7 +412,8 @@ function AutoBar:InitializeDefaults()
 			buttonClass = "AutoBarButtonRecovery",
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 6,
-			enabled = false,
+			enabled = true,
+			shuffle = true,
 		}
 	end
 

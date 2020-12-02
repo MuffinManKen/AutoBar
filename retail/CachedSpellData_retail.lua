@@ -108,6 +108,7 @@ ABGCS:CacheSpellData(162488, "Steel Trap"); --y
 ABGCS:CacheSpellData(1459, "Arcane Intellect"); --y
 ABGCS:CacheSpellData(235313, "Blazing Barrier"); --y
 ABGCS:CacheSpellData(42955, "Conjure Refreshment"); --y
+ABGCS:CacheSpellData(759, "Conjure Mana Gem");
 ABGCS:CacheSpellData(2139, "Counterspell"); --y
 ABGCS:CacheSpellData(110959, "Greater Invisibility"); --y
 ABGCS:CacheSpellData(11426, "Ice Barrier"); --y
