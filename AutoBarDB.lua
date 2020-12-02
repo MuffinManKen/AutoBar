@@ -406,16 +406,6 @@ function AutoBar:InitializeDefaults()
 			shuffle = true,
 		}
 	end
-	if (not AutoBar.db.account.buttonList["AutoBarButtonMana"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonMana"] = {
-			buttonKey = "AutoBarButtonMana",
-			buttonClass = "AutoBarButtonMana",
-			barKey = "AutoBarClassBarBasic",
-			defaultButtonIndex = 5,
-			enabled = true,
-			shuffle = true,
-		}
-	end
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRecovery"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRecovery"] = {
 			buttonKey = "AutoBarButtonRecovery",
@@ -1080,6 +1070,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
+			"AutoBarButtonMana",
 		}
 	else
 		deprecated_buttons=
@@ -1089,7 +1080,8 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
-			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic"
+			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
+			"AutoBarButtonMana",
 		}
 	end
 
