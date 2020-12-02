@@ -36,6 +36,7 @@ retail/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Misc.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
 retail/MuffinLibPTSets/LibPT-Muffin.OrderHall.lua
+retail/MuffinLibPTSets/LibPT-Muffin.Covenant.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Potions.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Skill.Archaeology.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
