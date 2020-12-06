@@ -18,7 +18,6 @@
 	<Binding name="AutoBarButtonCooldownPotionCombat_X"	category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownPotionHealth_X"	category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownStoneHealth_X"		category="AutoBar "/>
-	<Binding name="AutoBarButtonCooldownPotionMana_X"		category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownStoneMana_X"		category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownPotionRejuvenation_X"	category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownStoneRejuvenation_X"		category="AutoBar "/>

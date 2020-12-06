@@ -1854,29 +1854,6 @@ function AutoBarButtonCooldownPotionCombat.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonCooldownPotionMana = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownPotionMana"] = AutoBarButtonCooldownPotionMana
-
-function AutoBarButtonCooldownPotionMana.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownPotionMana.super.prototype.init(self, parentBar, buttonDB)
-
-	if (AutoBar.CLASS == "ROGUE") then
-		self:AddCategory("Consumable.Buff.Energy")
-	end
-
-	if (AutoBar.CLASS == "WARRIOR" or AutoBar.CLASS == "DRUID") then
-		self:AddCategory("Consumable.Buff.Rage")
-		self:AddCategory("Muffin.Potion.Rage")
-	end
-
-	if(ABGCode:ClassUsesMana(AutoBar.CLASS)) then
-		self:AddCategory("Muffin.Potion.Mana")
-		--self:AddCategory("Consumable.Cooldown.Potion.Mana.Anywhere")
-	end
-
-end
-
-
 
 local AutoBarButtonCooldownPotionRejuvenation = AceOO.Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionRejuvenation"] = AutoBarButtonCooldownPotionRejuvenation

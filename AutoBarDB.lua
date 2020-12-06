@@ -1071,7 +1071,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
-			"AutoBarButtonMana",
+			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
 		}
 	else
 		deprecated_buttons=
@@ -1082,7 +1082,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
 			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
-			"AutoBarButtonMana",
+			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
 		}
 	end
 
