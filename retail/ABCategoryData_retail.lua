@@ -54,6 +54,8 @@ function ABGCode:InitializeCategories()
 	AutoBarCategoryList["Muffin.Order Hall.Order Resources"] = AutoBarItems:new("Muffin.Order Hall.Order Resources", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Order Resources")
 
 	AutoBarCategoryList["Muffin.Covenant.Anima"] = AutoBarItems:new("Muffin.Covenant.Anima", "archaeology_5_0_mogucoin", "Muffin.Covenant.Anima")
+	AutoBarCategoryList["Muffin.Covenant.Conduit"] = AutoBarItems:new("Muffin.Covenant.Conduit", "archaeology_5_0_mogucoin", "Muffin.Covenant.Conduit")
+	AutoBarCategoryList["Muffin.Covenant.Wildseed"] = AutoBarItems:new("Muffin.Covenant.Wildseed", "archaeology_5_0_mogucoin", "Muffin.Covenant.Wildseed")
 
 
 	AutoBarCategoryList["Muffin.Skill.Archaeology.Lodestone"] = AutoBarItems:new("Muffin.Skill.Archaeology.Lodestone", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Lodestone")

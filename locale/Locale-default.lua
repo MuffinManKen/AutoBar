@@ -229,6 +229,8 @@ local quick_sets =
 	"Muffin.Skill.Fishing.Pole",
 	"Muffin.Herbs.Millable",
 	"Muffin.Covenant.Anima",
+	"Muffin.Covenant.Conduit",
+	"Muffin.Covenant.Wildseed",
 }
 
 atl_table(quick_sets);
