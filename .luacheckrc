@@ -1,8 +1,4 @@
-std = "lua51"
-
-package.path = package.path .. ";..\\WoWLuaCheckrc\\?.lua"
-
-wow_global_constants = require("wow_global_constants")
+std = "wowmmg"
 
 function deepcopy(orig)
     local orig_type = type(orig)
@@ -60,9 +56,7 @@ ignore = {
 	"212/_.*",
 	"213/_.*",
 
-	--THIS IS JUST TEMPORARY!!!!!!!!!!!!!!!!!
-	"21/FIZ_.*",
-	"11/FIZ_.*",
+
 }
 
 _checkbox_fields = {
@@ -80,313 +74,23 @@ _text_fields = {
 
 read_globals = {
 
-	--WoW API
-	"CollapseFactionHeader",
-	"CompleteQuest",
-	"CreateFrame",
-	"ExpandFactionHeader",
-	"FactionToggleAtWar",
-	"GetAddOnMetadata",
-	"GetContainerItemInfo",
-	"GetContainerItemLink",
-	"GetContainerNumSlots",
-	"GetFactionInfo",
-	"GetFactionInfoByID",
-	"GetFriendshipReputation",
-	"GetGossipAvailableQuests",
-	"GetGuildInfo",
-	"GetItemCount",
-	"GetItemInfo",
-	"GetItemInfoInstant",
-	"GetLFGBonusFactionID",
-	"GetNumFactions",
-	"GetNumGossipAvailableQuests",
-	"GetNumQuestLogEntries",
-	"GetProfessionInfo",
-	"GetProfessions",
-	"GetQuestLogIndexByID",
-	"GetQuestLogTitle",
-	"GetQuestLogQuestText",
-	"GetQuestObjectiveInfo",
-	"GetQuestReward",
-	"GetRealmName",
-	"GetSelectedFaction",
-	"GetSpellInfo",
-	"GetText",
-	"InCombatLockdown",
-	"IsFactionInactive",
-	"IsInGuild",
-	"IsQuestCompletable",
-	"PlaySound",
-	"SelectGossipAvailableQuest",
-	"SetFactionActive",
-	"SetFactionInactive",
-	"SetWatchedFactionIndex",
-	"UnitBuff",
-	"UnitClass",
-	"UnitFactionGroup",
-	"UnitGUID",
-	"UnitName",
-	"UnitRace",
-	"UnitSex",
-
-	--FrameXML
-	"AchievementFrame_LoadUI",
-	"AlertFrame_PauseOutAnimation",
-	"AlertFrame_ResumeOutAnimation",
-	"AchievementAlertFrame_SetUp",
-	"BreakUpLargeNumbers",
-	"CharacterFrame",
-	"ChatFrame_AddMessageEventFilter",
-	"Clamp",
-	"CloseDropDownMenus",
-	"FauxScrollFrame_GetOffset",
-	"FauxScrollFrame_Update",
-	"FormatLargeNumber",
-	"GameTooltip_AddQuestRewardsToTooltip",
-	"GameTooltip_Hide",
-	"GameTooltip_SetDefaultAnchor",
-	"HideUIPanel",
-	"HideParentPanel",
-	"ReputationFrame_Update",
-	"ReputationFrameStandingLabel",
-	"ToggleCharacter",
-	"ToggleDropDownMenu",
-	"UIDropDownMenu_AddButton",
-	"WorldMap_AddQuestTimeToTooltip",
-
-	--WoW-specific lua functions
-	"ceil",
-	"debugprofilestop",
-	"debugstack",
-	"floor",
-	"format",
-	"gsub",
-	"hooksecurefunc",
-	"strrep",
-	"strsplit",
-	"strsub",
-	"tinsert",
-	"wipe",
-	bit = {
-		fields = {
-			"band",
-		},
-	},
-
 	GameFontNormal = {
 		fields = {
 			"GetFont",
 		}
 	},
 
-	ReputationDetailFactionName = {
-		fields = _text_fields
-	},
-
-	ReputationDetailFactionDescription = {
-		fields = _text_fields
-	},
-
-	ReputationDetailAtWarCheckBox = {
-		fields = _checkbox_fields
-	},
-
-	ReputationDetailAtWarCheckBoxText = {
-		fields = _text_fields
-	}, 
-
-	ReputationDetailInactiveCheckBoxText = {
-		fields = _text_fields
-	},
-
-	ReputationDetailLFGBonusReputationCheckBox = {
-		fields = merge_tables( _checkbox_fields, {
-			factionID = { read_only = false},
-		})
-	},
-
-
-	ReputationDetailMainScreenCheckBox = {
-		fields = _checkbox_fields
-	},
-
-	ReputationDetailInactiveCheckBox = {
-		fields = _checkbox_fields
-	},
-
-	AchievementFrame = {},
-	AlertFrame = {
-		fields = {
-			"AddQueuedAlertFrameSubSystem",
-		}
-	},
-
-	--C_AzeriteItem
-	C_AzeriteItem = {
-		fields = {
-			"FindActiveAzeriteItem",
-			"GetAzeriteItemXPInfo",
-			"GetPowerLevel",
-		}
-	},
-
-	--C_Item
-	C_Item = {
-		fields = {
-			"RequestLoadItemDataByID",
-		}
-	},
-
-	--C_Reputation
-	C_Reputation = {
-		fields = {
-			"GetFactionParagonInfo",
-			"IsFactionParagon",
-			"RequestFactionParagonPreloadRewardData",
-		}
-	},
-	
-	--C_Map
-	C_Map = {
-		fields = {
-			"GetAreaInfo",
-			"GetMapInfo",
-		}
-	},	
-	--C_Timer
-	C_Timer = {
-		fields = {
-			"After",
-		}
-	},
-
-	--C_QuestLog
-	C_QuestLog = {
-		fields = {
-			"GetQuestInfo",
-			"GetQuestObjectives",
-			"IsOnQuest",
-		}
-	},
-
-	--C_TaskQuest
-	C_TaskQuest = {
-		fields = {
-			"GetQuestInfoByQuestID",
-		}
-	},
-
-	-- Item
-	Item = {
-		fields = {
-			"CreateFromItemLocation",
-		}
-	},
-
-	--StatusTrackingBarManager
-	StatusTrackingBarManager = {
-		fields = {
-			"UpdateBarsShown",
-		}
-	},
-
-	--ReputationFrame
-	ReputationFrame = {
-		fields = {
-			"IsVisible",
-			"paragonFramesPool",
-		}
-	},
-	--ReputationDetailFrame
-	ReputationDetailFrame = {
-		fields = {
-			"Hide",
-			"IsShown",
-			"IsVisible",
-			"SetHeight",
-			"Show",
-		}
-	},
-
-	--ReputationListScrollFrame
-	ReputationListScrollFrame = {
-		fields = {
-			
-		}
-	},
-	--ReputationListScrollFrameScrollBar
-	ReputationListScrollFrameScrollBar = {
-		fields = {
-			"SetValue",
-		}
-	},
-	--ReputationFrameStandingLabel
-	ReputationFrameStandingLabel = {
-		fields = _text_fields
-	},
-
-	--SOUNDKIT
-	SOUNDKIT = {
-		fields = {
-			"IG_MAINMENU_OPTION_CHECKBOX_OFF",
-			"IG_MAINMENU_OPTION_CHECKBOX_ON",
-			"GS_TITLE_OPTION_OK",
-			"U_CHAT_SCROLL_BUTTON",
-		}
-	},
-
-	GameTooltip = {
-		fields = {
-			"AddLine",
-			"AddDoubleLine",
-			"GetBackdrop",
-			"Hide",
-			"HookScript",
-			"SetBackdrop",
-			"SetBackdropColor",
-			"SetMinimumWidth",
-			"SetOwner",
-			"SetText",
-			"Show",
-		}
-	},
-
-	--WorldMapTooltip
-	WorldMapTooltip = {
-		fields = {
-			"AddLine",
-			"ClearLines",
-			"SetText",
-			"Show",
-		}
-	},
-
-	--ItemRefTooltip
-	ItemRefTooltip = {
-		fields = {
-		}
-	},
-
-	--WorldMapFrame
-	WorldMapFrame =  {
-		fields = {
-			"overlayFrames",
-		}
-	},
-
 }
 
-print("\n", read_globals)
-read_globals = merge_tables(read_globals, wow_global_constants)
-print("\n---------------\n", read_globals)
 
 globals = {
 	"_G",
 	"SlashCmdList",
 
 	--Autobar Globals
-
+	"AutoBar",
+	"AutoBarGlobalCodeSpace",
+	"AutoBarGlobalDataObject",
 
 	MUFFIN_WHATS_NEW_QUEUE = {
 		fields = {
