@@ -11,8 +11,6 @@
 -- GLOBALS: C_MountJournal, LE_MOUNT_JOURNAL_FILTER_COLLECTED, LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, LE_MOUNT_JOURNAL_FILTER_UNUSABLE C_ToyBox, C_PetJournal
 -- GLOBALS: WOW_PROJECT_ID, WOW_PROJECT_CLASSIC, WOW_PROJECT_MAINLINE
 
-local tostring, print, assert, math, pairs, strfind, ipairs, tonumber, table = tostring, print, assert, math, pairs, strfind, ipairs, tonumber, table
-
 local AutoBar = AutoBar
 local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
 
@@ -23,8 +21,6 @@ local spellIconList = ABGData.spell_icon_list
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local L = AutoBarGlobalDataObject.locale
-local _G = getfenv(0)
-local _
 
 
 AutoBarButton = AceOO.Class(AutoBar.Class.Button)
@@ -1813,7 +1809,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if  (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
+	if  (ABGCode.ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 
@@ -2204,7 +2200,7 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Spell.Mage.Conjure Water")
 	end
 
-	if (ABGCode:ClassUsesMana(AutoBar.CLASS)) then
+	if (ABGCode.ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 

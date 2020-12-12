@@ -245,7 +245,7 @@ function AutoBar:InitializeZero()
 	AutoBar:RegisterDB("AutoBarDB", nil, "class")
 
 	AutoBar:LogEvent("InitializeZero")
-	AutoBar:InitializeDB()
+	AutoBar.InitializeDB()
 	AutoBarCategory:Upgrade()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()

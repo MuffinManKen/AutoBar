@@ -37,7 +37,7 @@
 -- GLOBALS: IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown, GameTooltip, InCombatLockdown, GetItemInfo, GetMacroInfo
 
 local AutoBar = AutoBar
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
@@ -151,14 +151,14 @@ function AutoBar:OpenOptions()
 end
 
 function AutoBarChanged()
-	ABGCS:UpdateObjects()
+	ABGCode:UpdateObjects()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 local function ButtonCategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 end
 
 
@@ -167,7 +167,7 @@ function AutoBar:ButtonsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateButtonOptions(AutoBar.optionsMain.args.buttons.args)
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -177,7 +177,7 @@ function AutoBar:BarButtonChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshBarDBLists()
 	AutoBar:RefreshUnplacedButtonList()
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AutoBar:CreateOptionsAce3()
 	AceCfgReg:NotifyChange("AutoBar")
 end
@@ -189,14 +189,14 @@ function AutoBar:BarsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateOptionsAce3()
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 function AutoBar:CategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -503,7 +503,7 @@ local function ResetBars()
 
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -511,7 +511,7 @@ end
 local function ResetButtons()
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -519,7 +519,7 @@ end
 local function ResetAutoBar()
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
-	ABGCS:UpdateCategories()
+	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -571,7 +571,7 @@ local function getCustomBarName(info)
 end
 
 local function setCustomBarName(info, value)
-	value = AutoBar:GetValidatedName(value)
+	value = ABGCode.GetValidatedName(value)
 	if (value and value ~= "") then
 		local barKey = info.arg.barKey
 
@@ -597,7 +597,7 @@ local function getCustomButtonName(info)
 end
 
 local function setCustomButtonName(info, value)
-	value = AutoBar:GetValidatedName(value)
+	value = ABGCode.GetValidatedName(value)
 	if (value and value ~= "") then
 		local buttonKey = info.arg.buttonKey
 		if (AutoBar.Class.Button:NameExists(value)) then
@@ -2566,7 +2566,7 @@ local function setCategoryValue(info, value)
 end
 
 local function setCategoryName(info, value)
-	value = AutoBar:GetValidatedName(value)
+	value = ABGCode.GetValidatedName(value)
 	if (value and value ~= "") then
 		local categoryKey = info.arg.categoryKey
 --		local categoryDB = AutoBar:GetCategoryDB(categoryKey)
@@ -2643,7 +2643,7 @@ local function getCategoryMacroName(info)
 end
 
 local function setCategoryMacroName(info, value)
-	value = AutoBar:GetValidatedName(value)
+	value = ABGCode.GetValidatedName(value)
 	if (value and value ~= "") then
 		local newName = value--categoryInfo:ChangeName(value)
 		if (newName == value) then

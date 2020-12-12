@@ -555,7 +555,7 @@ end
 function AutoBarCategory:Initialize()
 
 	--Init Classic vs Mainline categories
-	ABGCode:InitializeCategories()
+	ABGCode.InitializeCategories()
 
 
 	AutoBarCategoryList["Macro.Raid Target"] = AutoBarMacroTextCategory:new( "Raid Target", "Spell_BrokenHeart")

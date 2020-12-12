@@ -6,7 +6,7 @@ local L = AutoBarGlobalDataObject.locale
 
 
 
-function ABGCode:InitializeCategories()
+function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = AutoBarItems:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = AutoBarItems:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")

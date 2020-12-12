@@ -4,9 +4,9 @@
 
 -- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox, type, GetSpellLink
 
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, _AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
-local print, select, ipairs, tostring, table, pairs, tonumber, string = print, select, ipairs, tostring, table, pairs, tonumber, string
+local print, select, ipairs, tostring, pairs, tonumber, string = print, select, ipairs, tostring, pairs, tonumber, string
 
 AutoBar = MMGHACKAceLibrary("AceAddon-2.0"):new("AceDB-2.0");
 AutoBar.warning_log = {}
@@ -15,7 +15,7 @@ AutoBar.warning_log = {}
 AutoBarGlobalCodeSpace = {}
 
 
-function AutoBarGlobalCodeSpace:MakeSet(list)
+function AutoBarGlobalCodeSpace.MakeSet(list)
    local set = {}
    for _, l in ipairs(list) do set[l] = true end
    return set
@@ -43,18 +43,18 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
-AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace:MakeSet{"DRUID", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
+AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace.MakeSet{"DRUID", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
 
-function AutoBarGlobalCodeSpace:ClassUsesMana(p_class_name)
+function AutoBarGlobalCodeSpace.ClassUsesMana(p_class_name)
 
 	return AutoBarGlobalDataObject.set_mana_users[p_class_name]
 
 end
 
-function AutoBarGlobalCodeSpace:ClassInList(p_class_name, ...)
+function AutoBarGlobalCodeSpace.ClassInList(p_class_name, ...)
 	local list = {...}
 
-	for i,v in ipairs(list) do
+	for _i, v in ipairs(list) do
 		if (p_class_name == v) then
 			return true;
 		end
@@ -94,7 +94,7 @@ local function table_pack(...)
   return { n = select("#", ...), ... }
 end
 
-function AutoBarGlobalCodeSpace:LogWarning(...)
+function AutoBarGlobalCodeSpace.LogWarning(...)
 
 	local message = "";
 	local args = table_pack(...)
@@ -158,9 +158,15 @@ function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
 	return ii_texture or i_texture;
 end
 
+function AutoBarGlobalCodeSpace.GetValidatedName(p_name)
+	local name = p_name:gsub("%.", "")
+	name = name:gsub("\"", "")
+	name = name:gsub(" ", "")
+	return name
+end
 
 
-local usable_items_override_set = AutoBarGlobalCodeSpace:MakeSet{
+local usable_items_override_set = AutoBarGlobalCodeSpace.MakeSet{
 122484,	--Blackrock foundry spoils
 71715,	--A Treatise on Strategy
 113258,  --Blingtron 5000 Gift package

@@ -6,7 +6,7 @@ local L = AutoBarGlobalDataObject.locale
 
 
 
-function ABGCode:InitializeCategories()
+function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Dynamic.Quest"] = AutoBarItems:new("Dynamic.Quest", "INV_Misc_Rune_01", nil)
 

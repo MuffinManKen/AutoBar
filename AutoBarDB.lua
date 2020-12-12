@@ -78,14 +78,7 @@ local classBar = {
 	WARRIOR = "AutoBarClassBarWarrior",
 }
 
-function AutoBar:GetValidatedName(name)
-	name = name:gsub("%.", "")
-	name = name:gsub("\"", "")	--" --(uedit doesnt understand escaped quotes)
-	name = name:gsub(" ", "")
-	return name
-end
-
-function AutoBar:InitializeDB(overide)
+function AutoBar.InitializeDB()
 	AutoBar.classBar = classBar[AutoBar.CLASS]
 
 	AutoBarDB2 = AutoBarDB2 or {}
@@ -910,7 +903,7 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (ABGCode:ClassInList(AutoBar.CLASS, "DEATHKNIGHT")) then
+	if (ABGCode.ClassInList(AutoBar.CLASS, "DEATHKNIGHT")) then
 		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
 			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
 				buttonKey = "AutoBarButtonClassBuff",
@@ -1487,7 +1480,7 @@ local renameBarList
 function AutoBar:UpgradeBar(barKey, barDB)
 	if (barDB.isCustomBar) then
 		local oldKey = barDB.barKey
-		local newName = AutoBar:GetValidatedName(barDB.name)
+		local newName = ABGCode.GetValidatedName(barDB.name)
 		if (newName ~= barDB.name) then
 			renameBarList[oldKey] = newName
 		end
@@ -1497,7 +1490,7 @@ end
 function AutoBar:UpgradeButton(buttonKey, buttonDB)
 	if (buttonDB.buttonClass == "AutoBarButtonCustom") then
 		local oldKey = buttonDB.buttonKey
-		local newName = AutoBar:GetValidatedName(buttonDB.name)
+		local newName = ABGCode.GetValidatedName(buttonDB.name)
 		if (newName ~= buttonDB.name) then
 			renameButtonList[oldKey] = newName
 		end
