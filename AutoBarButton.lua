@@ -19,7 +19,7 @@ local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
-local LibKeyBound = LibStub("LibKeyBound-1.0")
+--local LibKeyBound = LibStub("LibKeyBound-1.0")
 local L = AutoBarGlobalDataObject.locale
 
 
@@ -1966,9 +1966,8 @@ end
 function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local start, duration, enabled = 0, 0, 1
-		local totemName
-		_, totemName, start, duration = GetTotemInfo(totemAir)
+		local enabled = true
+		local _, _totemName, start, duration = GetTotemInfo(totemAir)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
@@ -2006,9 +2005,8 @@ end
 function AutoBarButtonTotemEarth.prototype:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local start, duration, enabled = 0, 0, 1
-		local totemName
-		_, totemName, start, duration = GetTotemInfo(totemEarth)
+		local enabled = true
+		local _, _totemName, start, duration = GetTotemInfo(totemEarth)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
@@ -2046,9 +2044,8 @@ end
 function AutoBarButtonTotemFire.prototype:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local start, duration, enabled = 0, 0, 1
-		local totemName
-		_, totemName, start, duration = GetTotemInfo(totemFire)
+		local enabled = true
+		local _, _totemName, start, duration = GetTotemInfo(totemFire)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
@@ -2086,9 +2083,8 @@ end
 function AutoBarButtonTotemWater.prototype:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local start, duration, enabled = 0, 0, 1
-		local totemName
-		_, totemName, start, duration = GetTotemInfo(totemWater)
+		local enabled = true
+		local _, _totemName, start, duration = GetTotemInfo(totemWater)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
@@ -2160,10 +2156,8 @@ end
 
 function AutoBarButtonTrinket2.prototype:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
-	if (itemType) then
-		if (itemType == "item") then
-      	PickupInventoryItem(TRINKET2_SLOT)
-		end
+	if (itemType and itemType == "item") then
+		PickupInventoryItem(TRINKET2_SLOT)
 	end
 end
 

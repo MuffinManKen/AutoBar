@@ -87,10 +87,13 @@ globals = {
 	"_G",
 	"SlashCmdList",
 
+	"LibStub",
+
 	--Autobar Globals
 	"AutoBar",
 	"AutoBarGlobalCodeSpace",
 	"AutoBarGlobalDataObject",
+	"AutoBarButton",
 
 	MUFFIN_WHATS_NEW_QUEUE = {
 		fields = {
