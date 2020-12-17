@@ -3,7 +3,7 @@
 local t1 = debugprofilestop()
 
 local t2 = debugprofilestop()
-AutoBarGlobalCodeSpace:AddProfileData("name", t2 - t1)
+AutoBarGlobalCodeSpace.AddProfileData("name", t2 - t1)
 
 
  ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
@@ -52,7 +52,7 @@ C_ToyBox.IsToyUsable(112059)
 --[[
 /script local button = CreateFrame("Button", "TestPet", nil, "SecureActionButtonTemplate"); button:SetAttribute("type","companion"); button:SetAttribute("spell","Ritual of Summoning")
 
-/script test_button = CreateFrame("Button", "TestPet", UIParent, "SecureActionButtonTemplate"); test_button:SetWidth(36); test_button:SetHeight(36); test_button:SetPoint("CENTER"); 
+/script test_button = CreateFrame("Button", "TestPet", UIParent, "SecureActionButtonTemplate"); test_button:SetWidth(36); test_button:SetHeight(36); test_button:SetPoint("CENTER");
 /script test_button:SetAttribute("type","macro"); test_button:SetAttribute("macrotext","/say Ritual of Summoning")
 /script test_texture = test_button:CreateTexture("TestTexture")
 

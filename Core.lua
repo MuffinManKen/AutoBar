@@ -191,7 +191,7 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 		if(show_tt_action) then
 			--if debug then print("show_tt_action:", show_tt_action); end;
 			action = show_tt_action
-			tooltip = select(2, GetItemInfo(action)) or ABGCS:GetSpellLink(action)
+			tooltip = select(2, GetItemInfo(action)) or ABGCS.GetSpellLink(action)
 			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
@@ -206,14 +206,14 @@ function AutoBar:GetActionForMacroBody(p_macro_body)
 
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
-				tooltip = select(2, GetItemInfo(action)) or ABGCS:GetSpellLink(action)
+				tooltip = select(2, GetItemInfo(action)) or ABGCS.GetSpellLink(action)
 			end
 		end
 
 	end
 
 	if(action) then
-		icon = select(3, GetSpellInfo(action)) or ABGCS:GetIconForItemID(action)
+		icon = select(3, GetSpellInfo(action)) or ABGCS.GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip
@@ -420,7 +420,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
 		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
-			local num_entries, num_quests = ABGCS:GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
+			local num_entries, _num_quests = ABGCS.GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
 			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then

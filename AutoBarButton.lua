@@ -80,7 +80,7 @@ end
 -- Handle rearranging of buttons when buttonLock is off
 function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 
-	if(itemType == "item" and ABGCode:PlayerHasToy(itemId)) then
+	if(itemType == "item" and ABGCode.PlayerHasToy(itemId)) then
 		AutoBar:Print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
 		return;
 	end
@@ -646,7 +646,7 @@ local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB
 if(WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
-	SPELL_MILL_HERB = ABGCode:GetSpellNameByName("Milling")
+	SPELL_MILL_HERB = ABGCode.GetSpellNameByName("Milling")
 end
 
 local TRINKET1_SLOT = 13
@@ -1333,13 +1333,13 @@ if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
 end
 
 --[[
-		"*", ABGCode:GetSpellNameByName("Archaeology"),
-		"*", ABGCode:GetSpellNameByName("Cooking Fire"),
-		"*", ABGCode:GetSpellNameByName("Disenchant"),
-		"*", ABGCode:GetSpellNameByName("Milling"),
-		"*", ABGCode:GetSpellNameByName("Prospecting"),
-		"*", ABGCode:GetSpellNameByName("Smelting"),
-		"*", ABGCode:GetSpellNameByName("Survey"),
+		"*", ABGCode.GetSpellNameByName("Archaeology"),
+		"*", ABGCode.GetSpellNameByName("Cooking Fire"),
+		"*", ABGCode.GetSpellNameByName("Disenchant"),
+		"*", ABGCode.GetSpellNameByName("Milling"),
+		"*", ABGCode.GetSpellNameByName("Prospecting"),
+		"*", ABGCode.GetSpellNameByName("Smelting"),
+		"*", ABGCode.GetSpellNameByName("Survey"),
 --]]
 
 AutoBarButtonCustom = AceOO.Class(AutoBarButton)
@@ -2171,7 +2171,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = ABGCode:GetIconForItemID((tonumber(itemId)))
+		local macroTexture = ABGCode.GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
@@ -2483,7 +2483,7 @@ else
 				local item_id = C_ToyBox.GetToyFromIndex(i)
 				local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(item_id)
 				local user_selected = (buttonDB.toybox_only_show_favourites and toy_is_fave) or not buttonDB.toybox_only_show_favourites
-				if (ABGCode:PlayerHasToy(item_id) and user_selected) then
+				if (ABGCode.PlayerHasToy(item_id) and user_selected) then
 					--print("  Adding ", toy_name, item_id, toy_is_fave);
 					local link = C_ToyBox.GetToyLink(item_id)
 	--				AutoBarSearch:RegisterToy(item_id, link)

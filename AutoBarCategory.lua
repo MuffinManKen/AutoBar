@@ -311,7 +311,7 @@ end
 function AutoBarMacroTextCategory.prototype:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local next_index = #self.items + 1
-	local guid = ABGCode:MacroTextGUID(p_macro_text)
+	local guid = ABGCode.MacroTextGUID(p_macro_text)
 	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	self.items[next_index] = guid
 end
@@ -433,7 +433,7 @@ function AutoBarCustom.prototype:init(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		texture = ABGCode:GetIconForItemID(tonumber(itemId))
+		texture = ABGCode.GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
 			_, _, texture = GetSpellInfo(spellName)
@@ -1011,12 +1011,12 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 	--	end
 
 		for _, toy_id in ipairs(self.all_items) do
-	--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode:PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
+	--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode.PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
 			local _, _toy_name, _toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
 			local user_selected = (self.only_favourites and toy_is_fave) or not self.only_favourites
-			if (toy_id and ABGCode:PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
+			if (toy_id and ABGCode.PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
 				AutoBarSearch:RegisterToy(toy_id)
-				self.items[list_index] = ABGCode:ToyGUID(toy_id)
+				self.items[list_index] = ABGCode.ToyGUID(toy_id)
 				list_index = list_index + 1
 			end
 		end

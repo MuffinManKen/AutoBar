@@ -105,13 +105,13 @@ function AutoBarGlobalCodeSpace.LogWarning(...)
 
 end
 
-function AutoBarGlobalCodeSpace:GetWarningLogString()
+function AutoBarGlobalCodeSpace.GetWarningLogString()
 
 	return table.concat(AutoBar.warning_log, "\n")
 
 end
 
-function AutoBarGlobalCodeSpace:ToyGUID(p_toy_id)
+function AutoBarGlobalCodeSpace.ToyGUID(p_toy_id)
 
 	local l = 7 - string.len(p_toy_id);
 	local guid = "toy:" .. string.rep("0", l) .. p_toy_id;
@@ -119,7 +119,7 @@ function AutoBarGlobalCodeSpace:ToyGUID(p_toy_id)
 	return guid;
 end
 
-function AutoBarGlobalCodeSpace:BPetGUID(p_bpet_id)
+function AutoBarGlobalCodeSpace.BPetGUID(p_bpet_id)
 
 	local guid = "bpet:" .. p_bpet_id;
 
@@ -127,7 +127,7 @@ function AutoBarGlobalCodeSpace:BPetGUID(p_bpet_id)
 end
 
 local macro_text_guid_index = 0;
-function AutoBarGlobalCodeSpace:MacroTextGUID(p_macro_text)	--TODO: We're not using the text?
+function AutoBarGlobalCodeSpace.MacroTextGUID(p_macro_text)	--TODO: We're not using the text?
 
 	macro_text_guid_index = macro_text_guid_index + 1
 	local guid = "macrotext:" .. macro_text_guid_index;
@@ -137,20 +137,19 @@ end
 
 
 
-function AutoBarGlobalCodeSpace:GetIconForToyID(p_toy_id)
-	local texture;
+function AutoBarGlobalCodeSpace.GetIconForToyID(p_toy_id)
 	local item_id = tonumber(p_toy_id)
 
-	_, _, texture =  C_ToyBox.GetToyInfo(item_id)
+	local _, _, texture =  C_ToyBox.GetToyInfo(item_id)
 
 	if(texture == nil) then
-		texture = AutoBarGlobalCodeSpace:GetIconForItemID(item_id);
+		texture = AutoBarGlobalCodeSpace.GetIconForItemID(item_id);
 	end
 
 	return texture;
 end
 
-function AutoBarGlobalCodeSpace:GetIconForItemID(p_item_id)
+function AutoBarGlobalCodeSpace.GetIconForItemID(p_item_id)
 	local i_texture = select(10, GetItemInfo(p_item_id))
 
 	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
@@ -179,7 +178,7 @@ local usable_items_override_set = AutoBarGlobalCodeSpace.MakeSet{
 
 local is_usable_item_cache = {}
 
-function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
+function AutoBarGlobalCodeSpace.IsUsableItem(p_item_id)
 
 	if(p_item_id == nil) then
 		return nil;
@@ -195,8 +194,8 @@ function AutoBarGlobalCodeSpace:IsUsableItem(p_item_id)
 end
 
 
---/run AutoBarGlobalCodeSpace:FrameInsp(ActionButton3)
-function AutoBarGlobalCodeSpace:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
+--/run AutoBarGlobalCodeSpace.FrameInsp(ActionButton3)
+function AutoBarGlobalCodeSpace.FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 
 	local frame = p_frame
 
@@ -212,11 +211,11 @@ function AutoBarGlobalCodeSpace:FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
 end
 
 
-function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
+function AutoBarGlobalCodeSpace.CacheSpellData(p_spell_id, p_spell_name)
 
-	local name, rank, icon = GetSpellInfo(p_spell_id);
+	local name, _rank, icon = GetSpellInfo(p_spell_id);
 
-	if (p_spell_id == 120145) then	-- Ancient Dalaran Port
+	if (p_spell_id == 120145) then	-- Ancient Dalaran Port TODO: Generalize this
 		icon = 628678;
 	end
 
@@ -230,7 +229,7 @@ function AutoBarGlobalCodeSpace:CacheSpellData(p_spell_id, p_spell_name)
 
 end
 
-function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
+function AutoBarGlobalCodeSpace.GetSpellNameByName(p_spell_name)
 
 	if (AutoBarGlobalDataObject.spell_name_list[p_spell_name]) then
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
@@ -241,7 +240,7 @@ function AutoBarGlobalCodeSpace:GetSpellNameByName(p_spell_name)
 	return nil
 end
 
-function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
+function AutoBarGlobalCodeSpace.GetSpellIconByName(p_spell_name)
 
 	if (AutoBarGlobalDataObject.spell_icon_list[p_spell_name]) then
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
@@ -252,14 +251,14 @@ function AutoBarGlobalCodeSpace:GetSpellIconByName(p_spell_name)
 	return nil
 end
 
-function AutoBarGlobalCodeSpace:GetSpellIconByNameFast(p_spell_name)
+function AutoBarGlobalCodeSpace.GetSpellIconByNameFast(p_spell_name)
 
 	return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 
 end
 
 local prof = AutoBarGlobalDataObject.profile
-function AutoBarGlobalCodeSpace:AddProfileData(p_name, p_time)
+function AutoBarGlobalCodeSpace.AddProfileData(p_name, p_time)
 
 	if(prof[p_name] == nil) then
 		prof[p_name] = {}
@@ -272,15 +271,18 @@ function AutoBarGlobalCodeSpace:AddProfileData(p_name, p_time)
 
 	prof[p_name].calls = prof[p_name].calls + 1;
 	prof[p_name].total_time = prof[p_name].total_time + p_time;
-	if(prof[p_name].min_time > p_time) then prof[p_name].min_time = p_time; end;
-	if(prof[p_name].max_time < p_time) then prof[p_name].max_time = p_time; end;
+	if(prof[p_name].min_time > p_time) then
+		prof[p_name].min_time = p_time;
+	end;
+	if(prof[p_name].max_time < p_time) then
+		prof[p_name].max_time = p_time;
+	end;
 	prof[p_name].avg_time = prof[p_name].total_time / prof[p_name].calls
-
 
 end
 
 
-function AutoBarGlobalCodeSpace:FindNamelessCategories()
+function AutoBarGlobalCodeSpace.FindNamelessCategories()
 
 	local nameless = ""
 	for key in pairs(AutoBarCategoryList) do
@@ -292,7 +294,7 @@ function AutoBarGlobalCodeSpace:FindNamelessCategories()
 	return nameless
 end
 
-function AutoBarGlobalCodeSpace:FindNamelessButtons()
+function AutoBarGlobalCodeSpace.FindNamelessButtons()
 
 	local nameless = ""
 	for key in pairs(AutoBar.Class) do
@@ -304,7 +306,7 @@ function AutoBarGlobalCodeSpace:FindNamelessButtons()
 	return nameless
 end
 
-function AutoBarGlobalCodeSpace:GetNumQuestLogEntries()
+function AutoBarGlobalCodeSpace.GetNumQuestLogEntries()
 
 	if (C_QuestLog and C_QuestLog.GetNumQuestLogEntries) then
 		return C_QuestLog.GetNumQuestLogEntries()
@@ -320,15 +322,15 @@ end
 -------------------------------------------------------------------
 if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
-	function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
+	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
 		return AutoBarSearch.macro_text[p_guid];
 	end
 
-	function AutoBarGlobalCodeSpace:PlayerHasToy(p_item_id)
+	function AutoBarGlobalCodeSpace.PlayerHasToy(_p_item_id)
 		return false;
 	end
 
-	function AutoBarGlobalCodeSpace:GetSpellLink(p_spell, p_rank)
+	function AutoBarGlobalCodeSpace.GetSpellLink(p_spell, p_rank)
 		local spell_link
 
 		if(type(p_spell) == "string") then
@@ -356,15 +358,15 @@ else
 -------------------------------------------------------------------
 
 	--This should query a global guid registry and then the specific ones if not found.
-	function AutoBarGlobalCodeSpace:InfoFromGUID(p_guid)
+	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
 		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
 	end
 
-	function AutoBarGlobalCodeSpace:PlayerHasToy(p_item_id)
+	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)
 		return PlayerHasToy(p_item_id);
 	end
 
-	function AutoBarGlobalCodeSpace:GetSpellLink(p_spell, p_rank)
+	function AutoBarGlobalCodeSpace.GetSpellLink(p_spell, p_rank)
 		local spell = GetSpellLink(p_spell, p_rank)
 
 		if spell == "" then

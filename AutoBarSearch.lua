@@ -280,7 +280,7 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 	if (bag or slot) then
 		-- Filter out too high level items
 		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
-		local usable = ABGCS:IsUsableItem(itemId);
+		local usable = ABGCS.IsUsableItem(itemId);
 		local item_spell = GetItemSpell(itemId);
 		if (itemMinLevel <= AutoBar.playerLevel and (usable or not item_spell)) then
 			AutoBarSearch.found:Add(itemId, bag, slot)
@@ -1189,7 +1189,7 @@ end
 function AutoBarSearch:RegisterToy(p_toy_id)
 
 	local debug = false; --(p_toy_id == 127670)
-	local toy_guid = ABGCS:ToyGUID(p_toy_id)
+	local toy_guid = ABGCS.ToyGUID(p_toy_id)
 	local toy_info = AutoBarSearch.toys[toy_guid]
 
 	if (not toy_info) then
