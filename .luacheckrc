@@ -91,9 +91,16 @@ globals = {
 
 	--Autobar Globals
 	"AutoBar",
+	"AutoBarDB2",
 	"AutoBarGlobalCodeSpace",
 	"AutoBarGlobalDataObject",
 	"AutoBarButton",
+	"AutoBarCategory",
+	"AutoBarCategoryList",
+	"AutoBarItems",
+	"AutoBarSpells",
+	"AutoBarToyCategory",
+	"AutoBarSearch",
 
 	MUFFIN_WHATS_NEW_QUEUE = {
 		fields = {

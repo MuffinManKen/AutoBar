@@ -613,7 +613,7 @@ end
 --]]
 
 -- Clear the state attributes of the button
-function AutoBarButton:SetupAttributesClear(frame)
+local function ClearButtonAttributes(frame)
 	frame:SetAttribute("target-slot1", nil)
 	frame:SetAttribute("target-slot2", nil)
 	frame:SetAttribute("target-bag1", nil)
@@ -655,7 +655,7 @@ local TRINKET2_SLOT = 14
 -- Set the state attributes of the button
 function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	local frame = button.frame
-	AutoBarButton:SetupAttributesClear(frame)
+	ClearButtonAttributes(frame)
 
 	local enabled = true
 	frame.needsTooltip = true

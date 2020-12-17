@@ -16,8 +16,6 @@ local ABGData = AutoBarGlobalDataObject
 
 local _
 
-local table, pairs, tostring, type, select, ipairs, strtrim, assert, print, tonumber = table, pairs, tostring, type, select, ipairs, strtrim, assert, print, tonumber
-
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
 AutoBarSearch = {}
@@ -92,7 +90,7 @@ end
 -- Remove and Recycle all items
 function SearchSpace.prototype:Reset()
 	for itemId, clientButtons in pairs(self.dataList) do
-		for i, buttonKey in pairs(clientButtons) do
+		for _i, buttonKey in pairs(clientButtons) do
 			clientButtons[buttonKey] = nil
 		end
 		self:Recycle(clientButtons)
@@ -102,7 +100,7 @@ end
 
 -- Testing & Debug function only
 function SearchSpace.prototype:Contains(id)
-	for itemId, clientButtons in pairs(self.dataList) do
+	for itemId, _clientButtons in pairs(self.dataList) do
 		if (itemId == id) then
 			if (not AutoBarSearch.trace) then
 				AutoBar:Print("SearchSpace.prototype:Contains    itemId " .. tostring(itemId))
@@ -159,7 +157,7 @@ end
 -- Remove a list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Items.prototype:Delete(itemList, buttonKey, category, slotIndex)
-	for i, itemId in pairs(itemList) do
+	for _i, itemId in pairs(itemList) do
 		local buttonItems = self.dataList[buttonKey]
 		local itemData = buttonItems[itemId]
 		if (itemData and slotIndex == itemData.slotIndex) then
@@ -185,8 +183,8 @@ end
 
 -- Testing & Debug function only
 function Items.prototype:Contains(id)
-	for buttonKey, buttonItems in pairs(self.dataList) do
-		for itemId, itemData in pairs(buttonItems) do
+	for _buttonKey, buttonItems in pairs(self.dataList) do
+		for itemId, _itemData in pairs(buttonItems) do
 			if (itemId == id) then
 				if (not AutoBarSearch.trace) then
 					AutoBar:Print("Items.prototype:Contains    itemId " .. tostring(itemId))
@@ -197,8 +195,6 @@ function Items.prototype:Contains(id)
 	end
 	return false
 end
-
-local tempList = {}
 
 -- Populate all the buttons
 function Items.prototype:Populate()
@@ -359,7 +355,7 @@ end
 
 function Stuff.prototype:ScanMacroText()
 
-	for macro_text_guid, macro_text_data in pairs(AutoBarSearch.macro_text) do
+	for macro_text_guid, _macro_text_data in pairs(AutoBarSearch.macro_text) do
 		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
 		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AutoBar:Dump(macro_text_data))
 		self:Add(macro_text_guid, nil, nil, macro_text_guid)
@@ -490,12 +486,12 @@ function Stuff.prototype:Reset()
 	local slotList
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		slotList = self.dataList[bag]
-		for i, itemId in pairs(slotList) do
+		for i, _item_id in pairs(slotList) do
 			slotList[i] = nil
 		end
 	end
 	slotList = self.dataList.inventory
-	for i, itemId in pairs(slotList) do
+	for i, _item_id in pairs(slotList) do
 		slotList[i] = nil
 	end
 end
@@ -516,7 +512,7 @@ function Stuff.prototype:Contains(id)
 		end
 	end
 	slotList = self.dataList.inventory
-	for i, itemId in pairs(slotList) do
+	for _i, itemId in pairs(slotList) do
 		if (itemId == id) then
 			contains = true
 			if (not AutoBarSearch.trace) then
@@ -525,7 +521,7 @@ function Stuff.prototype:Contains(id)
 		end
 	end
 	slotList = self.dataList.spells
-	for i, itemId in pairs(slotList) do
+	for _i, itemId in pairs(slotList) do
 		if (itemId == id) then
 			contains = true
 			if (not AutoBarSearch.trace) then
@@ -645,7 +641,6 @@ function Found.prototype:GetTotalSlots(itemId)
 	local itemData = self.dataList[itemId]
 	local lastIndex
 	if (itemData) then
-		local nItems = # itemData
 		local i = 3
 		while (true) do
 			if (itemData[i] or itemData[i + 1] or itemData[i + 2]) then
@@ -834,7 +829,7 @@ if (not itemId) then
 	AutoBar:Print("Sorted.prototype:Add   bad itemId  " .. tostring(itemId))
 end
 
-	for i, sortedItemData in ipairs(buttonItems) do
+	for _i, sortedItemData in ipairs(buttonItems) do
 		if (sortedItemData.itemId == itemId) then
 			bFound = true
 			if (slotIndex > sortedItemData.slotIndex) then
@@ -947,7 +942,7 @@ end
 -- Testing & Debug function only
 function Sorted.prototype:Contains(itemId)
 	for buttonKey, buttonItems in pairs(self.dataList) do
-		for i, sortedItemData in ipairs(buttonItems) do
+		for _i, sortedItemData in ipairs(buttonItems) do
 			if (itemId == sortedItemData.itemId) then
 				if (not AutoBarSearch.trace) then
 					AutoBar:Print("Sorted.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))

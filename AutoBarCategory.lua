@@ -25,7 +25,6 @@
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-local spellIconList = ABGData.spell_icon_list
 
 --TODO: Move AutoBarCategoryList into AutoBarGlobalDataObject
 AutoBarCategoryList = {}
@@ -34,8 +33,6 @@ local L = AutoBarGlobalDataObject.locale
 local PT = LibStub("LibPeriodicTable-3.1")
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local _
-
-local tonumber, type, print, table, ipairs, pairs, assert = tonumber, type, print, table, ipairs, pairs, assert
 
 -- List of categoryKey, category.description pairs for button categories
 AutoBar.categoryValidateList = {}
@@ -1015,7 +1012,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
 		for _, toy_id in ipairs(self.all_items) do
 	--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode:PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
-			local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
+			local _, _toy_name, _toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
 			local user_selected = (self.only_favourites and toy_is_fave) or not self.only_favourites
 			if (toy_id and ABGCode:PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
 				AutoBarSearch:RegisterToy(toy_id)

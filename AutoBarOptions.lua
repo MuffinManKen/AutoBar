@@ -38,7 +38,7 @@
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
-local ABGData = AutoBarGlobalDataObject
+local _ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
@@ -47,9 +47,6 @@ local ldbIcon = LibStub("LibDBIcon-1.0", true)
 local AceCfgReg = LibStub("AceConfigRegistry-3.0")
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local AceCfgCmd = LibStub("AceConfigCmd-3.0")
-local AceGUI = LibStub("AceGUI-3.0")
-
-local ipairs, pairs, type, assert, tostring, wipe, strmatch, strsub, table = ipairs, pairs, type, assert, tostring, wipe, strmatch, strsub, table
 
 local dewdrop = nil
 
@@ -103,7 +100,7 @@ function AutoBar:InitializeOptions()
 					GameTooltip:Hide()
 				end
 				if (tooltip and tooltip.AddLine) then
-					for i, text in ipairs(hintText) do
+					for _i, text in ipairs(hintText) do
 						tooltip:AddLine(text)
 					end
 				end
@@ -202,7 +199,7 @@ end
 
 
 local function CopyTable(source, target)
-	for k, v in pairs(source) do
+	for k, _v in pairs(source) do
 		if (type(k) == "table") then
 			target[k] = {}
 			CopyTable(source[k], target[k])
@@ -476,7 +473,7 @@ function AutoBar:GetCategoriesItemDB(categoryKey, itemIndex)
 	return config
 end
 
-
+--[[
 local function ResetBarList(barList)
 	for barKey, barDB in pairs(barList) do
 		if (not barDB.isCustomBar) then
@@ -484,20 +481,22 @@ local function ResetBarList(barList)
 		end
 	end
 end
+--]]
 
+--[[
 local function ResetBars()
 	ResetBarList(AutoBar.db.account.barList)
-	for classKey, classDB in pairs(AutoBarDB.classes) do
+	for _classKey, classDB in pairs(AutoBarDB.classes) do
 		ResetBarList(classDB.barList)
 	end
-	for charKey, charDB in pairs(AutoBarDB.chars) do
+	for _charKey, charDB in pairs(AutoBarDB.chars) do
 		ResetBarList(charDB.barList)
 	end
 
 	AutoBar:InitializeDefaults()
 
 	AutoBar:RefreshBarDBLists()
-	for barKey, bar in pairs(AutoBar.barList) do
+	for _barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateShared()
 	end
 
@@ -506,15 +505,16 @@ local function ResetBars()
 	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
+--]]
 
-
+--[[
 local function ResetButtons()
 	AutoBar:PopulateBars(true)
 	AutoBar:CreateOptionsAce3()
 	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
-
+--]]
 
 local function ResetAutoBar()
 	AutoBar:PopulateBars(true)
@@ -575,8 +575,7 @@ local function setCustomBarName(info, value)
 	if (value and value ~= "") then
 		local barKey = info.arg.barKey
 
-		if (AutoBar.Class.Bar:NameExists(value)) then
-		else
+		if (not AutoBar.Class.Bar:NameExists(value)) then
 			local customBarDB = AutoBar.barLayoutDBList[barKey]
 			customBarDB.name = value
 
@@ -1046,11 +1045,12 @@ local function setAddButtonName(info, value)
 	AutoBar:BarButtonChanged()
 end
 
+--[[
 local function BarReset()
 	AutoBar.Class.Bar:OptionsReset()
 	AutoBar:BarsChanged()
 end
-
+--]]
 
 local function CategoryReset()
 	AutoBarDB2.custom_categories = {}
@@ -2402,17 +2402,17 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 end
 
 
-local function getButtonCategory(info)
-	local barKey, buttonKey, categoryIndex, categoryKey = info.arg.barKey, info.arg.buttonKey, info.arg.categoryIndex, info.arg.categoryKey
-	local buttonDB = AutoBar:GetButtonDB(buttonKey)
+local function getButtonCategory(p_info)
+	local button_key, category_index = p_info.arg.buttonKey, p_info.arg.categoryIndex
+	local buttonDB = AutoBar:GetButtonDB(button_key)
 
-	return buttonDB[categoryIndex]
+	return buttonDB[category_index]
 end
 
-local function setButtonCategory(info, value)
-	local barKey, buttonKey, categoryIndex, categoryKey, buttonIndex = info.arg.barKey, info.arg.buttonKey, info.arg.categoryIndex, info.arg.categoryKey, info.arg.buttonIndex
-	local buttonDB = AutoBar:GetButtonDB(buttonKey)
-	buttonDB[categoryIndex] = value
+local function setButtonCategory(p_info, p_value)
+	local button_key, category_index = p_info.arg.buttonKey, p_info.arg.categoryIndex
+	local buttonDB = AutoBar:GetButtonDB(button_key)
+	buttonDB[category_index] = p_value
 
 	AutoBar:BarButtonChanged()
 end
@@ -2540,7 +2540,7 @@ function AutoBar:CreateButtonOptions(options)
 		}
 	end
 --]]
-	for buttonKey, buttonDB in pairs(buttonDBList) do
+	for buttonKey, _buttonDB in pairs(buttonDBList) do
 		options[buttonKey] = AutoBar:CreateBarButtonOptions(nil, nil, buttonKey, options[buttonKey])
 	end
 
@@ -2619,7 +2619,7 @@ local function setCategoryItem(info, value, ...)
 			CategoryItemDelete(info)
 		elseif (itemDB.itemType == "macroCustom") then
 			-- ToDo: Only grab the texture
-			local dragLinkType, info1, info2, texture = ...
+			local _dragLinkType, _info1, _info2, texture = ...
 			itemDB.texture = texture
 		elseif (value:find("item:%d+")) then
 			itemDB.itemType = "item"
