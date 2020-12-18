@@ -162,6 +162,44 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 end
 
 
+-- Return nil or list of spells matching player class
+-- itemsPerLine defaults to 2 (class type, spell).
+-- Only supports 2 & 3 for now.
+local function FilterByClass(castList, p_items_per_line)
+	local spellName, index, filteredList2, filteredList3
+	local items_per_line = p_items_per_line or 2
+
+	--TODO: verify that each entry starts with either a proper class name or a "*"
+	-- Filter out CLASS spells from castList
+	index = 1
+	for i = 1, # castList, items_per_line do
+		if (AutoBar.CLASS == castList[i] or "*" == castList[i]) then
+			spellName = castList[i + 1]
+			if (not filteredList2) then
+				filteredList2 = {}
+			end
+			if (items_per_line == 3 and not filteredList3) then
+				filteredList3 = {}
+			end
+			filteredList2[index] = spellName
+			if (items_per_line == 3) then
+				spellName = castList[i + 2]
+				filteredList3[index] = spellName
+			end
+			index = index + 1
+		end
+	end
+	return filteredList2, filteredList3
+end
+
+-- Learned new spells etc.  Refresh all categories
+function ABGCode.RefreshCategories()
+	for _, categoryInfo in pairs(AutoBarCategoryList) do
+		categoryInfo:Refresh()
+	end
+end
+
+
 
 -- Mandatory attributes:
 --		description - localized description
@@ -190,12 +228,10 @@ function AutoBarCategory.prototype:SetNonCombat(nonCombat)
 	self.nonCombat = nonCombat
 end
 
-
 -- True if item is for battlegrounds only
 function AutoBarCategory.prototype:SetBattleground(battleground)
 	self.battleground = battleground
 end
-
 
 -- True if item the spell check should be skipped, used for things like Mounts(?) where the spell check would otherwise fail
 function AutoBarCategory.prototype:SetNoSpellCheck(noSpellCheck)
@@ -205,43 +241,6 @@ end
 function AutoBarCategory.prototype:SetCastSpell(p_cast_spell)
 	self.castSpell = p_cast_spell
 end
-
-
-
-
-
-
-
--- Return nil or list of spells matching player class
--- itemsPerLine defaults to 2 (class type, spell).
--- Only supports 2 & 3 for now.
-function AutoBarCategory:FilterClass(castList, p_items_per_line)
-	local spellName, index, filteredList2, filteredList3
-	local items_per_line = p_items_per_line or 2
-
-	--TODO: verify that each entry starts with either a proper class name or a "*"
-	-- Filter out CLASS spells from castList
-	index = 1
-	for i = 1, # castList, items_per_line do
-		if (AutoBar.CLASS == castList[i] or "*" == castList[i]) then
-			spellName = castList[i + 1]
-			if (not filteredList2) then
-				filteredList2 = {}
-			end
-			if (items_per_line == 3 and not filteredList3) then
-				filteredList3 = {}
-			end
-			filteredList2[index] = spellName
-			if (items_per_line == 3) then
-				spellName = castList[i + 2]
-				filteredList3[index] = spellName
-			end
-			index = index + 1
-		end
-	end
-	return filteredList2, filteredList3
-end
-
 
 
 -- Reset the item list based on changed settings.
@@ -325,13 +324,13 @@ function AutoBarSpells.prototype:init(description, texture, castList, rightClick
 
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (castList) then
-		self.castList = AutoBarCategory:FilterClass(castList)
+		self.castList = FilterByClass(castList)
 	end
 	if (rightClickList) then
 		if (#rightClickList % 3 ~= 0) then
 			ABGCode:LogWarning("Category:", description, " rightClickList should be divisible by 3, but isn't.")
 		end
-		self.castList, self.rightClickList = AutoBarCategory:FilterClass(rightClickList, 3)
+		self.castList, self.rightClickList = FilterByClass(rightClickList, 3)
 	end
 
 	--Convert a PT set to a list of localized spell names
@@ -913,24 +912,6 @@ function AutoBarCategory:Initialize()
 
 end
 
--- Create category list using PeriodicTable data.
--- Split up to avoid Lua upValue limitations
-function AutoBarCategory:Initialize2()
-
-end
-
-
-function AutoBarCategory:Upgrade()
-
-
-end
-
--- Learned new spells etc.  Refresh all categories
-function AutoBarCategory:UpdateCategories()
-	for _, categoryInfo in pairs(AutoBarCategoryList) do
-		categoryInfo:Refresh()
-	end
-end
 
 
 function AutoBarCategory:UpdateCustomCategories()

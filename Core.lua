@@ -32,7 +32,8 @@ local L = AutoBarGlobalDataObject.locale
 local print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert = print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert
 
 local AutoBar = AutoBar
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCS = AutoBarGlobalCodeSpace	--TODO: Replace all with ABGCocde, or just the global AB
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local tick = ABGData.TickScheduler
 
@@ -246,7 +247,6 @@ function AutoBar:InitializeZero()
 
 	AutoBar:LogEvent("InitializeZero")
 	AutoBar.InitializeDB()
-	AutoBarCategory:Upgrade()
 	AutoBar:InitializeOptions()
 	AutoBar:Initialize()
 
@@ -797,7 +797,6 @@ function AutoBar:Initialize()
 	end
 
 	AutoBarCategory:Initialize()
-	AutoBarCategory:Initialize2()
 	AutoBarCategory:UpdateCustomCategories()
 	AutoBarSearch:Initialize()
 	self:LogEventEnd("AutoBar:Initialize")
@@ -1212,7 +1211,7 @@ function ABGCS:UpdateSpells(p_behaviour)
 
 	AutoBarSearch.stuff:ScanSpells()
 	AutoBarSearch.stuff:ScanMacros()
-	AutoBarCategory:UpdateCategories()
+	ABGCode.RefreshCategories()
 
 	ABGCS:UpdateObjects();	--We don't pass the behaviour flag along since we want calls to UpdateSpells to complete immediately
 
