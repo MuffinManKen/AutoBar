@@ -13,6 +13,8 @@
 -- GLOBALS: PickupItem, PickupSpellBookItem, PickupAction, PickupMacro, ItemHasRange, IsItemInRange, SpellHasRange, IsSpellInRange
 
 local AutoBar = AutoBar
+local ABGCode = AutoBarGlobalCodeSpace
+
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
@@ -513,7 +515,7 @@ function AutoBar.Class.Button.prototype:UpdateButton()
 	end
 
 	if (AutoBar.moveButtonsMode) then
-		frame.macroName:SetText(AutoBarButton:GetDisplayName(self.buttonDB))
+		frame.macroName:SetText(ABGCode.GetButtonDisplayName(self.buttonDB))
 --	elseif self.parentBar.sharedLayoutDB.showMacrotext then
 --		frame.macroName:SetText(GetActionText(self.action))
 	else
@@ -857,7 +859,7 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOn()
 	local frame = self.frame
 	frame:SetScript("OnDragStart", onDragStartFunc)
 	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
-	frame.macroName:SetText(AutoBarButton:GetDisplayName(self.buttonDB))
+	frame.macroName:SetText(ABGCode.GetButtonDisplayName(self.buttonDB))
 	frame:Show()
 end
 

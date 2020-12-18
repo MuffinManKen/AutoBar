@@ -2172,7 +2172,7 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 	if (not buttonDB) then
 		return existingConfig
 	end
-	local name = AutoBarButton:GetDisplayName(buttonDB)
+	local name = ABGCode.GetButtonDisplayName(buttonDB)
 
 	local passValue
 	if (existingConfig) then

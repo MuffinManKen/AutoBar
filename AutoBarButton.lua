@@ -32,21 +32,10 @@ function AutoBarButton.prototype:init(parentBar, buttonDB)
 end
 
 
--- Return the interface display name
-function AutoBarButton:GetDisplayName(buttonDB)
-	local name
-	if (buttonDB.name) then
-		name = tostring(buttonDB.name)
-	else
-		name = L[buttonDB.buttonKey] or L["Custom"]
-	end
-	return name
-end
-
-
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
-function AutoBarButton:AddCategoryItem(category, itemType, itemId, itemInfo)
+--TODO: Why is this in the Button class? It should be part of Category
+local function AddItemToCategory(category, itemType, itemId, itemInfo)
 	local categoryInfo = AutoBarCategoryList[category]
 	local itemsListDB = categoryInfo.customCategoriesDB.items
 	local itemIndex = # itemsListDB + 1
@@ -93,7 +82,7 @@ function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 			categoryInfo = AutoBarCategoryList[categoryKey]
 
 			if (categoryInfo and categoryInfo.customKey) then
-				AutoBarButton:AddCategoryItem(categoryKey, itemType, itemId, itemInfo)
+				AddItemToCategory(categoryKey, itemType, itemId, itemInfo)
 				AutoBar:BarButtonChanged()
 				dropped = true
 				break
@@ -104,9 +93,9 @@ function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 		local buttonDB = self.buttonDB
 		if (not dropped and buttonDB.drop) then
 			local buttonCategoryIndex = # buttonDB + 1
-			local categoryKey = AutoBar:CategoryNew()
-			buttonDB[buttonCategoryIndex] = categoryKey
-			AutoBarButton:AddCategoryItem(categoryKey, itemType, itemId, itemInfo)
+			local new_key = AutoBar:CategoryNew()
+			buttonDB[buttonCategoryIndex] = new_key
+			AddItemToCategory(new_key, itemType, itemId, itemInfo)
 			AutoBar:BarButtonChanged()
 		end
 	end
@@ -913,14 +902,14 @@ end
 --		if (self.class and self.class.sharedLayoutDB) then
 --			GameTooltip:AddLine(self.class.barName)
 --		elseif(isAutoBarButton) then
---			GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
+--			GameTooltip:AddLine(ABGCode.GetButtonDisplayName(self.class.buttonDB))
 --		end
 --	else
 --		local buttonType = self:GetAttribute("type")
 --
 --		if (not buttonType) then
 --			if (isAutoBarButton) then
---				GameTooltip:AddLine(AutoBarButton:GetDisplayName(self.class.buttonDB))
+--				GameTooltip:AddLine(ABGCode.GetButtonDisplayName(self.class.buttonDB))
 --			else
 --				self.updateTooltip = nil
 --			end
@@ -1292,7 +1281,7 @@ if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
 
 	function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
-		local debug --= true or (spell == "Cooking")
+		local debug = false --= true or (spell == "Cooking")
 
 		if (debug) then print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell], ABGData.spell_name_list["Cooking"]); end
 
@@ -1868,9 +1857,9 @@ AutoBar.Class["AutoBarButtonCooldownStoneRejuvenation"] = AutoBarButtonCooldownS
 function AutoBarButtonCooldownStoneRejuvenation.prototype:init(parentBar, buttonDB)
 	AutoBarButtonCooldownStoneRejuvenation.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
+--	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 --		self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
-	end
+--	end
 end
 
 
@@ -2414,14 +2403,12 @@ else
 	local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
 
-	_, _, spellIconList["Puntable Marmot"] = AutoBar:LoggedGetSpellInfo(127829)
-
 	function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
 		AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
 	--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
-			AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", spellIconList["Puntable Marmot"])
+			AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
 			local category = AutoBarCategoryList["Toys.ToyBox"]
 			category.unInitialized = true
 		end
@@ -2512,14 +2499,12 @@ else
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
 
-	_, _, spellIconList["Amani War Bear"] = AutoBar:LoggedGetSpellInfo(43688)
-
 	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 	--print("AutoBarButtonMount.prototype:init");
 
 		if (not AutoBarCategoryList["Spell.Mount"]) then
-			AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", spellIconList["Amani War Bear"], {} )
+			AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", "ability_druid_challangingroar", {} )
 			local category = AutoBarCategoryList["Spell.Mount"]
 			category:SetNonCombat(true)
 			category:SetNoSpellCheck(true)
@@ -2695,13 +2680,11 @@ else
 	local AutoBarButtonPets = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonPets"] = AutoBarButtonPets
 
-	_, _, spellIconList["Phoenix Hatchling"] = AutoBar:LoggedGetSpellInfo(46599)
-
 	function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 		AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
 		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-			AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", spellIconList["Phoenix Hatchling"])
+			AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
 		end
 		self:AddCategory("Battle Pet.Favourites")
 

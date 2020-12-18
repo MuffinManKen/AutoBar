@@ -202,6 +202,10 @@ function AutoBarCategory.prototype:SetNoSpellCheck(noSpellCheck)
 	self.noSpellCheck = noSpellCheck
 end
 
+function AutoBarCategory.prototype:SetCastSpell(p_cast_spell)
+	self.castSpell = p_cast_spell
+end
+
 
 
 
@@ -268,24 +272,6 @@ end
 
 -- Reset the item list based on changed settings.
 function AutoBarItems.prototype:Refresh()
-end
-
-
-
-
--- Category consisting of regular items
-AutoBarPetFood = AceOO.Class(AutoBarItems)
-
--- ptItems, ptPriorityItems are PeriodicTable sets
--- priorityItems sort higher than items at the same value
-function AutoBarPetFood.prototype:init(description, shortTexture, ptItems, ptPriorityItems)
-	AutoBarPetFood.super.prototype.init(self, description, "Interface\\Icons\\" .. shortTexture, ptItems, ptPriorityItems)
-
-	self.castSpell = AutoBar:LoggedGetSpellInfo(6991, "Feed Pet")
-end
-
--- Reset the item list based on changed settings.
-function AutoBarPetFood.prototype:Refresh()
 end
 
 
@@ -672,30 +658,36 @@ function AutoBarCategory:Initialize()
 	AutoBarCategoryList["Consumable.Food.Combo Percent"]:SetNonCombat(true)
 
 
-	AutoBarCategoryList["Consumable.Food.Bread"] = AutoBarPetFood:new("Consumable.Food.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
+	AutoBarCategoryList["Consumable.Food.Bread"] = AutoBarItems:new("Consumable.Food.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
 	AutoBarCategoryList["Consumable.Food.Bread"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Bread"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
-
-	AutoBarCategoryList["Consumable.Food.Cheese"] = AutoBarPetFood:new( "Consumable.Food.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
+	AutoBarCategoryList["Consumable.Food.Cheese"] = AutoBarItems:new( "Consumable.Food.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
 	AutoBarCategoryList["Consumable.Food.Cheese"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Cheese"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
 
-	AutoBarCategoryList["Consumable.Food.Fish"] = AutoBarPetFood:new("Consumable.Food.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
+	AutoBarCategoryList["Consumable.Food.Fish"] = AutoBarItems:new("Consumable.Food.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
 	AutoBarCategoryList["Consumable.Food.Fish"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Fish"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
 
-	AutoBarCategoryList["Consumable.Food.Fruit"] = AutoBarPetFood:new( "Consumable.Food.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
+	AutoBarCategoryList["Consumable.Food.Fruit"] = AutoBarItems:new( "Consumable.Food.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
 	AutoBarCategoryList["Consumable.Food.Fruit"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Fruit"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
 
-	AutoBarCategoryList["Consumable.Food.Fungus"] = AutoBarPetFood:new("Consumable.Food.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
+	AutoBarCategoryList["Consumable.Food.Fungus"] = AutoBarItems:new("Consumable.Food.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
 	AutoBarCategoryList["Consumable.Food.Fungus"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Fungus"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
-	AutoBarCategoryList["Consumable.Food.Meat"] = AutoBarPetFood:new("Consumable.Food.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
+	AutoBarCategoryList["Consumable.Food.Meat"] = AutoBarItems:new("Consumable.Food.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
 	AutoBarCategoryList["Consumable.Food.Meat"]:SetNonCombat(true)
+	AutoBarCategoryList["Consumable.Food.Meat"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
-	AutoBarCategoryList["Consumable.Buff Pet"] = AutoBarPetFood:new("Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
+	AutoBarCategoryList["Consumable.Buff Pet"] = AutoBarItems:new("Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
 	AutoBarCategoryList["Consumable.Buff Pet"]:SetTargeted("PET")
+	AutoBarCategoryList["Consumable.Buff Pet"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
 
 	AutoBarCategoryList["Consumable.Food.Bonus"] = AutoBarItems:new("Consumable.Food.Bonus", "INV_Misc_Food_47", "Consumable.Food.Bonus")
 	AutoBarCategoryList["Consumable.Food.Bonus"]:SetNonCombat(true)

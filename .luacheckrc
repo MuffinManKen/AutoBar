@@ -74,12 +74,6 @@ _text_fields = {
 
 read_globals = {
 
-	GameFontNormal = {
-		fields = {
-			"GetFont",
-		}
-	},
-
 }
 
 

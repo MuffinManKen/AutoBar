@@ -12,7 +12,7 @@
 
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 
@@ -54,11 +54,11 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 	local itemLink = button:GetAttribute("itemLink")
 	local buttonType = button:GetAttribute("type")
 	local item_guid = button:GetAttribute("AutoBarGUID")
-	local item_data = ABGCS.InfoFromGUID(item_guid)
+	local item_data = ABGCode.InfoFromGUID(item_guid)
 
 
 	if (AutoBar.moveButtonsMode) then
-		local name = AutoBarButton:GetDisplayName(button.class.buttonDB)
+		local name = ABGCode.GetButtonDisplayName(button.class.buttonDB)
 		GameTooltip:AddLine(name, 0.8, 0, 1, -1)
 		GameTooltip:Show()
 	elseif(item_data) then
@@ -145,7 +145,7 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, GetSpellInfo(p_action)) or ABGCS.GetIconForItemID(p_action)
+		texture = select(3, GetSpellInfo(p_action)) or ABGCode.GetIconForItemID(p_action)
 	end
 
 	--We haven't found a texture. This might be because it's just not cached yet.
@@ -186,13 +186,13 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	local texture, borderColor
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
-	local item_data =  ABGCS.InfoFromGUID(item_guid)
+	local item_data =  ABGCode.InfoFromGUID(item_guid)
 
 	if(item_data) then
 		if(item_data.icon) then
 			texture = item_data.icon -- Use cached icon if we have one
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
-			texture = ABGCS.GetIconForToyID(item_data.item_id)
+			texture = ABGCode.GetIconForToyID(item_data.item_id)
 			if(texture == nil) then
 				AutoBar:SetMissingItemFlag(item_data.item_id);
 			end
@@ -200,7 +200,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
-			texture = ABGCS.GetIconForItemID(tonumber(itemId))
+			texture = ABGCode.GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
 				AutoBar:SetMissingItemFlag(itemId);
 			end
@@ -225,7 +225,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			texture = ABGCS.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
+			texture = ABGCode.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -254,7 +254,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	end
 
 	local item_guid = self.frame:GetAttribute("AutoBarGUID")
-	local item_data = ABGCS.InfoFromGUID(item_guid)
+	local item_data = ABGCode.InfoFromGUID(item_guid)
 
 	local start, duration, enabled = 0, 0, 0
 
@@ -346,7 +346,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 
 		if (itemType == "item") then
 			local itemId = frame:GetAttribute("itemId")
-			isUsable, notEnoughMana = ABGCS.IsUsableItem(itemId)
+			isUsable, notEnoughMana = ABGCode.IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
 				local _, _, enabled = GetItemCooldown(itemId)

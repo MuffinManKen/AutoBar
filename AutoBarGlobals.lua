@@ -315,6 +315,19 @@ function AutoBarGlobalCodeSpace.GetNumQuestLogEntries()
 	end
 end
 
+-- Return the interface display name
+function AutoBarGlobalCodeSpace.GetButtonDisplayName(p_button_db)
+	local name
+
+	if (p_button_db.name) then
+		name = tostring(p_button_db.name)
+	else
+		local L = AutoBarGlobalDataObject.locale
+		name = L[p_button_db.buttonKey] or L["Custom"]
+	end
+	return name
+end
+
 -------------------------------------------------------------------
 --
 -- WoW Classic
