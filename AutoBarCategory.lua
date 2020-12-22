@@ -383,9 +383,24 @@ ABGCode.CustomCategory = CreateFromMixins(CategoryClass)
 local CustomCategory = ABGCode.CustomCategory
 
 -- Return a unique key to use
-function CustomCategory:GetCustomKey(customCategoryName)
-	local newKey = "Custom" .. customCategoryName
+---@param p_custom_category_name string
+function ABGCode.GetCustomCategoryKey(p_custom_category_name)
+	assert(type(p_custom_category_name) =="string")
+	local newKey = "Custom" .. p_custom_category_name
 	return newKey
+end
+
+-- Return the unique name to use
+function ABGCode.GetNewCustomCategoryName(baseName, index)
+	local newName = baseName .. index
+	local newKey = ABGCode.GetCustomCategoryKey(newName)
+	local customCategories = AutoBarDB2.custom_categories
+	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
+		index = index + 1
+		newName = baseName .. index
+		newKey = ABGCode.GetCustomCategoryKey(newName)
+	end
+	return newName, newKey
 end
 
 -- Select an Icon to use
@@ -433,7 +448,7 @@ function CustomCategory:new(customCategoriesDB)
 
 	obj.customCategoriesDB = customCategoriesDB
 
-	obj.customKey = CustomCategory:GetCustomKey(description)
+	obj.customKey = ABGCode.GetCustomCategoryKey(description)
 
 	obj:Refresh()
 
@@ -443,7 +458,7 @@ end
 -- If not used yet, change name to newName
 -- Return the name in use either way
 function CustomCategory:ChangeName(newName)
-	local newCategoryKey = CustomCategory:GetCustomKey(newName)
+	local newCategoryKey = ABGCode.GetCustomCategoryKey(newName)
 	if (not AutoBarCategoryList[newCategoryKey]) then
 		local oldCustomKey = self.customKey
 		self.customKey = newCategoryKey
@@ -468,21 +483,6 @@ function CustomCategory:ChangeName(newName)
 end
 -- /dump AutoBarCategoryList["Custom.Custom"]
 -- /dump AutoBarCategoryList["Custom.XXX"]
-
-
--- Return the unique name to use
-function CustomCategory:GetNewName(baseName, index)
-	local newName = baseName .. index
-	local newKey = CustomCategory:GetCustomKey(newName)
-	local customCategories = AutoBarDB2.custom_categories
-	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
-		index = index + 1
-		newName = baseName .. index
-		newKey = CustomCategory:GetCustomKey(newName)
-	end
-	return newName, newKey
-end
-
 
 -- Reset the item list based on changed settings.
 function CustomCategory:Refresh()

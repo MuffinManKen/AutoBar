@@ -1059,7 +1059,7 @@ end
 
 
 function AutoBar:CategoryNew()
-	local newCategoryName, categoryKey = ABGCode.CustomCategory:GetNewName(L["Custom"], 1)
+	local newCategoryName, categoryKey = ABGCode.GetNewCustomCategoryName(L["Custom"], 1)
 	local customCategories = AutoBarDB2.custom_categories
 	customCategories[categoryKey] = {
 		name = newCategoryName,
