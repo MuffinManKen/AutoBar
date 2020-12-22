@@ -23,7 +23,6 @@ local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store the
 local _G = _G
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
