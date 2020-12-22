@@ -2408,7 +2408,7 @@ else
 	--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
-			AutoBarCategoryList["Toys.ToyBox"] = AutoBarToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
+			AutoBarCategoryList["Toys.ToyBox"] = ABGCode.ToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
 			local category = AutoBarCategoryList["Toys.ToyBox"]
 			category.unInitialized = true
 		end
@@ -2504,7 +2504,7 @@ else
 	--print("AutoBarButtonMount.prototype:init");
 
 		if (not AutoBarCategoryList["Spell.Mount"]) then
-			AutoBarCategoryList["Spell.Mount"] = AutoBarSpells:new( "Spell.Mount", "ability_druid_challangingroar", {} )
+			AutoBarCategoryList["Spell.Mount"] = ABGCode.SpellsCategory:new( "Spell.Mount", "ability_druid_challangingroar", {} )
 			local category = AutoBarCategoryList["Spell.Mount"]
 			category:SetNonCombat(true)
 			category:SetNoSpellCheck(true)
@@ -2684,7 +2684,7 @@ else
 		AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
 		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-			AutoBarCategoryList["Battle Pet.Favourites"] = AutoBarMacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
+			AutoBarCategoryList["Battle Pet.Favourites"] = ABGCode.MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
 		end
 		self:AddCategory("Battle Pet.Favourites")
 

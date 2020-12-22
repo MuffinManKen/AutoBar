@@ -91,9 +91,6 @@ globals = {
 	"AutoBarButton",
 	"AutoBarCategory",
 	"AutoBarCategoryList",
-	"AutoBarItems",
-	"AutoBarSpells",
-	"AutoBarToyCategory",
 	"AutoBarSearch",
 
 	MUFFIN_WHATS_NEW_QUEUE = {

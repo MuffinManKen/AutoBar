@@ -796,8 +796,8 @@ function AutoBar:Initialize()
 		group.Colors = AutoBar.db.account.Colors or {}
 	end
 
-	AutoBarCategory:Initialize()
-	AutoBarCategory:UpdateCustomCategories()
+	ABGCode.InitializeAllCategories()
+	ABGCode.UpdateCustomCategories()
 	AutoBarSearch:Initialize()
 	self:LogEventEnd("AutoBar:Initialize")
 --AutoBarSearch:Test()
@@ -1195,7 +1195,7 @@ function ABGCS:UpdateCategories(p_behaviour)
 	local ret = tick.UpdateCompleteID
 	if (not InCombatLockdown()) then
 		AutoBar:LogEventStart("ABGCS:UpdateCategories")
-		AutoBarCategory:UpdateCustomCategories()
+		ABGCode.UpdateCustomCategories()
 		ABGCS:UpdateSpells();	--We don't pass the behaviour flag along since we want calls to UpdateCategories to complete immediately
 		AutoBar:LogEventEnd("ABGCS:UpdateCategories")
 	else

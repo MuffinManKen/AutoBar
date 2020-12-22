@@ -3,88 +3,140 @@ local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 local L = AutoBarGlobalDataObject.locale
+local ItemsCategory = ABGCode.ItemsCategory
+local MacroTextCategory = ABGCode.MacroTextCategory
+local SpellsCategory = ABGCode.SpellsCategory
 
+ABGCode.ToyCategory = CreateFromMixins(ABGCode.CategoryClass)
+local ToyCategory = ABGCode.ToyCategory
 
+function ToyCategory:new(p_description, p_short_texture, p_pt_name)
+	assert(type(p_description) == "string")
+	assert(type(p_short_texture) == "string")
+
+	local obj = CreateFromMixins(self)
+	obj:init(p_description, "Interface\\Icons\\" .. p_short_texture)
+
+	obj.is_toy = true
+
+	--All items in the category
+	obj.all_items = {}
+
+	if(p_pt_name) then
+		--print("pt_name", p_pt_name);
+		local raw_list = ABGCode.AddPTSetToRawList({}, p_pt_name, false)
+		obj.all_items = ABGCode.RawListToItemIDList(raw_list)
+		--print("all_items", AutoBar:Dump(obj.all_items))
+	end
+
+	obj:Refresh()
+
+	return obj
+end
+
+-- Reset the item list in case the player learned new toys
+function ToyCategory:Refresh()
+	local list_index = 1
+
+--	if(self.categoryKey == "Muffin.Toys.Hearth") then
+--		print("Refreshing Toy Category", self.categoryKey, #self.items, #self.all_items);
+--	end
+
+	for _, toy_id in ipairs(self.all_items) do
+--		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode.PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
+		local _, _toy_name, _toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
+		local user_selected = (self.only_favourites and toy_is_fave) or not self.only_favourites
+		if (toy_id and ABGCode.PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
+			AutoBarSearch:RegisterToy(toy_id)
+			self.items[list_index] = ABGCode.ToyGUID(toy_id)
+			list_index = list_index + 1
+		end
+	end
+
+	for i = list_index, # self.items, 1 do
+		self.items[i] = nil
+	end
+end
 
 function ABGCode.InitializeCategories()
 
-	AutoBarCategoryList["Dynamic.Quest"] = AutoBarItems:new("Dynamic.Quest", "INV_Misc_Rune_01", nil)
+	AutoBarCategoryList["Dynamic.Quest"] = ItemsCategory:new("Dynamic.Quest", "INV_Misc_Rune_01", nil)
 
-	AutoBarCategoryList["Muffin.Toys.Hearth"] = AutoBarToyCategory:new( "Muffin.Toys.Hearth", spellIconList["Puntable Marmot"], "Muffin.Toys.Hearth")
-	AutoBarCategoryList["Muffin.Toys.Pet Battle"] = AutoBarToyCategory:new( "Muffin.Toys.Pet Battle", spellIconList["Puntable Marmot"], "Muffin.Toys.Pet Battle")
-	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = AutoBarToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", spellIconList["Puntable Marmot"], "Muffin.Toys.Companion Pet.Ornamental")
-	AutoBarCategoryList["Muffin.Toys.Portal"] = AutoBarToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
-	AutoBarCategoryList["Muffin.Toys.Fishing"] = AutoBarToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
+	AutoBarCategoryList["Muffin.Toys.Hearth"] = ToyCategory:new( "Muffin.Toys.Hearth", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Hearth")
+	AutoBarCategoryList["Muffin.Toys.Pet Battle"] = ToyCategory:new( "Muffin.Toys.Pet Battle", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Pet Battle")
+	AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"] = ToyCategory:new( "Muffin.Toys.Companion Pet.Ornamental", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Companion Pet.Ornamental")
+	AutoBarCategoryList["Muffin.Toys.Portal"] = ToyCategory:new( "Muffin.Toys.Portal", "ability_siege_engineer_pattern_recognition", "Muffin.Toys.Portal")
+	AutoBarCategoryList["Muffin.Toys.Fishing"] = ToyCategory:new( "Muffin.Toys.Fishing", "INV_Fishingpole_01", "Muffin.Toys.Fishing")
 
-	AutoBarCategoryList["Macro.Mount.SummonRandomFave"] = AutoBarMacroTextCategory:new( "Macro.Mount.SummonRandomFave", "achievement_guildperk_mountup")
+	AutoBarCategoryList["Macro.Mount.SummonRandomFave"] = MacroTextCategory:new( "Macro.Mount.SummonRandomFave", "achievement_guildperk_mountup")
 	AutoBarCategoryList["Macro.Mount.SummonRandomFave"]:AddMacroText("/run C_MountJournal.SummonByID(0)",  "Interface/Icons/achievement_guildperk_mountup", L["Summon A Random Favourite Mount"])
 
-	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = MacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
 
-	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
+	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = MacroTextCategory:new( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"]:AddMacroText("/randomfavoritepet",  "Interface/Icons/PetBattle_Health", L["Summon A Random Fave Pet"])
 
-	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = AutoBarMacroTextCategory:new( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
+	AutoBarCategoryList["Macro.BattlePet.DismissPet"] = MacroTextCategory:new( "Macro.BattlePet.DismissPet", "Spell_BrokenHeart")
 	AutoBarCategoryList["Macro.BattlePet.DismissPet"]:AddMacroText("/dismisspet",  "Interface/Icons/Spell_BrokenHeart", L["Dismiss Battle Pet"])
 
-	AutoBarCategoryList["Muffin.Battle Pet Items.Upgrade"] = AutoBarItems:new("Muffin.Battle Pet Items.Upgrade", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Upgrade")
-	AutoBarCategoryList["Muffin.Battle Pet Items.Level"] = AutoBarItems:new("Muffin.Battle Pet Items.Level", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Level")
-	AutoBarCategoryList["Muffin.Battle Pet Items.Bandages"] = AutoBarItems:new("Muffin.Battle Pet Items.Bandages", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Bandages")
-	AutoBarCategoryList["Muffin.Battle Pet Items.Pet Treat"] = AutoBarItems:new("Muffin.Battle Pet Items.Pet Treat", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Pet Treat")
+	AutoBarCategoryList["Muffin.Battle Pet Items.Upgrade"] = ItemsCategory:new("Muffin.Battle Pet Items.Upgrade", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Upgrade")
+	AutoBarCategoryList["Muffin.Battle Pet Items.Level"] = ItemsCategory:new("Muffin.Battle Pet Items.Level", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Level")
+	AutoBarCategoryList["Muffin.Battle Pet Items.Bandages"] = ItemsCategory:new("Muffin.Battle Pet Items.Bandages", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Bandages")
+	AutoBarCategoryList["Muffin.Battle Pet Items.Pet Treat"] = ItemsCategory:new("Muffin.Battle Pet Items.Pet Treat", "INV_BannerPVP_02", "Muffin.Battle Pet Items.Pet Treat")
 
-	AutoBarCategoryList["Spell.Pet Battle"] = AutoBarSpells:new("Spell.Pet Battle", spellIconList["Conjure Refreshment"],
+	AutoBarCategoryList["Spell.Pet Battle"] = SpellsCategory:new("Spell.Pet Battle", spellIconList["Conjure Refreshment"],
 	{
 		"*", ABGCode.GetSpellNameByName("Revive Battle Pets"),
 	})
 
-	AutoBarCategoryList["Muffin.Skill.Archaeology.Crate"] = AutoBarItems:new( "Muffin.Skill.Archaeology.Crate", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Crate")
-	AutoBarCategoryList["Muffin.Skill.Archaeology.Mission"] = AutoBarItems:new( "Muffin.Skill.Archaeology.Mission", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Mission")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Crate"] = ItemsCategory:new( "Muffin.Skill.Archaeology.Crate", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Crate")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Mission"] = ItemsCategory:new( "Muffin.Skill.Archaeology.Mission", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Mission")
 
-	AutoBarCategoryList["Muffin.SunSongRanch"] = AutoBarItems:new("Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
+	AutoBarCategoryList["Muffin.SunSongRanch"] = ItemsCategory:new("Muffin.SunSongRanch", "INV_Potion_76", "Muffin.SunSongRanch")
 
-	AutoBarCategoryList["Muffin.Garrison"] = AutoBarItems:new("Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
+	AutoBarCategoryList["Muffin.Garrison"] = ItemsCategory:new("Muffin.Garrison", "INV_Potion_76", "Muffin.Garrison")
 
-	AutoBarCategoryList["Muffin.Order Hall.Artifact Power"] = AutoBarItems:new("Muffin.Order Hall.Artifact Power", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Artifact Power")
-	AutoBarCategoryList["Muffin.Order Hall.Nethershard"] = AutoBarItems:new("Muffin.Order Hall.Nethershard", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Nethershard")
-	AutoBarCategoryList["Muffin.Order Hall.Troop Recruit"] = AutoBarItems:new("Muffin.Order Hall.Troop Recruit", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Troop Recruit")
-	AutoBarCategoryList["Muffin.Order Hall.Buff"] = AutoBarItems:new("Muffin.Order Hall.Buff", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Buff")
-	AutoBarCategoryList["Muffin.Order Hall.Champion"] = AutoBarItems:new("Muffin.Order Hall.Champion", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Champion")
-	AutoBarCategoryList["Muffin.Order Hall.Ancient Mana"] = AutoBarItems:new("Muffin.Order Hall.Ancient Mana", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Ancient Mana")
-	AutoBarCategoryList["Muffin.Order Hall.Order Resources"] = AutoBarItems:new("Muffin.Order Hall.Order Resources", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Order Resources")
+	AutoBarCategoryList["Muffin.Order Hall.Artifact Power"] = ItemsCategory:new("Muffin.Order Hall.Artifact Power", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Artifact Power")
+	AutoBarCategoryList["Muffin.Order Hall.Nethershard"] = ItemsCategory:new("Muffin.Order Hall.Nethershard", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Nethershard")
+	AutoBarCategoryList["Muffin.Order Hall.Troop Recruit"] = ItemsCategory:new("Muffin.Order Hall.Troop Recruit", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Troop Recruit")
+	AutoBarCategoryList["Muffin.Order Hall.Buff"] = ItemsCategory:new("Muffin.Order Hall.Buff", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Buff")
+	AutoBarCategoryList["Muffin.Order Hall.Champion"] = ItemsCategory:new("Muffin.Order Hall.Champion", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Champion")
+	AutoBarCategoryList["Muffin.Order Hall.Ancient Mana"] = ItemsCategory:new("Muffin.Order Hall.Ancient Mana", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Ancient Mana")
+	AutoBarCategoryList["Muffin.Order Hall.Order Resources"] = ItemsCategory:new("Muffin.Order Hall.Order Resources", "archaeology_5_0_mogucoin", "Muffin.Order Hall.Order Resources")
 
-	AutoBarCategoryList["Muffin.Covenant.Anima"] = AutoBarItems:new("Muffin.Covenant.Anima", "archaeology_5_0_mogucoin", "Muffin.Covenant.Anima")
-	AutoBarCategoryList["Muffin.Covenant.Conduit"] = AutoBarItems:new("Muffin.Covenant.Conduit", "archaeology_5_0_mogucoin", "Muffin.Covenant.Conduit")
-	AutoBarCategoryList["Muffin.Covenant.Wildseed"] = AutoBarItems:new("Muffin.Covenant.Wildseed", "archaeology_5_0_mogucoin", "Muffin.Covenant.Wildseed")
+	AutoBarCategoryList["Muffin.Covenant.Anima"] = ItemsCategory:new("Muffin.Covenant.Anima", "archaeology_5_0_mogucoin", "Muffin.Covenant.Anima")
+	AutoBarCategoryList["Muffin.Covenant.Conduit"] = ItemsCategory:new("Muffin.Covenant.Conduit", "archaeology_5_0_mogucoin", "Muffin.Covenant.Conduit")
+	AutoBarCategoryList["Muffin.Covenant.Wildseed"] = ItemsCategory:new("Muffin.Covenant.Wildseed", "archaeology_5_0_mogucoin", "Muffin.Covenant.Wildseed")
 
 
-	AutoBarCategoryList["Muffin.Skill.Archaeology.Lodestone"] = AutoBarItems:new("Muffin.Skill.Archaeology.Lodestone", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Lodestone")
-	AutoBarCategoryList["Muffin.Skill.Archaeology.Map"] = AutoBarItems:new("Muffin.Skill.Archaeology.Map", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Map")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Lodestone"] = ItemsCategory:new("Muffin.Skill.Archaeology.Lodestone", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Lodestone")
+	AutoBarCategoryList["Muffin.Skill.Archaeology.Map"] = ItemsCategory:new("Muffin.Skill.Archaeology.Map", "archaeology_5_0_mogucoin", "Muffin.Skill.Archaeology.Map")
 
-	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = AutoBarSpells:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
+	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
 		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone"), ABGCode.GetSpellNameByName("Create Soulwell"),
 	})
 
-	AutoBarCategoryList["Spell.Mage.Conjure Food"] = AutoBarSpells:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
+	AutoBarCategoryList["Spell.Mage.Conjure Food"] = SpellsCategory:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Refreshment"),
 	})
 
-	AutoBarCategoryList["Consumable.Water.Conjure"] = AutoBarSpells:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
+	AutoBarCategoryList["Consumable.Water.Conjure"] = SpellsCategory:new("Consumable.Water.Conjure", spellIconList["Conjure Refreshment"], {
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Refreshment"),
 	})
 
-	AutoBarCategoryList["Consumable.Food.Conjure"] = AutoBarSpells:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
+	AutoBarCategoryList["Consumable.Food.Conjure"] = SpellsCategory:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Refreshment"),
 	})
 
-	AutoBarCategoryList["Spell.Mage.Create Manastone"] = AutoBarSpells:new( "Spell.Mage.Create Manastone", "inv_misc_gem_sapphire_02",
+	AutoBarCategoryList["Spell.Mage.Create Manastone"] = SpellsCategory:new( "Spell.Mage.Create Manastone", "inv_misc_gem_sapphire_02",
 	{
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Gem"),
 	})
 
 
-	AutoBarCategoryList["Spell.Stealth"] = AutoBarSpells:new("Spell.Stealth", spellIconList["Stealth"],
+	AutoBarCategoryList["Spell.Stealth"] = SpellsCategory:new("Spell.Stealth", spellIconList["Stealth"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Prowl"),
 		"HUNTER", ABGCode.GetSpellNameByName("Camouflage"),
@@ -95,7 +147,7 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Aspect"] = AutoBarSpells:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
+	AutoBarCategoryList["Spell.Aspect"] = SpellsCategory:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
 	{
 		"HUNTER", ABGCode.GetSpellNameByName("Aspect of the Cheetah"),
 		"HUNTER", ABGCode.GetSpellNameByName("Aspect of the Chameleon"),
@@ -105,13 +157,13 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Poison.Lethal"] = AutoBarSpells:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
+	AutoBarCategoryList["Spell.Poison.Lethal"] = SpellsCategory:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
 		"ROGUE", ABGCode.GetSpellNameByName("Deadly Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Instant Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Wound Poison"),
 	})
 
-	AutoBarCategoryList["Spell.Poison.Nonlethal"] = AutoBarSpells:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
+	AutoBarCategoryList["Spell.Poison.Nonlethal"] = SpellsCategory:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
 	{
 		"ROGUE", ABGCode.GetSpellNameByName("Crippling Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Numbing Poison"),
@@ -119,7 +171,7 @@ function ABGCode.InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Class.Buff"] = AutoBarSpells:new( "Spell.Class.Buff", spellIconList["Barkskin"],
+	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Path of Frost"),
 		"DRUID", ABGCode.GetSpellNameByName("Ironbark"),
@@ -138,7 +190,7 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Rallying Cry"),
 	})
 
-	AutoBarCategoryList["Spell.Class.Pet"] = AutoBarSpells:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
+	AutoBarCategoryList["Spell.Class.Pet"] = SpellsCategory:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Dancing Rune Weapon"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Raise Dead"),
@@ -165,7 +217,7 @@ function ABGCode.InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Class.Pets2"] = AutoBarSpells:new( "Spell.Class.Pets2", spellIconList["Call Pet 1"],
+	AutoBarCategoryList["Spell.Class.Pets2"] = SpellsCategory:new( "Spell.Class.Pets2", spellIconList["Call Pet 1"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Dark Transformation"),
 		"HUNTER", ABGCode.GetSpellNameByName("Kill Command"),
@@ -184,7 +236,7 @@ function ABGCode.InitializeCategories()
 	})
 
 	--Misc pet abilities
-	AutoBarCategoryList["Spell.Class.Pets3"] = AutoBarSpells:new(	"Spell.Class.Pets3", spellIconList["Feed Pet"],
+	AutoBarCategoryList["Spell.Class.Pets3"] = SpellsCategory:new(	"Spell.Class.Pets3", spellIconList["Feed Pet"],
 	{
 		"HUNTER", ABGCode.GetSpellNameByName("Dismiss Pet"),
 		"HUNTER", ABGCode.GetSpellNameByName("Eagle Eye"),
@@ -200,7 +252,7 @@ function ABGCode.InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Portals"] = AutoBarSpells:new( "Spell.Portals", "spell_arcane_portalironforge", nil,
+	AutoBarCategoryList["Spell.Portals"] = SpellsCategory:new( "Spell.Portals", "spell_arcane_portalironforge", nil,
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Teleport: Moonglade"), ABGCode.GetSpellNameByName("Teleport: Moonglade"),
 		"DRUID", ABGCode.GetSpellNameByName("Dreamwalk"), ABGCode.GetSpellNameByName("Dreamwalk"),
@@ -235,7 +287,7 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Mole Machine"), ABGCode.GetSpellNameByName("Mole Machine"),
 	})
 
-	AutoBarCategoryList["Spell.ChallengePortals"] = AutoBarSpells:new("Spell.ChallengePortals", "spell_arcane_portalironforge", nil,
+	AutoBarCategoryList["Spell.ChallengePortals"] = SpellsCategory:new("Spell.ChallengePortals", "spell_arcane_portalironforge", nil,
 	{
 		"*", ABGCode.GetSpellNameByName("Path of the Jade Serpent"), ABGCode.GetSpellNameByName("Path of the Jade Serpent"),
 		"*", ABGCode.GetSpellNameByName("Path of the Stout Brew"), ABGCode.GetSpellNameByName("Path of the Stout Brew"),
@@ -248,12 +300,12 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Path of the Black Ox"), ABGCode.GetSpellNameByName("Path of the Black Ox"),
 	})
 
-	AutoBarCategoryList["Spell.AncientDalaranPortals"] = AutoBarSpells:new("Spell.AncientDalaranPortals", spellIconList["Portal: Ancient Dalaran"], nil,
+	AutoBarCategoryList["Spell.AncientDalaranPortals"] = SpellsCategory:new("Spell.AncientDalaranPortals", spellIconList["Portal: Ancient Dalaran"], nil,
 	{
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Ancient Dalaran"), ABGCode.GetSpellNameByName("Portal: Ancient Dalaran"),
 	})
 
-	AutoBarCategoryList["Spell.Shields"] = AutoBarSpells:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
+	AutoBarCategoryList["Spell.Shields"] = SpellsCategory:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
 		"DEMONHUNTER",	 ABGCode.GetSpellNameByName("Blur"), 	ABGCode.GetSpellNameByName("Darkness"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Shell"), 	ABGCode.GetSpellNameByName("Icebound Fortitude"),
@@ -274,7 +326,7 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", 		ABGCode.GetSpellNameByName("Shield Wall"), ABGCode.GetSpellNameByName("Shield Block"),
 	})
 
-	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new( "Spell.Stance", spellIconList["Defensive Stance"], {
+	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"], {
 		"PALADIN", ABGCode.GetSpellNameByName("Crusader Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Devotion Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Retribution Aura"),
@@ -283,13 +335,13 @@ function ABGCode.InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new("Spell.Guild", spellIconList["Mobile Banking"],
+	AutoBarCategoryList["Spell.Guild"] = SpellsCategory:new("Spell.Guild", spellIconList["Mobile Banking"],
 	{
 		"*", ABGCode.GetSpellNameByName("Mobile Banking"),
 	})
 
 
-	AutoBarCategoryList["Spell.Totem.Earth"] = AutoBarSpells:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
+	AutoBarCategoryList["Spell.Totem.Earth"] = SpellsCategory:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
 		"SHAMAN", ABGCode.GetSpellNameByName("Ancestral Protection Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Earthgrab Totem"),
@@ -298,18 +350,18 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Totem.Air"] = AutoBarSpells:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
+	AutoBarCategoryList["Spell.Totem.Air"] = SpellsCategory:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
 		"SHAMAN", ABGCode.GetSpellNameByName("Cloudburst Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Wind Rush Totem"),
 	})
 
-	AutoBarCategoryList["Spell.Totem.Fire"] = AutoBarSpells:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
+	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
 		"SHAMAN", ABGCode.GetSpellNameByName("Liquid Magma Totem"),
 	})
 
-	AutoBarCategoryList["Spell.Totem.Water"] = AutoBarSpells:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
+	AutoBarCategoryList["Spell.Totem.Water"] = SpellsCategory:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
 		"SHAMAN", ABGCode.GetSpellNameByName("Healing Stream Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Healing Tide Totem"),
@@ -318,14 +370,14 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Buff.Weapon"] = AutoBarSpells:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
+	AutoBarCategoryList["Spell.Buff.Weapon"] = SpellsCategory:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
 		"ROGUE", ABGCode.GetSpellNameByName("Deadly Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Wound Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Crippling Poison"),
 	})
 
-	AutoBarCategoryList["Spell.Crafting"] = AutoBarSpells:new( "Spell.Crafting", spellIconList["First Aid"],
+	AutoBarCategoryList["Spell.Crafting"] = SpellsCategory:new( "Spell.Crafting", spellIconList["First Aid"],
 	{
 		"*", ABGCode.GetSpellNameByName("Alchemy"),
 		"*", ABGCode.GetSpellNameByName("Archaeology"),
@@ -346,20 +398,20 @@ function ABGCode.InitializeCategories()
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Runeforging"),
 	})
 
-	AutoBarCategoryList["Spell.Archaeology"] = AutoBarSpells:new("Spell.Archaeology", spellIconList["Archaeology"], nil,
+	AutoBarCategoryList["Spell.Archaeology"] = SpellsCategory:new("Spell.Archaeology", spellIconList["Archaeology"], nil,
 	{
 		"*",	ABGCode.GetSpellNameByName("Survey"), ABGCode.GetSpellNameByName("Archaeology"),
 	})
 
 
-	AutoBarCategoryList["Spell.Debuff.Multiple"] = AutoBarSpells:new("Spell.Debuff.Multiple", spellIconList["Slow"],
+	AutoBarCategoryList["Spell.Debuff.Multiple"] = SpellsCategory:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{
 		"DRUID",		ABGCode.GetSpellNameByName("Incapacitating Roar"),
 		"HUNTER",	ABGCode.GetSpellNameByName("Binding Shot"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Demoralizing Shout"),
 	})
 
-	AutoBarCategoryList["Spell.Debuff.Single"] = AutoBarSpells:new("Spell.Debuff.Single", spellIconList["Slow"],
+	AutoBarCategoryList["Spell.Debuff.Single"] = SpellsCategory:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Chains of Ice"),
 		"DRUID",	ABGCode.GetSpellNameByName("Entangling Roots"),
@@ -372,7 +424,7 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Fishing"] = AutoBarSpells:new("Spell.Fishing", spellIconList["Fishing"],
+	AutoBarCategoryList["Spell.Fishing"] = SpellsCategory:new("Spell.Fishing", spellIconList["Fishing"],
 	{
 		"*", ABGCode.GetSpellNameByName("Fishing"),
 		"*", ABGCode.GetSpellNameByName("Undercurrent"),
@@ -380,7 +432,7 @@ function ABGCode.InitializeCategories()
 
 
 
-	AutoBarCategoryList["Spell.Trap"] = AutoBarSpells:new( "Spell.Trap", spellIconList["Explosive Trap"],
+	AutoBarCategoryList["Spell.Trap"] = SpellsCategory:new( "Spell.Trap", spellIconList["Explosive Trap"],
 	{
 		"DEMONHUNTER", ABGCode.GetSpellNameByName("Sigil of Flame"),
 		"DEMONHUNTER", ABGCode.GetSpellNameByName("Sigil of Misery"),
@@ -391,7 +443,7 @@ function ABGCode.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Misc.Mount.Summoned"] = AutoBarSpells:new( "Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"],
+	AutoBarCategoryList["Misc.Mount.Summoned"] = SpellsCategory:new( "Misc.Mount.Summoned", spellIconList["Summon Dreadsteed"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Travel Form"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Ghost Wolf"),
@@ -399,10 +451,10 @@ function ABGCode.InitializeCategories()
 	})
 	AutoBarCategoryList["Misc.Mount.Summoned"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Muffin.Mounts"] = AutoBarSpells:new("Muffin.Mounts", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mounts." .. AutoBar.NiceClass)
+	AutoBarCategoryList["Muffin.Mounts"] = SpellsCategory:new("Muffin.Mounts", spellIconList["Summon Dreadsteed"], nil, nil, "Muffin.Mounts." .. AutoBar.NiceClass)
 	AutoBarCategoryList["Muffin.Mounts"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Spell.Charge"] = AutoBarSpells:new( "Spell.Charge", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.Charge"] = SpellsCategory:new( "Spell.Charge", spellIconList["Charge"],
 	{
 		"DEMONHUNTER", ABGCode.GetSpellNameByName("Fel Rush"),
 		"DRUID", ABGCode.GetSpellNameByName("Wild Charge"),
@@ -413,7 +465,7 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Intervene"),
 	})
 
-	AutoBarCategoryList["Spell.ER"] = AutoBarSpells:new( "Spell.ER", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.ER"] = SpellsCategory:new( "Spell.ER", spellIconList["Charge"],
 	{
 		"DEMONHUNTER", ABGCode.GetSpellNameByName("Vengeful Retreat"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Rune Tap"),
@@ -431,7 +483,7 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Enraged Regeneration"),
 	})
 
-	AutoBarCategoryList["Spell.Interrupt"] = AutoBarSpells:new( "Spell.Interrupt", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.Interrupt"] = SpellsCategory:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Mind Freeze"),
 		"DEMONHUNTER", ABGCode.GetSpellNameByName("Disrupt"),
@@ -446,32 +498,32 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Pummel"),
 	})
 
-	AutoBarCategoryList["Spell.CatForm"] = AutoBarSpells:new( "Spell.CatForm", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.CatForm"] = SpellsCategory:new( "Spell.CatForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Cat Form"),
 	})
 
-	AutoBarCategoryList["Spell.BearForm"] = AutoBarSpells:new( "Spell.BearForm", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.BearForm"] = SpellsCategory:new( "Spell.BearForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Bear Form"),
 	})
 
-	AutoBarCategoryList["Spell.MoonkinForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.MoonkinForm"] = SpellsCategory:new( "Spell.MoonkinForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Moonkin Form"),
 	})
 
-	AutoBarCategoryList["Spell.TreeForm"] = AutoBarSpells:new( "Spell.TreeForm", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.TreeForm"] = SpellsCategory:new( "Spell.TreeForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Treant Form"),
 	})
 
-	AutoBarCategoryList["Spell.StagForm"] = AutoBarSpells:new( "Spell.StagForm", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.StagForm"] = SpellsCategory:new( "Spell.StagForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Mount Form"),
 	})
 
-	AutoBarCategoryList["Spell.Travel"] = AutoBarSpells:new( "Spell.Travel", spellIconList["Charge"],
+	AutoBarCategoryList["Spell.Travel"] = SpellsCategory:new( "Spell.Travel", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Travel Form"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Ghost Wolf"),

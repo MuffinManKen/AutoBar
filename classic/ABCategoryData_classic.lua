@@ -8,10 +8,10 @@ local L = AutoBarGlobalDataObject.locale
 
 function ABGCode.InitializeCategories()
 
-	AutoBarCategoryList["Muffin.Poison.Lethal"] = AutoBarItems:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
-	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = AutoBarItems:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
+	AutoBarCategoryList["Muffin.Poison.Lethal"] = ItemsCategory:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
+	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = ItemsCategory:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
 
-	AutoBarCategoryList["Muffin.Mounts.Item"] = AutoBarItems:new("Muffin.Mounts.Item", "ability_mount_ridinghorse", "Muffin.Mounts.Item")
+	AutoBarCategoryList["Muffin.Mounts.Item"] = ItemsCategory:new("Muffin.Mounts.Item", "ability_mount_ridinghorse", "Muffin.Mounts.Item")
 	AutoBarCategoryList["Muffin.Mounts.Item"]:SetNonCombat(true)
 	AutoBarCategoryList["Muffin.Mounts.Paladin"] = AutoBarSpells:new("Muffin.Mounts.Paladin", "ability_mount_ridinghorse", "Muffin.Mounts.Paladin")
 	AutoBarCategoryList["Muffin.Mounts.Paladin"]:SetNonCombat(true)
