@@ -3,9 +3,9 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Removed the Mana and Cooldown Mana buttons, since Recovery does the same thing
- - Added Mana Stones to Recovery, and Create Mana Stones to Mage's Conjure button
- - Added an Anima category
+ - Added Categories for Covenant Conduits and Wildseeds
+ - Added new Hearthstones, Engineer Portals, Buff Items, Bandages, and more
+ - Lots of behind-the-scenes stuff
  - Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"
 
