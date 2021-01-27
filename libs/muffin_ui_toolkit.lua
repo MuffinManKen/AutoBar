@@ -1,12 +1,13 @@
-local ADDON_NAME, ADDON = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _ADDON_NAME, ADDON = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 ADDON.UITK = {}
 
 local UITK = ADDON.UITK
 
-UITK.default_font_name = GameFontNormal:GetFont()
+UITK.default_font_name, UITK.default_font_height = GameFontNormal:GetFont()
 local default_font_name = UITK.default_font_name
 
+--TODO: This is MFAC-specific code and needs to be fixed to be general!!!
 function UITK.resizing_set_text(p_self, p_text)
 	p_self:oSetText(p_text)
 	for i = p_self.MFAC_font_max, p_self.MFAC_font_min, -1 do
@@ -18,6 +19,7 @@ function UITK.resizing_set_text(p_self, p_text)
 	end
 end
 
+--TODO: This is MFAC-specific code and needs to be fixed to be general!!!
 function	UITK.make_fontstring_resizable(p_string, p_min, p_max)
 	assert(p_string.oSetText == nil) --Calling this multiple times will cause bad behaviour
 	p_string.oSetText = p_string.SetText
@@ -31,7 +33,7 @@ function UITK.create_fontstring(p_frame, p_name, p_options)
 	local fstring = p_frame:CreateFontString(p_name, "ARTWORK", opts.inherit)
 	fstring:SetJustifyH(opts.JustifyH or "LEFT")
 	fstring:SetJustifyV("TOP")
-	fstring:SetFont(default_font_name, 11)
+	fstring:SetFont(default_font_name, UITK.default_font_height)
 	fstring:SetShadowColor(0,0,0,.9)
 	fstring:SetShadowOffset(1,-1)
 
@@ -66,7 +68,6 @@ function UITK.create_checkbox(p_frame, p_name, p_text, p_options)
 	cb:SetPushedTexture("Interface/Buttons/UI-CheckBox-Down")
 
 	cb.fnt_string = UITK.create_fontstring(cb, nil)
-	cb.fnt_string:SetFont(default_font_name, 12)
 	cb.fnt_string:SetSize(0, 10)
 	cb.fnt_string:SetPoint("LEFT", cb, "RIGHT", 0, 2)
 	cb.fnt_string:SetText(p_text)
