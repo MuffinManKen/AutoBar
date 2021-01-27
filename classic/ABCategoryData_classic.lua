@@ -167,6 +167,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Stance"] = AutoBarSpells:new( "Spell.Stance", spellIconList["Defensive Stance"], {
 		"DRUID", ABGCode.GetSpellNameByName("Bear Form"),
+		"DRUID", ABGCode.GetSpellNameByName("Dire Bear Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Cat Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Aquatic Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Moonkin Form"),
@@ -345,6 +346,7 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Spell.BearForm"] = AutoBarSpells:new( "Spell.BearForm", spellIconList["Charge"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Bear Form"),
+		"DRUID", ABGCode.GetSpellNameByName("Dire Bear Form"),
 	})
 
 	AutoBarCategoryList["Spell.MoonkinForm"] = AutoBarSpells:new( "Spell.MoonkinForm", spellIconList["Charge"],

@@ -19,6 +19,7 @@ ABGCS.CacheSpellData(1126, "Mark of the Wild");
 ABGCS.CacheSpellData(21849, "Gift of the Wild");
 ABGCS.CacheSpellData(467, "Thorns");
 ABGCS.CacheSpellData(5487, "Bear Form");
+ABGCS.CacheSpellData(9634, "Dire Bear Form");
 ABGCS.CacheSpellData(768, "Cat Form");
 ABGCS.CacheSpellData(1066, "Aquatic Form");
 ABGCS.CacheSpellData(24858, "Moonkin Form");
