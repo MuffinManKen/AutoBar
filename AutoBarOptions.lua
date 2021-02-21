@@ -2668,7 +2668,7 @@ end
 
 
 
-local deleteIcon = "Interface\\Icons\\INV_Enchant_VoidSphere"
+--local deleteIcon = "Interface\\Icons\\INV_Enchant_VoidSphere"
 local validCustomCategoryKeys = {}
 
 -- Create CustomCategoryOptions for those that do not exist yet

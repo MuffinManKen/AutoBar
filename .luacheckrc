@@ -96,6 +96,7 @@ globals = {
 	MUFFIN_WHATS_NEW_QUEUE = {
 		fields = {
 			"AddEntry",
+			"AddConditionalEntry",
 			"body_text",
 			"frame",
 			"header_frame",

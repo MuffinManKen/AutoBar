@@ -28,8 +28,6 @@ local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
 local L = AutoBarGlobalDataObject.locale
 
-local print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert = print, string, select, pairs, tonumber, type, tostring, next, ipairs, unpack, table, assert
-
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace	--TODO: Replace all with ABGCocde, or just the global AB
 local ABGCode = AutoBarGlobalCodeSpace
@@ -139,7 +137,7 @@ AutoBar.dockingFrames = {
 AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 
 AutoBar.frame:SetScript("OnEvent",
-	function(self, event, ...)
+	function(_self, event, ...)
 
 		-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
 		-- PLAYER_ENTERING_WORLD runs before the throttling stuff is set up and doesn't need it anyway
@@ -175,7 +173,7 @@ AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 --		a spell
 --		an item
 function AutoBar:GetActionForMacroBody(p_macro_body)
-	local debug = false
+	--local debug = false
 	local action
 	local tooltip
 	local icon
@@ -856,7 +854,7 @@ function AutoBar.OnSetGroup(group)
 	if (group == true) then
 		AutoBar.stickyMode = true
 	elseif (type(group) == "table") then
-		for i, bar in pairs(AutoBar.barList) do
+		for _, bar in pairs(AutoBar.barList) do
 			if (bar.sharedLayoutDB.enabled and LibStickyFrames:InFrameGroup(bar.frame, group)) then
 				AutoBar.stickyMode = true
 				break
@@ -919,7 +917,7 @@ function AutoBar:MoveButtonsModeOn()
 	AutoBar:MoveBarModeOff()
 	LibKeyBound:Deactivate()
 	AutoBar.moveButtonsMode = true
-	for i, bar in pairs(self.barList) do
+	for _, bar in pairs(self.barList) do
 		if (bar.sharedLayoutDB.enabled) then
 			bar:MoveButtonsModeOn()
 		end
@@ -932,7 +930,7 @@ end
 
 function AutoBar:MoveButtonsModeOff()
 	AutoBar.moveButtonsMode = nil
-	for i, bar in pairs(self.barList) do
+	for _, bar in pairs(self.barList) do
 		if bar.sharedLayoutDB.enabled then
 			bar:MoveButtonsModeOff()
 		end
