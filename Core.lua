@@ -444,15 +444,9 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
 		end
 
-		button = AutoBar.buttonList["AutoBarButtonPets"]
-		if (button and (companionType ~= "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB)
-		end
-
 		if(need_update) then
 			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
 		end
-
 
 		AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
 	end
