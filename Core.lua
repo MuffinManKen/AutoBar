@@ -433,22 +433,21 @@ if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
 
 	end
 
-	function AutoBar.events:COMPANION_LEARNED(...)
-		local companionType = ...;
+	function AutoBar.events:COMPANION_LEARNED()
 		local need_update = false;
 
-		AutoBar:LogEventStart("COMPANION_LEARNED", companionType)
+		self:LogEventStart("COMPANION_LEARNED")
 
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button and (companionType == "MOUNT")) then
-			button:Refresh(button.parentBar, button.buttonDB, companionType == "MOUNT")
+		if (button) then
+			button:Refresh(button.parentBar, button.buttonDB, true)
 		end
 
 		if(need_update) then
 			ABGCS:ABScheduleUpdate(tick.UpdateCategoriesID);
 		end
 
-		AutoBar:LogEventEnd("COMPANION_LEARNED", companionType)
+		self:LogEventEnd("COMPANION_LEARNED")
 	end
 
 	function AutoBar.events:PET_BATTLE_CLOSE(arg1)
