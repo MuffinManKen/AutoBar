@@ -2705,10 +2705,6 @@ else
 		end
 
 		local category = AutoBarCategoryList["Battle Pet.Favourites"]
-		if (not category.castList) then
-			category.castList = {}
-		end
-		local castList = category.castList
 
 		AutoBar.last_critter_count = AutoBar.last_critter_count or 0;
 
@@ -2719,7 +2715,7 @@ else
 		if (total_pet_count ~= AutoBar.last_critter_count) then
 			--print("   Gonna do critter stuff");
 			AutoBar.last_critter_count = total_pet_count;
-
+			wipe(category.items)
 			for index = 1, total_pet_count, 1 do
 				local pet_data = {C_PetJournal.GetPetInfoByIndex(index)}
 				local pet_id = pet_data[1]
