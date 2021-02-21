@@ -506,7 +506,7 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 	end
 
 
-	if(hack_PetActionBarFrame) then
+	if(AutoBar.db.account.hack_PetActionBarFrame) then
 		PetActionBarFrame:EnableMouse(false);
 	end
 
