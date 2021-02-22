@@ -127,7 +127,7 @@ function AutoBarGlobalCodeSpace.BPetGUID(p_bpet_id)
 end
 
 local macro_text_guid_index = 0;
-function AutoBarGlobalCodeSpace.MacroTextGUID(p_macro_text)	--TODO: We're not using the text?
+function AutoBarGlobalCodeSpace.MacroTextGUID(_p_macro_text)	--TODO: We're not using the text?
 
 	macro_text_guid_index = macro_text_guid_index + 1
 	local guid = "macrotext:" .. macro_text_guid_index;

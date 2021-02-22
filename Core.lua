@@ -220,14 +220,14 @@ end
 
 function AutoBar:IsInLockDown()
 
-	return AutoBar.inCombat or InCombatLockdown() or (C_PetBattles and C_PetBattles.IsInBattle()) or (UnitInVehicle and UnitInVehicle("player"))
+	return self.inCombat or InCombatLockdown() or (C_PetBattles and C_PetBattles.IsInBattle()) or (UnitInVehicle and UnitInVehicle("player"))
 
 end
 
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
-			AutoBar:OpenOptions()
+		AutoBar:OpenOptions()
 	end
 end
 
@@ -302,7 +302,7 @@ end
 function AutoBar:RegisterOverrideBindings()
 	ABGCode.LogEvent("RegisterOverrideBindings")
 	ClearOverrideBindings(AutoBar.frame)
-	for buttonKey, buttonDB in pairs(AutoBar.buttonDBList) do
+	for buttonKey, _buttonDB in pairs(AutoBar.buttonDBList) do
 		AutoBar.Class.Button:UpdateBindings(buttonKey, buttonKey .. "Frame")
 	end
 end
@@ -468,7 +468,7 @@ function ABGCode.events.BAG_UPDATE_DELAYED()
 	ABGCode.LogEventStart("BAG_UPDATE_DELAYED")
 
 	if (InCombatLockdown()) then
-		for buttonName, button in pairs(AutoBar.buttonList) do
+		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateCount()
 		end
 	else
@@ -482,7 +482,7 @@ end
 function ABGCode.events.BAG_UPDATE_COOLDOWN(arg1)
 	ABGCode.LogEventStart("BAG_UPDATE_COOLDOWN")
 
-	for buttonName, button in pairs(AutoBar.buttonList) do
+	for _button_name, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
 
@@ -494,7 +494,7 @@ end
 function ABGCode.events.SPELL_UPDATE_COOLDOWN(arg1)
 	ABGCode.LogEventStart("SPELL_UPDATE_COOLDOWN")
 
-	for buttonName, button in pairs(AutoBar.buttonList) do
+	for _button_name, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
 
@@ -508,7 +508,7 @@ function ABGCode.events.ACTIONBAR_UPDATE_USABLE(arg1)
 	ABGCode.LogEvent("ACTIONBAR_UPDATE_USABLE", arg1)
 
 	if (InCombatLockdown()) then
-		for buttonName, button in pairs(AutoBar.buttonList) do
+		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	else
@@ -521,7 +521,7 @@ function ABGCode.events.UPDATE_SHAPESHIFT_FORMS(arg1)
 	ABGCode.LogEvent("UPDATE_SHAPESHIFT_FORMS", arg1)
 
 	if (InCombatLockdown()) then
-		for buttonName, button in pairs(AutoBar.buttonList) do
+		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	end
@@ -606,7 +606,7 @@ end
 
 function ABGCode.events.UNIT_AURA(arg1)
 	if (AutoBar:IsInLockDown()) then
-		for buttonName, button in pairs(AutoBar.buttonList) do
+		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	else
@@ -627,8 +627,8 @@ function ABGCode.events.UPDATE_BATTLEFIELD_STATUS()
 		local bgStatus = false
 		local max_battlefield_id = GetMaxBattlefieldID()
 		for i = 1, max_battlefield_id do
-			local status, mapName, instanceID = GetBattlefieldStatus(i);
-			if (instanceID ~= 0) then
+			local _status, _map_name, instance_id = GetBattlefieldStatus(i);
+			if (instance_id ~= 0) then
 				bgStatus = true
 				break
 			end
@@ -733,7 +733,7 @@ end
 --
 
 function AutoBar:ColorAutoBar()
-	for i, bar in pairs(AutoBar.barList) do
+	for _i, bar in pairs(AutoBar.barList) do
 		if (bar.sharedLayoutDB.enabled) then
 			bar:ColorBars()
 		end
