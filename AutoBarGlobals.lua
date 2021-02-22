@@ -328,6 +328,69 @@ function AutoBarGlobalCodeSpace.GetButtonDisplayName(p_button_db)
 	return name
 end
 
+
+local logItems = {}	-- n = startTime
+local logMemory = {}	-- n = startMemory
+local event_name_colour = "|cFFFFFF7F"
+
+function AutoBarGlobalCodeSpace.LogEvent(p_event_name, p_arg1)
+	local memory
+	if (AutoBar.db.account.logMemory) then
+		UpdateAddOnMemoryUsage()
+		memory = GetAddOnMemoryUsage("AutoBar")
+		print(p_event_name, "memory" , memory)
+	end
+	if (AutoBar.db.account.logEvents) then
+		if (p_arg1) then
+			memory = memory or ""
+			print(event_name_colour .. p_event_name .. "|r", "arg1" , p_arg1, "time:", GetTime(), memory)
+		else
+			print(event_name_colour .. p_event_name .. "|r", "time:", GetTime())
+		end
+	end
+end
+
+function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
+	if (AutoBar.db.account.logMemory) then
+		UpdateAddOnMemoryUsage()
+		local memory = GetAddOnMemoryUsage("AutoBar")
+		logMemory[p_event_name] = memory
+	end
+	if (AutoBar.db.account.performance) then
+		if (logItems[p_event_name]) then
+			--print(p_event_name, "restarted before previous completion")
+		else
+			logItems[p_event_name] = GetTime()
+			--print(p_event_name, "started time:", logItems[p_event_name])
+		end
+	end
+end
+
+function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, arg1)
+	if (AutoBar.db.account.performance) then
+		if (logItems[p_event_name]) then
+			local elapsed = GetTime() - logItems[p_event_name]
+			logItems[p_event_name] = nil
+			if (elapsed > 0.005) then
+				if (arg1) then
+					print(event_name_colour .. p_event_name .. "|r", arg1, "time:", elapsed)
+				else
+					print(event_name_colour .. p_event_name .. "|r", "time:", elapsed)
+				end
+			end
+		--else
+			--print(p_event_name, "restarted before previous completion")
+		end
+	end
+	if (AutoBar.db.account.logMemory) then
+		UpdateAddOnMemoryUsage()
+		local memory = GetAddOnMemoryUsage("AutoBar")
+		local deltaMemory = memory - (logMemory[p_event_name] or 0)
+		print(p_event_name, "memory" , deltaMemory)
+		logMemory[p_event_name] = nil
+	end
+end
+
 -------------------------------------------------------------------
 --
 -- WoW Classic

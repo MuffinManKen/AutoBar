@@ -11,7 +11,8 @@ Website: http://www.wowace.com/
 -- GLOBALS: C_ToyBox
 
 local AutoBar = AutoBar
-local ABGCS = AutoBarGlobalCodeSpace
+local ABGCS = AutoBarGlobalCodeSpace	--TODO: Replace all with ABGCocde, or just the global AB
+local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 local _
@@ -426,24 +427,24 @@ end
 
 -- Scan bags only to support shuffling of stuff manually added or moved during combat.
 function Stuff.prototype:ScanCombat()
-	AutoBar:LogEventStart("Stuff.prototype:ScanCombat")
+	ABGCode.LogEventStart("Stuff.prototype:ScanCombat")
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		self:ScanBag(bag)
 	end
-	AutoBar:LogEventEnd("Stuff.prototype:ScanCombat")
+	ABGCode.LogEventEnd("Stuff.prototype:ScanCombat")
 end
 
 
 -- Scan the requested Stuff.
 function Stuff.prototype:Scan()
-	AutoBar:LogEventStart("Stuff:Scan")
+	ABGCode.LogEventStart("Stuff:Scan")
 	AutoBar.playerLevel = UnitLevel("player")
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		if (AutoBarSearch.dirtyBags[bag]) then
-			AutoBar:LogEventStart("AutoBar scanned bag")
+			ABGCode.LogEventStart("AutoBar scanned bag")
 --AutoBar:Print("Stuff.prototype:Scan    scanning bag ", bag);
 			self:ScanBag(bag)
-			AutoBar:LogEventEnd("AutoBar scanned bag", bag)
+			ABGCode.LogEventEnd("AutoBar scanned bag", bag)
 			AutoBarSearch.dirtyBags[bag] = nil
 		end
 	end
@@ -478,7 +479,7 @@ function Stuff.prototype:Scan()
 		AutoBarSearch.dirtyBags.macros = nil
 	end
 
-	AutoBar:LogEventEnd("Stuff:Scan")
+	ABGCode.LogEventEnd("Stuff:Scan")
 end
 
 -- Remove and Recycle all items
