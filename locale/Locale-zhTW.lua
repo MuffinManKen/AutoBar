@@ -172,10 +172,6 @@ if (GetLocale() == "zhTW") then
 		["RIGHT"] = "右",
 		["BOTTOMRIGHT"] = "右下",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "FuBar 插件設定",
-		["Configure the FuBar Plugin"] = "設定 FuBar 插件",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "左鍵",
 		["Right-Click"] = "右鍵",

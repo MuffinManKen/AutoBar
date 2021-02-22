@@ -172,10 +172,6 @@ if (GetLocale() == "koKR") then
 		["RIGHT"] = "우측",
 		["BOTTOMRIGHT"] = "우측 하단",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "FuBar 플러그인 설정",
-		["Configure the FuBar Plugin"] = "FuBar 플러그인을 설정합니다.",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "좌-클릭",
 		["Right-Click"] = "우-클릭",

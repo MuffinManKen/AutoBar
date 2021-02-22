@@ -172,10 +172,6 @@ if (GetLocale() == "deDE") then
 		["RIGHT"] = "Rechts",
 		["BOTTOMRIGHT"] = "Unten Rechts",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "FubarPlugin-Konfiguration",
-		["Configure the FuBar Plugin"] = "Konfiguriert das Fubar-Plugin.",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "Links-Klick",
 		["Right-Click"] = "Right-Klick",

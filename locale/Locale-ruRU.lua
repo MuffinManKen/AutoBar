@@ -172,10 +172,6 @@ if (GetLocale() == "ruRU") then
 		["RIGHT"] = "Справа",
 		["BOTTOMRIGHT"] = "Внижнем правом углу",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "Настройка FuBarа",
-		["Configure the FuBar Plugin"] = "Настройка FuBar плагина",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "Левый-Клик",
 		["Right-Click"] = "Правый-Клик",

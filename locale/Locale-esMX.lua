@@ -170,10 +170,6 @@ if (GetLocale() == "esMX") then
 		["RIGHT"] = "Derecha",
 		["BOTTOMRIGHT"] = "Abajo Derecha",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "Configuración del Plugin de FuBar",
-		["Configure the FuBar Plugin"] = "Configura el plugin de FuBar",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "Click-Izquierdo",
 		["Right-Click"] = "Click-Derecho",

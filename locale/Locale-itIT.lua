@@ -172,10 +172,6 @@ if (GetLocale() == "itIT") then
 		["RIGHT"] = "Right",
 		["BOTTOMRIGHT"] = "Bottom Right",
 
-		-- AutoBarFuBar
-		["FuBarPlugin Config"] = "FuBarPlugin Config",
-		["Configure the FuBar Plugin"] = "Configure the FuBar Plugin",
-
 		["\n|cffffffff%s:|r %s"] = "\n|cffffffff%s:|r %s",
 		["Left-Click"] = "Left-Click",
 		["Right-Click"] = "Right-Click",

@@ -163,8 +163,6 @@ if (GetLocale() == "enUS") then
 		["RIGHT"] = "Right",
 		["BOTTOMRIGHT"] = "Bottom Right",
 
-		-- AutoBarFuBar
-
 		["Left-Click"] = "Left-Click",
 		["Right-Click"] = "Right-Click",
 		["Alt-Click"] = "Alt-Click",

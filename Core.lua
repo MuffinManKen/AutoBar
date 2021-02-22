@@ -806,9 +806,6 @@ function AutoBar:ColorAutoBar()
 			bar:ColorBars()
 		end
 	end
-	if (AutoBarFuBar) then
-		AutoBarFuBar:UpdateDisplay()
-	end
 end
 
 function AutoBar:LIBKEYBOUND_ENABLED()
@@ -860,9 +857,6 @@ function AutoBar.OnSetGroup(group)
 				break
 			end
 		end
-	end
-	if (AutoBarFuBar) then
-		AutoBarFuBar:UpdateDisplay()
 	end
 end
 
@@ -923,9 +917,6 @@ function AutoBar:MoveButtonsModeOn()
 		end
 	end
 	ABGCS:UpdateActive()
-	if (AutoBarFuBar) then
-		AutoBarFuBar:UpdateDisplay()
-	end
 end
 
 function AutoBar:MoveButtonsModeOff()
@@ -936,9 +927,6 @@ function AutoBar:MoveButtonsModeOff()
 		end
 	end
 	ABGCS:UpdateActive()
-	if (AutoBarFuBar) then
-		AutoBarFuBar:UpdateDisplay()
-	end
 end
 
 
