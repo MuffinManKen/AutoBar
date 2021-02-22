@@ -145,7 +145,6 @@ if (GetLocale() == "frFR") then
 		["Snap Bars while moving"] = "Unifie les barres en un bloc lors d'un déplacement",
 		["Sticky Frames"] = "Fenêtres magnétiques",
 		["Style"] = "Style",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Modifie le style de la barres.  Requires ButtonFacade for non-Blizzard styles.",
 		["Targeted"] = "Ciblé",
 		["<Any String>"] = "<Toutes chaînes>",
 		["Move the Bars"] = "Déplacer les barres",
@@ -177,7 +176,6 @@ if (GetLocale() == "frFR") then
 		["Ctrl-Click"] = "Ctrl-Click",
 		["Shift-Click"] = "Shift-Click",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-Click",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade is required to Skin the Buttons",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Basic",

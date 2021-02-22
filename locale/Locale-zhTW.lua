@@ -145,7 +145,6 @@ if (GetLocale() == "zhTW") then
 		["Snap Bars while moving"] = "使物品列在移動時有粘性",
 		["Sticky Frames"] = "粘性框架",
 		["Style"] = "樣式",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "改變物品列的樣式，需要安裝 ButtonFacade 插件。",
 		["Targeted"] = "目標",
 		["<Any String>"] = "<任何字串>",
 		["Move the Bars"] = "移動物品列",
@@ -179,7 +178,6 @@ if (GetLocale() == "zhTW") then
 		["Ctrl-Click"] = "Ctrl+點擊",
 		["Shift-Click"] = "Shift+點擊",
 		["Ctrl-Shift-Click"] = "Ctrl+Shift+點擊",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade 需要按鈕外觀",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "基本",

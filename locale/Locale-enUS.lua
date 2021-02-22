@@ -136,7 +136,6 @@ if (GetLocale() == "enUS") then
 		["Snap Bars while moving"] = "Snap Bars while moving",
 		["Sticky Frames"] = "Sticky Frames",
 		["Style"] = "Style",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles.",
 		["Targeted"] = "Targeted",
 		["<Any String>"] = "<Any String>",
 		["Move the Bars"] = "Move the Bars",

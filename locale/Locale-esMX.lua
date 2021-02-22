@@ -145,7 +145,6 @@ if (GetLocale() == "esMX") then
 		["Snap Bars while moving"] = "Barras Pegajosas al moverse",
 		["Sticky Frames"] = "Paneles Acoplables",
 		["Style"] = "Estilo",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Cambia el estilo de la barra.  Requiere ButtonFacade para estilos diferentes a los de Blizzard.",
 		["Targeted"] = "Seleccionado.";
 		["<Any String>"] = "<Alguna Cadena>",
 		["Move the Bars"] = "Mover las Barras",
@@ -177,7 +176,6 @@ if (GetLocale() == "esMX") then
 		["Ctrl-Click"] = "Ctrl-Click",
 		["Shift-Click"] = "Mayús-Click",
 		["Ctrl-Shift-Click"] = "Ctrl-Mayús-Click",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade es necesario para la Piel de los Botones",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Básica",

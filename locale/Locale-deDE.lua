@@ -145,7 +145,6 @@ if (GetLocale() == "deDE") then
 		["Snap Bars while moving"] = "Lässt Leisten aneinander schnappen beim bewegen.",
 		["Sticky Frames"] = "Haftende Fenster",
 		["Style"] = "Design",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Das Design der Leiste einstellen.  ACHTUNG: Setzt ButtonFacade Addon für mehr als nur den Blizzard Style vorraus!",
 		["Targeted"] = "\nZiel ausgewählt.";
 		["<Any String>"] = "<Any String>",
 		["Move the Bars"] = "Bewegen der Leisten",
@@ -179,7 +178,6 @@ if (GetLocale() == "deDE") then
 		["Ctrl-Click"] = "Strg-Klick",
 		["Shift-Click"] = "Shift-Klick",
 		["Ctrl-Shift-Click"] = "Strg-Shift-Klick",
-		["ButtonFacade is required to Skin the Buttons"] = "Das ButtonFacade Addon ist Vorraussetzung um die Tasten skinnen zu können!",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Basic",

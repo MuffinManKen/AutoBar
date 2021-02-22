@@ -145,7 +145,6 @@ if (GetLocale() == "ruRU") then
 		["Snap Bars while moving"] = "захват панелей пока двигаются",
 		["Sticky Frames"] = "Клейкие Фреймы",
 		["Style"] = "Стиль",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Изменить стиль панели.  Требуется ButtonFacade для не-Blizzardских стилей.",
 		["Targeted"] = "Нацеленный",
 		["<Any String>"] = "<Любая строка>",
 		["Move the Bars"] = "Перенести Бары",
@@ -179,7 +178,6 @@ if (GetLocale() == "ruRU") then
 		["Ctrl-Click"] = "Ctrl-Клик",
 		["Shift-Click"] = "Shift-Клик",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-Клик",
-		["ButtonFacade is required to Skin the Buttons"] = "Требуется ButtonFacade для смены шкурки кнопок",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Основной",

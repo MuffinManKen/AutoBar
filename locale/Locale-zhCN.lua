@@ -145,7 +145,6 @@ if (GetLocale() == "zhCN") then
 		["Snap Bars while moving"] = "移动时缩起动作条",
 		["Sticky Frames"] = "锁定框架",
 		["Style"] = "样式",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "改变动作条风格  Requires ButtonFacade for non-Blizzard styles.",
 		["Targeted"] = "需目标.";
 		["<Any String>"] = "<任何字串>",
 		["Move the Bars"] = "移动动作条",
@@ -179,7 +178,6 @@ if (GetLocale() == "zhCN") then
 		["Ctrl-Click"] = "Ctrl+点击",
 		["Shift-Click"] = "Shift+点击",
 		["Ctrl-Shift-Click"] = "Ctrl+Shift+点击",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade 需要按钮皮肤",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "基本",

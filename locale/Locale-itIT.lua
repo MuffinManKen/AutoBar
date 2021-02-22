@@ -145,7 +145,6 @@ if (GetLocale() == "itIT") then
 		["Snap Bars while moving"] = "Snap Bars while moving",
 		["Sticky Frames"] = "Sticky Frames",
 		["Style"] = "Style",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles.",
 		["Targeted"] = "Targeted",
 		["<Any String>"] = "<Any String>",
 		["Move the Bars"] = "Move the Bars",
@@ -179,7 +178,6 @@ if (GetLocale() == "itIT") then
 		["Ctrl-Click"] = "Ctrl-Click",
 		["Shift-Click"] = "Shift-Click",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-Click",
-		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade is required to Skin the Buttons",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Basic",

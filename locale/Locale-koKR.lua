@@ -145,7 +145,6 @@ if (GetLocale() == "koKR") then
 		["Snap Bars while moving"] = "움직이는 동안 스냅 바",
 		["Sticky Frames"] = "접착 창",
 		["Style"] = "스타일",
-		["Change the style of the bar.  Requires ButtonFacade for non-Blizzard styles."] = "바의 스타일을 변경합니다. non-Blizzard 스타일을 위해 ButtonFacade가 필요합니다.",
 		["Targeted"] = "대상",
 		["<Any String>"] = "<모든 문자>",
 		["Move the Bars"] = "바 이동",
@@ -179,7 +178,6 @@ if (GetLocale() == "koKR") then
 		["Ctrl-Click"] = "Ctrl-클릭",
 		["Shift-Click"] = "Shift-클릭",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-클릭",
-		["ButtonFacade is required to Skin the Buttons"] = "버튼에 스킨을 적용하기 위해 ButtonFacade가 필요합니다.",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "기본",
