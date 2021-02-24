@@ -367,11 +367,11 @@ end
 -- Scan equipped inventory items.
 function Stuff.prototype:ScanInventory()
 	local slotList = self.dataList.inventory
-	local name, itemId, oldItemId
+	local _name, itemId, oldItemId
 
 	-- Scan equipped items
 	for slot = 1, 19 do
-		name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", slot))
+		_name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", slot))
 		oldItemId = slotList[slot]
 
 		if (itemId) then
@@ -410,7 +410,7 @@ end
 function Stuff.prototype:ScanMacros()
 	for macroId, macroInfo in pairs(AutoBarSearch.macros) do
 		if (macroInfo.macroIndex) then
-			local name, iconTexture, body = GetMacroInfo(macroInfo.macroIndex)
+			local _name, _icon_texture, body = GetMacroInfo(macroInfo.macroIndex)
 			if (body) then
 				self:Add(macroId, nil, nil, macroId)
 			else
@@ -885,10 +885,10 @@ local function SortBySlotCategory(a, b)
 end
 
 -- Dirty buttonKey or all Buttons if buttonKey is nil.
-function Sorted.prototype:DirtyButtons(buttonKey)
+function Sorted.prototype:DirtyButtons(p_button_key)
 	self.dirty = true
-	if (buttonKey) then
-		self.dirtyList[buttonKey] = true
+	if (p_button_key) then
+		self.dirtyList[p_button_key] = true
 	else
 		for buttonKey in pairs(self.dataList) do
 			self.dirtyList[buttonKey] = true
@@ -1311,7 +1311,7 @@ function AutoBarSearch:Contains(itemId)
 	return contains
 end
 
-
+--[[
 -- Testing & Debug function only
 function AutoBarSearch:DumpSlot(buttonKey)
 	print("\n\n   AutoBarSearch:DumpSlot " .. tostring(buttonKey))
@@ -1325,7 +1325,7 @@ end
 
 
 -- Test harness		/script AutoBarSearch:Test()
---[[
+
 function AutoBarSearch:Test()
 	if (true and true) then
 		AutoBarSearch.trace = true
