@@ -418,8 +418,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 	popupHeader:SetHeight(2)
 	popupHeader:SetScale(1)
 	popupHeader:SetPoint(side, frame, relativeSide)
-	RegisterAutoHide(popupHeader, 1)
-
+	RegisterAutoHide(popupHeader, 0.25)
 
 	-- Hide unwanted buttons
 	for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
