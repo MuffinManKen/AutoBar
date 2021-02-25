@@ -68,7 +68,8 @@
 		"force_dirs" : ["retail", "libs", "locale"],
 		"renames" : {"textures/muffin.tga" : "textures/muffin.tga"},
 		"whats_new" : "retail/whats_new.lua",
-		"skip_ftp" : true
+		"skip_ftp" : true,
+		"generate_patreon_post" : true
 	},
 	{
 		"toc_file" : "AutoBar.toc",
