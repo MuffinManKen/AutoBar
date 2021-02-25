@@ -474,7 +474,6 @@ function AutoBarButton.prototype:SetupButton()
 
 	local bag, slot, spell, itemId, macroId, type_id, info_data = AutoBarSearch.sorted:GetInfo(buttonKey, 1)
 	local popupHeader = frame.popupHeader
-	local popupKeyHandler = frame.popupKeyHandler
 
 	--if (buttonKey == "AutoBarButtonHearth") then print("AutoBarButton.proto:SetupButton buttonKey ", buttonKey, " bag ", bag, " slot ", slot, " spell ", spell, " macroId ", macroId, "type_id", type_id, "info_data", info_data) end;
 	if ((bag or slot or spell or macroId or type_id) and self.buttonDB.enabled) then
@@ -511,7 +510,7 @@ function AutoBarButton.prototype:SetupButton()
 				if (popupOnModifier) then
 					-- Note that it is made a child of popupHeader, and later becomes parent to the popup buttons
 					-- Hiding it will thus hide the popup buttons as well, even if popupHeader is shown
-					popupKeyHandler = CreateFrame("Frame", buttonKey .. "HandlerPopupKey", popupHeader, "SecureHandlerStateTemplate")
+					local popupKeyHandler = CreateFrame("Frame", buttonKey .. "HandlerPopupKey", popupHeader, "SecureHandlerStateTemplate")
 					popupKeyHandler:SetAttribute("_onstate-modifier", snippetPopupKey)
 					popupKeyHandler:SetAllPoints(popupHeader)
 					RegisterStateDriver(popupKeyHandler, "modifier", popupKeyStates)
@@ -560,7 +559,7 @@ function AutoBarButton.prototype:SetupButton()
 			local wrapped = frame.UpdateIcon
 			-- Trigger Updating on the Anchor Button
 			if (wrapped and (not arrangeOnUse)) then
-				local header, preBody, postBody = popupHeader:UnwrapScript(frame, "OnAttributeChanged")
+				local _header, preBody, postBody = popupHeader:UnwrapScript(frame, "OnAttributeChanged")  --ToDo: Remove this?
 			elseif ((not wrapped) and arrangeOnUse) then
 				frame.UpdateIcon = UpdateIcon	-- Update Icon
 				frame.UpdateHandlers = UpdateHandlers	-- Update Handlers: Tooltip
@@ -956,7 +955,7 @@ end
 -- Add your Button custom options to the optionlist
 -- optionList[myCustomOptionKey]
 -- Call specific SetOption<Type> methods to do the actual setting
-function AutoBarButton.prototype:AddOptions(optionList, passValue)
+function AutoBarButton.prototype:AddOptions(_option_list, _pass_value)
 end
 
 
@@ -2408,7 +2407,7 @@ else
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
 			AutoBarCategoryList["Toys.ToyBox"] = ABGCode.ToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
 			local category = AutoBarCategoryList["Toys.ToyBox"]
-			category.unInitialized = true
+			category.initialized = false
 		end
 		self:AddCategory("Toys.ToyBox")
 
@@ -2458,7 +2457,6 @@ else
 			category.items = {}
 			category.all_items = {}
 
-			local initialized = not category.unInitialized
 
 			if(toy_total_learned <= 0) then
 				return
@@ -2479,7 +2477,7 @@ else
 				end
 			end
 
-			category.unInitialized = false
+			category.initialized = true
 
 			AutoBarCategoryList["Toys.ToyBox"]:Refresh()
 
@@ -2506,7 +2504,7 @@ else
 			local category = AutoBarCategoryList["Spell.Mount"]
 			category:SetNonCombat(true)
 			category:SetNoSpellCheck(true)
-			category.unInitialized = true
+			category.initialized = false
 			if (not category.castList) then
 				category.castList = {}
 				--print("  Spell.Mount was null, making it empty");
@@ -2583,7 +2581,7 @@ else
 
 			category.castList = {}
 
-			thisIsSpam = not category.unInitialized --or (# category.castList ~= count)
+			thisIsSpam = category.initialized --or (# category.castList ~= count)
 
 			for idx = 0, num_mounts do
 				local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
@@ -2615,7 +2613,7 @@ else
 				table.sort(category.castList, reverse_sort_func)
 			end
 
-			category.unInitialized = nil
+			category.initialized = true
 
 			AutoBarCategoryList["Spell.Mount"]:Refresh()
 		end
