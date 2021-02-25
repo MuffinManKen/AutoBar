@@ -250,10 +250,9 @@ local function UpdateIcon(button, texture)
 end
 
 -- Clicking on a popup changes the anchor button spell.  This updates the icon texture to match
-local function UpdateHandlers(frame, sourceButton)
-	sourceButton = frame:GetAttribute("sourceButton")
+local function UpdateHandlers(frame)
 	local TooltipSet = frame:GetAttribute("TooltipSet")
----print("UpdateHandlers", sourceButton, TooltipSet, frame.TooltipSet)
+--print("UpdateHandlers", sourceButton, TooltipSet, frame.TooltipSet)
 	frame.TooltipSet = TooltipSet
 
 	local itemId
@@ -361,7 +360,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		-- Wrap OnClick with the Arrange on use code
 		local wrapped = popupButtonFrame.snippetOnClick
 		if (wrapped and (not arrangeOnUse)) then
-			local header, preBody, postBody = popupHeader:UnwrapScript(popupButtonFrame, "OnClick")
+			local _header, preBody, _post_body = popupHeader:UnwrapScript(popupButtonFrame, "OnClick")
 			assert(wrapped == preBody, "wrapped ~= preBody in UnwrapScript")
 			-- ToDo: Are we the only wrapping people?  Maybe add some recursive unwrapping of our exact script.
 		elseif ((not wrapped) and arrangeOnUse) then
@@ -462,7 +461,7 @@ local snippetOnAttributeChanged = [[
 	if (name == "icon") then
 		control:CallMethod("UpdateIcon", value)
 	elseif (name == "sourcebutton") then -- or name == "sourceButton" Some code is lowercasing this.  How silly.
-		control:CallMethod("UpdateHandlers", self:GetAttribute("sourceButton"))
+		control:CallMethod("UpdateHandlers")
 	end
 ]]
 
