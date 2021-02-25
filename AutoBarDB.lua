@@ -78,6 +78,52 @@ local classBar = {
 	WARRIOR = "AutoBarClassBarWarrior",
 }
 
+local changed_category_key_dict = {
+	["Consumable.Buff Type.Both"] = "Consumable.Buff Type.Flask",
+	["Muffin.Reputation"] = "Muffin.Misc.Reputation",
+	["Muffin.Mount"] = "Muffin.Mounts",
+	["Tradeskill.Gather.Herbalism"] = "Muffin.Herbs.Millable",
+}
+local function verify_db()
+	-- Temporary, implement buttonKey field
+	for buttonKey, buttonDB in pairs(AutoBar.db.char.buttonList) do
+		buttonDB.buttonKey = buttonKey
+		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
+			buttonDB.name = nil
+		end
+		for categoryIndex, categoryKey in ipairs(buttonDB) do
+			local changedCategoryKey = changed_category_key_dict[categoryKey]
+			if (changedCategoryKey) then
+				buttonDB[categoryIndex] = changedCategoryKey
+			end
+		end
+	end
+	for buttonKey, buttonDB in pairs(AutoBar.db.class.buttonList) do
+		buttonDB.buttonKey = buttonKey
+		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
+			buttonDB.name = nil
+		end
+		for categoryIndex, categoryKey in ipairs(buttonDB) do
+			local changedCategoryKey = changed_category_key_dict[categoryKey]
+			if (changedCategoryKey) then
+				buttonDB[categoryIndex] = changedCategoryKey
+			end
+		end
+	end
+	for buttonKey, buttonDB in pairs(AutoBar.db.account.buttonList) do
+		buttonDB.buttonKey = buttonKey
+		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
+			buttonDB.name = nil
+		end
+		for categoryIndex, categoryKey in ipairs(buttonDB) do
+			local changedCategoryKey = changed_category_key_dict[categoryKey]
+			if (changedCategoryKey) then
+				buttonDB[categoryIndex] = changedCategoryKey
+			end
+		end
+	end
+end
+
 function AutoBar.InitializeDB()
 	AutoBar.classBar = classBar[AutoBar.CLASS]
 
@@ -89,7 +135,7 @@ function AutoBar.InitializeDB()
 	AutoBar:InitializeDefaults()
 
 -- ToDo: Temporary, implement buttonKey field.  Remove sometime after beta.
-	AutoBar:VerifyDB()
+	verify_db()
 
 
 	AutoBar:RefreshButtonDBList()
@@ -97,19 +143,12 @@ function AutoBar.InitializeDB()
 	AutoBar:BarsCompact()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
-	AutoBar:PopulateBars(true)
+	AutoBar:PopulateBars()
 end
 
 
 -- Character specific data for a particular Button
 -- For instance, the arrangeOnUse item.
-function AutoBar:GetCategoryDB(categoryKey)
-	return AutoBarDB2.custom_categories[categoryKey]
-end
-
-function AutoBar:GetCategoryItemDB(categoryKey, itemIndex)
-	return AutoBarDB2.custom_categories[categoryKey].items[itemIndex]
-end
 
 local function get_bar_default_settings()
 
@@ -1112,51 +1151,6 @@ function AutoBar:InitializeDefaults()
 
 end
 
-local changedCategoryKey = {
-	["Consumable.Buff Type.Both"] = "Consumable.Buff Type.Flask",
-	["Muffin.Reputation"] = "Muffin.Misc.Reputation",
-	["Muffin.Mount"] = "Muffin.Mounts",
-	["Tradeskill.Gather.Herbalism"] = "Muffin.Herbs.Millable",
-}
-function AutoBar:VerifyDB()
-	-- Temporary, implement buttonKey field
-	for buttonKey, buttonDB in pairs(AutoBar.db.char.buttonList) do
-		buttonDB.buttonKey = buttonKey
-		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
-			buttonDB.name = nil
-		end
-		for categoryIndex, categoryKey in ipairs(buttonDB) do
-			local changedCategoryKey = changedCategoryKey[categoryKey]
-			if (changedCategoryKey) then
-				buttonDB[categoryIndex] = changedCategoryKey
-			end
-		end
-	end
-	for buttonKey, buttonDB in pairs(AutoBar.db.class.buttonList) do
-		buttonDB.buttonKey = buttonKey
-		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
-			buttonDB.name = nil
-		end
-		for categoryIndex, categoryKey in ipairs(buttonDB) do
-			local changedCategoryKey = changedCategoryKey[categoryKey]
-			if (changedCategoryKey) then
-				buttonDB[categoryIndex] = changedCategoryKey
-			end
-		end
-	end
-	for buttonKey, buttonDB in pairs(AutoBar.db.account.buttonList) do
-		buttonDB.buttonKey = buttonKey
-		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
-			buttonDB.name = nil
-		end
-		for categoryIndex, categoryKey in ipairs(buttonDB) do
-			local changedCategoryKey = changedCategoryKey[categoryKey]
-			if (changedCategoryKey) then
-				buttonDB[categoryIndex] = changedCategoryKey
-			end
-		end
-	end
-end
 
 -- Populate AutoBar.buttonDBList with the correct DB from char, class or account
 function AutoBar:RefreshButtonDBList()
@@ -1183,7 +1177,7 @@ function AutoBar:RefreshUnplacedButtonList()
 
 	-- Duplicate all buttons
 	local buttonDBList = AutoBar.buttonDBList
-	for buttonKey, buttonDB in pairs(buttonDBList) do
+	for buttonKey, _button_db in pairs(buttonDBList) do
 		unplacedButtonList[buttonKey] = L[buttonKey]
 	end
 
@@ -1207,30 +1201,30 @@ function AutoBar:RefreshBarDBLists()
 	wipe(barButtonsDBList)
 	wipe(barLayoutDBList)
 	wipe(barPositionDBList)
-	for barKey, barDB in pairs(AutoBar.db.char.barList) do
+	for barKey, _bar_db in pairs(AutoBar.db.char.barList) do
 		barButtonsDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedButtons")
 		barLayoutDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLayout")
 		barPositionDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLocation")
 	end
-	for barKey, barDB in pairs(AutoBar.db.class.barList) do
+	for barKey, _bar_db in pairs(AutoBar.db.class.barList) do
 		barButtonsDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedButtons")
 		barLayoutDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLayout")
 		barPositionDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLocation")
 	end
-	for barKey, barDB in pairs(AutoBar.db.account.barList) do
+	for barKey, _bar_db in pairs(AutoBar.db.account.barList) do
 		barButtonsDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedButtons")
 		barLayoutDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLayout")
 		barPositionDBList[barKey] = AutoBar:GetSharedBarDB(barKey, "sharedLocation")
 	end
 
-	for barKey, bar in pairs(AutoBar.barList) do
+	for _bar_key, bar in pairs(AutoBar.barList) do
 		bar:UpdateShared()
 	end
 
 	local barValidateList = AutoBar.barValidateList
 	wipe(barValidateList)
 	barValidateList[""] = L["None"]
-	for barKey, barDB in pairs(barLayoutDBList) do
+	for barKey, _bar_db in pairs(barLayoutDBList) do
 		if (not L[barKey]) then
 			L[barKey] = barLayoutDBList[barKey].name
 		end
@@ -1239,7 +1233,7 @@ function AutoBar:RefreshBarDBLists()
 end
 
 function AutoBar:ButtonExists(barDB, targetButtonDB)
-	for buttonKeyIndex, buttonKey in ipairs(barDB.buttonKeys) do
+	for _button_key_index, buttonKey in ipairs(barDB.buttonKeys) do
 		if (buttonKey == targetButtonDB.buttonKey) then
 			return true
 		end
@@ -1344,12 +1338,12 @@ end
 
 -- /script AutoBar:BarsCompact()
 function AutoBar:BarsCompact()
-	for barKey, barDB in pairs(AutoBar.barButtonsDBList) do
+	for _bar_key, barDB in pairs(AutoBar.barButtonsDBList) do
 --AutoBar:Print("AutoBar:BarsCompact barKey " .. tostring(barKey) .. " AutoBar.barLayoutDBList[barKey].buttonKeys " .. tostring(AutoBar.barLayoutDBList[barKey].buttonKeys))
 		local buttonKeys = barDB.buttonKeys
 		local badIndexMax = nil
 		local nKeys = 0
-		for buttonKeyIndex, buttonKey in pairs(buttonKeys) do
+		for buttonKeyIndex, _button_key in pairs(buttonKeys) do
 			if (buttonKeyIndex > 1 and buttonKeys[buttonKeyIndex - 1] == nil) then
 				badIndexMax = buttonKeyIndex
 			end
@@ -1409,7 +1403,7 @@ local insertList = {}
 local appendList = {}
 
 -- if ignorePlace then ignore previous placement
-function AutoBar:PopulateBars(ignorePlace)
+function AutoBar:PopulateBars()
 	local barButtonsDBList = AutoBar.barButtonsDBList
 	local barDB, buttonIndex
 	for index in pairs(insertList) do
@@ -1418,7 +1412,7 @@ function AutoBar:PopulateBars(ignorePlace)
 	for index in pairs(appendList) do
 		appendList[index] = nil
 	end
-	for buttonKey, buttonDB in pairs(AutoBar.buttonDBList) do
+	for _button_key, buttonDB in pairs(AutoBar.buttonDBList) do
 		if (buttonDB.barKey) then
 			barDB = barButtonsDBList[buttonDB.barKey]
 		else
@@ -1443,41 +1437,32 @@ function AutoBar:PopulateBars(ignorePlace)
 					appendList[# appendList + 1] = buttonDB
 				else
 					barDB.buttonKeys[buttonIndex] = buttonDB.buttonKey
---AutoBar:Print("AutoBar:PopulateBars buttonIndex " .. tostring(buttonIndex) .. " " .. tostring(buttonDB.buttonKey) .. " buttonKey " .. tostring(buttonKey))
 				end
 			end
 		end
 	end
 	AutoBar:BarsCompact()
-	for index, buttonDB in ipairs(insertList) do
+	for _index, buttonDB in ipairs(insertList) do
 		barDB = barButtonsDBList[buttonDB.barKey]
 		local couldNotInsertDB = AutoBar:ButtonInsertNew(barDB, buttonDB)
 		if (couldNotInsertDB) then
 			appendList[# appendList + 1] = couldNotInsertDB
 		end
 	end
---AutoBar:Print("AutoBar:BarsCompact ")
-	for index, buttonDB in ipairs(appendList) do
+
+	for _index, buttonDB in ipairs(appendList) do
 		barDB = barButtonsDBList[buttonDB.barKey]
 		local nButtons = # barDB.buttonKeys + 1
 		barDB.buttonKeys[nButtons] = buttonDB.buttonKey
---AutoBar:Print("AutoBar:PopulateBars append nButtons " .. tostring(nButtons) .. " " .. tostring(buttonDB.buttonKey))
 	end
 end
-
--- /dump AutoBar.db.class.barList["AutoBarClassBarHunter"]
--- /dump AutoBar.db.class.barList["AutoBarClassBarHunter"].buttonKeys
--- /dump (# AutoBar.db.class.barList["AutoBarClassBarHunter"].buttonKeys)
---AutoBar:Print("AutoBar:DragStop" .. frame:GetName() .. " x/y " .. tostring().. " / " ..tostring())
--- /script AutoBarDB2.custom_categories = nil
-
 
 -- Upgrade from old DB versions
 local dbVersion = 2
 local renameButtonList
 local renameBarList
 
-function AutoBar:UpgradeBar(barKey, barDB)
+function AutoBar:UpgradeBar(barDB)
 	if (barDB.isCustomBar) then
 		local oldKey = barDB.barKey
 		local newName = ABGCode.GetValidatedName(barDB.name)
@@ -1487,7 +1472,7 @@ function AutoBar:UpgradeBar(barKey, barDB)
 	end
 end
 
-function AutoBar:UpgradeButton(buttonKey, buttonDB)
+function AutoBar:UpgradeButton(buttonDB)
 	if (buttonDB.buttonClass == "AutoBarButtonCustom") then
 		local oldKey = buttonDB.buttonKey
 		local newName = ABGCode.GetValidatedName(buttonDB.name)
@@ -1500,13 +1485,13 @@ end
 -- Options are at three levels: Account, Class, Character
 function AutoBar:UpgradeLevel(levelDB)
 	if (levelDB.barList) then
-		for barKey, barDB in pairs(levelDB.barList) do
-			AutoBar:UpgradeBar(barKey, barDB)
+		for _bar_key, barDB in pairs(levelDB.barList) do
+			AutoBar:UpgradeBar(barDB)
 		end
 	end
 	if (levelDB.buttonList) then
-		for buttonKey, buttonDB in pairs(levelDB.buttonList) do
-			AutoBar:UpgradeButton(buttonKey, buttonDB)
+		for _button_key, buttonDB in pairs(levelDB.buttonList) do
+			AutoBar:UpgradeButton(buttonDB)
 		end
 	end
 end

@@ -500,7 +500,7 @@ local function ResetBars()
 		bar:UpdateShared()
 	end
 
-	AutoBar:PopulateBars(true)
+	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
 	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
@@ -509,7 +509,7 @@ end
 
 --[[
 local function ResetButtons()
-	AutoBar:PopulateBars(true)
+	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
 	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
@@ -517,7 +517,7 @@ end
 --]]
 
 local function ResetAutoBar()
-	AutoBar:PopulateBars(true)
+	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
 	ABGCode:UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
@@ -2556,12 +2556,12 @@ end
 
 local function getCategoryValue(info)
 	local categoryKey = info.arg.categoryKey
-	return AutoBar:GetCategoryDB(categoryKey)[info[# info]]
+	return ABGCode.GetCategoryDB(categoryKey)[info[# info]]
 end
 
 local function setCategoryValue(info, value)
 	local categoryKey = info.arg.categoryKey
-	AutoBar:GetCategoryDB(categoryKey)[info[# info]] = value
+	ABGCode.GetCategoryDB(categoryKey)[info[# info]] = value
 	AutoBar:CategoriesChanged()
 end
 
@@ -2569,7 +2569,6 @@ local function setCategoryName(info, value)
 	value = ABGCode.GetValidatedName(value)
 	if (value and value ~= "") then
 		local categoryKey = info.arg.categoryKey
---		local categoryDB = AutoBar:GetCategoryDB(categoryKey)
 		local categoryInfo = AutoBarCategoryList[categoryKey]
 		local newName = categoryInfo:ChangeName(value)
 		if (newName == value) then
@@ -2639,7 +2638,7 @@ end
 
 local function getCategoryMacroName(info)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	return AutoBar:GetCategoryItemDB(categoryKey, itemIndex).itemId
+	return ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemId
 end
 
 local function setCategoryMacroName(info, value)
@@ -2648,7 +2647,7 @@ local function setCategoryMacroName(info, value)
 		local newName = value--categoryInfo:ChangeName(value)
 		if (newName == value) then
 			local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-			AutoBar:GetCategoryItemDB(categoryKey, itemIndex).itemId = newName
+			ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemId = newName
 			AutoBar:BarButtonChanged()
 		end
 	end
@@ -2657,12 +2656,12 @@ end
 
 local function getCategoryMacroText(info)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	return AutoBar:GetCategoryItemDB(categoryKey, itemIndex).itemInfo
+	return ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemInfo
 end
 
 local function setCategoryMacroText(info, value)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	AutoBar:GetCategoryItemDB(categoryKey, itemIndex).itemInfo = value
+	ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemInfo = value
 	AutoBar:BarButtonChanged()
 end
 

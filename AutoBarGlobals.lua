@@ -391,6 +391,15 @@ function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, arg1)
 	end
 end
 
+function AutoBarGlobalCodeSpace.GetCategoryDB(p_category_key)
+	return AutoBarDB2.custom_categories[p_category_key]
+end
+
+function AutoBarGlobalCodeSpace.GetCategoryItemDB(p_category_key, p_item_index)
+	return AutoBarDB2.custom_categories[p_category_key].items[p_item_index]
+end
+
+
 -------------------------------------------------------------------
 --
 -- WoW Classic
