@@ -9,7 +9,9 @@
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
 		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
 		"force_dirs" : ["classic", "libs", "locale", "textures"],
-		"whats_new" : "classic/whats_new.lua"
+		"whats_new" : "classic/whats_new.lua",
+		"skip_ftp" : true,
+		"generate_patreon_post" : true
 	},
 	{
 		"toc_file" : "AutoBarClassic.toc",
