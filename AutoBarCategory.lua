@@ -444,7 +444,7 @@ function CustomCategory:new(customCategoriesDB)
 
 	local obj = CreateFromMixins(self)
 
-	obj:init(self, description, texture)
+	obj:init(description, texture)
 
 	obj.customCategoriesDB = customCategoriesDB
 
