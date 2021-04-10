@@ -2471,7 +2471,7 @@ else
 					local link = C_ToyBox.GetToyLink(item_id)
 	--				AutoBarSearch:RegisterToy(item_id, link)
 					if(not link) then
-						AutoBar:SetMissingItemFlag(item_id)
+						ABGCode.SetMissingItemFlag(item_id)
 					end
 					category.all_items[#category.all_items + 1] = item_id
 				end

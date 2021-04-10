@@ -351,11 +351,14 @@ function AutoBarGlobalCodeSpace.LogEvent(p_event_name, p_arg1)
 end
 
 function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
+	local memory
+
 	if (AutoBar.db.account.logMemory) then
 		UpdateAddOnMemoryUsage()
-		local memory = GetAddOnMemoryUsage("AutoBar")
+		memory = GetAddOnMemoryUsage("AutoBar")
 		logMemory[p_event_name] = memory
 	end
+
 	if (AutoBar.db.account.performance) then
 		if (logItems[p_event_name]) then
 			--print(p_event_name, "restarted before previous completion")
@@ -364,22 +367,28 @@ function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
 			--print(p_event_name, "started time:", logItems[p_event_name])
 		end
 	end
+
+	if (AutoBar.db.account.logEvents) then
+		if (p_arg1) then
+			memory = memory or ""
+			print(event_name_colour .. p_event_name .. "|r", "arg1" , p_arg1, "time:", GetTime(), memory)
+		else
+			print(event_name_colour .. p_event_name .. "|r", "time:", GetTime())
+		end
+	end
 end
 
-function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, arg1)
+function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, p_arg1)	--ToDo: There can actually be multiple args
 	if (AutoBar.db.account.performance) then
 		if (logItems[p_event_name]) then
 			local elapsed = GetTime() - logItems[p_event_name]
-			logItems[p_event_name] = nil
-			if (elapsed > 0.005) then
-				if (arg1) then
-					print(event_name_colour .. p_event_name .. "|r", arg1, "time:", elapsed)
-				else
-					print(event_name_colour .. p_event_name .. "|r", "time:", elapsed)
-				end
+			--print(p_event_name, p_arg1, elapsed, "=", GetTime(), " - ", logItems[p_event_name])
+			if (elapsed > AutoBarDB2.performance_threshold) then
+				print(event_name_colour .. p_event_name .. "|r", (p_arg1 or ""), "time:", elapsed)
 			end
 		--else
 			--print(p_event_name, "restarted before previous completion")
+			logItems[p_event_name] = nil
 		end
 	end
 	if (AutoBar.db.account.logMemory) then

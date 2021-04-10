@@ -129,7 +129,8 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2 = AutoBarDB2 or {}
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBar.db.account.customCategories or {}
-	AutoBar.db.account.customCategories = nil
+	AutoBarDB2.whatsnew_version = AutoBarDB2.whatsnew_version or AutoBarDB.whatsnew_version
+	AutoBarDB2.performance_threshold = AutoBarDB2.performance_threshold or 0.002
 
 	AutoBar:UpgradeVersion()
 	AutoBar:InitializeDefaults()

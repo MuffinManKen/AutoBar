@@ -11,18 +11,14 @@
 -- GLOBALS: GetSpellCooldown, CooldownFrame_Set, GetItemCount, GetSpellCount, IsUsableSpell
 
 local AutoBar = AutoBar
-local spellIconList = AutoBar.spellIconList
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
-local LibKeyBound = LibStub("LibKeyBound-1.0")
 local _G = _G
 local _
-
-local strmatch, select, tonumber, print = strmatch, select, tonumber, print
 
 if (not AutoBar.Class) then
 	AutoBar.Class = {}
@@ -151,7 +147,7 @@ local function get_texture_for_action(p_action)
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 	if(texture == nil) then
-		AutoBar:SetMissingItemFlag(p_action);
+		ABGCode.SetMissingItemFlag(p_action);
 	end
 
 	return texture;
@@ -161,7 +157,7 @@ end
 --local function get_texture_for_macro_body(p_macro_body)
 --	local debug = false
 --
---	local action = AutoBar:GetActionForMacroBody(p_macro_body);
+--	local action = ABGCode.GetActionForMacroBody(p_macro_body);
 --	local texture = get_texture_for_action(action)
 --
 --	if (debug) then
@@ -194,7 +190,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
 			texture = ABGCode.GetIconForToyID(item_data.item_id)
 			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(item_data.item_id);
+				ABGCode.SetMissingItemFlag(item_data.item_id);
 			end
 		end
 	elseif (itemType == "item") then
@@ -202,7 +198,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if (itemId) then
 			texture = ABGCode.GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
-				AutoBar:SetMissingItemFlag(itemId);
+				ABGCode.SetMissingItemFlag(itemId);
 			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)

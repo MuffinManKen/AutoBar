@@ -155,7 +155,7 @@ end
 
 local function ButtonCategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 end
 
 
@@ -164,7 +164,7 @@ function AutoBar:ButtonsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateButtonOptions(AutoBar.optionsMain.args.buttons.args)
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -174,7 +174,7 @@ function AutoBar:BarButtonChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshBarDBLists()
 	AutoBar:RefreshUnplacedButtonList()
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AutoBar:CreateOptionsAce3()
 	AceCfgReg:NotifyChange("AutoBar")
 end
@@ -186,14 +186,14 @@ function AutoBar:BarsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateOptionsAce3()
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 function AutoBar:CategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -502,7 +502,7 @@ local function ResetBars()
 
 	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 --]]
@@ -511,7 +511,7 @@ end
 local function ResetButtons()
 	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 --]]
@@ -519,7 +519,7 @@ end
 local function ResetAutoBar()
 	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
-	ABGCode:UpdateCategories()
+	ABGCode.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
