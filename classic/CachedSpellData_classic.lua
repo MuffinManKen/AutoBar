@@ -232,7 +232,7 @@ ABGCS.CacheSpellData(1490, "Curse of the Elements");
 ABGCS.CacheSpellData(693, "Create Soulstone (Minor)");
 ABGCS.CacheSpellData(20752, "Create Soulstone (Lesser)");
 ABGCS.CacheSpellData(20755, "Create Soulstone");
-ABGCS.CacheSpellData(20755, "Create Soulstone (Greater)");
+ABGCS.CacheSpellData(20756, "Create Soulstone (Greater)");
 ABGCS.CacheSpellData(20757, "Create Soulstone (Major)");
 
 ABGCS.CacheSpellData(698, "Ritual of Summoning");
