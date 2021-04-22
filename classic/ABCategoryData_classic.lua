@@ -18,9 +18,10 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Muffin.Mounts.Item"]:SetNonCombat(true)
 	AutoBarCategoryList["Muffin.Mounts.Paladin"] = SpellsCategory:new("Muffin.Mounts.Paladin", "ability_mount_ridinghorse", "Muffin.Mounts.Paladin")
 	AutoBarCategoryList["Muffin.Mounts.Paladin"]:SetNonCombat(true)
+	AutoBarCategoryList["Muffin.Mounts.Paladin"]:SetNoSpellCheck(true)
 	AutoBarCategoryList["Muffin.Mounts.Warlock"] = SpellsCategory:new("Muffin.Mounts.Warlock", "ability_mount_ridinghorse", "Muffin.Mounts.Warlock")
 	AutoBarCategoryList["Muffin.Mounts.Warlock"]:SetNonCombat(true)
-
+	AutoBarCategoryList["Muffin.Mounts.Warlock"]:SetNoSpellCheck(true)
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
 	{
