@@ -566,8 +566,6 @@ function ABGCode.InitializeAllCategories()
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Bait"] = ItemsCategory:new( "Tradeskill.Tool.Fishing.Bait", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Bait")
 
-	AutoBarCategoryList["Muffin.Herbs.Millable"] = ItemsCategory:new( "Muffin.Herbs.Millable", "INV_Misc_HERB_01", "Muffin.Herbs.Millable")
-
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Gear"] = ItemsCategory:new( "Tradeskill.Tool.Fishing.Gear", "INV_Helmet_31", "Tradeskill.Tool.Fishing.Gear")
 
 	AutoBarCategoryList["Tradeskill.Tool.Fishing.Lure"] = ItemsCategory:new( "Tradeskill.Tool.Fishing.Lure", "INV_Misc_Food_26", "Tradeskill.Tool.Fishing.Lure")
