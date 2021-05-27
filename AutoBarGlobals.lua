@@ -4,7 +4,7 @@
 
 -- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox, type, GetSpellLink
 
-local _, _AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local print, select, ipairs, tostring, pairs, tonumber, string = print, select, ipairs, tostring, pairs, tonumber, string
 
@@ -19,7 +19,8 @@ function AutoBarGlobalCodeSpace.MakeSet(list)
    local set = {}
    for _, l in ipairs(list) do set[l] = true end
    return set
- end
+end
+
 
 -- All global data will be a child of this table
 AutoBarGlobalDataObject = {
@@ -33,7 +34,11 @@ AutoBarGlobalDataObject = {
 
 	profile = {},
 
-	QirajiMounts = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+	QirajiMounts = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1},
+
+	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE),
+	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
+	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
 
 }
 
@@ -220,7 +225,7 @@ function AutoBarGlobalCodeSpace.CacheSpellData(p_spell_id, p_spell_name)
 	end
 
 	if(name == nil) then
-		AutoBarGlobalCodeSpace:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		AutoBarGlobalCodeSpace.LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
@@ -235,7 +240,7 @@ function AutoBarGlobalCodeSpace.GetSpellNameByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace.LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -246,7 +251,7 @@ function AutoBarGlobalCodeSpace.GetSpellIconByName(p_spell_name)
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 	end
 
-	AutoBarGlobalCodeSpace:LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	AutoBarGlobalCodeSpace.LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
@@ -414,7 +419,7 @@ end
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+if (AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow) then
 
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
 		return AutoBarSearch.macro_text[p_guid];
@@ -444,7 +449,7 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 
 	end
 
-else
+elseif (AutoBarGlobalDataObject.is_mainline_wow) then
 -------------------------------------------------------------------
 --
 -- WoW Retail

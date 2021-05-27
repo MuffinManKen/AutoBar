@@ -51,9 +51,6 @@
 --	Bar & Button visual settings are inherited AutoBar -> Bar -> Button
 --  Plugin Buttons / Bars
 
--- GLOBALS: WOW_PROJECT_ID, WOW_PROJECT_MAINLINE, WOW_PROJECT_CLASSIC
-
-
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
@@ -318,6 +315,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonCat", },
 			{button_name = "AutoBarButtonTravel", },
 			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonStagForm", project_id = WOW_PROJECT_MAINLINE},
 			{button_name = "AutoBarButtonMoonkin", },
 			{button_name = "AutoBarButtonTreeForm", },
@@ -325,6 +323,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonDebuff", },
 			{button_name = "AutoBarButtonClassBuff", },
 			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonShields", },
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonER", },
@@ -348,6 +347,8 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonStance", },
 			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 		},
 		PRIEST =
 		{
@@ -367,6 +368,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonCharge", },
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 		},
 		WARLOCK =
 		{
@@ -377,6 +379,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonClassBuff", },
 			{button_name = "AutoBarButtonDebuff", },
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
+			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonClassPet", },
 		},
 		WARRIOR =
@@ -665,7 +668,7 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+	if (ABGData.is_mainline_wow) then
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonArchaeology"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonArchaeology"] = {
@@ -1096,7 +1099,7 @@ function AutoBar:InitializeDefaults()
 	local deprecated_buttons
 
 	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
-		deprecated_buttons=
+		deprecated_buttons =
 		{
 			"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
@@ -1106,8 +1109,9 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
 			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
 		}
-	else
-		deprecated_buttons=
+	elseif (ABGData.is_mainline_wow) then
+
+		deprecated_buttons =
 		{
 			"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
 			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
@@ -1117,6 +1121,8 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
 			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
 		}
+	else
+		deprecated_buttons = {}
 	end
 
 	for _, dep in ipairs(deprecated_buttons) do
@@ -1135,14 +1141,17 @@ function AutoBar:InitializeDefaults()
 	if(AutoBar.CLASS == "WARLOCK" and AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonInterrupt"] = nil
 	end
-	if(AutoBar.CLASS == "ROGUE" and AutoBar.db.class.buttonList["AutoBarButtonTrap"] and (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC)) then
-		AutoBar.db.class.buttonList["AutoBarButtonTrap"] = nil
-	end
-	if(AutoBar.CLASS == "DRUID" and (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC)) then
-		AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = nil
-		AutoBar.db.class.buttonList["AutoBarButtonStance"] = nil
-	end
 
+	if (ABGData.is_mainline_wow) then
+
+		if(AutoBar.CLASS == "ROGUE" and AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
+			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = nil
+		end
+		if(AutoBar.CLASS == "DRUID" ) then
+			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = nil
+			AutoBar.db.class.buttonList["AutoBarButtonStance"] = nil
+		end
+	end
 
 
 -- save as sample to remove buttons per class

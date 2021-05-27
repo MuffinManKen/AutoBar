@@ -6,10 +6,7 @@
 -- http://muffinmangames.com
 --
 
--- GLOBALS: GetSpellBookItemName, ClearCursor, GetCursorInfo, SecureHandlerWrapScript, CreateFrame, RegisterStateDriver, RegisterAutoHide, InCombatLockdown, GetInventoryItemLink
--- GLOBALS: GetContainerItemLink, GetShapeshiftForm, GetShapeshiftFormInfo, GetTotemInfo, PickupInventoryItem, CooldownFrame_Set, GetSpellInfo
--- GLOBALS: C_MountJournal, LE_MOUNT_JOURNAL_FILTER_COLLECTED, LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, LE_MOUNT_JOURNAL_FILTER_UNUSABLE C_ToyBox, C_PetJournal
--- GLOBALS: WOW_PROJECT_ID, WOW_PROJECT_CLASSIC, WOW_PROJECT_MAINLINE
+--local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
@@ -631,7 +628,7 @@ end
 local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB
-if(WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+if(ABGData.is_mainline_wow) then
 	SPELL_MILL_HERB = ABGCode.GetSpellNameByName("Milling")
 end
 
@@ -1070,9 +1067,9 @@ AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonLethal.super.prototype.init(self, parentBar, buttonDB)
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 		self:AddCategory("Muffin.Poison.Lethal")
-	else
+	elseif (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 	end
 end
@@ -1083,9 +1080,9 @@ AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonNonlethal.super.prototype.init(self, parentBar, buttonDB)
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 		self:AddCategory("Muffin.Poison.Nonlethal")
-	else
+	elseif (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Nonlethal")
 	end
 
@@ -1131,7 +1128,7 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Potion.Water Breathing")
 
-	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Muffin.Order Hall.Buff")
 	end
 
@@ -1161,10 +1158,10 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 		self:AddCategory("Muffin.Poison.Lethal")
 		self:AddCategory("Muffin.Poison.Nonlethal")
-	else
+	elseif (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 		self:AddCategory("Spell.Poison.Nonlethal")
 	end
@@ -1224,12 +1221,12 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
 		self:AddCategory("Spell.Mage.Create Manastone")
-		if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+		if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 			self:AddCategory("Spell.Mage.Conjure Water")
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
-		if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+		if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 			self:AddCategory("Spell.Warlock.Create Soulstone")
 		end
 
@@ -1256,7 +1253,7 @@ function AutoBarButtonCrafting.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Crafting")
 end
 
-if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+if (ABGData.is_mainline_wow) then
 	--TODO: Clean up all this crap once I know it's working
 	local function find_known_spell(p_list)
 		for _i, id in ipairs(p_list) do
@@ -1494,7 +1491,7 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Misc")
 	self:AddCategory("Muffin.Skill.Fishing.Pole")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
-	if (WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC) then
+	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Muffin.Toys.Fishing")
 	end
 
@@ -1690,7 +1687,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	end
 
 	self:AddCategory("Misc.Hearth")
-	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+	if (ABGData.is_mainline_wow) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
 
 		self:AddCategory("Muffin.Toys.Hearth")
@@ -1703,7 +1700,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	end
 end
 
-if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+if (ABGData.is_mainline_wow) then
 	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
 		self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
@@ -1767,7 +1764,9 @@ function AutoBarButtonQuest.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Misc.Quest")
 	self:AddCategory("Muffin.Misc.StartsQuest")
 	self:AddCategory("Misc.Usable.BossItem")
-	self:AddCategory("Dynamic.Quest")
+	if (ABGData.is_mainline_wow) then
+		self:AddCategory("Dynamic.Quest")
+	end
 end
 
 local AutoBarButtonRaidTarget = AceOO.Class(AutoBarButton)
@@ -2224,7 +2223,7 @@ end
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
@@ -2258,7 +2257,8 @@ if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
 	end
 
 
-else
+elseif (ABGData.is_mainline_wow) then
+
 -------------------------------------------------------------------
 --
 -- WoW Retail

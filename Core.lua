@@ -13,10 +13,6 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- Maintained by MuffinManKen.  Original author Saien of Hyjal
 -- http://muffinmangames.com
 
--- GLOBALS: GetTime, GetItemInfo, GetSpellLink, SecureCmdOptionParse, GetSpellInfo, InCombatLockdown, UnitFactionGroup, UnitName, GetRealmName, UnitInVehicle
--- GLOBALS: UnitClass, GetAddOnMemoryUsage, UpdateAddOnMemoryUsage, ClearOverrideBindings, C_Timer, GetMaxBattlefieldID, GetBattlefieldStatus, PetActionBarFrame
--- GLOBALS: NUM_BAG_SLOTS, WOW_PROJECT_ID, WOW_PROJECT_MAINLINE
--- GLOBALS: C_PetBattles
 
 local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
@@ -261,7 +257,7 @@ function AutoBar:InitializeZero()
 	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+	if (ABGData.is_mainline_wow) then
 		AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
 		AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 		AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
@@ -334,7 +330,7 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
 end
 
-if (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) then
+if (ABGData.is_mainline_wow) then
 
 	function ABGCode.events.QUEST_ACCEPTED(p_quest_index)
 		ABGCode.LogEventStart("QUEST_ACCEPTED")
