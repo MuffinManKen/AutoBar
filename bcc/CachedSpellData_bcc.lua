@@ -106,6 +106,19 @@ ABGCS.CacheSpellData(3562, "Teleport: Ironforge");
 ABGCS.CacheSpellData(11417, "Portal: Orgrimmar");
 ABGCS.CacheSpellData(3567, "Teleport: Orgrimmar");
 
+ABGCS.CacheSpellData(49361, "Portal: Stonard");
+ABGCS.CacheSpellData(49360, "Portal: Theramore");
+ABGCS.CacheSpellData(32266, "Portal: Exodar");
+ABGCS.CacheSpellData(32267, "Portal: Silvermoon");
+ABGCS.CacheSpellData(33691, "Portal: Shattrath - Alliance");
+ABGCS.CacheSpellData(35717, "Portal: Shattrath - Horde");
+ABGCS.CacheSpellData(49358, "Teleport: Stonard");
+ABGCS.CacheSpellData(49359, "Teleport: Theramore");
+ABGCS.CacheSpellData(32271, "Teleport: Exodar");
+ABGCS.CacheSpellData(32272, "Teleport: Silvermoon");
+ABGCS.CacheSpellData(33690, "Teleport: Shattrath - Alliance");
+ABGCS.CacheSpellData(35715, "Teleport: Shattrath - Horde");
+
 --Paladin
 ABGCS.CacheSpellData(498, "Divine Protection");
 ABGCS.CacheSpellData(642, "Divine Shield");

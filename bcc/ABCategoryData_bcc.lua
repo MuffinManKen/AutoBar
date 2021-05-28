@@ -68,8 +68,8 @@ function ABGCode.InitializeCategories()
 		"DRUID", ABGCode.GetSpellNameByName("Prowl"),
 		"MAGE", ABGCode.GetSpellNameByName("Invisibility"),
 		"MAGE", ABGCode.GetSpellNameByName("Lesser Invisibility"),
-		"ROGUE", ABGCode.GetSpellNameByName("Stealth"),	--y
-		"*", ABGCode.GetSpellNameByName("Shadowmeld"),	--y
+		"ROGUE", ABGCode.GetSpellNameByName("Stealth"),
+		"*", ABGCode.GetSpellNameByName("Shadowmeld"),
 	})
 
 	AutoBarCategoryList["Spell.Aspect"] = SpellsCategory:new("Spell.Aspect", spellIconList["Aspect of the Cheetah"],
@@ -144,6 +144,12 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Darnassus"), ABGCode.GetSpellNameByName("Portal: Darnassus"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Ironforge"), ABGCode.GetSpellNameByName("Portal: Ironforge"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Orgrimmar"), ABGCode.GetSpellNameByName("Portal: Orgrimmar"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Stonard"), ABGCode.GetSpellNameByName("Portal: Stonard"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Theramore"), ABGCode.GetSpellNameByName("Portal: Theramore"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Exodar"), ABGCode.GetSpellNameByName("Portal: Exodar"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Silvermoon"), ABGCode.GetSpellNameByName("Portal: Silvermoon"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Alliance"), ABGCode.GetSpellNameByName("Portal: Shattrath - Alliance"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Horde"), ABGCode.GetSpellNameByName("Portal: Shattrath - Horde"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Astral Recall"), ABGCode.GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
 	})
