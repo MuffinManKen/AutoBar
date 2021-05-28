@@ -2584,7 +2584,7 @@ elseif (ABGData.is_mainline_wow) then
 			thisIsSpam = category.initialized --or (# category.castList ~= count)
 
 			for idx = 0, num_mounts do
-				local name, spell_id, icon, active, usable, src, is_favourite, faction_specific, faction, is_hidden, is_collected, mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
+				local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
 				local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
 				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[spell_id]) or false;
 	--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
