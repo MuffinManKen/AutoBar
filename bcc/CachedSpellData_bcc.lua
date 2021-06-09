@@ -259,6 +259,7 @@ ABGCS.CacheSpellData(688, "Summon Imp");   -- y
 ABGCS.CacheSpellData(712, "Summon Succubus");
 ABGCS.CacheSpellData(697, "Summon Voidwalker");
 ABGCS.CacheSpellData(1122, "Summon Infernal");
+ABGCS.CacheSpellData(30146, "Summon Felguard");
 
 --Warrior
 ABGCS.CacheSpellData(6673, "Battle Shout");

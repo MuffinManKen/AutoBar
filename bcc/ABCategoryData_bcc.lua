@@ -113,6 +113,7 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Imp"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Succubus"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Voidwalker"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Summon Felguard"),
 	})
 
 
