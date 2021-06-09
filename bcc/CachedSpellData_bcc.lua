@@ -184,7 +184,7 @@ ABGCS.CacheSpellData(10595, "Nature Resistance Totem");
 ABGCS.CacheSpellData(6495, "Sentry Totem");
 ABGCS.CacheSpellData(25908, "Tranquil Air Totem");
 ABGCS.CacheSpellData(8512, "Windfury Totem");
-ABGCS.CacheSpellData(8512, "Windwall Totem");
+ABGCS.CacheSpellData(15107, "Windwall Totem");
 
 	--Earth totems
 ABGCS.CacheSpellData(2484, "Earthbind Totem");
@@ -205,6 +205,7 @@ ABGCS.CacheSpellData(8170, "Disease Cleansing Totem");
 ABGCS.CacheSpellData(10538, "Fire Resistance Totem");
 ABGCS.CacheSpellData(5394, "Healing Stream Totem");
 ABGCS.CacheSpellData(5675, "Mana Spring Totem");
+ABGCS.CacheSpellData(16190, "Mana Tide Totem");
 ABGCS.CacheSpellData(8166, "Poison Cleansing Totem");
 
 ABGCS.CacheSpellData(546, "Water Walking");

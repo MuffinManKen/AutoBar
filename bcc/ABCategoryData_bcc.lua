@@ -244,6 +244,7 @@ function ABGCode.InitializeCategories()
 		"SHAMAN", ABGCode.GetSpellNameByName("Fire Resistance Totem");
 		"SHAMAN", ABGCode.GetSpellNameByName("Healing Stream Totem");
 		"SHAMAN", ABGCode.GetSpellNameByName("Mana Spring Totem");
+		"SHAMAN", ABGCode.GetSpellNameByName("Mana Tide Totem");
 		"SHAMAN", ABGCode.GetSpellNameByName("Poison Cleansing Totem");
 	})
 
