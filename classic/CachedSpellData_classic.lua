@@ -138,9 +138,12 @@ ABGCS.CacheSpellData(20166, "Seal of Wisdom");
 
 
 --Priest
+ABGCS.CacheSpellData(588, "Inner Fire");
 ABGCS.CacheSpellData(1243, "Power Word: Fortitude");
 ABGCS.CacheSpellData(17, "Power Word: Shield");
 ABGCS.CacheSpellData(15487, "Silence");
+ABGCS.CacheSpellData(976, "Shadow Protection");
+ABGCS.CacheSpellData(27683, "Prayer of Shadow Protection");
 
 --Rogue
 ABGCS.CacheSpellData(1842, "Disarm Trap");

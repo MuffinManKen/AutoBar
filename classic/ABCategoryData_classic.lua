@@ -99,6 +99,9 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
 		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Wisdom"),
 		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude");
+		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire");
+		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection");
+		"PRIEST", ABGCode.GetSpellNameByName("Prayer of Shadow Protection");
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"),

@@ -1,10 +1,10 @@
-local AutoBar = AutoBar
+--local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
-local L = AutoBarGlobalDataObject.locale
+--local L = AutoBarGlobalDataObject.locale
 local ItemsCategory = ABGCode.ItemsCategory
-local MacroTextCategory = ABGCode.MacroTextCategory
+--local MacroTextCategory = ABGCode.MacroTextCategory
 local SpellsCategory = ABGCode.SpellsCategory
 
 
@@ -99,6 +99,9 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
 		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Wisdom"),
 		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude");
+		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire");
+		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection");
+		"PRIEST", ABGCode.GetSpellNameByName("Prayer of Shadow Protection");
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"),

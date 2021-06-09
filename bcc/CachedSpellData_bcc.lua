@@ -66,7 +66,7 @@ ABGCS.CacheSpellData(13813, "Explosive Trap");
 ABGCS.CacheSpellData(13795, "Immolation Trap");
 
 
---Mage
+--#region Mage
 ABGCS.CacheSpellData(168, "Frost Armor");
 ABGCS.CacheSpellData(7302, "Ice Armor");
 ABGCS.CacheSpellData(6117, "Mage Armor");
@@ -118,8 +118,9 @@ ABGCS.CacheSpellData(32271, "Teleport: Exodar");
 ABGCS.CacheSpellData(32272, "Teleport: Silvermoon");
 ABGCS.CacheSpellData(33690, "Teleport: Shattrath - Alliance");
 ABGCS.CacheSpellData(35715, "Teleport: Shattrath - Horde");
+--#endregion
 
---Paladin
+--#region Paladin
 ABGCS.CacheSpellData(498, "Divine Protection");
 ABGCS.CacheSpellData(642, "Divine Shield");
 ABGCS.CacheSpellData(1044, "Blessing of Freedom");
@@ -148,12 +149,15 @@ ABGCS.CacheSpellData(20165, "Seal of Light");
 ABGCS.CacheSpellData(20154, "Seal of Righteousness");
 ABGCS.CacheSpellData(21082, "Seal of the Crusader");
 ABGCS.CacheSpellData(20166, "Seal of Wisdom");
-
+--#endregion
 
 --Priest
+ABGCS.CacheSpellData(588, "Inner Fire");
 ABGCS.CacheSpellData(1243, "Power Word: Fortitude");
 ABGCS.CacheSpellData(17, "Power Word: Shield");
 ABGCS.CacheSpellData(15487, "Silence");
+ABGCS.CacheSpellData(976, "Shadow Protection");
+ABGCS.CacheSpellData(27683, "Prayer of Shadow Protection");
 
 --Rogue
 ABGCS.CacheSpellData(1842, "Disarm Trap");
@@ -165,7 +169,7 @@ ABGCS.CacheSpellData(2094, "Blind");
 ABGCS.CacheSpellData(6770, "Sap");
 
 
---Shaman
+--#region Shaman
 ABGCS.CacheSpellData(8024, "Flametongue Weapon");
 ABGCS.CacheSpellData(8033, "Frostbrand Weapon");
 ABGCS.CacheSpellData(8017, "Rockbiter Weapon");
@@ -206,9 +210,9 @@ ABGCS.CacheSpellData(8166, "Poison Cleansing Totem");
 ABGCS.CacheSpellData(546, "Water Walking");
 ABGCS.CacheSpellData(2645, "Ghost Wolf");
 ABGCS.CacheSpellData(556, "Astral Recall");
+--#endregion
 
-
---Warlock
+--#region Warlock
 ABGCS.CacheSpellData(687, "Demon Skin");
 ABGCS.CacheSpellData(706, "Demon Armor");
 
@@ -260,6 +264,7 @@ ABGCS.CacheSpellData(712, "Summon Succubus");
 ABGCS.CacheSpellData(697, "Summon Voidwalker");
 ABGCS.CacheSpellData(1122, "Summon Infernal");
 ABGCS.CacheSpellData(30146, "Summon Felguard");
+--#endregion
 
 --Warrior
 ABGCS.CacheSpellData(6673, "Battle Shout");
