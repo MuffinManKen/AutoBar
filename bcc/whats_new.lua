@@ -3,7 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Added Portals and Teleports
- - Did a bunch of data mining
- - Go to MuffinManGames.com to report any issues or for information on my Patreon
+	- Priest: Inner Fire, Shadow Protection, and Prayer of Shadow Protection
+	- Shaman: Windwall Totem and Mana Tide Totem
+	- Warlock: Summon Felguard
+	- Go to MuffinManGames.com to report any issues or for information on my Patreon
 ]] .. "|n"

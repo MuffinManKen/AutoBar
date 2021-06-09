@@ -1,7 +1,7 @@
 ## Interface: 20501
 ## Title: AutoBarBCC
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
-## Version: 2.05.1.01
+## Version: 2.05.1.02
 ## X-Website: http://www.MuffinManGames.com
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
 ## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
@@ -11,8 +11,6 @@
 ## Notes-esES: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
 ## Notes-esMX: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
 ## DefaultState: enabled
-## UIType: 动作条
-## UIType-zhTW: 動作條
 ## X-Category: Action Bars
 ## X-Credits: Diablo for teaching us how to guzzle potions. Saien for first enabling guzzling in WoW.  Sayclub (Korean) | PDI175, lostcup (Chinese traditional and simplified) | Teodred, curexx (German), Cinedelle (French), shiftos (Spanish), StingerSoft (Russian)
 ## OptionalDeps: Ace3, Ace2, LibKeyBound-1.0, LibPeriodicTable-3.1, LibStickyFrames-2.0, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
