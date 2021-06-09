@@ -1,10 +1,10 @@
-local AutoBar = AutoBar
+--local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
-local L = AutoBarGlobalDataObject.locale
+--local L = AutoBarGlobalDataObject.locale
 local ItemsCategory = ABGCode.ItemsCategory
-local MacroTextCategory = ABGCode.MacroTextCategory
+--local MacroTextCategory = ABGCode.MacroTextCategory
 local SpellsCategory = ABGCode.SpellsCategory
 
 
