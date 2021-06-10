@@ -177,7 +177,7 @@ ABGCS.CacheSpellData(8232, "Windfury Weapon");
 
 ABGCS.CacheSpellData(8042, "Earth Shock");
 
-	--Air totems
+--Air totems
 ABGCS.CacheSpellData(8835, "Grace of Air Totem");
 ABGCS.CacheSpellData(8177, "Grounding Totem");
 ABGCS.CacheSpellData(10595, "Nature Resistance Totem");
@@ -185,22 +185,26 @@ ABGCS.CacheSpellData(6495, "Sentry Totem");
 ABGCS.CacheSpellData(25908, "Tranquil Air Totem");
 ABGCS.CacheSpellData(8512, "Windfury Totem");
 ABGCS.CacheSpellData(15107, "Windwall Totem");
+ABGCS.CacheSpellData(3738, "Wrath of Air Totem");
 
-	--Earth totems
+
+--Earth totems
 ABGCS.CacheSpellData(2484, "Earthbind Totem");
+ABGCS.CacheSpellData(2062, "Earth Elemental Totem");
 ABGCS.CacheSpellData(5730, "Stoneclaw Totem");
 ABGCS.CacheSpellData(8071, "Stoneskin Totem");
 ABGCS.CacheSpellData(8075, "Strength of Earth Totem");
 ABGCS.CacheSpellData(8143, "Tremor Totem");
 
-	--Fire totems
+--Fire totems
 ABGCS.CacheSpellData(1535, "Fire Nova Totem");
 ABGCS.CacheSpellData(16387, "Flametongue Totem");
 ABGCS.CacheSpellData(8181, "Frost Resistance Totem");
 ABGCS.CacheSpellData(8190, "Magma Totem");
 ABGCS.CacheSpellData(3599, "Searing Totem");
+ABGCS.CacheSpellData(30706, "Totem of Wrath");
 
-	--Water totems
+--Water totems
 ABGCS.CacheSpellData(8170, "Disease Cleansing Totem");
 ABGCS.CacheSpellData(10538, "Fire Resistance Totem");
 ABGCS.CacheSpellData(5394, "Healing Stream Totem");

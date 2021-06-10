@@ -211,41 +211,44 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Spell.Totem.Earth"] = SpellsCategory:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
 		"SHAMAN", ABGCode.GetSpellNameByName("Earthbind Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Earth Elemental Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Stoneclaw Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Stoneskin Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Strength of Earth Totem"),
-		"SHAMAN", ABGCode.GetSpellNameByName("Tremor Totem");
+		"SHAMAN", ABGCode.GetSpellNameByName("Tremor Totem"),
 	})
 
 
 	AutoBarCategoryList["Spell.Totem.Air"] = SpellsCategory:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Grace of Air Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Grounding Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Nature Resistance Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Sentry Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Tranquil Air Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Windfury Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Windwall Totem");
+		"SHAMAN", ABGCode.GetSpellNameByName("Grace of Air Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Grounding Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Nature Resistance Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Sentry Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Tranquil Air Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Windfury Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Windwall Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Wrath of Air Totem"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Fire Nova Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Frost Resistance Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Magma Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Searing Totem");
+		"SHAMAN", ABGCode.GetSpellNameByName("Fire Nova Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Frost Resistance Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Magma Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Searing Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Totem of Wrath"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Water"] = SpellsCategory:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Disease Cleansing Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Fire Resistance Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Healing Stream Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Mana Spring Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Mana Tide Totem");
-		"SHAMAN", ABGCode.GetSpellNameByName("Poison Cleansing Totem");
+		"SHAMAN", ABGCode.GetSpellNameByName("Disease Cleansing Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Fire Resistance Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Healing Stream Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Mana Spring Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Mana Tide Totem"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Poison Cleansing Totem"),
 	})
 
 
