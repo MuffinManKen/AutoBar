@@ -81,6 +81,11 @@ function AutoBar.Class.Button.prototype:init(parentBar, buttonDB)
 
 	self.parentBar = parentBar
 	self.buttonDB = buttonDB
+
+	if (self.buttonDB.square_popups == nil) then
+		self.buttonDB.square_popups = true
+	end
+
 	self.buttonName = buttonDB.buttonKey
 	self.buttonDBIndex = buttonDB.order
 	self:CreateButtonFrame()

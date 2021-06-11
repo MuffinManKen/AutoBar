@@ -331,13 +331,20 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 	local max_popup_height = self.buttonDB.max_popup_height or MAX_POPUP_HEIGHT
 
 	-- For gigantic popups, split it up into a block
-	local nSplits = math.ceil(nItems / max_popup_height)
-	local splitLength, splitRelativePoint
-	if (nSplits > 1) then
-		splitLength = math.ceil(nItems / nSplits)
-	else
-		splitLength = nItems + 10
-	end
+	local splitLength = max_popup_height
+	local splitRelativePoint
+
+	if(self.buttonDB.square_popups == true) then
+		local nSplits = math.ceil(nItems / max_popup_height)
+		if (nSplits > 1) then
+			splitLength = math.ceil(nItems / nSplits)
+		end
+end
+
+
+	--if (self.buttonDB.max_popup_height) then
+	--	print("items:", nItems,"max height:", self.buttonDB.max_popup_height, "square:", self.buttonDB.square_popups, "split_len:", splitLength)
+	--end
 
 	-- Arrange on Use Buttons show the first Button because it needs to remain there for changes during combat.
 	local arrangeOnUse = self.buttonDB.arrangeOnUse

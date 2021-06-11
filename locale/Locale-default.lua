@@ -140,6 +140,10 @@ atl("AutoBarButtonAquatic", "Aquatic")
 atl("NewButton", "New Button")
 atl("NewButtonTooltip", "Create a new custom button")
 
+atl("Square Popups", "Square Popups")
+atl("Square Popups Desc", "Try to organize popups into more of a square shape")
+
+
 atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet from your pet journal|r")
 atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet from your list of favourites in the pet journal|r")
 atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current battle pet|r")
