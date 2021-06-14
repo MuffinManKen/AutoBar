@@ -91,8 +91,8 @@ ABGCS.CacheSpellData(604, "Dampen Magic");
 
 --ABGCS.CacheSpellData(42955, "Conjure Refreshment");
 --ABGCS.CacheSpellData(43987, "Conjure Refreshment Table");
-ABGCS.CacheSpellData(66, "Lesser Invisibility");
-ABGCS.CacheSpellData(885, "Invisibility");
+ABGCS.CacheSpellData(7870, "Lesser Invisibility");
+ABGCS.CacheSpellData(66, "Invisibility");
 ABGCS.CacheSpellData(27619, "Ice Block");
 ABGCS.CacheSpellData(11418, "Portal: Undercity");
 ABGCS.CacheSpellData(3563, "Teleport: Undercity");
@@ -240,9 +240,7 @@ ABGCS.CacheSpellData(17953, "Create Firestone (Major)");--TODO: Add this to a ca
 ABGCS.CacheSpellData(2362, "Create Spellstone");--TODO: Add this to a category
 ABGCS.CacheSpellData(17727, "Create Spellstone (Greater)");--TODO: Add this to a category
 
-ABGCS.CacheSpellData(132, "Detect Lesser Invisibility");	--TODO: Add this to a category
-ABGCS.CacheSpellData(2970, "Detect Invisibility");	--TODO: Add this to a category
-ABGCS.CacheSpellData(11743, "Detect Greater Invisibility");	--TODO: Add this to a category
+ABGCS.CacheSpellData(132, "Detect Invisibility");	--TODO: Add this to a category
 
 ABGCS.CacheSpellData(5500, "Sense Demons");
 
