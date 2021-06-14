@@ -90,6 +90,7 @@ AutoBarGlobalDataObject.TickScheduler =
 
 	OtherStickyFrames = {
 		"GridLayoutFrame",
+		"Grid2LayoutFrame",
 	}
 }
 
