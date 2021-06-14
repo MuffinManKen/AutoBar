@@ -28,13 +28,14 @@ ABGCS.CacheSpellData(783, "Travel Form");
 ABGCS.CacheSpellData(18960, "Teleport: Moonglade");
 
 
---Hunter
+--#region Hunter
 ABGCS.CacheSpellData(5118, "Aspect of the Cheetah");
 ABGCS.CacheSpellData(13165, "Aspect of the Hawk");
 ABGCS.CacheSpellData(13163, "Aspect of the Monkey");
 ABGCS.CacheSpellData(20043, "Aspect of the Wild");
 ABGCS.CacheSpellData(13159, "Aspect of the Pack");
 ABGCS.CacheSpellData(13161, "Aspect of the Beast");
+ABGCS.CacheSpellData(34074, "Aspect of the Viper");
 
 ABGCS.CacheSpellData(1462, "Beast Lore");
 ABGCS.CacheSpellData(19574, "Bestial Wrath");
@@ -64,7 +65,7 @@ ABGCS.CacheSpellData(1499, "Freezing Trap");
 ABGCS.CacheSpellData(13809, "Frost Trap");
 ABGCS.CacheSpellData(13813, "Explosive Trap");
 ABGCS.CacheSpellData(13795, "Immolation Trap");
-
+--#endregion
 
 --#region Mage
 ABGCS.CacheSpellData(168, "Frost Armor");
