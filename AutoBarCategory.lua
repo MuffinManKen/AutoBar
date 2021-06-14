@@ -29,7 +29,7 @@ local ABGData = AutoBarGlobalDataObject
 --TODO: Move AutoBarCategoryList into AutoBarGlobalDataObject
 AutoBarCategoryList = {}
 
-local L = AutoBarGlobalDataObject.locale
+local L = ABGData.locale
 local PT = LibStub("LibPeriodicTable-3.1")
 local _
 
