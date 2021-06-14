@@ -375,12 +375,8 @@ function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
 	end
 
 	if (AutoBar.db.account.logEvents) then
-		if (p_arg1) then
 			memory = memory or ""
-			print(event_name_colour .. p_event_name .. "|r", "arg1" , p_arg1, "time:", GetTime(), memory)
-		else
-			print(event_name_colour .. p_event_name .. "|r", "time:", GetTime())
-		end
+			print(event_name_colour .. p_event_name .. "|r", "time:", GetTime(), memory)
 	end
 end
 
