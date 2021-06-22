@@ -221,6 +221,7 @@ ABGCS.CacheSpellData(556, "Astral Recall");
 --#region Warlock
 ABGCS.CacheSpellData(687, "Demon Skin");
 ABGCS.CacheSpellData(706, "Demon Armor");
+ABGCS.CacheSpellData(28176, "Fel Armor");
 
 ABGCS.CacheSpellData(6201, "Create Healthstone (Minor)");
 ABGCS.CacheSpellData(6202, "Create Healthstone (Lesser)");

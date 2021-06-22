@@ -176,6 +176,7 @@ function ABGCode.InitializeCategories()
 
 		"WARLOCK", ABGCode.GetSpellNameByName("Demon Skin"),  ABGCode.GetSpellNameByName("Shadow Ward"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Demon Armor"), ABGCode.GetSpellNameByName("Shadow Ward"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Fel Armor"), ABGCode.GetSpellNameByName("Shadow Ward"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Shadow Ward"), ABGCode.GetSpellNameByName("Shadow Ward"),
 
 	})
