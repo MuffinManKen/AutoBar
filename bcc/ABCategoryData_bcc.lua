@@ -189,6 +189,8 @@ function ABGCode.InitializeCategories()
 		"DRUID", ABGCode.GetSpellNameByName("Moonkin Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Tree Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Travel Form"),
+		"DRUID", ABGCode.GetSpellNameByName("Flight Form"),
+		"DRUID", ABGCode.GetSpellNameByName("Swift Flight Form"),
 		"PALADIN", ABGCode.GetSpellNameByName("Devotion Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Retribution Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Concentration Aura"),
