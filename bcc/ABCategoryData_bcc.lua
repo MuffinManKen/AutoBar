@@ -187,7 +187,6 @@ function ABGCode.InitializeCategories()
 		"DRUID", ABGCode.GetSpellNameByName("Cat Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Aquatic Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Moonkin Form"),
-		"DRUID", ABGCode.GetSpellNameByName("Tree Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Travel Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Flight Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Swift Flight Form"),
@@ -385,7 +384,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.TreeForm"] = SpellsCategory:new( "Spell.TreeForm", spellIconList["Charge"],
 	{
-		"DRUID", ABGCode.GetSpellNameByName("Tree Form"),
+		--"DRUID", ABGCode.GetSpellNameByName("Tree Form"),
 	})
 
 	AutoBarCategoryList["Spell.Travel"] = SpellsCategory:new( "Spell.Travel", spellIconList["Charge"],
