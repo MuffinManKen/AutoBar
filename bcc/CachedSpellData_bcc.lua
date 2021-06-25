@@ -48,7 +48,7 @@ ABGCS.CacheSpellData(2641, "Dismiss Pet");
 ABGCS.CacheSpellData(6197, "Eagle Eye");
 ABGCS.CacheSpellData(6991, "Feed Pet");
 ABGCS.CacheSpellData(5384, "Feign Death");
-ABGCS.CacheSpellData(7093, "Intimidation");
+ABGCS.CacheSpellData(19577, "Intimidation");
 ABGCS.CacheSpellData(136, "Mend Pet");
 ABGCS.CacheSpellData(982, "Revive Pet");
 ABGCS.CacheSpellData(1515, "Tame Beast");
@@ -67,6 +67,7 @@ ABGCS.CacheSpellData(1499, "Freezing Trap");
 ABGCS.CacheSpellData(13809, "Frost Trap");
 ABGCS.CacheSpellData(13813, "Explosive Trap");
 ABGCS.CacheSpellData(13795, "Immolation Trap");
+ABGCS.CacheSpellData(34600, "Snake Trap");
 --#endregion
 
 --#region Mage
