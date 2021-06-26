@@ -82,29 +82,26 @@ function ABGCode.InitializeCategories()
 		"HUNTER", ABGCode.GetSpellNameByName("Aspect of the Viper"),
 	})
 
-	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"],
+	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"], nil,
 	{
-		"MAGE", ABGCode.GetSpellNameByName("Slow Fall"),
-		"MAGE", ABGCode.GetSpellNameByName("Arcane Intellect"),
-		"MAGE", ABGCode.GetSpellNameByName("Arcane Brilliance"),
-		"MAGE", ABGCode.GetSpellNameByName("Amplify Magic"),
-		"MAGE", ABGCode.GetSpellNameByName("Dampen Magic"),
-		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"),
-		"DRUID", ABGCode.GetSpellNameByName("Gift of the Wild"),
-		"DRUID", ABGCode.GetSpellNameByName("Thorns"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Protection"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Salvation"),
-		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
-		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Wisdom"),
-		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude");
-		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire");
-		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection");
-		"PRIEST", ABGCode.GetSpellNameByName("Prayer of Shadow Protection");
-		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"),
-		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"),
+		"MAGE", ABGCode.GetSpellNameByName("Slow Fall"), ABGCode.GetSpellNameByName("Slow Fall"),
+		"MAGE", ABGCode.GetSpellNameByName("Arcane Intellect"), ABGCode.GetSpellNameByName("Arcane Brilliance"),
+		"MAGE", ABGCode.GetSpellNameByName("Amplify Magic"), ABGCode.GetSpellNameByName("Amplify Magic"),
+		"MAGE", ABGCode.GetSpellNameByName("Dampen Magic"), ABGCode.GetSpellNameByName("Dampen Magic"),
+		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"), ABGCode.GetSpellNameByName("Gift of the Wild"),
+		"DRUID", ABGCode.GetSpellNameByName("Thorns"), ABGCode.GetSpellNameByName("Thorns"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"), ABGCode.GetSpellNameByName("Blessing of Might"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Protection"), ABGCode.GetSpellNameByName("Blessing of Protection"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"), ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Salvation"), ABGCode.GetSpellNameByName("Blessing of Salvation"),
+		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Kings"), ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Wisdom"), ABGCode.GetSpellNameByName("Greater Blessing of Wisdom"),
+		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude"), ABGCode.GetSpellNameByName("Prayer of Fortitude"),
+		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire"), ABGCode.GetSpellNameByName("Inner Fire"),
+		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection"), ABGCode.GetSpellNameByName("Prayer of Shadow Protection"),
+		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"), ABGCode.GetSpellNameByName("Water Walking"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"), ABGCode.GetSpellNameByName("Unending Breath"),
+		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = SpellsCategory:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],

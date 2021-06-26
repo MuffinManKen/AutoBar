@@ -133,6 +133,7 @@ ABGCS.CacheSpellData(1022, "Blessing of Protection");
 ABGCS.CacheSpellData(6940, "Blessing of Sacrifice");
 ABGCS.CacheSpellData(1038, "Blessing of Salvation");
 ABGCS.CacheSpellData(25898, "Greater Blessing of Kings");
+ABGCS.CacheSpellData(19742, "Blessing of Wisdom");
 ABGCS.CacheSpellData(25894, "Greater Blessing of Wisdom");
 ABGCS.CacheSpellData(633, "Lay on Hands");
 
@@ -159,6 +160,7 @@ ABGCS.CacheSpellData(20166, "Seal of Wisdom");
 --Priest
 ABGCS.CacheSpellData(588, "Inner Fire");
 ABGCS.CacheSpellData(1243, "Power Word: Fortitude");
+ABGCS.CacheSpellData(21562, "Prayer of Fortitude");
 ABGCS.CacheSpellData(17, "Power Word: Shield");
 ABGCS.CacheSpellData(15487, "Silence");
 ABGCS.CacheSpellData(976, "Shadow Protection");
