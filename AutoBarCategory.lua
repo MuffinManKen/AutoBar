@@ -315,7 +315,15 @@ local SpellsCategory = ABGCode.SpellsCategory
 -- Icon from castList is used unless not available but rightClickList is
 -- NOTE: Muffin.Mounts is the only SpellsCategory with a PT Set
 ---@param p_description string
+---@param p_cast_list table
 function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickList, p_pt_set)
+
+	if(type(p_cast_list) ~= "table" and p_cast_list ~= nil) then
+		ABGCode:LogWarning("Category:", p_description, " is passing a bad cast_list:", p_cast_list)
+	end
+	if(type(rightClickList) ~= "table" and rightClickList ~= nil) then
+		ABGCode:LogWarning("Category:", p_description, " is passing a bad rightClickList:", rightClickList)
+	end
 
 	local obj = CreateFromMixins(self)
 
