@@ -85,6 +85,7 @@ ABGCS.CacheSpellData(759, "Conjure Mana Agate");
 ABGCS.CacheSpellData(10054, "Conjure Mana Ruby");
 ABGCS.CacheSpellData(3552, "Conjure Mana Jade");
 ABGCS.CacheSpellData(10053, "Conjure Mana Citrine");
+ABGCS.CacheSpellData(27101, "Conjure Mana Emerald");
 
 
 ABGCS.CacheSpellData(11426, "Ice Barrier");

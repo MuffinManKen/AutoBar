@@ -45,6 +45,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Ruby"),
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Agate"),
 		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Citrine"),
+		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Emerald"),
 	})
 
 
