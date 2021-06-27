@@ -139,6 +139,7 @@ ABGCS.CacheSpellData(633, "Lay on Hands");
 
 ABGCS.CacheSpellData(19740, "Blessing of Might"); --y
 
+ABGCS.CacheSpellData(32223, "Crusader Aura");
 ABGCS.CacheSpellData(465, "Devotion Aura");
 ABGCS.CacheSpellData(7294, "Retribution Aura");
 ABGCS.CacheSpellData(19746, "Concentration Aura");
@@ -154,6 +155,7 @@ ABGCS.CacheSpellData(20164, "Seal of Justice");
 ABGCS.CacheSpellData(20165, "Seal of Light");
 ABGCS.CacheSpellData(20154, "Seal of Righteousness");
 ABGCS.CacheSpellData(21082, "Seal of the Crusader");
+ABGCS.CacheSpellData(348700, "Seal of the Martyr");
 ABGCS.CacheSpellData(20166, "Seal of Wisdom");
 --#endregion
 

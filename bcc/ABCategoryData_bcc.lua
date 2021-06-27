@@ -186,6 +186,7 @@ function ABGCode.InitializeCategories()
 		"DRUID", ABGCode.GetSpellNameByName("Travel Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Flight Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Swift Flight Form"),
+		"PALADIN", ABGCode.GetSpellNameByName("Crusader Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Devotion Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Retribution Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Concentration Aura"),
@@ -204,6 +205,7 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Light"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Righteousness"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of the Crusader"),
+		"PALADIN", ABGCode.GetSpellNameByName("Seal of the Martyr"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Wisdom"),
 	})
 
