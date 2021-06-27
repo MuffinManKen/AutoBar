@@ -459,7 +459,6 @@ if (GetLocale() == "zhCN") then
 		["Spell.Warlock.Create Healthstone"] = "制造治疗石";
 		["Spell.Warlock.Create Soulstone"] = "制造灵魂石";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "法力石";
-		["Spell.Mage.Conjure Mana Stone"] = "制造法力石";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "昏睡药水";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "恢复药水";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "石像";

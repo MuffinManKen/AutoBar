@@ -459,7 +459,6 @@ if (GetLocale() == "deDE") then
 		["Spell.Warlock.Create Healthstone"] = "Herstellen Healthstone",
 		["Spell.Warlock.Create Soulstone"] = "Herstellen Soulstone",
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Manasteine",
-		["Spell.Mage.Conjure Mana Stone"] = "Manasteine herbeizaubern";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "Abklingzeit: Traumloser Schlaf";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "Abklingzeit: Verjüngungstränke";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "Abklingzeit: Stone Statues";

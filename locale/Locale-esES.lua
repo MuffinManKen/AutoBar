@@ -457,7 +457,6 @@ if (GetLocale() == "esES") then
 		["Spell.Warlock.Create Healthstone"] = "Crear Piedra de Salud";
 		["Spell.Warlock.Create Soulstone"] = "Crear Piedra del Alma";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Piedras de Maná";
-		["Spell.Mage.Conjure Mana Stone"] = "Conjurar Piedras de Maná";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "Poción de letargo sin sueños";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "Pociones de Rejuvenecimiento";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "Estátuas de Piedra";

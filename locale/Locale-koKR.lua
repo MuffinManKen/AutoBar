@@ -459,7 +459,6 @@ if (GetLocale() == "koKR") then
 		["Spell.Warlock.Create Healthstone"] = "생명석 창조";
 		["Spell.Warlock.Create Soulstone"] = "영혼석 창조";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "마나석";
-		["Spell.Mage.Conjure Mana Stone"] = "마나석 창조";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "숙면의 물약";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "회복 물약";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "돌 조각상";

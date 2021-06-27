@@ -461,7 +461,6 @@ if (GetLocale() == "ptBR") then
 		["Spell.Warlock.Create Healthstone"] = "Create Healthstone";
 		["Spell.Warlock.Create Soulstone"] = "Create Soulstone";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Mana Gem";
-		["Spell.Mage.Conjure Mana Stone"] = "Conjure Mana Gem";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "Dreamless Sleep";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "Rejuvenation Potions";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "Stone Statues";

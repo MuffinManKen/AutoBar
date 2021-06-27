@@ -459,7 +459,6 @@ if (GetLocale() == "ruRU") then
 		["Spell.Warlock.Create Healthstone"] = "Создать Камень здоровья";
 		["Spell.Warlock.Create Soulstone"] = "Создать Камень души";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Камни маны";
-		["Spell.Mage.Conjure Mana Stone"] = "Сотворение Камня маны";
 		["Consumable.Cooldown.Stone.Rejuvenation.Dreamless Sleep"] = "Мирный сон";
 		["Consumable.Cooldown.Potion.Rejuvenation"] = "Зелья Омоложения";
 		["Consumable.Cooldown.Stone.Health.Statue"] = "Каменные статуетки";
