@@ -167,6 +167,13 @@ ABGCS.CacheSpellData(17, "Power Word: Shield");
 ABGCS.CacheSpellData(15487, "Silence");
 ABGCS.CacheSpellData(976, "Shadow Protection");
 ABGCS.CacheSpellData(27683, "Prayer of Shadow Protection");
+ABGCS.CacheSpellData(34433, "Shadowfiend");
+ABGCS.CacheSpellData(18137, "Shadowguard");
+ABGCS.CacheSpellData(13896, "Feedback");
+ABGCS.CacheSpellData(2651, "Elune's Grace");
+ABGCS.CacheSpellData(2652, "Touch of Weakness");
+ABGCS.CacheSpellData(6346, "Fear Ward");
+
 
 --Rogue
 ABGCS.CacheSpellData(1842, "Disarm Trap");
