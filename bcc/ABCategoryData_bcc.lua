@@ -300,7 +300,8 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Recklessness"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Shadow"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of the Elements"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Weakness"),	--y
+		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Weakness"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Exhaustion"),
 	})
 
 

@@ -266,6 +266,7 @@ ABGCS.CacheSpellData(1714, "Curse of Tongues");
 ABGCS.CacheSpellData(702, "Curse of Weakness"); --y
 ABGCS.CacheSpellData(17862, "Curse of Shadow");
 ABGCS.CacheSpellData(1490, "Curse of the Elements");
+ABGCS.CacheSpellData(18223, "Curse of Exhaustion");
 
 ABGCS.CacheSpellData(693, "Create Soulstone (Minor)");
 ABGCS.CacheSpellData(20752, "Create Soulstone (Lesser)");
