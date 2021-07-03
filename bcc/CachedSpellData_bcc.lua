@@ -74,9 +74,15 @@ ABGCS.CacheSpellData(34600, "Snake Trap");
 ABGCS.CacheSpellData(168, "Frost Armor");
 ABGCS.CacheSpellData(7302, "Ice Armor");
 ABGCS.CacheSpellData(6117, "Mage Armor");
+ABGCS.CacheSpellData(30482, "Molten Armor");
+ABGCS.CacheSpellData(27619, "Ice Block");
+ABGCS.CacheSpellData(11426, "Ice Barrier");
 
 ABGCS.CacheSpellData(1459, "Arcane Intellect");
 ABGCS.CacheSpellData(23028, "Arcane Brilliance");
+ABGCS.CacheSpellData(130, "Slow Fall");
+ABGCS.CacheSpellData(1008, "Amplify Magic");
+ABGCS.CacheSpellData(604, "Dampen Magic");
 
 ABGCS.CacheSpellData(5504, "Conjure Water");
 ABGCS.CacheSpellData(587, "Conjure Food");
@@ -87,17 +93,13 @@ ABGCS.CacheSpellData(3552, "Conjure Mana Jade");
 ABGCS.CacheSpellData(10053, "Conjure Mana Citrine");
 ABGCS.CacheSpellData(27101, "Conjure Mana Emerald");
 
-
-ABGCS.CacheSpellData(11426, "Ice Barrier");
-ABGCS.CacheSpellData(130, "Slow Fall");
-ABGCS.CacheSpellData(1008, "Amplify Magic");
-ABGCS.CacheSpellData(604, "Dampen Magic");
+ABGCS.CacheSpellData(31687, "Summon Water Elemental");
 
 --ABGCS.CacheSpellData(42955, "Conjure Refreshment");
 --ABGCS.CacheSpellData(43987, "Conjure Refreshment Table");
 ABGCS.CacheSpellData(7870, "Lesser Invisibility");
 ABGCS.CacheSpellData(66, "Invisibility");
-ABGCS.CacheSpellData(27619, "Ice Block");
+
 ABGCS.CacheSpellData(11418, "Portal: Undercity");
 ABGCS.CacheSpellData(3563, "Teleport: Undercity");
 ABGCS.CacheSpellData(11420, "Portal: Thunder Bluff");
@@ -110,7 +112,6 @@ ABGCS.CacheSpellData(11416, "Portal: Ironforge");
 ABGCS.CacheSpellData(3562, "Teleport: Ironforge");
 ABGCS.CacheSpellData(11417, "Portal: Orgrimmar");
 ABGCS.CacheSpellData(3567, "Teleport: Orgrimmar");
-
 ABGCS.CacheSpellData(49361, "Portal: Stonard");
 ABGCS.CacheSpellData(49360, "Portal: Theramore");
 ABGCS.CacheSpellData(32266, "Portal: Exodar");
