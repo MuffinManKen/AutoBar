@@ -345,6 +345,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Charge"] = SpellsCategory:new( "Spell.Charge", spellIconList["Charge"],
 	{
+		"ROGUE", ABGCode.GetSpellNameByName("Shadowstep"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Charge"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Intercept"),
 	})
