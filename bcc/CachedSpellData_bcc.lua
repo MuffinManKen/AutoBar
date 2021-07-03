@@ -160,7 +160,7 @@ ABGCS.CacheSpellData(348700, "Seal of the Martyr");
 ABGCS.CacheSpellData(20166, "Seal of Wisdom");
 --#endregion
 
---Priest
+--#region Priest
 ABGCS.CacheSpellData(588, "Inner Fire");
 ABGCS.CacheSpellData(1243, "Power Word: Fortitude");
 ABGCS.CacheSpellData(21562, "Prayer of Fortitude");
@@ -174,7 +174,7 @@ ABGCS.CacheSpellData(13896, "Feedback");
 ABGCS.CacheSpellData(2651, "Elune's Grace");
 ABGCS.CacheSpellData(2652, "Touch of Weakness");
 ABGCS.CacheSpellData(6346, "Fear Ward");
-
+--#endregion
 
 --Rogue
 ABGCS.CacheSpellData(1842, "Disarm Trap");
