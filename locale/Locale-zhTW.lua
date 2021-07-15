@@ -455,7 +455,6 @@ if (GetLocale() == "zhTW") then
 		["Consumable.Anti-Venom"] = "抗毒藥劑";
 
 		["Consumable.Warlock.Soulstone"] = "靈魂石";
-		["Consumable.Cooldown.Stone.Health.Warlock"] = "治療石";
 		["Spell.Warlock.Create Healthstone"] = "製造治療石";
 		["Spell.Warlock.Create Soulstone"] = "製造靈魂石";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "法力寶石";

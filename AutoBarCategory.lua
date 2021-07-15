@@ -747,8 +747,6 @@ function ABGCode.InitializeAllCategories()
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Mana.Pvp"]:SetBattleground(true)
 
 
-	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Warlock"] = ItemsCategory:new("Consumable.Cooldown.Stone.Health.Warlock", "INV_Stone_04", "Consumable.Cooldown.Stone.Health.Warlock")
-
 	AutoBarCategoryList["Misc.Booze"] = ItemsCategory:new("Misc.Booze", "INV_Drink_03", "Misc.Booze")
 	AutoBarCategoryList["Misc.Booze"]:SetNonCombat(true)
 

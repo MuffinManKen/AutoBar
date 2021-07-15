@@ -455,7 +455,6 @@ if (GetLocale() == "koKR") then
 		["Consumable.Anti-Venom"] = "해독제";
 
 		["Consumable.Warlock.Soulstone"] = "영혼석";
-		["Consumable.Cooldown.Stone.Health.Warlock"] = "생명석";
 		["Spell.Warlock.Create Healthstone"] = "생명석 창조";
 		["Spell.Warlock.Create Soulstone"] = "영혼석 창조";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "마나석";

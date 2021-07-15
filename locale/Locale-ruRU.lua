@@ -455,7 +455,6 @@ if (GetLocale() == "ruRU") then
 		["Consumable.Anti-Venom"] = "Противоядие";
 
 		["Consumable.Warlock.Soulstone"] = "Камни души";
-		["Consumable.Cooldown.Stone.Health.Warlock"] = "Камни здоровья";
 		["Spell.Warlock.Create Healthstone"] = "Создать Камень здоровья";
 		["Spell.Warlock.Create Soulstone"] = "Создать Камень души";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Камни маны";

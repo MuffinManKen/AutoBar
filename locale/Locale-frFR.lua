@@ -454,7 +454,6 @@ if (GetLocale() == "frFR") then
 		["Consumable.Anti-Venom"] = "Anti-Venin";
 
 		["Consumable.Warlock.Soulstone"] = "Soulstone";
-		["Consumable.Cooldown.Stone.Health.Warlock"] = "Pierre de soin";
 		["Spell.Warlock.Create Healthstone"] = "Créer une Pierre de soin";
 		["Spell.Warlock.Create Soulstone"] = "Créer une Pierre d'âme";
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Pierres de mana";

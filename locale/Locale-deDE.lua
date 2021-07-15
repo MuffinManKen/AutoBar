@@ -455,7 +455,6 @@ if (GetLocale() == "deDE") then
 		["Consumable.Anti-Venom"] = "Gegengift",
 
 		["Consumable.Warlock.Soulstone"] = "Seelenstein",
-		["Consumable.Cooldown.Stone.Health.Warlock"] = "Gesundheitssteine",
 		["Spell.Warlock.Create Healthstone"] = "Herstellen Healthstone",
 		["Spell.Warlock.Create Soulstone"] = "Herstellen Soulstone",
 		["Consumable.Cooldown.Stone.Mana.Mana Stone"] = "Manasteine",
