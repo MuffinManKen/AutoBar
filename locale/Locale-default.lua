@@ -194,6 +194,7 @@ local quick_sets =
 	"Muffin.Order Hall.Order Resources",
 	"Muffin.Potion.Mana",
 	"Muffin.Misc.Reputation",
+	"Muffin.Misc.Repair",
 	"Muffin.Skill.Fishing.Misc",
 	"Muffin.Skill.Fishing.Rare Fish",
 	"Muffin.SunSongRanch",
