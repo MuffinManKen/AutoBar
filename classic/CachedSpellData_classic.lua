@@ -117,7 +117,7 @@ ABGCS.CacheSpellData(25898, "Greater Blessing of Kings");
 ABGCS.CacheSpellData(25894, "Greater Blessing of Wisdom");
 ABGCS.CacheSpellData(633, "Lay on Hands");
 
-ABGCS.CacheSpellData(19740, "Blessing of Might"); --y
+ABGCS.CacheSpellData(19740, "Blessing of Might");
 
 ABGCS.CacheSpellData(465, "Devotion Aura");
 ABGCS.CacheSpellData(7294, "Retribution Aura");
@@ -229,7 +229,7 @@ ABGCS.CacheSpellData(5500, "Sense Demons");
 
 ABGCS.CacheSpellData(704, "Curse of Recklessness");
 ABGCS.CacheSpellData(1714, "Curse of Tongues");
-ABGCS.CacheSpellData(702, "Curse of Weakness"); --y
+ABGCS.CacheSpellData(702, "Curse of Weakness");
 ABGCS.CacheSpellData(17862, "Curse of Shadow");
 ABGCS.CacheSpellData(1490, "Curse of the Elements");
 
@@ -266,20 +266,20 @@ ABGCS.CacheSpellData(2458, "Berserker Stance");
 
 
 --Skills
-ABGCS.CacheSpellData(3273, "First Aid"); --y
-ABGCS.CacheSpellData(2259, "Alchemy"); --y
-ABGCS.CacheSpellData(818, "Basic Campfire"); --y
-ABGCS.CacheSpellData(2018, "Blacksmithing"); --y
+ABGCS.CacheSpellData(3273, "First Aid");
+ABGCS.CacheSpellData(2259, "Alchemy");
+ABGCS.CacheSpellData(818, "Basic Campfire");
+ABGCS.CacheSpellData(2018, "Blacksmithing");
 ABGCS.CacheSpellData(2550, "Cooking");	--y
-ABGCS.CacheSpellData(13262, "Disenchant"); --y
-ABGCS.CacheSpellData(7411, "Enchanting");  --y
-ABGCS.CacheSpellData(4036, "Engineering"); --y
-ABGCS.CacheSpellData(2108, "Leatherworking"); --y
-ABGCS.CacheSpellData(2656, "Smelting"); --y
-ABGCS.CacheSpellData(3908, "Tailoring"); --y
-ABGCS.CacheSpellData(7620, "Fishing"); --y
-ABGCS.CacheSpellData(2580, "Find Minerals"); --y
-ABGCS.CacheSpellData(2383, "Find Herbs"); --y
+ABGCS.CacheSpellData(13262, "Disenchant");
+ABGCS.CacheSpellData(7411, "Enchanting");
+ABGCS.CacheSpellData(4036, "Engineering");
+ABGCS.CacheSpellData(2108, "Leatherworking");
+ABGCS.CacheSpellData(2656, "Smelting");
+ABGCS.CacheSpellData(3908, "Tailoring");
+ABGCS.CacheSpellData(7620, "Fishing");
+ABGCS.CacheSpellData(2580, "Find Minerals");
+ABGCS.CacheSpellData(2383, "Find Herbs");
 
 
 local cache_timer_stop = debugprofilestop();

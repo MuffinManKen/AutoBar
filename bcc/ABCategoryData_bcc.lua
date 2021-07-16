@@ -307,7 +307,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Fishing"] = SpellsCategory:new("Spell.Fishing", spellIconList["Fishing"],
 	{
-		"*", ABGCode.GetSpellNameByName("Fishing"), --y
+		"*", ABGCode.GetSpellNameByName("Fishing"),
 	})
 
 
