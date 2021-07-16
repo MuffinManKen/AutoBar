@@ -329,6 +329,7 @@ function ABGCode.InitializeCategories()
 	})
 
 	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"], {
+		"PALADIN", ABGCode.GetSpellNameByName("Concentration Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Crusader Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Devotion Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Retribution Aura"),

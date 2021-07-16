@@ -196,6 +196,7 @@ ABGCS.CacheSpellData(32223, "Crusader Aura"); --y
 ABGCS.CacheSpellData(465, "Devotion Aura"); --y
 ABGCS.CacheSpellData(183435, "Retribution Aura"); --y
 
+ABGCS.CacheSpellData(317920, "Concentration Aura");
 
 --Priest
 ABGCS.CacheSpellData(17, "Power Word: Shield"); --y
