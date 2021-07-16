@@ -1432,7 +1432,7 @@ function AutoBar:CreateOptionsAce3()
 							width = 1.2,
 							name = "Throttle Event Limit",
 							desc = "Events happening faster than this limit are ignored (in seconds)",
-							min = 0, max = 10, step = 0.1, bigStep = 0.5,
+							min = 0, max = 5, step = 0.05, bigStep = 0.25,
 						},
 
 					}
