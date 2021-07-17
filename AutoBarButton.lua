@@ -1822,13 +1822,18 @@ end
 
 
 
-local AutoBarButtonCooldownDrums = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonCooldownDrums"] = AutoBarButtonCooldownDrums
+local AutoBarButtonDrums = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonDrums"] = AutoBarButtonDrums
 
-function AutoBarButtonCooldownDrums.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownDrums.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonDrums.prototype:init(parentBar, buttonDB)
+	AutoBarButtonDrums.super.prototype.init(self, parentBar, buttonDB)
 
-	self:AddCategory("Consumable.Cooldown.Drums")
+	if (AutoBarCategoryList["Muffin.Drum"]) then
+		self:AddCategory("Muffin.Drum")
+	end
+	if (AutoBarCategoryList["Consumable.Cooldown.Drums"]) then
+		self:AddCategory("Consumable.Cooldown.Drums")
+	end
 end
 
 

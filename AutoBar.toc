@@ -24,6 +24,7 @@ libs/muffin_ui_toolkit.lua
 libs/muffin_whats_new.lua
 
 retail/MuffinLibPTSets/LibPT-Muffin.BattlePet.lua
+retail/MuffinLibPTSets/LibPT-Muffin.Drum.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Flasks.lua

@@ -212,7 +212,6 @@ if (GetLocale() == "deDE") then
 		["AutoBarButtonClassPet"] = "klassen Begleiter",
 		["AutoBarButtonConjure"] = "Conjure",
 		["AutoBarButtonOpenable"] = "Openable",
-		["AutoBarButtonCooldownDrums"] = "Abklingzeit: Drums",
 		["AutoBarButtonCooldownPotionCombat"] = "Trank Abklingzeit: Combat",
 		["AutoBarButtonCooldownPotionHealth"] = "Trank Abklingzeit: Health",
 		["AutoBarButtonCooldownPotionMana"] = "Trank Abklingzeit: Mana",

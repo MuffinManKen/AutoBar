@@ -475,10 +475,10 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (not AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"]) then
-		AutoBar.db.account.buttonList["AutoBarButtonCooldownDrums"] = {
-			buttonKey = "AutoBarButtonCooldownDrums",
-			buttonClass = "AutoBarButtonCooldownDrums",
+	if (not AutoBar.db.account.buttonList["AutoBarButtonDrums"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonDrums"] = {
+			buttonKey = "AutoBarButtonDrums",
+			buttonClass = "AutoBarButtonDrums",
 			barKey = "AutoBarClassBarBasic",
 			defaultButtonIndex = 14,
 			enabled = true,
@@ -1108,6 +1108,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
 			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
+			"AutoBarButtonCooldownDrums",
 		}
 	elseif (ABGData.is_mainline_wow) then
 
@@ -1120,9 +1121,12 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
 			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
+			"AutoBarButtonCooldownDrums",
 		}
 	else
-		deprecated_buttons = {}
+		deprecated_buttons = {
+			"AutoBarButtonCooldownDrums",
+		}
 	end
 
 	for _, dep in ipairs(deprecated_buttons) do

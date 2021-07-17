@@ -193,7 +193,6 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonClassPets3"] = "Pet Misc",
 		["AutoBarButtonConjure"] = "Conjure",
 		["AutoBarButtonOpenable"] = "Openable",
-		["AutoBarButtonCooldownDrums"] = "Cooldown: Drums",
 		["AutoBarButtonCooldownPotionCombat"] = "Potion Cooldown: Combat",
 		["AutoBarButtonCooldownPotionHealth"] = "Potion Cooldown: Health",
 		["AutoBarButtonCooldownPotionMana"] = "Potion Cooldown: Mana",

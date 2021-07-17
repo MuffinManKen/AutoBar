@@ -44,7 +44,7 @@
 --	BINDING_NAME_AutoBarButtonToyBox_X = L["AutoBarButtonToyBox"]
 
 	BINDING_HEADER_AutoBarCooldownHeader = L["AutoBarCooldownHeader"]
-	BINDING_NAME_AutoBarButtonCooldownDrums_X = L["AutoBarButtonCooldownDrums"]
+	BINDING_NAME_AutoBarButtonDrums_X = L["AutoBarButtonDrums"]
 	BINDING_NAME_AutoBarButtonCooldownPotionCombat_X = L["AutoBarButtonCooldownPotionCombat"]
 	BINDING_NAME_AutoBarButtonCooldownPotionHealth_X = L["AutoBarButtonCooldownPotionHealth"]
 	BINDING_NAME_AutoBarButtonCooldownStoneHealth_X = L["AutoBarButtonCooldownStoneHealth"]

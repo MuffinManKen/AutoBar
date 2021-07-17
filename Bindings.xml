@@ -14,8 +14,8 @@
 	<Binding name="AutoBarButtonFoodCombo_X"					category="AutoBar "/>
 	<Binding name="AutoBarButtonBuff_X"							category="AutoBar "/>
 	<Binding name="AutoBarButtonBuffWeapon1_X"				category="AutoBar "/>
-	<Binding name="AutoBarButtonCooldownDrums_X"				category="AutoBar "	header="AutoBarCooldownHeader"/>
-	<Binding name="AutoBarButtonCooldownPotionCombat_X"	category="AutoBar "/>
+	<Binding name="AutoBarButtonDrums_X"				category="AutoBar "/>
+	<Binding name="AutoBarButtonCooldownPotionCombat_X"	category="AutoBar "	header="AutoBarCooldownHeader"/>
 	<Binding name="AutoBarButtonCooldownPotionHealth_X"	category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownStoneHealth_X"		category="AutoBar "/>
 	<Binding name="AutoBarButtonCooldownStoneMana_X"		category="AutoBar "/>

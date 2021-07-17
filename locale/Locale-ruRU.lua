@@ -212,7 +212,6 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonClassPet"] = "Классовые питомцы",
 		["AutoBarButtonConjure"] = "Сотворение",
 		["AutoBarButtonOpenable"] = "Openable",
-		["AutoBarButtonCooldownDrums"] = "Перезарядка: Барабаны",
 		["AutoBarButtonCooldownPotionCombat"] = "Перезарядка Зелья: Боевые",
 		["AutoBarButtonCooldownPotionHealth"] = "Перезарядка Зелья: Здоровья",
 		["AutoBarButtonCooldownPotionMana"] = "Перезарядка Зелья: Маны",

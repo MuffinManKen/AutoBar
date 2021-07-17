@@ -212,7 +212,6 @@ if (GetLocale() == "zhCN") then
 		["AutoBarButtonClassPet"] = "战斗宠物",
 		["AutoBarButtonConjure"] = "法术: 制造",
 		["AutoBarButtonOpenable"] = "Openable",
-		["AutoBarButtonCooldownDrums"] = "冷却：战鼓",
 		["AutoBarButtonCooldownPotionCombat"] = "药水冷却：战斗",
 		["AutoBarButtonCooldownPotionHealth"] = "药水冷却：生命",
 		["AutoBarButtonCooldownPotionMana"] = "药水冷却：法力",

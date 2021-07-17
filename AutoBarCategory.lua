@@ -757,8 +757,6 @@ function ABGCode.InitializeAllCategories()
 
 	AutoBarCategoryList["Consumable.Cooldown.Stone.Health.Statue"] = ItemsCategory:new("Consumable.Cooldown.Stone.Health.Statue", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone.Health.Statue")
 
-	AutoBarCategoryList["Consumable.Cooldown.Drums"] = ItemsCategory:new("Consumable.Cooldown.Drums", "INV_Misc_Drum_05", "Consumable.Cooldown.Drums")
-
 	AutoBarCategoryList["Consumable.Cooldown.Potion"] = ItemsCategory:new("Consumable.Cooldown.Potion", "INV_Potion_47", "Consumable.Cooldown.Potion")
 
 	AutoBarCategoryList["Consumable.Cooldown.Stone"] = ItemsCategory:new("Consumable.Cooldown.Stone", "INV_Misc_Statue_10", "Consumable.Cooldown.Stone")

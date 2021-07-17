@@ -212,7 +212,6 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonClassPet"] = "직업 소환수",
 		["AutoBarButtonConjure"] = "창조",
 		["AutoBarButtonOpenable"] = "열기",
-		["AutoBarButtonCooldownDrums"] = "대기시간: 북소리",
 		["AutoBarButtonCooldownPotionCombat"] = "물약 대기시간: 전투",
 		["AutoBarButtonCooldownPotionHealth"] = "물약 대기시간: 생명력",
 		["AutoBarButtonCooldownPotionMana"] = "물약 대기시간: 마나",
