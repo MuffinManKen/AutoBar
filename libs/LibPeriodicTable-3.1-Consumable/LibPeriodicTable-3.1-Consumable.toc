@@ -1,4 +1,4 @@
-﻿## Interface: 80100
+﻿## Interface: 90100
 ## LoadOnDemand: 1
 ## Title: Lib: PeriodicTable-3.1 [|cffeda55fConsumable|r]
 ## Notes: PeriodicTable data module.
