@@ -1235,7 +1235,7 @@ end
 
 -- Based on the active Bars and their Buttons display them
 function ABGCS:UpdateButtons(_p_behaviour)
-	ABGCode.LogEventStart("AutoBar:UpdateButtons")
+	ABGCode.LogEventStart("ABGCS:UpdateButtons")
 	for _button_name, button in pairs(AutoBar.buttonListDisabled) do
 		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Disabled " .. _button_name); end;
 		button:Disable()
