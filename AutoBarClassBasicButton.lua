@@ -249,18 +249,20 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		return;
 	end
 
-	local item_guid = self.frame:GetAttribute("AutoBarGUID")
-	local item_data = ABGCode.InfoFromGUID(item_guid)
 
 	local start, duration, enabled = 0, 0, 0
 
 	if (itemType == "item") then
-		local itemId = self.frame:GetAttribute("itemId")
-		if (itemId) then
-			start, duration, enabled = GetItemCooldown(itemId)
+		local item_id = self.frame:GetAttribute("itemId")
+		if (item_id) then
+			start, duration, enabled = GetItemCooldown(item_id)
 		end
-	elseif (itemType == "toy" and item_data) then
-		start, duration, enabled = GetItemCooldown(item_data.item_id)
+	elseif (itemType == "toy") then
+		local item_guid = self.frame:GetAttribute("AutoBarGUID")
+		local item_data = ABGCode.InfoFromGUID(item_guid)
+		if (item_data) then
+			start, duration, enabled = GetItemCooldown(item_data.item_id)
+		end
 --	elseif (itemType == "macro") then --ToDo some day
 --			local macroText = self.frame:GetAttribute("macrotext")
 --			SecureCmdOptionParse()?
