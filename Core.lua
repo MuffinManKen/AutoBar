@@ -1090,7 +1090,9 @@ function AutoBar:ABSchedulerTick()
 	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
 		tick.ScheduledUpdate = ABGCS:UpdateObjects(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
-		tick.ScheduledUpdate = ABGCS:UpdateItems(false, tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS:UpdateItems(tick.BehaveTicker);
+	elseif(tick.ScheduledUpdate == tick.UpdateAttributesID) then
+		tick.ScheduledUpdate = ABGCS:UpdateAttributes(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateButtonsID) then
 		tick.ScheduledUpdate = ABGCS:UpdateButtons(tick.BehaveTicker);
 	else
@@ -1140,11 +1142,11 @@ function ABGCS:UpdateSpells(p_behaviour)
 	AutoBarSearch.stuff:ScanMacros()
 	ABGCode.RefreshCategories()
 
-	ABGCS:UpdateObjects();	--We don't pass the behaviour flag along since we want calls to UpdateSpells to complete immediately
+--	ABGCS:UpdateObjects();	--We don't pass the behaviour flag along since we want calls to UpdateSpells to complete immediately
 
 	ABGCode.LogEventEnd("ABGCS:UpdateSpells")
 
-	return tick.UpdateCompleteID;
+	return tick.UpdateObjectsID;
 end
 
 function ABGCS:UpdateObjects(p_behaviour)
@@ -1174,7 +1176,7 @@ function ABGCS:UpdateObjects(p_behaviour)
 		end
 	end
 
-	tick.FullScanItemsFlag = true
+	--tick.FullScanItemsFlag = true
 
 	local ret = tick.UpdateItemsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
@@ -1200,10 +1202,10 @@ function ABGCS:UpdateItems(p_behaviour)
 		AutoBarSearch:UpdateScan()
 	end
 
-	ABGCS:UpdateAttributes(p_behaviour)
+	--ABGCS:UpdateAttributes(p_behaviour)
 
 	ABGCode.LogEventEnd("ABGCS:UpdateItems")
-	return tick.UpdateCompleteID;
+	return tick.UpdateAttributesID;
 
 end
 
