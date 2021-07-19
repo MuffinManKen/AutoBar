@@ -127,7 +127,8 @@ function AutoBar.InitializeDB()
 	AutoBarDB2 = AutoBarDB2 or {}
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBar.db.account.customCategories or {}
 	AutoBarDB2.whatsnew_version = AutoBarDB2.whatsnew_version or AutoBarDB.whatsnew_version
-	AutoBarDB2.performance_threshold = AutoBarDB2.performance_threshold or 0.002
+	AutoBarDB2.performance_threshold = AutoBarDB2.performance_threshold or 100
+	if (AutoBarDB2.performance_threshold < 20) then AutoBarDB2.performance_threshold = 100; end;
 
 	AutoBar:UpgradeVersion()
 	AutoBar:InitializeDefaults()
