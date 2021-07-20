@@ -95,6 +95,23 @@ AutoBarGlobalDataObject.TickScheduler =
 }
 
 
+function AB.Dump(o, p_max_depth)
+	local depth = p_max_depth or 5
+	if type(o) == 'table' and (depth >= 1)  then
+		depth = depth - 1
+		local s = '{ '
+		for k,v in pairs(o) do
+			if type(k) ~= 'number' then
+				k = '"'..k..'"'
+			end
+			s = s .. '['..k..'] = ' .. AB.Dump(v, depth) .. ','
+		end
+		return s .. '} '
+	else
+		return tostring(o)
+	end
+end
+
 
 local function table_pack(...)
   return { n = select("#", ...), ... }

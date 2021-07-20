@@ -242,7 +242,7 @@ function AutoBar:InitializeZero()
 	AutoBar:InitializeOptions()
 	AutoBar.Initialize()
 
-	ABGCS:UpdateCategories()
+	ABGCS.UpdateCategories()
 	ABGCode.RegisterOverrideBindings()
 	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 
@@ -322,7 +322,7 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	local debug_me = false
 	local category = AutoBarCategoryList[p_category_name]
 
-	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, AutoBar:Dump(category)); end;
+	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, AB.Dump(category)); end;
 
 	local item_name, item_id = AutoBar.ItemLinkDecode(p_item_link)
 	category.items[#category.items + 1] = item_id
@@ -598,7 +598,7 @@ function ABGCode.events.PLAYER_REGEN_DISABLED(p_arg1)
 		LibKeyBound:Deactivate()
 	end
 
-	ABGCS:UpdateActive()
+	ABGCS.UpdateActive()
 	AceCfgDlg:Close("AutoBar")
 
 	ABGCode.LogEventEnd("PLAYER_REGEN_DISABLED", p_arg1)
@@ -649,7 +649,7 @@ function ABGCode.events.UPDATE_BATTLEFIELD_STATUS()
 		end
 		if (AutoBar.inBG ~= bgStatus) then
 			AutoBar.inBG = bgStatus
-			ABGCS:UpdateActive();
+			ABGCS.UpdateActive();
 		end
 	end
 
@@ -775,22 +775,22 @@ end
 function AutoBar:MoveBarModeToggle()
 --print("AutoBar:MoveBarModeToggle")
 	if (LibStickyFrames:GetGroup()) then
-		AutoBar:MoveBarModeOff()
+		self:MoveBarModeOff()
 	else
-		AutoBar:MoveBarModeOn()
+		self:MoveBarModeOn()
 	end
 end
 
 function AutoBar:MoveBarModeOff()
 	LibStickyFrames:SetGroup(nil)
-	AutoBar.stickyMode = false
+	self.stickyMode = false
 end
 
 function AutoBar:MoveBarModeOn()
 	LibKeyBound:Deactivate()
-	AutoBar:MoveButtonsModeOff()
+	self:MoveButtonsModeOff()
 	LibStickyFrames:SetGroup(true)
-	AutoBar.stickyMode = true
+	self.stickyMode = true
 end
 
 function AutoBar.OnSetGroup(group)
@@ -850,10 +850,10 @@ end
 
 
 function AutoBar:MoveButtonsModeToggle()
-	if AutoBar.moveButtonsMode then
-		AutoBar:MoveButtonsModeOff()
+	if self.moveButtonsMode then
+		self:MoveButtonsModeOff()
 	else
-		AutoBar:MoveButtonsModeOn()
+		self:MoveButtonsModeOn()
 	end
 end
 
@@ -866,7 +866,7 @@ function AutoBar:MoveButtonsModeOn()
 			bar:MoveButtonsModeOn()
 		end
 	end
-	ABGCS:UpdateActive()
+	ABGCS.UpdateActive()
 end
 
 function AutoBar:MoveButtonsModeOff()
@@ -876,7 +876,7 @@ function AutoBar:MoveButtonsModeOff()
 			bar:MoveButtonsModeOff()
 		end
 	end
-	ABGCS:UpdateActive()
+	ABGCS.UpdateActive()
 end
 
 
@@ -903,12 +903,12 @@ end
 
 -- Retrieve last object dragged from
 function AutoBar:GetDraggingObject()
-	return AutoBar.fromObject
+	return self.fromObject
 end
 
 -- Record last object dragged from
 function AutoBar:SetDraggingObject(fromObject)
-	AutoBar.fromObject = fromObject
+	self.fromObject = fromObject
 end
 
 
@@ -920,25 +920,8 @@ end
 --/script DEFAULT_CHAT_FRAME:AddMessage("" .. tostring())
 --/print GetMouseFocus():GetName()
 
-function AutoBar:Print(...)
+function AutoBar.Print(_self, ...)
 	print(...)
-end
-
-function AutoBar:Dump(o, p_max_depth)
-	local depth = p_max_depth or 5
-	if type(o) == 'table' and (depth >= 1)  then
-		depth = depth - 1
-		local s = '{ '
-		for k,v in pairs(o) do
-			if type(k) ~= 'number' then
-				k = '"'..k..'"'
-			end
-			s = s .. '['..k..'] = ' .. AutoBar:Dump(v, depth) .. ','
-		end
-		return s .. '} '
-	else
-		return tostring(o)
-	end
 end
 
 local StupidLogEnabled = false
@@ -964,7 +947,7 @@ function AutoBar:DumpWarningLog()
 
 	AutoBar:Print("Warnings/Errors occured in AutoBar:")
 
-	for i,v in ipairs(AutoBar.warning_log) do
+	for _i, v in ipairs(AutoBar.warning_log) do
 		AutoBar:Print(v)
 	end
 
@@ -1071,7 +1054,7 @@ end
 
 
 function AutoBar:ABSchedulerTick()
---print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate)
+ --if (tick.ScheduledUpdate ~= tick.UpdateCompleteID) then print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate); end;
 	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
 
 	--If we're in combat, catch it on the next tick so we don't cause a hitch in gameplay
@@ -1084,7 +1067,7 @@ function AutoBar:ABSchedulerTick()
 	end
 
 	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
-		tick.ScheduledUpdate = ABGCS:UpdateCategories(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateCategories(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
 		tick.ScheduledUpdate = ABGCS:UpdateSpells(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
@@ -1094,7 +1077,7 @@ function AutoBar:ABSchedulerTick()
 	elseif(tick.ScheduledUpdate == tick.UpdateAttributesID) then
 		tick.ScheduledUpdate = ABGCS:UpdateAttributes(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateButtonsID) then
-		tick.ScheduledUpdate = ABGCS:UpdateButtons(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateButtons(tick.BehaveTicker);
 	else
 print("     ", "Not sure what's happening", tick.ScheduledUpdate)
 	end
@@ -1127,7 +1110,7 @@ function ABGCode.UpdateCategories(p_behaviour)
 		ABGCode.UpdateCustomCategories()
 		ABGCS:UpdateSpells();	--We don't pass the behaviour flag along since we want calls to UpdateCategories to complete immediately
 	else
-		ret = tick.UpdateCategoriesID
+		ret = tick.UpdateSpellsID;
 	end
 
 	ABGCode.LogEventEnd("UpdateCategories", p_behaviour)
@@ -1142,11 +1125,15 @@ function ABGCS:UpdateSpells(p_behaviour)
 	AutoBarSearch.stuff:ScanMacros()
 	ABGCode.RefreshCategories()
 
---	ABGCS:UpdateObjects();	--We don't pass the behaviour flag along since we want calls to UpdateSpells to complete immediately
+	local ret = tick.UpdateObjectsID;
+	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
+		ABGCS:UpdateObjects();
+		ret = tick.UpdateCompleteID;
+	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateSpells")
+	ABGCode.LogEventEnd("ABGCS:UpdateSpells", p_behaviour)
 
-	return tick.UpdateObjectsID;
+	return ret;
 end
 
 function ABGCS:UpdateObjects(p_behaviour)
@@ -1184,7 +1171,7 @@ function ABGCS:UpdateObjects(p_behaviour)
 		ret = tick.UpdateCompleteID;
 	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateObjects")
+	ABGCode.LogEventEnd("ABGCS:UpdateObjects", p_behaviour)
 
 	return ret;
 
@@ -1202,10 +1189,14 @@ function ABGCS:UpdateItems(p_behaviour)
 		AutoBarSearch:UpdateScan()
 	end
 
-	--ABGCS:UpdateAttributes(p_behaviour)
+	local ret = tick.UpdateAttributesID;
+	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
+		ABGCS:UpdateAttributes();
+		ret = tick.UpdateCompleteID;
+	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateItems")
-	return tick.UpdateAttributesID;
+	ABGCode.LogEventEnd("ABGCS:UpdateItems", p_behaviour)
+	return ret;
 
 end
 
@@ -1217,14 +1208,14 @@ function ABGCS:UpdateAttributes(p_behaviour)
 		bar:UpdateAttributes()
 	end
 
-	ABGCS:UpdateActive(p_behaviour)
+	ABGCS.UpdateActive(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS:UpdateAttributes")
+	ABGCode.LogEventEnd("ABGCS:UpdateAttributes", p_behaviour)
 end
 
 -- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
-function ABGCS:UpdateActive(p_behaviour)
-	ABGCode.LogEventStart("ABGCS:UpdateActive")
+function ABGCS.UpdateActive(p_behaviour)
+	ABGCode.LogEventStart("ABGCS.UpdateActive")
 	for _bar_key, bar in pairs(AutoBar.barList) do
 		bar:UpdateActive()
 		bar:RefreshLayout()
@@ -1232,14 +1223,14 @@ function ABGCS:UpdateActive(p_behaviour)
 
 	ABGCS:UpdateButtons(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS:UpdateActive")
+	ABGCode.LogEventEnd("ABGCS.UpdateActive")
 end
 
 -- Based on the active Bars and their Buttons display them
-function ABGCS:UpdateButtons(_p_behaviour)
-	ABGCode.LogEventStart("ABGCS:UpdateButtons")
+function ABGCS.UpdateButtons(_p_behaviour)
+	ABGCode.LogEventStart("ABGCS.UpdateButtons")
 	for _button_name, button in pairs(AutoBar.buttonListDisabled) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Disabled " .. _button_name); end;
+		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Disabled " .. _button_name); end;
 		button:Disable()
 		--I don't see why we should update all of these if they're disabled.
 		--button:UpdateCooldown()
@@ -1249,7 +1240,7 @@ function ABGCS:UpdateButtons(_p_behaviour)
 		--button:UpdateUsable()
 	end
 	for button_key, button in pairs(AutoBar.buttonList) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS:UpdateButtons Enabled " .. buttonKey); end;
+		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Enabled " .. buttonKey); end;
 		assert(button.buttonDB.enabled, "In list but disabled " .. button_key)
 		button:SetupButton()
 		button:UpdateCooldown()
@@ -1258,7 +1249,7 @@ function ABGCS:UpdateButtons(_p_behaviour)
 		button:UpdateIcon()
 		button:UpdateUsable()
 	end
-	ABGCode.LogEventEnd("ABGCS:UpdateButtons", " #buttons " .. tostring(# AutoBar.buttonList))
+	ABGCode.LogEventEnd("ABGCS.UpdateButtons", " #buttons " .. tostring(# AutoBar.buttonList))
 
 	return tick.UpdateCompleteID;
 

@@ -348,7 +348,7 @@ function Stuff.prototype:ScanToyBox()
 
 	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
 		AutoBarSearch:RegisterToy(toy_data.item_id);
-		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AutoBar:Dump(toy_data))
+		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AB.Dump(toy_data))
 		self:Add(toy_guid, nil, nil, toy_guid)
 	end
 
@@ -358,7 +358,7 @@ function Stuff.prototype:ScanMacroText()
 
 	for macro_text_guid, _macro_text_data in pairs(AutoBarSearch.macro_text) do
 		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
-		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AutoBar:Dump(macro_text_data))
+		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AB.Dump(macro_text_data))
 		self:Add(macro_text_guid, nil, nil, macro_text_guid)
 	end
 
@@ -394,7 +394,7 @@ function Stuff.prototype:ScanSpells()
 		--local debug = (spellName == "Wild Charge")
 		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
 		spellInfo.canCast = AutoBarSearch:CanCastSpell(spellName)
-		--if (debug) then print("Spell Info:", AutoBar:Dump(spellInfo)); end;
+		--if (debug) then print("Spell Info:", AB.Dump(spellInfo)); end;
 		AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
 		if (spellInfo.canCast) then
 			self:Add(spellName, nil, nil, spellName)
@@ -1039,8 +1039,8 @@ function Sorted.prototype:SetBest(buttonKey)
 
 	local buttonDB = AutoBar.buttonDBList[buttonKey]
 	if (buttonDB.equipped) then
-		local name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
-		if (self:SwapToFront(sortedItems, itemId)) then
+		local _name, item_id = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
+		if (self:SwapToFront(sortedItems, item_id)) then
 			return
 		else
 			--ToDo: handle unknown items

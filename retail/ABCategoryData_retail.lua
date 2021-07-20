@@ -26,7 +26,7 @@ function ToyCategory:new(p_description, p_short_texture, p_pt_name)
 		--print("pt_name", p_pt_name);
 		local raw_list = ABGCode.AddPTSetToRawList({}, p_pt_name, false)
 		obj.all_items = ABGCode.RawListToItemIDList(raw_list)
-		--print("all_items", AutoBar:Dump(obj.all_items))
+		--print("all_items", AB.Dump(obj.all_items))
 	end
 
 	obj:Refresh()
