@@ -749,7 +749,7 @@ end
 --
 
 function AutoBar:ColorAutoBar()
-	for _i, bar in pairs(AutoBar.barList) do
+	for _i, bar in pairs(self.barList) do
 		if (bar.sharedLayoutDB.enabled) then
 			bar:ColorBars()
 		end
@@ -757,19 +757,19 @@ function AutoBar:ColorAutoBar()
 end
 
 function AutoBar:LIBKEYBOUND_ENABLED()
-	AutoBar:MoveBarModeOff()
-	AutoBar:MoveButtonsModeOff()
-	AutoBar.keyBoundMode = true
-	AutoBar:ColorAutoBar()
+	self:MoveBarModeOff()
+	self:MoveButtonsModeOff()
+	self.keyBoundMode = true
+	self:ColorAutoBar()
 end
 
 function AutoBar:LIBKEYBOUND_DISABLED()
-	AutoBar.keyBoundMode = nil
-	AutoBar:ColorAutoBar()
+	self.keyBoundMode = nil
+	self:ColorAutoBar()
 end
 
 function AutoBar:LIBKEYBOUND_MODE_COLOR_CHANGED()
-	AutoBar:ColorAutoBar()
+	self:ColorAutoBar()
 end
 
 function AutoBar:MoveBarModeToggle()
