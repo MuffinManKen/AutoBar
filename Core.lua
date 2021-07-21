@@ -775,22 +775,22 @@ end
 function AutoBar:MoveBarModeToggle()
 --print("AutoBar:MoveBarModeToggle")
 	if (LibStickyFrames:GetGroup()) then
-		self:MoveBarModeOff()
+		AutoBar:MoveBarModeOff()
 	else
-		self:MoveBarModeOn()
+		AutoBar:MoveBarModeOn()
 	end
 end
 
 function AutoBar:MoveBarModeOff()
 	LibStickyFrames:SetGroup(nil)
-	self.stickyMode = false
+	AutoBar.stickyMode = false
 end
 
 function AutoBar:MoveBarModeOn()
 	LibKeyBound:Deactivate()
-	self:MoveButtonsModeOff()
+	AutoBar:MoveButtonsModeOff()
 	LibStickyFrames:SetGroup(true)
-	self.stickyMode = true
+	AutoBar.stickyMode = true
 end
 
 function AutoBar.OnSetGroup(group)
