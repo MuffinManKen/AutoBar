@@ -959,7 +959,7 @@ end
 -- Add your Button custom options to the optionlist
 -- optionList[myCustomOptionKey]
 -- Call specific SetOption<Type> methods to do the actual setting
-function AutoBarButton.prototype:AddOptions(_option_list, _pass_value)
+function AutoBarButton.prototype.AddOptions(_self, _option_list, _pass_value)
 end
 
 
