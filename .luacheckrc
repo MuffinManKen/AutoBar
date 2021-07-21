@@ -83,6 +83,8 @@ globals = {
 
 	"LibStub",
 
+	"CONFIGMODE_CALLBACKS",
+
 	--Autobar Globals
 	"AutoBar",
 	"AutoBarDB2",
