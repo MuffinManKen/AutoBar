@@ -1195,7 +1195,7 @@ function ABGCS:UpdateItems(p_behaviour)
 		ret = tick.UpdateCompleteID;
 	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateItems", p_behaviour)
+	ABGCode.LogEventEnd("ABGCS:UpdateItems", tostring(p_behaviour))
 	return ret;
 
 end
@@ -1210,7 +1210,10 @@ function ABGCS:UpdateAttributes(p_behaviour)
 
 	ABGCS.UpdateActive(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS:UpdateAttributes", p_behaviour)
+	ABGCode.LogEventEnd("ABGCS:UpdateAttributes", tostring(p_behaviour))
+
+	return tick.UpdateCompleteID;
+
 end
 
 -- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
@@ -1223,12 +1226,17 @@ function ABGCS.UpdateActive(p_behaviour)
 
 	ABGCS:UpdateButtons(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS.UpdateActive")
+	ABGCode.LogEventEnd("ABGCS.UpdateActive", tostring(p_behaviour))
+
+	return tick.UpdateCompleteID;
+
 end
 
 -- Based on the active Bars and their Buttons display them
 function ABGCS.UpdateButtons(_p_behaviour)
 	ABGCode.LogEventStart("ABGCS.UpdateButtons")
+	local disabled_count, enabled_count = 0, 0
+
 	for _button_name, button in pairs(AutoBar.buttonListDisabled) do
 		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Disabled " .. _button_name); end;
 		button:Disable()
@@ -1238,6 +1246,7 @@ function ABGCS.UpdateButtons(_p_behaviour)
 		--button:UpdateHotkeys()
 		--button:UpdateIcon()
 		--button:UpdateUsable()
+		disabled_count = disabled_count + 1
 	end
 	for button_key, button in pairs(AutoBar.buttonList) do
 		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Enabled " .. buttonKey); end;
@@ -1248,8 +1257,9 @@ function ABGCS.UpdateButtons(_p_behaviour)
 		button:UpdateHotkeys()
 		button:UpdateIcon()
 		button:UpdateUsable()
+		enabled_count = enabled_count + 1
 	end
-	ABGCode.LogEventEnd("ABGCS.UpdateButtons", " #buttons " .. tostring(# AutoBar.buttonList))
+	ABGCode.LogEventEnd("ABGCS.UpdateButtons", " #buttons " .. tostring(enabled_count) .. "  " .. disabled_count)
 
 	return tick.UpdateCompleteID;
 
