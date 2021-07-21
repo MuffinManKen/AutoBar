@@ -2511,20 +2511,6 @@ elseif (ABGData.is_mainline_wow) then
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 	--print("AutoBarButtonMount.prototype:init");
 
-		if (not AutoBarCategoryList["Spell.Mount"]) then
-			AutoBarCategoryList["Spell.Mount"] = ABGCode.SpellsCategory:new( "Spell.Mount", "ability_druid_challangingroar", {} )
-			local category = AutoBarCategoryList["Spell.Mount"]
-			category:SetNonCombat(true)
-			category:SetNoSpellCheck(true)
-			category.initialized = false
-			if (not category.castList) then
-				category.castList = {}
-				--print("  Spell.Mount was null, making it empty");
-			end
-		end
-		self:AddCategory("Spell.Mount")
-		self:AddCategory("Macro.Mount.SummonRandomFave")
-
 		local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
 		if (not buttonData) then
 			buttonData = {}
@@ -2551,8 +2537,8 @@ elseif (ABGData.is_mainline_wow) then
 			self:AddCategory("Macro.Mount.SummonRandomFave")
 		end
 
-		--print("After refresh Mount castlist has " .. #AutoBarCategoryList["Spell.Mount"].castList .. " entries");
-		--AutoBarCategoryList["Spell.Mount"]:Refresh()
+		self:AddCategory("Spell.Mount")
+
 	end
 
 	function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
@@ -2560,7 +2546,7 @@ elseif (ABGData.is_mainline_wow) then
 
 		if (not AutoBarCategoryList["Spell.Mount"]) then
 			--AutoBarButtonMount.prototype:init hasn't run, so skip
-			--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+			print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
 			return true;
 		end
 
