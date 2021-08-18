@@ -3,6 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Fixed Paladin & Warlock mounts
- - Go to MuffinManGames.com to report any issues or for information on my Patreon
+ - Performance improvements
+ - Minor fixes
+ - This is my final release
 ]] .. "|n"
