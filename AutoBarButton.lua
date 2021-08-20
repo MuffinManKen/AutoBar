@@ -2546,7 +2546,7 @@ elseif (ABGData.is_mainline_wow) then
 
 		if (not AutoBarCategoryList["Spell.Mount"]) then
 			--AutoBarButtonMount.prototype:init hasn't run, so skip
-			print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+			--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
 			return true;
 		end
 
@@ -2677,9 +2677,6 @@ elseif (ABGData.is_mainline_wow) then
 	function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
 		AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
 
-		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-			AutoBarCategoryList["Battle Pet.Favourites"] = ABGCode.MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
-		end
 		self:AddCategory("Battle Pet.Favourites")
 
 		self:AddCategory("Macro.BattlePet.SummonRandom")
@@ -2691,12 +2688,6 @@ elseif (ABGData.is_mainline_wow) then
 
 	function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
 		AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
-
-		if (not AutoBarCategoryList["Battle Pet.Favourites"]) then
-			--AutoBarButtonPets.prototype:init hasn't run, so skip
-			--print("Skipping AutoBarButtonPets.prototype:Refresh);
-			return true;
-		end
 
 		local category = AutoBarCategoryList["Battle Pet.Favourites"]
 

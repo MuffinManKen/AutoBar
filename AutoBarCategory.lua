@@ -550,7 +550,7 @@ function ABGCode.InitializeAllCategories()
 		AutoBarCategoryList["Macro.Raid Target"]:AddMacroText('/run SetRaidTarget("target", ' .. index .. ')',  "Interface/targetingframe/UI-RaidTargetingIcon_" .. index, L["Raid " .. index])
 	end
 
-
+	AutoBarCategoryList["Battle Pet.Favourites"] = ABGCode.MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
 
 
 	AutoBarCategoryList["Misc.Hearth"] = ItemsCategory:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
