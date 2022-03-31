@@ -850,10 +850,10 @@ end
 
 
 function AutoBar:MoveButtonsModeToggle()
-	if self.moveButtonsMode then
-		self:MoveButtonsModeOff()
+	if AutoBar.moveButtonsMode then
+		AutoBar:MoveButtonsModeOff()
 	else
-		self:MoveButtonsModeOn()
+		AutoBar:MoveButtonsModeOn()
 	end
 end
 
