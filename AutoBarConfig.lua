@@ -50,7 +50,7 @@ ABC.categories_panel:SetScript("OnMouseWheel", function(self, p_delta)
 	local new_value = Clamp(val - (p_delta * 3), s_min, s_max)
 	ABC.category_slider:SetValue(new_value)
 end)
-InterfaceOptions_AddCategory(ABC.categories_panel);
+--InterfaceOptions_AddCategory(ABC.categories_panel);
 
 
 ABC.category_slider = UI.create_slider(ABC.categories_panel, {min = 1, max = max_categories_in_list});
