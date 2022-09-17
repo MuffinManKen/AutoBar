@@ -39,6 +39,7 @@ AutoBarGlobalDataObject = {
 	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE),
 	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
+	is_wrath_wow = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC),
 
 }
 
@@ -430,12 +431,41 @@ function AutoBarGlobalCodeSpace.GetCategoryItemDB(p_category_key, p_item_index)
 end
 
 
+
+if (AutoBarGlobalDataObject.is_mainline_wow) then
+-------------------------------------------------------------------
+--
+-- WoW Retail
+--
+-------------------------------------------------------------------
+
+	--This should query a global guid registry and then the specific ones if not found.
+	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
+		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
+	end
+
+	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)
+		return PlayerHasToy(p_item_id);
+	end
+
+	function AutoBarGlobalCodeSpace.GetSpellLink(p_spell, p_rank)
+		local spell = GetSpellLink(p_spell, p_rank)
+
+		if spell == "" then
+			spell = nil;
+		end
+
+		return spell;
+
+	end
+
 -------------------------------------------------------------------
 --
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow) then
+
+else --(AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow) then
 
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
 		return AutoBarSearch.macro_text[p_guid];
@@ -464,34 +494,5 @@ if (AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow
 		return spell_link;
 
 	end
-
-elseif (AutoBarGlobalDataObject.is_mainline_wow) then
--------------------------------------------------------------------
---
--- WoW Retail
---
--------------------------------------------------------------------
-
-	--This should query a global guid registry and then the specific ones if not found.
-	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
-		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
-	end
-
-	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)
-		return PlayerHasToy(p_item_id);
-	end
-
-	function AutoBarGlobalCodeSpace.GetSpellLink(p_spell, p_rank)
-		local spell = GetSpellLink(p_spell, p_rank)
-
-		if spell == "" then
-			spell = nil;
-		end
-
-		return spell;
-
-	end
-
-
 end
 

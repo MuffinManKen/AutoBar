@@ -1,7 +1,7 @@
-## Interface: 20504
-## Title: AutoBarBCC
+## Interface: 30400
+## Title: AutoBarWrath
 ## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
-## Version: 2.05.4.00
+## Version: 3.00.4.00
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
 ## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
 ## Notes-koKR: 자동으로 물약, 음료, 음식등이 포함된 버튼을 제공하며 슬롯에 사용할 아이템을 별도로 추가할 수 있습니다. 이것은 액션 슬롯에 여유를 가져다 줄것입니다.
@@ -22,24 +22,24 @@ embeds.xml
 libs/muffin_ui_toolkit.lua
 libs/muffin_whats_new.lua
 
-bcc/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Food.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Gear.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Misc.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Poison.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Potions.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
-bcc/MuffinLibPTSets/LibPT-Muffin.Stones.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Food.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Misc.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Poison.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Potions.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Stones.lua
 
 AceGUIWidget-DragLink.lua
 
 AutoBarGlobals.lua
 
-bcc/CachedSpellData_bcc.lua
-bcc/whats_new.lua
+wrath/CachedSpellData_wrath.lua
+wrath/whats_new.lua
 
 # Localization
 locale/Locale-enUS.lua
@@ -72,7 +72,7 @@ AutoBarClassPopupButton.lua
 AutoBarButton.lua
 AutoBarCategory.lua
 
-bcc/ABCategoryData_bcc.lua
+wrath/ABCategoryData_wrath.lua
 
 AutoBarConfig.lua
 

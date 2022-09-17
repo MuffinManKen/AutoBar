@@ -3,6 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Performance improvements
- - This is my final release
+ - Fixed Button moving bug
+ - Added Dark Portal hearthstone (maybe, I can't test it)
+ - I'm still not playing, I just just felt bad about leaving this bugged
 ]] .. "|n"

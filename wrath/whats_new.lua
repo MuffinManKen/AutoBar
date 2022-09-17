@@ -3,8 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - TOC Update
- - Updated datamining
+ - Initial Wrath release
+ - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
-
-

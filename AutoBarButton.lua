@@ -1074,10 +1074,10 @@ AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonLethal.super.prototype.init(self, parentBar, buttonDB)
 
-	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
-		self:AddCategory("Muffin.Poison.Lethal")
-	elseif (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
+	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+		self:AddCategory("Muffin.Poison.Lethal")
 	end
 end
 
@@ -1087,10 +1087,10 @@ AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 	AutoBarButtonPoisonNonlethal.super.prototype.init(self, parentBar, buttonDB)
 
-	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
-		self:AddCategory("Muffin.Poison.Nonlethal")
-	elseif (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Nonlethal")
+	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+		self:AddCategory("Muffin.Poison.Nonlethal")
 	end
 
 end
@@ -1165,12 +1165,12 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
 
-	if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
-		self:AddCategory("Muffin.Poison.Lethal")
-		self:AddCategory("Muffin.Poison.Nonlethal")
-	elseif (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 		self:AddCategory("Spell.Poison.Nonlethal")
+	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+		self:AddCategory("Muffin.Poison.Lethal")
+		self:AddCategory("Muffin.Poison.Nonlethal")
 	end
 
 end
@@ -1228,12 +1228,12 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
 		self:AddCategory("Spell.Mage.Create Manastone")
-		if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+		if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 			self:AddCategory("Spell.Mage.Conjure Water")
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
-		if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+		if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 			self:AddCategory("Spell.Warlock.Create Soulstone")
 		end
 
@@ -2235,7 +2235,7 @@ end
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount

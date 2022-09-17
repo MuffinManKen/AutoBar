@@ -1,4 +1,4 @@
-std = "wowmmg"
+std = "wow_mmg"
 
 function deepcopy(orig)
     local orig_type = type(orig)

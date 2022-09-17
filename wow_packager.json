@@ -71,50 +71,21 @@
 		"whats_new" : "bcc/whats_new.lua",
 		"skip_ftp" : true,
 		"generate_patreon_post" : true
-	},
+	}
+	],
+"wrath" :
+	[
 	{
-		"toc_file" : "AutoBarBCC.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarBCC_%VER%_rare.zip",
-		"zip_root" : "AutoBarBCC",
+		"toc_file" : "AutoBarWrath.toc",
+		"zip_path" : "D:/Projects/Build/AutoBarWrath_%VER%.zip",
+		"zip_root" : "AutoBarWrath",
 		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarBCC.toc", "Readme.txt"],
-		"force_dirs" : ["bcc", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_rare.tga" : "textures/muffin.tga"},
-		"whats_new" : "bcc/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarBCC.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarBCC_%VER%_uncommon.zip",
-		"zip_root" : "AutoBarBCC",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarBCC.toc", "Readme.txt"],
-		"force_dirs" : ["bcc", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_uncommon.tga" : "textures/muffin.tga"},
-		"whats_new" : "bcc/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarBCC.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarBCC_%VER%_epic.zip",
-		"zip_root" : "AutoBarBCC",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarBCC.toc", "Readme.txt"],
-		"force_dirs" : ["bcc", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_epic.tga" : "textures/muffin.tga"},
-		"whats_new" : "bcc/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarBCC.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarBCC_%VER%_legend.zip",
-		"zip_root" : "AutoBarBCC",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarBCC.toc", "Readme.txt"],
-		"force_dirs" : ["bcc", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_legend.tga" : "textures/muffin.tga"},
-		"whats_new" : "bcc/whats_new.lua"
+		"force_files" : ["AutoBarWrath.toc", "Readme.txt"],
+		"force_dirs" : ["wrath", "libs", "locale", "textures"],
+		"whats_new" : "wrath/whats_new.lua",
+		"skip_ftp" : true,
+		"generate_patreon_post" : true
 	}
 	],
 "retail" :
@@ -130,53 +101,8 @@
 		"renames" : {"textures/muffin.tga" : "textures/muffin.tga"},
 		"whats_new" : "retail/whats_new.lua",
 		"skip_ftp" : true,
-		"generate_patreon_post" : true
-	},
-	{
-		"toc_file" : "AutoBar.toc",
-		"zip_path" : "D:/Projects/Build/AutoBar_%VER%_rare.zip",
-		"zip_root" : "AutoBar",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBar.toc", "Readme.txt"],
-		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_rare.tga" : "textures/muffin.tga"},
-		"whats_new" : "retail/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBar.toc",
-		"zip_path" : "D:/Projects/Build/AutoBar_%VER%_uncommon.zip",
-		"zip_root" : "AutoBar",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBar.toc", "Readme.txt"],
-		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_uncommon.tga" : "textures/muffin.tga"},
-		"whats_new" : "retail/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBar.toc",
-		"zip_path" : "D:/Projects/Build/AutoBar_%VER%_epic.zip",
-		"zip_root" : "AutoBar",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBar.toc", "Readme.txt"],
-		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_epic.tga" : "textures/muffin.tga"},
-		"whats_new" : "retail/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBar.toc",
-		"zip_path" : "D:/Projects/Build/AutoBar_%VER%_legend.zip",
-		"zip_root" : "AutoBar",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBar.toc", "Readme.txt"],
-		"force_dirs" : ["retail", "libs", "locale"],
-		"renames" : {"textures/muffin_legend.tga" : "textures/muffin.tga"},
-		"whats_new" : "retail/whats_new.lua"
+		"generate_patreon_post" : false
 	}
-
 
 	]
 
