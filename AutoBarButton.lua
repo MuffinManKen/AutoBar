@@ -2235,7 +2235,7 @@ end
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
+if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow) then
 
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
@@ -2267,7 +2267,6 @@ if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bc
 
 		self:AddCategory("Spell.Track")
 	end
-
 
 elseif (ABGData.is_mainline_wow) then
 

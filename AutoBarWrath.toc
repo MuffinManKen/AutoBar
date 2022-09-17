@@ -28,7 +28,6 @@ wrath/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Food.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Gear.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Misc.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Poison.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Potions.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
@@ -70,6 +69,7 @@ AutoBarClassBasicButton.lua
 AutoBarClassButton.lua
 AutoBarClassPopupButton.lua
 AutoBarButton.lua
+wrath/AutoBarButton.lua
 AutoBarCategory.lua
 
 wrath/ABCategoryData_wrath.lua

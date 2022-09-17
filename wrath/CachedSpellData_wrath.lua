@@ -6,7 +6,7 @@ local ABGData = AutoBarGlobalDataObject
 local cache_timer_start = debugprofilestop();
 
 --All
-ABGCS.CacheSpellData(20580, "Shadowmeld");
+ABGCS.CacheSpellData(58984, "Shadowmeld");
 
 
 --Druid
@@ -146,7 +146,6 @@ ABGCS.CacheSpellData(7294, "Retribution Aura");
 ABGCS.CacheSpellData(19746, "Concentration Aura");
 ABGCS.CacheSpellData(19891, "Fire Resistance Aura");
 ABGCS.CacheSpellData(19888, "Frost Resistance Aura");
-ABGCS.CacheSpellData(20218, "Sanctity Aura");
 ABGCS.CacheSpellData(19876, "Shadow Resistance Aura");
 
 ABGCS.CacheSpellData(5502, "Sense Undead");
@@ -155,7 +154,6 @@ ABGCS.CacheSpellData(20375, "Seal of Command");
 ABGCS.CacheSpellData(20164, "Seal of Justice");
 ABGCS.CacheSpellData(20165, "Seal of Light");
 ABGCS.CacheSpellData(20154, "Seal of Righteousness");
-ABGCS.CacheSpellData(21082, "Seal of the Crusader");
 ABGCS.CacheSpellData(348700, "Seal of the Martyr");
 ABGCS.CacheSpellData(20166, "Seal of Wisdom");
 --#endregion
@@ -169,10 +167,6 @@ ABGCS.CacheSpellData(15487, "Silence");
 ABGCS.CacheSpellData(976, "Shadow Protection");
 ABGCS.CacheSpellData(27683, "Prayer of Shadow Protection");
 ABGCS.CacheSpellData(34433, "Shadowfiend");
-ABGCS.CacheSpellData(18137, "Shadowguard");
-ABGCS.CacheSpellData(13896, "Feedback");
-ABGCS.CacheSpellData(2651, "Elune's Grace");
-ABGCS.CacheSpellData(2652, "Touch of Weakness");
 ABGCS.CacheSpellData(6346, "Fear Ward");
 --#endregion
 
@@ -196,13 +190,10 @@ ABGCS.CacheSpellData(8232, "Windfury Weapon");
 ABGCS.CacheSpellData(8042, "Earth Shock");
 
 --Air totems
-ABGCS.CacheSpellData(8835, "Grace of Air Totem");
 ABGCS.CacheSpellData(8177, "Grounding Totem");
 ABGCS.CacheSpellData(10595, "Nature Resistance Totem");
 ABGCS.CacheSpellData(6495, "Sentry Totem");
-ABGCS.CacheSpellData(25908, "Tranquil Air Totem");
 ABGCS.CacheSpellData(8512, "Windfury Totem");
-ABGCS.CacheSpellData(15107, "Windwall Totem");
 ABGCS.CacheSpellData(3738, "Wrath of Air Totem");
 
 
@@ -228,7 +219,6 @@ ABGCS.CacheSpellData(10538, "Fire Resistance Totem");
 ABGCS.CacheSpellData(5394, "Healing Stream Totem");
 ABGCS.CacheSpellData(5675, "Mana Spring Totem");
 ABGCS.CacheSpellData(16190, "Mana Tide Totem");
-ABGCS.CacheSpellData(8166, "Poison Cleansing Totem");
 
 ABGCS.CacheSpellData(546, "Water Walking");
 ABGCS.CacheSpellData(2645, "Ghost Wolf");
@@ -262,10 +252,8 @@ ABGCS.CacheSpellData(132, "Detect Invisibility");	--TODO: Add this to a category
 
 ABGCS.CacheSpellData(5500, "Sense Demons");
 
-ABGCS.CacheSpellData(704, "Curse of Recklessness");
 ABGCS.CacheSpellData(1714, "Curse of Tongues");
 ABGCS.CacheSpellData(702, "Curse of Weakness");
-ABGCS.CacheSpellData(17862, "Curse of Shadow");
 ABGCS.CacheSpellData(1490, "Curse of the Elements");
 ABGCS.CacheSpellData(18223, "Curse of Exhaustion");
 

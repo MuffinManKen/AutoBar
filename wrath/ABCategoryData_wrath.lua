@@ -11,15 +11,10 @@ local SpellsCategory = ABGCode.SpellsCategory
 
 function ABGCode.InitializeCategories()
 
+	AutoBarCategoryList["Spell.Mount"] = SpellsCategory:new("Spell.Mount", "ability_druid_challangingroar", nil)
+
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = ItemsCategory:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = ItemsCategory:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
-
-	AutoBarCategoryList["Muffin.Mounts.Item"] = ItemsCategory:new("Muffin.Mounts.Item", "ability_mount_ridinghorse", "Muffin.Mounts.Item")
-	AutoBarCategoryList["Muffin.Mounts.Item"]:SetNonCombat(true)
-	AutoBarCategoryList["Muffin.Mounts.Paladin"] = SpellsCategory:new("Muffin.Mounts.Paladin", "ability_mount_ridinghorse", nil, nil, "Muffin.Mounts.Paladin")
-	AutoBarCategoryList["Muffin.Mounts.Paladin"]:SetNonCombat(true)
-	AutoBarCategoryList["Muffin.Mounts.Warlock"] = SpellsCategory:new("Muffin.Mounts.Warlock", "ability_mount_ridinghorse", nil, nil, "Muffin.Mounts.Warlock")
-	AutoBarCategoryList["Muffin.Mounts.Warlock"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
 	{
@@ -100,10 +95,6 @@ function ABGCode.InitializeCategories()
 		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire"), ABGCode.GetSpellNameByName("Inner Fire"),
 		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection"), ABGCode.GetSpellNameByName("Prayer of Shadow Protection"),
 		"PRIEST", ABGCode.GetSpellNameByName("Fear Ward"), ABGCode.GetSpellNameByName("Fear Ward"),
-		"PRIEST", ABGCode.GetSpellNameByName("Feedback"), ABGCode.GetSpellNameByName("Feedback"),
-		"PRIEST", ABGCode.GetSpellNameByName("Elune's Grace"), ABGCode.GetSpellNameByName("Elune's Grace"),
-		"PRIEST", ABGCode.GetSpellNameByName("Shadowguard"), ABGCode.GetSpellNameByName("Shadowguard"),
-		"PRIEST", ABGCode.GetSpellNameByName("Touch of Weakness"), ABGCode.GetSpellNameByName("Touch of Weakness"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"), ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"), ABGCode.GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
@@ -198,7 +189,6 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Concentration Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Fire Resistance Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Frost Resistance Aura"),
-		"PALADIN", ABGCode.GetSpellNameByName("Sanctity Aura"),
 		"PALADIN", ABGCode.GetSpellNameByName("Shadow Resistance Aura"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Stance"),
@@ -210,7 +200,6 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Justice"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Light"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Righteousness"),
-		"PALADIN", ABGCode.GetSpellNameByName("Seal of the Crusader"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of the Martyr"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Wisdom"),
 	})
@@ -228,13 +217,10 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Totem.Air"] = SpellsCategory:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Grace of Air Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Grounding Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Nature Resistance Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Sentry Totem"),
-		"SHAMAN", ABGCode.GetSpellNameByName("Tranquil Air Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Windfury Totem"),
-		"SHAMAN", ABGCode.GetSpellNameByName("Windwall Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Wrath of Air Totem"),
 	})
 
@@ -255,7 +241,6 @@ function ABGCode.InitializeCategories()
 		"SHAMAN", ABGCode.GetSpellNameByName("Healing Stream Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Mana Spring Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Mana Tide Totem"),
-		"SHAMAN", ABGCode.GetSpellNameByName("Poison Cleansing Totem"),
 	})
 
 
@@ -297,8 +282,6 @@ function ABGCode.InitializeCategories()
 		"HUNTER", ABGCode.GetSpellNameByName("Concussive Shot"),
 		"HUNTER", ABGCode.GetSpellNameByName("Wing Clip"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Tongues"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Recklessness"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Shadow"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of the Elements"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Weakness"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Curse of Exhaustion"),
