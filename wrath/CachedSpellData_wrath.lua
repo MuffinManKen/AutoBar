@@ -313,6 +313,8 @@ ABGCS.CacheSpellData(2580, "Find Minerals");
 ABGCS.CacheSpellData(2383, "Find Herbs");
 ABGCS.CacheSpellData(25229, "Jewelcrafting");
 ABGCS.CacheSpellData(31252, "Prospecting");
+ABGCS.CacheSpellData(45357, "Inscription");
+ABGCS.CacheSpellData(51005, "Milling");
 
 
 local cache_timer_stop = debugprofilestop();

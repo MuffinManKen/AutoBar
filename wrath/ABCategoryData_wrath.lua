@@ -257,6 +257,8 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Disenchant"),
 		"*", ABGCode.GetSpellNameByName("Enchanting"),
 		"*", ABGCode.GetSpellNameByName("Engineering"),
+		"*", ABGCode.GetSpellNameByName("Inscription"),
+		"*", ABGCode.GetSpellNameByName("Milling"),
 		"*", ABGCode.GetSpellNameByName("Jewelcrafting"),
 		"*", ABGCode.GetSpellNameByName("Prospecting"),
 		"*", ABGCode.GetSpellNameByName("First Aid"),
