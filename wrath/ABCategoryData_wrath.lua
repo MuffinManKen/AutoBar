@@ -16,13 +16,9 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = ItemsCategory:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = ItemsCategory:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
 
-	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
+	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Minor)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Lesser)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Greater)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Major)"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone"), ABGCode.GetSpellNameByName("Ritual of Souls"),
 	})
 
 	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = SpellsCategory:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone"],

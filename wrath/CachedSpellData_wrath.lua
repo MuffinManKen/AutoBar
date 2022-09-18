@@ -230,11 +230,17 @@ ABGCS.CacheSpellData(687, "Demon Skin");
 ABGCS.CacheSpellData(706, "Demon Armor");
 ABGCS.CacheSpellData(28176, "Fel Armor");
 
-ABGCS.CacheSpellData(6201, "Create Healthstone (Minor)");
-ABGCS.CacheSpellData(6202, "Create Healthstone (Lesser)");
-ABGCS.CacheSpellData(5699, "Create Healthstone");
-ABGCS.CacheSpellData(11729, "Create Healthstone (Greater)");
-ABGCS.CacheSpellData(11730, "Create Healthstone (Major)");
+ABGCS.CacheSpellData(6201, "Create Healthstone");
+-- ABGCS.CacheSpellData(6202, "Create Healthstone (Lesser)");
+-- ABGCS.CacheSpellData(5699, "Create Healthstone");
+-- ABGCS.CacheSpellData(11729, "Create Healthstone (Greater)");
+-- ABGCS.CacheSpellData(11730, "Create Healthstone (Major)");
+-- ABGCS.CacheSpellData(27230, "Create Healthstone (Master)");
+-- ABGCS.CacheSpellData(47871, "Create Healthstone (Demonic)");
+-- ABGCS.CacheSpellData(47878, "Create Healthstone (Fel)");
+
+ABGCS.CacheSpellData(29893, "Ritual of Souls");
+-- ABGCS.CacheSpellData(58887, "Ritual of Souls (Fel)");
 
 --ABGCS.CacheSpellData(00000, "XXX");
 
@@ -264,7 +270,6 @@ ABGCS.CacheSpellData(20756, "Create Soulstone (Greater)");
 ABGCS.CacheSpellData(20757, "Create Soulstone (Major)");
 
 ABGCS.CacheSpellData(698, "Ritual of Summoning");
-
 
 ABGCS.CacheSpellData(18220, "Dark Pact");
 ABGCS.CacheSpellData(5697, "Unending Breath");
