@@ -182,6 +182,7 @@ ABGCS.CacheSpellData(36554, "Shadowstep");
 
 
 --#region Shaman
+ABGCS.CacheSpellData(51730, "Earthliving Weapon");
 ABGCS.CacheSpellData(8024, "Flametongue Weapon");
 ABGCS.CacheSpellData(8033, "Frostbrand Weapon");
 ABGCS.CacheSpellData(8017, "Rockbiter Weapon");
@@ -206,7 +207,6 @@ ABGCS.CacheSpellData(8075, "Strength of Earth Totem");
 ABGCS.CacheSpellData(8143, "Tremor Totem");
 
 --Fire totems
-ABGCS.CacheSpellData(1535, "Fire Nova Totem");
 ABGCS.CacheSpellData(16387, "Flametongue Totem");
 ABGCS.CacheSpellData(8181, "Frost Resistance Totem");
 ABGCS.CacheSpellData(8190, "Magma Totem");

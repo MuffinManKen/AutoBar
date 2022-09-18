@@ -222,7 +222,6 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Fire Nova Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Frost Resistance Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Magma Totem"),
@@ -242,6 +241,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Buff.Weapon"] = SpellsCategory:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
+		"SHAMAN", ABGCode.GetSpellNameByName("Earthliving Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Frostbrand Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Rockbiter Weapon"),
