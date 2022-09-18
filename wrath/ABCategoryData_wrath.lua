@@ -267,9 +267,11 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Leatherworking"),
 		"*", ABGCode.GetSpellNameByName("Smelting"),
 		"*", ABGCode.GetSpellNameByName("Tailoring"),
+		"*", ABGCode.GetSpellNameByName("Inscription"),
 
 		"*", ABGCode.GetSpellNameByName("Find Minerals"),
 		"*", ABGCode.GetSpellNameByName("Find Herbs"),
+		"*", ABGCode.GetSpellNameByName("Milling"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = SpellsCategory:new("Spell.Debuff.Multiple", spellIconList["Slow"],
