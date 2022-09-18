@@ -112,6 +112,8 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Succubus"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Voidwalker"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Felguard"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Raise Dead"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Summon Gargoyle"),
 	})
 
 
@@ -151,6 +153,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Horde"), ABGCode.GetSpellNameByName("Portal: Shattrath - Horde"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Astral Recall"), ABGCode.GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Death Gate"), ABGCode.GetSpellNameByName("Death Gate"),
 	})
 
 
@@ -171,6 +174,8 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Demon Armor"), ABGCode.GetSpellNameByName("Shadow Ward"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Fel Armor"), ABGCode.GetSpellNameByName("Shadow Ward"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Shadow Ward"), ABGCode.GetSpellNameByName("Shadow Ward"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Shell"), ABGCode.GetSpellNameByName("Anti-Magic Shell"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Zone"), ABGCode.GetSpellNameByName("Anti-Magic Zone"),
 
 	})
 
@@ -193,6 +198,9 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Stance"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Berserker Stance"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Blood Presence"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Frost Presence"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Unholy Presence"),
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
@@ -331,6 +339,7 @@ function ABGCode.InitializeCategories()
 		"ROGUE", ABGCode.GetSpellNameByName("Shadowstep"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Charge"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Intercept"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Death Grip"),
 	})
 
 	AutoBarCategoryList["Spell.ER"] = SpellsCategory:new( "Spell.ER", spellIconList["Charge"],
@@ -349,6 +358,8 @@ function ABGCode.InitializeCategories()
 	{
 		"ROGUE", ABGCode.GetSpellNameByName("Kick"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Earth Shock"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Strangulate"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Mind Freeze"),
 	})
 
 	AutoBarCategoryList["Spell.CatForm"] = SpellsCategory:new( "Spell.CatForm", spellIconList["Charge"],
