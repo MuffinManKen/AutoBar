@@ -30,34 +30,23 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Create Soulstone (Major)"),
 	})
 
-	AutoBarCategoryList["Spell.Mage.Create Manastone"] = SpellsCategory:new( "Spell.Mage.Create Manastone", spellIconList["Conjure Mana Jade"],
+	AutoBarCategoryList["Spell.Mage.Create Manastone"] = SpellsCategory:new( "Spell.Mage.Create Manastone", spellIconList["Conjure Mana Gem"],
 	{
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Jade"),
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Ruby"),
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Agate"),
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Citrine"),
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Emerald"),
+		"MAGE", ABGCode.GetSpellNameByName("Conjure Mana Gem"),
 	})
 
-
-	AutoBarCategoryList["Spell.Mage.Conjure Food"] = SpellsCategory:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Refreshment"], {
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Food"),
+	AutoBarCategoryList["Spell.Mage.Conjure Food"] = SpellsCategory:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Food"], nil, {
+		"MAGE", ABGCode.GetSpellNameByName("Conjure Food"), ABGCode.GetSpellNameByName("Ritual of Refreshment")
 	})
 
-	AutoBarCategoryList["Spell.Mage.Conjure Water"] = SpellsCategory:new("Spell.Mage.Conjure Water", spellIconList["Conjure Refreshment"], {
-		"MAGE", ABGCode.GetSpellNameByName("Conjure Water"),
+	AutoBarCategoryList["Spell.Mage.Conjure Water"] = SpellsCategory:new("Spell.Mage.Conjure Water", spellIconList["Conjure Water"], nil, {
+		"MAGE", ABGCode.GetSpellNameByName("Conjure Water"), ABGCode.GetSpellNameByName("Ritual of Refreshment")
 	})
-
-	AutoBarCategoryList["Consumable.Food.Conjure"] = SpellsCategory:new("Consumable.Food.Conjure", spellIconList["Conjure Refreshment"], {
---			"MAGE", ABGCode.GetSpellNameByName("Conjure Refreshment"),
-			})
-
 
 	AutoBarCategoryList["Spell.Stealth"] = SpellsCategory:new("Spell.Stealth", spellIconList["Stealth"],
 	{
 		"DRUID", ABGCode.GetSpellNameByName("Prowl"),
 		"MAGE", ABGCode.GetSpellNameByName("Invisibility"),
-		"MAGE", ABGCode.GetSpellNameByName("Lesser Invisibility"),
 		"ROGUE", ABGCode.GetSpellNameByName("Stealth"),
 		"*", ABGCode.GetSpellNameByName("Shadowmeld"),
 	})
@@ -114,8 +103,6 @@ function ABGCode.InitializeCategories()
 
 	})
 
-
-
 	AutoBarCategoryList["Spell.Class.Pets2"] = SpellsCategory:new( "Spell.Class.Pets2", spellIconList["Call Pet 1"],
 	{
 		"HUNTER", ABGCode.GetSpellNameByName("Bestial Wrath"),
@@ -154,7 +141,6 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
 	
 	})
-
 
 	AutoBarCategoryList["Spell.Shields"] = SpellsCategory:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{

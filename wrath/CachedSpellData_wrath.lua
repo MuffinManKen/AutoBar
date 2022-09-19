@@ -109,17 +109,12 @@ ABGCS.CacheSpellData(604, "Dampen Magic");
 ABGCS.CacheSpellData(5504, "Conjure Water");
 ABGCS.CacheSpellData(587, "Conjure Food");
 
-ABGCS.CacheSpellData(759, "Conjure Mana Agate");
-ABGCS.CacheSpellData(10054, "Conjure Mana Ruby");
-ABGCS.CacheSpellData(3552, "Conjure Mana Jade");
-ABGCS.CacheSpellData(10053, "Conjure Mana Citrine");
-ABGCS.CacheSpellData(27101, "Conjure Mana Emerald");
+ABGCS.CacheSpellData(759, "Conjure Mana Gem");
+
+ABGCS.CacheSpellData(43987, "Ritual of Refreshment");
 
 ABGCS.CacheSpellData(31687, "Summon Water Elemental");
 
---ABGCS.CacheSpellData(42955, "Conjure Refreshment");
---ABGCS.CacheSpellData(43987, "Conjure Refreshment Table");
-ABGCS.CacheSpellData(7870, "Lesser Invisibility");
 ABGCS.CacheSpellData(66, "Invisibility");
 
 ABGCS.CacheSpellData(11418, "Portal: Undercity");
