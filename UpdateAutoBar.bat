@@ -1,5 +1,6 @@
 xcopy "D:\Projects\Current\WoW\MuffinLibPTSets\classic" ".\classic\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 xcopy "D:\Projects\Current\WoW\MuffinLibPTSets\bcc" ".\bcc\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
+xcopy "D:\Projects\Current\WoW\MuffinLibPTSets\wrath" ".\wrath\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 xcopy "D:\Projects\Current\WoW\MuffinLibPTSets\retail" ".\retail\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 
 xcopy "D:\Projects\Current\WoW\LibPeriodicTable\LibPeriodicTable-3.1-Consumable" ".\libs\LibPeriodicTable-3.1-Consumable" /Y /S /I
