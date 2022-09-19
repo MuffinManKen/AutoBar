@@ -81,6 +81,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Dampen Magic"), ABGCode.GetSpellNameByName("Dampen Magic"),
 		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"), ABGCode.GetSpellNameByName("Gift of the Wild"),
 		"DRUID", ABGCode.GetSpellNameByName("Thorns"), ABGCode.GetSpellNameByName("Thorns"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Horn of Winter"), ABGCode.GetSpellNameByName("Horn of Winter"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"), ABGCode.GetSpellNameByName("Blessing of Might"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Protection"), ABGCode.GetSpellNameByName("Blessing of Protection"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"), ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
@@ -98,6 +99,8 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Class.Pet"] = SpellsCategory:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
 	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Raise Dead"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Summon Gargoyle"),
 		"HUNTER", ABGCode.GetSpellNameByName("Call Pet"),
 		"PRIEST", ABGCode.GetSpellNameByName("Shadowfiend"),
 		"MAGE",  ABGCode.GetSpellNameByName("Summon Water Elemental"),
@@ -108,6 +111,7 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Succubus"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Voidwalker"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Summon Felguard"),
+
 	})
 
 
@@ -132,6 +136,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Portals"] = SpellsCategory:new( "Spell.Portals", "spell_arcane_portalironforge", nil,
 	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Death Gate"), ABGCode.GetSpellNameByName("Death Gate"),
 		"DRUID", ABGCode.GetSpellNameByName("Teleport: Moonglade"), ABGCode.GetSpellNameByName("Teleport: Moonglade"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Undercity"), ABGCode.GetSpellNameByName("Portal: Undercity"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Thunder Bluff"), ABGCode.GetSpellNameByName("Portal: Thunder Bluff"),
@@ -147,11 +152,14 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Horde"), ABGCode.GetSpellNameByName("Portal: Shattrath - Horde"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Astral Recall"), ABGCode.GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
+	
 	})
 
 
 	AutoBarCategoryList["Spell.Shields"] = SpellsCategory:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Shell"), ABGCode.GetSpellNameByName("Anti-Magic Zone"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Zone"), ABGCode.GetSpellNameByName("Anti-Magic Shell"),
 		"DRUID", 		ABGCode.GetSpellNameByName("Barkskin"), 	ABGCode.GetSpellNameByName("Barkskin"),
 		"MAGE", 			ABGCode.GetSpellNameByName("Frost Armor"), ABGCode.GetSpellNameByName("Ice Barrier"),
 		"MAGE", 			ABGCode.GetSpellNameByName("Ice Armor"), ABGCode.GetSpellNameByName("Ice Barrier"),
@@ -168,9 +176,14 @@ function ABGCode.InitializeCategories()
 		"WARLOCK", ABGCode.GetSpellNameByName("Fel Armor"), ABGCode.GetSpellNameByName("Shadow Ward"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Shadow Ward"), ABGCode.GetSpellNameByName("Shadow Ward"),
 
+
 	})
 
-	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"], {
+	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"], 
+	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Blood Presence"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Frost Presence"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Unholy Presence"),
 		"DRUID", ABGCode.GetSpellNameByName("Bear Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Dire Bear Form"),
 		"DRUID", ABGCode.GetSpellNameByName("Cat Form"),
@@ -189,6 +202,7 @@ function ABGCode.InitializeCategories()
 		"WARRIOR", ABGCode.GetSpellNameByName("Defensive Stance"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Stance"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Berserker Stance"),
+
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
@@ -326,9 +340,11 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Charge"] = SpellsCategory:new( "Spell.Charge", spellIconList["Charge"],
 	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Death Grip"),
 		"ROGUE", ABGCode.GetSpellNameByName("Shadowstep"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Charge"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Intercept"),
+
 	})
 
 	AutoBarCategoryList["Spell.ER"] = SpellsCategory:new( "Spell.ER", spellIconList["Charge"],
@@ -345,8 +361,11 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Interrupt"] = SpellsCategory:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Strangulate"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Mind Freeze"),
 		"ROGUE", ABGCode.GetSpellNameByName("Kick"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Earth Shock"),
+
 	})
 
 	AutoBarCategoryList["Spell.CatForm"] = SpellsCategory:new( "Spell.CatForm", spellIconList["Charge"],
