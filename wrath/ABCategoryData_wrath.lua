@@ -162,8 +162,8 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Shields"] = SpellsCategory:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
 	{
-		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Shell"), ABGCode.GetSpellNameByName("Anti-Magic Shell"),
-		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Zone"), ABGCode.GetSpellNameByName("Anti-Magic Zone"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Shell"), ABGCode.GetSpellNameByName("Anti-Magic Zone"),
+		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Anti-Magic Zone"), ABGCode.GetSpellNameByName("Anti-Magic Shell"),
 		"DRUID", 		ABGCode.GetSpellNameByName("Barkskin"), 	ABGCode.GetSpellNameByName("Barkskin"),
 		"MAGE", 			ABGCode.GetSpellNameByName("Frost Armor"), ABGCode.GetSpellNameByName("Ice Barrier"),
 		"MAGE", 			ABGCode.GetSpellNameByName("Ice Armor"), ABGCode.GetSpellNameByName("Ice Barrier"),
