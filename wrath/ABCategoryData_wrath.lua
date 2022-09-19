@@ -16,13 +16,9 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = ItemsCategory:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = ItemsCategory:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
 
-	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"],
+	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Minor)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Lesser)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Greater)"),
-		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone (Major)"),
+		"WARLOCK", ABGCode.GetSpellNameByName("Create Healthstone"), ABGCode.GetSpellNameByName("Ritual of Souls"),
 	})
 
 	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = SpellsCategory:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone"],
@@ -226,7 +222,6 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
-		"SHAMAN", ABGCode.GetSpellNameByName("Fire Nova Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Frost Resistance Totem"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Magma Totem"),
@@ -246,6 +241,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Buff.Weapon"] = SpellsCategory:new("Spell.Buff.Weapon", spellIconList["Deadly Poison"],
 	{
+		"SHAMAN", ABGCode.GetSpellNameByName("Earthliving Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Flametongue Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Frostbrand Weapon"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Rockbiter Weapon"),
@@ -261,6 +257,8 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Disenchant"),
 		"*", ABGCode.GetSpellNameByName("Enchanting"),
 		"*", ABGCode.GetSpellNameByName("Engineering"),
+		"*", ABGCode.GetSpellNameByName("Inscription"),
+		"*", ABGCode.GetSpellNameByName("Milling"),
 		"*", ABGCode.GetSpellNameByName("Jewelcrafting"),
 		"*", ABGCode.GetSpellNameByName("Prospecting"),
 		"*", ABGCode.GetSpellNameByName("First Aid"),
