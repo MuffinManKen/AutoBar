@@ -65,22 +65,24 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"], nil,
 	{
 		"MAGE", ABGCode.GetSpellNameByName("Slow Fall"), ABGCode.GetSpellNameByName("Slow Fall"),
-		"MAGE", ABGCode.GetSpellNameByName("Arcane Intellect"), ABGCode.GetSpellNameByName("Arcane Brilliance"),
 		"MAGE", ABGCode.GetSpellNameByName("Amplify Magic"), ABGCode.GetSpellNameByName("Amplify Magic"),
 		"MAGE", ABGCode.GetSpellNameByName("Dampen Magic"), ABGCode.GetSpellNameByName("Dampen Magic"),
-		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"), ABGCode.GetSpellNameByName("Gift of the Wild"),
+		"MAGE", ABGCode.GetSpellNameByName("Arcane Intellect"), ABGCode.GetSpellNameByName("Arcane Brilliance"),
 		"DRUID", ABGCode.GetSpellNameByName("Thorns"), ABGCode.GetSpellNameByName("Thorns"),
+		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"), ABGCode.GetSpellNameByName("Gift of the Wild"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Horn of Winter"), ABGCode.GetSpellNameByName("Horn of Winter"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"), ABGCode.GetSpellNameByName("Blessing of Might"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Protection"), ABGCode.GetSpellNameByName("Blessing of Protection"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"), ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
-		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Salvation"), ABGCode.GetSpellNameByName("Blessing of Salvation"),
-		"PALADIN", ABGCode.GetSpellNameByName("Greater Blessing of Kings"), ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
+		"PALADIN", ABGCode.GetSpellNameByName("Hand of Salvation"), ABGCode.GetSpellNameByName("Hand of Salvation"),
+		"PALADIN", ABGCode.GetSpellNameByName("Hand of Sacrifice"), ABGCode.GetSpellNameByName("Hand of Sacrifice"),
+		"PALADIN", ABGCode.GetSpellNameByName("Hand of Freedom"), ABGCode.GetSpellNameByName("Hand of Freedom"),
+		"PALADIN", ABGCode.GetSpellNameByName("Hand of Protection"), ABGCode.GetSpellNameByName("Hand of Protection"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Sanctuary"), ABGCode.GetSpellNameByName("Greater Blessing of Sanctuary"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Wisdom"), ABGCode.GetSpellNameByName("Greater Blessing of Wisdom"),
-		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude"), ABGCode.GetSpellNameByName("Prayer of Fortitude"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"), ABGCode.GetSpellNameByName("Greater Blessing of Might"),
+		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Kings"), ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
+		"PRIEST", ABGCode.GetSpellNameByName("Fear Ward"), ABGCode.GetSpellNameByName("Fear Ward"),
 		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire"), ABGCode.GetSpellNameByName("Inner Fire"),
 		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection"), ABGCode.GetSpellNameByName("Prayer of Shadow Protection"),
-		"PRIEST", ABGCode.GetSpellNameByName("Fear Ward"), ABGCode.GetSpellNameByName("Fear Ward"),
+		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude"), ABGCode.GetSpellNameByName("Prayer of Fortitude"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"), ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"), ABGCode.GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
@@ -139,7 +141,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Horde"), ABGCode.GetSpellNameByName("Portal: Shattrath - Horde"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Astral Recall"), ABGCode.GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
-	
+
 	})
 
 	AutoBarCategoryList["Spell.Shields"] = SpellsCategory:new( "Spell.Shields", spellIconList["Ice Barrier"], nil,
@@ -165,7 +167,7 @@ function ABGCode.InitializeCategories()
 
 	})
 
-	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"], 
+	AutoBarCategoryList["Spell.Stance"] = SpellsCategory:new( "Spell.Stance", spellIconList["Defensive Stance"],
 	{
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Blood Presence"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Frost Presence"),
@@ -192,12 +194,13 @@ function ABGCode.InitializeCategories()
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
-		"PALADIN", ABGCode.GetSpellNameByName("Seal of Command"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Justice"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Light"),
-		"PALADIN", ABGCode.GetSpellNameByName("Seal of Righteousness"),
-		"PALADIN", ABGCode.GetSpellNameByName("Seal of the Martyr"),
 		"PALADIN", ABGCode.GetSpellNameByName("Seal of Wisdom"),
+		"PALADIN", ABGCode.GetSpellNameByName("Seal of Vengeance"),
+		"PALADIN", ABGCode.GetSpellNameByName("Seal of Corruption"),
+		"PALADIN", ABGCode.GetSpellNameByName("Seal of Righteousness"),
+		"PALADIN", ABGCode.GetSpellNameByName("Seal of Command"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = SpellsCategory:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
