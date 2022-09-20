@@ -317,6 +317,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonTravel", },
 			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_WRATH_CLASSIC},
 			{button_name = "AutoBarButtonStagForm", project_id = WOW_PROJECT_MAINLINE},
 			{button_name = "AutoBarButtonMoonkin", },
 			{button_name = "AutoBarButtonTreeForm", },
@@ -325,6 +326,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonClassBuff", },
 			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_WRATH_CLASSIC},
 			{button_name = "AutoBarButtonShields", },
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonER", },
@@ -350,6 +352,8 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_WRATH_CLASSIC},
+			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
 		},
 		PRIEST =
 		{
@@ -370,6 +374,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonER", },
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_WRATH_CLASSIC},
 		},
 		WARLOCK =
 		{
@@ -381,6 +386,7 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonDebuff", },
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
 			{button_name = "AutoBarButtonClassPet", },
 		},
 		WARRIOR =
