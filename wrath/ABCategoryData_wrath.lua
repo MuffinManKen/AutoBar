@@ -83,7 +83,7 @@ function ABGCode.InitializeCategories()
 		"DRUID", ABGCode.GetSpellNameByName("Thorns"), ABGCode.GetSpellNameByName("Thorns"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Horn of Winter"), ABGCode.GetSpellNameByName("Horn of Winter"),
         "PALADIN", ABGCode.GetSpellNameByName("Blessing of Protection"), ABGCode.GetSpellNameByName("Blessing of Protection"),
-	    "PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"), ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
+        "PALADIN", ABGCode.GetSpellNameByName("Blessing of Sacrifice"), ABGCode.GetSpellNameByName("Blessing of Sacrifice"),
         "PALADIN", ABGCode.GetSpellNameByName("Blessing of Salvation"), ABGCode.GetSpellNameByName("Blessing of Salvation"),
 		"PALADIN", ABGCode.GetSpellNameByName("Hand of Sacrifice"), ABGCode.GetSpellNameByName("Hand of Sacrifice"),
 		"PALADIN", ABGCode.GetSpellNameByName("Hand of Salvation"), ABGCode.GetSpellNameByName("Hand of Salvation"),
