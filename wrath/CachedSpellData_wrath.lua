@@ -151,14 +151,20 @@ ABGCS.CacheSpellData(35715, "Teleport: Shattrath - Horde");
 --#region Paladin
 ABGCS.CacheSpellData(498, "Divine Protection");
 ABGCS.CacheSpellData(642, "Divine Shield");
+ABGCS.CacheSpellData(1022, "Hand of Protection");
+ABGCS.CacheSpellData(6940, "Hand of Sacrifice");
+ABGCS.CacheSpellData(1038, "Hand of Salvation");
 ABGCS.CacheSpellData(1044, "Blessing of Freedom");
 ABGCS.CacheSpellData(1022, "Blessing of Protection");
 ABGCS.CacheSpellData(6940, "Blessing of Sacrifice");
 ABGCS.CacheSpellData(1038, "Blessing of Salvation");
+ABGCS.CacheSpellData(20217, "Blessing of Kings");
 ABGCS.CacheSpellData(25898, "Greater Blessing of Kings");
 ABGCS.CacheSpellData(19742, "Blessing of Wisdom");
 ABGCS.CacheSpellData(25894, "Greater Blessing of Wisdom");
 ABGCS.CacheSpellData(633, "Lay on Hands");
+ABGCS.CacheSpellData(19740, "Blessing of Might");
+ABGCS.CacheSpellData(25916, "Greater Blessing of Might");
 
 ABGCS.CacheSpellData(19740, "Blessing of Might");
 
