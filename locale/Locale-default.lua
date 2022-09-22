@@ -195,6 +195,7 @@ local quick_sets =
 	"Muffin.Order Hall.Troop Recruit",
 	"Muffin.Order Hall.Order Resources",
 	"Muffin.Potion.Mana",
+	"Muffin.Misc.Hearth",
 	"Muffin.Misc.Reputation",
 	"Muffin.Misc.Repair",
 	"Muffin.Skill.Fishing.Misc",

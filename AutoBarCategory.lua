@@ -554,6 +554,7 @@ function ABGCode.InitializeAllCategories()
 
 
 	AutoBarCategoryList["Misc.Hearth"] = ItemsCategory:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
+	AutoBarCategoryList["Muffin.Misc.Hearth"] = ItemsCategory:new("Muffin.Misc.Hearth", "INV_Misc_Rune_01", "Muffin.Misc.Hearth")
 
 	AutoBarCategoryList["Consumable.Buff.Free Action"] = ItemsCategory:new( "Consumable.Buff.Free Action", "INV_Potion_04", "Consumable.Buff.Free Action")
 

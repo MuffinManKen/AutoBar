@@ -1693,7 +1693,8 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Spell.AncientDalaranPortals")
 	end
 
-	self:AddCategory("Misc.Hearth")
+	self:AddCategory("Muffin.Misc.Hearth")
+
 	if (ABGData.is_mainline_wow) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
 
@@ -2228,6 +2229,7 @@ function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Food.Mana.Buff")
 
 end
+
 
 if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
