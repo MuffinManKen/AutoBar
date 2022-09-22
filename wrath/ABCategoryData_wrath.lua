@@ -85,6 +85,7 @@ function ABGCode.InitializeCategories()
 		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire"), ABGCode.GetSpellNameByName("Inner Fire"),
 		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection"), ABGCode.GetSpellNameByName("Prayer of Shadow Protection"),
 		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude"), ABGCode.GetSpellNameByName("Prayer of Fortitude"),
+		"PRIEST", ABGCode.GetSpellNameByName("Divine Spirit"), ABGCode.GetSpellNameByName("Prayer of Spirit"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"), ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"), ABGCode.GetSpellNameByName("Unending Breath"),
 		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
