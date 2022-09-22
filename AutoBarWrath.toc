@@ -27,6 +27,7 @@ wrath/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Food.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+wrath/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Misc.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Poison.lua
 wrath/MuffinLibPTSets/LibPT-Muffin.Potions.lua

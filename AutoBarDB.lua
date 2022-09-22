@@ -674,8 +674,30 @@ function AutoBar:InitializeDefaults()
 			arrangeOnUse = true,
 		}
 	end
+--#endregion
 
-	if (ABGData.is_mainline_wow) then
+--#region XpacButtons
+	-- A list of all buttons on the account bars that a player should have by expansion pack
+
+	if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
+
+		if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
+			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
+				buttonKey = "AutoBarButtonMillHerbs",
+				buttonClass = "AutoBarButtonMillHerbs",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = 11,
+				enabled = true,
+				arrangeOnUse = true,
+				targeted = "Milling",
+			}
+		end
+
+	end --LE_EXPANSION_WRATH_OF_THE_LICH_KING
+
+
+
+	if (ABGData.is_mainline_wow) then	--ToDo: These should be changed to use LE_EXPANSION_* for forward compatibility
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonArchaeology"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonArchaeology"] = {
@@ -719,20 +741,6 @@ function AutoBar:InitializeDefaults()
 				arrangeOnUse = true,
 			}
 		end
-
-
-		if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
-			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {
-				buttonKey = "AutoBarButtonMillHerbs",
-				buttonClass = "AutoBarButtonMillHerbs",
-				barKey = "AutoBarClassBarExtras",
-				defaultButtonIndex = 11,
-				enabled = true,
-				arrangeOnUse = true,
-				targeted = "Milling",
-			}
-		end
-
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonGarrison"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonGarrison"] = {
@@ -790,6 +798,7 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 	end
+--#endregion XpacButtons
 
 	if (not AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonRaidTarget"] = {

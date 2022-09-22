@@ -2229,7 +2229,17 @@ function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 
 end
 
+if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
+	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
+
+	function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
+		AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Herbs.Millable")
+	end
+end
 -------------------------------------------------------------------
 --
 -- WoW Classic
@@ -2328,15 +2338,6 @@ elseif (ABGData.is_mainline_wow) then
 		AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.Guild")
-	end
-
-	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
-	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
-
-	function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
-		AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
-
-		self:AddCategory("Muffin.Herbs.Millable")
 	end
 
 	local AutoBarButtonSunsongRanch = AceOO.Class(AutoBarButton)
