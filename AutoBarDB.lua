@@ -280,6 +280,7 @@ function AutoBar:InitializeDefaults()
 		AutoBar.db.account.barList["AutoBarClassBarExtras"].posY = 360
 	end
 
+--#region ClassBars
 	--
 	-- Create the various class bars
 	--
@@ -310,6 +311,20 @@ function AutoBar:InitializeDefaults()
 	-- A list of all buttons on the class bar that a class should have
 	local class_button_map =
 	{
+		DEATHKNIGHT =
+		{
+			{button_name = "AutoBarButtonClassBuff" },
+			{button_name = "AutoBarButtonDebuff" },
+			{button_name = "AutoBarButtonClassPet" },
+			{button_name = "AutoBarButtonClassPets2" },
+			{button_name = "AutoBarButtonER" },
+		},
+		DEMONHUNTER =
+		{
+			{button_name = "AutoBarButtonER" },
+			{button_name = "AutoBarButtonCharge" },
+			{button_name = "AutoBarButtonTrap",},
+		},
 		DRUID =
 		{
 			{button_name = "AutoBarButtonBear", },
@@ -330,6 +345,19 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonShields", },
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonER", },
+		},
+		HUNTER =
+		{
+			{button_name = "AutoBarButtonAspect" },
+			{button_name = "AutoBarButtonCharge" },
+			{button_name = "AutoBarButtonFoodPet", additional_args = {rightClickTargetsPet = true}},
+			{button_name = "AutoBarButtonTrap"},
+			{button_name = "AutoBarButtonStealth" },
+			{button_name = "AutoBarButtonDebuff" },
+			{button_name = "AutoBarButtonClassPet" },
+			{button_name = "AutoBarButtonClassPets2" },
+			{button_name = "AutoBarButtonClassPets3" },
+			{button_name = "AutoBarButtonER" },
 		},
 		MAGE =
 		{
@@ -366,15 +394,24 @@ function AutoBar:InitializeDefaults()
 		ROGUE =
 		{
 			{button_name = "AutoBarButtonShields", },
-			{button_name = "AutoBarButtonStealth", },
+			{button_name = "AutoBarButtonStealth" },
 			{button_name = "AutoBarButtonPoisonLethal", },
 			{button_name = "AutoBarButtonPoisonNonlethal", },
 			{button_name = "AutoBarButtonInterrupt", },
 			{button_name = "AutoBarButtonCharge", },
-			{button_name = "AutoBarButtonER", },
+			{button_name = "AutoBarButtonER" },
+			{button_name = "AutoBarButtonPickLock", additional_args = {targeted = "Lockpicking"} },
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		},
+		SHAMAN =
+		{
+			{button_name = "AutoBarButtonTotemAir", },
+			{button_name = "AutoBarButtonTotemEarth", },
+			{button_name = "AutoBarButtonTotemFire", },
+			{button_name = "AutoBarButtonTotemWater", },
+			{button_name = "AutoBarButtonTravel", },
 		},
 		WARLOCK =
 		{
@@ -387,16 +424,16 @@ function AutoBar:InitializeDefaults()
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 			{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
-			{button_name = "AutoBarButtonClassPet", },
+			{button_name = "AutoBarButtonClassPet" },
 		},
 		WARRIOR =
 		{
-			{button_name = "AutoBarButtonShields", },
-			{button_name = "AutoBarButtonCharge", },
-			{button_name = "AutoBarButtonInterrupt", },
-			{button_name = "AutoBarButtonER", },
-			{button_name = "AutoBarButtonStance", },
-			{button_name = "AutoBarButtonClassBuff", },
+			{button_name = "AutoBarButtonShields" },
+			{button_name = "AutoBarButtonCharge" },
+			{button_name = "AutoBarButtonInterrupt" },
+			{button_name = "AutoBarButtonER" },
+			{button_name = "AutoBarButtonStance" },
+			{button_name = "AutoBarButtonClassBuff" },
 			{button_name = "AutoBarButtonDebuff", project_id = WOW_PROJECT_MAINLINE},
 		}
 	}
@@ -414,10 +451,16 @@ function AutoBar:InitializeDefaults()
 					defaultButtonIndex = idx,
 					enabled = true,
 				}
+				if (button_def.additional_args) then
+					Mixin(AutoBar.db.class.buttonList[button_name], button_def.additional_args)
+				end
 			end
 		end
 	end
 
+--#endregion
+
+--#region CommonButtons
 	if (not AutoBar.db.account.buttonList["AutoBarButtonHearth"]) then
 		AutoBar.db.account.buttonList["AutoBarButtonHearth"] = {
 			buttonKey = "AutoBarButtonHearth",
@@ -863,118 +906,6 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonFoodPet"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonFoodPet"] = {
-				buttonKey = "AutoBarButtonFoodPet",
-				buttonClass = "AutoBarButtonFoodPet",
-				barKey = "AutoBarClassBarHunter",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-				rightClickTargetsPet = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTrack"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTrack"] = {
-				buttonKey = "AutoBarButtonTrack",
-				buttonClass = "AutoBarButtonTrack",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTrap"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTrap"] = {
-				buttonKey = "AutoBarButtonTrap",
-				buttonClass = "AutoBarButtonTrap",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-	end
-
-
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonStealth"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonStealth"] = {
-				buttonKey = "AutoBarButtonStealth",
-				buttonClass = "AutoBarButtonStealth",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "DEATHKNIGHT" or AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonDebuff"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonDebuff"] = {
-				buttonKey = "AutoBarButtonDebuff",
-				buttonClass = "AutoBarButtonDebuff",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-
-	if (AutoBar.CLASS == "HUNTER" or AutoBar.CLASS == "DEATHKNIGHT") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPets2"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonClassPets2"] = {
-				buttonKey = "AutoBarButtonClassPets2",
-				buttonClass = "AutoBarButtonClassPets2",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPets3"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonClassPets3"] = {
-				buttonKey = "AutoBarButtonClassPets3",
-				buttonClass = "AutoBarButtonClassPets3",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-	if ( AutoBar.CLASS == "DEATHKNIGHT"  or AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonClassPet"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonClassPet"] = {
-				buttonKey = "AutoBarButtonClassPet",
-				buttonClass = "AutoBarButtonClassPet",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-			}
-		end
-	end
-
-	if (ABGCode.ClassInList(AutoBar.CLASS, "DEATHKNIGHT")) then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonClassBuff"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonClassBuff"] = {
-				buttonKey = "AutoBarButtonClassBuff",
-				buttonClass = "AutoBarButtonClassBuff",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-	end
-
 	if (not AutoBar.db.class.buttonList["AutoBarButtonShields"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonShields"] = {
 			buttonKey = "AutoBarButtonShields",
@@ -999,19 +930,6 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if (AutoBar.CLASS == "DEMONHUNTER" or AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonCharge"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonCharge"] = {
-				buttonKey = "AutoBarButtonCharge",
-				buttonClass = "AutoBarButtonCharge",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-	end
-
 	if (not AutoBar.db.class.buttonList["AutoBarButtonInterrupt"]) then
 		AutoBar.db.class.buttonList["AutoBarButtonInterrupt"] = {
 			buttonKey = "AutoBarButtonInterrupt",
@@ -1024,92 +942,7 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS == "HUNTER") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonAspect"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonAspect"] = {
-				buttonKey = "AutoBarButtonAspect",
-				buttonClass = "AutoBarButtonAspect",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-	end
-
-	if (AutoBar.CLASS == "ROGUE") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonPickLock"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonPickLock"] = {
-				buttonKey = "AutoBarButtonPickLock",
-				buttonClass = "AutoBarButtonPickLock",
-				barKey = "AutoBarClassBarRogue",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-				targeted = "Lockpicking",
-			}
-		end
-
-	end
-
-	if (AutoBar.CLASS == "SHAMAN") then
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTotemEarth"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTotemEarth"] = {
-				buttonKey = "AutoBarButtonTotemEarth",
-				buttonClass = "AutoBarButtonTotemEarth",
-				barKey = "AutoBarClassBarShaman",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTotemAir"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTotemAir"] = {
-				buttonKey = "AutoBarButtonTotemAir",
-				buttonClass = "AutoBarButtonTotemAir",
-				barKey = "AutoBarClassBarShaman",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTotemFire"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTotemFire"] = {
-				buttonKey = "AutoBarButtonTotemFire",
-				buttonClass = "AutoBarButtonTotemFire",
-				barKey = "AutoBarClassBarShaman",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTotemWater"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTotemWater"] = {
-				buttonKey = "AutoBarButtonTotemWater",
-				buttonClass = "AutoBarButtonTotemWater",
-				barKey = "AutoBarClassBarShaman",
-				defaultButtonIndex = "*",
-				enabled = true,
-				arrangeOnUse = true,
-			}
-		end
-
-		if (not AutoBar.db.class.buttonList["AutoBarButtonTravel"]) then
-			AutoBar.db.class.buttonList["AutoBarButtonTravel"] = {
-				buttonKey = "AutoBarButtonTravel",
-				buttonClass = "AutoBarButtonTravel",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = 3,
-				enabled = true,
-				noPopup = true,
-			}
-		end
-	end
-
+--#endregion XpacButtons
 
 	--classic-only: "AutoBarButtonTrack",
 	local deprecated_buttons
