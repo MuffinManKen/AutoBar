@@ -24,7 +24,7 @@ local MINOR = 100000 + 2
 			button:FreeKey(key) - unbinds the given key from all other buttons
 			button:ClearBindings() - removes all keys bound to the given button
 			button:GetBindings() - returns a string listing all bindings of the given button
-			button:GetActionName() - what we're binding to, used for printing
+			button:GetActionName() - what we''re binding to, used for printing
 --]]
 
 local LibKeyBound, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
@@ -43,6 +43,18 @@ LibKeyBound.L = L
 LibKeyBound.Binder = LibKeyBound.Binder or {}
 
 local SaveBindings = SaveBindings or AttemptToSaveBindings
+
+local checkbox_template = SettingsCheckBoxControlMixin and 'SettingsCheckBoxControlTemplate' or 'OptionsCheckButtonTemplate'
+
+local function set_checkbox_text (p_checkbox, p_text)
+
+	if (SettingsCheckBoxControlMixin) then
+		p_checkbox.Text:SetText(p_text)
+	else
+		_G[p_checkbox:GetName() .. 'Text']:SetText(p_text)
+	end
+
+end
 
 -- #NODOC
 function LibKeyBound:Initialize()
@@ -69,7 +81,7 @@ function LibKeyBound:Initialize()
 		f:SetScript('OnHide', function() PlaySound(SOUNDKIT and SOUNDKIT.GS_TITLE_OPTION_EXIT or 'gsTitleOptionExit') end)
 
 		f:RegisterForDrag('LeftButton')
-		f:SetScript('OnDragStart', function(f) f:StartMoving() end) 
+		f:SetScript('OnDragStart', function(f) f:StartMoving() end)
 		f:SetScript('OnDragStop', function(f) f:StopMovingOrSizing() end)
 
 		local header = f:CreateTexture(nil, 'ARTWORK')
@@ -91,8 +103,9 @@ function LibKeyBound:Initialize()
 		desc:SetText(format(L.BindingsHelp, GetBindingText('ESCAPE')))
 
 		-- Per character bindings checkbox
-		local perChar = CreateFrame('CheckButton', 'KeyboundDialogCheck', f, 'OptionsCheckButtonTemplate')
-		_G[perChar:GetName() .. 'Text']:SetText(CHARACTER_SPECIFIC_KEYBINDINGS)
+		local perChar = CreateFrame('CheckButton', 'KeyboundDialogCheck', f, checkbox_template)
+		set_checkbox_text(perChar, CHARACTER_SPECIFIC_KEYBINDINGS)
+
 
 		perChar:SetScript('OnShow', function(self)
 			self:SetChecked(GetCurrentBindingSet() == 2)
@@ -105,8 +118,9 @@ function LibKeyBound:Initialize()
 		end)
 
 		-- Okay bindings checkbox
-		local okayBindings = CreateFrame('CheckButton', 'KeyboundDialogOkay', f, 'OptionsButtonTemplate')
-		getglobal(okayBindings:GetName() .. 'Text'):SetText(OKAY)
+		local okayBindings = CreateFrame('CheckButton', 'KeyboundDialogOkay', f, "UIPanelButtonTemplate")
+		okayBindings:SetText(OKAY)
+		okayBindings:SetWidth(80)
 
 		okayBindings:SetScript('OnClick', function(self)
 			current = (perChar:GetChecked() and 2) or 1
@@ -134,8 +148,9 @@ function LibKeyBound:Initialize()
 		end)
 
 		-- Cancel bindings checkbox
-		local cancelBindings = CreateFrame('CheckButton', 'KeyboundDialogCancel', f, 'OptionsButtonTemplate')
-		getglobal(cancelBindings:GetName() .. 'Text'):SetText(CANCEL)
+		local cancelBindings = CreateFrame('CheckButton', 'KeyboundDialogCancel', f, "UIPanelButtonTemplate")
+		cancelBindings:SetText(CANCEL)
+		cancelBindings:SetWidth(80)
 
 		cancelBindings:SetScript('OnClick', function(self)
 			if InCombatLockdown() then

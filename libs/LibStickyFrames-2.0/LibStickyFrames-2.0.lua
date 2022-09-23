@@ -54,7 +54,7 @@ lib.events = lib.events or _G.LibStub("CallbackHandler-1.0"):New(lib)
 lib.group = lib.group or false
 -- Embeded Frames
 lib.registered = lib.registered or {}
-lib.registered[_G.MainMenuBarArtFrame] = true
+lib.registered[_G.MainMenuBar] = true
 lib.registered[_G.CharacterMicroButton] = true
 lib.registered[_G.ChatFrameMenuButton] = true
 --lib.registered[_G.MainMenuBar] = true
