@@ -1693,7 +1693,9 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Spell.AncientDalaranPortals")
 	end
 
-	self:AddCategory("Muffin.Misc.Hearth")
+	if (AutoBarCategoryList["Muffin.Misc.Hearth"]) then
+		self:AddCategory("Muffin.Misc.Hearth")
+	end
 
 	if (ABGData.is_mainline_wow) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
