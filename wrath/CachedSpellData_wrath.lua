@@ -193,6 +193,8 @@ ABGCS.CacheSpellData(976, "Shadow Protection");
 ABGCS.CacheSpellData(27683, "Prayer of Shadow Protection");
 ABGCS.CacheSpellData(34433, "Shadowfiend");
 ABGCS.CacheSpellData(6346, "Fear Ward");
+ABGCS.CacheSpellData(14752, "Divine Spirit");
+ABGCS.CacheSpellData(27681, "Prayer of Spirit");
 --#endregion
 
 --Rogue
