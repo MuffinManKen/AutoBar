@@ -1502,6 +1502,26 @@ function AutoBar:CreateOptionsAce3()
 						}
 					},
 				},
+				contributors = {
+					type = "group",
+					order = 51,
+					name = L["Contributors"],
+					childGroups = "tree",
+					args = {
+						header0 = {
+							type = "header",
+							order = 0,
+							name = "AutoBar Contributors",
+						},
+						cont_text = {
+						    type = "description",
+							order = 1,
+						    name = "Maggz, Sinewyk, Korbl, jasskin",
+						    desc = "Helpful people",
+						    fontSize = "medium",
+						}
+					},
+				},
 
 				config = {
 					type = "execute",

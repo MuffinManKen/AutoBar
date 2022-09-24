@@ -144,6 +144,8 @@ atl("NewButtonTooltip", "Create a new custom button")
 atl("Square Popups", "Square Popups")
 atl("Square Popups Desc", "Try to organize popups into more of a square shape")
 
+atl("Contributors", "Contributors")
+
 
 atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet from your pet journal|r")
 atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet|nfrom your list of favourites|nin the pet journal|r")
