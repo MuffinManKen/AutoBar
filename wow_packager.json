@@ -12,51 +12,8 @@
 		"whats_new" : "classic/whats_new.lua",
 		"skip_ftp" : true,
 		"generate_patreon_post" : true
-	},
-	{
-		"toc_file" : "AutoBarClassic.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%_rare.zip",
-		"zip_root" : "AutoBarClassic",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
-		"force_dirs" : ["classic", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_rare.tga" : "textures/muffin.tga"},
-		"whats_new" : "classic/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarClassic.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%_uncommon.zip",
-		"zip_root" : "AutoBarClassic",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
-		"force_dirs" : ["classic", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_uncommon.tga" : "textures/muffin.tga"},
-		"whats_new" : "classic/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarClassic.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%_epic.zip",
-		"zip_root" : "AutoBarClassic",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
-		"force_dirs" : ["classic", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_epic.tga" : "textures/muffin.tga"},
-		"whats_new" : "classic/whats_new.lua"
-	},
-	{
-		"toc_file" : "AutoBarClassic.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%_legend.zip",
-		"zip_root" : "AutoBarClassic",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "Readme.txt"],
-		"force_dirs" : ["classic", "libs", "locale", "textures"],
-		"renames" : {"textures/muffin_legend.tga" : "textures/muffin.tga"},
-		"whats_new" : "classic/whats_new.lua"
 	}
+
 	],
 "bcc" :
 	[
