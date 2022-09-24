@@ -1002,7 +1002,7 @@ end
 -- Add category to the end of the buttons list
 function AutoBarButton.prototype:AddCategory(p_category_name)
 	if not AutoBarCategoryList[p_category_name] then
-		ABGCode:LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
+		ABGCode.LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
 	end
 	for _, category in ipairs(self) do
 		if (category == p_category_name) then
