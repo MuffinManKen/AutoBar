@@ -722,7 +722,7 @@ function AutoBar:InitializeDefaults()
 --#region XpacButtons
 	-- A list of all buttons on the account bars that a player should have by expansion pack
 
-	if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
+	if (LE_EXPANSION_WRATH_OF_THE_LICH_KING and LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
 		if (not AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"]) then
 			AutoBar.db.account.buttonList["AutoBarButtonMillHerbs"] = {

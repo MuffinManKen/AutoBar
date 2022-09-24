@@ -2231,7 +2231,7 @@ function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 end
 
 
-if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
+if (LE_EXPANSION_WRATH_OF_THE_LICH_KING and LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
 	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
