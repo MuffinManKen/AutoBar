@@ -3,9 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - DeathKnight: Spells and Buttons added (Korbl)
- - Mage: Spell updates (Sinewyk)
- - Misc: More buttons added to Wrath (Sinewyk)
- - Paladin: Spell updates (Sinewyk)
+ - Professions: Added Milling button
+ - Items: Updated Hearth entries
+ - Priest: Divine Spirit, Prayer of Spirit (jasskin)
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
