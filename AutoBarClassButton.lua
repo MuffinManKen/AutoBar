@@ -1058,19 +1058,12 @@ end
 
 function AutoBar.Class.Button:OptionsReset()
 	ResetCustomButtons(AutoBar.db.account.buttonList)
---	AutoBar.db.account.buttonListVersion = buttonVersion
 	ResetCustomButtons(AutoBar.db.class.buttonList)
 	ResetCustomButtons(AutoBar.db.char.buttonList)
 end
 
 function AutoBar.Class.Button:OptionsUpgrade()
---AutoBar:Print("AutoBar.Class.Button:OptionsUpgrade start")
-	if (not AutoBar.db.account.buttonListVersion) then
---		AutoBar.db.account.buttonListVersion = buttonVersion
-	elseif (AutoBar.db.account.buttonListVersion < buttonVersion) then
---AutoBar:Print("AutoBar.Class.Button:OptionsUpgrade AutoBar.db.account.buttonListVersion " .. tostring(AutoBar.db.account.buttonListVersion))
---		AutoBar.db.account.buttonListVersion = buttonVersion
-	end
+
 end
 
 
