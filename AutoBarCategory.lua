@@ -888,6 +888,8 @@ function ABGCode.InitializeAllCategories()
 
 	AutoBarCategoryList["Misc.Lockboxes"] = ItemsCategory:new("Misc.Lockboxes", "INV_Trinket_Naxxramas06", "Misc.Lockboxes")
 
+	AutoBarCategoryList["Misc.Unlock"] = ItemsCategory:new("Misc.Unlock", "INV_Trinket_Naxxramas06", "Misc.Unlock")
+
 	AutoBarCategoryList["Misc.Usable.BossItem"] = ItemsCategory:new("Misc.Usable.BossItem", "INV_BannerPVP_02", "Misc.Usable.BossItem")
 
 	AutoBarCategoryList["Misc.Usable.Fun"] = ItemsCategory:new("Misc.Usable.Fun", "INV_Misc_Toy_10", "Misc.Usable.Fun")

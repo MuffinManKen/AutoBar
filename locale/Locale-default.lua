@@ -241,6 +241,7 @@ local quick_sets =
 	"Muffin.Covenant.Anima",
 	"Muffin.Covenant.Conduit",
 	"Muffin.Covenant.Wildseed",
+	"Misc.Unlock",
 }
 
 atl_table(quick_sets);
