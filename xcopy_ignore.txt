@@ -9,6 +9,7 @@ CVS
 ChangeList.txt
 media
 notes.txt
+wow_defs.lua
 xcopy_ignore_classic.txt
 xcopy_ignore_retail.txt
 xcopy_ignore.txt
