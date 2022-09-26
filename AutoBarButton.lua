@@ -1696,6 +1696,7 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	if (AutoBarCategoryList["Muffin.Misc.Hearth"]) then
 		self:AddCategory("Muffin.Misc.Hearth")
 	end
+	self:AddCategory("Misc.Hearth")
 
 	if (ABGData.is_mainline_wow) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
