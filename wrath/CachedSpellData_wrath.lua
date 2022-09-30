@@ -141,6 +141,8 @@ ABGCS.CacheSpellData(32271, "Teleport: Exodar");
 ABGCS.CacheSpellData(32272, "Teleport: Silvermoon");
 ABGCS.CacheSpellData(33690, "Teleport: Shattrath - Alliance");
 ABGCS.CacheSpellData(35715, "Teleport: Shattrath - Horde");
+ABGCS.CacheSpellData(53140, "Teleport: Dalaran");
+ABGCS.CacheSpellData(53142, "Portal: Dalaran");
 --#endregion
 
 --#region Paladin

@@ -144,6 +144,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Silvermoon"), ABGCode.GetSpellNameByName("Portal: Silvermoon"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Alliance"), ABGCode.GetSpellNameByName("Portal: Shattrath - Alliance"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Shattrath - Horde"), ABGCode.GetSpellNameByName("Portal: Shattrath - Horde"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Dalaran"), ABGCode.GetSpellNameByName("Portal: Dalaran"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Astral Recall"), ABGCode.GetSpellNameByName("Astral Recall"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Ritual of Summoning"), ABGCode.GetSpellNameByName("Ritual of Summoning"),
 
