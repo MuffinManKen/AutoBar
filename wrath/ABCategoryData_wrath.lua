@@ -90,7 +90,8 @@ function ABGCode.InitializeCategories()
 		"PRIEST", ABGCode.GetSpellNameByName("Divine Spirit"), ABGCode.GetSpellNameByName("Prayer of Spirit"),
 		"SHAMAN", ABGCode.GetSpellNameByName("Water Walking"), ABGCode.GetSpellNameByName("Water Walking"),
 		"WARLOCK", ABGCode.GetSpellNameByName("Unending Breath"), ABGCode.GetSpellNameByName("Unending Breath"),
-		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
+		"WARRIOR", ABGCode.GetSpellNameByName("Battle Shout"), ABGCode.GetSpellNameByName("Commanding Shout"),
+		"WARRIOR", ABGCode.GetSpellNameByName("Commanding Shout"), ABGCode.GetSpellNameByName("Battle Shout"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = SpellsCategory:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],

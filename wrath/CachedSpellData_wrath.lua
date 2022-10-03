@@ -313,6 +313,7 @@ ABGCS.CacheSpellData(30146, "Summon Felguard");
 
 --Warrior
 ABGCS.CacheSpellData(6673, "Battle Shout");
+ABGCS.CacheSpellData(469, "Commanding Shout");
 ABGCS.CacheSpellData(100, "Charge");
 ABGCS.CacheSpellData(1160, "Demoralizing Shout");
 ABGCS.CacheSpellData(20252, "Intercept");
