@@ -649,7 +649,7 @@ function ABGCode.events.UPDATE_BATTLEFIELD_STATUS()
 		end
 		if (AutoBar.inBG ~= bgStatus) then
 			AutoBar.inBG = bgStatus
-			ABGCS.UpdateActive();
+			ABGCS.ABScheduleUpdate(tick.UpdateActiveID)
 		end
 	end
 
