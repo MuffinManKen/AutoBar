@@ -1,7 +1,7 @@
 ## Interface: 30400
 ## Title: AutoBarWrath
 ## Author: MuffinManKen, Toadkiller (Original code)
-## Version: 3.00.4.05
+## Version: 3.00.4.06
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
 ## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
 ## Notes-koKR: 자동으로 물약, 음료, 음식등이 포함된 버튼을 제공하며 슬롯에 사용할 아이템을 별도로 추가할 수 있습니다. 이것은 액션 슬롯에 여유를 가져다 줄것입니다.
