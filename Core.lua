@@ -1069,17 +1069,24 @@ function AutoBar:ABSchedulerTick()
 	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
 		tick.ScheduledUpdate = ABGCS.UpdateCategories(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
-		tick.ScheduledUpdate = ABGCS:UpdateSpells(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateSpells(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
-		tick.ScheduledUpdate = ABGCS:UpdateObjects(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateObjects(tick.BehaveTicker);
+
 	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
-		tick.ScheduledUpdate = ABGCS:UpdateItems(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateItems(tick.BehaveTicker);
+
 	elseif(tick.ScheduledUpdate == tick.UpdateAttributesID) then
-		tick.ScheduledUpdate = ABGCS:UpdateAttributes(tick.BehaveTicker);
+		tick.ScheduledUpdate = ABGCS.UpdateAttributes(tick.BehaveTicker);
+
+	elseif(tick.ScheduledUpdate == tick.UpdateActiveID) then
+		tick.ScheduledUpdate = ABGCS.UpdateActive(tick.BehaveTicker);
+
 	elseif(tick.ScheduledUpdate == tick.UpdateButtonsID) then
 		tick.ScheduledUpdate = ABGCS.UpdateButtons(tick.BehaveTicker);
 	else
-print("     ", "Not sure what's happening", tick.ScheduledUpdate)
+		print("AutoBar : Invalid tick ID", tick.ScheduledUpdate)
+		tick.ScheduledUpdate = tick.UpdateCompleteID
 	end
 
 
@@ -1118,7 +1125,7 @@ function ABGCode.UpdateCategories(p_behaviour)
 	return ret;
 end
 
-function ABGCS:UpdateSpells(p_behaviour)
+function ABGCS.UpdateSpells(p_behaviour)
 	ABGCode.LogEventStart("ABGCS:UpdateSpells")
 
 	AutoBarSearch.stuff:ScanSpells()
@@ -1136,7 +1143,7 @@ function ABGCS:UpdateSpells(p_behaviour)
 	return ret;
 end
 
-function ABGCS:UpdateObjects(p_behaviour)
+function ABGCS.UpdateObjects(p_behaviour)
 
 	ABGCode.LogEventStart("ABGCS:UpdateObjects")
 	local barLayoutDBList = AutoBar.barLayoutDBList
@@ -1178,7 +1185,7 @@ function ABGCS:UpdateObjects(p_behaviour)
 end
 
 
-function ABGCS:UpdateItems(p_behaviour)
+function ABGCS.UpdateItems(p_behaviour)
 
 	ABGCode.LogEventStart("ABGCS:UpdateItems")
 
@@ -1202,7 +1209,7 @@ end
 
 -- Based on the current Scan results, update the Button and Popup Attributes
 -- Create Popup Buttons as needed
-function ABGCS:UpdateAttributes(p_behaviour)
+function ABGCS.UpdateAttributes(p_behaviour)
 	ABGCode.LogEventStart("ABGCS:UpdateAttributes")
 	for _bar_key, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
@@ -1224,7 +1231,7 @@ function ABGCS.UpdateActive(p_behaviour)
 		bar:RefreshLayout()
 	end
 
-	ABGCS:UpdateButtons(p_behaviour)
+	ABGCS.UpdateButtons(p_behaviour)
 
 	ABGCode.LogEventEnd("ABGCS.UpdateActive", tostring(p_behaviour))
 
