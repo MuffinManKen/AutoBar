@@ -134,6 +134,9 @@ end
 ---@class AB
 AB = {}
 
+function AB.ClearNormalTexture(frame) end
+
+
 --#region LibKeyBound
 ---@class LibKeyBound
 ---@field Binder table

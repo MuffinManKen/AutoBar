@@ -217,6 +217,14 @@ function AutoBarGlobalCodeSpace.IsUsableItem(p_item_id)
 --	return is_usable_item_cache[p_item_id], not_enough_mana;
 end
 
+function AB.ClearNormalTexture(p_frame)
+	if (p_frame.ClearNormalTexture) then
+		p_frame:ClearNormalTexture()
+	else
+		p_frame:SetNormalTexture(nil)
+	end
+end
+
 
 --/run AutoBarGlobalCodeSpace.FrameInsp(ActionButton3)
 function AutoBarGlobalCodeSpace.FrameInsp(p_frame) --AutoBarButtonExplosiveFrame

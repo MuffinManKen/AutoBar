@@ -10,6 +10,7 @@
 --
 
 --GLOBALS: UIParent, CreateFrame, GameFontNormal, RegisterStateDriver, UnregisterStateDriver, InCombatLockdown, IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown
+local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local _G = _G
@@ -485,7 +486,7 @@ function AutoBar.Class.Bar.prototype:CreateDragFrame()
 		local name = self.barKey .. "DragFrame"
 		local frame = CreateFrame("Button", name, self.frame, "ActionButtonTemplate SecureActionButtonTemplate SecureHandlerDragTemplate")
 		frame:GetNormalTexture():Hide()
-		frame:SetNormalTexture(nil)
+		AB.ClearNormalTexture(frame)
 		self.dragFrame = frame
 	--AutoBar:Print(tostring(self.parentBar.frame) .. " ->  " .. tostring(frame) .. " button " .. tostring(name))
 
@@ -502,7 +503,7 @@ function AutoBar.Class.Bar.prototype:CreateFadeFrame()
 	if (not self.fadeFrame) then
 		local name = self.barKey .. "FadeFrame"
 		local frame = CreateFrame("CheckButton", name, self.frame, "ActionButtonTemplate, SecureActionButtonTemplate")
-		frame:SetNormalTexture(nil)
+		AB.ClearNormalTexture(frame)
 		frame.class = self
 
 		self.fadeFrame = frame
