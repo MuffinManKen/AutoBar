@@ -368,7 +368,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
 			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
 		elseif ((oor ~= "none") and frame.outOfRange) then
-print("AutoBar.Class.BasicButton.prototype:UpdateUsable", oor)
+			print("AutoBar.Class.BasicButton.prototype:UpdateUsable", oor)
 			if (oor == "button") then
 				frame.icon:SetVertexColor(0.8, 0.1, 0.1)
 				frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)

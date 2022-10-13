@@ -153,7 +153,7 @@ AutoBar.frame:SetScript("OnEvent",
 			AutoBar[timer_name] = AutoBar[timer_name] or 0
 
 			if ((now - AutoBar[timer_name]) < AutoBarDB2.settings.throttle_event_limit) then
-				if (AutoBarDB2.settings.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
+				if (AutoBarDB2.settings.log_throttled_events) then print (" AutoBar Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")", ...) end
 				return
 			end
 			AutoBar[timer_name] = now
@@ -585,7 +585,7 @@ function ABGCode.events.PLAYER_REGEN_DISABLED(p_arg1)
 
 	AutoBar.inCombat = true
 	if (InCombatLockdown()) then
-		print("PLAYER_REGEN_DISABLED called while InCombatLockdown")
+		print("AutoBar PLAYER_REGEN_DISABLED called while InCombatLockdown")
 	end
 
 	if (AutoBar.moveButtonsMode) then
@@ -1053,7 +1053,7 @@ end
 
 
 function AutoBar:ABSchedulerTick()
- --if (tick.ScheduledUpdate ~= tick.UpdateCompleteID) then print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate); end;
+ 	--if (tick.ScheduledUpdate ~= tick.UpdateCompleteID) then print("AutoBar:ABSchedulerTick", "ScheduledUpdate:", ABGData.TickScheduler.ScheduledUpdate); end;
 	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
 
 	--If we're in combat, catch it on the next tick so we don't cause a hitch in gameplay

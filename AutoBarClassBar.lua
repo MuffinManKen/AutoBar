@@ -213,7 +213,7 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 		elseif (buttonDB.enabled) then
 			-- Recover from disabled cache
 			assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjects mismatched keys")
-			if(AutoBar.Class[buttonDB.buttonClass] == nil) then print(buttonDB.buttonClass, "is nil"); end;
+			if(AutoBar.Class[buttonDB.buttonClass] == nil) then print("AutoBar ", buttonDB.buttonClass, "is nil"); end;
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
