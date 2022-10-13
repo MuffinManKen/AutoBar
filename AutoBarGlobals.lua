@@ -8,7 +8,7 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 
 local print, select, ipairs, tostring, pairs, tonumber, string = print, select, ipairs, tostring, pairs, tonumber, string
 
-AutoBar = MMGHACKAceLibrary("AceAddon-2.0"):new("AceDB-2.0");
+AutoBar = {}
 AutoBar.warning_log = {}
 
 -- All global code with be a child of this table.
@@ -359,12 +359,12 @@ local event_name_colour = "|cFFFFFF7F"
 
 function AutoBarGlobalCodeSpace.LogEvent(p_event_name, p_arg1)
 	local memory
-	if (AutoBar.db.account.logMemory) then
+	if (AutoBarDB2.settings.log_memory) then
 		UpdateAddOnMemoryUsage()
 		memory = GetAddOnMemoryUsage("AutoBar")
 		print(p_event_name, "memory" , memory)
 	end
-	if (AutoBar.db.account.logEvents) then
+	if (AutoBarDB2.settings.log_events) then
 		if (p_arg1) then
 			memory = memory or ""
 			print(event_name_colour .. p_event_name .. "|r", "arg1" , p_arg1, "time:", GetTime(), memory)
@@ -377,13 +377,13 @@ end
 function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
 	local memory
 
-	if (AutoBar.db.account.logMemory) then
+	if (AutoBarDB2.settings.log_memory) then
 		UpdateAddOnMemoryUsage()
 		memory = GetAddOnMemoryUsage("AutoBar")
 		logMemory[p_event_name] = memory
 	end
 
-	if (AutoBar.db.account.performance) then
+	if (AutoBarDB2.settings.performance) then
 		if (logItems[p_event_name]) then
 			--print(p_event_name, "restarted before previous completion")
 		else
@@ -392,20 +392,20 @@ function AutoBarGlobalCodeSpace.LogEventStart(p_event_name)
 		end
 	end
 
-	if (AutoBar.db.account.logEvents) then
+	if (AutoBarDB2.settings.log_events) then
 			memory = memory or ""
 			print(event_name_colour .. p_event_name .. "|r", "time:", debugprofilestop(), memory)
 	end
 end
 
 function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, p_arg1)	--ToDo: There can actually be multiple args
-	if (AutoBar.db.account.performance) then
+	if (AutoBarDB2.settings.performance) then
 		if (logItems[p_event_name]) then
 			local elapsed = debugprofilestop() - logItems[p_event_name]
 			-- if (p_event_name == "SPELLS_CHANGED") then
 			-- 	print(p_event_name, p_arg1, elapsed, "=", debugprofilestop(), " - ", logItems[p_event_name])
 			-- end
-			if (elapsed > AutoBarDB2.performance_threshold) then
+			if (elapsed > AutoBarDB2.settings.performance_threshold) then
 				print(event_name_colour .. p_event_name .. "|r", (p_arg1 or ""), "time:", elapsed)
 			end
 		--else
@@ -413,7 +413,7 @@ function AutoBarGlobalCodeSpace.LogEventEnd(p_event_name, p_arg1)	--ToDo: There 
 			logItems[p_event_name] = nil
 		end
 	end
-	if (AutoBar.db.account.logMemory) then
+	if (AutoBarDB2.settings.log_memory) then
 		UpdateAddOnMemoryUsage()
 		local memory = GetAddOnMemoryUsage("AutoBar")
 		local deltaMemory = memory - (logMemory[p_event_name] or 0)

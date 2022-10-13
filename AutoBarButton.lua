@@ -271,10 +271,10 @@ local function UpdateHandlers(frame)
 		end
 	end
 
-	local buttonData = AutoBar.db.char.buttonDataList[buttonKey]
+	local buttonData = AutoBar.char.buttonDataList[buttonKey]
 	if (not buttonData) then
 		buttonData = {}
-		AutoBar.db.char.buttonDataList[buttonKey] = buttonData
+		AutoBar.char.buttonDataList[buttonKey] = buttonData
 	end
 
 	buttonData.arrangeOnUse = itemId
@@ -452,7 +452,7 @@ function AutoBarButton.prototype:GetHierarchicalSetting(setting)
 	if (db[setting] ~= nil) then
 		return db[setting]
 	end
-	db = AutoBar.db.account
+	db = AutoBarDB2.account
 	if (db[setting] ~= nil) then
 		return db[setting]
 	end
@@ -563,7 +563,7 @@ function AutoBarButton.prototype:SetupButton()
 			local wrapped = frame.UpdateIcon
 			-- Trigger Updating on the Anchor Button
 			if (wrapped and (not arrangeOnUse)) then
-				local _header, preBody, postBody = popupHeader:UnwrapScript(frame, "OnAttributeChanged")  --ToDo: Remove this?
+				local _header, _preBody, _postBody = popupHeader:UnwrapScript(frame, "OnAttributeChanged")  --ToDo: Remove this?
 			elseif ((not wrapped) and arrangeOnUse) then
 				frame.UpdateIcon = UpdateIcon	-- Update Icon
 				frame.UpdateHandlers = UpdateHandlers	-- Update Handlers: Tooltip
@@ -581,8 +581,8 @@ function AutoBarButton.prototype:SetupButton()
 			popupHeader:Hide()
 		end
 
-		--if (buttonKey == "AutoBarButtonCharge") then print("move_mode",AutoBar.moveButtonsMode, "showEmpty", AutoBar.db.account.showEmptyButtons, "Alwaysshow", self.buttonDB.alwaysShow, "enabled", self.buttonDB.enabled ) end;
-		if ((AutoBar.moveButtonsMode or AutoBar.db.account.showEmptyButtons or self.buttonDB.alwaysShow) and self.buttonDB.enabled) then
+		--if (buttonKey == "AutoBarButtonCharge") then print("move_mode",AutoBar.moveButtonsMode, "showEmpty", AutoBarDB2.settings.show_empty_buttons, "Alwaysshow", self.buttonDB.alwaysShow, "enabled", self.buttonDB.enabled ) end;
+		if ((AutoBar.moveButtonsMode or AutoBarDB2.settings.show_empty_buttons or self.buttonDB.alwaysShow) and self.buttonDB.enabled) then
 			frame:Show()
 			--if (buttonKey == "AutoBarButtonCharge") then print("Showing Frame", "self[1]", self[1]); end;
 			if (self[1]) then
@@ -659,7 +659,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 	local targeted, castSpell, itemsRightClick
 	local buttonDB = self.buttonDB	-- Use base button info for popups as well
-	local selfCastRightClick = AutoBar.db.account.selfCastRightClick
+	local selfCastRightClick = AutoBarDB2.settings.self_cast_right_click
 
 	-- Set up special conditions from Category attributes
 	local categoryInfo = AutoBarCategoryList[category]
@@ -873,14 +873,14 @@ end
 --
 
 --function AutoBarButton:SetTooltip(button)
---AutoBar:Print("SetTooltip " .. tostring(self.needsTooltip) .. " button " .. tostring(button) .. " button " .. tostring(button) .. " showTooltip " .. tostring(AutoBar.db.account.showTooltip) .. " self.needsTooltip " .. tostring(self.needsTooltip))
+--AutoBar:Print("SetTooltip " .. tostring(self.needsTooltip) .. " button " .. tostring(button) .. " button " .. tostring(button) .. " showTooltip " .. tostring(AutoBarDB2.settings.show_tooltip) .. " self.needsTooltip " .. tostring(self.needsTooltip))
 --	local isAutoBarButton = self.class and self.class.buttonDB
 --
 --	if (isAutoBarButton and self.GetHotkey) then
 --		LibKeyBound:Set(self)
 --	end
---	local noTooltip = not (AutoBar.db.account.showTooltip and self.needsTooltip or AutoBar.moveButtonsMode)
---	noTooltip = noTooltip or (InCombatLockdown() and not AutoBar.db.account.showTooltipCombat) or (button == "OnLeave")
+--	local noTooltip = not (AutoBarDB2.settings.show_tooltip and self.needsTooltip or AutoBar.moveButtonsMode)
+--	noTooltip = noTooltip or (InCombatLockdown() and not AutoBarDB2.settings.show_tooltip_in_combat) or (button == "OnLeave")
 --	if (noTooltip) then
 --		self.updateTooltip = nil
 --		GameTooltip:Hide()
@@ -928,7 +928,7 @@ end
 --				end
 --			end
 --			self.updateTooltip = TOOLTIP_UPDATE_TIME
---			if (AutoBar.db.account.showTooltipExtended) then
+--			if (AAutoBarDB2.settings.showTooltipExtended) then
 --				print("GameTooltip_ShowCompareItem")
 --				GameTooltip_ShowCompareItem()
 --			end
@@ -1186,10 +1186,10 @@ function AutoBarButtonClassBuff.prototype:init(parentBar, buttonDB)
 end
 
 function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	local selfCastRightClick = AutoBar.db.account.selfCastRightClick
-	AutoBar.db.account.selfCastRightClick = nil
+	local selfCastRightClick = AutoBarDB2.settings.self_cast_right_click
+	AutoBarDB2.settings.self_cast_right_click = nil
 	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBar.db.account.selfCastRightClick = selfCastRightClick
+	AutoBarDB2.settings.self_cast_right_click = selfCastRightClick
 end
 
 local AutoBarButtonClassPets2 = AceOO.Class(AutoBarButton)
@@ -2428,8 +2428,8 @@ elseif (ABGData.is_mainline_wow) then
 		end
 		self:AddCategory("Toys.ToyBox")
 
-		if (not AutoBar.db.char.buttonDataList[buttonDB.buttonKey]) then
-			AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = {}
+		if (not AutoBar.char.buttonDataList[buttonDB.buttonKey]) then
+			AutoBar.char.buttonDataList[buttonDB.buttonKey] = {}
 		end
 
 		if(buttonDB.toybox_only_show_favourites == nil) then buttonDB.toybox_only_show_favourites = false end
@@ -2516,10 +2516,10 @@ elseif (ABGData.is_mainline_wow) then
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 	--print("AutoBarButtonMount.prototype:init");
 
-		local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
+		local buttonData = AutoBar.char.buttonDataList[buttonDB.buttonKey]
 		if (not buttonData) then
 			buttonData = {}
-			AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
+			AutoBar.char.buttonDataList[buttonDB.buttonKey] = buttonData
 		end
 
 		if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end

@@ -1048,7 +1048,7 @@ function Sorted.prototype:SetBest(buttonKey)
 	end
 
 	-- Move arrangeOnUse item to front of list
-	local buttonData = AutoBar.db.char.buttonDataList[buttonKey]
+	local buttonData = AutoBar.char.buttonDataList[buttonKey]
 
 	if (buttonData) then
 		if (buttonData.SetBest) then

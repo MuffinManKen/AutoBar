@@ -55,8 +55,8 @@ end
 
 
 local function funcOnEnter(self)
-	local noTooltip = not (AutoBar.db.account.showTooltip and self.needsTooltip or AutoBar.moveButtonsMode)
-	noTooltip = noTooltip or (InCombatLockdown() and not AutoBar.db.account.showTooltipCombat)
+	local noTooltip = not (AutoBarDB2.settings.show_tooltip and self.needsTooltip or AutoBar.moveButtonsMode)
+	noTooltip = noTooltip or (InCombatLockdown() and not AutoBarDB2.settings.show_tooltip_in_combat)
 	if (noTooltip) then
 		self.UpdateTooltip = nil
 		GameTooltip:Hide()

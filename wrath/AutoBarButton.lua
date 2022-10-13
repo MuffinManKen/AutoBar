@@ -53,10 +53,10 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 --print("AutoBarButtonMount.prototype:init");
 
-	local buttonData = AutoBar.db.char.buttonDataList[buttonDB.buttonKey]
+	local buttonData = AutoBar.char.buttonDataList[buttonDB.buttonKey]
 	if (not buttonData) then
 		buttonData = {}
-		AutoBar.db.char.buttonDataList[buttonDB.buttonKey] = buttonData
+		AutoBar.char.buttonDataList[buttonDB.buttonKey] = buttonData
 	end
 
 	if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end

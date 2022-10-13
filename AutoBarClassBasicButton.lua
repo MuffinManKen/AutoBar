@@ -122,7 +122,7 @@ end
 
 -- Apply tooltipType to the Button
 function AutoBar.Class.BasicButton:TooltipApply(button)
-	if (AutoBar.db.account.showTooltip) then
+	if (AutoBarDB2.settings.show_tooltip) then
 		if (not button.TooltipShow) then
 			button.TooltipShow = AutoBar.Class.BasicButton.TooltipShow
 --			SecureHandlerWrapScript(button, "OnEnter", button, [[ control:CallMethod("TooltipShow", self) ]])
@@ -282,7 +282,7 @@ end
 -- Set count based on the type and type2 settings
 function AutoBar.Class.BasicButton.prototype:UpdateCount()
 	local frame = self.frame
-	if (AutoBar.db.account.showCount) then
+	if (AutoBarDB2.settings.show_count) then
 		frame.count:Show()
 		local count1 = 0
 		local count2 = 0
@@ -363,7 +363,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			return
 		end
 
-		local oor = AutoBar.db.account.outOfRange or "none"
+		local oor = AutoBarDB2.settings.outOfRange or "none"
 		if (isUsable and (not frame.outOfRange or not (oor ~= "none"))) then
 			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
 			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)

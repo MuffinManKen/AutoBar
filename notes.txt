@@ -36,7 +36,7 @@ AutoBarGlobalCodeSpace.AddProfileData("name", t2 - t1)
 
 /dump C_ToyBox.GetToyLink(127670)
 
-/dump AutoBar.db.account.buttonList["AutoBarButtonToyBox"]
+/dump AutoBarDB2.account.buttonList["AutoBarButtonToyBox"]
 
 
 /dump AutoBarSearch.toys

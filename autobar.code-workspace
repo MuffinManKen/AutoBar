@@ -10,7 +10,6 @@
 		"scm.diffDecorations": "none",
 		"scm.diffDecorationsGutterAction": "none",
 		"scm.diffDecorationsGutterVisibility": "hover",
-		"Lua.completion.callSnippet": "Both",
 		"typescript.locale": "en"
 	}
 }

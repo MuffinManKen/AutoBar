@@ -82,9 +82,6 @@ local function LDBOnClick(clickedFrame, button)
 end
 
 function AutoBar:InitializeOptions()
-	if (not AutoBar:IsActive()) then
-		AutoBar:ToggleActive()
-	end
 
 	self:CreateOptionsAce3()
 
@@ -108,10 +105,8 @@ function AutoBar:InitializeOptions()
 		})
 
 		if (ldbIcon) then
-			if (not AutoBar.db.account.ldbIcon) then
-				AutoBar.db.account.ldbIcon = {}
-			end
-			ldbIcon:Register("AutoBar", ldbAutoBar, AutoBar.db.account.ldbIcon)
+
+			ldbIcon:Register("AutoBar", ldbAutoBar, AutoBarDB2.ldb_icon)
 
 			self.optionsMain.args.main.args.ldbIcon = {
 				type = "toggle",
@@ -119,10 +114,10 @@ function AutoBar:InitializeOptions()
 				width = 1.2,
 				name = L["Show Minimap Icon"],
 				desc = L["Show Minimap Icon"],
-				get = function() return not AutoBar.db.account.ldbIcon.hide end,
-				set = function(info, value)
+				get = function() return not AutoBarDB2.ldb_icon.hide end,
+				set = function(_info, value)
 					value = not value
-					AutoBar.db.account.ldbIcon.hide = value
+					AutoBarDB2.ldb_icon.hide = value
 					if (value) then
 						ldbIcon:Hide("AutoBar")
 					else
@@ -220,9 +215,9 @@ local SHARED_CLASS = "2"
 local SHARED_ACCOUNT = "3"
 
 function AutoBar:GetSharedBarDB(barKey, sharedVar)
-	local charDB = AutoBar.db.char.barList[barKey]
-	local classDB = AutoBar.db.class.barList[barKey]
-	local accountDB = AutoBar.db.account.barList[barKey]
+	local charDB = AutoBar.char.barList[barKey]
+	local classDB = AutoBar.class.barList[barKey]
+	local accountDB = AutoBarDB2.account.barList[barKey]
 
 	-- Char specific db overides all others
 	if (charDB and charDB[sharedVar]) then
@@ -271,19 +266,19 @@ end
 
 function AutoBar:GetSharedBarDBValue(barKey, sharedVar)
 	-- Char specific db overides all others
-	local charDB = AutoBar.db.char.barList[barKey]
+	local charDB = AutoBar.char.barList[barKey]
 	if (charDB and charDB[sharedVar]) then
 		return charDB[sharedVar]
 	end
 
 	-- Class db overides account
-	local classDB = AutoBar.db.class.barList[barKey]
+	local classDB = AutoBar.class.barList[barKey]
 	if (classDB and classDB[sharedVar]) then
 		return classDB[sharedVar]
 	end
 
 	-- Default to account
-	local accountDB = AutoBar.db.account.barList[barKey]
+	local accountDB = AutoBarDB2.account.barList[barKey]
 	if (accountDB and accountDB[sharedVar]) then
 		return accountDB[sharedVar]
 	end
@@ -303,7 +298,7 @@ end
 --/dump AutoBar:GetSharedBarDBValue("AutoBarClassBarHunter", "sharedLayout")
 --/dump AutoBar:GetSharedBarDB("AutoBarClassBarHunter", "sharedLayout")
 
---/dump AutoBar.db.char.barList["AutoBarClassBarHunter"]
+--/dump AutoBar.char.barList["AutoBarClassBarHunter"]
 --/dump AutoBar:GetSharedBarDBValue("AutoBarClassBarHunter", "sharedButtons")
 --/dump AutoBar:GetSharedBarDB("AutoBarClassBarHunter", "sharedButtons")
 
@@ -311,35 +306,35 @@ function AutoBar:SetSharedBarDB(barKey, sharedVar, value)
 	local charDB, classDB, accountDB
 
 	if (value == SHARED_NONE) then
-		charDB = AutoBar.db.char.barList[barKey]
+		charDB = AutoBar.char.barList[barKey]
 		if (not charDB) then
 			local sourceDB = AutoBar:GetSharedBarDB(barKey, sharedVar)
 			charDB = {}
-			AutoBar.db.char.barList[barKey] = charDB
+			AutoBar.char.barList[barKey] = charDB
 			CopyTable(sourceDB, charDB)
 		end
 		charDB[sharedVar] = value
 	elseif (value == SHARED_CLASS) then
-		classDB = AutoBar.db.class.barList[barKey]
+		classDB = AutoBar.class.barList[barKey]
 		if (not classDB) then
 			local sourceDB = AutoBar:GetSharedBarDB(barKey, sharedVar)
 			classDB = {}
-			AutoBar.db.class.barList[barKey] = classDB
+			AutoBar.class.barList[barKey] = classDB
 			CopyTable(sourceDB, classDB)
 		end
 		classDB[sharedVar] = value
-		charDB = AutoBar.db.char.barList[barKey]
+		charDB = AutoBar.char.barList[barKey]
 		if (charDB) then
 			charDB[sharedVar] = nil
 		end
 	elseif (value == SHARED_ACCOUNT) then
-		accountDB = AutoBar.db.account.barList[barKey]
+		accountDB = AutoBarDB2.account.barList[barKey]
 		if (accountDB) then
-			charDB = AutoBar.db.char.barList[barKey]
+			charDB = AutoBar.char.barList[barKey]
 			if (charDB) then
 				charDB[sharedVar] = nil
 			end
-			classDB = AutoBar.db.class.barList[barKey]
+			classDB = AutoBar.class.barList[barKey]
 			if (classDB) then
 				classDB[sharedVar] = nil
 			end
@@ -355,24 +350,24 @@ function AutoBar:GetButtonDB(buttonKey)
 	local db, accountDB
 
 	-- Char specific db overides all others
-	db = AutoBar.db.char.buttonList[buttonKey]
+	db = AutoBar.char.buttonList[buttonKey]
 	if (db) then
 		if (db.shared and db.shared == SHARED_NONE) then
 			return db
 		elseif (db.shared and db.shared == SHARED_CLASS) then
-			return AutoBar.db.class.buttonList[buttonKey]
+			return AutoBar.class.buttonList[buttonKey]
 		elseif (not db.shared or db.shared == SHARED_ACCOUNT) then
-			return AutoBar.db.account.buttonList[buttonKey]
+			return AutoBarDB2.account.buttonList[buttonKey]
 		end
 	end
 
 	-- Class db overides account
-	db = AutoBar.db.class.buttonList[buttonKey]
+	db = AutoBar.class.buttonList[buttonKey]
 	if (db) then
 		if (db.shared and db.shared == SHARED_CLASS) then
 			return db
 		elseif (not db.shared or db.shared == SHARED_ACCOUNT) then
-			accountDB = AutoBar.db.account.buttonList[buttonKey]
+			accountDB = AutoBarDB2.account.buttonList[buttonKey]
 			if (accountDB) then
 				return accountDB
 			else
@@ -381,7 +376,7 @@ function AutoBar:GetButtonDB(buttonKey)
 		end
 	end
 
-	accountDB = AutoBar.db.account.buttonList[buttonKey]
+	accountDB = AutoBarDB2.account.buttonList[buttonKey]
 	if (accountDB) then
 		return accountDB
 	end
@@ -391,19 +386,19 @@ end
 
 function AutoBar:GetSharedButtonDBValue(buttonKey)
 	-- Char specific db overides all others
-	local charDB = AutoBar.db.char.buttonList[buttonKey]
+	local charDB = AutoBar.char.buttonList[buttonKey]
 	if (charDB and charDB.shared) then
 		return charDB.shared
 	end
 
 	-- Class db overides account
-	local classDB = AutoBar.db.class.buttonList[buttonKey]
+	local classDB = AutoBar.class.buttonList[buttonKey]
 	if (classDB and classDB.shared) then
 		return classDB.shared
 	end
 
 	-- Default to account
-	local accountDB = AutoBar.db.account.buttonList[buttonKey]
+	local accountDB = AutoBarDB2.account.buttonList[buttonKey]
 	if (accountDB and accountDB.shared) then
 		return accountDB.shared
 	end
@@ -424,40 +419,40 @@ function AutoBar:SetSharedButtonDB(buttonKey, value)
 	local charDB, classDB, accountDB
 
 	if (value == SHARED_NONE) then
-		charDB = AutoBar.db.char.buttonList[buttonKey]
+		charDB = AutoBar.char.buttonList[buttonKey]
 		if (not charDB) then
 			local sourceDB = AutoBar:GetButtonDB(buttonKey)
 			charDB = {}
-			AutoBar.db.char.buttonList[buttonKey] = charDB
+			AutoBar.char.buttonList[buttonKey] = charDB
 			CopyTable(sourceDB, charDB)
 		end
 		charDB.shared = value
 	elseif (value == SHARED_CLASS) then
-		classDB = AutoBar.db.class.buttonList[buttonKey]
+		classDB = AutoBar.class.buttonList[buttonKey]
 		if (not classDB) then
 			local sourceDB = AutoBar:GetButtonDB(buttonKey)
 			classDB = {}
-			AutoBar.db.class.buttonList[buttonKey] = classDB
+			AutoBar.class.buttonList[buttonKey] = classDB
 			CopyTable(sourceDB, classDB)
 		end
 		classDB.shared = value
-		charDB = AutoBar.db.char.buttonList[buttonKey]
+		charDB = AutoBar.char.buttonList[buttonKey]
 		if (charDB) then
 			charDB.shared = nil
 		end
 	elseif (value == SHARED_ACCOUNT) then
-		accountDB = AutoBar.db.account.buttonList[buttonKey]
+		accountDB = AutoBarDB2.account.buttonList[buttonKey]
 		if (not accountDB) then
 			local sourceDB = AutoBar:GetButtonDB(buttonKey)
 			accountDB = {}
-			AutoBar.db.account.buttonList[buttonKey] = accountDB
+			AutoBarDB2.account.buttonList[buttonKey] = accountDB
 			CopyTable(sourceDB, accountDB)
 		end
-		charDB = AutoBar.db.char.buttonList[buttonKey]
+		charDB = AutoBar.char.buttonList[buttonKey]
 		if (charDB) then
 			charDB.shared = nil
 		end
-		classDB = AutoBar.db.class.buttonList[buttonKey]
+		classDB = AutoBar.class.buttonList[buttonKey]
 		if (classDB) then
 			classDB.shared = nil
 		end
@@ -485,8 +480,8 @@ end
 
 --[[
 local function ResetBars()
-	ResetBarList(AutoBar.db.account.barList)
-	for _classKey, classDB in pairs(AutoBarDB.classes) do
+	ResetBarList(AutoBarDB2.account.barList)
+	for _classKey, classDB in pairs(AutoBarDB2.classes) do
 		ResetBarList(classDB.barList)
 	end
 	for _charKey, charDB in pairs(AutoBarDB.chars) do
@@ -607,143 +602,11 @@ local function setCustomButtonName(info, value)
 	end
 end
 
---TODO: Can this not just be a single call that returns the only active class bar???
-local function getDemonHunter(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].DEMONHUNTER
-end
-
-local function setDemonHunter(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].DEMONHUNTER = value
-	AutoBar:BarsChanged()
-end
-
-local function getMonk(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].MONK
-end
-
-local function setMonk(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].MONK = value
-	AutoBar:BarsChanged()
-end
-
-local function getDeathKnight(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].DEATHKNIGHT
-end
-
-local function setDeathKnight(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].DEATHKNIGHT = value
-	AutoBar:BarsChanged()
-end
-
-local function getDruid(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].DRUID
-end
-
-local function setDruid(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].DRUID = value
-	AutoBar:BarsChanged()
-end
-
-local function getHunter(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].HUNTER
-end
-
-local function setHunter(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].HUNTER = value
-	AutoBar:BarsChanged()
-end
-
-local function getMage(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].MAGE
-end
-
-local function setMage(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].MAGE = value
-	AutoBar:BarsChanged()
-end
-
-local function getPaladin(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].PALADIN
-end
-
-local function setPaladin(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].PALADIN = value
-	AutoBar:BarsChanged()
-end
-
-local function getPriest(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].PRIEST
-end
-
-local function setPriest(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].PRIEST = value
-	AutoBar:BarsChanged()
-end
-
-local function getRogue(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].ROGUE
-end
-
-local function setRogue(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].ROGUE = value
-	AutoBar:BarsChanged()
-end
-
-local function getShaman(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].SHAMAN
-end
-
-local function setShaman(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].SHAMAN = value
-	AutoBar:BarsChanged()
-end
-
-local function getWarlock(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].WARLOCK
-end
-
-local function setWarlock(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].WARLOCK = value
-	AutoBar:BarsChanged()
-end
-
-local function getWarrior(info)
-	local barKey = info.arg.barKey
-	return AutoBar.barLayoutDBList[barKey].WARRIOR
-end
-
-local function setWarrior(info, value)
-	local barKey = info.arg.barKey
-	AutoBar.barLayoutDBList[barKey].WARRIOR = value
-	AutoBar:BarsChanged()
-end
 
 local function setButtonArrangeOnUse(info, value)
 	local buttonKey = info.arg.buttonKey
 	AutoBar:GetButtonDB(buttonKey).arrangeOnUse = value
-	local buttonData = AutoBar.db.char.buttonDataList[buttonKey]
+	local buttonData = AutoBar.char.buttonDataList[buttonKey]
 	if (buttonData) then
 		buttonData.arrangeOnUse = nil
 	end
@@ -863,7 +726,7 @@ end
 
 local function BarNew()
 	local newBarName, barKey = AutoBar.Class.Bar:GetNewName(L["Custom"])
-	AutoBar.db.account.barList[barKey] = {
+	AutoBarDB2.account.barList[barKey] = {
 		name = newBarName,
 		desc = newBarName,
 		enabled = true,
@@ -885,27 +748,16 @@ local function BarNew()
 		showOnModifier = nil,
 		posX = 300,
 		posY = 360,
-		DEATHKNIGHT = true,
-		DEMONHUNTER = true,
-		DRUID = true,
-		HUNTER = true,
-		MAGE = true,
-		MONK = true,
-		PALADIN = true,
-		PRIEST = true,
-		ROGUE = true,
-		SHAMAN = true,
-		WARLOCK = true,
-		WARRIOR = true,
+		allowed_class = "*",
 		isCustomBar = true,
 		buttonKeys = {},
 	}
 	AutoBar:BarsChanged()
---DevTools_Dump(AutoBar.db.account.barList)
+--DevTools_Dump(AutoBarDB2.account.barList)
 end
---/Dump AutoBar.db.account.barList
---/dump AutoBar.db.account.barList["AutoBarCustomBar1"]
---/Script AutoBar.db.account.barList["AutoBarCustomBar1"] = nil
+--/Dump AutoBarDB2.account.barList
+--/dump AutoBarDB2.account.barList["AutoBarCustomBar1"]
+--/Script AutoBarDB2.account.barList["AutoBarCustomBar1"] = nil
 
 local function BarButtonDelete(barKey, buttonKey, buttonIndex)
 	local buttonKey, button = AutoBar:ButtonCut(barKey, buttonIndex)
@@ -953,7 +805,7 @@ local function BarButtonNew(info)
 	local buttonIndex = # buttonKeys + 1
 	if (buttonIndex <= MAXBARBUTTONS) then
 		local newButtonName, customButtonKey = AutoBar.Class.Button:GetNewName(L["Custom"])
-		AutoBar.db.account.buttonList[customButtonKey] = {
+		AutoBarDB2.account.buttonList[customButtonKey] = {
 			name = newButtonName,
 			buttonKey = customButtonKey,
 			buttonClass = "AutoBarButtonCustom",
@@ -961,7 +813,7 @@ local function BarButtonNew(info)
 			hasCustomCategories = true,
 			enabled = true,
 		}
-		AutoBar.db.account.buttonList[customButtonKey][1] = "Misc.Hearth"
+		AutoBarDB2.account.buttonList[customButtonKey][1] = "Misc.Hearth"
 		buttonKeys[buttonIndex] = customButtonKey
 	end
 
@@ -986,8 +838,8 @@ local function ButtonDelete(info)
 end
 -- /dump AutoBar.buttonDBList
 -- /dump AutoBar.buttonDBList["AutoBarCustomButton4"]
--- /script AutoBar.db.account.buttonList["AutoBarCustomButton4"] = nil
--- /script AutoBar.db.account.buttonList["AutoBarCustomButton4"] = nil
+-- /script AutoBarDB2.account.buttonList["AutoBarCustomButton4"] = nil
+-- /script AutoBarDB2.account.buttonList["AutoBarCustomButton4"] = nil
 
 local function ButtonRemove(info, oldBarKey, buttonKey)
 	if (info) then
@@ -1013,17 +865,17 @@ end
 
 local function ButtonNew()
 	local newButtonName, customButtonKey = AutoBar.Class.Button:GetNewName(L["Custom"])
-	AutoBar.db.account.buttonList[customButtonKey] = {
+	AutoBarDB2.account.buttonList[customButtonKey] = {
 		name = newButtonName,
 		buttonKey = customButtonKey,
 		buttonClass = "AutoBarButtonCustom",
 		hasCustomCategories = true,
 		enabled = true,
 	}
-	AutoBar.db.account.buttonList[customButtonKey][1] = "Misc.Hearth"
+	AutoBarDB2.account.buttonList[customButtonKey][1] = "Misc.Hearth"
 
 	AutoBar:ButtonsChanged()
---DevTools_Dump(AutoBar.db.account.buttonList)
+--DevTools_Dump(AutoBarDB2.account.buttonList)
 end
 
 
@@ -1107,9 +959,10 @@ local function GetNewMacroName(itemsListDB)
 	end
 	local baseName = L["Custom"]
 	local newName
+	local key_seed = 0
 	while true do
-		newName = baseName .. AutoBar.db.account.keySeed
-		AutoBar.db.account.keySeed = AutoBar.db.account.keySeed + 1
+		newName = baseName .. key_seed
+		key_seed = key_seed + 1
 		if (not otherMacroNames[newName]) then
 			break
 		end
@@ -1167,20 +1020,20 @@ local popupDirectionValidateList = {
 
 
 local function getAutoBarValue(info)
-	return AutoBar.db.account[info[# info]]
+	return AutoBarDB2.account[info[# info]]
 end
 
 local function setAutoBarValue(info, value)
-	AutoBar.db.account[info[# info]] = value
+	AutoBarDB2.account[info[# info]] = value
 	AutoBarChanged()
 end
 
 local function getTooltipDisabled()
-	return not AutoBar.db.account.showTooltip
+	return not AutoBarDB2.settings.show_tooltip
 end
 
 local function getFadeOutDisabled()
-	return not AutoBar.db.account.fadeOut
+	return not AutoBarDB2.settings.fade_out
 end
 
 
@@ -1548,11 +1401,10 @@ function AutoBar:CreateOptionsAce3()
 		end
 
 		-- Ignore bars not marked for our class
-		if (barDB[AutoBar.CLASS]) then
+		if (barDB["allowed_class"] == "*" or (barDB["allowed_class"] == AutoBar.CLASS)) then
 			barOptions[barKey] = self:CreateBarOptions(barKey, barOptions[barKey])
 
 			AceCfgReg:RegisterOptionsTable(barKey, barOptions[barKey])
---			AceCfgDlg:AddToBlizOptions(barKey, L[barKey], "AutoBar")
 		end
 	end
 
@@ -1985,138 +1837,7 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 			disabled = getCombatLockdown,
 		}
 	end
-		if (not barOptions.args.demonhunter) then
-		barOptions.args.demonhunter = {
-			type = "toggle",
-			order = 109,
-			name = L["AutoBarClassBarDemonHunter"],
-			get = getDemonHunter,
-			set = setDemonHunter,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-		if (not barOptions.args.monk) then
-		barOptions.args.monk = {
-			type = "toggle",
-			order = 110,
-			name = L["AutoBarClassBarMonk"],
-			get = getMonk,
-			set = setMonk,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.deathKnight) then
-		barOptions.args.deathKnight = {
-			type = "toggle",
-			order = 111,
-			name = L["AutoBarClassBarDeathKnight"],
-			get = getDeathKnight,
-			set = setDeathKnight,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.druid) then
-		barOptions.args.druid = {
-			type = "toggle",
-			order = 112,
-			name = L["AutoBarClassBarDruid"],
-			get = getDruid,
-			set = setDruid,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.hunter) then
-		barOptions.args.hunter = {
-			type = "toggle",
-			order = 113,
-			name = L["AutoBarClassBarHunter"],
-			get = getHunter,
-			set = setHunter,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.mage) then
-		barOptions.args.mage = {
-			type = "toggle",
-			order = 114,
-			name = L["AutoBarClassBarMage"],
-			get = getMage,
-			set = setMage,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.paladin) then
-		barOptions.args.paladin = {
-			type = "toggle",
-			order = 115,
-			name = L["AutoBarClassBarPaladin"],
-			get = getPaladin,
-			set = setPaladin,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.priest) then
-		barOptions.args.priest = {
-			type = "toggle",
-			order = 116,
-			name = L["AutoBarClassBarPriest"],
-			get = getPriest,
-			set = setPriest,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.rogue) then
-		barOptions.args.rogue = {
-			type = "toggle",
-			order = 117,
-			name = L["AutoBarClassBarRogue"],
-			get = getRogue,
-			set = setRogue,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.shaman) then
-		barOptions.args.shaman = {
-			type = "toggle",
-			order = 118,
-			name = L["AutoBarClassBarShaman"],
-			get = getShaman,
-			set = setShaman,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.warlock) then
-		barOptions.args.warlock = {
-			type = "toggle",
-			order = 119,
-			name = L["AutoBarClassBarWarlock"],
-			get = getWarlock,
-			set = setWarlock,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
-	if (not barOptions.args.warrior) then
-		barOptions.args.warrior = {
-			type = "toggle",
-			order = 120,
-			name = L["AutoBarClassBarWarrior"],
-			get = getWarrior,
-			set = setWarrior,
-			arg = passValue,
-			disabled = getCombatLockdown,
-		}
-	end
+
 	if (not barOptions.args.delete) then
 		barOptions.args.delete = {
 		    type = "execute",
