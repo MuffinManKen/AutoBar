@@ -120,7 +120,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			spellIconList[spell_name] = icon
 			AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
 			local spellInfo = AutoBarSearch.spells[spell_name]
-			spellInfo.spellLink = "spell:" .. spell_id
+			spellInfo.spell_link = "spell:" .. spell_id
 			category.castList[# category.castList + 1] = spell_name
 
 		end

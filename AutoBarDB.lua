@@ -373,10 +373,6 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2 = AutoBarDB2 or {}
 
-
-
-
-
 	migrate_db_from_ace2()
 
 	upgrade_db_version()
@@ -395,7 +391,7 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or {}
 
-
+	AutoBarDB2.skin = AutoBarDB2.skin or {}
 
 	AutoBarDB2.settings = AutoBarDB2.settings or {}
 	local settings = AutoBarDB2.settings

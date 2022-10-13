@@ -28,6 +28,22 @@ AutoBarSearch.macro_text = {}
 AutoBarSearch.dirtyBags = {}
 local searchSpace, items
 
+
+
+-- -- Returns true if a spell can be cast at all
+-- -- Therefore returns true if IsUsableSpell returns true or only mana is lacking or it exists in the spellbook
+-- ---@param p_spell_name string
+-- ---@return boolean
+-- local function can_cast_spell(p_spell_name)
+-- 	local spell_info = AutoBarSearch.spells[p_spell_name]
+-- 	if (not spell_info or not spell_info.can_cast) then
+-- 		return false
+-- 	else
+-- 		return true
+-- 	end
+-- end
+
+
 -- Recycle lists will avoid garbage collection and memory thrashing but potentially grow over time
 -- A simple 2 list aproach that recycles objects specific to that type of list so the bulk of operations should be only initing recycled objects.
 local Recycle = AceOO.Class()
@@ -251,30 +267,31 @@ end
 -- Map of bag, inventory and spell contents
 -- Changes synced to Found
 -- [bag][slot] = <itemId | nil>
-local Stuff = AceOO.Class()
+local CStuff = {}
 
-function Stuff.prototype:init()
-	Stuff.super.prototype.init(self)
-	self.dataList = {}
+function CStuff:new()
+	local obj = CreateFromMixins(self)
+	obj:init()
+
+	return obj
+end
+
+function CStuff:init()
+	self.bags = {}
 	for bag = 0, NUM_BAG_SLOTS, 1 do
-		self.dataList[bag] = {}
+		self.bags[bag] = {}
 	end
-	self.dataList.inventory = {}
-	self.dataList.spells = {}
+	self.inventory = {}
 end
 
 -- Add itemId to bag, slot, spell
-function Stuff.prototype:Add(itemId, bag, slot, spell)
+function CStuff:add(itemId, bag, slot, spell)
 	local slotList
 	if (bag) then
-		slotList = self.dataList[bag]
+		slotList = self.bags[bag]
 		slotList[slot] = itemId
 	elseif (slot) then
-		slotList = self.dataList.inventory
-		slotList[slot] = itemId
-	else
-		slotList = self.dataList.spells
-		slotList[spell] = itemId
+		self.inventory[slot] = itemId
 	end
 
 	--if(spell == "toy:127670") then print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell)) end;
@@ -295,18 +312,13 @@ end
 
 
 -- Remove itemId from bag, slot, spell
-function Stuff.prototype:Delete(itemId, bag, slot, spell)
+function CStuff:Delete(itemId, bag, slot, spell)
 	local slotList
 	if (bag) then
-		slotList = self.dataList[bag]
+		slotList = self.bags[bag]
 		slotList[slot] = nil
 	elseif (slot) then
-		slotList = self.dataList.inventory
-		slotList[slot] = nil
-	else
-		slotList = self.dataList.spells
-		slotList[spell] = nil
-		--if(spell == "Wild Charge") then print("Stuff.prototype:Delete", itemId, bag, slot, spell) end;
+		self.inventory[slot] = nil
 	end
 
 	AutoBarSearch.found:Delete(itemId, bag, slot, spell)
@@ -316,8 +328,8 @@ end
 
 
 -- Scan the given bag.
-function Stuff.prototype:ScanBag(bag)
-	local slotList = self.dataList[bag]
+function CStuff:ScanBag(bag)
+	local slotList = self.bags[bag]
 	local itemId, oldItemId
 	local nSlots = GetContainerNumSlots(bag)
 
@@ -333,9 +345,9 @@ function Stuff.prototype:ScanBag(bag)
 		if (itemId) then
 			if (oldItemId and oldItemId ~= itemId) then
 				self:Delete(oldItemId, bag, slot)
-				self:Add(itemId, bag, slot)
+				self:add(itemId, bag, slot)
 			elseif (not oldItemId) then
-				self:Add(itemId, bag, slot, nil)
+				self:add(itemId, bag, slot, nil)
 			end
 		elseif (not itemId and oldItemId) then
 			self:Delete(oldItemId, bag, slot, nil)
@@ -344,29 +356,29 @@ function Stuff.prototype:ScanBag(bag)
 end
 
 --As far as I know there is no way to get rid of a toy, so we don't need to ever delete anything
-function Stuff.prototype:ScanToyBox()
+function CStuff:ScanToyBox()
 
 	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
 		AutoBarSearch:RegisterToy(toy_data.item_id);
 		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AB.Dump(toy_data))
-		self:Add(toy_guid, nil, nil, toy_guid)
+		self:add(toy_guid, nil, nil, toy_guid)
 	end
 
 end
 
-function Stuff.prototype:ScanMacroText()
+function CStuff:ScanMacroText()
 
 	for macro_text_guid, _macro_text_data in pairs(AutoBarSearch.macro_text) do
 		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
 		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AB.Dump(macro_text_data))
-		self:Add(macro_text_guid, nil, nil, macro_text_guid)
+		self:add(macro_text_guid, nil, nil, macro_text_guid)
 	end
 
 end
 
 -- Scan equipped inventory items.
-function Stuff.prototype:ScanInventory()
-	local slotList = self.dataList.inventory
+function CStuff:ScanInventory()
+	local slotList = self.inventory
 	local _name, itemId, oldItemId
 
 	-- Scan equipped items
@@ -377,9 +389,9 @@ function Stuff.prototype:ScanInventory()
 		if (itemId) then
 			if (oldItemId and oldItemId ~= itemId) then
 				self:Delete(oldItemId, nil, slot, nil)
-				self:Add(itemId, nil, slot, nil)
+				self:add(itemId, nil, slot, nil)
 			elseif (not oldItemId) then
-				self:Add(itemId, nil, slot, nil)
+				self:add(itemId, nil, slot, nil)
 			end
 		elseif (not itemId and oldItemId) then
 			self:Delete(oldItemId, nil, slot, nil)
@@ -389,15 +401,15 @@ end
 
 
 -- Scan available Spells
-function Stuff.prototype:ScanSpells()
+function CStuff:ScanSpells()
 	for spellName, spellInfo in pairs(AutoBarSearch.spells) do
 		--local debug = (spellName == "Wild Charge")
 		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
-		spellInfo.canCast = AutoBarSearch:CanCastSpell(spellName)
+		--spellInfo.can_cast = can_cast_spell(spellName)
 		--if (debug) then print("Spell Info:", AB.Dump(spellInfo)); end;
-		AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
-		if (spellInfo.canCast) then
-			self:Add(spellName, nil, nil, spellName)
+		local can_cast = AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
+		if (can_cast) then
+			self:add(spellName, nil, nil, spellName)
 		else
 			--if (debug) then print("Deleting:", spellName); end;
 			self:Delete(spellName, nil, nil, spellName)
@@ -407,17 +419,17 @@ end
 
 
 -- Scan available Macros
-function Stuff.prototype:ScanMacros()
+function CStuff:ScanMacros()
 	for macroId, macroInfo in pairs(AutoBarSearch.macros) do
 		if (macroInfo.macroIndex) then
 			local _name, _icon_texture, body = GetMacroInfo(macroInfo.macroIndex)
 			if (body) then
-				self:Add(macroId, nil, nil, macroId)
+				self:add(macroId, nil, nil, macroId)
 			else
 				self:Delete(macroId, nil, nil, macroId)
 			end
 		elseif (macroInfo.macroText) then
-			self:Add(macroId, nil, nil, macroId)
+			self:add(macroId, nil, nil, macroId)
 		else
 			self:Delete(macroId, nil, nil, macroId)
 		end
@@ -426,7 +438,7 @@ end
 
 
 -- Scan bags only to support shuffling of stuff manually added or moved during combat.
-function Stuff.prototype:ScanCombat()
+function CStuff:ScanCombat()
 	ABGCode.LogEventStart("Stuff.prototype:ScanCombat")
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		self:ScanBag(bag)
@@ -436,7 +448,7 @@ end
 
 
 -- Scan the requested Stuff.
-function Stuff.prototype:Scan()
+function CStuff:Scan()
 	ABGCode.LogEventStart("Stuff:Scan")
 	AutoBar.playerLevel = UnitLevel("player")
 	for bag = 0, NUM_BAG_SLOTS, 1 do
@@ -483,22 +495,17 @@ function Stuff.prototype:Scan()
 end
 
 -- Remove and Recycle all items
-function Stuff.prototype:Reset()
-	local slotList
+function CStuff:Reset()
 	for bag = 0, NUM_BAG_SLOTS, 1 do
-		slotList = self.dataList[bag]
-		for i, _item_id in pairs(slotList) do
-			slotList[i] = nil
-		end
+		wipe(self.bags[bag])
 	end
-	slotList = self.dataList.inventory
-	for i, _item_id in pairs(slotList) do
-		slotList[i] = nil
-	end
+
+	wipe(self.inventory)
+
 end
 
 -- Testing & Debug function only
-function Stuff.prototype:Contains(id)
+function CStuff:Contains(id)
 	local slotList
 	local contains = nil
 	for bag = 0, NUM_BAG_SLOTS, 1 do
@@ -521,7 +528,7 @@ function Stuff.prototype:Contains(id)
 			end
 		end
 	end
-	slotList = self.dataList.spells
+	slotList = self.spells
 	for _i, itemId in pairs(slotList) do
 		if (itemId == id) then
 			contains = true
@@ -531,13 +538,6 @@ function Stuff.prototype:Contains(id)
 		end
 	end
 	return contains
-end
-
-
--- Return the Stuff list.
--- Do not manipulate the list.  It is only for performance.
-function Stuff.prototype:GetList()
-	return self.dataList
 end
 
 
@@ -1102,27 +1102,24 @@ function Sorted.prototype:SetBest(buttonKey)
 end
 
 
--- Returns true if a spell can be cast at all
--- Therefore returns true if IsUsableSpell returns true or only mana is lacking or it exists in the spellbook
-function AutoBarSearch:CanCastSpell(spellName)
-	local spellInfo = AutoBarSearch.spells[spellName]
-	if (not spellInfo or not spellInfo.canCast) then
-		return false
-	else
-		return true
-	end
-end
-
 
 -- Register a spell, and figure out its spellbook index for use in tooltip
 -- Multiple calls refresh current state of the spell
--- {spellName = {canCast, spellLink, noSpellCheck}}
-function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_spell_link)
+-- {spellName = {can_cast, spell_link, no_spell_check, spell_id}}
+---@param p_spell_name string
+---@param p_spell_id integer
+---@param p_no_spell_check boolean|nil
+---@param p_spell_link string|nil
+---@return any
+function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check, p_spell_link)
 
+	if (p_no_spell_check == nil) then p_no_spell_check = false; end
+
+	---@type ABSpellInfo
 	local spellInfo = AutoBarSearch.spells[p_spell_name]
 
 	--local debug = (p_spell_name == "Wild Charge")
-	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, noSpellCheck, p_spell_link, GetSpellLink(p_spell_name)); end
+	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, GetSpellLink(p_spell_name)); end
 
 	if (not spellInfo) then
 		spellInfo = {}
@@ -1130,9 +1127,9 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_s
 	end
 
 	if (p_spell_link) then
-		spellInfo.spellLink = p_spell_link
+		spellInfo.spell_link = p_spell_link
 	else
-		spellInfo.spellLink = GetSpellLink(p_spell_name)
+		spellInfo.spell_link = GetSpellLink(p_spell_name)
 	end
 
 	if (p_spell_id) then
@@ -1141,13 +1138,11 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, noSpellCheck, p_s
 		spellInfo.spell_id = select(7, GetSpellInfo(p_spell_name))
 	end
 
+	spellInfo.no_spell_check = p_no_spell_check
 
-	if (noSpellCheck) then
-		spellInfo.noSpellCheck = true
-	end
+	spellInfo.can_cast = (spellInfo.spell_link ~= nil) or spellInfo.no_spell_check
 
-	spellInfo.canCast = spellInfo.spellLink or spellInfo.noSpellCheck
-	return p_spell_name
+	return spellInfo.can_cast
 end
 
 function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
@@ -1238,7 +1233,7 @@ function AutoBarSearch:Initialize()
 	AutoBarSearch.current = Current:new()		-- Current items found for each button (Found intersect Items)
 	AutoBarSearch.found = Found:new()			-- All items found in Stuff + list of bag, slot found in
 
-	AutoBarSearch.stuff = Stuff:new()			-- Map of bags, inventory and spells
+	AutoBarSearch.stuff = CStuff:new() 	-- Map of bags, inventory
 
 	searchSpace = AutoBarSearch.space:GetList()
 	items = AutoBarSearch.items:GetList()
@@ -1505,7 +1500,6 @@ end
 --]]
 
 --[[
-/dump AutoBarSearch:CanCastSpell("Amani War Bear")
 /script AutoBarSearch:DumpSlot("AutoBarButtonMount")
 /script AutoBarSearch:Contains("Travel Form")
 /dump (AutoBarSearch.sorted:GetList("CustomButton33"))

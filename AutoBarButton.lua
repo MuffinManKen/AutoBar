@@ -827,8 +827,8 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 
 			-- Tooltip
 			local spellInfo = AutoBarSearch.spells[spell]
-			if (spellInfo and spellInfo.spellLink) then
-				frame:SetAttribute("itemLink", spellInfo.spellLink)
+			if (spellInfo and spellInfo.spell_link) then
+				frame:SetAttribute("itemLink", spellInfo.spell_link)
 			end
 		elseif (castSpell) then
 			-- Set castSpell as default if nothing else is available
@@ -837,9 +837,9 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("spell", castSpell)
 
 			-- Tooltip
-			local spellInfo = AutoBarSearch.spells[castSpell].spellLink
-			if (spellInfo.spellLink) then
-				frame:SetAttribute("itemLink", spellInfo.spellLink)
+			local spellInfo = AutoBarSearch.spells[castSpell].spell_link
+			if (spellInfo.spell_link) then
+				frame:SetAttribute("itemLink", spellInfo.spell_link)
 			end
 		else
 			frame:SetAttribute("type", nil)
@@ -936,7 +936,7 @@ end
 --
 --			if (spellName) then
 --				local spellInfo = AutoBarSearch.spells[spellName]
---				GameTooltip:SetSpellBookItem(spellInfo.spellId, spellInfo.spellTab)
+--				GameTooltip:SetSpellBookItem(spellInfo.spell_id, spellInfo.spellTab)
 --			end
 --			self.updateTooltip = TOOLTIP_UPDATE_TIME
 --		end
@@ -2601,7 +2601,7 @@ elseif (ABGData.is_mainline_wow) then
 					spellIconList[spell_name] = icon
 					AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
 					local spellInfo = AutoBarSearch.spells[spell_name]
-					spellInfo.spellLink = "spell:" .. spell_id
+					spellInfo.spell_link = "spell:" .. spell_id
 					category.castList[# category.castList + 1] = spell_name
 				end
 
@@ -2724,7 +2724,7 @@ elseif (ABGData.is_mainline_wow) then
 	--			spellIconList[spellName] = icon
 	--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
 	--			local spellInfo = AutoBarSearch.spells[spellName]
-	--			spellInfo.spellLink = "spell:" .. spellID
+	--			spellInfo.spell_link = "spell:" .. spellID
 	--			category.castList[index] = spellName
 			end
 		end

@@ -91,13 +91,13 @@ function ABGCode.RawListToItemIDList(p_raw_list)
 end
 
 
--- Convert list of negative numbered spellId to spellName.
+-- Convert list of negative numbered spell_id to spellName.
 local function PTSpellIDsToSpellName(p_cast_list)
 --print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
 
 	for i = 1, # p_cast_list do
-		local spellId = p_cast_list[i] * -1
-		p_cast_list[i] = GetSpellInfo(spellId)
+		local spell_id = p_cast_list[i] * -1
+		p_cast_list[i] = GetSpellInfo(spell_id)
 	end
 	return p_cast_list
 end

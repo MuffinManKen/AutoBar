@@ -284,5 +284,10 @@ local AutoBarSettings = {
 AutoBarDB2 = {}
 
 
-
+---@class ABSpellInfo
+---@field can_cast boolean
+---@field spell_link string
+---@field no_spell_check boolean
+---@field spell_id number
+ABSpellInfo = {}
 
