@@ -354,8 +354,6 @@ end
 	end
 
 	local buttonItems = AutoBarSearch.items:GetList(buttonKey)
-	local buttonWidth = layoutDB.buttonWidth
-	local buttonHeight = layoutDB.buttonHeight
 	local relativePoint = popupHeader
 	for popupButtonIndex = popupIndexStart, nItems, 1 do
 		local popupButton = AutoBar.Class.PopupButton:GetPopupButton(self, popupButtonIndex, popupHeader, popupKeyHandler)
@@ -374,8 +372,8 @@ end
 
 		-- Attach to edge of previous popupButtonFrame or the popupHeader
 		popupButtonFrame:ClearAllPoints()
-		popupButtonFrame:SetHeight(buttonHeight)
-		popupButtonFrame:SetWidth(buttonWidth)
+		popupButtonFrame:SetHeight(ABGData.default_button_height)
+        popupButtonFrame:SetWidth(ABGData.default_button_width)
 		popupButtonFrame:Raise()
 		popupButtonFrame:SetScale(1)
 		if (relativePoint == popupHeader) then
@@ -416,8 +414,8 @@ end
 
 	popupHeader:ClearAllPoints()
 --- ToDo: fix for orientation
---			popupHeader:SetWidth(buttonWidth + paddingX * 2)
---			popupHeader:SetHeight((buttonHeight + paddingY) * (nItems - 1) + paddingY)
+--			popupHeader:SetWidth(ABGData.default_button_width + paddingX * 2)
+--			popupHeader:SetHeight((ABGData.default_button_height + paddingY) * (nItems - 1) + paddingY)
 	popupHeader:SetWidth(2)
 	popupHeader:SetHeight(2)
 	popupHeader:SetScale(1)

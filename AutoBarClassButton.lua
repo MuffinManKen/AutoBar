@@ -14,6 +14,7 @@
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
+local ABGData = AutoBarGlobalDataObject
 
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
@@ -256,11 +257,9 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	local frame = CreateFrame("Button", name, self.parentBar.frame, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerBaseTemplate")
 	self.frame = frame
 
-	local buttonWidth = self.parentBar.buttonWidth or 36
-	local buttonHeight = self.parentBar.buttonHeight or 36
 	frame:ClearAllPoints()
-	frame:SetWidth(buttonWidth)
-	frame:SetHeight(buttonHeight)
+	frame:SetWidth(ABGData.default_button_width)
+	frame:SetHeight(ABGData.default_button_height)
 
 	-- Support selfcast and focuscast
 	frame:SetAttribute("checkselfcast", true)

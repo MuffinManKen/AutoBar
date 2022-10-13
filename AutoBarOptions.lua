@@ -734,8 +734,6 @@ local function BarNew()
 		columns = 16,
 		alignButtons = "3",
 		alpha = 1,
-		buttonWidth = 36,
-		buttonHeight = 36,
 		docking = nil,
 		dockShiftX = 0,
 		dockShiftY = 0,

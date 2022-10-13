@@ -41,7 +41,19 @@ AutoBarGlobalDataObject = {
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
 	is_wrath_wow = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC),
 
+	default_button_width = 36,
+	default_button_height = 36,
+
 }
+
+local api_version_temp = strsplittable(".", GetBuildInfo())
+AutoBarGlobalDataObject.API_VERSION = tonumber(api_version_temp[1])
+AutoBarGlobalDataObject.API_SUBVERSION = tonumber(api_version_temp[2])
+
+if(AutoBarGlobalDataObject.API_VERSION >= 10) then	-- Dragonflight+
+	AutoBarGlobalDataObject.default_button_width = 45
+	AutoBarGlobalDataObject.default_button_height = 45
+end
 
 
 -- List of [spellName] = <GetSpellInfo Name>

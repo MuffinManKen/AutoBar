@@ -10,6 +10,7 @@
 --GLOBALS: InCombatLockdown, GameTooltip, CreateFrame, SecureHandlerWrapScript
 
 local AutoBar = AutoBar
+local ABGData = AutoBarGlobalDataObject
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
@@ -92,11 +93,9 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 	SecureHandlerWrapScript(frame, "OnEnter", frame, [[ self:GetFrameRef("popupHeader"):Show() ]])
 	SecureHandlerWrapScript(frame, "OnLeave", frame, [[ self:GetFrameRef("popupHeader"):Hide() ]])
 
-	local buttonWidth = self.parentBar.buttonWidth or 36
-	local buttonHeight = self.parentBar.buttonHeight or 36
 	frame:ClearAllPoints()
-	frame:SetWidth(buttonWidth)
-	frame:SetHeight(buttonHeight)
+	frame:SetWidth(ABGData.default_button_width)
+	frame:SetHeight(ABGData.default_button_height)
 
 ---	frame:SetScript("PostClick", self.PostClick)
 

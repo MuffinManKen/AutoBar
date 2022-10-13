@@ -13,6 +13,8 @@
 local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
+local ABGData = AutoBarGlobalDataObject
+
 local _G = _G
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
@@ -650,12 +652,12 @@ end
 --	["9"] = L["BOTTOMRIGHT"],
 
 -- Get offsets for any of the centered options of alignButtons
-local function getCenterShift(alignButtons, signX, signY, rows, columns, displayedRows, displayedColumns, buttonWidth, buttonHeight, padding)
+local function getCenterShift(alignButtons, signX, signY, rows, columns, displayedRows, displayedColumns, padding)
 	local centerShiftX = 0
 	local centerShiftY = 0
 
-	local padded_width = buttonWidth + padding
-	local padded_height = buttonHeight + padding
+	local padded_width = ABGData.default_button_width + padding
+	local padded_height = ABGData.default_button_height + padding
 
 	if (alignButtons == "6") then
 		centerShiftX = signX * (columns - displayedColumns) * (padded_width) / 2
@@ -679,15 +681,13 @@ end
 function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 	local rows = self.sharedLayoutDB.rows or 1
 	local columns = self.sharedLayoutDB.columns or 24
-	local buttonWidth = self.sharedLayoutDB.buttonWidth
-	local buttonHeight = self.sharedLayoutDB.buttonHeight
 	local padding = self.sharedLayoutDB.padding
 	local alignButtons = self.sharedLayoutDB.alignButtons or "3"
 	local alignPoint, _, _, signX, signY = AutoBar.Class.Bar:GetAlignPoints(alignButtons)
 	local framePadding = math.max(0, padding)
 
-	self.frame:SetWidth(buttonWidth * columns + ((columns + 1) * framePadding))
-	self.frame:SetHeight(buttonHeight * rows + ((rows + 1) * framePadding))
+	self.frame:SetWidth(ABGData.default_button_width * columns + ((columns + 1) * framePadding))
+	self.frame:SetHeight(ABGData.default_button_height * rows + ((rows + 1) * framePadding))
 
 	local anchorFrame = self.frame
 
@@ -695,17 +695,20 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 
 	local displayedRows = math.floor((# activeButtonList - 1) / columns) + 1
 	local displayedColumns = math.min(# activeButtonList, columns)
-	local centerShiftX, centerShiftY = getCenterShift(alignButtons, signX, signY, rows, columns, displayedRows, displayedColumns, buttonWidth, buttonHeight, padding)
+	local centerShiftX, centerShiftY = getCenterShift(alignButtons, signX, signY, rows, columns, displayedRows, displayedColumns, padding)
 
+	local pad_btn_width = ABGData.default_button_width + padding
+
+	--TODO: Clean up those SetPoint calls. Poor perf, and they're ugly
 	local nButtons = # activeButtonList
 	local frame
 	for i = 1, nButtons do
 		frame = activeButtonList[i].frame
 		frame:ClearAllPoints()
-		frame:SetHeight(buttonHeight)
-		frame:SetWidth(buttonWidth)
+		frame:SetHeight(ABGData.default_button_height)
+		frame:SetWidth(ABGData.default_button_width)
 		frame:SetScale(1)
-		frame:SetPoint(alignPoint, anchorFrame, alignPoint, ((i - 1) % columns) * signX * (buttonWidth + padding) + signX * padding + centerShiftX, (math.floor((i - 1) / columns)) * signY * (buttonHeight + padding) + signY * padding + centerShiftY)
+		frame:SetPoint(alignPoint, anchorFrame, alignPoint, ((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX, (math.floor((i - 1) / columns)) * signY * (ABGData.default_button_height + padding) + signY * padding + centerShiftY)
 	end
 
 	-- Dummy drag button for empty bar and end of bar drags
@@ -715,8 +718,8 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 		frame:ClearAllPoints()
 		local emptyColumns = columns - ((i - 1) % columns)
 --AutoBar:Print("AutoBar.Class.Bar.prototype:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
-		frame:SetWidth((buttonWidth + padding) * emptyColumns)
-		frame:SetPoint(alignPoint, anchorFrame, alignPoint, ((i - 1) % columns) * signX * (buttonWidth + padding) + signX * padding + centerShiftX, (math.floor((i - 1) / columns)) * signY * (buttonHeight + padding) + signY * padding + centerShiftY)
+		frame:SetWidth(pad_btn_width * emptyColumns)
+		frame:SetPoint(alignPoint, anchorFrame, alignPoint, ((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX, (math.floor((i - 1) / columns)) * signY * (ABGData.default_button_h + padding) + signY * padding + centerShiftY)
 	end
 end
 
