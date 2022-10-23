@@ -66,6 +66,7 @@ local CLASS_BAR_MAP = {
 	DEATHKNIGHT = "AutoBarClassBarDeathKnight",
 	DEMONHUNTER = "AutoBarClassBarDemonHunter",
 	DRUID = "AutoBarClassBarDruid",
+	EVOKER = "AutoBarClassBarEvoker",
 	HUNTER = "AutoBarClassBarHunter",
 	MAGE = "AutoBarClassBarMage",
 	MONK = "AutoBarClassBarMonk",
@@ -147,6 +148,10 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonShields", },
 		{button_name = "AutoBarButtonInterrupt", },
 		{button_name = "AutoBarButtonER", },
+	},
+	EVOKER =
+	{
+
 	},
 	HUNTER =
 	{
