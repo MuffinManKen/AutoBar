@@ -266,7 +266,8 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	frame:SetAttribute("checkfocuscast", true)
 
 	frame.class = self
-	frame:RegisterForClicks("AnyUp")
+	frame:SetMouseClickEnabled()
+	frame:RegisterForClicks("AnyUp", "AnyDown")
 	frame:RegisterForDrag("LeftButton", "RightButton")
 
 	frame:SetScript("OnUpdate", OnUpdateFunc)

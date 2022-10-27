@@ -494,7 +494,7 @@ function AutoBar.Class.Bar.prototype:CreateDragFrame()
 
 		frame.class = self
 		frame:EnableMouse(true)
-		frame:RegisterForClicks("AnyUp")
+		frame:RegisterForClicks("AnyUp", "AnyDown")
 		frame:RegisterForDrag("LeftButton", "RightButton")
 ---		frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	end
