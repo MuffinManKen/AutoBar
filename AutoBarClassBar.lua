@@ -698,6 +698,7 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 	local centerShiftX, centerShiftY = getCenterShift(alignButtons, signX, signY, rows, columns, displayedRows, displayedColumns, padding)
 
 	local pad_btn_width = ABGData.default_button_width + padding
+	local pad_btn_height = ABGData.default_button_height + padding
 
 	--TODO: Clean up those SetPoint calls. Poor perf, and they're ugly
 	local nButtons = # activeButtonList
@@ -719,7 +720,9 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 		local emptyColumns = columns - ((i - 1) % columns)
 --AutoBar:Print("AutoBar.Class.Bar.prototype:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
 		frame:SetWidth(pad_btn_width * emptyColumns)
-		frame:SetPoint(alignPoint, anchorFrame, alignPoint, ((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX, (math.floor((i - 1) / columns)) * signY * (ABGData.default_button_h + padding) + signY * padding + centerShiftY)
+		frame:SetPoint(alignPoint, anchorFrame, alignPoint,
+						((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX,
+						(math.floor((i - 1) / columns)) * signY * pad_btn_height + signY * padding + centerShiftY)
 	end
 end
 
