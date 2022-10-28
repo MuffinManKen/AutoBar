@@ -1,6 +1,6 @@
 <Bindings>
 	<Binding name="AUTOBAR_CONFIG" header="AUTOBAR_SEP" category="AutoBar ">
-		ABGCode.ConfigToggle()
+		AutoBarGlobalCodeSpace.ConfigToggle()
 	</Binding>
 	<Binding name="AutoBarButtonHearth_X"  					category="AutoBar "	header="AutoBarButtonHeader"/>
 	<Binding name="AutoBarButtonMount_X"						category="AutoBar "/>
