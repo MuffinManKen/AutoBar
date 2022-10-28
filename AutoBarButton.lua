@@ -2189,8 +2189,8 @@ AutoBar.Class["AutoBarButtonWater"] = AutoBarButtonWater
 function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	AutoBarButtonWater.super.prototype.init(self, parentBar, buttonDB)
 
-	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
-		self:AddCategory("Spell.Mage.Conjure Water")
+	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure and not ABGData.is_mainline_wow) then
+			self:AddCategory("Spell.Mage.Conjure Water")
 	end
 
 	if (ABGCode.ClassUsesMana(AutoBar.CLASS)) then
