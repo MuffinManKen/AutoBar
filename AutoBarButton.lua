@@ -776,7 +776,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			-- Tooltip
 			frame:SetAttribute("itemLink", itemLink)
 		elseif (bag and slot) then
-			local itemLink = GetContainerItemLink(bag, slot)
+			local itemLink = AB.GetContainerItemLink(bag, slot)
 			frame:SetAttribute("itemLink", itemLink)
 ---			if (buttonDB.shuffle) then
 ---				itemLink = bag .. " " .. slot

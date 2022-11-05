@@ -10,12 +10,13 @@ Website: http://www.wowace.com/
 -- GLOBALS: UpdateAddOnMemoryUsage, GetAddOnMemoryUsage
 -- GLOBALS: C_ToyBox
 
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+
+
 local AutoBar = AutoBar
 local ABGCS = AutoBarGlobalCodeSpace	--TODO: Replace all with ABGCocde, or just the global AB
 local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
-
-local _
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
@@ -331,14 +332,14 @@ end
 function CStuff:ScanBag(bag)
 	local slotList = self.bags[bag]
 	local itemId, oldItemId
-	local nSlots = GetContainerNumSlots(bag)
+	local nSlots = AB.GetContainerNumSlots(bag)
 
 --AutoBar:Print("Stuff.prototype:Scan bag " .. tostring(bag) .. " nSlots " .. tostring(nSlots) .. " slotList " .. tostring(slotList))
 
 	-- ToDo: Clear out excess slots if bag got smaller
 
 	for slot = 1, nSlots, 1 do
-		itemId = GetContainerItemID(bag, slot)
+		itemId = AB.GetContainerItemID(bag, slot)
 		oldItemId = slotList[slot]
 
 --AutoBar:Print("Stuff.prototype:Scan  itemId " .. tostring(itemId) .. " oldItemId " .. tostring(oldItemId))

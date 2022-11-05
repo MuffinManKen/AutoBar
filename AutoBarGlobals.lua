@@ -457,6 +457,10 @@ function AutoBarGlobalCodeSpace.GetCategoryItemDB(p_category_key, p_item_index)
 	return AutoBarDB2.custom_categories[p_category_key].items[p_item_index]
 end
 
+-- Support multiple APi versions
+AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
+AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
+AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
 
 
 if (AutoBarGlobalDataObject.is_mainline_wow) then
