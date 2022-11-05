@@ -774,7 +774,7 @@ function AutoBar:InitializeDefaults()
 				defaultButtonIndex = "*",
 				enabled = false,
 				arrangeOnUse = true,
-				toybox_only_show_favourites = false,
+				toybox_only_show_favourites = true,
 			}
 		end
 	end
