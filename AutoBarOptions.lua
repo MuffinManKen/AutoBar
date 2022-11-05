@@ -36,6 +36,8 @@
 
 -- GLOBALS: IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown, GameTooltip, InCombatLockdown, GetItemInfo, GetMacroInfo
 
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
 local _ABGData = AutoBarGlobalDataObject
@@ -1018,11 +1020,12 @@ local popupDirectionValidateList = {
 
 
 local function getAutoBarValue(info)
-	return AutoBarDB2.account[info[# info]]
+	return AutoBarDB2.settings[info[# info]]
 end
 
 local function setAutoBarValue(info, value)
-	AutoBarDB2.account[info[# info]] = value
+	local setting_name = info[# info]
+	AutoBarDB2.settings[setting_name] = value
 	AutoBarChanged()
 end
 
@@ -1086,7 +1089,7 @@ function AutoBar:CreateOptionsAce3()
 							order = 100,
 							name = "",
 						},
-						clampedToScreen = {
+						clamp_bars_to_screen = {
 							type = "toggle",
 							order = 161,
 							width = 1.2,

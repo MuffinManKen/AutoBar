@@ -125,6 +125,13 @@ function AB.Dump(o, p_max_depth)
 	end
 end
 
+function AB.NVL(p_1, p_2)
+	if(p_1 ~= nil) then
+		return p_1
+	end
+
+	return p_2
+end
 
 local function table_pack(...)
   return { n = select("#", ...), ... }

@@ -51,6 +51,7 @@
 --	Bar & Button visual settings are inherited AutoBar -> Bar -> Button
 --  Plugin Buttons / Bars
 
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
@@ -295,20 +296,21 @@ end
 
 local function migrate_db_from_ace2()
 
-	if (not (AutoBar.db and AutoBar.db.account)) then
+	if (not (AutoBarDB and AutoBarDB.account)) then
 		return
 	end
 
-	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBar.db.account.customCategories
-	AutoBar.db.account.customCategories = nil
+
+	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBarDB.account.customCategories
+	AutoBarDB.account.customCategories = nil
 
 	AutoBarDB2.settings = AutoBarDB2.settings or {}
-	AutoBarDB2.ldb_icon = AutoBarDB2.ldb_icon or AutoBar.db.account.ldbIcon
+	AutoBarDB2.ldb_icon = AutoBarDB2.ldb_icon or AutoBarDB.account.ldbIcon
 
-	AutoBar.db.account.ldbIcon = nil
-	AutoBar.db.account.stupidlog = nil
-	AutoBar.db.account.keySeed = nil
-	AutoBar.db.account.dbVersion = nil
+	AutoBarDB.account.ldbIcon = nil
+	AutoBarDB.account.stupidlog = nil
+	AutoBarDB.account.keySeed = nil
+	AutoBarDB.account.dbVersion = nil
 
 	AutoBarDB2.classes = AutoBarDB2.classes or AutoBarDB.classes
 	AutoBarDB2.chars = AutoBarDB2.classes or AutoBarDB.chars
@@ -332,21 +334,21 @@ local function migrate_db_from_ace2()
 
 	for _i, data in ipairs(setting_migration) do
 		local l, r = data[1], data[2]
-		AutoBarDB2.settings[l] = AutoBarDB2.settings[l] or AutoBar.db.account[r]
-		AutoBar.db.account[r] = nil
+		AutoBarDB2.settings[l] = AB.NVL(AutoBarDB2.settings[l], AutoBarDB.account[r])
+		AutoBarDB.account[r] = nil
 	end
 
 	if (not AutoBarDB2.skin) then
 		AutoBarDB2.skin = {
-			["SkinID"] = AutoBar.db.account.SkinID,
-			["Gloss"] = AutoBar.db.account.Gloss,
-			["Backdrop"] = AutoBar.db.account.Backdrop,
-			["Colors"] = AutoBar.db.account.Colors,
+			["SkinID"] = AutoBarDB.account.SkinID,
+			["Gloss"] = AutoBarDB.account.Gloss,
+			["Backdrop"] = AutoBarDB.account.Backdrop,
+			["Colors"] = AutoBarDB.account.Colors,
 		}
-		AutoBar.db.account.SkinID = nil
-		AutoBar.db.account.Gloss = nil
-		AutoBar.db.account.Backdrop = nil
-		AutoBar.db.account.Colors = nil
+		AutoBarDB.account.SkinID = nil
+		AutoBarDB.account.Gloss = nil
+		AutoBarDB.account.Backdrop = nil
+		AutoBarDB.account.Colors = nil
 	end
 
 	for _key, bar in pairs(AutoBarDB2.account.barList) do
@@ -357,11 +359,13 @@ local function migrate_db_from_ace2()
 
 	end
 
-	AutoBarDB2.account.barList = AutoBar.db.account.barList
-	AutoBar.db.account.barList = nil
-	AutoBarDB2.account.buttonList = AutoBar.db.account.buttonList
-	AutoBar.db.account.buttonList = nil
+	AutoBarDB2.account.barList = AutoBarDB.account.barList
+	AutoBarDB.account.barList = nil
+	AutoBarDB2.account.buttonList = AutoBarDB.account.buttonList
+	AutoBarDB.account.buttonList = nil
 
+	AutoBarDB2.account.clampedToScreen = nil
+	AutoBarDB.whatsnew_version = nil
 end
 
 local function upgrade_db_version()
@@ -400,21 +404,21 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2.settings = AutoBarDB2.settings or {}
 	local settings = AutoBarDB2.settings
-	settings.show_empty_buttons = settings.show_empty_buttons or false
-	settings.show_tooltip = settings.show_tooltip or true
-	settings.show_tooltip_in_combat = settings.show_tooltip_in_combat or true
-	settings.handle_spell_changed = settings.handle_spell_changed or true
-	settings.show_count = settings.show_count or true
-	settings.show_hotkey = settings.show_hotkey or true
-	settings.hack_PetActionBarFrame = settings.hack_PetActionBarFrame or false
-	settings.fade_out = settings.fade_out or false
-	settings.clamp_bars_to_screen = settings.clamp_bars_to_screen or true
-	settings.self_cast_right_click = settings.self_cast_right_click or true
-	settings.log_throttled_events = settings.log_throttled_events or false
+	settings.show_empty_buttons = AB.NVL(settings.show_empty_buttons, false)
+	settings.show_tooltip = AB.NVL(settings.show_tooltip, true)
+	settings.show_tooltip_in_combat = AB.NVL(settings.show_tooltip_in_combat, true)
+	settings.handle_spell_changed = AB.NVL(settings.handle_spell_changed, true)
+	settings.show_count = AB.NVL(settings.show_count, true)
+	settings.show_hotkey = AB.NVL(settings.show_hotkey, true)
+	settings.hack_PetActionBarFrame = AB.NVL(settings.hack_PetActionBarFrame, false)
+	settings.fade_out = AB.NVL(settings.fade_out, false)
+	settings.clamp_bars_to_screen = AB.NVL(settings.clamp_bars_to_screen, true)
+	settings.self_cast_right_click = AB.NVL(settings.self_cast_right_click, true)
+	settings.log_throttled_events = AB.NVL(settings.log_throttled_events, false)
 	settings.throttle_event_limit = settings.throttle_event_limit or 0
-	settings.log_events = settings.log_events or false
-	settings.log_memory = settings.log_memory or false
-	settings.performance = settings.performance or false
+	settings.log_events = AB.NVL(settings.log_events, false)
+	settings.log_memory = AB.NVL(settings.log_memory, false)
+	settings.performance = AB.NVL(settings.performance, false)
 	settings.performance_threshold = settings.performance_threshold or 100
 	if (settings.performance_threshold < 20) then settings.performance_threshold = 100; end;
 
