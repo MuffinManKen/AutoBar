@@ -752,7 +752,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		-- The matched spell to cast on RightClick
 		if (itemsRightClick and itemsRightClick[itemId]) then
 			castSpell = itemsRightClick[itemId]
-			selfCastRightClick = nil
+			selfCastRightClick = false
 --AutoBar:Print("AutoBarButton.prototype:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
 		end
 		-- Special spell to cast on RightClick
@@ -1970,7 +1970,7 @@ function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, 1)
 		else
 			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
