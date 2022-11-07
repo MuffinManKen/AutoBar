@@ -6,7 +6,7 @@
 -- http://muffinmangames.com
 --
 
---local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
