@@ -136,6 +136,9 @@ AB = {}
 
 function AB.ClearNormalTexture(frame) end
 
+---@return boolean
+function AB.NVL(p_1, p_2) end
+
 
 --#region LibKeyBound
 ---@class LibKeyBound
@@ -291,3 +294,5 @@ AutoBarDB2 = {}
 ---@field spell_id number
 ABSpellInfo = {}
 
+
+AutoBarDB = {}
