@@ -14,7 +14,7 @@ xcopy "..\libs\ace3\AceGUI-3.0" ".\libs\AceGUI-3.0"  /Y /S /I
 copy "..\MuffinUIToolkit\muffin_ui_toolkit.lua" ".\libs\"
 copy "..\MuffinWhatsNew\muffin_whats_new.lua" ".\libs\"
 
-copy "..\MuffinIcons\*.tga" ".\textures\"
+copy "..\MuffinIcons\muffin.tga" ".\textures\"
 
 
 REM xcopy "..\libs\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
