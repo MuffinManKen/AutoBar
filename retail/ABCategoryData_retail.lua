@@ -172,6 +172,7 @@ function ABGCode.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Poison.Nonlethal"] = SpellsCategory:new( "Spell.Poison.Nonlethal", spellIconList["Crippling Poison"],
 	{
+		"ROGUE", ABGCode.GetSpellNameByName("Atrophic Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Crippling Poison"),
 		"ROGUE", ABGCode.GetSpellNameByName("Numbing Poison"),
 	})

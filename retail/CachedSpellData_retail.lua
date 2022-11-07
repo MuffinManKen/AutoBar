@@ -210,7 +210,8 @@ ABGCS.CacheSpellData(1706, "Levitate");
 ABGCS.CacheSpellData(21562, "Power Word: Fortitude");
 
 
---Rogue
+--#region Rogue
+ABGCS.CacheSpellData(381637, "Atrophic Poison");
 ABGCS.CacheSpellData(3408, "Crippling Poison");
 ABGCS.CacheSpellData(2823, "Deadly Poison");
 ABGCS.CacheSpellData(315584, "Instant Poison");
@@ -222,7 +223,7 @@ ABGCS.CacheSpellData(36554, "Shadowstep");
 ABGCS.CacheSpellData(1784, "Stealth");
 ABGCS.CacheSpellData(1856, "Vanish");
 ABGCS.CacheSpellData(271877, "Blade Rush");
-
+--#endregion
 
 
 --Shaman
