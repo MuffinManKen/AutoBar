@@ -6,7 +6,7 @@ local t2 = debugprofilestop()
 AutoBarGlobalCodeSpace.AddProfileData("name", t2 - t1)
 
 
- ** To fix Rearrange on Use, search for isntances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
+ ** To fix Rearrange on Use, search for instances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff
 
 /run hearth = AutoBarCategoryList["Spell.Mount"]
 
@@ -18,7 +18,12 @@ AutoBarGlobalCodeSpace.AddProfileData("name", t2 - t1)
 /run hearth = AutoBarCategoryList["Misc.Hearth"]
 /watch hearth
 
-/run toys = AutoBarCategoryList["Toys.ToyBox"]
+AutoBarSearch.sorted:GetList("AutoBarButtonHearth")
+AutoBarSearch.items:GetList("AutoBarButtonHearth")
+AutoBar.buttonList["AutoBarButtonHearth"]
+AutoBarCategoryList["Muffin.Toys.Hearth"]
+AutoBar.buttonList["AutoBarButtonToyBox"]
+/run toys = AutoBarCategoryList["Muffin.Toys.Everything"]
 /watch toys
 
 --Item ID 131814
