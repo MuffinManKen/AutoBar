@@ -3,9 +3,10 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Mage: Fixed warning about Conjure Water
- - Fixed error when clicking Move the Buttons button
- - Fixed error when open config via keybind
+ - Rogue: Added Atrophic Poison
+ - ToyBox defaults to only showing Favourites
+ - Added workarounds for differences in Beta vs Live Container APIs
+ - Fixes some issues where settings were getting lost (Clamp To Screen, for example)
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
 
