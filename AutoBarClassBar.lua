@@ -793,7 +793,7 @@ function AutoBar.Class.Bar:NameExists(newName)
 			return true
 		end
 	end
-	for _, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB2.chars) do
 		if (charDB.barList[newKey]) then
 			return true
 		end

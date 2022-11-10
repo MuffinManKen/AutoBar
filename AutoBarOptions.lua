@@ -486,7 +486,7 @@ local function ResetBars()
 	for _classKey, classDB in pairs(AutoBarDB2.classes) do
 		ResetBarList(classDB.barList)
 	end
-	for _charKey, charDB in pairs(AutoBarDB.chars) do
+	for _charKey, charDB in pairs(AutoBarDB2.chars) do
 		ResetBarList(charDB.barList)
 	end
 
@@ -1101,7 +1101,7 @@ function AutoBar:CreateOptionsAce3()
 							order = 300,
 							name = "",
 						},
-						showEmptyButtons = {
+						show_empty_buttons = {
 							type = "toggle",
 							order = 311,
 							width = 1.2,
@@ -1109,7 +1109,7 @@ function AutoBar:CreateOptionsAce3()
 							desc = L["Show Empty Buttons for %s"]:format(name),
 							tristate = true,
 						},
-						showCount = {
+						show_count = {
 							type = "toggle",
 							order = 321,
 							width = 1.2,
@@ -1117,7 +1117,7 @@ function AutoBar:CreateOptionsAce3()
 							desc = L["Show Count Text for %s"]:format(name),
 							tristate = true,
 						},
-						showHotkey = {
+						show_hotkey = {
 							type = "toggle",
 							order = 331,
 							width = 1.2,
@@ -1125,7 +1125,7 @@ function AutoBar:CreateOptionsAce3()
 							desc = L["Show Hotkey Text for %s"]:format(name),
 							tristate = true,
 						},
-						showTooltip = {
+						show_tooltip = {
 							type = "toggle",
 							order = 341,
 							width = 1.2,
@@ -1133,7 +1133,7 @@ function AutoBar:CreateOptionsAce3()
 							desc = L["Show Tooltips for %s"]:format(name),
 							tristate = true,
 						},
-						showTooltipCombat = {
+						show_tooltip_in_combat = {
 							type = "toggle",
 							order = 342,
 							width = 1.2,
@@ -1141,7 +1141,7 @@ function AutoBar:CreateOptionsAce3()
 							tristate = true,
 							disabled = getTooltipDisabled,
 						},
-						selfCastRightClick = {
+						self_cast_right_click = {
 							type = "toggle",
 							order = 361,
 							width = 1.2,
@@ -1163,7 +1163,7 @@ function AutoBar:CreateOptionsAce3()
 							order = 400,
 							name = L["FadeOut"],
 						},
-						fadeOut = {
+						fade_out = {
 							type = "toggle",
 							order = 410,
 							name = L["FadeOut"],
@@ -1248,13 +1248,13 @@ function AutoBar:CreateOptionsAce3()
 							width = 1.2,
 							name = L["Log Performance"],
 						},
-						logEvents = {
+						log_events = {
 							type = "toggle",
 							order = 502,
 							width = 1.2,
 							name = L["Log Events"],
 						},
-						logMemory = {
+						log_memory = {
 							type = "toggle",
 							order = 503,
 							width = 1.2,

@@ -950,7 +950,7 @@ function AutoBar.Class.Button:Delete(buttonKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
 		classDB.buttonList[buttonKey] = nil
 	end
-	for _, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB2.chars) do
 		charDB.buttonList[buttonKey] = nil
 	end
 
@@ -959,7 +959,7 @@ function AutoBar.Class.Button:Delete(buttonKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
 		AutoBar.Class.Bar:DeleteButtonKey(classDB.barList, buttonKey)
 	end
-	for _, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB2.chars) do
 		AutoBar.Class.Bar:DeleteButtonKey(charDB.barList, buttonKey)
 	end
 
@@ -984,7 +984,7 @@ function AutoBar.Class.Button:RenameCategory(oldKey, newKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
 		AutoBar.Class.Button:RenameCategoryKey(classDB.buttonList, oldKey, newKey)
 	end
-	for _, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB2.chars) do
 		AutoBar.Class.Button:RenameCategoryKey(charDB.buttonList, oldKey, newKey)
 	end
 end
@@ -1009,7 +1009,7 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 	for _, classDB in pairs (AutoBarDB2.classes) do
 		AutoBar.Class.Button:RenameKey(classDB.buttonList, oldKey, newKey, newName)
 	end
-	for _, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB2.chars) do
 		AutoBar.Class.Button:RenameKey(charDB.buttonList, oldKey, newKey, newName)
 	end
 
