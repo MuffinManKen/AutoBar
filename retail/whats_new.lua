@@ -3,10 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Rogue: Added Atrophic Poison
- - ToyBox defaults to only showing Favourites
- - Added workarounds for differences in Beta vs Live Container APIs
- - Fixes some issues where settings were getting lost (Clamp To Screen, for example)
+ - Many setting-related fixes
+ - If you're still having issues with settings being lost, please attach your saved variables to an issue so I can see them
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
 
