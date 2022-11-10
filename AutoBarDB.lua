@@ -361,14 +361,19 @@ local function migrate_db_from_ace2()
 	end
 
 	-- Move account-level bar and button lists from DB to DB2
-	AutoBarDB2.account.barList = AutoBarDB.account.barList
-	AutoBarDB.account.barList = nil
-	AutoBarDB2.account.buttonList = AutoBarDB.account.buttonList
-	AutoBarDB.account.buttonList = nil
+	if (AutoBarDB.account.barList) then
+		AutoBarDB2.account.barList = AutoBarDB.account.barList
+		AutoBarDB.account.barList = nil
+	end
+	if(AutoBarDB.account.buttonList) then
+		AutoBarDB2.account.buttonList = AutoBarDB.account.buttonList
+		AutoBarDB.account.buttonList = nil
+	end
 
 	AutoBarDB.whatsnew_version = nil
 
 	--Clean up various bits of failed migration
+	AutoBarDB2.account.selfCastRightClick = nil
 	AutoBarDB2.account.clampedToScreen = nil
 	for class_name in pairs(CLASS_BAR_MAP) do
 		AutoBarDB2.chars[class_name] = nil	-- Class data had been copied into the character table
@@ -875,7 +880,7 @@ function AutoBar:InitializeDefaults()
 	end
 
 
---#endregion XpacButtons
+
 
 	--classic-only: "AutoBarButtonTrack",
 	local deprecated_buttons

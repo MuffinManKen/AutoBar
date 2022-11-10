@@ -220,6 +220,10 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 	local charDB = AutoBar.char.barList[barKey]
 	local classDB = AutoBar.class.barList[barKey]
 	local accountDB = AutoBarDB2.account.barList[barKey]
+	local debug = false --barKey == "AutoBarClassBarBasic"
+
+	if (debug) then ABGCode.LogWarning("AutoBar:GetSharedBarDB(", barKey, ", ", sharedVar, ")"); end
+	if (debug) then ABGCode.LogWarning("charDB", charDB, " classDB", classDB, " accountDB", accountDB); end
 
 	-- Char specific db overides all others
 	if (charDB and charDB[sharedVar]) then
@@ -243,6 +247,8 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 		end
 	end
 
+	if (debug) then ABGCode.LogWarning("accountDB", accountDB, " sharedVar", accountDB[sharedVar]); end
+
 	-- Default to account
 	if (accountDB and accountDB[sharedVar]) then
 		if (accountDB[sharedVar] == SHARED_NONE and charDB) then
@@ -256,6 +262,9 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 
 	-- No specific setting so use the widest scope available
 	if (accountDB) then
+		if (debug) then ABGCode.LogWarning("using accountDB"); end
+		if (debug) then ABGCode.LogWarning(AB.Dump(accountDB, 1)); end
+
 		return accountDB
 	elseif (classDB) then
 		return classDB
