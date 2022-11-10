@@ -313,7 +313,7 @@ local function migrate_db_from_ace2()
 	AutoBarDB.account.dbVersion = nil
 
 	AutoBarDB2.classes = AutoBarDB2.classes or AutoBarDB.classes
-	AutoBarDB2.chars = AutoBarDB2.classes or AutoBarDB.chars
+	AutoBarDB2.chars = AutoBarDB2.chars or AutoBarDB.chars
 
 	local setting_migration = {
 		{"custom_categories", "customCategories"},
@@ -351,6 +351,7 @@ local function migrate_db_from_ace2()
 		AutoBarDB.account.Colors = nil
 	end
 
+	-- Erase the per-class entries (MONK = true, MAGE = true, etc) and replace with the single "allowed_class"
 	for _key, bar in pairs(AutoBarDB2.account.barList) do
 		for class_name in pairs(CLASS_BAR_MAP) do
 			bar[class_name] = nil
@@ -359,13 +360,27 @@ local function migrate_db_from_ace2()
 
 	end
 
+	-- Move account-level bar and button lists from DB to DB2
 	AutoBarDB2.account.barList = AutoBarDB.account.barList
 	AutoBarDB.account.barList = nil
 	AutoBarDB2.account.buttonList = AutoBarDB.account.buttonList
 	AutoBarDB.account.buttonList = nil
 
-	AutoBarDB2.account.clampedToScreen = nil
 	AutoBarDB.whatsnew_version = nil
+
+	--Clean up various bits of failed migration
+	AutoBarDB2.account.clampedToScreen = nil
+	for class_name in pairs(CLASS_BAR_MAP) do
+		AutoBarDB2.chars[class_name] = nil	-- Class data had been copied into the character table
+	end
+
+	for key in pairs(AutoBarDB2.classes) do
+		if(CLASS_BAR_MAP[key] == nil) then
+			print("Removing from classes:", key)
+			AutoBarDB2.classes[key] = nil
+		end
+
+	end
 end
 
 local function upgrade_db_version()
