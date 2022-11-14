@@ -1146,7 +1146,7 @@ function AutoBarSearch:UpdateScan()
 	for i = 0, NUM_BAG_SLOTS, 1 do
 		AutoBarSearch.dirty.bags[i] = true
 	end
-	AutoBarSearch.dirty.inventory = true
+
 	AutoBarSearch.dirty.toybox = true
 	AutoBarSearch.dirty.spells = true
 	AutoBarSearch.dirty.macros = true
@@ -1161,6 +1161,11 @@ end
 
 function AutoBarSearch:MarkBagDirty(p_bag_idx)
 	self.dirty.bags[p_bag_idx] = true
+end
+
+
+function AutoBarSearch:MarkInventoryDirty()
+	self.dirty.inventory = true
 end
 
 

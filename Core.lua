@@ -248,6 +248,7 @@ function AutoBar:InitializeZero()
 
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
+	AutoBar.frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
 	AutoBar.frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
 
@@ -465,6 +466,20 @@ function ABGCode.events.BAG_UPDATE_DELAYED()
 	ABGCode.LogEventEnd("BAG_UPDATE_DELAYED")
 
 end
+
+
+function ABGCode.events.PLAYER_EQUIPMENT_CHANGED()
+	ABGCode.LogEventStart("PLAYER_EQUIPMENT_CHANGED")
+
+	AutoBarSearch:MarkInventoryDirty()
+
+	ABGCS.ABScheduleUpdate(tick.UpdateItemsID)
+
+	ABGCode.LogEventEnd("PLAYER_EQUIPMENT_CHANGED")
+
+end
+
+
 
 function ABGCode.events.BAG_UPDATE_COOLDOWN(p_arg1)
 	ABGCode.LogEventStart("BAG_UPDATE_COOLDOWN")
