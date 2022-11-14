@@ -476,7 +476,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 
 	--This should query a global guid registry and then the specific ones if not found.
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
-		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
+		return AutoBarSearch.registered_macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
 	end
 
 	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)
@@ -503,7 +503,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 else --(AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow) then
 
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
-		return AutoBarSearch.macro_text[p_guid];
+		return AutoBarSearch.registered_macro_text[p_guid];
 	end
 
 	function AutoBarGlobalCodeSpace.PlayerHasToy(_p_item_id)

@@ -257,7 +257,6 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
 	if (ABGData.is_mainline_wow) then
-		AutoBar.frame:RegisterEvent("PET_BATTLE_CLOSE")
 		AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 		AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
 		AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
@@ -379,19 +378,15 @@ if (ABGData.is_mainline_wow) then
 		ABGCode.LogEventEnd("COMPANION_LEARNED")
 	end
 
-	function ABGCode.events.PET_BATTLE_CLOSE(p_arg1)
-		ABGCode.LogEventStart("PET_BATTLE_CLOSE")
-		-- AutoBar.in_pet_battle = false
-		ABGCode.LogEventEnd("PET_BATTLE_CLOSE", p_arg1)
-	end
 
 	function ABGCode.events.TOYS_UPDATED(p_item_id, p_new)
 		ABGCode.LogEventStart("TOYS_UPDATED")
 
-
 		if(true) then ABGCode.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
 
-		ABGCode.ABScheduleUpdate(tick.ResetSearch)
+		if(p_item_id == nil or p_new == true) then
+			ABGCode.ABScheduleUpdate(tick.ResetSearch)
+		end
 
 		ABGCode.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
@@ -401,7 +396,11 @@ end
 
 
 function ABGCode.events.PLAYER_ENTERING_WORLD()
---print("   PLAYER_ENTERING_WORLD")
+	ABGCode.LogWarning("* PLAYER_ENTERING_WORLD")
+
+--UIParentLoadAddOn("Blizzard_DebugTools")
+--UIParentLoadAddOn("Blizzard_EventTrace")
+
 
 	if (not AutoBar.initialized) then
 		AutoBar:InitializeZero();
@@ -441,13 +440,14 @@ function ABGCode.events.PLAYER_LEAVING_WORLD()
 end
 
 
-function ABGCode.events.BAG_UPDATE(arg1)
+function ABGCode.events.BAG_UPDATE(p_bag_idx)
 	ABGCode.LogEventStart("BAG_UPDATE")
-	if (AutoBar.inWorld and arg1 <= NUM_BAG_SLOTS) then
-		AutoBarSearch.dirtyBags[arg1] = true
+
+	if (AutoBar.inWorld and p_bag_idx <= NUM_BAG_SLOTS) then
+		AutoBarSearch:MarkBagDirty(p_bag_idx)
 	end
 
-	ABGCode.LogEventEnd("BAG_UPDATE", arg1)
+	ABGCode.LogEventEnd("BAG_UPDATE", p_bag_idx)
 
 end
 
@@ -1141,8 +1141,8 @@ end
 function ABGCS.UpdateSpells(p_behaviour)
 	ABGCode.LogEventStart("ABGCS:UpdateSpells")
 
-	AutoBarSearch.stuff:ScanSpells()
-	AutoBarSearch.stuff:ScanMacros()
+	AutoBarSearch:ScanRegisteredSpells()
+	AutoBarSearch:ScanRegisteredMacros()
 	ABGCode.RefreshCategories()
 
 	local ret = tick.UpdateObjectsID;

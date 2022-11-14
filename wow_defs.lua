@@ -2,6 +2,7 @@
 ---@meta
 
 
+--#region Global Constants
 ---@type integer
 LE_EXPANSION_WRATH_OF_THE_LICH_KING = 2
 
@@ -16,6 +17,13 @@ LE_MOUNT_JOURNAL_FILTER_COLLECTED = -1
 LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED = -1
 LE_MOUNT_JOURNAL_FILTER_UNUSABLE = -1
 
+
+NUM_BAG_SLOTS = -1  ---@type integer
+
+--defined in BlizzardInterfaceCode\Interface\FrameXML\ActionButton.lua
+---@type number
+ATTACK_BUTTON_FLASH_TIME = 0.4
+--#endregion Global Constants
 
 --#region Global Strings
 OKAY = "Okay"
@@ -36,7 +44,6 @@ KEY_RIGHT = ""
 INVTYPE_TRINKET  = ""
 --#endregion Global Strings
 
-NUM_BAG_SLOTS = -1
 
 ---@type Frame
 PetActionBarFrame = {}
@@ -44,9 +51,7 @@ PetActionBarFrame = {}
 ---@type FontObject
 GameFontNormal = nil
 
---defined in BlizzardInterfaceCode\Interface\FrameXML\ActionButton.lua
----@type number
-ATTACK_BUTTON_FLASH_TIME = 0.4
+
 
 
 ---@param n number|string|nil

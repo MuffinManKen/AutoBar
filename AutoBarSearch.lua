@@ -27,10 +27,10 @@ AutoBarSearch.registered_spells = {}	-- The "master list" of spells that are dee
 ---@type table<string, ABToyInfo >
 AutoBarSearch.registered_toys = {}
 
-AutoBarSearch.macros = {}
-AutoBarSearch.macro_text = {}
+AutoBarSearch.registered_macros = {}
+AutoBarSearch.registered_macro_text = {}
 
-AutoBarSearch.dirtyBags = {}
+AutoBarSearch.dirty = { bags = {} }
 
 local METHOD_DEBUG = true
 local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
@@ -300,16 +300,6 @@ function CStuff:init()
 	self.inventory = {}
 end
 
----CStuff:add is a private method called by the various Scan* methods
----@param p_id string
----@param p_spell string
--- Add itemId to bag, slot, spell
-function CStuff:add(p_id, p_spell)
-	local debug = (DEBUG_IDS[p_id] or DEBUG_GUIDS[p_id])
-	if (debug) then ABGCode.LogWarning("CStuff:add", p_id, p_spell); end
-
-	AutoBarSearch.found:Add(p_id, nil, nil, p_spell)
-end
 
 ---CStuff:add_item is a private method called by the various Scan* methods
 ---@param p_item_id integer
@@ -330,7 +320,7 @@ function CStuff:add_item(p_item_id, p_bag, p_slot)
 	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
 	local usable = ABGCS.IsUsableItem(p_item_id);
 	local item_spell = GetItemSpell(p_item_id);
-	if (itemMinLevel <= AutoBar.playerLevel and (usable or item_spell)) then
+	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
 		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
 	end
 --AutoBar:Print("Stuff.prototype:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
@@ -379,25 +369,9 @@ function CStuff:ScanBag(bag)
 	end
 end
 
----Scan all registered toys, refreshing their data and adding them to Stuff
-function CStuff:ScanToyBox()
-	if (METHOD_DEBUG) then ABGCode.LogWarning("CStuff:ScanToyBox", AutoBar:tcount(AutoBarSearch.registered_toys)); end
-	for toy_guid, toy_data in pairs(AutoBarSearch.registered_toys) do
-		AutoBarSearch:RegisterToy(toy_data.item_id);
-		self:add(toy_guid, toy_guid)
-	end
 
-end
 
-function CStuff:ScanMacroText()
 
-	for macro_text_guid, _macro_text_data in pairs(AutoBarSearch.macro_text) do
-		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
-		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AB.Dump(macro_text_data))
-		self:add(macro_text_guid, macro_text_guid)
-	end
-
-end
 
 -- Scan equipped inventory items.
 function CStuff:ScanInventory()
@@ -421,41 +395,10 @@ function CStuff:ScanInventory()
 end
 
 
--- Scan available Spells
-function CStuff:ScanSpells()
-	for spellName, spellInfo in pairs(AutoBarSearch.registered_spells) do
-		--local debug = (spellName == "Wild Charge")
-		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
-		--spellInfo.can_cast = can_cast_spell(spellName)
-		--if (debug) then print("Spell Info:", AB.Dump(spellInfo)); end;
-		local can_cast = AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
-		if (can_cast) then
-			self:add(spellName, spellName)
-		else
-			--if (debug) then print("Deleting:", spellName); end;
-			self:Delete(spellName, nil, nil, spellName)
-		end
-	end
-end
 
 
--- Scan available Macros
-function CStuff:ScanMacros()
-	for macroId, macroInfo in pairs(AutoBarSearch.macros) do
-		if (macroInfo.macroIndex) then
-			local _name, _icon_texture, body = GetMacroInfo(macroInfo.macroIndex)
-			if (body) then
-				self:add(macroId, macroId)
-			else
-				self:Delete(macroId, nil, nil, macroId)
-			end
-		elseif (macroInfo.macroText) then
-			self:add(macroId, macroId)
-		else
-			self:Delete(macroId, nil, nil, macroId)
-		end
-	end
-end
+
+
 
 
 -- Scan bags only to support shuffling of stuff manually added or moved during combat.
@@ -468,52 +411,6 @@ function CStuff:ScanCombat()
 end
 
 
--- Scan the requested Stuff.
-function CStuff:Scan()
-	ABGCode.LogEventStart("Stuff:Scan")
-	AutoBar.playerLevel = UnitLevel("player")
-	for bag = 0, NUM_BAG_SLOTS, 1 do
-		if (AutoBarSearch.dirtyBags[bag]) then
-			ABGCode.LogEventStart("AutoBar scanned bag")
---AutoBar:Print("Stuff.prototype:Scan    scanning bag ", bag);
-			self:ScanBag(bag)
-			ABGCode.LogEventEnd("AutoBar scanned bag", bag)
-			AutoBarSearch.dirtyBags[bag] = nil
-		end
-	end
-
-	if (AutoBarSearch.dirtyBags.macro_text) then
---AutoBar:Print("Stuff.prototype:Scan    scanning macro_text ");
-		self:ScanMacroText()
-		AutoBarSearch.dirtyBags.macro_text = false
-	end
-
-	if (AutoBarSearch.dirtyBags.toybox) then
---AutoBar:Print("Stuff.prototype:Scan    scanning toybox ");
-		self:ScanToyBox()
-		AutoBarSearch.dirtyBags.toybox = false
-	end
-
-	if (AutoBarSearch.dirtyBags.inventory) then
---AutoBar:Print("Stuff.prototype:Scan    scanning inventory ");
-		self:ScanInventory()
-		AutoBarSearch.dirtyBags.inventory = nil
-	end
-
-	if (AutoBarSearch.dirtyBags.spells) then
---AutoBar:Print("Stuff.prototype:Scan    scanning spells ");
-		self:ScanSpells()
-		AutoBarSearch.dirtyBags.spells = nil
-	end
-
-	if (AutoBarSearch.dirtyBags.macros) then
---AutoBar:Print("Stuff.prototype:Scan    scanning macros ");
-		self:ScanMacros()
-		AutoBarSearch.dirtyBags.macros = nil
-	end
-
-	ABGCode.LogEventEnd("Stuff:Scan")
-end
 
 -- Remove and Recycle all items
 function CStuff:Reset()
@@ -754,7 +651,7 @@ end
 -- Remove and Recycle all items
 function Current.prototype:Reset()
 	for buttonKey, buttonItems in pairs(self.dataList) do
-		for itemId, itemData in pairs(buttonItems) do
+		for itemId, _item_data in pairs(buttonItems) do
 			buttonItems[itemId] = nil
 		end
 		if (not AutoBar.buttonList[buttonKey]) then
@@ -903,7 +800,7 @@ end
 
 -- Remove and Recycle all items
 function Sorted.prototype:Reset()
-	self.dirty = true
+
 	for buttonKey, buttonItems in pairs(self.dataList) do
 		for i, sortedItemData in pairs(buttonItems) do
 			buttonItems[i] = nil
@@ -954,7 +851,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 			spell = nil
 		elseif(spell:find("^macrotext:")) then
 			type_id = ABGData.TYPE_MACRO_TEXT
-			info_data = AutoBarSearch.macro_text[spell]
+			info_data = AutoBarSearch.registered_macro_text[spell]
 			spell = nil
 		elseif(spell:find("^macro")) then
 			macroId = spell
@@ -1115,11 +1012,11 @@ end
 function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local debug = false; --(p_macro_guid == 127670)
-	local macro_text_info = AutoBarSearch.macro_text[p_macro_guid]
+	local macro_text_info = AutoBarSearch.registered_macro_text[p_macro_guid]
 
 	if (not macro_text_info) then
 		macro_text_info = {}
-		AutoBarSearch.macro_text[p_macro_guid] = macro_text_info
+		AutoBarSearch.registered_macro_text[p_macro_guid] = macro_text_info
 	end
 
 	if (p_macro_icon_override) then
@@ -1149,7 +1046,7 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 
 end
 
----comment
+
 ---@param p_toy_id integer
 ---@return ABToyInfo
 function AutoBarSearch:RegisterToy(p_toy_id)
@@ -1183,10 +1080,10 @@ end
 -- 	"macroCustom" .. categoryKey .. "\n" .. macroName
 -- {macroId = {macroIndex}|{macroName,macroText}}
 function AutoBarSearch:RegisterMacro(macroId, macroIndex, macroName, macroText)
-	local macroInfo = AutoBarSearch.macros[macroId]
+	local macroInfo = AutoBarSearch.registered_macros[macroId]
 	if (not macroInfo) then
 		macroInfo = {}
-		AutoBarSearch.macros[macroId] = macroInfo
+		AutoBarSearch.registered_macros[macroId] = macroInfo
 	end
 
 	macroInfo.macroIndex = macroIndex
@@ -1197,6 +1094,19 @@ function AutoBarSearch:RegisterMacro(macroId, macroIndex, macroName, macroText)
 	end
 end
 
+
+local function init_dirty_flags()
+
+	for i = 0, NUM_BAG_SLOTS, 1 do
+		AutoBarSearch.dirty.bags[i] = true
+	end
+
+	AutoBarSearch.dirty.inventory = true
+	AutoBarSearch.dirty.toybox = true
+	AutoBarSearch.dirty.spells = true
+	AutoBarSearch.dirty.macros = true
+	AutoBarSearch.dirty.macro_text = true
+end
 
 -- Call once only
 function AutoBarSearch:Initialize()
@@ -1210,6 +1120,7 @@ function AutoBarSearch:Initialize()
 
 	AutoBarSearch.stuff = CStuff:new() 	-- Map of bags, inventory
 
+	init_dirty_flags()
 end
 
 -- Empty everything
@@ -1229,17 +1140,9 @@ function AutoBarSearch:Reset()
 	AutoBarSearch:Empty()
 
 	AutoBarSearch.items:Populate()
-	-- Add Items
-	for i = 0, NUM_BAG_SLOTS, 1 do
-		AutoBarSearch.dirtyBags[i] = true
-	end
-	AutoBarSearch.dirtyBags.inventory = true
-	AutoBarSearch.dirtyBags.toybox = true
-	AutoBarSearch.dirtyBags.spells = true
-	AutoBarSearch.dirtyBags.macros = true
-	AutoBarSearch.dirtyBags.macro_text = true
-	AutoBarSearch.dirty = true
-	AutoBarSearch.stuff:Scan()
+
+	init_dirty_flags()
+	AutoBarSearch:ScanAll()
 	AutoBarSearch.sorted:Update()
 --AutoBar:Print("AutoBarSearch:Reset End")
 end
@@ -1247,18 +1150,130 @@ end
 -- Scan & sort based on current dirty lists
 function AutoBarSearch:UpdateScan()
 --AutoBar:Print("AutoBarSearch:Reset Start")
-	-- ToDo: reimplement the dirty code
---	for i = 0, NUM_BAG_SLOTS, 1 do
---		AutoBarSearch.dirtyBags[i] = true
---	end
-	AutoBarSearch.dirtyBags.inventory = true
-	AutoBarSearch.dirtyBags.toybox = true
-	AutoBarSearch.dirtyBags.spells = true
-	AutoBarSearch.dirtyBags.macros = true
-	AutoBarSearch.dirty = true
+	-- ToDo: reimplement the dirty code and remove the below auto-dirtying stuff since it defeats the purpose
+	for i = 0, NUM_BAG_SLOTS, 1 do
+		AutoBarSearch.dirty.bags[i] = true
+	end
+	AutoBarSearch.dirty.inventory = true
+	AutoBarSearch.dirty.toybox = true
+	AutoBarSearch.dirty.spells = true
+	AutoBarSearch.dirty.macros = true
 
-	AutoBarSearch.stuff:Scan()
+	AutoBarSearch:ScanAll()
+
 	AutoBarSearch.sorted:DirtyButtons()
 	AutoBarSearch.sorted:Update()
 --AutoBar:Print("AutoBarSearch:Reset End")
+end
+
+
+function AutoBarSearch:MarkBagDirty(p_bag_idx)
+	self.dirty.bags[p_bag_idx] = true
+end
+
+
+-- Scan all of the bags
+function AutoBarSearch:ScanDirtyBags()
+	for bag = 0, NUM_BAG_SLOTS, 1 do
+		if (AutoBarSearch.dirty.bags[bag]) then
+			self.stuff:ScanBag(bag)
+			AutoBarSearch.dirty.bags[bag] = nil
+		end
+	end
+end
+
+
+---Scan all registered toys, refreshing their data and adding them to Stuff
+function AutoBarSearch:ScanRegisteredToys()
+
+	if (METHOD_DEBUG) then ABGCode.LogWarning("AutoBarSearch:ScanRegisteredToys", AutoBar:tcount(self.registered_toys)); end
+
+	for toy_guid, toy_data in pairs(self.registered_toys) do
+		self:RegisterToy(toy_data.item_id);
+		self.found:Add(toy_guid, nil, nil, toy_guid)
+	end
+
+end
+
+
+-- Scan registered Spells
+function AutoBarSearch:ScanRegisteredSpells()
+
+	for name, info in pairs(self.registered_spells) do
+		local can_cast = self:RegisterSpell(name, info.spell_id)
+		if (can_cast) then
+			self.found:Add(name, nil, nil, name)
+		else
+			self.stuff:Delete(name, nil, nil, name)
+		end
+	end
+
+end
+
+
+-- Scan registered Macros
+function AutoBarSearch:ScanRegisteredMacros()
+
+	for macro_id, macroInfo in pairs(self.registered_macros) do
+		local keep = false
+		if (macroInfo.macroIndex) then
+			local _name, _icon_texture, body = GetMacroInfo(macroInfo.macroIndex)
+			keep = (body ~= nil)
+		else
+			keep = (macroInfo.macroText ~= nil)
+		end
+
+		if(keep) then
+			self.found:Add(macro_id, nil, nil, macro_id)
+		else
+			self.stuff:Delete(macro_id, nil, nil, macro_id)
+		end
+	end
+
+end
+
+
+function AutoBarSearch:ScanRegisteredMacroText()
+
+	for macro_text_guid, _macro_text_data in pairs(self.registered_macro_text) do
+		self.found:Add(macro_text_guid, nil, nil, macro_text_guid)
+	end
+
+end
+
+-- Scan all of the things
+function AutoBarSearch:ScanAll()
+	ABGCode.LogEventStart("AutoBarSearch:ScanAll")
+
+	-- Cache player's current level.  Used by CStuff.add_item for filtering
+	AutoBar.player_level = UnitLevel("player")
+
+	self:ScanDirtyBags()
+
+	if (AutoBarSearch.dirty.inventory) then
+		self.stuff:ScanInventory()
+		AutoBarSearch.dirty.inventory = false
+	end
+
+	if (AutoBarSearch.dirty.toybox) then
+		self:ScanRegisteredToys()
+		AutoBarSearch.dirty.toybox = false
+	end
+
+	if (AutoBarSearch.dirty.spells) then
+		self:ScanRegisteredSpells()
+		AutoBarSearch.dirty.spells = false
+	end
+
+	if (AutoBarSearch.dirty.macros) then
+		self:ScanRegisteredMacros()
+		AutoBarSearch.dirty.macros = false
+	end
+
+	if (AutoBarSearch.dirty.macro_text) then
+		self:ScanRegisteredMacroText()
+		AutoBarSearch.dirty.macro_text = false
+	end
+
+	ABGCode.LogEventEnd("AutoBarSearch:ScanAll")
 end

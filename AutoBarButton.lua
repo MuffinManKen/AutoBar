@@ -803,7 +803,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("AutoBarGUID", p_info_data.guid)
 			button.macroActive = true
 		elseif (macroId) then
-			local macroInfo = AutoBarSearch.macros[macroId]
+			local macroInfo = AutoBarSearch.registered_macros[macroId]
 			frame:SetAttribute("type", "macro")
 			frame:SetAttribute("macroId", macroId)
 			if (macroInfo.macroIndex) then
