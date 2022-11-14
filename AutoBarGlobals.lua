@@ -162,12 +162,12 @@ function AutoBarGlobalCodeSpace.ToyGUID(p_toy_id)
 	return guid;
 end
 
-function AutoBarGlobalCodeSpace.BPetGUID(p_bpet_id)
+--[[ function AutoBarGlobalCodeSpace.BPetGUID(p_bpet_id)
 
 	local guid = "bpet:" .. p_bpet_id;
 
 	return guid;
-end
+end ]]
 
 local macro_text_guid_index = 0;
 function AutoBarGlobalCodeSpace.MacroTextGUID(_p_macro_text)	--TODO: We're not using the text?
@@ -249,8 +249,8 @@ function AB.ClearNormalTexture(p_frame)
 end
 
 
---/run AutoBarGlobalCodeSpace.FrameInsp(ActionButton3)
-function AutoBarGlobalCodeSpace.FrameInsp(p_frame) --AutoBarButtonExplosiveFrame
+--/run AutoBarGlobalCodeSpace.FrameInsp(AutoBarButtonExplosiveFrame)
+function AutoBarGlobalCodeSpace.FrameInsp(p_frame)
 
 	local frame = p_frame
 
@@ -312,8 +312,8 @@ function AutoBarGlobalCodeSpace.GetSpellIconByNameFast(p_spell_name)
 
 end
 
-local prof = AutoBarGlobalDataObject.profile
 function AutoBarGlobalCodeSpace.AddProfileData(p_name, p_time)
+	local prof = AutoBarGlobalDataObject.profile
 
 	if(prof[p_name] == nil) then
 		prof[p_name] = {}
