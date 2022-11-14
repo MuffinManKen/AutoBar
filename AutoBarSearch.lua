@@ -401,14 +401,6 @@ end
 
 
 
--- Scan bags only to support shuffling of stuff manually added or moved during combat.
-function CStuff:ScanCombat()
-	ABGCode.LogEventStart("Stuff.prototype:ScanCombat")
-	for bag = 0, NUM_BAG_SLOTS, 1 do
-		self:ScanBag(bag)
-	end
-	ABGCode.LogEventEnd("Stuff.prototype:ScanCombat")
-end
 
 
 
@@ -1180,6 +1172,16 @@ function AutoBarSearch:ScanDirtyBags()
 			AutoBarSearch.dirty.bags[bag] = nil
 		end
 	end
+end
+
+
+-- Scan bags only to support shuffling of stuff manually added or moved during combat.
+function AutoBarSearch:ScanBagsInCombat()
+	ABGCode.LogEventStart("Stuff.prototype:ScanCombat")
+	for bag = 0, NUM_BAG_SLOTS, 1 do
+		self.stuff:ScanBag(bag)
+	end
+	ABGCode.LogEventEnd("Stuff.prototype:ScanCombat")
 end
 
 

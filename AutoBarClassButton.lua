@@ -339,7 +339,7 @@ function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewIt
 	local _, itemCount, locked = GetContainerItemInfo(targetBag, targetSlot)
 	local totalCount = GetItemCount(itemId)
 	if (not itemCount and totalCount > 0) then
-		AutoBarSearch.stuff:ScanCombat()
+		AutoBarSearch:ScanBagsInCombat()
 	end
 
 --	if (isNewItem) then
