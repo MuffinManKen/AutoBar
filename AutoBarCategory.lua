@@ -918,6 +918,7 @@ end
 function ABGCode.UpdateCustomCategories()
 	local customCategories = AutoBarDB2.custom_categories
 
+	-- Add any customCategories that are not already in AutoBarCategoryList
 	for categoryKey, customCategoriesDB in pairs(customCategories) do
 		assert(customCategoriesDB and (categoryKey == customCategoriesDB.categoryKey), "customCategoriesDB nil or bad categoryKey")
 		if (not AutoBarCategoryList[categoryKey]) then
@@ -925,6 +926,8 @@ function ABGCode.UpdateCustomCategories()
 		end
 	end
 
+	-- Refresh ALL categories (not just Custom ones)
+	-- Prune AutoBarCategoryList, removing any Custom Categories that are not in customCategories
 	for categoryKey, categoryInfo in pairs(AutoBarCategoryList) do
 		categoryInfo:Refresh()
 
@@ -933,12 +936,13 @@ function ABGCode.UpdateCustomCategories()
 		end
 	end
 
-	for categoryKey in pairs(AutoBar.categoryValidateList) do
-		AutoBar.categoryValidateList[categoryKey] = nil
-	end
+
+	--Rebuild categoryValidateList
+	wipe(AutoBar.categoryValidateList)
 	for categoryKey, categoryInfo in pairs(AutoBarCategoryList) do
 		AutoBar.categoryValidateList[categoryKey] = categoryInfo.description
 	end
+
 end
 
 

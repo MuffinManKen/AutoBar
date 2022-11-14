@@ -72,7 +72,7 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 		if (tonumber(spell_name)) then
 			GameTooltip:SetSpellByID(spell_name);
 		else
-			local spell_info = AutoBarSearch.spells[spell_name]
+			local spell_info = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
 			GameTooltip:SetSpellByID(spell_info.spell_id);
 		end
 		button.UpdateTooltip = AutoBar.Class.BasicButton.TooltipShow

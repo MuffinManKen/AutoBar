@@ -119,8 +119,8 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 			if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
 			spellIconList[spell_name] = icon
 			AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
-			local spellInfo = AutoBarSearch.spells[spell_name]
-			spellInfo.spell_link = "spell:" .. spell_id
+			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
+			spellInfo.spell_link = "spell:" .. spell_id		--TODO: This shouldn't be necessary. Test to see if RegisterSpell isn't giving a good link
 			category.castList[# category.castList + 1] = spell_name
 
 		end

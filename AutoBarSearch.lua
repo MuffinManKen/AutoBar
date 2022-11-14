@@ -21,14 +21,31 @@ local ABGData = AutoBarGlobalDataObject
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
 AutoBarSearch = {}
-AutoBarSearch.spells = {}
-AutoBarSearch.toys = {}
+---@type table<string, ABSpellInfo >
+AutoBarSearch.registered_spells = {}	-- The "master list" of spells that are deemed relevant to the character
+
+---@type table<string, ABToyInfo >
+AutoBarSearch.registered_toys = {}
+
 AutoBarSearch.macros = {}
 AutoBarSearch.macro_text = {}
 
 AutoBarSearch.dirtyBags = {}
-local searchSpace, items
 
+local METHOD_DEBUG = true
+local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
+local DEBUG_GUIDS = ABGCode.MakeSet({ABGCode.ToyGUID(54452), ABGCode.ToyGUID(142542)})
+
+
+---Returns the ABSpellInfo for a given spell
+---@param p_spell_name string
+---@return ABSpellInfo
+function AutoBarSearch.GetRegisteredSpellInfo(p_spell_name)
+
+	local spell_info = AutoBarSearch.registered_spells[p_spell_name]
+
+	return spell_info
+end
 
 
 -- -- Returns true if a spell can be cast at all
@@ -36,7 +53,7 @@ local searchSpace, items
 -- ---@param p_spell_name string
 -- ---@return boolean
 -- local function can_cast_spell(p_spell_name)
--- 	local spell_info = AutoBarSearch.spells[p_spell_name]
+-- 	local spell_info = AutoBarSearch.registered_spells[p_spell_name]
 -- 	if (not spell_info or not spell_info.can_cast) then
 -- 		return false
 -- 	else
@@ -81,6 +98,7 @@ end
 -- The search space with all items to look for
 -- Tracks client buttons that are looking (for proper deletion)
 --		{ itemId = {buttonKey, ...} }
+--#region SearchSpace
 local SearchSpace = AceOO.Class(Recycle)
 
 -- Add a list of itemIds for the given buttonKey
@@ -116,18 +134,6 @@ function SearchSpace.prototype:Reset()
 	end
 end
 
--- Testing & Debug function only
-function SearchSpace.prototype:Contains(id)
-	for itemId, _clientButtons in pairs(self.dataList) do
-		if (itemId == id) then
-			if (not AutoBarSearch.trace) then
-				AutoBar:Print("SearchSpace.prototype:Contains    itemId " .. tostring(itemId))
-			end
-			return true
-		end
-	end
-	return false
-end
 
 -- Return the search space list.
 -- Do not manipulate the list.  It is only for performance when checking if an itemId is searched for
@@ -135,13 +141,15 @@ function SearchSpace.prototype:GetList()
 	return self.dataList
 end
 
+--#endregion SearchSpace
 
 
 -- List of items to search for per slot.  No duplicates, highest priority overwrites.
 -- Synced to SearchSpace.  All SearchSpace changes are via Items
--- Should only be changed via Config, or hunter pet food swithes
+-- Should only be changed via Config, or hunter pet food switches
 -- Priority is slotIndex.categoryIndex
 --		{ itemId = {category, slotIndex, categoryIndex} }
+--#region Items
 local Items = AceOO.Class(Recycle)
 
 function Items.prototype:init()
@@ -199,54 +207,59 @@ function Items.prototype:Reset()
 	end
 end
 
--- Testing & Debug function only
-function Items.prototype:Contains(id)
-	for _buttonKey, buttonItems in pairs(self.dataList) do
-		for itemId, _itemData in pairs(buttonItems) do
-			if (itemId == id) then
-				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Items.prototype:Contains    itemId " .. tostring(itemId))
-				end
-				return true
+
+local function get_items(slotItem)
+	if (type(slotItem) == "string") then
+		local categoryInfo = AutoBarCategoryList[slotItem]
+		if (categoryInfo) then
+			if (categoryInfo.spell) then
+				return slotItem, categoryInfo.items, nil
+			elseif (categoryInfo.spells) then
+				return slotItem, categoryInfo.items, categoryInfo.spells
+			else
+				return slotItem, categoryInfo.items, nil
 			end
+		else
+			return nil, nil, nil, nil, nil
 		end
+	else
+		AutoBar:Print("Items.prototype:Populate    GetItems unknown type " .. tostring(type(slotItem)))
 	end
-	return false
 end
 
 -- Populate all the buttons
 function Items.prototype:Populate()
-	local function GetItems(slotItem)
-		if (type(slotItem) == "string") then
-			local categoryInfo = AutoBarCategoryList[slotItem]
-			if (categoryInfo) then
-				if (categoryInfo.spell) then
-AutoBar:Print("Items.prototype:Populate   slotItem " .. tostring(slotItem))
---DevTools_Dump(AutoBarCategoryList["Spell.Portals"])
-					return slotItem, categoryInfo.items, nil
-				elseif (categoryInfo.spells) then
-					return slotItem, categoryInfo.items, categoryInfo.spells
-				else
-					return slotItem, categoryInfo.items, nil
-				end
-			else
-				return nil, nil, nil, nil, nil
-			end
-		else
-			AutoBar:Print("Items.prototype:Populate    GetItems unknown type " .. tostring(type(slotItem)))
-		end
-	end
-
+	if(METHOD_DEBUG) then ABGCode.LogWarning("Items:Populate"); end
 	for buttonKey, button in pairs(AutoBar.buttonList) do
 		if (button and button[1]) then
 			for slotIndex = 1, # button, 1 do
-				local category, itemList, spells = GetItems(button[slotIndex])
+				local category, itemList, spells = get_items(button[slotIndex])
+				if(button[slotIndex] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(itemList), AB.Dump(spells)) end
 				if (itemList) then
 					self:Add(itemList, buttonKey, category, slotIndex)
 				end
 				if (spells) then
 					self:Add(spells, buttonKey, category, slotIndex)
 				end
+			end
+		end
+	end
+
+end
+
+-- Re-Populate a  button
+function Items.prototype:RePopulate(p_button_key)
+	if(METHOD_DEBUG) then ABGCode.LogWarning("Items:RePopulate", p_button_key); end
+	local button = AutoBar.buttonList[p_button_key]
+	if (button and button[1]) then
+		for slotIndex = 1, # button, 1 do
+			local category, itemList, spells = get_items(button[slotIndex])
+			if(button[slotIndex] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(itemList), AB.Dump(spells)) end
+			if (itemList) then
+				self:Add(itemList, p_button_key, category, slotIndex)
+			end
+			if (spells) then
+				self:Add(spells, p_button_key, category, slotIndex)
 			end
 		end
 	end
@@ -264,10 +277,12 @@ function Items.prototype:GetList(buttonKey)
 	end
 end
 
+--#endregion Items
 
 -- Map of bag, inventory and spell contents
 -- Changes synced to Found
 -- [bag][slot] = <itemId | nil>
+--#region CStuff
 local CStuff = {}
 
 function CStuff:new()
@@ -285,31 +300,41 @@ function CStuff:init()
 	self.inventory = {}
 end
 
+---CStuff:add is a private method called by the various Scan* methods
+---@param p_id string
+---@param p_spell string
 -- Add itemId to bag, slot, spell
-function CStuff:add(itemId, bag, slot, spell)
-	local slotList
-	if (bag) then
-		slotList = self.bags[bag]
-		slotList[slot] = itemId
-	elseif (slot) then
-		self.inventory[slot] = itemId
+function CStuff:add(p_id, p_spell)
+	local debug = (DEBUG_IDS[p_id] or DEBUG_GUIDS[p_id])
+	if (debug) then ABGCode.LogWarning("CStuff:add", p_id, p_spell); end
+
+	AutoBarSearch.found:Add(p_id, nil, nil, p_spell)
+end
+
+---CStuff:add_item is a private method called by the various Scan* methods
+---@param p_item_id integer
+---@param p_bag integer|nil
+---@param p_slot integer
+-- Add itemId to bag, slot
+function CStuff:add_item(p_item_id, p_bag, p_slot)
+	assert(p_bag or p_slot)
+
+	if (p_bag) then
+		local slotList = self.bags[p_bag]
+		slotList[p_slot] = p_item_id
+	else
+		self.inventory[p_slot] = p_item_id
 	end
 
-	--if(spell == "toy:127670") then print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell)) end;
-	if (bag or slot) then
-		-- Filter out too high level items
-		local itemMinLevel = select(5, GetItemInfo(itemId)) or 0;
-		local usable = ABGCS.IsUsableItem(itemId);
-		local item_spell = GetItemSpell(itemId);
-		if (itemMinLevel <= AutoBar.playerLevel and (usable or not item_spell)) then
-			AutoBarSearch.found:Add(itemId, bag, slot)
-		end
-	else
-		AutoBarSearch.found:Add(itemId, bag, slot, spell)
+	-- Filter out too high level items
+	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
+	local usable = ABGCS.IsUsableItem(p_item_id);
+	local item_spell = GetItemSpell(p_item_id);
+	if (itemMinLevel <= AutoBar.playerLevel and (usable or item_spell)) then
+		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
 	end
 --AutoBar:Print("Stuff.prototype:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
-
 
 
 -- Remove itemId from bag, slot, spell
@@ -346,23 +371,20 @@ function CStuff:ScanBag(bag)
 		if (itemId) then
 			if (oldItemId and oldItemId ~= itemId) then
 				self:Delete(oldItemId, bag, slot)
-				self:add(itemId, bag, slot)
-			elseif (not oldItemId) then
-				self:add(itemId, bag, slot, nil)
 			end
+			self:add_item(itemId, bag, slot)
 		elseif (not itemId and oldItemId) then
-			self:Delete(oldItemId, bag, slot, nil)
+			self:Delete(oldItemId, bag, slot)
 		end
 	end
 end
 
---As far as I know there is no way to get rid of a toy, so we don't need to ever delete anything
+---Scan all registered toys, refreshing their data and adding them to Stuff
 function CStuff:ScanToyBox()
-
-	for toy_guid, toy_data in pairs(AutoBarSearch.toys) do
+	if (METHOD_DEBUG) then ABGCode.LogWarning("CStuff:ScanToyBox", AutoBar:tcount(AutoBarSearch.registered_toys)); end
+	for toy_guid, toy_data in pairs(AutoBarSearch.registered_toys) do
 		AutoBarSearch:RegisterToy(toy_data.item_id);
-		--print("Stuff.prototype:ScanToyBox - ", toy_guid, AB.Dump(toy_data))
-		self:add(toy_guid, nil, nil, toy_guid)
+		self:add(toy_guid, toy_guid)
 	end
 
 end
@@ -372,7 +394,7 @@ function CStuff:ScanMacroText()
 	for macro_text_guid, _macro_text_data in pairs(AutoBarSearch.macro_text) do
 		--AutoBarSearch:RegisterToy(toy_data.item_id, toy_data.link);	--It's already registered if it's in AutoBarSearch.macro_text
 		--print("Stuff.prototype:ScanMacroText - ", macro_text_guid, AB.Dump(macro_text_data))
-		self:add(macro_text_guid, nil, nil, macro_text_guid)
+		self:add(macro_text_guid, macro_text_guid)
 	end
 
 end
@@ -389,13 +411,11 @@ function CStuff:ScanInventory()
 
 		if (itemId) then
 			if (oldItemId and oldItemId ~= itemId) then
-				self:Delete(oldItemId, nil, slot, nil)
-				self:add(itemId, nil, slot, nil)
-			elseif (not oldItemId) then
-				self:add(itemId, nil, slot, nil)
+				self:Delete(oldItemId, nil, slot)
 			end
-		elseif (not itemId and oldItemId) then
-			self:Delete(oldItemId, nil, slot, nil)
+			self:add_item(itemId, nil, slot)
+		elseif (oldItemId) then
+			self:Delete(oldItemId, nil, slot)
 		end
 	end
 end
@@ -403,14 +423,14 @@ end
 
 -- Scan available Spells
 function CStuff:ScanSpells()
-	for spellName, spellInfo in pairs(AutoBarSearch.spells) do
+	for spellName, spellInfo in pairs(AutoBarSearch.registered_spells) do
 		--local debug = (spellName == "Wild Charge")
 		--if (debug) then AutoBar:Print("Stuff.prototype:ScanSpells    spellName " .. tostring(spellName)); end
 		--spellInfo.can_cast = can_cast_spell(spellName)
 		--if (debug) then print("Spell Info:", AB.Dump(spellInfo)); end;
 		local can_cast = AutoBarSearch:RegisterSpell(spellName, spellInfo.spell_id)
 		if (can_cast) then
-			self:add(spellName, nil, nil, spellName)
+			self:add(spellName, spellName)
 		else
 			--if (debug) then print("Deleting:", spellName); end;
 			self:Delete(spellName, nil, nil, spellName)
@@ -425,12 +445,12 @@ function CStuff:ScanMacros()
 		if (macroInfo.macroIndex) then
 			local _name, _icon_texture, body = GetMacroInfo(macroInfo.macroIndex)
 			if (body) then
-				self:add(macroId, nil, nil, macroId)
+				self:add(macroId, macroId)
 			else
 				self:Delete(macroId, nil, nil, macroId)
 			end
 		elseif (macroInfo.macroText) then
-			self:add(macroId, nil, nil, macroId)
+			self:add(macroId, macroId)
 		else
 			self:Delete(macroId, nil, nil, macroId)
 		end
@@ -505,46 +525,14 @@ function CStuff:Reset()
 
 end
 
--- Testing & Debug function only
-function CStuff:Contains(id)
-	local slotList
-	local contains = nil
-	for bag = 0, NUM_BAG_SLOTS, 1 do
-		slotList = self.dataList[bag]
-		for i, itemId in pairs(slotList) do
-			if (itemId == id) then
-				contains = true
-				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Stuff.prototype:Contains    itemId " .. tostring(itemId).." at bag/slot " .. tostring(bag).." / " .. tostring(i))
-				end
-			end
-		end
-	end
-	slotList = self.dataList.inventory
-	for _i, itemId in pairs(slotList) do
-		if (itemId == id) then
-			contains = true
-			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Stuff.prototype:Contains inventory    itemId " .. tostring(itemId))
-			end
-		end
-	end
-	slotList = self.spells
-	for _i, itemId in pairs(slotList) do
-		if (itemId == id) then
-			contains = true
-			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Stuff.prototype:Contains spells    itemId " .. tostring(itemId))
-			end
-		end
-	end
-	return contains
-end
 
+
+--#endregion CStuff
 
 -- Found is a list of the different items found in bags & inventory
 -- Syncs to Stuff and Current
 -- itemId = { [bag, slot, spell], ... }
+--#region Found
 local Found = AceOO.Class(Recycle)
 
 function Found.prototype:init()
@@ -554,9 +542,14 @@ end
 
 -- Add itemId to bag, slot
 function Found.prototype:Add(itemId, bag, slot, spell)
+	local searchSpace = AutoBarSearch.space:GetList()
+	local debug = (DEBUG_GUIDS[itemId])
+	if (debug) then ABGCode.LogWarning("Found:Add", itemId, bag, slot, spell, "-->foundData:", AB.Dump(self.dataList[itemId], 1), "space:", searchSpace[itemId]); end
+
 	local itemData = self.dataList[itemId]
 --AutoBar:Print("Found.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell ")
 	if (not itemData) then
+		if (debug) then ABGCode.LogWarning("   no itemData", searchSpace[itemId]); end
 		itemData = self:Create()
 		self.dataList[itemId] = itemData
 		itemData[1] = bag
@@ -597,6 +590,7 @@ end
 
 -- Remove bag, slot, spell for the itemId
 function Found.prototype:Delete(itemId, bag, slot, spell)
+	local searchSpace = AutoBarSearch.space:GetList()
 	local itemData = self.dataList[itemId]
 	--if (spell == "Wild Charge") then print("Found.prototype:Delete - itemId ",itemId," bag ",bag," slot ",slot," spell ", spell, "ItemData", itemData) end
 	if (itemData) then
@@ -680,34 +674,7 @@ function Found.prototype:ClearItemData(itemId, index)
 	end
 end
 
--- Testing & Debug function only
-function Found.prototype:Contains(id, count)
-	for itemId, itemData in pairs(self.dataList) do
-		if (itemId == id) then
-			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Found.prototype:Contains    itemId " .. tostring(itemId))
-			end
-			if (count) then
-				local nItems = # itemData
-				local found = 0
-				local i = 1
-				while (i <= nItems) do
-					if (itemData[i] or itemData[i + 1] or itemData[i + 2]) then
-						found = found + 1
-					end
-					i = i + 3
-				end
-				if (found == count) then
-					return true
-				else
-					return false
-				end
-			end
-			return true
-		end
-	end
-	return false
-end
+
 
 -- Return the buttons found list.
 -- Do not manipulate the list.  It is only for performance.
@@ -715,10 +682,12 @@ function Found.prototype:GetList()
 	return self.dataList
 end
 
+--#endregion Found
 
 -- list of found items for the button
 -- bag, slot synced to Stuff
 -- { itemId, ... }
+--#region Current
 local Current = AceOO.Class()
 
 function Current.prototype:init()
@@ -728,11 +697,16 @@ end
 
 -- Add the brand new item to any interested buttons
 function Current.prototype:Merge(itemId)
+	local debug = (DEBUG_GUIDS[itemId])
+	if (debug) then ABGCode.LogWarning("Current:Merge", itemId); end
+
+	local items = AutoBarSearch.items:GetList()
 	for buttonKey, searchItems in pairs(items) do
 		if (searchItems and searchItems[itemId]) then
 			local itemData = searchItems[itemId]
 			self:Add(buttonKey, itemId)
---print("Current.prototype:Merge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey), itemData.slotIndex, itemData.categoryIndex)
+			--print("Current.prototype:Merge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey), itemData.slotIndex, itemData.categoryIndex)
+			if (debug) then ABGCode.LogWarning("Current:Merge itemId:", itemId, buttonKey); end
 			AutoBarSearch.sorted:Add(buttonKey, itemId, itemData.slotIndex, itemData.categoryIndex)
 		end
 	end
@@ -740,10 +714,13 @@ end
 
 -- Purge the defunct item from its client buttons
 function Current.prototype:Purge(itemId)
+	local items = AutoBarSearch.items:GetList()
 	for buttonKey, searchItems in pairs(items) do
+		local debug = false --(buttonKey == "AutoBarButtonHearth")
 		if (searchItems and searchItems[itemId]) then
 			self:Delete(buttonKey, itemId)
---AutoBar:Print("Current.prototype:Purge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
+			--AutoBar:Print("Current.prototype:Purge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
+			if (debug) then ABGCode.LogWarning("Current:Purge itemId:", itemId); end
 			AutoBarSearch.sorted:Delete(buttonKey, itemId)
 		end
 	end
@@ -751,21 +728,27 @@ end
 
 -- Add the found item to the list of itemIds for the given buttonKey
 function Current.prototype:Add(buttonKey, itemId)
+	local debug = (DEBUG_IDS[itemId])
+	if (debug) then ABGCode.LogWarning("Current:Add", buttonKey, itemId); end
+
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
 	local buttonItems = self.dataList[buttonKey]
 	buttonItems[itemId] = true
+
 end
 
 -- Remove the found item from the list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Current.prototype:Delete(buttonKey, itemId)
+	local debug = (buttonKey == "AutoBarButtonHearth")
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
 	local buttonItems = self.dataList[buttonKey]
 	buttonItems[itemId] = nil
+	if (debug) then ABGCode.LogWarning("Current:Delete itemId:", itemId); end
 end
 
 -- Remove and Recycle all items
@@ -780,20 +763,7 @@ function Current.prototype:Reset()
 	end
 end
 
--- Testing & Debug function only
-function Current.prototype:Contains(id)
-	for buttonKey, buttonItems in pairs(self.dataList) do
-		for itemId, itemData in pairs(buttonItems) do
-			if (itemId == id) then
-				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Current.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
-				end
-				return true
-			end
-		end
-	end
-	return false
-end
+
 
 -- Return the buttons found list.
 -- Do not manipulate the list.  It is only for performance.
@@ -805,11 +775,13 @@ function Current.prototype:GetList(buttonKey)
 	end
 end
 
+--#endregion Current
 
 -- Sorted version of Current items for each button
 -- Syncs to Items and Current
 -- Verify / add items
 -- n = { itemId, slotIndex, categoryIndex}, ... }
+--#region Sorted
 local Sorted = AceOO.Class(Recycle)
 
 function Sorted.prototype:init()
@@ -821,15 +793,18 @@ end
 
 -- Add the found item to the list of itemIds for the given buttonKey
 function Sorted.prototype:Add(buttonKey, itemId, slotIndex, categoryIndex)
+	local debug = (DEBUG_IDS[itemId])
+	if (debug) then ABGCode.LogWarning("Sorted:Add ", buttonKey, itemId, slotIndex, categoryIndex); end
+
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
 	local buttonItems = self.dataList[buttonKey]
 	local bFound = nil
 
-if (not itemId) then
-	AutoBar:Print("Sorted.prototype:Add   bad itemId  " .. tostring(itemId))
-end
+	if (not itemId) then
+		AutoBar:Print("Sorted.prototype:Add   bad itemId  " .. tostring(itemId))
+	end
 
 	for _i, sortedItemData in ipairs(buttonItems) do
 		if (sortedItemData.itemId == itemId) then
@@ -856,6 +831,9 @@ end
 -- Remove the found item from the list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Sorted.prototype:Delete(buttonKey, itemId)
+	local debug = (buttonKey == "AutoBarButtonHearth")
+	if (debug) then ABGCode.LogWarning("Sorted:Add itemId:", itemId); end
+
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
@@ -941,20 +919,7 @@ function Sorted.prototype:Reset()
 	self.dirty = true
 end
 
--- Testing & Debug function only
-function Sorted.prototype:Contains(itemId)
-	for buttonKey, buttonItems in pairs(self.dataList) do
-		for _i, sortedItemData in ipairs(buttonItems) do
-			if (itemId == sortedItemData.itemId) then
-				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Sorted.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
-				end
-				return true
-			end
-		end
-	end
-	return false
-end
+
 
 -- Dirty a specific button
 function Sorted.prototype:SetDirty(buttonKey)
@@ -982,7 +947,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	if (spell) then
 		if(spell:find("^toy")) then
 			type_id = ABGData.TYPE_TOY
-			info_data = AutoBarSearch.toys[spell]
+			info_data = AutoBarSearch.registered_toys[spell]
 			spell = nil
 		elseif(spell:find("^bpet")) then
 			bpet_guid = spell		--TODO: This isn't used?
@@ -1083,10 +1048,10 @@ function Sorted.prototype:SetBest(buttonKey)
 -- n = { itemId, slotIndex, categoryIndex}, ... }
 		if (categoryInfo) then
 			if (categoryInfo.battleground and not AutoBar.inBG) then
-				good = nil
+				good = false
 			else
 				if (categoryInfo.nonCombat and AutoBar.inCombat) then
-					good = nil
+					good = false
 				end
 			end
 		end
@@ -1102,6 +1067,7 @@ function Sorted.prototype:SetBest(buttonKey)
 	end
 end
 
+--#endregion Current
 
 
 -- Register a spell, and figure out its spellbook index for use in tooltip
@@ -1111,20 +1077,20 @@ end
 ---@param p_spell_id integer
 ---@param p_no_spell_check boolean|nil
 ---@param p_spell_link string|nil
----@return any
+---@return boolean
 function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check, p_spell_link)
 
 	if (p_no_spell_check == nil) then p_no_spell_check = false; end
 
 	---@type ABSpellInfo
-	local spellInfo = AutoBarSearch.spells[p_spell_name]
+	local spellInfo = AutoBarSearch.registered_spells[p_spell_name]
 
 	--local debug = (p_spell_name == "Wild Charge")
 	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, GetSpellLink(p_spell_name)); end
 
 	if (not spellInfo) then
 		spellInfo = {}
-		AutoBarSearch.spells[p_spell_name] = spellInfo
+		AutoBarSearch.registered_spells[p_spell_name] = spellInfo
 	end
 
 	if (p_spell_link) then
@@ -1183,24 +1149,32 @@ function AutoBarSearch:RegisterMacroText(p_macro_guid, p_macro_text, p_macro_ico
 
 end
 
+---comment
+---@param p_toy_id integer
+---@return ABToyInfo
 function AutoBarSearch:RegisterToy(p_toy_id)
-
-	local debug = false; --(p_toy_id == 127670)
+	assert(type(p_toy_id) == "number")
+	local debug = (DEBUG_IDS[p_toy_id])
 	local toy_guid = ABGCS.ToyGUID(p_toy_id)
-	local toy_info = AutoBarSearch.toys[toy_guid]
+	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 
 	if (not toy_info) then
 		toy_info = {}
-		AutoBarSearch.toys[toy_guid] = toy_info
+		AutoBarSearch.registered_toys[toy_guid] = toy_info
 	end
+
+	local _item_id, toy_name, icon, is_fave = C_ToyBox.GetToyInfo(p_toy_id)
 
 	toy_info.guid = toy_guid
 	toy_info.item_id = p_toy_id
 	toy_info.ab_type = ABGData.TYPE_TOY
-	toy_info.icon = select(3, C_ToyBox.GetToyInfo(tonumber(p_toy_id)))
+	toy_info.icon = icon
+	toy_info.is_fave = is_fave
+	toy_info.name = toy_name
 
-	if (debug) then print("AutoBarSearch:RegisterToy", "ID:", p_toy_id, toy_guid); end
+	if (debug) then ABGCode.LogWarning("RegisterToy", "ID:", p_toy_id, "Name:", toy_name); end
 
+	return toy_info
 end
 
 -- Register a macro or customMacro
@@ -1236,8 +1210,6 @@ function AutoBarSearch:Initialize()
 
 	AutoBarSearch.stuff = CStuff:new() 	-- Map of bags, inventory
 
-	searchSpace = AutoBarSearch.space:GetList()
-	items = AutoBarSearch.items:GetList()
 end
 
 -- Empty everything
@@ -1253,10 +1225,11 @@ end
 -- Completely reset everything and then rescan.
 function AutoBarSearch:Reset()
 --AutoBar:Print("AutoBarSearch:Reset Start")
+
 	AutoBarSearch:Empty()
 
-	-- Add Items
 	AutoBarSearch.items:Populate()
+	-- Add Items
 	for i = 0, NUM_BAG_SLOTS, 1 do
 		AutoBarSearch.dirtyBags[i] = true
 	end
@@ -1279,7 +1252,7 @@ function AutoBarSearch:UpdateScan()
 --		AutoBarSearch.dirtyBags[i] = true
 --	end
 	AutoBarSearch.dirtyBags.inventory = true
---	AutoBarSearch.dirtyBags.toybox = true
+	AutoBarSearch.dirtyBags.toybox = true
 	AutoBarSearch.dirtyBags.spells = true
 	AutoBarSearch.dirtyBags.macros = true
 	AutoBarSearch.dirty = true
@@ -1289,230 +1262,3 @@ function AutoBarSearch:UpdateScan()
 	AutoBarSearch.sorted:Update()
 --AutoBar:Print("AutoBarSearch:Reset End")
 end
-
--- Testing & Debug function only
-function AutoBarSearch:Contains(itemId)
-	if (not AutoBarSearch.trace) then
-		AutoBar:Print("\n\n   AutoBarSearch:Contains: " .. tostring(itemId))
-	end
-	local contains = nil
-
-	contains = contains or AutoBarSearch.space:Contains(itemId)
-	contains = contains or AutoBarSearch.items:Contains(itemId)
-	contains = contains or AutoBarSearch.sorted:Contains(itemId)
-	contains = contains or AutoBarSearch.current:Contains(itemId)
-	contains = contains or AutoBarSearch.found:Contains(itemId)
-	contains = contains or AutoBarSearch.stuff:Contains(itemId)
-
-	return contains
-end
-
---[[
--- Testing & Debug function only
-function AutoBarSearch:DumpSlot(buttonKey)
-	print("\n\n   AutoBarSearch:DumpSlot " .. tostring(buttonKey))
-	print("items ")
-	dump(AutoBarSearch.items:GetList(buttonKey))
-	print("current ")
-	dump(AutoBarSearch.current:GetList(buttonKey))
-	print("sorted ")
-	dump(AutoBarSearch.sorted:GetList(buttonKey))
-end
-
-
--- Test harness		/script AutoBarSearch:Test()
-
-function AutoBarSearch:Test()
-	if (true and true) then
-		AutoBarSearch.trace = true
-		print("\nAutoBarSearch:Test start")
-		AutoBarSearch:Empty()
-		AutoBar.playerLevel = UnitLevel("player")
-
-		UpdateAddOnMemoryUsage()
-		local usedKB = GetAddOnMemoryUsage("AutoBar")
-		print("usedKB = " .. usedKB)
-
-		AutoBarSearch.items:Add({4536}, 1, nil, 1)
-		assert(AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Add failed")
-		assert(AutoBarSearch.space:Contains(4536), "AutoBarSearch.space:Add failed")
-		AutoBarSearch.items:Delete({4536}, 1, nil, 1)
-		assert(not AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Delete failed")
-		assert(not AutoBarSearch.space:Contains(4536), "AutoBarSearch.space:Delete failed")
-		AutoBarSearch.items:Add({4536, 6948, 4757}, 1, nil, 1)
---		AutoBar:Print("\n\n Items Added [1]")
---		DevTools_Dump(AutoBarSearch.items:GetList(1))
-		assert(AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Add {4536, 6948, 4757} failed")
-		assert(AutoBarSearch.items:Contains(6948), "AutoBarSearch.items:Add {4536, 6948, 4757} failed")
-		assert(AutoBarSearch.items:Contains(4757), "AutoBarSearch.items:Add {4536, 6948, 4757} failed")
-		assert(AutoBarSearch.space:Contains(4536), "AutoBarSearch.space:Add {4536, 6948, 4757} failed")
-		assert(AutoBarSearch.space:Contains(6948), "AutoBarSearch.space:Add {4536, 6948, 4757} failed")
-		assert(AutoBarSearch.space:Contains(4757), "AutoBarSearch.space:Add {4536, 6948, 4757} failed")
-
-		AutoBarSearch.items:Add({787, 2070, 159}, "AutoBarButtonQuest", nil, 2)
-		assert(AutoBarSearch.items:Contains(787), "AutoBarSearch.items:Add {787, 2070, 159} failed")
-		assert(AutoBarSearch.items:Contains(2070), "AutoBarSearch.items:Add {787, 2070, 159} failed")
-		assert(AutoBarSearch.items:Contains(159), "AutoBarSearch.items:Add {787, 2070, 159} failed")
-		assert(AutoBarSearch.space:Contains(787), "AutoBarSearch.space:Add {787, 2070, 159} failed")
-		assert(AutoBarSearch.space:Contains(2070), "AutoBarSearch.space:Add {787, 2070, 159} failed")
-		assert(AutoBarSearch.space:Contains(159), "AutoBarSearch.space:Add {787, 2070, 159} failed")
-
-		AutoBarSearch.stuff:Add(6948, 0, 1)
-		assert(AutoBarSearch.stuff:Contains(6948), "AutoBarSearch.stuff:Add 6948 failed")
-		AutoBarSearch.stuff:Delete(6948, 0, 1)
-		assert(not AutoBarSearch.stuff:Contains(6948), "AutoBarSearch.stuff:Delete 6948 failed")
-
-		-- Add something not looked for
-		AutoBarSearch.stuff:Add(2130, 0, 1)
-		assert(AutoBarSearch.stuff:Contains(2130), "AutoBarSearch.stuff:Add 2130 failed")
-		assert(AutoBarSearch.found:Contains(2130), "AutoBarSearch.found:Add 2130 failed")
-		assert(not AutoBarSearch.current:Contains(2130), "AutoBarSearch.current 2130 incorectly added")
-		assert(not AutoBarSearch.sorted:Contains(2130), "AutoBarSearch.current 2130 incorectly added")
-
-		-- Add something looked for
-		AutoBarSearch.stuff:Add(6948, 0, 2)
-		assert(AutoBarSearch.stuff:Contains(6948), "AutoBarSearch.stuff:Add 6948 failed")
-		assert(AutoBarSearch.found:Contains(6948), "AutoBarSearch.found:Add 6948 failed")
-		assert(AutoBarSearch.current:Contains(6948), "AutoBarSearch.current 6948 failed")
-		assert(AutoBarSearch.sorted:Contains(6948), "AutoBarSearch.current 6948 failed")
-
-		AutoBarSearch.stuff:Add(2132, 0, 3)
-		assert(AutoBarSearch.stuff:Contains(2132), "AutoBarSearch.stuff:Add 2132 failed")
-		assert(AutoBarSearch.found:Contains(2132), "AutoBarSearch.found:Add 2132 failed")
-		assert(not AutoBarSearch.current:Contains(2132), "AutoBarSearch.current 2132 incorectly added")
-		assert(not AutoBarSearch.sorted:Contains(2132), "AutoBarSearch.current 2132 incorectly added")
-
-		AutoBarSearch.stuff:Add(4536, 0, 4)
-		assert(AutoBarSearch.stuff:Contains(4536), "AutoBarSearch.stuff:Add 4536 failed")
-		assert(AutoBarSearch.found:Contains(4536), "AutoBarSearch.found:Add 4536 failed")
-		assert(AutoBarSearch.current:Contains(4536), "AutoBarSearch.current 4536 failed")
-		assert(AutoBarSearch.sorted:Contains(4536), "AutoBarSearch.current 4536 failed")
-
-		-- Add something looked for
-		AutoBarSearch.stuff:Add(2070, 4, 1)
-		assert(AutoBarSearch.stuff:Contains(2070), "AutoBarSearch.stuff:Add 2070 failed")
-		assert(AutoBarSearch.found:Contains(2070), "AutoBarSearch.found:Add 2070 failed")
-		assert(AutoBarSearch.current:Contains(2070), "AutoBarSearch.current 2070 failed")
-		assert(AutoBarSearch.sorted:Contains(2070), "AutoBarSearch.current 2070 failed")
-
-		AutoBarSearch.stuff:Add(787, 4, 2)
-		assert(AutoBarSearch.stuff:Contains(787), "AutoBarSearch.stuff:Add 787 failed")
-		assert(AutoBarSearch.found:Contains(787), "AutoBarSearch.found:Add 787 failed")
-		assert(AutoBarSearch.current:Contains(787), "AutoBarSearch.current 787 failed")
-		assert(AutoBarSearch.sorted:Contains(787), "AutoBarSearch.current 787 failed")
-
-		AutoBarSearch.stuff:Add(159, 4, 3)
-		assert(AutoBarSearch.stuff:Contains(159), "AutoBarSearch.stuff:Add 159 failed")
-		assert(AutoBarSearch.found:Contains(159), "AutoBarSearch.found:Add 159 failed")
-		assert(AutoBarSearch.current:Contains(159), "AutoBarSearch.current 159 failed")
-		assert(AutoBarSearch.sorted:Contains(159), "AutoBarSearch.current 159 failed")
-
-		AutoBarSearch.stuff:Add(4757, 0, 5)
-		assert(AutoBarSearch.found:Contains(4757), "AutoBarSearch.found:Add 4757 failed")
-		assert(AutoBarSearch.found:Contains(4757, 1), "AutoBarSearch.found:Add 4757 failed")
-		AutoBarSearch.stuff:Add(4757, 2, 5)
-		assert(AutoBarSearch.found:Contains(4757, 2), "AutoBarSearch.found:Add 4757 failed")
-		AutoBarSearch.stuff:Add(4757, 1, 5)
-		assert(AutoBarSearch.found:Contains(4757, 3), "AutoBarSearch.found:Add 4757 failed")
-		assert(AutoBarSearch.stuff:Contains(4757), "AutoBarSearch.stuff:Add 4757 3/3 failed")
-		assert(AutoBarSearch.current:Contains(4757), "AutoBarSearch.current 4757 failed")
-		assert(AutoBarSearch.sorted:Contains(4757), "AutoBarSearch.current 4757 failed")
-
-		AutoBarSearch.sorted:Update()
-		local sorted = AutoBarSearch.sorted:GetList(1)
-		assert(sorted[1].itemId == 4757, "AutoBarSearch.sorted 4757 failed")
-		assert(sorted[2].itemId == 6948, "AutoBarSearch.sorted 4757 failed")
-		assert(sorted[3].itemId == 4536, "AutoBarSearch.sorted 4757 failed")
-
-		sorted = AutoBarSearch.sorted:GetList("AutoBarButtonQuest")
-		assert(sorted[1].itemId == 159, "AutoBarSearch.sorted 159 failed")
-		assert(sorted[2].itemId == 2070, "AutoBarSearch.sorted 2070 failed")
-		assert(sorted[3].itemId == 787, "AutoBarSearch.sorted 787 failed")
-
-		AutoBarSearch.stuff:Delete(2130, 0, 1)
-		AutoBarSearch.stuff:Delete(6948, 0, 2)
-		AutoBarSearch.stuff:Delete(2132, 0, 3)
-		AutoBarSearch.stuff:Delete(4536, 0, 4)
-		assert(not AutoBarSearch.stuff:Contains(2130), "AutoBarSearch.stuff:Delete 2130 failed")
-		assert(not AutoBarSearch.stuff:Contains(6948), "AutoBarSearch.stuff:Delete 6948 failed")
-		assert(not AutoBarSearch.stuff:Contains(2132), "AutoBarSearch.stuff:Delete 2132 failed")
-		assert(not AutoBarSearch.stuff:Contains(4536), "AutoBarSearch.stuff:Delete 4536 failed")
-
-		AutoBarSearch.stuff:Delete(4757, 0, 5)
-		assert(AutoBarSearch.found:Contains(4757, 2), "AutoBarSearch.found:Delete 4757 1/3 failed")
-		assert(AutoBarSearch.stuff:Contains(4757), "AutoBarSearch.stuff:Delete 4757 1/3 failed")
-		assert(AutoBarSearch.current:Contains(4757), "AutoBarSearch.current 4757 1/3 failed")
-		assert(AutoBarSearch.sorted:Contains(4757), "AutoBarSearch.current 4757 1/3 failed")
-		AutoBarSearch.stuff:Delete(4757, 1, 5)
-		assert(AutoBarSearch.found:Contains(4757, 1), "AutoBarSearch.found:Delete 4757 2/3 failed")
-		assert(AutoBarSearch.stuff:Contains(4757), "AutoBarSearch.stuff:Delete 4757 2/3 failed")
-		assert(AutoBarSearch.current:Contains(4757), "AutoBarSearch.current 4757 2/3 failed")
-		assert(AutoBarSearch.sorted:Contains(4757), "AutoBarSearch.current 4757 2/3 failed")
-		AutoBarSearch.stuff:Delete(4757, 2, 5)
-		assert(not AutoBarSearch.found:Contains(4757), "AutoBarSearch.found:Delete 4757 3/3 failed")
-		assert(not AutoBarSearch.stuff:Contains(4757), "AutoBarSearch.stuff:Delete 4757 3/3 failed")
-		assert(not AutoBarSearch.current:Contains(4757), "AutoBarSearch.current 4757 3/3 failed")
-		assert(not AutoBarSearch.sorted:Contains(4757), "AutoBarSearch.current 4757 3/3 failed")
-
-		AutoBarSearch.items:Delete({4757}, 1, nil, 1)
-		assert(not AutoBarSearch.items:Contains(4757), "AutoBarSearch.items:Delete 4757 failed")
-		assert(not AutoBarSearch.space:Contains(4757), "AutoBarSearch.space:Delete 4757 failed")
-		AutoBarSearch.items:Add({4757}, 1, nil, 1)
-		AutoBarSearch.items:Delete({4536, 4757, 6948}, 1, nil, 1)
-		assert(not AutoBarSearch.items:Contains(4757), "AutoBarSearch.items:Delete {4536, 6948, 4757} failed")
-		assert(not AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Delete {4536, 6948, 4757} failed")
-		assert(not AutoBarSearch.items:Contains(6948), "AutoBarSearch.items:Delete {4536, 6948, 4757} failed")
-		assert(not AutoBarSearch.space:Contains(4757), "AutoBarSearch.space:Delete {4536, 6948, 4757} failed")
-		assert(not AutoBarSearch.space:Contains(4536), "AutoBarSearch.space:Delete {4536, 6948, 4757} failed")
-		assert(not AutoBarSearch.space:Contains(6948), "AutoBarSearch.space:Delete {4536, 6948, 4757} failed")
-
---		AutoBarSearch.items:Populate()
---		AutoBar:Print("\n\n SearchSpace")
---		DevTools_Dump(AutoBarSearch.space:GetList())
-
---		AutoBarSearch.items:Add({BS["Conjure Food"]}, 24, nil, 1)
---		AutoBarSearch.stuff:ScanSpells()
---		AutoBar:Print("\n\n SearchSpace")
---		DevTools_Dump(AutoBarSearch.space:GetList())
-
---		local bag0, bag1, bag2, bag3, bag4 = true, true, true, true, true
---		AutoBarSearch.stuff:Scan(bag0, bag1, bag2, bag3, bag4)
-
---		AutoBar:Print("\n\n Stuff")
---		DevTools_Dump(AutoBarSearch.stuff:GetList())
---
---		AutoBar:Print("\n\n Found")
---		DevTools_Dump(AutoBarSearch.found:GetList())
---
---		AutoBar:Print("\n\n Current")
---		DevTools_Dump(AutoBarSearch.current:GetList(1))
---
---		AutoBarSearch.sorted:Update()
---		AutoBar:Print("\n\n Sorted")
---		DevTools_Dump(AutoBarSearch.sorted:GetList())
-
-		AutoBar:Print("AutoBarSearch:Test successful")
-		AutoBarSearch:Reset()
-		UpdateAddOnMemoryUsage()
-		usedKB = GetAddOnMemoryUsage("AutoBar")
-		AutoBar:Print("usedKB = " .. usedKB)
-	end
-end
---]]
-
---[[
-/script AutoBarSearch:DumpSlot("AutoBarButtonMount")
-/script AutoBarSearch:Contains("Travel Form")
-/dump (AutoBarSearch.sorted:GetList("CustomButton33"))
-/dump (AutoBarSearch.sorted:GetList("AutoBarButtonCooldownPotionMana"))
-/dump (AutoBarSearch.sorted:Update("AutoBarButtonCooldownPotionMana"))
-/dump AutoBarSearch.space:GetList()
-/dump (AutoBarSearch.sorted:GetList())
-/dump (AutoBarSearch.sorted:GetList("Custom1"))
-/dump (AutoBarSearch.found:GetList()[28104])
-/dump (AutoBarSearch.stuff:GetList())
-/dump (AutoBarCategoryList["Spell.Portals"])
-/dump (AutoBarSearch.spells)
-/script AutoBarSearch:Empty()
-/script AutoBarSearch:Reset()
---]]

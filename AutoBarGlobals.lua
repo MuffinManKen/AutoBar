@@ -85,15 +85,15 @@ end
 
 AutoBarGlobalDataObject.TickScheduler =
 {
-
-	UpdateCategoriesID = 1,
-	UpdateSpellsID = 2,
-	UpdateObjectsID = 3,
-	UpdateItemsID = 4,
-	UpdateAttributesID = 5,
-	UpdateActiveID = 6,
-	UpdateButtonsID = 7,
-	UpdateCompleteID = 8,
+	ResetSearch = 1,
+	UpdateCategoriesID = 2,
+	UpdateSpellsID = 3,
+	UpdateObjectsID = 4,
+	UpdateItemsID = 5,
+	UpdateAttributesID = 6,
+	UpdateActiveID = 7,
+	UpdateButtonsID = 8,
+	UpdateCompleteID = 9,
 
 	BehaveTicker = 1,	-- Called by the ticker, so you may return the next step to be run rather than doing it immediately
 
@@ -182,6 +182,10 @@ end
 
 function AutoBarGlobalCodeSpace.GetIconForToyID(p_toy_id)
 	local item_id = tonumber(p_toy_id)
+
+	if(not item_id) then
+		return nil
+	end
 
 	local _, _, texture =  C_ToyBox.GetToyInfo(item_id)
 
@@ -472,7 +476,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 
 	--This should query a global guid registry and then the specific ones if not found.
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
-		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.toys[p_guid];
+		return AutoBarSearch.macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
 	end
 
 	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)

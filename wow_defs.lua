@@ -126,10 +126,7 @@ function SetCursor(cursor) end
 
 ---@param itemId number
 ---@return number, string, number, boolean, boolean, number
-function C_ToyBox.GetToyFromIndex(itemId)
-    return 0, "", 0, true, true, 0
-end
-
+function C_ToyBox.GetToyFromIndex(itemId) end
 
 ---@class AB
 AB = {}
@@ -293,6 +290,18 @@ AutoBarDB2 = {}
 ---@field no_spell_check boolean
 ---@field spell_id number
 ABSpellInfo = {}
+
+---@class ABToyInfo
+---@field guid string
+---@field item_id integer
+---@field ab_type integer
+---@field icon integer
+---@field is_fave boolean
+---@field name string
+ABToyInfo = {}
+
+
+
 
 
 AutoBarDB = {}

@@ -44,7 +44,7 @@ AutoBar.buttonList["AutoBarButtonToyBox"]
 /dump AutoBarDB2.account.buttonList["AutoBarButtonToyBox"]
 
 
-/dump AutoBarSearch.toys
+/dump AutoBarSearch.registered_toys
 
 
 /run print(C_ToyBox.GetToyLink(127670), select(2,GetItemInfo(127670)))

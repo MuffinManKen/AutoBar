@@ -388,20 +388,10 @@ if (ABGData.is_mainline_wow) then
 	function ABGCode.events.TOYS_UPDATED(p_item_id, p_new)
 		ABGCode.LogEventStart("TOYS_UPDATED")
 
-		if(p_item_id ~= nil or p_new ~= nil) then
-			local need_update = false;
 
-			AutoBarSearch.dirtyBags.toybox = true
-			local button = AutoBar.buttonList["AutoBarButtonToyBox"]
-			if (button) then
-				need_update = button:Refresh(button.parentBar, button.buttonDB, true)
-			end
+		if(true) then ABGCode.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
 
-			if(need_update) then
-				ABGCS.ABScheduleUpdate(tick.UpdateCategoriesID);
-			end
-
-		end
+		ABGCode.ABScheduleUpdate(tick.ResetSearch)
 
 		ABGCode.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
@@ -1065,7 +1055,9 @@ function AutoBar:ABSchedulerTick()
 		return;
 	end
 
-	if(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
+	if(tick.ScheduledUpdate == tick.ResetSearch) then
+		tick.ScheduledUpdate = ABGCS.ResetSearch(tick.BehaveTicker);
+	elseif(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
 		tick.ScheduledUpdate = ABGCS.UpdateCategories(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
 		tick.ScheduledUpdate = ABGCS.UpdateSpells(tick.BehaveTicker);
@@ -1090,6 +1082,28 @@ function AutoBar:ABSchedulerTick()
 
 
 end
+
+function ABGCode.ResetSearch(p_behaviour)
+	ABGCode.LogEventStart("ResetSearch")
+
+	local ret = tick.ResetSearch
+	if (not InCombatLockdown()) then
+		AutoBarSearch:Reset()
+
+		AutoBar:BarButtonChanged()
+
+		ABGCS:UpdateCategories();	--We don't pass the behaviour flag along since we want calls to ResetSearch to complete immediately
+
+		ret = tick.UpdateCompleteID
+	end
+
+	ABGCode.LogEventEnd("ResetSearch", p_behaviour)
+
+	return ret;
+end
+
+
+
 
 function ABGCode.UpdateCategories(p_behaviour)
 	ABGCode.LogEventStart("UpdateCategories")

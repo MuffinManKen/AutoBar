@@ -37,25 +37,31 @@ end
 -- Reset the item list in case the player learned new toys
 function ToyCategory:Refresh()
 	local list_index = 1
+	local debug = (self.categoryKey == "Muffin.Toys.Hearth")
+	if(debug) then ABGCode.LogWarning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items); end
 
---	if(self.categoryKey == "Muffin.Toys.Hearth") then
---		print("Refreshing Toy Category", self.categoryKey, #self.items, #self.all_items);
---	end
+	wipe(self.items)
+
+	if(self.only_favourites == nil) then
+		if(debug) then ABGCode.LogWarning("Exiting Toy Refresh, button settings aren't loaded|n"); end
+		return
+	end
+	local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
 
 	for _, toy_id in ipairs(self.all_items) do
---		if(self.categoryKey == "Muffin.Toys.Hearth") then print(toy_id, ABGCode.PlayerHasToy(toy_id), C_ToyBox.IsToyUsable(toy_id)); end
-		local _, _toy_name, _toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(toy_id)
-		local user_selected = (self.only_favourites and toy_is_fave) or not self.only_favourites
+		local toy_info = AutoBarSearch:RegisterToy(toy_id)
+		local user_selected = (self.only_favourites and toy_info.is_fave) or not self.only_favourites
+		if(debug and DEBUG_IDS[toy_id]) then ABGCode.LogWarning(toy_id, toy_info.name, "HasToy:", ABGCode.PlayerHasToy(toy_id), "Usable:", C_ToyBox.IsToyUsable(toy_id), "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
 		if (toy_id and ABGCode.PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
-			AutoBarSearch:RegisterToy(toy_id)
 			self.items[list_index] = ABGCode.ToyGUID(toy_id)
 			list_index = list_index + 1
 		end
 	end
 
-	for i = list_index, # self.items, 1 do
-		self.items[i] = nil
-	end
+
+
+	if(debug) then ABGCode.LogWarning("After Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "|n"); end
+
 end
 
 function ABGCode.InitializeCategories()

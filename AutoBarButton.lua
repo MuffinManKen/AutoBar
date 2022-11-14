@@ -339,7 +339,7 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 		if (nSplits > 1) then
 			splitLength = math.ceil(nItems / nSplits)
 		end
-end
+	end
 
 
 	--if (self.buttonDB.max_popup_height) then
@@ -826,7 +826,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("spell", spell)
 
 			-- Tooltip
-			local spellInfo = AutoBarSearch.spells[spell]
+			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell)
 			if (spellInfo and spellInfo.spell_link) then
 				frame:SetAttribute("itemLink", spellInfo.spell_link)
 			end
@@ -837,8 +837,8 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			frame:SetAttribute("spell", castSpell)
 
 			-- Tooltip
-			local spellInfo = AutoBarSearch.spells[castSpell].spell_link
-			if (spellInfo.spell_link) then
+			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(castSpell)
+			if (spellInfo and spellInfo.spell_link) then
 				frame:SetAttribute("itemLink", spellInfo.spell_link)
 			end
 		else
@@ -935,7 +935,7 @@ end
 --			local spellName = self:GetAttribute("spell")
 --
 --			if (spellName) then
---				local spellInfo = AutoBarSearch.spells[spellName]
+--				local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spellName)
 --				GameTooltip:SetSpellBookItem(spellInfo.spell_id, spellInfo.spellTab)
 --			end
 --			self.updateTooltip = TOOLTIP_UPDATE_TIME
@@ -2410,7 +2410,7 @@ elseif (ABGData.is_mainline_wow) then
 	function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
 	end
-
+--[[
 	-------------------------- AutoBarButtonToyBox ---------------------
 	local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
@@ -2504,7 +2504,7 @@ elseif (ABGData.is_mainline_wow) then
 	function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "toybox_only_show_favourites", L["ToyBoxOnlyFavourites"])
 	end
-
+ ]]
 	-------------------------- AutoBarButtonMount ---------------------
 
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
@@ -2600,7 +2600,7 @@ elseif (ABGData.is_mainline_wow) then
 					if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
 					spellIconList[spell_name] = icon
 					AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
-					local spellInfo = AutoBarSearch.spells[spell_name]
+					local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
 					spellInfo.spell_link = "spell:" .. spell_id
 					category.castList[# category.castList + 1] = spell_name
 				end
@@ -2723,7 +2723,7 @@ elseif (ABGData.is_mainline_wow) then
 	--			spellName = GetSpellInfo(spellID)
 	--			spellIconList[spellName] = icon
 	--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
-	--			local spellInfo = AutoBarSearch.spells[spellName]
+	--			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spellName)
 	--			spellInfo.spell_link = "spell:" .. spellID
 	--			category.castList[index] = spellName
 			end
