@@ -20,6 +20,9 @@ LE_MOUNT_JOURNAL_FILTER_UNUSABLE = -1
 
 NUM_BAG_SLOTS = -1  ---@type integer
 
+INVSLOT_FIRST_EQUIPPED = 1
+INVSLOT_LAST_EQUIPPED = 19
+
 --defined in BlizzardInterfaceCode\Interface\FrameXML\ActionButton.lua
 ---@type number
 ATTACK_BUTTON_FLASH_TIME = 0.4
