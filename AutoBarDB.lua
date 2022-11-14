@@ -82,7 +82,7 @@ local CLASS_BAR_MAP = {
 local BASIC_BUTTON_DATA = {
 	{button_name = "AutoBarButtonHearth", barKey = "AutoBarClassBarBasic", additional_args = {
 		hearth_include_ancient_dalaran = false,
-		only_favourite_hearth = false,
+		only_favourite_hearth = true,
 		hearth_include_challenge_portals = true,
 	} },
 	{button_name = "AutoBarButtonBandages", barKey = "AutoBarClassBarBasic"},
@@ -790,17 +790,17 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
-		if (not AutoBarDB2.account.buttonList["AutoBarButtonToyBox"]) then
-			AutoBarDB2.account.buttonList["AutoBarButtonToyBox"] = {
-				buttonKey = "AutoBarButtonToyBox",
-				buttonClass = "AutoBarButtonToyBox",
-				barKey = "AutoBarClassBarExtras",
-				defaultButtonIndex = "*",
-				enabled = false,
-				arrangeOnUse = true,
-				toybox_only_show_favourites = true,
-			}
-		end
+		-- if (not AutoBarDB2.account.buttonList["AutoBarButtonToyBox"]) then
+		-- 	AutoBarDB2.account.buttonList["AutoBarButtonToyBox"] = {
+		-- 		buttonKey = "AutoBarButtonToyBox",
+		-- 		buttonClass = "AutoBarButtonToyBox",
+		-- 		barKey = "AutoBarClassBarExtras",
+		-- 		defaultButtonIndex = "*",
+		-- 		enabled = false,
+		-- 		arrangeOnUse = true,
+		-- 		toybox_only_show_favourites = true,
+		-- 	}
+		-- end
 	end
 --#endregion XpacButtons
 
@@ -908,7 +908,7 @@ function AutoBar:InitializeDefaults()
 			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
 			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
 			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
-			"AutoBarButtonCooldownDrums",
+			"AutoBarButtonCooldownDrums", "AutoBarButtonToyBox",
 		}
 	else
 		deprecated_buttons = {
