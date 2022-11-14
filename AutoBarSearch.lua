@@ -20,17 +20,27 @@ local ABGData = AutoBarGlobalDataObject
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 
-AutoBarSearch = {}
----@type table<string, ABSpellInfo >
-AutoBarSearch.registered_spells = {}	-- The "master list" of spells that are deemed relevant to the character
+AutoBarSearch = {
 
----@type table<string, ABToyInfo >
-AutoBarSearch.registered_toys = {}
+	---@type table<string, ABSpellInfo >
+	registered_spells = {},	-- The "master list" of spells that are deemed relevant to the character
 
-AutoBarSearch.registered_macros = {}
-AutoBarSearch.registered_macro_text = {}
+	---@type table<string, ABToyInfo >
+	registered_toys = {},
 
-AutoBarSearch.dirty = { bags = {} }
+	registered_macros = {},
+	registered_macro_text = {},
+
+	--This tracks the player's current inventory to filter out uneeded item changes
+	---@type integer[]
+	inventory_cache = {},
+
+	--Flag structure to track dirty state of things
+	dirty = {
+		---@type boolean[]
+		bags = {}
+	},
+}
 
 local METHOD_DEBUG = true
 local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
@@ -297,24 +307,19 @@ function CStuff:init()
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		self.bags[bag] = {}
 	end
-	self.inventory = {}
+
 end
 
 
----CStuff:add_item is a private method called by the various Scan* methods
 ---@param p_item_id integer
 ---@param p_bag integer|nil
 ---@param p_slot integer
 -- Add itemId to bag, slot
 function CStuff:add_item(p_item_id, p_bag, p_slot)
-	assert(p_bag or p_slot)
+	assert(p_bag and p_slot)
 
-	if (p_bag) then
-		local slotList = self.bags[p_bag]
-		slotList[p_slot] = p_item_id
-	else
-		self.inventory[p_slot] = p_item_id
-	end
+	local slotList = self.bags[p_bag]
+	slotList[p_slot] = p_item_id
 
 	-- Filter out too high level items
 	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
@@ -333,12 +338,9 @@ function CStuff:Delete(itemId, bag, slot, spell)
 	if (bag) then
 		slotList = self.bags[bag]
 		slotList[slot] = nil
-	elseif (slot) then
-		self.inventory[slot] = nil
 	end
 
 	AutoBarSearch.found:Delete(itemId, bag, slot, spell)
---AutoBar:Print("Stuff.prototype:Delete bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
 
 
@@ -373,26 +375,8 @@ end
 
 
 
--- Scan equipped inventory items.
-function CStuff:ScanInventory()
-	local slotList = self.inventory
-	local _name, itemId, oldItemId
 
-	-- Scan equipped items
-	for slot = 1, 19 do
-		_name, itemId = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", slot))
-		oldItemId = slotList[slot]
 
-		if (itemId) then
-			if (oldItemId and oldItemId ~= itemId) then
-				self:Delete(oldItemId, nil, slot)
-			end
-			self:add_item(itemId, nil, slot)
-		elseif (oldItemId) then
-			self:Delete(oldItemId, nil, slot)
-		end
-	end
-end
 
 
 
@@ -409,8 +393,6 @@ function CStuff:Reset()
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		wipe(self.bags[bag])
 	end
-
-	wipe(self.inventory)
 
 end
 
@@ -1123,6 +1105,9 @@ function AutoBarSearch:Empty()
 	AutoBarSearch.current:Reset()
 	AutoBarSearch.found:Reset()
 	AutoBarSearch.stuff:Reset()
+
+	wipe(self.inventory_cache)
+
 end
 
 -- Completely reset everything and then rescan.
@@ -1248,6 +1233,37 @@ function AutoBarSearch:ScanRegisteredMacroText()
 
 end
 
+
+local function delete_inventory_item(p_item_id, p_slot)
+
+	AutoBarSearch.found:Delete(p_item_id, nil, p_slot, nil)
+	AutoBarSearch.inventory_cache[p_slot] = nil
+
+end
+
+-- Scan equipped inventory items.
+function AutoBarSearch:ScanInventory()
+	local inventory = self.inventory_cache
+	local item_id, old_item_id
+
+	-- Scan equipped items
+	for slot = INVSLOT_FIRST_EQUIPPED, INVSLOT_LAST_EQUIPPED do
+		item_id = GetInventoryItemID("player", slot)
+		old_item_id = inventory[slot]
+
+		if (item_id) then
+			if (old_item_id and old_item_id ~= item_id) then
+				delete_inventory_item(old_item_id, slot)
+			end
+			self.found:Add(item_id, nil, slot )
+		elseif (old_item_id) then
+			delete_inventory_item(old_item_id, slot)
+		end
+
+	end
+end
+
+
 -- Scan all of the things
 function AutoBarSearch:ScanAll()
 	ABGCode.LogEventStart("AutoBarSearch:ScanAll")
@@ -1258,7 +1274,7 @@ function AutoBarSearch:ScanAll()
 	self:ScanDirtyBags()
 
 	if (AutoBarSearch.dirty.inventory) then
-		self.stuff:ScanInventory()
+		self:ScanInventory()
 		AutoBarSearch.dirty.inventory = false
 	end
 
