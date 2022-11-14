@@ -2597,12 +2597,15 @@ elseif (ABGData.is_mainline_wow) then
 				if (is_collected and user_selected and not qiraji_filtered) then
 					local spell_name = GetSpellInfo(spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
-					if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
-					spellIconList[spell_name] = icon
-					AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
-					local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
-					spellInfo.spell_link = "spell:" .. spell_id
-					category.castList[# category.castList + 1] = spell_name
+					if not spell_name then
+						print("AutoBar Error: Missing spell name for", spell_id, name);
+					else
+						spellIconList[spell_name] = icon
+						AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
+						local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
+						spellInfo.spell_link = "spell:" .. spell_id
+						category.castList[# category.castList + 1] = spell_name
+					end
 				end
 
 			end
