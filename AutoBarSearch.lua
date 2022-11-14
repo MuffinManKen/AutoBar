@@ -35,6 +35,8 @@ AutoBarSearch = {
 	---@type integer[]
 	inventory_cache = {},
 
+	bag_cache = {},
+
 	--Flag structure to track dirty state of things
 	dirty = {
 		---@type boolean[]
@@ -289,116 +291,7 @@ end
 
 --#endregion Items
 
--- Map of bag, inventory and spell contents
--- Changes synced to Found
--- [bag][slot] = <itemId | nil>
---#region CStuff
-local CStuff = {}
 
-function CStuff:new()
-	local obj = CreateFromMixins(self)
-	obj:init()
-
-	return obj
-end
-
-function CStuff:init()
-	self.bags = {}
-	for bag = 0, NUM_BAG_SLOTS, 1 do
-		self.bags[bag] = {}
-	end
-
-end
-
-
----@param p_item_id integer
----@param p_bag integer|nil
----@param p_slot integer
--- Add itemId to bag, slot
-function CStuff:add_item(p_item_id, p_bag, p_slot)
-	assert(p_bag and p_slot)
-
-	local slotList = self.bags[p_bag]
-	slotList[p_slot] = p_item_id
-
-	-- Filter out too high level items
-	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
-	local usable = ABGCS.IsUsableItem(p_item_id);
-	local item_spell = GetItemSpell(p_item_id);
-	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
-		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
-	end
---AutoBar:Print("Stuff.prototype:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
-end
-
-
--- Remove itemId from bag, slot, spell
-function CStuff:Delete(itemId, bag, slot, spell)
-	local slotList
-	if (bag) then
-		slotList = self.bags[bag]
-		slotList[slot] = nil
-	end
-
-	AutoBarSearch.found:Delete(itemId, bag, slot, spell)
-end
-
-
-
--- Scan the given bag.
-function CStuff:ScanBag(bag)
-	local slotList = self.bags[bag]
-	local itemId, oldItemId
-	local nSlots = AB.GetContainerNumSlots(bag)
-
---AutoBar:Print("Stuff.prototype:Scan bag " .. tostring(bag) .. " nSlots " .. tostring(nSlots) .. " slotList " .. tostring(slotList))
-
-	-- ToDo: Clear out excess slots if bag got smaller
-
-	for slot = 1, nSlots, 1 do
-		itemId = AB.GetContainerItemID(bag, slot)
-		oldItemId = slotList[slot]
-
---AutoBar:Print("Stuff.prototype:Scan  itemId " .. tostring(itemId) .. " oldItemId " .. tostring(oldItemId))
-		if (itemId) then
-			if (oldItemId and oldItemId ~= itemId) then
-				self:Delete(oldItemId, bag, slot)
-			end
-			self:add_item(itemId, bag, slot)
-		elseif (not itemId and oldItemId) then
-			self:Delete(oldItemId, bag, slot)
-		end
-	end
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- Remove and Recycle all items
-function CStuff:Reset()
-	for bag = 0, NUM_BAG_SLOTS, 1 do
-		wipe(self.bags[bag])
-	end
-
-end
-
-
-
---#endregion CStuff
 
 -- Found is a list of the different items found in bags & inventory
 -- Syncs to Stuff and Current
@@ -1092,9 +985,11 @@ function AutoBarSearch:Initialize()
 	AutoBarSearch.current = Current:new()		-- Current items found for each button (Found intersect Items)
 	AutoBarSearch.found = Found:new()			-- All items found in Stuff + list of bag, slot found in
 
-	AutoBarSearch.stuff = CStuff:new() 	-- Map of bags, inventory
-
 	init_dirty_flags()
+
+	for bag = 0, NUM_BAG_SLOTS, 1 do
+		self.bag_cache[bag] = {}
+	end
 end
 
 -- Empty everything
@@ -1104,9 +999,12 @@ function AutoBarSearch:Empty()
 	AutoBarSearch.sorted:Reset()
 	AutoBarSearch.current:Reset()
 	AutoBarSearch.found:Reset()
-	AutoBarSearch.stuff:Reset()
 
 	wipe(self.inventory_cache)
+
+	for bag = 0, NUM_BAG_SLOTS, 1 do
+		wipe(self.bag_cache[bag])
+	end
 
 end
 
@@ -1158,18 +1056,18 @@ end
 function AutoBarSearch:ScanDirtyBags()
 	for bag = 0, NUM_BAG_SLOTS, 1 do
 		if (AutoBarSearch.dirty.bags[bag]) then
-			self.stuff:ScanBag(bag)
+			self:ScanBag(bag)
 			AutoBarSearch.dirty.bags[bag] = nil
 		end
 	end
 end
 
 
--- Scan bags only to support shuffling of stuff manually added or moved during combat.
+-- Scan bags only to support shuffling of bag items manually added or moved during combat.
 function AutoBarSearch:ScanBagsInCombat()
 	ABGCode.LogEventStart("Stuff.prototype:ScanCombat")
 	for bag = 0, NUM_BAG_SLOTS, 1 do
-		self.stuff:ScanBag(bag)
+		self:ScanBag(bag)
 	end
 	ABGCode.LogEventEnd("Stuff.prototype:ScanCombat")
 end
@@ -1196,7 +1094,7 @@ function AutoBarSearch:ScanRegisteredSpells()
 		if (can_cast) then
 			self.found:Add(name, nil, nil, name)
 		else
-			self.stuff:Delete(name, nil, nil, name)
+			self.delete_found_item(name, nil, nil, name)
 		end
 	end
 
@@ -1218,7 +1116,7 @@ function AutoBarSearch:ScanRegisteredMacros()
 		if(keep) then
 			self.found:Add(macro_id, nil, nil, macro_id)
 		else
-			self.stuff:Delete(macro_id, nil, nil, macro_id)
+			self.delete_found_item(macro_id, nil, nil, macro_id)
 		end
 	end
 
@@ -1233,10 +1131,44 @@ function AutoBarSearch:ScanRegisteredMacroText()
 
 end
 
+---@param p_item_id integer
+---@param p_bag integer|nil
+---@param p_slot integer
+-- Add itemId to bag, slot
+local function add_found_item(p_item_id, p_bag, p_slot)
+	assert(p_bag and p_slot)
+
+	local slotList = AutoBarSearch.bag_cache[p_bag]
+	slotList[p_slot] = p_item_id
+
+	-- Filter out too high level items
+	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
+	local usable = ABGCS.IsUsableItem(p_item_id);
+	local item_spell = GetItemSpell(p_item_id);
+	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
+		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
+	end
+--AutoBar:Print("Stuff.prototype:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
+end
+
+
+-- Remove itemId from bag, slot, spell
+local function delete_found_item(p_item_id, p_bag, p_slot, p_spell)
+	assert(p_bag and p_slot)
+
+	if (p_bag) then
+		local this_bag = AutoBarSearch.bag_cache[p_bag]
+		this_bag[p_slot] = nil
+	end
+
+	AutoBarSearch.found:Delete(p_item_id, p_bag, p_slot, p_spell)
+end
+
 
 local function delete_inventory_item(p_item_id, p_slot)
 
 	AutoBarSearch.found:Delete(p_item_id, nil, p_slot, nil)
+	delete_found_item(p_item_id, nil, p_slot)
 	AutoBarSearch.inventory_cache[p_slot] = nil
 
 end
@@ -1262,6 +1194,32 @@ function AutoBarSearch:ScanInventory()
 
 	end
 end
+
+
+-- Scan the given bag.
+function AutoBarSearch:ScanBag(p_bag)
+	local slotList = self.bag_cache[p_bag]
+	local itemId, oldItemId
+	local nSlots = AB.GetContainerNumSlots(p_bag)
+
+	-- ToDo: Clear out excess slots if bag got smaller
+
+	for slot = 1, nSlots, 1 do
+		itemId = AB.GetContainerItemID(p_bag, slot)
+		oldItemId = slotList[slot]
+
+		if (itemId) then
+			if (oldItemId and oldItemId ~= itemId) then
+				delete_found_item(oldItemId, p_bag, slot)
+			end
+			add_found_item(itemId, p_bag, slot)
+		elseif (not itemId and oldItemId) then
+			delete_found_item(oldItemId, p_bag, slot)
+		end
+	end
+end
+
+
 
 
 -- Scan all of the things
