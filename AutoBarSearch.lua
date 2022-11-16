@@ -42,6 +42,10 @@ AutoBarSearch = {
 		---@type boolean[]
 		bags = {}
 	},
+
+	found = {
+		dataList = {}
+	}
 }
 
 local METHOD_DEBUG = true
@@ -87,6 +91,7 @@ function Recycle.prototype:init()
 	self.dataList = {}
 end
 
+--[[
 -- Returns a new or recycled list object
 function Recycle.prototype:Create()
 	if (self.recycleList[1]) then
@@ -98,13 +103,15 @@ function Recycle.prototype:Create()
 		return {}
 	end
 end
+ ]]
 
--- Adds some trash to the recycle list
+
+--[[ -- Adds some trash to the recycle list
 -- do delete trash from the original list.
 function Recycle.prototype:Recycle(p_trash)
 	table.insert(self.recycleList, p_trash)
 end
-
+ ]]
 
 
 -- The search space with all items to look for
@@ -117,7 +124,7 @@ local SearchSpace = AceOO.Class(Recycle)
 function SearchSpace.prototype:Add(itemId, buttonKey)
 	local clientButtons = self.dataList[itemId]
 	if (not clientButtons) then
-		clientButtons = self:Create()
+		clientButtons = {}
 		self.dataList[itemId] = clientButtons
 	end
 	clientButtons[buttonKey] = true
@@ -130,7 +137,6 @@ function SearchSpace.prototype:Delete(itemId, buttonKey)
 		clientButtons[buttonKey] = nil
 	end
 	if (# clientButtons == 0) then
-		self:Recycle(clientButtons)
 		self.dataList[itemId] = nil
 	end
 end
@@ -141,7 +147,6 @@ function SearchSpace.prototype:Reset()
 		for _i, buttonKey in pairs(clientButtons) do
 			clientButtons[buttonKey] = nil
 		end
-		self:Recycle(clientButtons)
 		self.dataList[itemId] = nil
 	end
 end
@@ -178,7 +183,7 @@ function Items.prototype:Add(itemList, buttonKey, category, slotIndex)
 	for i, itemId in pairs(itemList) do
 		local itemData = buttonItems[itemId]
 		if (not itemData) then
-			itemData = self:Create()
+			itemData = {}
 			buttonItems[itemId] = itemData
 			itemData.category = category
 			itemData.slotIndex = slotIndex
@@ -200,7 +205,6 @@ function Items.prototype:Delete(itemList, buttonKey, category, slotIndex)
 		local itemData = buttonItems[itemId]
 		if (itemData and slotIndex == itemData.slotIndex) then
 			buttonItems[itemId] = nil
-			self:Recycle(itemData)
 			AutoBarSearch.space:Delete(itemId, buttonKey)
 		end
 	end
@@ -209,10 +213,9 @@ end
 -- Remove and Recycle all items
 function Items.prototype:Reset()
 	for buttonKey, buttonItems in pairs(self.dataList) do
-		for item_id, item_data in pairs(buttonItems) do
+		for item_id, _item_data in pairs(buttonItems) do
 			buttonItems[item_id] = nil
 		end
-		self:Recycle(item_data)	--TODO: This is out of scope. WTF?
 		if (not AutoBar.buttonList[buttonKey]) then
 			self.dataList[buttonKey] = nil
 		end
@@ -297,15 +300,9 @@ end
 -- Syncs to Stuff and Current
 -- itemId = { [bag, slot, spell], ... }
 --#region Found
-local Found = AceOO.Class(Recycle)
-
-function Found.prototype:init()
-	Found.super.prototype.init(self)
-	self.dataList = {}
-end
 
 -- Add itemId to bag, slot
-function Found.prototype:Add(itemId, bag, slot, spell)
+function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 	local searchSpace = AutoBarSearch.space:GetList()
 	local debug = (DEBUG_GUIDS[itemId])
 	if (debug) then ABGCode.LogWarning("Found:Add", itemId, bag, slot, spell, "-->foundData:", AB.Dump(self.dataList[itemId], 1), "space:", searchSpace[itemId]); end
@@ -314,7 +311,7 @@ function Found.prototype:Add(itemId, bag, slot, spell)
 --AutoBar:Print("Found.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell ")
 	if (not itemData) then
 		if (debug) then ABGCode.LogWarning("   no itemData", searchSpace[itemId]); end
-		itemData = self:Create()
+		itemData = {}
 		self.dataList[itemId] = itemData
 		itemData[1] = bag
 		itemData[2] = slot
@@ -353,7 +350,7 @@ function Found.prototype:Add(itemId, bag, slot, spell)
 end
 
 -- Remove bag, slot, spell for the itemId
-function Found.prototype:Delete(itemId, bag, slot, spell)
+function AutoBarSearch.found:Delete(itemId, bag, slot, spell)
 	local searchSpace = AutoBarSearch.space:GetList()
 	local itemData = self.dataList[itemId]
 	--if (spell == "Wild Charge") then print("Found.prototype:Delete - itemId ",itemId," bag ",bag," slot ",slot," spell ", spell, "ItemData", itemData) end
@@ -378,7 +375,6 @@ function Found.prototype:Delete(itemId, bag, slot, spell)
 		-- Item is now totally gone so remove it everywhere
 		if (not (itemData[1] or itemData[2] or itemData[3])) then
 			self.dataList[itemId] = nil
-			self:Recycle(itemData)
 
 			if (searchSpace[itemId]) then
 				AutoBarSearch.current:Purge(itemId)
@@ -388,16 +384,15 @@ function Found.prototype:Delete(itemId, bag, slot, spell)
 end
 
 -- Remove and Recycle all items
-function Found.prototype:Reset()
-	for itemId, itemData in pairs(self.dataList) do
+function AutoBarSearch.found:Reset()
+	for itemId, _itemData in pairs(self.dataList) do
 		self.dataList[itemId] = nil
-		self:Recycle(itemData)
 		-- Clearing out itemData handled in Add
 	end
 end
 
 -- Return number of slots for the itemId
-function Found.prototype:GetTotalSlots(itemId)
+function AutoBarSearch.found:GetTotalSlots(itemId)
 	local itemData = self.dataList[itemId]
 	local lastIndex
 	if (itemData) then
@@ -415,7 +410,7 @@ function Found.prototype:GetTotalSlots(itemId)
 end
 
 -- Return bag, slot, spell at index for the itemId
-function Found.prototype:GetItemData(itemId, index)
+function AutoBarSearch.found:GetItemData(itemId, index)
 	local itemData = self.dataList[itemId]
 	if (index) then
 		local offset = index * 3
@@ -428,7 +423,7 @@ function Found.prototype:GetItemData(itemId, index)
 end
 
 -- Nil out bag, slot, spell at index for the itemId
-function Found.prototype:ClearItemData(itemId, index)
+function AutoBarSearch.found:ClearItemData(itemId, index)
 	local itemData = self.dataList[itemId]
 	if (index) then
 		local offset = index * 3
@@ -442,7 +437,7 @@ end
 
 -- Return the buttons found list.
 -- Do not manipulate the list.  It is only for performance.
-function Found.prototype:GetList()
+function AutoBarSearch.found:GetList()
 	return self.dataList
 end
 
@@ -582,7 +577,7 @@ function Sorted.prototype:Add(buttonKey, itemId, slotIndex, categoryIndex)
 		end
 	end
 	if (not bFound) then
-		local sortedItemData = self:Create()
+		local sortedItemData = {}
 		table.insert(buttonItems, sortedItemData)
 		sortedItemData.itemId = itemId
 		sortedItemData.slotIndex = slotIndex
@@ -606,7 +601,6 @@ function Sorted.prototype:Delete(buttonKey, itemId)
 	for i, sortedItemData in ipairs(buttonItems) do
 		if (sortedItemData.itemId == itemId) then
 			table.remove(buttonItems, i)
-			self:Recycle(sortedItemData)
 			break
 		end
 	end
@@ -669,9 +663,8 @@ end
 function Sorted.prototype:Reset()
 
 	for buttonKey, buttonItems in pairs(self.dataList) do
-		for i, sortedItemData in pairs(buttonItems) do
+		for i, _sortedItemData in pairs(buttonItems) do
 			buttonItems[i] = nil
-			self:Recycle(sortedItemData)
 		end
 		if (not AutoBar.buttonList[buttonKey]) then
 			self.dataList[buttonKey] = nil
@@ -699,7 +692,7 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 	end
 
 	local found = AutoBarSearch.found:GetList()
-	local bag, slot, spell, itemId, macroId, type_id, info_data, bpet_guid
+	local bag, slot, spell, itemId, macroId, type_id, info_data
 	if (sortedItems[index]) then
 		itemId = sortedItems[index].itemId
 		if (found[itemId]) then
@@ -712,9 +705,6 @@ function Sorted.prototype:GetInfo(buttonKey, index)
 		if(spell:find("^toy")) then
 			type_id = ABGData.TYPE_TOY
 			info_data = AutoBarSearch.registered_toys[spell]
-			spell = nil
-		elseif(spell:find("^bpet")) then
-			bpet_guid = spell		--TODO: This isn't used?
 			spell = nil
 		elseif(spell:find("^macrotext:")) then
 			type_id = ABGData.TYPE_MACRO_TEXT
@@ -765,7 +755,7 @@ function Sorted.prototype:SetBest(buttonKey)
 	local sortedItems = AutoBarSearch.sorted:GetList(buttonKey)
 	local searchItems = AutoBarSearch.items:GetList()[buttonKey]
 	assert(searchItems, "Sorted.prototype:SetBest items["..tostring(buttonKey).."] is nil")
-	local itemId, category, categoryInfo, found
+	local itemId, category, categoryInfo
 
 	local buttonDB = AutoBar.buttonDBList[buttonKey]
 	if (buttonDB.equipped) then
@@ -983,7 +973,6 @@ function AutoBarSearch:Initialize()
 	AutoBarSearch.sorted = Sorted:new()			-- Sorted version of Current items
 
 	AutoBarSearch.current = Current:new()		-- Current items found for each button (Found intersect Items)
-	AutoBarSearch.found = Found:new()			-- All items found in Stuff + list of bag, slot found in
 
 	init_dirty_flags()
 
