@@ -2598,7 +2598,7 @@ elseif (ABGData.is_mainline_wow) then
 					local spell_name = GetSpellInfo(spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 					if not spell_name then
-						print("AutoBar Error: Missing spell name for", spell_id, name);
+						--print("AutoBar Error: Missing spell name for", spell_id, name);
 					else
 						spellIconList[spell_name] = icon
 						AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
