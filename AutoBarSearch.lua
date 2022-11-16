@@ -53,6 +53,27 @@ local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
 local DEBUG_GUIDS = ABGCode.MakeSet({ABGCode.ToyGUID(54452), ABGCode.ToyGUID(142542)})
 
 
+-- Remove itemId from bag, slot, spell
+local function delete_found_item(p_item_id, p_bag, p_slot, p_spell)
+
+	if (p_bag) then
+		local this_bag = AutoBarSearch.bag_cache[p_bag]
+		this_bag[p_slot] = nil
+	end
+
+	AutoBarSearch.found:Delete(p_item_id, p_bag, p_slot, p_spell)
+end
+
+
+local function delete_inventory_item(p_item_id, p_slot)
+
+	AutoBarSearch.found:Delete(p_item_id, nil, p_slot, nil)
+	delete_found_item(p_item_id, nil, p_slot)
+	AutoBarSearch.inventory_cache[p_slot] = nil
+
+end
+
+
 ---Returns the ABSpellInfo for a given spell
 ---@param p_spell_name string
 ---@return ABSpellInfo
@@ -1083,7 +1104,7 @@ function AutoBarSearch:ScanRegisteredSpells()
 		if (can_cast) then
 			self.found:Add(name, nil, nil, name)
 		else
-			self.delete_found_item(name, nil, nil, name)
+			delete_found_item(name, nil, nil, name)
 		end
 	end
 
@@ -1105,7 +1126,7 @@ function AutoBarSearch:ScanRegisteredMacros()
 		if(keep) then
 			self.found:Add(macro_id, nil, nil, macro_id)
 		else
-			self.delete_found_item(macro_id, nil, nil, macro_id)
+			delete_found_item(macro_id, nil, nil, macro_id)
 		end
 	end
 
@@ -1141,26 +1162,6 @@ local function add_found_item(p_item_id, p_bag, p_slot)
 end
 
 
--- Remove itemId from bag, slot, spell
-local function delete_found_item(p_item_id, p_bag, p_slot, p_spell)
-	assert(p_bag and p_slot)
-
-	if (p_bag) then
-		local this_bag = AutoBarSearch.bag_cache[p_bag]
-		this_bag[p_slot] = nil
-	end
-
-	AutoBarSearch.found:Delete(p_item_id, p_bag, p_slot, p_spell)
-end
-
-
-local function delete_inventory_item(p_item_id, p_slot)
-
-	AutoBarSearch.found:Delete(p_item_id, nil, p_slot, nil)
-	delete_found_item(p_item_id, nil, p_slot)
-	AutoBarSearch.inventory_cache[p_slot] = nil
-
-end
 
 -- Scan equipped inventory items.
 function AutoBarSearch:ScanInventory()
