@@ -300,6 +300,7 @@ local function migrate_db_from_ace2()
 		return
 	end
 
+	AutoBarDB2.account = AutoBarDB2.account or {}
 
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBarDB.account.customCategories
 	AutoBarDB.account.customCategories = nil
@@ -401,6 +402,7 @@ function AutoBar.InitializeDB()
 	AutoBar.classBar = CLASS_BAR_MAP[AutoBar.CLASS]
 
 	AutoBarDB2 = AutoBarDB2 or {}
+
 
 	migrate_db_from_ace2()
 
