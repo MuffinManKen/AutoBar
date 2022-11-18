@@ -1497,6 +1497,8 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Muffin.Skill.Fishing.Pole")
 	self:AddCategory("Muffin.Skill.Fishing.Rare Fish")
 	if (ABGData.is_mainline_wow) then
+		AutoBarCategoryList["Muffin.Toys.Fishing"].only_favourites = false
+
 		self:AddCategory("Muffin.Toys.Fishing")
 	end
 
@@ -1698,9 +1700,11 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 
 	if (ABGData.is_mainline_wow) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
+		AutoBarCategoryList["Muffin.Toys.Portal"].only_favourites = false
 
 		self:AddCategory("Muffin.Toys.Hearth")
 		self:AddCategory("Muffin.Toys.Portal")
+
 
 		if(buttonDB.hearth_include_challenge_portals) then
 			self:AddCategory("Spell.ChallengePortals")
@@ -2398,10 +2402,12 @@ elseif (ABGData.is_mainline_wow) then
 		self:AddCategory("Muffin.Battle Pet Items.Bandages")
 		self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
 
+		AutoBarCategoryList["Muffin.Toys.Pet Battle"].only_favourites = false
 		self:AddCategory("Muffin.Toys.Pet Battle")
 		self:AddCategory("Spell.Pet Battle")
 
 		if(buttonDB.show_ornamental == true) then
+			AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"].only_favourites = false
 			self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
 		end
 
