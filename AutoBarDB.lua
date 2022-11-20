@@ -301,6 +301,7 @@ local function migrate_db_from_ace2()
 	end
 
 	AutoBarDB2.account = AutoBarDB2.account or {}
+	AutoBarDB2.account.barList = AutoBarDB2.account.barList or {}
 
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or AutoBarDB.account.customCategories
 	AutoBarDB.account.customCategories = nil
