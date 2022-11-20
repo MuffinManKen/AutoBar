@@ -46,7 +46,7 @@ function ToyCategory:Refresh()
 		if(debug) then ABGCode.LogWarning("Exiting Toy Refresh, button settings aren't loaded|n"); end
 		return
 	end
-	local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
+	local DEBUG_IDS = ABGCode.MakeSet({182773, 172179})
 
 	for _, toy_id in ipairs(self.all_items) do
 		local toy_info = AutoBarSearch:RegisterToy(toy_id)

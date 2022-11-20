@@ -49,8 +49,8 @@ AutoBarSearch = {
 }
 
 local METHOD_DEBUG = true
-local DEBUG_IDS = ABGCode.MakeSet({54452, 142542})
-local DEBUG_GUIDS = ABGCode.MakeSet({ABGCode.ToyGUID(54452), ABGCode.ToyGUID(142542)})
+local DEBUG_IDS = ABGCode.MakeSet({182773, 172179})
+local DEBUG_GUIDS = ABGCode.MakeSet({ABGCode.ToyGUID(182773), ABGCode.ToyGUID(172179)})
 
 
 -- Remove itemId from bag, slot, spell
