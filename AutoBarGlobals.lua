@@ -474,14 +474,34 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 --
 -------------------------------------------------------------------
 
+AutoBarGlobalDataObject.player_has_toy_cache = {}
+AutoBarGlobalDataObject.is_toy_usable_cache = {}
+
 	--This should query a global guid registry and then the specific ones if not found.
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)
 		return AutoBarSearch.registered_macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
 	end
 
+	--Once we get a non-nil result, that's what we'll use for the rest of the session
+	--TODO: We could invalidate this cache if we get this item_id show up in a TOY_UPDATE
 	function AutoBarGlobalCodeSpace.PlayerHasToy(p_item_id)
-		return PlayerHasToy(p_item_id);
+		local phtc = AutoBarGlobalDataObject.player_has_toy_cache
+		if(phtc[p_item_id] == nil) then
+			phtc[p_item_id] = PlayerHasToy(p_item_id);
+		end
+		return phtc[p_item_id]
 	end
+
+
+	--Once we get a non-nil result, that's what we'll use for the rest of the session
+	function AutoBarGlobalCodeSpace.IsToyUsable(p_item_id)
+		local ituc = AutoBarGlobalDataObject.is_toy_usable_cache
+		if(ituc[p_item_id] == nil) then
+			ituc[p_item_id] = C_ToyBox.IsToyUsable(p_item_id);
+		end
+		return ituc[p_item_id]
+	end
+
 
 	function AutoBarGlobalCodeSpace.GetSpellLink(p_spell, p_rank)
 		local spell = GetSpellLink(p_spell, p_rank)

@@ -51,8 +51,8 @@ function ToyCategory:Refresh()
 	for _, toy_id in ipairs(self.all_items) do
 		local toy_info = AutoBarSearch:RegisterToy(toy_id)
 		local user_selected = (self.only_favourites and toy_info.is_fave) or not self.only_favourites
-		if(debug and DEBUG_IDS[toy_id]) then ABGCode.LogWarning(toy_id, toy_info.name, "HasToy:", ABGCode.PlayerHasToy(toy_id), "Usable:", C_ToyBox.IsToyUsable(toy_id), "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
-		if (toy_id and ABGCode.PlayerHasToy(toy_id) and C_ToyBox.IsToyUsable(toy_id) and user_selected) then
+		if(debug and DEBUG_IDS[toy_id]) then ABGCode.LogWarning(toy_id, toy_info.name, "HasToy:", ABGCode.PlayerHasToy(toy_id), "Usable:", ABGCode.IsToyUsable(toy_id), "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
+		if (toy_id and ABGCode.PlayerHasToy(toy_id) and ABGCode.IsToyUsable(toy_id) and user_selected) then
 			self.items[list_index] = ABGCode.ToyGUID(toy_id)
 			list_index = list_index + 1
 		end

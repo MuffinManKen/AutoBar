@@ -934,18 +934,21 @@ function AutoBarSearch:RegisterToy(p_toy_id)
 	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 
 	if (not toy_info) then
-		toy_info = {}
+		toy_info = {
+			ab_type = ABGData.TYPE_TOY,
+			item_id = p_toy_id,
+			guid = toy_guid,
+		}
 		AutoBarSearch.registered_toys[toy_guid] = toy_info
 	end
 
 	local _item_id, toy_name, icon, is_fave = C_ToyBox.GetToyInfo(p_toy_id)
 
-	toy_info.guid = toy_guid
-	toy_info.item_id = p_toy_id
-	toy_info.ab_type = ABGData.TYPE_TOY
-	toy_info.icon = icon
-	toy_info.is_fave = is_fave
-	toy_info.name = toy_name
+	toy_info.name = toy_info.name or toy_name
+	toy_info.icon = toy_info.icon or icon
+	if(is_fave ~= nil) then
+		toy_info.is_fave = is_fave
+	end
 
 	if (debug) then ABGCode.LogWarning("RegisterToy", "ID:", p_toy_id, "Name:", toy_name); end
 
