@@ -3,11 +3,11 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Another fix for bars not appearing (bad argument #1 to 'pairs')
- - Tweaked some logging options
- - If you're still having issues with settings being lost or bars/buttons missing,
-         please attach your saved variables to an issue so I can see them
- - I'm not playing WoW, so if things are missing make sure you report them.
+ - Added Journals to Crafting button
+ - Added Valdrakken portal
+ - Did some data mining
+ - Added code to cache Toy data so toys will hopefully show up more reliably.
+ - I'm not playing WoW, so if things are missing or broken make sure you report them with as much detail as you can.
 ]] .. "|n"
 
 
