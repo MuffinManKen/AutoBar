@@ -311,6 +311,10 @@ ABGCS.CacheSpellData(26790, "Tailoring");
 ABGCS.CacheSpellData(131474, "Fishing");
 ABGCS.CacheSpellData(201891, "Undercurrent");
 
+ABGCS.CacheSpellData(194174, "Skinning Journal");
+ABGCS.CacheSpellData(271990, "Fishing Journal");
+ABGCS.CacheSpellData(193290, "Herbalism Journal");
+ABGCS.CacheSpellData(2656, "Mining Journal");
 local cache_timer_stop = debugprofilestop();
 
 ABGData.timing["CacheSpellData.lua"] = cache_timer_stop - cache_timer_start;

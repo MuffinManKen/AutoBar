@@ -411,6 +411,10 @@ function ABGCode.InitializeCategories()
 		"*", ABGCode.GetSpellNameByName("Smelting"),
 		"*", ABGCode.GetSpellNameByName("Survey"),
 		"*", ABGCode.GetSpellNameByName("Tailoring"),
+		"*", ABGCode.GetSpellNameByName("Skinning Journal"),
+		"*", ABGCode.GetSpellNameByName("Fishing Journal"),
+		"*", ABGCode.GetSpellNameByName("Herbalism Journal"),
+		"*", ABGCode.GetSpellNameByName("Mining Journal"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Runeforging"),
 	})
 
