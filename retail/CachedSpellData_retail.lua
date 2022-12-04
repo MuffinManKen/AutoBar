@@ -21,7 +21,7 @@ ABGCS.CacheSpellData(131232, "Path of the Necromancer");
 ABGCS.CacheSpellData(131228, "Path of the Black Ox");
 
 
---DeathKnight
+--#region DeathKnight
 ABGCS.CacheSpellData(3714, "Path of Frost");
 ABGCS.CacheSpellData(63560, "Dark Transformation");
 ABGCS.CacheSpellData(45524, "Chains of Ice");
@@ -34,8 +34,10 @@ ABGCS.CacheSpellData(46584, "Raise Dead");
 ABGCS.CacheSpellData(49206, "Summon Gargoyle");
 ABGCS.CacheSpellData(42650, "Army of the Dead");
 ABGCS.CacheSpellData(50977, "Death Gate");
+--#endregion
 
---DemonHunter
+
+--#region DemonHunter
 ABGCS.CacheSpellData(195072, "Fel Rush");
 ABGCS.CacheSpellData(198793, "Vengeful Retreat");
 ABGCS.CacheSpellData(198589, "Blur");
@@ -44,9 +46,10 @@ ABGCS.CacheSpellData(204596, "Sigil of Flame");
 ABGCS.CacheSpellData(207684, "Sigil of Misery");
 ABGCS.CacheSpellData(202137, "Sigil of Silence");
 ABGCS.CacheSpellData(183752, "Disrupt");
+--#endregion
 
 
---Druid
+--#region Druid
 ABGCS.CacheSpellData(22812, "Barkskin");
 ABGCS.CacheSpellData(5487, "Bear Form");
 ABGCS.CacheSpellData(768, "Cat Form");
@@ -63,8 +66,10 @@ ABGCS.CacheSpellData(210053, "Mount Form");
 ABGCS.CacheSpellData(783, "Travel Form");
 ABGCS.CacheSpellData(18960, "Teleport: Moonglade");
 ABGCS.CacheSpellData(102401, "Wild Charge");
+--#endregion
 
---Hunter
+
+--#region Hunter
 ABGCS.CacheSpellData(61648, "Aspect of the Chameleon");
 ABGCS.CacheSpellData(186257, "Aspect of the Cheetah");
 ABGCS.CacheSpellData(186289, "Aspect of the Eagle");
@@ -102,9 +107,10 @@ ABGCS.CacheSpellData(195645, "Wing Clip");
 ABGCS.CacheSpellData(187650, "Freezing Trap");
 ABGCS.CacheSpellData(187698, "Tar Trap");
 ABGCS.CacheSpellData(162488, "Steel Trap");
+--#endregion
 
 
---Mage
+--#region Mage
 ABGCS.CacheSpellData(1459, "Arcane Intellect");
 ABGCS.CacheSpellData(235313, "Blazing Barrier");
 ABGCS.CacheSpellData(42955, "Conjure Refreshment");
@@ -175,14 +181,17 @@ ABGCS.CacheSpellData(344597, "Portal: Oribos");
 
 ABGCS.CacheSpellData(395277, "Teleport: Valdrakken");
 ABGCS.CacheSpellData(395289, "Portal: Valdrakken");
+--#endregion
 
 
---Monk
+--#region Monk
 ABGCS.CacheSpellData(126892, "Zen Pilgrimage");
 ABGCS.CacheSpellData(126895, "Zen Pilgrimage: Return");
 ABGCS.CacheSpellData(115203, "Fortifying Brew");
 ABGCS.CacheSpellData(116705, "Spear Hand Strike");
 ABGCS.CacheSpellData(137639, "Storm, Earth, and Fire");
+--#endregion
+
 
 --#region Paladin
 ABGCS.CacheSpellData(31850, "Ardent Defender");
@@ -200,7 +209,8 @@ ABGCS.CacheSpellData(465, "Devotion Aura");
 ABGCS.CacheSpellData(183435, "Retribution Aura");
 --#endregion
 
---Priest
+
+--#region Priest
 ABGCS.CacheSpellData(17, "Power Word: Shield");
 ABGCS.CacheSpellData(62618, "Power Word: Barrier");
 ABGCS.CacheSpellData(34433, "Shadowfiend");
@@ -210,6 +220,7 @@ ABGCS.CacheSpellData(33206, "Pain Suppression");
 ABGCS.CacheSpellData(15487, "Silence");
 ABGCS.CacheSpellData(1706, "Levitate");
 ABGCS.CacheSpellData(21562, "Power Word: Fortitude");
+--#endregion
 
 
 --#region Rogue
@@ -228,7 +239,7 @@ ABGCS.CacheSpellData(271877, "Blade Rush");
 --#endregion
 
 
---Shaman
+--#region Shaman
 ABGCS.CacheSpellData(556, "Astral Recall");
 ABGCS.CacheSpellData(198103, "Earth Elemental");
 ABGCS.CacheSpellData(51533, "Feral Spirit");
@@ -250,9 +261,10 @@ ABGCS.CacheSpellData(192222, "Liquid Magma Totem");
 ABGCS.CacheSpellData(16191, "Mana Tide Totem");
 ABGCS.CacheSpellData(98008, "Spirit Link Totem");
 ABGCS.CacheSpellData(192077, "Wind Rush Totem");
+--#endregion
 
 
---Warlock
+--#region Warlock
 ABGCS.CacheSpellData(104316, "Call Dreadstalkers");
 ABGCS.CacheSpellData(119898, "Command Demon");
 ABGCS.CacheSpellData(1714, "Curse of Tongues");	--y
@@ -276,8 +288,10 @@ ABGCS.CacheSpellData(30146, "Summon Felguard");
 ABGCS.CacheSpellData(205180, "Summon Darkglare");--y
 ABGCS.CacheSpellData(265187, "Summon Demonic Tyrant");
 ABGCS.CacheSpellData(698, "Ritual of Summoning");
+--#endregion
 
---Warrior
+
+--#region Warrior
 ABGCS.CacheSpellData(6673, "Battle Shout");
 ABGCS.CacheSpellData(100, "Charge");
 ABGCS.CacheSpellData(97462, "Rallying Cry");
@@ -289,8 +303,10 @@ ABGCS.CacheSpellData(12975, "Last Stand");
 ABGCS.CacheSpellData(6552, "Pummel");
 ABGCS.CacheSpellData(2565, "Shield Block");
 ABGCS.CacheSpellData(871, "Shield Wall");
+--#endregion
 
---Skills
+
+--#region Skills
 ABGCS.CacheSpellData(28596, "Alchemy");
 ABGCS.CacheSpellData(818, "Cooking Fire");
 ABGCS.CacheSpellData(29844, "Blacksmithing");
@@ -315,6 +331,8 @@ ABGCS.CacheSpellData(194174, "Skinning Journal");
 ABGCS.CacheSpellData(271990, "Fishing Journal");
 ABGCS.CacheSpellData(193290, "Herbalism Journal");
 ABGCS.CacheSpellData(2656, "Mining Journal");
+--#endregion
+
 local cache_timer_stop = debugprofilestop();
 
 ABGData.timing["CacheSpellData.lua"] = cache_timer_stop - cache_timer_start;
