@@ -173,6 +173,8 @@ ABGCS.CacheSpellData(281402, "Portal: Dazar'alor");
 ABGCS.CacheSpellData(344587, "Teleport: Oribos");
 ABGCS.CacheSpellData(344597, "Portal: Oribos");
 
+ABGCS.CacheSpellData(395277, "Teleport: Valdrakken");
+ABGCS.CacheSpellData(395289, "Portal: Valdrakken");
 
 
 --Monk

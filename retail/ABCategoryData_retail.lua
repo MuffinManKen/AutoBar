@@ -293,6 +293,7 @@ function ABGCode.InitializeCategories()
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Boralus"), ABGCode.GetSpellNameByName("Portal: Boralus"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Dazar'alor"), ABGCode.GetSpellNameByName("Portal: Dazar'alor"),
 		"MAGE", ABGCode.GetSpellNameByName("Teleport: Oribos"), ABGCode.GetSpellNameByName("Portal: Oribos"),
+		"MAGE", ABGCode.GetSpellNameByName("Teleport: Valdrakken"), ABGCode.GetSpellNameByName("Portal: Valdrakken"),
 		"MONK", ABGCode.GetSpellNameByName("Zen Pilgrimage"), ABGCode.GetSpellNameByName("Zen Pilgrimage"),
 		"MONK", ABGCode.GetSpellNameByName("Zen Pilgrimage: Return"), ABGCode.GetSpellNameByName("Zen Pilgrimage: Return"),
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Death Gate"), ABGCode.GetSpellNameByName("Death Gate"),
