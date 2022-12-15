@@ -59,6 +59,7 @@ ABGCS.CacheSpellData(22842, "Frenzied Regeneration");
 ABGCS.CacheSpellData(99, "Incapacitating Roar");
 ABGCS.CacheSpellData(102342, "Ironbark");
 ABGCS.CacheSpellData(5215, "Prowl");
+ABGCS.CacheSpellData(1126, "Mark of the Wild");
 ABGCS.CacheSpellData(197625, "Moonkin Form");
 ABGCS.CacheSpellData(114282, "Treant Form");
 ABGCS.CacheSpellData(106839, "Skull Bash");
