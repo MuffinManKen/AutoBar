@@ -103,36 +103,12 @@ end
 -- A simple 2 list aproach that recycles objects specific to that type of list so the bulk of operations should be only initing recycled objects.
 local Recycle = AceOO.Class()
 Recycle.virtual = true
-Recycle.prototype.recycleList = 0
 Recycle.prototype.dataList = 0
 
 function Recycle.prototype:init()
 	Recycle.super.prototype.init(self) -- Mandatory init.
-	self.recycleList = {}
 	self.dataList = {}
 end
-
---[[
--- Returns a new or recycled list object
-function Recycle.prototype:Create()
-	if (self.recycleList[1]) then
-		local i = # self.recycleList
-		local x = self.recycleList[i]
-		self.recycleList[i] = nil
-		return x
-	else
-		return {}
-	end
-end
- ]]
-
-
---[[ -- Adds some trash to the recycle list
--- do delete trash from the original list.
-function Recycle.prototype:Recycle(p_trash)
-	table.insert(self.recycleList, p_trash)
-end
- ]]
 
 
 -- The search space with all items to look for
@@ -220,7 +196,7 @@ end
 
 -- Remove a list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
-function Items.prototype:Delete(itemList, buttonKey, category, slotIndex)
+function Items.prototype:Delete(itemList, buttonKey, _category, slotIndex)
 	for _i, itemId in pairs(itemList) do
 		local buttonItems = self.dataList[buttonKey]
 		local itemData = buttonItems[itemId]
@@ -244,23 +220,15 @@ function Items.prototype:Reset()
 end
 
 
-local function get_items(slotItem)
-	if (type(slotItem) == "string") then
-		local categoryInfo = AutoBarCategoryList[slotItem]
-		if (categoryInfo) then
-			if (categoryInfo.spell) then
-				return slotItem, categoryInfo.items, nil
-			elseif (categoryInfo.spells) then
-				return slotItem, categoryInfo.items, categoryInfo.spells
-			else
-				return slotItem, categoryInfo.items, nil
-			end
-		else
-			return nil, nil, nil, nil, nil
-		end
-	else
-		AutoBar:Print("Items.prototype:Populate    GetItems unknown type " .. tostring(type(slotItem)))
+local function get_items(p_category)
+	---@class CategoryClass
+	local categoryInfo = AutoBarCategoryList[p_category]
+	if (categoryInfo) then
+		return p_category, categoryInfo.items
 	end
+
+	return nil, nil
+
 end
 
 -- Populate all the buttons
@@ -268,14 +236,11 @@ function Items.prototype:Populate()
 	if(METHOD_DEBUG) then ABGCode.LogWarning("Items:Populate"); end
 	for buttonKey, button in pairs(AutoBar.buttonList) do
 		if (button and button[1]) then
-			for slotIndex = 1, # button, 1 do
-				local category, itemList, spells = get_items(button[slotIndex])
-				if(button[slotIndex] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(itemList), AB.Dump(spells)) end
-				if (itemList) then
-					self:Add(itemList, buttonKey, category, slotIndex)
-				end
-				if (spells) then
-					self:Add(spells, buttonKey, category, slotIndex)
+			for category_index = 1, # button, 1 do
+				local category, item_list = get_items(button[category_index])
+				if(button[category_index] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(item_list)) end
+				if (item_list) then
+					self:Add(item_list, buttonKey, category, category_index)
 				end
 			end
 		end
@@ -289,13 +254,10 @@ function Items.prototype:RePopulate(p_button_key)
 	local button = AutoBar.buttonList[p_button_key]
 	if (button and button[1]) then
 		for slotIndex = 1, # button, 1 do
-			local category, itemList, spells = get_items(button[slotIndex])
-			if(button[slotIndex] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(itemList), AB.Dump(spells)) end
+			local category, itemList = get_items(button[slotIndex])
+			if(button[slotIndex] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(itemList)) end
 			if (itemList) then
 				self:Add(itemList, p_button_key, category, slotIndex)
-			end
-			if (spells) then
-				self:Add(spells, p_button_key, category, slotIndex)
 			end
 		end
 	end
@@ -1032,6 +994,7 @@ function AutoBarSearch:Reset()
 	init_dirty_flags()
 	AutoBarSearch:ScanAll()
 	AutoBarSearch.sorted:Update()
+
 --AutoBar:Print("AutoBarSearch:Reset End")
 end
 
