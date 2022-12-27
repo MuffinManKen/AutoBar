@@ -20,8 +20,6 @@ local _G = _G
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
-local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
-local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 
 local assert, ipairs, print, pairs, math = assert, ipairs, print, pairs, math
 
@@ -154,7 +152,7 @@ function AutoBar.Class.Bar.prototype:CreateBarFrame()
 	end
 	self.frame = driver
 
-	LibStickyFrames:RegisterFrame(self.frame)
+	AB.LibStickyFrames:RegisterFrame(self.frame)
 
 	self.elapsed = 0
 	if (self.sharedLayoutDB.fadeOut) then
@@ -394,7 +392,7 @@ function AutoBar.Class.Bar.prototype:SetFadeOut(fadeOut)
 end
 
 function AutoBar.Class.Bar.prototype:StickTo(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
-	LibStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
+	AB.LibStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
 	self.sharedLayoutDB.stickPoint = point
 	self.sharedLayoutDB.stickToFrameName = stickToFrame and stickToFrame:GetName() or nil
 	self.sharedLayoutDB.stickToPoint = stickToPoint
@@ -418,10 +416,10 @@ function AutoBar.Class.Bar.prototype:ColorBars()
 
 		-- Set Color
 		if (AutoBar.keyBoundMode) then
-			frame:SetBackdropColor(LibKeyBound:GetColorKeyBoundMode())
+			frame:SetBackdropColor(AB.LibKeyBound:GetColorKeyBoundMode())
 		elseif (AutoBar.moveButtonsMode) then
 			if (self.sharedLayoutDB.hide) then
-				frame:SetBackdropColor(LibStickyFrames:GetColorHidden())
+				frame:SetBackdropColor(AB.LibStickyFrames:GetColorHidden())
 			else
 				frame:SetBackdropColor(colorMoveButtons.r, colorMoveButtons.g, colorMoveButtons.b, colorMoveButtons.a)
 			end
@@ -565,7 +563,7 @@ function AutoBar.Class.Bar.prototype:PositionLoad()
 	if(debug) then ABGCode.LogWarning(AB.Dump(sharedPositionDB, 1)); end
 	if (sharedPositionDB.stickToFrameName and _G[sharedPositionDB.stickToFrameName]) then
 		local stickToFrame = _G[sharedPositionDB.stickToFrameName]
-		LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
+		AB.LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
 --AutoBar:Print("AutoBar.Class.Bar.prototype:PositionLoad " .. tostring(barDB.stickToFrameName))
 	else
 		if (not sharedLayoutDB.alignButtons) then

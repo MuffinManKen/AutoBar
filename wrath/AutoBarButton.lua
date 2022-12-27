@@ -16,7 +16,6 @@ local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
---local LibKeyBound = LibStub("LibKeyBound-1.0")
 local L = AutoBarGlobalDataObject.locale
 
 local reverse_sort_func = function( a,b ) return a > b end

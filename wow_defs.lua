@@ -132,9 +132,20 @@ end
 ---@return boolean changed
 function SetCursor(cursor) end
 
----@param itemId number
----@return number, string, number, boolean, boolean, number
-function C_ToyBox.GetToyFromIndex(itemId) end
+---@param containerIndex number
+---@return number numSlots
+function GetContainerNumSlots(containerIndex) end
+
+---@param containerIndex number
+---@param slotIndex number
+---@return number containerID
+function GetContainerItemID(containerIndex, slotIndex) end
+
+---@param containerIndex number
+---@param slotIndex number
+---@return string itemLink
+function GetContainerItemLink(containerIndex, slotIndex) end
+
 
 ---@class AB
 AB = {}
@@ -228,9 +239,9 @@ Frame = {}
 function Frame:ClearNormalTexture() end
 function Frame:SetNormalTexture(p_tex) end
 
----@param scriptType ScriptFrame
----@param handler function|nil
-function Frame:SetScript(scriptType, handler) end
+-- ---@param scriptType ScriptFrame
+-- ---@param handler function|nil
+-- function Frame:SetScript(scriptType, handler) end
 
 --These are actually part of BackdropTemplateMixin
 function Frame:SetBackdrop(backdropInfo) end
@@ -256,10 +267,17 @@ function Masque:GetGloss(button) end
 --#endregion Masque
 
 
----@class AceConfigDialog
-local AceConfigDialog = {}
 
-function AceConfigDialog:Close(name) end
+
+--#region AceConfigRegistry
+---@class AceConfigRegistry-3.0
+local AceConfigRegistry = {}
+
+function AceConfigRegistry:NotifyChange(name) end
+
+
+
+--#endregion AceConfigRegistry
 
 
 ---@class AutoBarSettings

@@ -5,12 +5,12 @@ local ABGData = AutoBarGlobalDataObject
 -- NOTE: This entire set of code runs in ~2ms, so no need to try to optimize it
 local cache_timer_start = debugprofilestop();
 
---All
+--#region Racial
 ABGCS.CacheSpellData(58984, "Shadowmeld");
+--endregion
 
 
-
---Druid
+--#region Druid
 ABGCS.CacheSpellData(22812, "Barkskin");
 ABGCS.CacheSpellData(99, "Disorienting Roar");
 ABGCS.CacheSpellData(5215, "Prowl");
@@ -29,6 +29,7 @@ ABGCS.CacheSpellData(783, "Travel Form");
 ABGCS.CacheSpellData(33943, "Flight Form");
 ABGCS.CacheSpellData(40120, "Swift Flight Form");
 ABGCS.CacheSpellData(18960, "Teleport: Moonglade");
+--endregion
 
 --#region DeathKnight
 ABGCS.CacheSpellData(48265, "Unholy Presence");
@@ -199,7 +200,7 @@ ABGCS.CacheSpellData(14752, "Divine Spirit");
 ABGCS.CacheSpellData(27681, "Prayer of Spirit");
 --#endregion
 
---Rogue
+--#region Rogue
 ABGCS.CacheSpellData(1842, "Disarm Trap");
 ABGCS.CacheSpellData(4086, "Evasion");
 ABGCS.CacheSpellData(1766, "Kick");
@@ -208,7 +209,7 @@ ABGCS.CacheSpellData(1856, "Vanish");
 ABGCS.CacheSpellData(2094, "Blind");
 ABGCS.CacheSpellData(6770, "Sap");
 ABGCS.CacheSpellData(36554, "Shadowstep");
-
+--#endregion
 
 --#region Shaman
 ABGCS.CacheSpellData(51730, "Earthliving Weapon");
@@ -311,7 +312,7 @@ ABGCS.CacheSpellData(1122, "Summon Infernal");
 ABGCS.CacheSpellData(30146, "Summon Felguard");
 --#endregion
 
---Warrior
+--#region Warrior
 ABGCS.CacheSpellData(6673, "Battle Shout");
 ABGCS.CacheSpellData(469, "Commanding Shout");
 ABGCS.CacheSpellData(100, "Charge");
@@ -323,10 +324,10 @@ ABGCS.CacheSpellData(12975, "Last Stand");
 ABGCS.CacheSpellData(71, "Defensive Stance");
 ABGCS.CacheSpellData(2457, "Battle Stance");
 ABGCS.CacheSpellData(2458, "Berserker Stance");
+--#endregion
 
 
-
---Skills
+--#region Skills
 ABGCS.CacheSpellData(3273, "First Aid");
 ABGCS.CacheSpellData(2259, "Alchemy");
 ABGCS.CacheSpellData(818, "Basic Campfire");
@@ -345,7 +346,7 @@ ABGCS.CacheSpellData(25229, "Jewelcrafting");
 ABGCS.CacheSpellData(31252, "Prospecting");
 ABGCS.CacheSpellData(45357, "Inscription");
 ABGCS.CacheSpellData(51005, "Milling");
-
+--#endregion
 
 local cache_timer_stop = debugprofilestop();
 

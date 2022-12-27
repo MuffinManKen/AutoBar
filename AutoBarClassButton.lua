@@ -11,6 +11,7 @@
 -- GLOBALS: SetCursor, ClearCursor, GetBindingKey, SetBinding, GetBindingText, SetOverrideBindingClick, InCombatLockdown, GameTooltip
 -- GLOBALS: RegisterStateDriver, CreateFrame, GetContainerItemInfo, GetItemCount, PickupContainerItem, IsConsumableItem, GetSpellTabInfo, GetSpellBookItemName
 -- GLOBALS: PickupItem, PickupSpellBookItem, PickupAction, PickupMacro, ItemHasRange, IsItemInRange, SpellHasRange, IsSpellInRange
+local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
@@ -20,7 +21,6 @@ local ABGData = AutoBarGlobalDataObject
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
-local LibKeyBound = LibStub("LibKeyBound-1.0")
 local _
 local _G = _G
 
@@ -143,7 +143,7 @@ end
 function AutoBar.Class.Button:GetHotkey()
 	local frame = self
 	local key1 = GetBindingKey(frame.class.buttonName .. "_X")
-	local key = LibKeyBound:ToShortKey(key1)
+	local key = AB.LibKeyBound:ToShortKey(key1)
 --AutoBar:Print("AutoBar.Class.Button.prototype:GetHotkey key1 " .. tostring(key1) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
 	return key
 end
@@ -235,7 +235,7 @@ end
 
 local function funcOnEnter(self)
 	if (self.GetHotkey and AutoBar.keyBoundMode) then
-		LibKeyBound:Set(self)
+		AB.LibKeyBound:Set(self)
 	end
 
 	local noTooltip = not (AutoBarDB2.settings.show_tooltip and self.needsTooltip or AutoBar.moveButtonsMode)
@@ -550,10 +550,10 @@ function AutoBar.Class.Button.prototype:UpdateHotkeys()
 	if (buttonBinding) then
 		key = GetBindingKey(buttonBinding)
 	else
-		key = LibKeyBound.Binder:GetBindings(frame)
+		key = AB.LibKeyBound.Binder:GetBindings(frame)
 	end
 	if (key) then
-		frame.hotKey:SetText(LibKeyBound:ToShortKey(GetBindingText(key, "KEY_", 1)))
+		frame.hotKey:SetText(AB.LibKeyBound:ToShortKey(GetBindingText(key, "KEY_", 1)))
 	else
 		frame.hotKey:SetText("")
 	end

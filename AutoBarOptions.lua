@@ -43,7 +43,6 @@ local ABGCode = AutoBarGlobalCodeSpace
 local _ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
-local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
 local LDB = LibStub("LibDataBroker-1.1", true)
 local ldbIcon = LibStub("LibDBIcon-1.0", true)
 local AceCfgReg = LibStub("AceConfigRegistry-3.0")
@@ -60,7 +59,7 @@ local hintText = {
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
 }
-local function LDBOnClick(clickedFrame, button)
+local function LDBOnClick(_clickedFrame, button)
 	if (button == "LeftButton") then
 		if (dewdrop and dewdrop:GetOpenedParent()) then
 			dewdrop:Close()
@@ -70,7 +69,7 @@ local function LDBOnClick(clickedFrame, button)
 		elseif (IsControlKeyDown()) then
 			AutoBar:MoveButtonsModeToggle()
 		elseif (IsAltKeyDown()) then
-			LibKeyBound:Toggle()
+			AB.LibKeyBound:Toggle()
 		elseif(AceCfgDlg.OpenFrames["AutoBar"]) then
 			AceCfgDlg:Close("AutoBar")
 		else
@@ -150,10 +149,10 @@ function AutoBarChanged()
 end
 
 
-local function ButtonCategoriesChanged()
-	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCode.UpdateCategories()
-end
+-- local function ButtonCategoriesChanged()
+-- 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
+-- 	ABGCode.UpdateCategories()
+-- end
 
 
 function AutoBar:ButtonsChanged()
@@ -522,12 +521,12 @@ local function ResetButtons()
 end
 --]]
 
-local function ResetAutoBar()
-	AutoBar:PopulateBars()
-	AutoBar:CreateOptionsAce3()
-	ABGCode.UpdateCategories()
-	AceCfgReg:NotifyChange("AutoBar")
-end
+-- local function ResetAutoBar()
+-- 	AutoBar:PopulateBars()
+-- 	AutoBar:CreateOptionsAce3()
+-- 	ABGCode.UpdateCategories()
+-- 	AceCfgReg:NotifyChange("AutoBar")
+-- end
 
 
 function AutoBar:OnProfileDisable()
@@ -631,7 +630,6 @@ end
 -- Adjust the remaining buttons to fill the gap if any
 -- Return the button, its DB & its Options
 function AutoBar:ButtonCut(fromBarKey, fromIndex)
-	local button, buttonDB, buttonOptions
 	local fromButtonKeyList = AutoBar.barButtonsDBList[fromBarKey].buttonKeys
 	local nButtons = # fromButtonKeyList
 	assert(fromIndex > 0, "AutoBar:ButtonCut fromIndex < 1")
@@ -643,6 +641,7 @@ function AutoBar:ButtonCut(fromBarKey, fromIndex)
 	end
 
 	local bar = AutoBar.barList[fromBarKey]
+	local button
 	if (bar) then
 		button = bar.buttonList[fromIndex]
 	end
@@ -1090,7 +1089,7 @@ function AutoBar:CreateOptionsAce3()
 							width = 1.2,
 							name = L["Key Bindings"],
 							desc = L["Assign Bindings for Buttons on your Bars."],
-							func = LibKeyBound.Toggle,
+							func = AB.LibKeyBound.Toggle,
 							disabled = getCombatLockdown,
 						},
 						header1 = {

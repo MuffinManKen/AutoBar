@@ -17,8 +17,6 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local _G = _G
-local LibKeyBound = LibStub("LibKeyBound-1.0")
-local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
@@ -278,15 +276,15 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
 	AutoBar.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 
-	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
-	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
-	LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_MODE_COLOR_CHANGED")
+	AB.LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_ENABLED")
+	AB.LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
+	AB.LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_MODE_COLOR_CHANGED")
 
-	LibStickyFrames.RegisterCallback(self, "OnSetGroup")
-	LibStickyFrames.RegisterCallback(self, "OnClick")
---	LibStickyFrames.RegisterCallback(self, "OnStartFrameMoving")
-	LibStickyFrames.RegisterCallback(self, "OnStopFrameMoving")
-	LibStickyFrames.RegisterCallback(self, "OnStickToFrame")
+	AB.LibStickyFrames.RegisterCallback(self, "OnSetGroup")
+	AB.LibStickyFrames.RegisterCallback(self, "OnClick")
+	--	AB.LibStickyFrames.RegisterCallback(self, "OnStartFrameMoving")
+	AB.LibStickyFrames.RegisterCallback(self, "OnStopFrameMoving")
+	AB.LibStickyFrames.RegisterCallback(self, "OnStickToFrame")
 end
 
 
@@ -595,11 +593,11 @@ function ABGCode.events.PLAYER_REGEN_DISABLED(p_arg1)
 
 	if (AutoBar.moveButtonsMode) then
 		AutoBar:MoveButtonsModeOff()
-		LibKeyBound:Deactivate()
+		AB.LibKeyBound:Deactivate()
 	end
 
 	if (AutoBar.keyBoundMode) then
-		LibKeyBound:Deactivate()
+		AB.LibKeyBound:Deactivate()
 	end
 
 	ABGCS.UpdateActive()
@@ -778,7 +776,7 @@ end
 
 function AutoBar:MoveBarModeToggle()
 --print("AutoBar:MoveBarModeToggle")
-	if (LibStickyFrames:GetGroup()) then
+	if (AB.LibStickyFrames:GetGroup()) then
 		AutoBar:MoveBarModeOff()
 	else
 		AutoBar:MoveBarModeOn()
@@ -786,14 +784,14 @@ function AutoBar:MoveBarModeToggle()
 end
 
 function AutoBar:MoveBarModeOff()
-	LibStickyFrames:SetGroup(nil)
+	AB.LibStickyFrames:SetGroup(nil)
 	AutoBar.stickyMode = false
 end
 
 function AutoBar:MoveBarModeOn()
-	LibKeyBound:Deactivate()
+	AB.LibKeyBound:Deactivate()
 	AutoBar:MoveButtonsModeOff()
-	LibStickyFrames:SetGroup(true)
+	AB.LibStickyFrames:SetGroup(true)
 	AutoBar.stickyMode = true
 end
 
@@ -804,7 +802,7 @@ function AutoBar.OnSetGroup(group)
 		AutoBar.stickyMode = true
 	elseif (type(group) == "table") then
 		for _, bar in pairs(AutoBar.barList) do
-			if (bar.sharedLayoutDB.enabled and LibStickyFrames:InFrameGroup(bar.frame, group)) then
+			if (bar.sharedLayoutDB.enabled and AB.LibStickyFrames:InFrameGroup(bar.frame, group)) then
 				AutoBar.stickyMode = true
 				break
 			end
@@ -863,7 +861,7 @@ end
 
 function AutoBar:MoveButtonsModeOn()
 	AutoBar:MoveBarModeOff()
-	LibKeyBound:Deactivate()
+	AB.LibKeyBound:Deactivate()
 	AutoBar.moveButtonsMode = true
 	for _, bar in pairs(self.barList) do
 		if (bar.sharedLayoutDB.enabled) then
@@ -1130,7 +1128,7 @@ function ABGCode.UpdateCategories(p_behaviour)
 		for _index, stickyFrame in pairs(tick.OtherStickyFrames) do
 			if (_G[stickyFrame]) then
 				--print("     ABGCS:UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
-				LibStickyFrames:RegisterFrame(_G[stickyFrame])
+				AB.LibStickyFrames:RegisterFrame(_G[stickyFrame])
 			else
 				delete = false
 			end
@@ -1188,15 +1186,15 @@ function ABGCS.UpdateObjects(p_behaviour)
 				--print("     UpdateObjects barKey " .. tostring(barKey) .. " Name " .. tostring(AutoBar.barList[barKey].barName))
 			end
 			bar = AutoBar.barList[barKey]
-			LibStickyFrames:SetFrameEnabled(bar.frame, true)
-			LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
-			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+			AB.LibStickyFrames:SetFrameEnabled(bar.frame, true)
+			AB.LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
+			AB.LibStickyFrames:SetFrameText(bar.frame, bar.barName)
 		elseif (AutoBar.barList[barKey]) then
 			--print("UpdateObjects barKey " .. tostring(barKey) .. " Hide " .. tostring(AutoBar.barList[barKey].barName))
 			bar = AutoBar.barList[barKey]
 			bar.frame:Hide()
-			LibStickyFrames:SetFrameEnabled(bar.frame)
-			LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+			AB.LibStickyFrames:SetFrameEnabled(bar.frame)
+			AB.LibStickyFrames:SetFrameText(bar.frame, bar.barName)
 		end
 	end
 

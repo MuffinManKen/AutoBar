@@ -199,6 +199,14 @@ end
 -- Optional attributes:
 --		targeted, nonCombat, battleground
 ---@class CategoryClass
+---@field categoryKey string
+---@field description string	localized name
+---@field texture string
+---@field targeted boolean
+---@field nonCombat boolean
+---@field battleground boolean
+---@field noSpellCheck boolean
+---@field items table
 ABGCode.CategoryClass = {}
 local CategoryClass = ABGCode.CategoryClass
 
@@ -386,9 +394,6 @@ function SpellsCategory:Refresh()
 end
 
 
--- Custom Category
-ABGCode.CustomCategory = CreateFromMixins(CategoryClass)
-local CustomCategory = ABGCode.CustomCategory
 
 -- Return a unique key to use
 ---@param p_custom_category_name string
@@ -410,6 +415,12 @@ function ABGCode.GetNewCustomCategoryName(baseName, index)
 	end
 	return newName, newKey
 end
+
+
+-- Custom Category
+ABGCode.CustomCategory = CreateFromMixins(CategoryClass)
+local CustomCategory = ABGCode.CustomCategory
+
 
 -- Select an Icon to use
 -- Add description verbatim to localization
@@ -550,7 +561,7 @@ function ABGCode.InitializeAllCategories()
 		AutoBarCategoryList["Macro.Raid Target"]:AddMacroText('/run SetRaidTarget("target", ' .. index .. ')',  "Interface/targetingframe/UI-RaidTargetingIcon_" .. index, L["Raid " .. index])
 	end
 
-	AutoBarCategoryList["Battle Pet.Favourites"] = ABGCode.MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
+	AutoBarCategoryList["Battle Pet.Favourites"] = MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
 
 
 	AutoBarCategoryList["Misc.Hearth"] = ItemsCategory:new("Misc.Hearth", "INV_Misc_Rune_01", "Misc.Hearth")
