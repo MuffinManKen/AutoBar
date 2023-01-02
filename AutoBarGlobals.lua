@@ -68,7 +68,7 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
-AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace.MakeSet{"DRUID", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
+AutoBarGlobalDataObject.set_mana_users = AutoBarGlobalCodeSpace.MakeSet{"DRUID", "EVOKER", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
 
 function AutoBarGlobalCodeSpace.ClassUsesMana(p_class_name)
 
