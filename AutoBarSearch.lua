@@ -48,7 +48,7 @@ AutoBarSearch = {
 	}
 }
 
-local METHOD_DEBUG = true
+local METHOD_DEBUG = false
 local DEBUG_IDS = ABGCode.MakeSet({182773, 172179})
 local DEBUG_GUIDS = ABGCode.MakeSet({ABGCode.ToyGUID(182773), ABGCode.ToyGUID(172179)})
 
@@ -238,7 +238,7 @@ function Items.prototype:Populate()
 		if (button and button[1]) then
 			for category_index = 1, # button, 1 do
 				local category, item_list = get_items(button[category_index])
-				if(button[category_index] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(item_list)) end
+				--if(button[category_index] == "Muffin.Toys.Hearth") then ABGCode.LogWarning("   ", category, AB.Dump(item_list)) end
 				if (item_list) then
 					self:Add(item_list, buttonKey, category, category_index)
 				end
@@ -287,7 +287,7 @@ end
 -- Add itemId to bag, slot
 function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 	local searchSpace = AutoBarSearch.space:GetList()
-	local debug = (DEBUG_GUIDS[itemId])
+	local debug = false --(DEBUG_GUIDS[itemId])
 	if (debug) then ABGCode.LogWarning("Found:Add", itemId, bag, slot, spell, "-->foundData:", AB.Dump(self.dataList[itemId], 1), "space:", searchSpace[itemId]); end
 
 	local itemData = self.dataList[itemId]
@@ -439,7 +439,7 @@ end
 
 -- Add the brand new item to any interested buttons
 function Current.prototype:Merge(itemId)
-	local debug = (DEBUG_GUIDS[itemId])
+	local debug = false --(DEBUG_GUIDS[itemId])
 	if (debug) then ABGCode.LogWarning("Current:Merge", itemId); end
 
 	local items = AutoBarSearch.items:GetList()
@@ -470,7 +470,7 @@ end
 
 -- Add the found item to the list of itemIds for the given buttonKey
 function Current.prototype:Add(buttonKey, itemId)
-	local debug = (DEBUG_IDS[itemId])
+	local debug = false --(DEBUG_IDS[itemId])
 	if (debug) then ABGCode.LogWarning("Current:Add", buttonKey, itemId); end
 
 	if (not self.dataList[buttonKey]) then
@@ -484,7 +484,7 @@ end
 -- Remove the found item from the list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Current.prototype:Delete(buttonKey, itemId)
-	local debug = (buttonKey == "AutoBarButtonHearth")
+	local debug = false --(buttonKey == "AutoBarButtonHearth")
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
@@ -535,7 +535,7 @@ end
 
 -- Add the found item to the list of itemIds for the given buttonKey
 function Sorted.prototype:Add(buttonKey, itemId, slotIndex, categoryIndex)
-	local debug = (DEBUG_IDS[itemId])
+	local debug = false --(DEBUG_IDS[itemId])
 	if (debug) then ABGCode.LogWarning("Sorted:Add ", buttonKey, itemId, slotIndex, categoryIndex); end
 
 	if (not self.dataList[buttonKey]) then
@@ -573,7 +573,7 @@ end
 -- Remove the found item from the list of itemIds for the given buttonKey
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Sorted.prototype:Delete(buttonKey, itemId)
-	local debug = (buttonKey == "AutoBarButtonHearth")
+	local debug = false --(buttonKey == "AutoBarButtonHearth")
 	if (debug) then ABGCode.LogWarning("Sorted:Add itemId:", itemId); end
 
 	if (not self.dataList[buttonKey]) then
@@ -891,7 +891,7 @@ end
 ---@return ABToyInfo
 function AutoBarSearch:RegisterToy(p_toy_id)
 	assert(type(p_toy_id) == "number")
-	local debug = (DEBUG_IDS[p_toy_id])
+	local debug = false --(DEBUG_IDS[p_toy_id])
 	local toy_guid = ABGCS.ToyGUID(p_toy_id)
 	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 

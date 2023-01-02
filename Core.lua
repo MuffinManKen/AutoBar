@@ -381,7 +381,7 @@ if (ABGData.is_mainline_wow) then
 	function ABGCode.events.TOYS_UPDATED(p_item_id, p_new)
 		ABGCode.LogEventStart("TOYS_UPDATED")
 
-		if(true) then ABGCode.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
+		if(false) then ABGCode.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
 
 		if(p_item_id == nil or p_new == true) then
 			ABGCode.ABScheduleUpdate(tick.ResetSearch)

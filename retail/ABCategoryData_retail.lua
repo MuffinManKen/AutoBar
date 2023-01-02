@@ -37,7 +37,7 @@ end
 -- Reset the item list in case the player learned new toys
 function ToyCategory:Refresh()
 	local list_index = 1
-	local debug = (self.categoryKey == "Muffin.Toys.Hearth")
+	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
 	if(debug) then ABGCode.LogWarning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items); end
 
 	wipe(self.items)
