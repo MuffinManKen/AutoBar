@@ -2573,8 +2573,9 @@ elseif (ABGData.is_mainline_wow) then
 		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
 		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
 
-		local num_mounts = C_MountJournal.GetNumDisplayedMounts();
-		local needs_update = (num_mounts ~= AutoBar.last_mount_count) or buttonDB.is_dirty
+		local mount_ids = C_MountJournal.GetMountIDs()
+		local num_mounts = #mount_ids
+		local needs_update = (num_mounts > AutoBar.last_mount_count) or buttonDB.is_dirty
 
 	--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
 	--print(debugstack(1, 3, 3));
@@ -2589,26 +2590,27 @@ elseif (ABGData.is_mainline_wow) then
 
 			thisIsSpam = category.initialized --or (# category.castList ~= count)
 
-			for idx = 0, num_mounts do
-				local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
-				local user_selected = (is_favourite and buttonDB.mount_show_favourites) or (not is_favourite and buttonDB.mount_show_nonfavourites)
-				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[spell_id]) or false;
+			for _k, id in ipairs(mount_ids) do
+				local mount_data = ABGCode.GetMountInfoByID(id)
+				--local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
+				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
+				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[mount_data.spell_id]) or false;
 	--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
 	--if (is_collected and is_hidden ) then
 	--	print(string.format("%5s  %5s  Usable:%5s", mount_id, spell_id, tostring(usable)), name)
 	--	print("   FacSpecific:",faction_specific, "Faction:", faction, "Hidden:", is_hidden, "Collected:", is_collected)
 	--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 	--end;
-				if (is_collected and user_selected and not qiraji_filtered) then
-					local spell_name = GetSpellInfo(spell_id)
+				if (mount_data.is_collected and user_selected and not qiraji_filtered) then
+					local spell_name = GetSpellInfo(mount_data.spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 					if not spell_name then
 						--print("AutoBar Error: Missing spell name for", spell_id, name);
 					else
-						spellIconList[spell_name] = icon
-						AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
+						spellIconList[spell_name] = mount_data.icon
+						AutoBarSearch:RegisterSpell(spell_name, mount_data.spell_id, true)
 						local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
-						spellInfo.spell_link = "spell:" .. spell_id
+						spellInfo.spell_link = "spell:" .. mount_data.spell_id
 						category.castList[# category.castList + 1] = spell_name
 					end
 				end

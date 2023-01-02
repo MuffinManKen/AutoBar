@@ -487,6 +487,27 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 
 AutoBarGlobalDataObject.player_has_toy_cache = {}
 AutoBarGlobalDataObject.is_toy_usable_cache = {}
+AutoBarGlobalDataObject.mount_data_cache_by_id = {}
+
+
+
+
+	function AutoBarGlobalCodeSpace.GetMountInfoByID(p_id)
+		local mdc = AutoBarGlobalDataObject.mount_data_cache_by_id
+		if(mdc[p_id] == nil) then
+			local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id =
+						 C_MountJournal.GetMountInfoByID(p_id)
+			local data = {}
+			data.name = name
+			data.spell_id = spell_id
+			data.icon = icon
+			data.is_favourite = is_favourite
+			data.is_collected = is_collected
+
+			mdc[p_id] = data;
+		end
+		return mdc[p_id]
+	end
 
 	--This should query a global guid registry and then the specific ones if not found.
 	function AutoBarGlobalCodeSpace.InfoFromGUID(p_guid)	---@diagnostic disable-line: duplicate-set-field
