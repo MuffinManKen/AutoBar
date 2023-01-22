@@ -7,8 +7,6 @@
 -- http://muffinmangames.com
 --
 
--- GLOBALS: GameTooltip, GetCVar, GameTooltip_SetDefaultAnchor, GetScreenWidth, SecureHandlerWrapScript, GetSpellInfo, GetMacroInfo, GetItemCooldown
--- GLOBALS: GetSpellCooldown, CooldownFrame_Set, GetItemCount, GetSpellCount, IsUsableSpell
 
 local AutoBar = AutoBar
 local ABGCode = AutoBarGlobalCodeSpace
@@ -255,13 +253,13 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 	if (itemType == "item") then
 		local item_id = self.frame:GetAttribute("itemId")
 		if (item_id) then
-			start, duration, enabled = GetItemCooldown(item_id)
+			start, duration, enabled = C_Container.GetItemCooldown(item_id)
 		end
 	elseif (itemType == "toy") then
 		local item_guid = self.frame:GetAttribute("AutoBarGUID")
 		local item_data = ABGCode.InfoFromGUID(item_guid)
 		if (item_data) then
-			start, duration, enabled = GetItemCooldown(item_data.item_id)
+			start, duration, enabled = C_Container.GetItemCooldown(item_data.item_id)
 		end
 --	elseif (itemType == "macro") then --ToDo some day
 --			local macroText = self.frame:GetAttribute("macrotext")
@@ -347,7 +345,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			isUsable, notEnoughMana = ABGCode.IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
-				local _, _, enabled = GetItemCooldown(itemId)
+				local _, _, enabled = C_Container.GetItemCooldown(itemId)
 				if (not enabled) then
 					isUsable = false
 				end
