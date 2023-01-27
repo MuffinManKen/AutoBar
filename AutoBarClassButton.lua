@@ -267,7 +267,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	frame:RegisterForClicks("AnyUp", "AnyDown")
+	frame:RegisterForClicks("AnyUp")
 	frame:RegisterForDrag("LeftButton", "RightButton")
 
 	frame:SetScript("OnUpdate", OnUpdateFunc)

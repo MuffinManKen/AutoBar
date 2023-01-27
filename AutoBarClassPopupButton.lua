@@ -85,7 +85,7 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 	self.frame = frame
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	frame:RegisterForClicks("AnyUp", "AnyDown")
+	frame:RegisterForClicks("AnyUp")
 
 	frame:SetFrameRef("popupHeader", popupHeader)
 	frame.popupHeader = popupHeader
