@@ -336,7 +336,7 @@ end
 -- Return true if successful
 -- Return nil if not
 function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewItem)
-	local _, itemCount, locked = GetContainerItemInfo(targetBag, targetSlot)
+	local _, itemCount, _locked = GetContainerItemInfo(targetBag, targetSlot)
 	local totalCount = GetItemCount(itemId)
 	if (not itemCount and totalCount > 0) then
 		AutoBarSearch:ScanBagsInCombat()
