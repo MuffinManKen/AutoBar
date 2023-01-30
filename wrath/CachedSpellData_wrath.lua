@@ -198,6 +198,7 @@ ABGCS.CacheSpellData(34433, "Shadowfiend");
 ABGCS.CacheSpellData(6346, "Fear Ward");
 ABGCS.CacheSpellData(14752, "Divine Spirit");
 ABGCS.CacheSpellData(27681, "Prayer of Spirit");
+ABGCS.CacheSpellData(15286, "Vampiric Embrace");
 --#endregion
 
 --#region Rogue
