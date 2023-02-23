@@ -125,7 +125,7 @@ function ABGCode.InitializeCategories()
 	AutoBarCategoryList["Muffin.Covenant.Wildseed"] = ItemsCategory:new("Muffin.Covenant.Wildseed", "archaeology_5_0_mogucoin", "Muffin.Covenant.Wildseed")
 	
 	AutoBarCategoryList["Muffin.Consumable.Enchants"] = ItemsCategory:new("Muffin.Consumable.Enchants", "archaeology_5_0_mogucoin", "Muffin.Consumable.Enchants")
-
+	AutoBarCategoryList["Muffin.Consumable.Runes"] = ItemsCategory:new("Muffin.Consumable.Runes", "inv_misc_rune_05", "Muffin.Consumable.Runes")
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{

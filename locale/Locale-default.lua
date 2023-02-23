@@ -243,6 +243,7 @@ local quick_sets =
 	"Muffin.Covenant.Conduit",
 	"Muffin.Covenant.Wildseed",
 	"Muffin.Consumable.Enchants",
+	"Muffin.Consumable.Runes",
 	"Misc.Unlock",
 }
 
