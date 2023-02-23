@@ -41,6 +41,7 @@ retail/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Stones.lua
 retail/MuffinLibPTSets/LibPT-Muffin.SunsongRanch.lua
 retail/MuffinLibPTSets/LibPT-Muffin.Toys.lua
+retail/MuffinLibPTSets/LibPT-Muffin.Consumable.lua
 
 
 AceGUIWidget-DragLink.lua
