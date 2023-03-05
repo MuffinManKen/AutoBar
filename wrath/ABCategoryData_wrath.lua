@@ -84,6 +84,7 @@ function ABGCode.InitializeCategories()
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Might"), ABGCode.GetSpellNameByName("Greater Blessing of Might"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Kings"), ABGCode.GetSpellNameByName("Greater Blessing of Kings"),
 		"PRIEST", ABGCode.GetSpellNameByName("Fear Ward"), ABGCode.GetSpellNameByName("Fear Ward"),
+		"PRIEST", ABGCode.GetSpellNameByName("Vampiric Embrace"), ABGCode.GetSpellNameByName("Vampiric Embrace"),
 		"PRIEST", ABGCode.GetSpellNameByName("Inner Fire"), ABGCode.GetSpellNameByName("Inner Fire"),
 		"PRIEST", ABGCode.GetSpellNameByName("Shadow Protection"), ABGCode.GetSpellNameByName("Prayer of Shadow Protection"),
 		"PRIEST", ABGCode.GetSpellNameByName("Power Word: Fortitude"), ABGCode.GetSpellNameByName("Prayer of Fortitude"),
