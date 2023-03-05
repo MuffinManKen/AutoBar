@@ -243,6 +243,8 @@ local quick_sets =
 	"Muffin.Covenant.Conduit",
 	"Muffin.Covenant.Wildseed",
 	"Misc.Unlock",
+	"Muffin.ItemEnchant.Permanent",
+	"Muffin.ItemEnchant.Temporary",
 }
 
 atl_table(quick_sets);
