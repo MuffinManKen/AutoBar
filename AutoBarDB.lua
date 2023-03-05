@@ -152,7 +152,7 @@ local CLASS_BUTTON_MAP = {
 	},
 	EVOKER =
 	{
-
+		{button_name = "AutoBarButtonClassBuff", },
 	},
 	HUNTER =
 	{

@@ -69,6 +69,9 @@ ABGCS.CacheSpellData(18960, "Teleport: Moonglade");
 ABGCS.CacheSpellData(102401, "Wild Charge");
 --#endregion
 
+--#region Evoker
+ABGCS.CacheSpellData(364342, "Blessing of the Bronze");
+--#endregion Evoker
 
 --#region Hunter
 ABGCS.CacheSpellData(61648, "Aspect of the Chameleon");

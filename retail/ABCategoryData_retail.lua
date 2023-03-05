@@ -190,6 +190,7 @@ function ABGCode.InitializeCategories()
 		"DEATHKNIGHT", ABGCode.GetSpellNameByName("Path of Frost"),
 		"DRUID", ABGCode.GetSpellNameByName("Ironbark"),
 		"DRUID", ABGCode.GetSpellNameByName("Mark of the Wild"),
+		"EVOKER", ABGCode.GetSpellNameByName("Blessing of the Bronze"),
 		"MAGE", ABGCode.GetSpellNameByName("Slow Fall"),
 		"MAGE", ABGCode.GetSpellNameByName("Arcane Intellect"),
 		"PALADIN", ABGCode.GetSpellNameByName("Blessing of Freedom"),
