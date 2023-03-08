@@ -85,8 +85,11 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 	self.frame = frame
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	frame:RegisterForClicks("AnyUp")
-
+	if (AutoBarGlobalDataObject.is_mainline_wow) then
+		frame:RegisterForClicks("AnyUp", "AnyDown")
+	else
+		frame:RegisterForClicks("AnyUp")
+	end
 	frame:SetFrameRef("popupHeader", popupHeader)
 	frame.popupHeader = popupHeader
 	frame:SetScript("OnEnter", funcOnEnter)

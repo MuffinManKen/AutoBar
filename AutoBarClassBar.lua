@@ -493,7 +493,11 @@ function AutoBar.Class.Bar.prototype:CreateDragFrame()
 
 		frame.class = self
 		frame:EnableMouse(true)
-		frame:RegisterForClicks("AnyUp")
+		if (AutoBarGlobalDataObject.is_mainline_wow) then
+			frame:RegisterForClicks("AnyUp", "AnyDown")
+		else
+			frame:RegisterForClicks("AnyUp")
+		end
 		frame:RegisterForDrag("LeftButton", "RightButton")
 ---		frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	end
