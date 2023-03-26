@@ -1,2 +1,2 @@
 
-..\WowPackager\wow_packager.py %*
+py ..\WowPackager\wow_packager.py %*
