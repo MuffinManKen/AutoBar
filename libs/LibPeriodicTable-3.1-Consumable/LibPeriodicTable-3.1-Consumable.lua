@@ -4,10 +4,10 @@ if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded befo
 LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 658 $", "(%d+)", function(n) return n+90000 end), {
 	["Consumable.Anti-Venom"]="6452:25,6453:35,13462:60,2633:60,19440:60,12586:60,9030:60,3386:60,31437:70,25550:70",
 	["Consumable.Artifact Power"]="",
-	["Consumable.Bandage.Basic"]="1251:66,2581:114,3530:161,3531:301,8545:312,14529:390,6450:400,14530:442,142332:578,6451:640,53049:780,8544:800,21990:800,34721:800,53050:840,53051:900,21991:904,34722:967,72985:980,72986:1120,111603:1440,133940:1540,136653:1980,158381:2240,133942:2420,158382:3520,173192:7000,173191:11000",
+	["Consumable.Bandage.Basic"]="1251:66,2581:114,3530:161,3531:301,8545:312,14529:390,6450:400,14530:442,6451:640,8544:800,21990:800,142332:893,21991:904,53049:910,34721:933,53050:980,53051:1050,34722:1128,72985:1400,72986:1600,111603:2080,133940:2380,158381:2800,136653:3060,133942:3740,158382:4400,173192:7000,173191:11000,194048:33977",
 	["Consumable.Bandage.Battleground.Alterac Valley"]="19307:960",
-	["Consumable.Bandage.Battleground.Arathi Basin"]="20065:338,20232:338,20237:338,20067:343,20235:343,20244:343,20066:616,20234:616,20243:616",
-	["Consumable.Bandage.Battleground.Warsong Gulch"]="19067:312,19068:320,19066:608",
+	["Consumable.Bandage.Battleground.Arathi Basin"]="20065:338,20232:338,20237:338,20067:343,20235:343,20244:343,20066:924,20234:924,20243:924",
+	["Consumable.Bandage.Battleground.Warsong Gulch"]="19067:312,19068:320,19066:912",
 
 	--NOT AUTOGENNED Self buffs are on caster only, target buffs are on target
 	--Under no circumstances do you add food buffs here, nor weapon buffs for now.  These are applied differently / noncombat
