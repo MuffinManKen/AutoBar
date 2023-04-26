@@ -245,6 +245,7 @@ local quick_sets =
 	"Misc.Unlock",
 	"Muffin.ItemEnchant.Permanent",
 	"Muffin.ItemEnchant.Temporary",
+	"Muffin.Bandages.Basic",
 }
 
 atl_table(quick_sets);

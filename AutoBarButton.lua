@@ -1102,6 +1102,13 @@ function AutoBarButtonBandages.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Bandage.Battleground.Alterac Valley")
 	self:AddCategory("Consumable.Bandage.Battleground.Arathi Basin")
 	self:AddCategory("Consumable.Bandage.Battleground.Warsong Gulch")
+
+	if (AutoBarGlobalDataObject.is_mainline_wow) then
+		self:AddCategory("Muffin.Bandages.Basic")
+	end
+
+
+
 end
 
 
