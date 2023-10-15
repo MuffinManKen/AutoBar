@@ -112,7 +112,7 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		local all_mounts = C_MountJournal.GetMountIDs();
 		for _, mount_id in ipairs(all_mounts) do
 			local name, spell_id, icon, is_active, is_usable, source_type, is_favorite, is_faction_specific, faction, should_hide_on_char, is_collected = C_MountJournal.GetMountInfoByID(mount_id)
-			if (is_collected) then
+			if (is_collected and not should_hide_on_char) then
 				-- print("Collected mount:", mount_id, name, spell_id, icon, is_favourite)
 
 				local spell_name = GetSpellInfo(spell_id)
