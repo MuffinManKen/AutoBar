@@ -5,5 +5,7 @@ AB.WHATSNEW_TEXT = "" ..
 [[
  - Updated data
  - TOC Update
- - I'm not playing WoW, so if things are missing make sure you report them.
+ - If you'd like to see development continue, consider supporting the Kickstarter:
+ https://www.kickstarter.com/projects/2075655491/autobar-2023
+
 ]] .. "|n"

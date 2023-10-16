@@ -383,7 +383,7 @@ local function migrate_db_from_ace2()
 
 	for key in pairs(AutoBarDB2.classes) do
 		if(CLASS_BAR_MAP[key] == nil) then
-			print("Removing from classes:", key)
+			--print("Removing from classes:", key)
 			AutoBarDB2.classes[key] = nil
 		end
 
