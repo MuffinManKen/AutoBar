@@ -109,18 +109,21 @@ function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 
 		thisIsSpam = category.initialized --or (# category.castList ~= count)
 
-		for idx = 1, num_mounts do
-			local _creature_id, name, spell_id, icon, _is_summoned, _mount_type = GetCompanionInfo("MOUNT", idx)
-			--print(creature_id, creature_name, creature_spell_id, icon, is_summoned, mount_type)
+		local all_mounts = C_MountJournal.GetMountIDs();
+		for _, mount_id in ipairs(all_mounts) do
+			local name, spell_id, icon, is_active, is_usable, source_type, is_favorite, is_faction_specific, faction, should_hide_on_char, is_collected = C_MountJournal.GetMountInfoByID(mount_id)
+			if (is_collected and not should_hide_on_char) then
+				-- print("Collected mount:", mount_id, name, spell_id, icon, is_favourite)
 
-			local spell_name = GetSpellInfo(spell_id)
-			--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id);
-			if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
-			spellIconList[spell_name] = icon
-			AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
-			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
-			spellInfo.spell_link = "spell:" .. spell_id		--TODO: This shouldn't be necessary. Test to see if RegisterSpell isn't giving a good link
-			category.castList[# category.castList + 1] = spell_name
+				local spell_name = GetSpellInfo(spell_id)
+				-- print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id);
+				if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
+				spellIconList[spell_name] = icon
+				AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
+				local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
+				spellInfo.spell_link = "spell:" .. spell_id		--TODO: This shouldn't be necessary. Test to see if RegisterSpell isn't giving a good link
+				category.castList[# category.castList + 1] = spell_name
+			end
 
 		end
 
