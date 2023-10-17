@@ -3,6 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Backed out a stupid hack that was required for Dragonflight, but made Wrath double-click stuff
+ - Possible fix for new/old Collections API change (provided by Tim Stirrat)
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
