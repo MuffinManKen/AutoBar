@@ -811,7 +811,7 @@ end
 -- Multiple calls refresh current state of the spell
 -- {spellName = {can_cast, spell_link, no_spell_check, spell_id}}
 ---@param p_spell_name string
----@param p_spell_id integer
+---@param p_spell_id integer|nil
 ---@param p_no_spell_check boolean|nil
 ---@param p_spell_link string|nil
 ---@return boolean

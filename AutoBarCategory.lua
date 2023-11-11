@@ -201,17 +201,17 @@ end
 ---@class CategoryClass
 ---@field categoryKey string
 ---@field description string	localized name
----@field texture string
+---@field texture string|number
 ---@field targeted boolean
 ---@field nonCombat boolean
 ---@field battleground boolean
 ---@field noSpellCheck boolean
 ---@field items table
 ABGCode.CategoryClass = {}
-local CategoryClass = ABGCode.CategoryClass
+local CategoryClass = ABGCode.CategoryClass ---@class CategoryClass
 
 ---@param description string
----@param texture string
+---@param texture string|number
 function CategoryClass:init(description, texture)
 	self.categoryKey = description
 	self.description = L[description]
@@ -258,10 +258,12 @@ end
 function CategoryClass:Refresh() -- luacheck: no unused args
 end
 
-
+---@class ItemsCategory: CategoryClass
+---@field pt_items table
+---@field ptPriorityItems table
 -- Category consisting of regular items, defined by PeriodicTable sets
 ABGCode.ItemsCategory = CreateFromMixins(CategoryClass)
-local ItemsCategory = ABGCode.ItemsCategory
+local ItemsCategory = ABGCode.ItemsCategory ---@class ItemsCategory
 
 -- p_pt_items, p_pt_priority_items are PeriodicTable sets
 -- p_pt_priority_items sort higher than items at the same value
@@ -286,9 +288,10 @@ function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_prio
 	return obj
 end
 
+---@class MacroTextCategory: CategoryClass
 
 ABGCode.MacroTextCategory = CreateFromMixins(CategoryClass)
-local MacroTextCategory = ABGCode.MacroTextCategory
+local MacroTextCategory = ABGCode.MacroTextCategory	---@class MacroTextCategory
 
 function MacroTextCategory:new(p_description, p_short_texture)
 	assert(type(p_description) == "string")
@@ -312,8 +315,12 @@ end
 
 
 -- Category consisting of spells
+---@class SpellsCategory: CategoryClass
+---@field castList table
+---@field rightClickList table
+
 ABGCode.SpellsCategory = CreateFromMixins(CategoryClass)
-local SpellsCategory = ABGCode.SpellsCategory
+local SpellsCategory = ABGCode.SpellsCategory ---@class SpellsCategory
 
 -- castList, is of the form:
 -- { "DRUID", "Flight Form", "DRUID", "Swift Flight Form", ["<class>", "<localized spell name>",] ... }
@@ -395,31 +402,12 @@ end
 
 
 
--- Return a unique key to use
----@param p_custom_category_name string
-function ABGCode.GetCustomCategoryKey(p_custom_category_name)
-	assert(type(p_custom_category_name) =="string")
-	local newKey = "Custom" .. p_custom_category_name
-	return newKey
-end
-
--- Return the unique name to use
-function ABGCode.GetNewCustomCategoryName(baseName, index)
-	local newName = baseName .. index
-	local newKey = ABGCode.GetCustomCategoryKey(newName)
-	local customCategories = AutoBarDB2.custom_categories
-	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
-		index = index + 1
-		newName = baseName .. index
-		newKey = ABGCode.GetCustomCategoryKey(newName)
-	end
-	return newName, newKey
-end
-
-
 -- Custom Category
+---@class CustomCategory: CategoryClass
+---@field customCategoriesDB table
+
 ABGCode.CustomCategory = CreateFromMixins(CategoryClass)
-local CustomCategory = ABGCode.CustomCategory
+local CustomCategory = ABGCode.CustomCategory	---@class CustomCategory
 
 
 -- Select an Icon to use
@@ -956,6 +944,26 @@ function ABGCode.UpdateCustomCategories()
 
 end
 
+-- Return a unique key to use
+---@param p_custom_category_name string
+function ABGCode.GetCustomCategoryKey(p_custom_category_name)
+	assert(type(p_custom_category_name) =="string")
+	local newKey = "Custom" .. p_custom_category_name
+	return newKey
+end
+
+-- Return the unique name to use
+function ABGCode.GetNewCustomCategoryName(baseName, index)
+	local newName = baseName .. index
+	local newKey = ABGCode.GetCustomCategoryKey(newName)
+	local customCategories = AutoBarDB2.custom_categories
+	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
+		index = index + 1
+		newName = baseName .. index
+		newKey = ABGCode.GetCustomCategoryKey(newName)
+	end
+	return newName, newKey
+end
 
 --[[
 /dump AutoBarCategoryList["Consumable.Cooldown.Potion.Health.PvP"]

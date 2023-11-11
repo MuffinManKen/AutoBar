@@ -218,7 +218,7 @@ function LibStickyFrames:SetFrameText(frame, barName) end
 
 
 --#region LibPeriodicTable
----@class LibPeriodicTable
+---@class LibPeriodicTable-3.1
 LibPeriodicTable = {}
 
 ---@param pt_set string
