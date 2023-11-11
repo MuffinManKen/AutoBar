@@ -422,7 +422,7 @@ function ABGCode.events.PLAYER_ENTERING_WORLD()
 	end
 
 
-	if(AutoBarDB2.settings.hack_PetActionBarFrame) then
+	if(AutoBarDB2.settings.hack_PetActionBarFrame and PetActionBarFrame) then
 		PetActionBarFrame:EnableMouse(false);
 	end
 
