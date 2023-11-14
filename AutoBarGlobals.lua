@@ -6,13 +6,18 @@
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
-local print, select, ipairs, tostring, pairs, tonumber, string = print, select, ipairs, tostring, pairs, tonumber, string
+local print, select, ipairs, tostring, pairs, tonumber, string, next = print, select, ipairs, tostring, pairs, tonumber, string, next
 
 ---@diagnostic disable-next-line: assign-type-mismatch
 AB.LibKeyBound = LibStub("LibKeyBound-1.0")	---@type LibKeyBound
 
 ---@diagnostic disable-next-line: assign-type-mismatch
 AB.LibStickyFrames = LibStub("LibStickyFrames-2.0") ---@type LibStickyFrames
+
+---@param p_table table
+function AB.is_table_empty(p_table)
+	return next(p_table) == nil
+end
 
 AutoBar = {}
 AutoBar.warning_log = {}
