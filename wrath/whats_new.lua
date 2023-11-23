@@ -3,6 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Possible fix for new/old Collections API change (provided by Tim Stirrat)
+ - Added Aspect of the Dragonhawk
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
