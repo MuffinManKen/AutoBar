@@ -2421,6 +2421,10 @@ elseif (ABGData.is_mainline_wow) then
 	function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
 	end
+
+	local reverse_sort_func = function( a,b ) return a > b end
+	local forward_sort_func = function( a,b ) return a < b end
+
 --[[
 	-------------------------- AutoBarButtonToyBox ---------------------
 	local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
@@ -2447,8 +2451,6 @@ elseif (ABGData.is_mainline_wow) then
 		--print("After refresh ToyBox item list has " .. #AutoBarCategoryList["Toys.ToyBox"].items .. " entries");
 	end
 
-	local reverse_sort_func = function( a,b ) return a > b end
-	local forward_sort_func = function( a,b ) return a < b end
 
 	function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
 		AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
