@@ -252,8 +252,16 @@ function Frame:SetBackdropColor(r, g, b, a) end
 ---@class Masque
 local Masque = {}
 
+---@class MasqueGroup
+---@field Backdrop any
+---@field Gloss any
+---@field Colors table
+---@field SkinID any
+MasqueGroup = {}
+
 ---@param group_name string
 ---@param other_param any?
+---@return MasqueGroup
 function Masque:Group(group_name, other_param) end
 
 
@@ -266,7 +274,16 @@ function Masque:GetBackdrop(button) end
 function Masque:GetGloss(button) end
 --#endregion Masque
 
+--#region C_Addons
+---@class C_Addons
+C_Addons = {
+}
 
+---@param p_name string|number
+---@param p_variable string
+function C_Addons:GetAddOnMetadata(p_name, p_variable) end
+
+--#endregion C_Addons
 
 
 --#region AceConfigRegistry
@@ -311,10 +328,10 @@ AutoBarDB2 = {}
 
 
 ---@class ABSpellInfo
----@field can_cast boolean
----@field spell_link string
----@field no_spell_check boolean
----@field spell_id number
+---@field can_cast boolean|nil
+---@field spell_link string|nil
+---@field no_spell_check boolean|nil
+---@field spell_id number|nil
 ABSpellInfo = {}
 
 ---@class ABToyInfo
@@ -328,6 +345,13 @@ ABToyInfo = {}
 
 
 
-
-
 AutoBarDB = {}
+
+
+---@class MUFFIN_WHATS_NEW_QUEUE
+MUFFIN_WHATS_NEW_QUEUE = {}
+
+---@param p_params table
+function MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry(p_params) end
+
+function MUFFIN_WHATS_NEW_QUEUE.Show() end
