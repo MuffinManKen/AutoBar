@@ -3,9 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - API updates
- - TOC Update
- - If you'd like to see development continue, consider supporting the Kickstarter:
- https://www.kickstarter.com/projects/2075655491/autobar-2023
-
+ - Updated dataming
+ - Fixed Hunter's Track button
+ - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
