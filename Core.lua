@@ -231,7 +231,7 @@ function AutoBar:InitializeZero()
 	_, AutoBar.CLASS = UnitClass("player")
 	AutoBar.NiceClass = string.sub(AutoBar.CLASS, 1, 1) .. string.lower(string.sub(AutoBar.CLASS, 2))
 
-	AutoBar.version = GetAddOnMetadata(ADDON_NAME, "Version")
+	AutoBar.version = AB.GetAddOnMetadata(ADDON_NAME, "Version")
 
 	AutoBar.InitializeDB()
 	AutoBar:InitializeOptions()

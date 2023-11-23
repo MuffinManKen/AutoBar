@@ -479,6 +479,8 @@ AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlo
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
 
+---@diagnostic disable-next-line: deprecated
+AB.GetAddOnMetadata = GetAddOnMetadata or C_Addons.GetAddOnMetadata
 
 
 if (AutoBarGlobalDataObject.is_mainline_wow) then
