@@ -65,6 +65,7 @@ function AB.InitializeCategories()
 		"HUNTER", AB.GetSpellNameByName("Aspect of the Pack"),
 		"HUNTER", AB.GetSpellNameByName("Aspect of the Beast"),
 		"HUNTER", AB.GetSpellNameByName("Aspect of the Viper"),
+		"HUNTER", AB.GetSpellNameByName("Aspect of the Dragonhawk"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"], nil,

@@ -91,6 +91,7 @@ AB.CacheSpellData(13809, "Frost Trap");
 AB.CacheSpellData(13813, "Explosive Trap");
 AB.CacheSpellData(13795, "Immolation Trap");
 AB.CacheSpellData(34600, "Snake Trap");
+AB.CacheSpellData(61847, "Aspect of the Dragonhawk");
 --#endregion
 
 --#region Mage
