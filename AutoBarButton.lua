@@ -11,7 +11,6 @@ local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally
 local AutoBar = AutoBar
 local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
 
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
@@ -65,7 +64,7 @@ end
 -- Handle rearranging of buttons when buttonLock is off
 function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 
-	if(itemType == "item" and ABGCode.PlayerHasToy(itemId)) then
+	if(itemType == "item" and AB.PlayerHasToy(itemId)) then
 		AutoBar:Print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
 		return;
 	end
@@ -633,7 +632,7 @@ local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB
 if(ABGData.is_mainline_wow) then
-	SPELL_MILL_HERB = ABGCode.GetSpellNameByName("Milling")
+	SPELL_MILL_HERB = AB.GetSpellNameByName("Milling")
 end
 
 local TRINKET1_SLOT = 13
@@ -900,14 +899,14 @@ end
 --		if (self.class and self.class.sharedLayoutDB) then
 --			GameTooltip:AddLine(self.class.barName)
 --		elseif(isAutoBarButton) then
---			GameTooltip:AddLine(ABGCode.GetButtonDisplayName(self.class.buttonDB))
+--			GameTooltip:AddLine(AB.GetButtonDisplayName(self.class.buttonDB))
 --		end
 --	else
 --		local buttonType = self:GetAttribute("type")
 --
 --		if (not buttonType) then
 --			if (isAutoBarButton) then
---				GameTooltip:AddLine(ABGCode.GetButtonDisplayName(self.class.buttonDB))
+--				GameTooltip:AddLine(AB.GetButtonDisplayName(self.class.buttonDB))
 --			else
 --				self.updateTooltip = nil
 --			end
@@ -999,7 +998,7 @@ end
 -- Add category to the end of the buttons list
 function AutoBarButton.prototype:AddCategory(p_category_name)
 	if not AutoBarCategoryList[p_category_name] then
-		ABGCode.LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
+		AB.LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
 	end
 	for _, category in ipairs(self) do
 		if (category == p_category_name) then
@@ -1327,13 +1326,13 @@ if (ABGData.is_mainline_wow) then
 end
 
 --[[
-		"*", ABGCode.GetSpellNameByName("Archaeology"),
-		"*", ABGCode.GetSpellNameByName("Cooking Fire"),
-		"*", ABGCode.GetSpellNameByName("Disenchant"),
-		"*", ABGCode.GetSpellNameByName("Milling"),
-		"*", ABGCode.GetSpellNameByName("Prospecting"),
-		"*", ABGCode.GetSpellNameByName("Smelting"),
-		"*", ABGCode.GetSpellNameByName("Survey"),
+		"*", AB.GetSpellNameByName("Archaeology"),
+		"*", AB.GetSpellNameByName("Cooking Fire"),
+		"*", AB.GetSpellNameByName("Disenchant"),
+		"*", AB.GetSpellNameByName("Milling"),
+		"*", AB.GetSpellNameByName("Prospecting"),
+		"*", AB.GetSpellNameByName("Smelting"),
+		"*", AB.GetSpellNameByName("Survey"),
 --]]
 
 AutoBarButtonCustom = AceOO.Class(AutoBarButton)
@@ -1813,7 +1812,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if  (ABGCode.ClassUsesMana(AutoBar.CLASS)) then
+	if  (AB.ClassUsesMana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 
@@ -2180,7 +2179,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = ABGCode.GetIconForItemID((tonumber(itemId)))
+		local macroTexture = AB.GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
@@ -2203,7 +2202,7 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 			self:AddCategory("Spell.Mage.Conjure Water")
 	end
 
-	if (ABGCode.ClassUsesMana(AutoBar.CLASS)) then
+	if (AB.ClassUsesMana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 
@@ -2432,7 +2431,7 @@ elseif (ABGData.is_mainline_wow) then
 	--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
 
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
-			AutoBarCategoryList["Toys.ToyBox"] = ABGCode.ToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
+			AutoBarCategoryList["Toys.ToyBox"] = AB.ToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
 			local category = AutoBarCategoryList["Toys.ToyBox"]
 			category.initialized = false
 		end
@@ -2493,12 +2492,12 @@ elseif (ABGData.is_mainline_wow) then
 				local item_id = C_ToyBox.GetToyFromIndex(i)
 				local _, toy_name, toy_icon, toy_is_fave = C_ToyBox.GetToyInfo(item_id)
 				local user_selected = (buttonDB.toybox_only_show_favourites and toy_is_fave) or not buttonDB.toybox_only_show_favourites
-				if (ABGCode.PlayerHasToy(item_id) and user_selected) then
+				if (AB.PlayerHasToy(item_id) and user_selected) then
 					--print("  Adding ", toy_name, item_id, toy_is_fave);
 					local link = C_ToyBox.GetToyLink(item_id)
 	--				AutoBarSearch:RegisterToy(item_id, link)
 					if(not link) then
-						ABGCode.SetMissingItemFlag(item_id)
+						AB.SetMissingItemFlag(item_id)
 					end
 					category.all_items[#category.all_items + 1] = item_id
 				end
@@ -2598,7 +2597,7 @@ elseif (ABGData.is_mainline_wow) then
 			thisIsSpam = category.initialized --or (# category.castList ~= count)
 
 			for _k, id in ipairs(mount_ids) do
-				local mount_data = ABGCode.GetMountInfoByID(id)
+				local mount_data = AB.GetMountInfoByID(id)
 				--local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
 				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
 				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[mount_data.spell_id]) or false;

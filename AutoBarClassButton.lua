@@ -14,7 +14,6 @@
 local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 
@@ -386,7 +385,7 @@ end
 -- For a given itemId, find and shuffle stacks of it to targetBag, targetSlot
 -- Return true if successful
 -- Return nil if not
---TODO: Is this ever called??? ABGCS isn't defined here
+--TODO: Is this ever called???
 function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targetSlot)
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
@@ -395,15 +394,15 @@ function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targ
 			local itemType = self.frame:GetAttribute("type")
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
-				local isUsable = ABGCS.IsUsableItem(itemId)
+				local isUsable = AB.IsUsableItem(itemId)
 				if (isUsable) then
 					-- It is usable so we have some in inventory so switch
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)
 					if (didShuffle) then
 						local texture
-						texture = ABGCS.GetIconForItemID(tonumber(itemId))
+						texture = AB.GetIconForItemID(tonumber(itemId))
 						self.frame.icon:SetTexture(texture)
-						texture = ABGCS.GetIconForItemID(tonumber(buttonItemId))
+						texture = AB.GetIconForItemID(tonumber(buttonItemId))
 						frame.icon:SetTexture(texture)
 						return true
 	--					self:UpdateButton()
@@ -523,7 +522,7 @@ function AutoBar.Class.Button.prototype:UpdateButton()
 	end
 
 	if (AutoBar.moveButtonsMode) then
-		frame.macroName:SetText(ABGCode.GetButtonDisplayName(self.buttonDB))
+		frame.macroName:SetText(AB.GetButtonDisplayName(self.buttonDB))
 --	elseif self.parentBar.sharedLayoutDB.showMacrotext then
 --		frame.macroName:SetText(GetActionText(self.action))
 	else
@@ -800,7 +799,6 @@ function AutoBar.Class.Button.prototype:ShowButton()
 		if (popupHeader) then
 			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
-				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
 					backdrop:Show()
 				end
@@ -867,7 +865,7 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOn()
 	local frame = self.frame
 	frame:SetScript("OnDragStart", onDragStartFunc)
 	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
-	frame.macroName:SetText(ABGCode.GetButtonDisplayName(self.buttonDB))
+	frame.macroName:SetText(AB.GetButtonDisplayName(self.buttonDB))
 	frame:Show()
 end
 

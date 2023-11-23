@@ -3,7 +3,7 @@
 local t1 = debugprofilestop()
 
 local t2 = debugprofilestop()
-AutoBarGlobalCodeSpace.AddProfileData("name", t2 - t1)
+AB.AddProfileData("name", t2 - t1)
 
 
  ** To fix Rearrange on Use, search for instances of arrangeOnUse and fix 'em.  The code doesn't know how to handle macrotext stuff

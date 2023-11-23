@@ -14,7 +14,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
-local ABGCode = AutoBarGlobalCodeSpace
 
 local _G = _G
 local AceOO = MMGHACKAceLibrary("AceOO-2.0")
@@ -563,8 +562,8 @@ function AutoBar.Class.Bar.prototype:PositionLoad()
 	local sharedLayoutDB = self.sharedLayoutDB
 	local debug = false --self.barKey == "AutoBarClassBarBasic"
 
-	if(debug) then ABGCode.LogWarning("PositionLoad", self.barKey); end
-	if(debug) then ABGCode.LogWarning(AB.Dump(sharedPositionDB, 1)); end
+	if(debug) then AB.LogWarning("PositionLoad", self.barKey); end
+	if(debug) then AB.LogWarning(AB.Dump(sharedPositionDB, 1)); end
 	if (sharedPositionDB.stickToFrameName and _G[sharedPositionDB.stickToFrameName]) then
 		local stickToFrame = _G[sharedPositionDB.stickToFrameName]
 		AB.LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
@@ -593,8 +592,8 @@ function AutoBar.Class.Bar.prototype:PositionSave()
 	x, y = x * s, y * s
 	self.sharedPositionDB.posX = x
 	self.sharedPositionDB.posY = y
-	if(debug) then ABGCode.LogWarning("|nPositionSave", self.barKey); end
-	if(debug) then ABGCode.LogWarning(AB.Dump(self.sharedPositionDB, 1)); end
+	if(debug) then AB.LogWarning("|nPositionSave", self.barKey); end
+	if(debug) then AB.LogWarning(AB.Dump(self.sharedPositionDB, 1)); end
 
 end
 

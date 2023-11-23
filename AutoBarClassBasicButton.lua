@@ -7,9 +7,9 @@
 -- http://muffinmangames.com
 --
 
+local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 
@@ -48,11 +48,11 @@ function AutoBar.Class.BasicButton.TooltipShow(button)
 	local itemLink = button:GetAttribute("itemLink")
 	local buttonType = button:GetAttribute("type")
 	local item_guid = button:GetAttribute("AutoBarGUID")
-	local item_data = ABGCode.InfoFromGUID(item_guid)
+	local item_data = AB.InfoFromGUID(item_guid)
 
 
 	if (AutoBar.moveButtonsMode) then
-		local name = ABGCode.GetButtonDisplayName(button.class.buttonDB)
+		local name = AB.GetButtonDisplayName(button.class.buttonDB)
 		GameTooltip:AddLine(name, 0.8, 0, 1, -1)
 		GameTooltip:Show()
 	elseif(item_data) then
@@ -139,13 +139,13 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, GetSpellInfo(p_action)) or ABGCode.GetIconForItemID(p_action)
+		texture = select(3, GetSpellInfo(p_action)) or AB.GetIconForItemID(p_action)
 	end
 
 	--We haven't found a texture. This might be because it's just not cached yet.
 	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
 	if(texture == nil) then
-		ABGCode.SetMissingItemFlag(p_action);
+		AB.SetMissingItemFlag(p_action);
 	end
 
 	return texture;
@@ -155,7 +155,7 @@ end
 --local function get_texture_for_macro_body(p_macro_body)
 --	local debug = false
 --
---	local action = ABGCode.GetActionForMacroBody(p_macro_body);
+--	local action = AB.GetActionForMacroBody(p_macro_body);
 --	local texture = get_texture_for_action(action)
 --
 --	if (debug) then
@@ -180,23 +180,23 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	local texture, borderColor
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
-	local item_data =  ABGCode.InfoFromGUID(item_guid)
+	local item_data =  AB.InfoFromGUID(item_guid)
 
 	if(item_data) then
 		if(item_data.icon) then
 			texture = item_data.icon -- Use cached icon if we have one
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
-			texture = ABGCode.GetIconForToyID(item_data.item_id)
+			texture = AB.GetIconForToyID(item_data.item_id)
 			if(texture == nil) then
-				ABGCode.SetMissingItemFlag(item_data.item_id);
+				AB.SetMissingItemFlag(item_data.item_id);
 			end
 		end
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
-			texture = ABGCode.GetIconForItemID(tonumber(itemId))
+			texture = AB.GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
-				ABGCode.SetMissingItemFlag(itemId);
+				AB.SetMissingItemFlag(itemId);
 			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)
@@ -219,7 +219,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			texture = ABGCode.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
+			texture = AB.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -257,7 +257,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		end
 	elseif (itemType == "toy") then
 		local item_guid = self.frame:GetAttribute("AutoBarGUID")
-		local item_data = ABGCode.InfoFromGUID(item_guid)
+		local item_data = AB.InfoFromGUID(item_guid)
 		if (item_data) then
 			start, duration, enabled = C_Container.GetItemCooldown(item_data.item_id)
 		end
@@ -342,7 +342,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 
 		if (itemType == "item") then
 			local itemId = frame:GetAttribute("itemId")
-			isUsable, notEnoughMana = ABGCode.IsUsableItem(itemId)
+			isUsable, notEnoughMana = AB.IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
 				local _, _, enabled = C_Container.GetItemCooldown(itemId)

@@ -21,9 +21,9 @@
 
 -- GLOBALS: GetSpellInfo, GetMacroInfo, GetMacroIndexByName
 -- GLOBALS: C_ToyBox
+local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 
 --TODO: Move AutoBarCategoryList into AutoBarGlobalDataObject
@@ -57,7 +57,7 @@ end
 
 -- Add items from set to rawList
 -- If priority is true, the items will have priority over non-priority items with the same values
-function ABGCode.AddPTSetToRawList(p_raw_list, p_set, p_priority)
+function AB.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 	if (not p_raw_list) then
 		p_raw_list = {}
 	end
@@ -81,7 +81,7 @@ function ABGCode.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 end
 
 -- Convert rawList to a simple array of itemIds, ordered by their value in the set, and priority if any
-function ABGCode.RawListToItemIDList(p_raw_list)
+function AB.RawListToItemIDList(p_raw_list)
 	local itemArray = {}
 	table.sort(p_raw_list, sortList)
 	for i, j in ipairs(p_raw_list) do
@@ -185,7 +185,7 @@ local function FilterByClass(castList, p_items_per_line)
 end
 
 -- Learned new spells etc.  Refresh all categories
-function ABGCode.RefreshCategories()
+function AB.RefreshCategories()
 	for _, categoryInfo in pairs(AutoBarCategoryList) do
 		categoryInfo:Refresh()
 	end
@@ -207,8 +207,8 @@ end
 ---@field battleground boolean
 ---@field noSpellCheck boolean
 ---@field items table
-ABGCode.CategoryClass = {}
-local CategoryClass = ABGCode.CategoryClass ---@class CategoryClass
+AB.CategoryClass = {}
+local CategoryClass = AB.CategoryClass ---@class CategoryClass
 
 ---@param description string
 ---@param texture string|number
@@ -262,8 +262,8 @@ end
 ---@field pt_items table
 ---@field ptPriorityItems table
 -- Category consisting of regular items, defined by PeriodicTable sets
-ABGCode.ItemsCategory = CreateFromMixins(CategoryClass)
-local ItemsCategory = ABGCode.ItemsCategory ---@class ItemsCategory
+AB.ItemsCategory = CreateFromMixins(CategoryClass)
+local ItemsCategory = AB.ItemsCategory ---@class ItemsCategory
 
 -- p_pt_items, p_pt_priority_items are PeriodicTable sets
 -- p_pt_priority_items sort higher than items at the same value
@@ -279,19 +279,19 @@ function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_prio
 	obj.pt_items = p_pt_items
 	obj.ptPriorityItems = p_pt_priority_items
 
-	local raw_list = ABGCode.AddPTSetToRawList({}, p_pt_items, false)
+	local raw_list = AB.AddPTSetToRawList({}, p_pt_items, false)
 	if (p_pt_priority_items) then
-		raw_list = ABGCode.AddPTSetToRawList(raw_list, p_pt_priority_items, true)
+		raw_list = AB.AddPTSetToRawList(raw_list, p_pt_priority_items, true)
 	end
-	obj.items = ABGCode.RawListToItemIDList(raw_list)
+	obj.items = AB.RawListToItemIDList(raw_list)
 
 	return obj
 end
 
 ---@class MacroTextCategory: CategoryClass
 
-ABGCode.MacroTextCategory = CreateFromMixins(CategoryClass)
-local MacroTextCategory = ABGCode.MacroTextCategory	---@class MacroTextCategory
+AB.MacroTextCategory = CreateFromMixins(CategoryClass)
+local MacroTextCategory = AB.MacroTextCategory	---@class MacroTextCategory
 
 function MacroTextCategory:new(p_description, p_short_texture)
 	assert(type(p_description) == "string")
@@ -306,7 +306,7 @@ end
 function MacroTextCategory:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	assert(type(p_macro_text) == "string")
 
-	local guid = ABGCode.MacroTextGUID(p_macro_text)
+	local guid = AB.MacroTextGUID(p_macro_text)
 	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local next_index = #self.items + 1
@@ -319,8 +319,8 @@ end
 ---@field castList table
 ---@field rightClickList table
 
-ABGCode.SpellsCategory = CreateFromMixins(CategoryClass)
-local SpellsCategory = ABGCode.SpellsCategory ---@class SpellsCategory
+AB.SpellsCategory = CreateFromMixins(CategoryClass)
+local SpellsCategory = AB.SpellsCategory ---@class SpellsCategory
 
 -- castList, is of the form:
 -- { "DRUID", "Flight Form", "DRUID", "Swift Flight Form", ["<class>", "<localized spell name>",] ... }
@@ -334,10 +334,10 @@ local SpellsCategory = ABGCode.SpellsCategory ---@class SpellsCategory
 function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickList, p_pt_set)
 
 	if(type(p_cast_list) ~= "table" and p_cast_list ~= nil) then
-		ABGCode:LogWarning("Category:", p_description, " is passing a bad cast_list:", p_cast_list)
+		AB.LogWarning("Category:", p_description, " is passing a bad cast_list:", p_cast_list)
 	end
 	if(type(rightClickList) ~= "table" and rightClickList ~= nil) then
-		ABGCode:LogWarning("Category:", p_description, " is passing a bad rightClickList:", rightClickList)
+		AB.LogWarning("Category:", p_description, " is passing a bad rightClickList:", rightClickList)
 	end
 
 	local obj = CreateFromMixins(self)
@@ -347,7 +347,7 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (rightClickList) then
 		if (#rightClickList % 3 ~= 0) then
-			ABGCode:LogWarning("Category:", p_description, " rightClickList should be divisible by 3, but isn't.")
+			AB.LogWarning("Category:", p_description, " rightClickList should be divisible by 3, but isn't.")
 		end
 		obj.castList, obj.rightClickList = FilterByClass(rightClickList, 3)
 	elseif (p_cast_list) then
@@ -358,8 +358,8 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 	if (p_pt_set) then
 		assert(p_cast_list == nil)
 		assert(rightClickList == nil)
-		local raw_list = ABGCode.AddPTSetToRawList({}, p_pt_set, false)
-		local id_list = ABGCode.RawListToItemIDList(raw_list)
+		local raw_list = AB.AddPTSetToRawList({}, p_pt_set, false)
+		local id_list = AB.RawListToItemIDList(raw_list)
 		obj.castList = PTSpellIDsToSpellName(id_list)
 	end
 
@@ -406,8 +406,8 @@ end
 ---@class CustomCategory: CategoryClass
 ---@field customCategoriesDB table
 
-ABGCode.CustomCategory = CreateFromMixins(CategoryClass)
-local CustomCategory = ABGCode.CustomCategory	---@class CustomCategory
+AB.CustomCategory = CreateFromMixins(CategoryClass)
+local CustomCategory = AB.CustomCategory	---@class CustomCategory
 
 
 -- Select an Icon to use
@@ -434,7 +434,7 @@ function CustomCategory:new(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		texture = ABGCode.GetIconForItemID(tonumber(itemId))
+		texture = AB.GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
 			_, _, texture = GetSpellInfo(spellName)
@@ -455,7 +455,7 @@ function CustomCategory:new(customCategoriesDB)
 
 	obj.customCategoriesDB = customCategoriesDB
 
-	obj.customKey = ABGCode.GetCustomCategoryKey(description)
+	obj.customKey = AB.GetCustomCategoryKey(description)
 
 	obj:Refresh()
 
@@ -465,7 +465,7 @@ end
 -- If not used yet, change name to newName
 -- Return the name in use either way
 function CustomCategory:ChangeName(newName)
-	local newCategoryKey = ABGCode.GetCustomCategoryKey(newName)
+	local newCategoryKey = AB.GetCustomCategoryKey(newName)
 	if (not AutoBarCategoryList[newCategoryKey]) then
 		local oldCustomKey = self.customKey
 		self.customKey = newCategoryKey
@@ -538,10 +538,10 @@ end
 
 
 -- Create category list using PeriodicTable data.
-function ABGCode.InitializeAllCategories()
+function AB.InitializeAllCategories()
 
 	--Init Classic vs Mainline categories
-	ABGCode.InitializeCategories()
+	AB.InitializeCategories()
 
 
 	AutoBarCategoryList["Macro.Raid Target"] = MacroTextCategory:new( "Raid Target", "Spell_BrokenHeart")
@@ -914,7 +914,7 @@ end
 
 
 
-function ABGCode.UpdateCustomCategories()
+function AB.UpdateCustomCategories()
 	local customCategories = AutoBarDB2.custom_categories
 
 	-- Add any customCategories that are not already in AutoBarCategoryList
@@ -946,21 +946,21 @@ end
 
 -- Return a unique key to use
 ---@param p_custom_category_name string
-function ABGCode.GetCustomCategoryKey(p_custom_category_name)
+function AB.GetCustomCategoryKey(p_custom_category_name)
 	assert(type(p_custom_category_name) =="string")
 	local newKey = "Custom" .. p_custom_category_name
 	return newKey
 end
 
 -- Return the unique name to use
-function ABGCode.GetNewCustomCategoryName(baseName, index)
+function AB.GetNewCustomCategoryName(baseName, index)
 	local newName = baseName .. index
-	local newKey = ABGCode.GetCustomCategoryKey(newName)
+	local newKey = AB.GetCustomCategoryKey(newName)
 	local customCategories = AutoBarDB2.custom_categories
 	while (customCategories[newKey] or AutoBarCategoryList[newKey]) do
 		index = index + 1
 		newName = baseName .. index
-		newKey = ABGCode.GetCustomCategoryKey(newName)
+		newKey = AB.GetCustomCategoryKey(newName)
 	end
 	return newName, newKey
 end

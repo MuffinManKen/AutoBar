@@ -1,3 +1,4 @@
+local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 
 --These 2 maps are a bi-directional map, so you can find the location of an item by it's ID
@@ -24,7 +25,7 @@ local function initialize_maps()
 
 end
 
-function AutoBarGlobalCodeSpace.Search_AddSpell(p_spell_id, p_spell_name)
+function AB.Search_AddSpell(p_spell_id, p_spell_name)
 
 	LocationToIDMap.spells[p_spell_name] = p_spell_id
 
@@ -32,7 +33,7 @@ function AutoBarGlobalCodeSpace.Search_AddSpell(p_spell_id, p_spell_name)
 
 end
 
-function AutoBarGlobalCodeSpace.Search_AddInventoryItem(p_item_id, p_slot)
+function AB.Search_AddInventoryItem(p_item_id, p_slot)
 
 	LocationToIDMap.inventory[p_slot] = p_item_id
 
@@ -40,7 +41,7 @@ function AutoBarGlobalCodeSpace.Search_AddInventoryItem(p_item_id, p_slot)
 
 end
 
-function AutoBarGlobalCodeSpace.Search_AddBagItem(p_item_id, p_bag, p_slot)
+function AB.Search_AddBagItem(p_item_id, p_bag, p_slot)
 
 	local bag = LocationToIDMap.bags[p_bag]
 	bag[p_slot] = p_item_id

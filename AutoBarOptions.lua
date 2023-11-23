@@ -39,7 +39,6 @@
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 local _ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
@@ -144,14 +143,14 @@ function AutoBar:OpenOptions()
 end
 
 function AutoBarChanged()
-	ABGCode:UpdateObjects()
+	AB.UpdateObjects()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 -- local function ButtonCategoriesChanged()
 -- 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
--- 	ABGCode.UpdateCategories()
+-- 	AB.UpdateCategories()
 -- end
 
 
@@ -160,7 +159,7 @@ function AutoBar:ButtonsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateButtonOptions(AutoBar.optionsMain.args.buttons.args)
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -170,7 +169,7 @@ function AutoBar:BarButtonChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshBarDBLists()
 	AutoBar:RefreshUnplacedButtonList()
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AutoBar:CreateOptionsAce3()
 	AceCfgReg:NotifyChange("AutoBar")
 end
@@ -182,14 +181,14 @@ function AutoBar:BarsChanged()
 	AutoBar:RemoveDuplicateButtons()
 	AutoBar:RefreshUnplacedButtonList()
 	AutoBar:CreateOptionsAce3()
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
 
 function AutoBar:CategoriesChanged()
 	AutoBar:CreateCustomCategoryOptions(AutoBar.optionsMain.args.categories.args)
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 
@@ -221,8 +220,8 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 	local accountDB = AutoBarDB2.account.barList[barKey]
 	local debug = false --barKey == "AutoBarClassBarBasic"
 
-	if (debug) then ABGCode.LogWarning("AutoBar:GetSharedBarDB(", barKey, ", ", sharedVar, ")"); end
-	if (debug) then ABGCode.LogWarning("charDB", charDB, " classDB", classDB, " accountDB", accountDB); end
+	if (debug) then AB.LogWarning("AutoBar:GetSharedBarDB(", barKey, ", ", sharedVar, ")"); end
+	if (debug) then AB.LogWarning("charDB", charDB, " classDB", classDB, " accountDB", accountDB); end
 
 	-- Char specific db overides all others
 	if (charDB and charDB[sharedVar]) then
@@ -246,7 +245,7 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 		end
 	end
 
-	if (debug) then ABGCode.LogWarning("accountDB", accountDB, " sharedVar", accountDB[sharedVar]); end
+	if (debug) then AB.LogWarning("accountDB", accountDB, " sharedVar", accountDB[sharedVar]); end
 
 	-- Default to account
 	if (accountDB and accountDB[sharedVar]) then
@@ -261,8 +260,8 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 
 	-- No specific setting so use the widest scope available
 	if (accountDB) then
-		if (debug) then ABGCode.LogWarning("using accountDB"); end
-		if (debug) then ABGCode.LogWarning(AB.Dump(accountDB, 1)); end
+		if (debug) then AB.LogWarning("using accountDB"); end
+		if (debug) then AB.LogWarning(AB.Dump(accountDB, 1)); end
 
 		return accountDB
 	elseif (classDB) then
@@ -507,7 +506,7 @@ local function ResetBars()
 
 	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 --]]
@@ -516,7 +515,7 @@ end
 local function ResetButtons()
 	AutoBar:PopulateBars()
 	AutoBar:CreateOptionsAce3()
-	ABGCode.UpdateCategories()
+	AB.UpdateCategories()
 	AceCfgReg:NotifyChange("AutoBar")
 end
 --]]
@@ -524,7 +523,7 @@ end
 -- local function ResetAutoBar()
 -- 	AutoBar:PopulateBars()
 -- 	AutoBar:CreateOptionsAce3()
--- 	ABGCode.UpdateCategories()
+-- 	AB.UpdateCategories()
 -- 	AceCfgReg:NotifyChange("AutoBar")
 -- end
 
@@ -576,7 +575,7 @@ local function getCustomBarName(info)
 end
 
 local function setCustomBarName(info, value)
-	value = ABGCode.GetValidatedName(value)
+	value = AB.GetValidatedName(value)
 	if (value and value ~= "") then
 		local barKey = info.arg.barKey
 
@@ -601,7 +600,7 @@ local function getCustomButtonName(info)
 end
 
 local function setCustomButtonName(info, value)
-	value = ABGCode.GetValidatedName(value)
+	value = AB.GetValidatedName(value)
 	if (value and value ~= "") then
 		local buttonKey = info.arg.buttonKey
 		if (AutoBar.Class.Button:NameExists(value)) then
@@ -919,7 +918,7 @@ end
 
 
 function AutoBar:CategoryNew()
-	local newCategoryName, categoryKey = ABGCode.GetNewCustomCategoryName(L["Custom"], 1)
+	local newCategoryName, categoryKey = AB.GetNewCustomCategoryName(L["Custom"], 1)
 	local customCategories = AutoBarDB2.custom_categories
 	customCategories[categoryKey] = {
 		name = newCategoryName,
@@ -927,7 +926,7 @@ function AutoBar:CategoryNew()
 		categoryKey = categoryKey,
 		items = {},
 	}
-	AutoBarCategoryList[categoryKey] = ABGCode.CustomCategory:new(AutoBarDB2.custom_categories[categoryKey])
+	AutoBarCategoryList[categoryKey] = AB.CustomCategory:new(AutoBarDB2.custom_categories[categoryKey])
 	AutoBar:CategoriesChanged()
 	return categoryKey
 end
@@ -1922,7 +1921,7 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 	if (not buttonDB) then
 		return existingConfig
 	end
-	local name = ABGCode.GetButtonDisplayName(buttonDB)
+	local name = AB.GetButtonDisplayName(buttonDB)
 
 	local passValue
 	if (existingConfig) then
@@ -2326,17 +2325,17 @@ end
 
 local function getCategoryValue(info)
 	local categoryKey = info.arg.categoryKey
-	return ABGCode.GetCategoryDB(categoryKey)[info[# info]]
+	return AB.GetCategoryDB(categoryKey)[info[# info]]
 end
 
 local function setCategoryValue(info, value)
 	local categoryKey = info.arg.categoryKey
-	ABGCode.GetCategoryDB(categoryKey)[info[# info]] = value
+	AB.GetCategoryDB(categoryKey)[info[# info]] = value
 	AutoBar:CategoriesChanged()
 end
 
 local function setCategoryName(info, value)
-	value = ABGCode.GetValidatedName(value)
+	value = AB.GetValidatedName(value)
 	if (value and value ~= "") then
 		local categoryKey = info.arg.categoryKey
 		local categoryInfo = AutoBarCategoryList[categoryKey]
@@ -2408,16 +2407,16 @@ end
 
 local function getCategoryMacroName(info)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	return ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemId
+	return AB.GetCategoryItemDB(categoryKey, itemIndex).itemId
 end
 
 local function setCategoryMacroName(info, value)
-	value = ABGCode.GetValidatedName(value)
+	value = AB.GetValidatedName(value)
 	if (value and value ~= "") then
 		local newName = value--categoryInfo:ChangeName(value)
 		if (newName == value) then
 			local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-			ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemId = newName
+			AB.GetCategoryItemDB(categoryKey, itemIndex).itemId = newName
 			AutoBar:BarButtonChanged()
 		end
 	end
@@ -2426,12 +2425,12 @@ end
 
 local function getCategoryMacroText(info)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	return ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemInfo
+	return AB.GetCategoryItemDB(categoryKey, itemIndex).itemInfo
 end
 
 local function setCategoryMacroText(info, value)
 	local categoryKey, itemIndex = info.arg.categoryKey, info.arg.itemIndex
-	ABGCode.GetCategoryItemDB(categoryKey, itemIndex).itemInfo = value
+	AB.GetCategoryItemDB(categoryKey, itemIndex).itemInfo = value
 	AutoBar:BarButtonChanged()
 end
 

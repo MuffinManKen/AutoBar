@@ -9,7 +9,6 @@
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 
 local L = AutoBarGlobalDataObject.locale
 local _
@@ -109,10 +108,10 @@ InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
 local function set_nameless_category_text(p_widget)
 
 	local edit_box_cat = p_widget:GetUserData("edit_box_cat")
-	edit_box_cat:SetText(ABGCode.FindNamelessCategories())
+	edit_box_cat:SetText(AB.FindNamelessCategories())
 
 	local edit_box_btn = p_widget:GetUserData("edit_box_btn")
-	edit_box_btn:SetText(ABGCode.FindNamelessButtons())
+	edit_box_btn:SetText(AB.FindNamelessButtons())
 
 --	edit_box:SetText(print_map_ids())
 
@@ -158,7 +157,7 @@ local function DrawGroupWarnings(container)
 	edit_box:SetLabel("")
 	container:AddChild(edit_box)
 
-	edit_box:SetText(AutoBarGlobalCodeSpace.GetWarningLogString())
+	edit_box:SetText(AB.GetWarningLogString())
 
 end
 

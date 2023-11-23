@@ -54,7 +54,6 @@
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
 local AutoBar = AutoBar
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local L = ABGData.locale
 
@@ -1268,7 +1267,7 @@ local renameBarList
 function AutoBar:UpgradeBar(barDB)
 	if (barDB.isCustomBar) then
 		local oldKey = barDB.barKey
-		local newName = ABGCode.GetValidatedName(barDB.name)
+		local newName = AB.GetValidatedName(barDB.name)
 		if (newName ~= barDB.name) then
 			renameBarList[oldKey] = newName
 		end
@@ -1278,7 +1277,7 @@ end
 function AutoBar:UpgradeButton(buttonDB)
 	if (buttonDB.buttonClass == "AutoBarButtonCustom") then
 		local oldKey = buttonDB.buttonKey
-		local newName = ABGCode.GetValidatedName(buttonDB.name)
+		local newName = AB.GetValidatedName(buttonDB.name)
 		if (newName ~= buttonDB.name) then
 			renameButtonList[oldKey] = newName
 		end

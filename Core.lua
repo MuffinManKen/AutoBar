@@ -23,8 +23,6 @@ local _
 local L = AutoBarGlobalDataObject.locale
 
 local AutoBar = AutoBar
-local ABGCS = AutoBarGlobalCodeSpace	--TODO: Replace all with ABGCocde, or just the global AB
-local ABGCode = AutoBarGlobalCodeSpace
 local ABGData = AutoBarGlobalDataObject
 local tick = ABGData.TickScheduler
 
@@ -55,7 +53,7 @@ AutoBar.buttonList = {}
 -- List of buttonName = AutoBarButton for disabled buttons
 AutoBar.buttonListDisabled = {}
 
-ABGCode.events = {}
+AB.events = {}
 
 AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
 
@@ -136,7 +134,7 @@ AutoBar.frame:SetScript("OnEvent",
 		-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
 		-- PLAYER_ENTERING_WORLD runs before the throttling stuff is set up and doesn't need it anyway
 		if(event == "BAG_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
-			ABGCode.events[event]( ...)
+			AB.events[event]( ...)
 			return
 		end
 
@@ -157,7 +155,7 @@ AutoBar.frame:SetScript("OnEvent",
 			AutoBar[timer_name] = now
 		end
 
-		ABGCode.events[event]( ...)
+		AB.events[event]( ...)
 	end)
 
 AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -166,7 +164,7 @@ AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 -- Process a macro to determine what its "action" is:
 --		a spell
 --		an item
-function ABGCode.GetActionForMacroBody(p_macro_body)
+function AB.GetActionForMacroBody(p_macro_body)
 	--local debug = false
 	local action
 	local tooltip
@@ -183,7 +181,7 @@ function ABGCode.GetActionForMacroBody(p_macro_body)
 		if(show_tt_action) then
 			--if debug then print("show_tt_action:", show_tt_action); end;
 			action = show_tt_action
-			tooltip = select(2, GetItemInfo(action)) or ABGCS.GetSpellLink(action)
+			tooltip = select(2, GetItemInfo(action)) or AB.GetSpellLink(action)
 			--if debug then print("   ", show_tt_action,tooltip); end;
 		end
 	end
@@ -198,14 +196,14 @@ function ABGCode.GetActionForMacroBody(p_macro_body)
 
 			--if there are qualifiers on the action (like [mounted]) and they all parse away, it returns null
 			if(action) then
-				tooltip = select(2, GetItemInfo(action)) or ABGCS.GetSpellLink(action)
+				tooltip = select(2, GetItemInfo(action)) or AB.GetSpellLink(action)
 			end
 		end
 
 	end
 
 	if(action) then
-		icon = select(3, GetSpellInfo(action)) or ABGCS.GetIconForItemID(action)
+		icon = select(3, GetSpellInfo(action)) or AB.GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip
@@ -218,8 +216,8 @@ function AutoBar:IsInLockDown()
 
 end
 
-
-function ABGCode.ConfigToggle()
+-- This function needs to be globally accessible for Bindings.xml
+function AutoBar.ConfigToggle()
 	if (not InCombatLockdown()) then
 		AutoBar:OpenOptions()
 	end
@@ -239,8 +237,8 @@ function AutoBar:InitializeZero()
 	AutoBar:InitializeOptions()
 	AutoBar.Initialize()
 
-	ABGCS.UpdateCategories()
-	ABGCode.RegisterOverrideBindings()
+	AB.UpdateCategories()
+	AB.RegisterOverrideBindings()
 	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 
 
@@ -291,26 +289,26 @@ end
 
 
 -- Will not update if set during combat
-function ABGCode.RegisterOverrideBindings()
-	ABGCode.LogEventStart("RegisterOverrideBindings")
+function AB.RegisterOverrideBindings()
+	AB.LogEventStart("RegisterOverrideBindings")
 
 	ClearOverrideBindings(AutoBar.frame)
 	for buttonKey, _buttonDB in pairs(AutoBar.buttonDBList) do
 		AutoBar.Class.Button:UpdateBindings(buttonKey, buttonKey .. "Frame")
 	end
 
-	ABGCode.LogEventEnd("RegisterOverrideBindings")
+	AB.LogEventEnd("RegisterOverrideBindings")
 end
 
 
 
-function ABGCode.events.GET_ITEM_INFO_RECEIVED(p_item_id)
-	ABGCode.LogEventStart("GET_ITEM_INFO_RECEIVED")
+function AB.events.GET_ITEM_INFO_RECEIVED(p_item_id)
+	AB.LogEventStart("GET_ITEM_INFO_RECEIVED")
 	--print("GET_ITEM_INFO_RECEIVED", p_item_id, GetItemInfo(p_item_id))
-	ABGCode.ClearMissingItemFlag();
-	ABGCS.ABScheduleUpdate(tick.UpdateItemsID)
+	AB.ClearMissingItemFlag();
+	AB.ABScheduleUpdate(tick.UpdateItemsID)
 
-	ABGCode.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
+	AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
 end
 
 -- Given an item link, this adds the item to the given category
@@ -329,41 +327,41 @@ end
 
 if (ABGData.is_mainline_wow) then
 
-	function ABGCode.events.QUEST_ACCEPTED(p_quest_index)
-		ABGCode.LogEventStart("QUEST_ACCEPTED")
+	function AB.events.QUEST_ACCEPTED(p_quest_index)
+		AB.LogEventStart("QUEST_ACCEPTED")
 
 		local link = GetQuestLogSpecialItemInfo(p_quest_index)
 		if(link) then
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
-			ABGCS.ABScheduleUpdate(tick.UpdateObjectsID)
+			AB.ABScheduleUpdate(tick.UpdateObjectsID)
 		end
 
-		ABGCode.LogEventEnd("QUEST_ACCEPTED", p_quest_index)
+		AB.LogEventEnd("QUEST_ACCEPTED", p_quest_index)
 	end
 
-	function ABGCode.events.QUEST_LOG_UPDATE(p_arg1)
-		ABGCode.LogEventStart("QUEST_LOG_UPDATE")
+	function AB.events.QUEST_LOG_UPDATE(p_arg1)
+		AB.LogEventStart("QUEST_LOG_UPDATE")
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
 		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
-			local num_entries, _num_quests = ABGCS.GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
+			local num_entries, _num_quests = AB.GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
 			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
-					ABGCS.ABScheduleUpdate(tick.UpdateObjectsID)
+					AB.ABScheduleUpdate(tick.UpdateObjectsID)
 				end
 			end
 		end
 
-		ABGCode.LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
+		AB.LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
 
 	end
 
-	function ABGCode.events.COMPANION_LEARNED()
+	function AB.events.COMPANION_LEARNED()
 		local need_update = false;
 
-		ABGCode.LogEventStart("COMPANION_LEARNED")
+		AB.LogEventStart("COMPANION_LEARNED")
 
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button) then
@@ -371,31 +369,31 @@ if (ABGData.is_mainline_wow) then
 		end
 
 		if(need_update) then
-			ABGCS.ABScheduleUpdate(tick.UpdateCategoriesID);
+			AB.ABScheduleUpdate(tick.UpdateCategoriesID);
 		end
 
-		ABGCode.LogEventEnd("COMPANION_LEARNED")
+		AB.LogEventEnd("COMPANION_LEARNED")
 	end
 
 
-	function ABGCode.events.TOYS_UPDATED(p_item_id, p_new)
-		ABGCode.LogEventStart("TOYS_UPDATED")
+	function AB.events.TOYS_UPDATED(p_item_id, p_new)
+		AB.LogEventStart("TOYS_UPDATED")
 
-		if(false) then ABGCode.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
+		if(false) then AB.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
 
 		if(p_item_id == nil or p_new == true) then
-			ABGCode.ABScheduleUpdate(tick.ResetSearch)
+			AB.ABScheduleUpdate(tick.ResetSearch)
 		end
 
-		ABGCode.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
+		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
 	end
 
 end
 
 
-function ABGCode.events.PLAYER_ENTERING_WORLD()
-	ABGCode.LogWarning("* PLAYER_ENTERING_WORLD")
+function AB.events.PLAYER_ENTERING_WORLD()
+	AB.LogWarning("* PLAYER_ENTERING_WORLD")
 
 --UIParentLoadAddOn("Blizzard_DebugTools")
 --UIParentLoadAddOn("Blizzard_EventTrace")
@@ -428,97 +426,97 @@ function ABGCode.events.PLAYER_ENTERING_WORLD()
 
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	ABGCS.ABScheduleUpdate(tick.UpdateCategoriesID);
+	AB.ABScheduleUpdate(tick.UpdateCategoriesID);
 
 	C_Timer.After(ABSchedulerTickLength, AutoBar.ABSchedulerTick)
 end
 
 
-function ABGCode.events.PLAYER_LEAVING_WORLD()
+function AB.events.PLAYER_LEAVING_WORLD()
 	AutoBar.inWorld = false;
 end
 
 
-function ABGCode.events.BAG_UPDATE(p_bag_idx)
-	ABGCode.LogEventStart("BAG_UPDATE")
+function AB.events.BAG_UPDATE(p_bag_idx)
+	AB.LogEventStart("BAG_UPDATE")
 
 	if (AutoBar.inWorld and p_bag_idx <= NUM_BAG_SLOTS) then
 		AutoBarSearch:MarkBagDirty(p_bag_idx)
 	end
 
-	ABGCode.LogEventEnd("BAG_UPDATE", p_bag_idx)
+	AB.LogEventEnd("BAG_UPDATE", p_bag_idx)
 
 end
 
-function ABGCode.events.BAG_UPDATE_DELAYED()
-	ABGCode.LogEventStart("BAG_UPDATE_DELAYED")
+function AB.events.BAG_UPDATE_DELAYED()
+	AB.LogEventStart("BAG_UPDATE_DELAYED")
 
 	if (InCombatLockdown()) then
 		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateCount()
 		end
 	else
-		ABGCS.ABScheduleUpdate(tick.UpdateItemsID)
+		AB.ABScheduleUpdate(tick.UpdateItemsID)
 	end
 
-	ABGCode.LogEventEnd("BAG_UPDATE_DELAYED")
+	AB.LogEventEnd("BAG_UPDATE_DELAYED")
 
 end
 
 
-function ABGCode.events.PLAYER_EQUIPMENT_CHANGED()
-	ABGCode.LogEventStart("PLAYER_EQUIPMENT_CHANGED")
+function AB.events.PLAYER_EQUIPMENT_CHANGED()
+	AB.LogEventStart("PLAYER_EQUIPMENT_CHANGED")
 
 	AutoBarSearch:MarkInventoryDirty()
 
-	ABGCS.ABScheduleUpdate(tick.UpdateItemsID)
+	AB.ABScheduleUpdate(tick.UpdateItemsID)
 
-	ABGCode.LogEventEnd("PLAYER_EQUIPMENT_CHANGED")
+	AB.LogEventEnd("PLAYER_EQUIPMENT_CHANGED")
 
 end
 
 
 
-function ABGCode.events.BAG_UPDATE_COOLDOWN(p_arg1)
-	ABGCode.LogEventStart("BAG_UPDATE_COOLDOWN")
+function AB.events.BAG_UPDATE_COOLDOWN(p_arg1)
+	AB.LogEventStart("BAG_UPDATE_COOLDOWN")
 
 	for _button_name, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
 
-	ABGCode.LogEventEnd("BAG_UPDATE_COOLDOWN", p_arg1)
+	AB.LogEventEnd("BAG_UPDATE_COOLDOWN", p_arg1)
 end
 
 
-function ABGCode.events.SPELL_UPDATE_COOLDOWN(arg1)
-	ABGCode.LogEventStart("SPELL_UPDATE_COOLDOWN")
+function AB.events.SPELL_UPDATE_COOLDOWN(arg1)
+	AB.LogEventStart("SPELL_UPDATE_COOLDOWN")
 
 	for _button_name, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
 
-	ABGCode.LogEventEnd("SPELL_UPDATE_COOLDOWN", arg1)
+	AB.LogEventEnd("SPELL_UPDATE_COOLDOWN", arg1)
 end
 
 
 
-function ABGCode.events.ACTIONBAR_UPDATE_USABLE(p_arg1)
-	ABGCode.LogEventStart("ACTIONBAR_UPDATE_USABLE")
+function AB.events.ACTIONBAR_UPDATE_USABLE(p_arg1)
+	AB.LogEventStart("ACTIONBAR_UPDATE_USABLE")
 
 	if (InCombatLockdown()) then
 		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	else
-		ABGCS.ABScheduleUpdate(tick.UpdateObjectsID)
+		AB.ABScheduleUpdate(tick.UpdateObjectsID)
 	end
 
-	ABGCode.LogEventEnd("ACTIONBAR_UPDATE_USABLE", p_arg1)
+	AB.LogEventEnd("ACTIONBAR_UPDATE_USABLE", p_arg1)
 end
 
 
-function ABGCode.events.UPDATE_SHAPESHIFT_FORMS(p_arg1)
-	ABGCode.LogEventStart("UPDATE_SHAPESHIFT_FORMS")
+function AB.events.UPDATE_SHAPESHIFT_FORMS(p_arg1)
+	AB.LogEventStart("UPDATE_SHAPESHIFT_FORMS")
 
 	if (InCombatLockdown()) then
 		for _button_name, button in pairs(AutoBar.buttonList) do
@@ -526,65 +524,65 @@ function ABGCode.events.UPDATE_SHAPESHIFT_FORMS(p_arg1)
 		end
 	end
 
-	ABGCS.ABScheduleUpdate(tick.UpdateSpellsID)
+	AB.ABScheduleUpdate(tick.UpdateSpellsID)
 
-	ABGCode.LogEventEnd("UPDATE_SHAPESHIFT_FORMS", p_arg1)
+	AB.LogEventEnd("UPDATE_SHAPESHIFT_FORMS", p_arg1)
 end
 
 
-function ABGCode.events.UPDATE_BINDINGS()
-	ABGCode.LogEventStart("UPDATE_BINDINGS")
-	ABGCode.RegisterOverrideBindings()
-	ABGCS.ABScheduleUpdate(tick.UpdateButtonsID)
-	ABGCode.LogEventEnd("UPDATE_BINDINGS")
+function AB.events.UPDATE_BINDINGS()
+	AB.LogEventStart("UPDATE_BINDINGS")
+	AB.RegisterOverrideBindings()
+	AB.ABScheduleUpdate(tick.UpdateButtonsID)
+	AB.LogEventEnd("UPDATE_BINDINGS")
 end
 
 
-function ABGCode.events.LEARNED_SPELL_IN_TAB(p_arg1)
-	ABGCode.LogEventStart("LEARNED_SPELL_IN_TAB")
-	ABGCS.ABScheduleUpdate(tick.UpdateSpellsID)
-	ABGCode.LogEventEnd("LEARNED_SPELL_IN_TAB", p_arg1)
+function AB.events.LEARNED_SPELL_IN_TAB(p_arg1)
+	AB.LogEventStart("LEARNED_SPELL_IN_TAB")
+	AB.ABScheduleUpdate(tick.UpdateSpellsID)
+	AB.LogEventEnd("LEARNED_SPELL_IN_TAB", p_arg1)
 end
 
-function ABGCode.events.UNIT_SPELLCAST_SUCCEEDED(p_unit, p_guid, p_spell_id)
-	ABGCode.LogEventStart("UNIT_SPELLCAST_SUCCEEDED")
+function AB.events.UNIT_SPELLCAST_SUCCEEDED(p_unit, p_guid, p_spell_id)
+	AB.LogEventStart("UNIT_SPELLCAST_SUCCEEDED")
 	assert(p_unit == "player")
-	ABGCS.ABScheduleUpdate(tick.UpdateSpellsID)
-	ABGCode.LogEventEnd("UNIT_SPELLCAST_SUCCEEDED", p_unit, p_guid, p_spell_id)
+	AB.ABScheduleUpdate(tick.UpdateSpellsID)
+	AB.LogEventEnd("UNIT_SPELLCAST_SUCCEEDED", p_unit, p_guid, p_spell_id)
 end
 
 
-function ABGCode.events.SPELLS_CHANGED(p_arg1)
-	ABGCode.LogEventStart("SPELLS_CHANGED")
+function AB.events.SPELLS_CHANGED(p_arg1)
+	AB.LogEventStart("SPELLS_CHANGED")
 
 	if(AutoBarDB2.settings.handle_spell_changed) then
-		ABGCS.ABScheduleUpdate(tick.UpdateSpellsID)
+		AB.ABScheduleUpdate(tick.UpdateSpellsID)
 	end
 
-	ABGCode.LogEventEnd("SPELLS_CHANGED", p_arg1)
+	AB.LogEventEnd("SPELLS_CHANGED", p_arg1)
 end
 
 
 
-function ABGCode.events.PLAYER_CONTROL_GAINED(p_arg1)
-	ABGCode.LogEventStart("PLAYER_CONTROL_GAINED")
-	ABGCS.ABScheduleUpdate(tick.UpdateButtonsID)
-	ABGCode.LogEventEnd("PLAYER_CONTROL_GAINED", p_arg1)
+function AB.events.PLAYER_CONTROL_GAINED(p_arg1)
+	AB.LogEventStart("PLAYER_CONTROL_GAINED")
+	AB.ABScheduleUpdate(tick.UpdateButtonsID)
+	AB.LogEventEnd("PLAYER_CONTROL_GAINED", p_arg1)
 end
 
 
 
-function ABGCode.events.PLAYER_REGEN_ENABLED(p_arg1)
-	ABGCode.LogEventStart("PLAYER_REGEN_ENABLED")
+function AB.events.PLAYER_REGEN_ENABLED(p_arg1)
+	AB.LogEventStart("PLAYER_REGEN_ENABLED")
 
 	AutoBar.inCombat = nil
 
-	ABGCode.LogEventEnd("PLAYER_REGEN_ENABLED", p_arg1)
+	AB.LogEventEnd("PLAYER_REGEN_ENABLED", p_arg1)
 end
 
 
-function ABGCode.events.PLAYER_REGEN_DISABLED(p_arg1)
-	ABGCode.LogEventStart("PLAYER_REGEN_DISABLED")
+function AB.events.PLAYER_REGEN_DISABLED(p_arg1)
+	AB.LogEventStart("PLAYER_REGEN_DISABLED")
 
 	AutoBar.inCombat = true
 	if (InCombatLockdown()) then
@@ -600,44 +598,44 @@ function ABGCode.events.PLAYER_REGEN_DISABLED(p_arg1)
 		AB.LibKeyBound:Deactivate()
 	end
 
-	ABGCS.UpdateActive()
+	AB.UpdateActive()
 	AceCfgDlg:Close("AutoBar")
 
-	ABGCode.LogEventEnd("PLAYER_REGEN_DISABLED", p_arg1)
+	AB.LogEventEnd("PLAYER_REGEN_DISABLED", p_arg1)
 end
 
 
-function ABGCode.events.PLAYER_ALIVE(p_arg1)
-	ABGCode.LogEventStart("PLAYER_ALIVE")
-	ABGCS.ABScheduleUpdate(tick.UpdateButtonsID)
-	ABGCode.LogEventEnd("PLAYER_ALIVE", p_arg1)
+function AB.events.PLAYER_ALIVE(p_arg1)
+	AB.LogEventStart("PLAYER_ALIVE")
+	AB.ABScheduleUpdate(tick.UpdateButtonsID)
+	AB.LogEventEnd("PLAYER_ALIVE", p_arg1)
 end
 
 
-function ABGCode.events.UNIT_AURA(p_arg1)
-	ABGCode.LogEventStart("UNIT_AURA")
+function AB.events.UNIT_AURA(p_arg1)
+	AB.LogEventStart("UNIT_AURA")
 
 	if (AutoBar:IsInLockDown()) then
 		for _button_name, button in pairs(AutoBar.buttonList) do
 			button:UpdateUsable()
 		end
 	else
-		ABGCS.ABScheduleUpdate(tick.UpdateButtonsID)
+		AB.ABScheduleUpdate(tick.UpdateButtonsID)
 	end
 
-	ABGCode.LogEventEnd("UNIT_AURA", p_arg1)
+	AB.LogEventEnd("UNIT_AURA", p_arg1)
 end
 
 
-function ABGCode.events.PLAYER_UNGHOST(p_arg1)
-	ABGCode.LogEventStart("PLAYER_UNGHOST")
-	ABGCS.ABScheduleUpdate(tick.UpdateButtonsID)
-	ABGCode.LogEventEnd("PLAYER_UNGHOST", p_arg1)
+function AB.events.PLAYER_UNGHOST(p_arg1)
+	AB.LogEventStart("PLAYER_UNGHOST")
+	AB.ABScheduleUpdate(tick.UpdateButtonsID)
+	AB.LogEventEnd("PLAYER_UNGHOST", p_arg1)
 end
 
 
-function ABGCode.events.UPDATE_BATTLEFIELD_STATUS()
-	ABGCode.LogEventStart("UPDATE_BATTLEFIELD_STATUS")
+function AB.events.UPDATE_BATTLEFIELD_STATUS()
+	AB.LogEventStart("UPDATE_BATTLEFIELD_STATUS")
 
 	if (AutoBar.inWorld) then
 		local bgStatus = false
@@ -651,11 +649,11 @@ function ABGCode.events.UPDATE_BATTLEFIELD_STATUS()
 		end
 		if (AutoBar.inBG ~= bgStatus) then
 			AutoBar.inBG = bgStatus
-			ABGCS.ABScheduleUpdate(tick.UpdateActiveID)
+			AB.ABScheduleUpdate(tick.UpdateActiveID)
 		end
 	end
 
-	ABGCode.LogEventEnd("UPDATE_BATTLEFIELD_STATUS")
+	AB.LogEventEnd("UPDATE_BATTLEFIELD_STATUS")
 end
 
 
@@ -725,7 +723,7 @@ end
 
 
 function AutoBar.Initialize()
-	ABGCode.LogEventStart("AutoBar:Initialize")
+	AB.LogEventStart("AutoBar:Initialize")
 
 	-- Set AutoBar Skin
 	if (Masque and not AutoBar.MasqueGroup) then
@@ -737,10 +735,11 @@ function AutoBar.Initialize()
 		group.Colors = AutoBarDB2.skin.Colors or {}
 	end
 
-	ABGCode.InitializeAllCategories()
-	ABGCode.UpdateCustomCategories()
+	AB.InitializeAllCategories()
+	AB.UpdateCustomCategories()
 	AutoBarSearch:Initialize()
-	ABGCode.LogEventEnd("AutoBar:Initialize")
+
+	AB.LogEventEnd("AutoBar:Initialize")
 end
 
 
@@ -868,7 +867,7 @@ function AutoBar:MoveButtonsModeOn()
 			bar:MoveButtonsModeOn()
 		end
 	end
-	ABGCS.UpdateActive()
+	AB.UpdateActive()
 end
 
 function AutoBar:MoveButtonsModeOff()
@@ -878,7 +877,7 @@ function AutoBar:MoveButtonsModeOff()
 			bar:MoveButtonsModeOff()
 		end
 	end
-	ABGCS.UpdateActive()
+	AB.UpdateActive()
 end
 
 
@@ -960,7 +959,7 @@ function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
 	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
 
 	if next(ret_val) == nil then
-		ABGCS:LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		AB.LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	end
 
 	return unpack(ret_val)
@@ -1018,14 +1017,14 @@ function AutoBar:SetDifference(p_set1, p_set2)
 	return s
 end
 
-function ABGCode.ClearMissingItemFlag()
+function AB.ClearMissingItemFlag()
 
 	AutoBar.missing_items = false;
 
 end
 
 local l_missing_item_count = 0
-function ABGCode.SetMissingItemFlag(_p_item)
+function AB.SetMissingItemFlag(_p_item)
 
 	AutoBar.missing_items = true;
 
@@ -1045,9 +1044,9 @@ end
 --
 -------------------------------------------------------------------------
 
-function ABGCS.ABScheduleUpdate(p_update_id)
+function AB.ABScheduleUpdate(p_update_id)
 
---print("ABGCS.ABScheduleUpdate", p_update_id);
+--print("AB.ABScheduleUpdate", p_update_id);
 	if ((tick.ScheduledUpdate == nil) or (p_update_id < tick.ScheduledUpdate)) then
 		tick.ScheduledUpdate = p_update_id;
 	end
@@ -1069,25 +1068,25 @@ function AutoBar:ABSchedulerTick()
 	end
 
 	if(tick.ScheduledUpdate == tick.ResetSearch) then
-		tick.ScheduledUpdate = ABGCS.ResetSearch(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.ResetSearch(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
-		tick.ScheduledUpdate = ABGCS.UpdateCategories(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateCategories(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateSpellsID) then
-		tick.ScheduledUpdate = ABGCS.UpdateSpells(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateSpells(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateObjectsID) then
-		tick.ScheduledUpdate = ABGCS.UpdateObjects(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateObjects(tick.BehaveTicker);
 
 	elseif(tick.ScheduledUpdate == tick.UpdateItemsID) then
-		tick.ScheduledUpdate = ABGCS.UpdateItems(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateItems(tick.BehaveTicker);
 
 	elseif(tick.ScheduledUpdate == tick.UpdateAttributesID) then
-		tick.ScheduledUpdate = ABGCS.UpdateAttributes(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateAttributes(tick.BehaveTicker);
 
 	elseif(tick.ScheduledUpdate == tick.UpdateActiveID) then
-		tick.ScheduledUpdate = ABGCS.UpdateActive(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateActive(tick.BehaveTicker);
 
 	elseif(tick.ScheduledUpdate == tick.UpdateButtonsID) then
-		tick.ScheduledUpdate = ABGCS.UpdateButtons(tick.BehaveTicker);
+		tick.ScheduledUpdate = AB.UpdateButtons(tick.BehaveTicker);
 	else
 		print("AutoBar : Invalid tick ID", tick.ScheduledUpdate)
 		tick.ScheduledUpdate = tick.UpdateCompleteID
@@ -1096,8 +1095,8 @@ function AutoBar:ABSchedulerTick()
 
 end
 
-function ABGCode.ResetSearch(p_behaviour)
-	ABGCode.LogEventStart("ResetSearch")
+function AB.ResetSearch(p_behaviour)
+	AB.LogEventStart("ResetSearch")
 
 	local ret = tick.ResetSearch
 	if (not InCombatLockdown()) then
@@ -1105,12 +1104,12 @@ function ABGCode.ResetSearch(p_behaviour)
 
 		AutoBar:BarButtonChanged()
 
-		ABGCS:UpdateCategories();	--We don't pass the behaviour flag along since we want calls to ResetSearch to complete immediately
+		AB.UpdateCategories();	--We don't pass the behaviour flag along since we want calls to ResetSearch to complete immediately
 
 		ret = tick.UpdateCompleteID
 	end
 
-	ABGCode.LogEventEnd("ResetSearch", p_behaviour)
+	AB.LogEventEnd("ResetSearch", p_behaviour)
 
 	return ret;
 end
@@ -1118,8 +1117,8 @@ end
 
 
 
-function ABGCode.UpdateCategories(p_behaviour)
-	ABGCode.LogEventStart("UpdateCategories")
+function AB.UpdateCategories(p_behaviour)
+	AB.LogEventStart("UpdateCategories")
 
 	--TODO: Review sticky frame handling. This code could be cleaned up
 	--TODO: Split this out to its own function
@@ -1127,7 +1126,7 @@ function ABGCode.UpdateCategories(p_behaviour)
 		local delete = true
 		for _index, stickyFrame in pairs(tick.OtherStickyFrames) do
 			if (_G[stickyFrame]) then
-				--print("     ABGCS:UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
+				--print("     AB.UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
 				AB.LibStickyFrames:RegisterFrame(_G[stickyFrame])
 			else
 				delete = false
@@ -1140,38 +1139,38 @@ function ABGCode.UpdateCategories(p_behaviour)
 
 	local ret = tick.UpdateCompleteID
 	if (not InCombatLockdown()) then
-		ABGCode.UpdateCustomCategories()
-		ABGCS:UpdateSpells();	--We don't pass the behaviour flag along since we want calls to UpdateCategories to complete immediately
+		AB.UpdateCustomCategories()
+		AB.UpdateSpells();	--We don't pass the behaviour flag along since we want calls to UpdateCategories to complete immediately
 	else
 		ret = tick.UpdateSpellsID;
 	end
 
-	ABGCode.LogEventEnd("UpdateCategories", p_behaviour)
+	AB.LogEventEnd("UpdateCategories", p_behaviour)
 
 	return ret;
 end
 
-function ABGCS.UpdateSpells(p_behaviour)
-	ABGCode.LogEventStart("ABGCS:UpdateSpells")
+function AB.UpdateSpells(p_behaviour)
+	AB.LogEventStart("AB.UpdateSpells")
 
 	AutoBarSearch:ScanRegisteredSpells()
 	AutoBarSearch:ScanRegisteredMacros()
-	ABGCode.RefreshCategories()
+	AB.RefreshCategories()
 
 	local ret = tick.UpdateObjectsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
-		ABGCS:UpdateObjects();
+		AB.UpdateObjects();
 		ret = tick.UpdateCompleteID;
 	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateSpells", p_behaviour)
+	AB.LogEventEnd("AB.UpdateSpells", p_behaviour)
 
 	return ret;
 end
 
-function ABGCS.UpdateObjects(p_behaviour)
+function AB.UpdateObjects(p_behaviour)
 
-	ABGCode.LogEventStart("ABGCS:UpdateObjects")
+	AB.LogEventStart("AB.UpdateObjects")
 	local barLayoutDBList = AutoBar.barLayoutDBList
 	local bar
 	for barKey, barDB in pairs(barLayoutDBList) do
@@ -1202,20 +1201,20 @@ function ABGCS.UpdateObjects(p_behaviour)
 
 	local ret = tick.UpdateItemsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
-		ABGCS:UpdateItems();
+		AB.UpdateItems();
 		ret = tick.UpdateCompleteID;
 	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateObjects", p_behaviour)
+	AB.LogEventEnd("AB.UpdateObjects", p_behaviour)
 
 	return ret;
 
 end
 
 
-function ABGCS.UpdateItems(p_behaviour)
+function AB.UpdateItems(p_behaviour)
 
-	ABGCode.LogEventStart("ABGCS:UpdateItems")
+	AB.LogEventStart("AB.UpdateItems")
 
 	if(tick.FullScanItemsFlag) then
 		AutoBarSearch:Reset();
@@ -1226,54 +1225,54 @@ function ABGCS.UpdateItems(p_behaviour)
 
 	local ret = tick.UpdateAttributesID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
-		ABGCS:UpdateAttributes();
+		AB.UpdateAttributes();
 		ret = tick.UpdateCompleteID;
 	end
 
-	ABGCode.LogEventEnd("ABGCS:UpdateItems", tostring(p_behaviour))
+	AB.LogEventEnd("AB.UpdateItems", tostring(p_behaviour))
 	return ret;
 
 end
 
 -- Based on the current Scan results, update the Button and Popup Attributes
 -- Create Popup Buttons as needed
-function ABGCS.UpdateAttributes(p_behaviour)
-	ABGCode.LogEventStart("ABGCS:UpdateAttributes")
+function AB.UpdateAttributes(p_behaviour)
+	AB.LogEventStart("AB.UpdateAttributes")
 	for _bar_key, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
 	end
 
-	ABGCS.UpdateActive(p_behaviour)
+	AB.UpdateActive(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS:UpdateAttributes", tostring(p_behaviour))
+	AB.LogEventEnd("AB.UpdateAttributes", tostring(p_behaviour))
 
 	return tick.UpdateCompleteID;
 
 end
 
 -- Based on the current Scan results, Bars and their Buttons, determine the active Buttons
-function ABGCS.UpdateActive(p_behaviour)
-	ABGCode.LogEventStart("ABGCS.UpdateActive")
+function AB.UpdateActive(p_behaviour)
+	AB.LogEventStart("AB.UpdateActive")
 	for _bar_key, bar in pairs(AutoBar.barList) do
 		bar:UpdateActive()
 		bar:RefreshLayout()
 	end
 
-	ABGCS.UpdateButtons(p_behaviour)
+	AB.UpdateButtons(p_behaviour)
 
-	ABGCode.LogEventEnd("ABGCS.UpdateActive", tostring(p_behaviour))
+	AB.LogEventEnd("AB.UpdateActive", tostring(p_behaviour))
 
 	return tick.UpdateCompleteID;
 
 end
 
 -- Based on the active Bars and their Buttons display them
-function ABGCS.UpdateButtons(_p_behaviour)
-	ABGCode.LogEventStart("ABGCS.UpdateButtons")
+function AB.UpdateButtons(_p_behaviour)
+	AB.LogEventStart("AB.UpdateButtons")
 	local disabled_count, enabled_count = 0, 0
 
 	for _button_name, button in pairs(AutoBar.buttonListDisabled) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Disabled " .. _button_name); end;
+		--if (buttonKey == "AutoBarButtonCharge") then print("   AB.UpdateButtons Disabled " .. _button_name); end;
 		button:Disable()
 		--I don't see why we should update all of these if they're disabled.
 		--button:UpdateCooldown()
@@ -1284,7 +1283,7 @@ function ABGCS.UpdateButtons(_p_behaviour)
 		disabled_count = disabled_count + 1
 	end
 	for button_key, button in pairs(AutoBar.buttonList) do
-		--if (buttonKey == "AutoBarButtonCharge") then print("   ABGCS.UpdateButtons Enabled " .. buttonKey); end;
+		--if (buttonKey == "AutoBarButtonCharge") then print("   AB.UpdateButtons Enabled " .. buttonKey); end;
 		assert(button.buttonDB.enabled, "In list but disabled " .. button_key)
 		button:SetupButton()
 		button:UpdateCooldown()
@@ -1294,7 +1293,7 @@ function ABGCS.UpdateButtons(_p_behaviour)
 		button:UpdateUsable()
 		enabled_count = enabled_count + 1
 	end
-	ABGCode.LogEventEnd("ABGCS.UpdateButtons", " #buttons " .. tostring(enabled_count) .. "  " .. disabled_count)
+	AB.LogEventEnd("AB.UpdateButtons", " #buttons " .. tostring(enabled_count) .. "  " .. disabled_count)
 
 	return tick.UpdateCompleteID;
 
