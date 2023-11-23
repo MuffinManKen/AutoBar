@@ -21,25 +21,6 @@ local reverse_sort_func = function( a,b ) return a > b end
 local forward_sort_func = function( a,b ) return a < b end
 
 
-local AutoBarButtonAquatic = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonAquatic"] = AutoBarButtonAquatic
-
-function AutoBarButtonAquatic.prototype:init(parentBar, buttonDB)
-	AutoBarButtonAquatic.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.AquaticForm")
-
-end
-
-local AutoBarButtonTrack = AceOO.Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonTrack"] = AutoBarButtonTrack
-
-function AutoBarButtonTrack.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTrack.super.prototype.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.Track")
-end
-
 
 
 
