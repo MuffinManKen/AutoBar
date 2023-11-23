@@ -228,6 +228,7 @@ AB.CacheSpellData(21562, "Power Word: Fortitude");
 
 
 --#region Rogue
+AB.CacheSpellData(381664, "Amplifying Poison");
 AB.CacheSpellData(381637, "Atrophic Poison");
 AB.CacheSpellData(3408, "Crippling Poison");
 AB.CacheSpellData(2823, "Deadly Poison");

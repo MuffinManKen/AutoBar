@@ -176,6 +176,7 @@ function AB.InitializeCategories()
 
 
 	AutoBarCategoryList["Spell.Poison.Lethal"] = SpellsCategory:new( "Spell.Poison.Lethal", spellIconList["Deadly Poison"], {
+		"ROGUE", AB.GetSpellNameByName("Amplifying Poison"),
 		"ROGUE", AB.GetSpellNameByName("Deadly Poison"),
 		"ROGUE", AB.GetSpellNameByName("Instant Poison"),
 		"ROGUE", AB.GetSpellNameByName("Wound Poison"),
