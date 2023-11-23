@@ -165,6 +165,9 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonClassPets2" },
 		{button_name = "AutoBarButtonClassPets3" },
 		{button_name = "AutoBarButtonER" },
+		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
+		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
+		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
 	},
 	MAGE =
 	{
