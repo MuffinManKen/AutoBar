@@ -173,7 +173,7 @@ AB.CacheSpellData(176244, "Portal: Warspear");
 AB.CacheSpellData(120145, "Teleport: Ancient Dalaran");
 AB.CacheSpellData(120146, "Portal: Ancient Dalaran");
 
-AB.CacheSpellData(204287, "Teleport: Hall of the Guardian");
+AB.CacheSpellData(193759, "Teleport: Hall of the Guardian");
 
 AB.CacheSpellData(281403, "Teleport: Boralus");
 AB.CacheSpellData(281400, "Portal: Boralus");
