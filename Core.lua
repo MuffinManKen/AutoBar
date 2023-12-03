@@ -256,9 +256,10 @@ function AutoBar:InitializeZero()
 	end
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 
+	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
+
 	if (ABGData.is_mainline_wow) then
 		AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
-		AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
 		AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
 		AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 	end
@@ -328,19 +329,34 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
 end
 
-if (ABGData.is_mainline_wow) then
 
-	function AB.events.QUEST_ACCEPTED(p_quest_index)
-		AB.LogEventStart("QUEST_ACCEPTED")
+function AB.events.QUEST_ACCEPTED(p_arg1, p_arg2)
+	AB.LogEventStart("QUEST_ACCEPTED", p_arg1, p_arg2)
 
-		local link = GetQuestLogSpecialItemInfo(p_quest_index)
+	-- At some point, the event payload was changed from (Index, ID) to (ID, null)
+	local quest_idx
+	if (p_arg2) then
+		quest_idx = p_arg1
+	else
+		quest_idx = code.GetLogIndexForQuestID(p_arg1)
+	end
+
+
+	code.log_warning("QUEST_ACCEPTED","   Idx:", quest_idx)
+
+	if(quest_idx) then
+		local link = GetQuestLogSpecialItemInfo(quest_idx)
+		code.log_warning("   ", link)
 		if(link) then
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
 			AB.ABScheduleUpdate(tick.UpdateObjectsID)
 		end
-
-		AB.LogEventEnd("QUEST_ACCEPTED", p_quest_index)
 	end
+
+	AB.LogEventEnd("QUEST_ACCEPTED", p_arg1, p_arg2)
+end
+
+if (ABGData.is_mainline_wow) then
 
 	function AB.events.QUEST_LOG_UPDATE(p_arg1)
 		AB.LogEventStart("QUEST_LOG_UPDATE")
