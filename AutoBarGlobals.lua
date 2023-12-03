@@ -4,7 +4,15 @@
 
 -- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox, type, GetSpellLink
 
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _
+local AB = select(2, ...)
+
+local code = {}	---@class ABCode
+AB.code = code
+
+local types = {}	---@class ABTypes
+AB.types = types
+
 
 local print, select, ipairs, tostring, pairs, tonumber, string, next = print, select, ipairs, tostring, pairs, tonumber, string, next
 
@@ -14,22 +22,47 @@ AB.LibKeyBound = LibStub("LibKeyBound-1.0")	---@type LibKeyBound
 ---@diagnostic disable-next-line: assign-type-mismatch
 AB.LibStickyFrames = LibStub("LibStickyFrames-2.0") ---@type LibStickyFrames
 
----@param p_table table
-function AB.is_table_empty(p_table)
-	return next(p_table) == nil
-end
+
 
 AutoBar = {}
 AutoBar.warning_log = {}
 
 
+---@param p_table table
+---@return boolean
+function code.is_table_empty(p_table)
+	return next(p_table) == nil
+end
 
-
-function AB.MakeSet(list)
+---@param p_list table
+---@return table
+function code.make_set(p_list)
    local set = {}
-   for _, l in ipairs(list) do set[l] = true end
+   for _, l in ipairs(p_list) do set[l] = true end
    return set
 end
+
+
+---@param p_class_name string
+---@return boolean
+function code.class_uses_mana(p_class_name)
+
+	return AutoBarGlobalDataObject.set_mana_users[p_class_name]
+
+end
+
+--[[ function code.class_in_list(p_class_name, ...)
+	local list = {...}
+
+	for _i, v in ipairs(list) do
+		if (p_class_name == v) then
+			return true;
+		end
+	end
+
+	return false;
+
+end ]]
 
 
 -- All global data will be a child of this table
@@ -72,27 +105,7 @@ AutoBarGlobalDataObject.spell_name_list = {}
 -- List of [spellName] = <GetSpellInfo Icon>
 AutoBarGlobalDataObject.spell_icon_list = {}
 
-AutoBarGlobalDataObject.set_mana_users = AB.MakeSet{"DRUID", "EVOKER", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
-
-function AB.ClassUsesMana(p_class_name)
-
-	return AutoBarGlobalDataObject.set_mana_users[p_class_name]
-
-end
-
-function AB.ClassInList(p_class_name, ...)
-	local list = {...}
-
-	for _i, v in ipairs(list) do
-		if (p_class_name == v) then
-			return true;
-		end
-	end
-
-	return false;
-
-end
-
+AutoBarGlobalDataObject.set_mana_users = code.make_set{"DRUID", "EVOKER", "HUNTER", "MAGE", "MONK", "PRIEST", "PALADIN", "SHAMAN", "WARLOCK"}
 
 AutoBarGlobalDataObject.TickScheduler =
 {
@@ -119,7 +132,12 @@ AutoBarGlobalDataObject.TickScheduler =
 }
 
 
-function AB.Dump(o, p_max_depth)
+
+
+---@param o any
+---@param p_max_depth number|nil
+---@return string
+function code.Dump(o, p_max_depth)
 	local depth = p_max_depth or 5
 	if type(o) == 'table' and (depth >= 1)  then
 		depth = depth - 1
@@ -128,7 +146,7 @@ function AB.Dump(o, p_max_depth)
 			if type(k) ~= 'number' then
 				k = '"'..k..'"'
 			end
-			s = s .. '['..k..'] = ' .. AB.Dump(v, depth) .. ','
+			s = s .. '['..k..'] = ' .. code.Dump(v, depth) .. ','
 		end
 		return s .. '} '
 	else
@@ -136,7 +154,11 @@ function AB.Dump(o, p_max_depth)
 	end
 end
 
-function AB.NVL(p_1, p_2)
+
+---@param p_1 any
+---@param p_2 any
+---@return any
+function code.NVL(p_1, p_2)
 	if(p_1 ~= nil) then
 		return p_1
 	end
@@ -148,7 +170,7 @@ local function table_pack(...)
   return { n = select("#", ...), ... }
 end
 
-function AB.LogWarning(...)
+function code.log_warning(...)
 
 	local message = "";
 	local args = table_pack(...)
@@ -159,13 +181,16 @@ function AB.LogWarning(...)
 
 end
 
-function AB.GetWarningLogString()
+function code.get_warning_log_string()
 
 	return table.concat(AutoBar.warning_log, "\n")
 
 end
 
-function AB.ToyGUID(p_toy_id)
+
+---@param p_toy_id number
+---@return string
+function code.ToyGUID(p_toy_id)
 
 	local l = 7 - string.len(p_toy_id);
 	local guid = "toy:" .. string.rep("0", l) .. p_toy_id;
@@ -181,7 +206,7 @@ end
 end ]]
 
 local macro_text_guid_index = 0;
-function AB.MacroTextGUID(_p_macro_text)	--TODO: We're not using the text?
+function code.MacroTextGUID(_p_macro_text)	--TODO: We're not using the text?
 
 	macro_text_guid_index = macro_text_guid_index + 1
 	local guid = "macrotext:" .. macro_text_guid_index;
@@ -191,8 +216,9 @@ end
 
 
 
-function AB.GetIconForToyID(p_toy_id)
-	local item_id = tonumber(p_toy_id)
+--TODO: Memoize? How often is this called?
+function code.GetIconForToyID(p_toy_id)
+	local item_id = tonumber(p_toy_id)	--TODO: Is this needed?
 
 	if(not item_id) then
 		return nil
@@ -201,13 +227,14 @@ function AB.GetIconForToyID(p_toy_id)
 	local _, _, texture =  C_ToyBox.GetToyInfo(item_id)
 
 	if(texture == nil) then
-		texture = AB.GetIconForItemID(item_id);
+		texture = code.GetIconForItemID(item_id);
 	end
 
 	return texture;
 end
 
-function AB.GetIconForItemID(p_item_id)
+--TODO: Memoize? How often is this called?
+function code.GetIconForItemID(p_item_id)	--TODO: Calls into this seem to always tonumber, is that necessary?
 	local i_texture = select(10, GetItemInfo(p_item_id))
 
 	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
@@ -215,7 +242,8 @@ function AB.GetIconForItemID(p_item_id)
 	return ii_texture or i_texture;
 end
 
-function AB.GetValidatedName(p_name)
+--TODO: Document what this is for
+function code.GetValidatedName(p_name)
 	local name = p_name:gsub("%.", "")
 	name = name:gsub("\"", "")
 	name = name:gsub(" ", "")
@@ -223,7 +251,7 @@ function AB.GetValidatedName(p_name)
 end
 
 
--- local usable_items_override_set = AB.MakeSet{
+-- local usable_items_override_set = code.make_set{
 -- 122484,	--Blackrock foundry spoils
 -- 71715,	--A Treatise on Strategy
 -- 113258,  --Blingtron 5000 Gift package
@@ -236,7 +264,8 @@ end
 
 --local is_usable_item_cache = {}
 
-function AB.IsUsableItem(p_item_id)
+--TODO: It would be nice to get this working, but IsUsableItem seems useless
+function code.IsUsableItem(p_item_id)
 
 	if(p_item_id == nil) then
 		return nil;
@@ -251,7 +280,7 @@ function AB.IsUsableItem(p_item_id)
 --	return is_usable_item_cache[p_item_id], not_enough_mana;
 end
 
-function AB.ClearNormalTexture(p_frame)
+function code.ClearNormalTexture(p_frame)
 	if (p_frame.ClearNormalTexture) then
 		p_frame:ClearNormalTexture()
 	else
@@ -260,7 +289,7 @@ function AB.ClearNormalTexture(p_frame)
 end
 
 
-function AB.FrameInsp(p_frame)
+--[[ function AB.FrameInsp(p_frame)
 
 	local frame = p_frame
 
@@ -274,9 +303,9 @@ function AB.FrameInsp(p_frame)
 	print("Unit:", frame:GetAttribute("unit"), "HelpButton:", frame:GetAttribute("helpbutton"), "harmbutton:", frame:GetAttribute("harmbutton"))
 
 end
+ ]]
 
-
-function AB.CacheSpellData(p_spell_id, p_spell_name)
+function code.cache_spell_data(p_spell_id, p_spell_name)
 
 	local name, _rank, icon = GetSpellInfo(p_spell_id);
 
@@ -285,7 +314,7 @@ function AB.CacheSpellData(p_spell_id, p_spell_name)
 	end
 
 	if(name == nil) then
-		AB.LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		code.log_warning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
@@ -294,35 +323,35 @@ function AB.CacheSpellData(p_spell_id, p_spell_name)
 
 end
 
-function AB.GetSpellNameByName(p_spell_name)
+function code.get_spell_name_by_name(p_spell_name)
 
 	if (AutoBarGlobalDataObject.spell_name_list[p_spell_name]) then
 		return AutoBarGlobalDataObject.spell_name_list[p_spell_name]
 	end
 
-	AB.LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	code.log_warning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
 
-function AB.GetSpellIconByName(p_spell_name)
+function code.get_spell_icon_by_name(p_spell_name)
 
 	if (AutoBarGlobalDataObject.spell_icon_list[p_spell_name]) then
 		return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 	end
 
-	AB.LogWarning("Unknown Spell Name:" .. (p_spell_name or "nil"))
+	code.log_warning("Unknown Spell Name:" .. (p_spell_name or "nil"))
 
 	return nil
 end
 
-function AB.GetSpellIconByNameFast(p_spell_name)
+function code.get_spell_icon_by_name_fast(p_spell_name)
 
 	return AutoBarGlobalDataObject.spell_icon_list[p_spell_name]
 
 end
 
-function AB.AddProfileData(p_name, p_time)
+function code.add_profile_data(p_name, p_time)
 	local prof = AutoBarGlobalDataObject.profile
 
 	if(prof[p_name] == nil) then
@@ -347,30 +376,16 @@ function AB.AddProfileData(p_name, p_time)
 end
 
 
-function AB.FindNamelessCategories()
+function code.GetLogIndexForQuestID(p_quest_id)
 
-	local nameless = ""
-	for key in pairs(AutoBarCategoryList) do
-		if(AutoBarGlobalDataObject.locale[key] == nil) then
-			nameless = nameless .. "|n" .. key
-		end
+	if (C_QuestLog and C_QuestLog.GetLogIndexForQuestID) then
+		return C_QuestLog.GetLogIndexForQuestID(p_quest_id)
+	else
+		return GetQuestLogIndexByID(p_quest_id)
 	end
-
-	return nameless
 end
 
-function AB.FindNamelessButtons()
-
-	local nameless = ""
-	for key in pairs(AutoBar.Class) do
-		if(AutoBarGlobalDataObject.locale[key] == nil) then
-			nameless = nameless .. "|n" .. key
-		end
-	end
-
-	return nameless
-end
-
+--C_QuestLog.GetLogIndexForQuestID
 function AB.GetNumQuestLogEntries()
 
 	if (C_QuestLog and C_QuestLog.GetNumQuestLogEntries) then

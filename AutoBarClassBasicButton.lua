@@ -7,7 +7,10 @@
 -- http://muffinmangames.com
 --
 
-local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
@@ -139,7 +142,7 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, GetSpellInfo(p_action)) or AB.GetIconForItemID(p_action)
+		texture = select(3, GetSpellInfo(p_action)) or code.GetIconForItemID(p_action)
 	end
 
 	--We haven't found a texture. This might be because it's just not cached yet.
@@ -186,7 +189,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 		if(item_data.icon) then
 			texture = item_data.icon -- Use cached icon if we have one
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
-			texture = AB.GetIconForToyID(item_data.item_id)
+			texture = code.GetIconForToyID(item_data.item_id)
 			if(texture == nil) then
 				AB.SetMissingItemFlag(item_data.item_id);
 			end
@@ -194,7 +197,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
-			texture = AB.GetIconForItemID(tonumber(itemId))
+			texture = code.GetIconForItemID(tonumber(itemId))
 			if(texture == nil) then
 				AB.SetMissingItemFlag(itemId);
 			end
@@ -219,7 +222,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			texture = AB.GetSpellIconByNameFast(spellName) or select(3, GetSpellInfo(spellName))
+			texture = code.get_spell_icon_by_name_fast(spellName) or select(3, GetSpellInfo(spellName))
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -342,7 +345,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 
 		if (itemType == "item") then
 			local itemId = frame:GetAttribute("itemId")
-			isUsable, notEnoughMana = AB.IsUsableItem(itemId)
+			isUsable, notEnoughMana = code.IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
 				local _, _, enabled = C_Container.GetItemCooldown(itemId)

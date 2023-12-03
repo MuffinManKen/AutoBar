@@ -11,10 +11,13 @@ Description: Dynamic 24 button bar automatically adds potions, water, food and o
 -- New Stuff Copyright 2009- MuffinManKen
 
 -- Maintained by MuffinManKen.  Original author Saien of Hyjal
--- http://muffinmangames.com
 
 
-local ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local ADDON_NAME = select(1, ...)	---@type string
+local AB = select(2, ...)
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local _G = _G
 local Masque = LibStub("Masque", true)
@@ -203,7 +206,7 @@ function AB.GetActionForMacroBody(p_macro_body)
 	end
 
 	if(action) then
-		icon = select(3, GetSpellInfo(action)) or AB.GetIconForItemID(action)
+		icon = select(3, GetSpellInfo(action)) or code.GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip
@@ -317,7 +320,7 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	local debug_me = false
 	local category = AutoBarCategoryList[p_category_name]
 
-	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, AB.Dump(category)); end;
+	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, code.Dump(category)); end;
 
 	local item_name, item_id = AutoBar.ItemLinkDecode(p_item_link)
 	category.items[#category.items + 1] = item_id
@@ -379,7 +382,7 @@ if (ABGData.is_mainline_wow) then
 	function AB.events.TOYS_UPDATED(p_item_id, p_new)
 		AB.LogEventStart("TOYS_UPDATED")
 
-		if(false) then AB.LogWarning("|nTOYS_UPDATED", p_item_id, p_new); end
+		if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
 
 		if(p_item_id == nil or p_new == true) then
 			AB.ABScheduleUpdate(tick.ResetSearch)
@@ -393,7 +396,7 @@ end
 
 
 function AB.events.PLAYER_ENTERING_WORLD()
-	AB.LogWarning("* PLAYER_ENTERING_WORLD")
+	code.log_warning("* PLAYER_ENTERING_WORLD")
 
 --UIParentLoadAddOn("Blizzard_DebugTools")
 --UIParentLoadAddOn("Blizzard_EventTrace")
@@ -959,7 +962,7 @@ function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
 	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
 
 	if next(ret_val) == nil then
-		AB.LogWarning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
+		code.log_warning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	end
 
 	return unpack(ret_val)
@@ -1181,7 +1184,7 @@ function AB.UpdateObjects(p_behaviour)
 			if (AutoBar.barList[barKey]) then
 				AutoBar.barList[barKey]:UpdateObjects()
 			else
-				AutoBar.barList[barKey] = AutoBar.Class.Bar:new(barKey)
+				AutoBar.barList[barKey] = AB.bar:new(barKey) ---@class Bar
 				--print("     UpdateObjects barKey " .. tostring(barKey) .. " Name " .. tostring(AutoBar.barList[barKey].barName))
 			end
 			bar = AutoBar.barList[barKey]

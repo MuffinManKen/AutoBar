@@ -12,6 +12,8 @@ Website: http://www.wowace.com/
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
@@ -45,8 +47,8 @@ AutoBarSearch = {
 }
 
 local METHOD_DEBUG = false
---local DEBUG_IDS = AB.MakeSet({182773, 172179})
---local DEBUG_GUIDS = AB.MakeSet({AB.ToyGUID(182773), AB.ToyGUID(172179)})
+--local DEBUG_IDS = code.make_set{182773, 172179}
+--local DEBUG_GUIDS = code.make_set{code.ToyGUID(182773), code.ToyGUID(172179)}
 
 
 -- Remove itemId from bag, slot, spell
@@ -126,7 +128,7 @@ function SearchSpace:Delete(p_item_id, p_button_key)
 	if (clientButtons) then
 		clientButtons[p_button_key] = nil
 	end
-	if (AB.is_table_empty(clientButtons)) then
+	if (code.is_table_empty(clientButtons)) then
 		self.dataList[p_item_id] = nil
 	end
 end
@@ -227,12 +229,12 @@ end
 
 -- Populate all the buttons
 function Items:Populate()
-	if(METHOD_DEBUG) then AB.LogWarning("Items:Populate"); end
+	if(METHOD_DEBUG) then code.log_warning("Items:Populate"); end
 	for buttonKey, button in pairs(AutoBar.buttonList) do
 		if (button and button[1]) then
 			for category_index = 1, # button, 1 do
 				local category, item_list = get_items(button[category_index])
-				--if(button[category_index] == "Muffin.Toys.Hearth") then AB.LogWarning("   ", category, AB.Dump(item_list)) end
+				--if(button[category_index] == "Muffin.Toys.Hearth") then code.log_warning("   ", category, code.Dump(item_list)) end
 				if (item_list) then
 					self:Add(item_list, buttonKey, category, category_index)
 				end
@@ -244,12 +246,12 @@ end
 
 -- Re-Populate a  button
 function Items:RePopulate(p_button_key)
-	if(METHOD_DEBUG) then AB.LogWarning("Items:RePopulate", p_button_key); end
+	if(METHOD_DEBUG) then code.log_warning("Items:RePopulate", p_button_key); end
 	local button = AutoBar.buttonList[p_button_key]
 	if (button and button[1]) then
 		for slotIndex = 1, # button, 1 do
 			local category, itemList = get_items(button[slotIndex])
-			if(button[slotIndex] == "Muffin.Toys.Hearth") then AB.LogWarning("   ", category, AB.Dump(itemList)) end
+			if(button[slotIndex] == "Muffin.Toys.Hearth") then code.log_warning("   ", category, code.Dump(itemList)) end
 			if (itemList) then
 				self:Add(itemList, p_button_key, category, slotIndex)
 			end
@@ -282,12 +284,12 @@ end
 function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 	local search_list = AutoBarSearch.space:GetList()
 	local debug = false --(DEBUG_GUIDS[itemId])
-	if (debug) then AB.LogWarning("Found:Add", itemId, bag, slot, spell, "-->foundData:", AB.Dump(self.dataList[itemId], 1), "space:", search_list[itemId]); end
+	if (debug) then code.log_warning("Found:Add", itemId, bag, slot, spell, "-->foundData:", code.Dump(self.dataList[itemId], 1), "space:", search_list[itemId]); end
 
 	local itemData = self.dataList[itemId]
 --AutoBar:Print("Found:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell ")
 	if (not itemData) then
-		if (debug) then AB.LogWarning("   no itemData", search_list[itemId]); end
+		if (debug) then code.log_warning("   no itemData", search_list[itemId]); end
 		itemData = {}
 		self.dataList[itemId] = itemData
 		itemData[1] = bag
@@ -432,7 +434,7 @@ local Current = {
 -- Add the brand new item to any interested buttons
 function Current:Merge(itemId)
 	local debug = false --(DEBUG_GUIDS[itemId])
-	if (debug) then AB.LogWarning("Current:Merge", itemId); end
+	if (debug) then code.log_warning("Current:Merge", itemId); end
 
 	local items = AutoBarSearch.items:GetList()
 	for buttonKey, searchItems in pairs(items) do
@@ -440,7 +442,7 @@ function Current:Merge(itemId)
 			local itemData = searchItems[itemId]
 			self:Add(buttonKey, itemId)
 			--print("Current:Merge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey), itemData.slotIndex, itemData.categoryIndex)
-			if (debug) then AB.LogWarning("Current:Merge itemId:", itemId, buttonKey); end
+			if (debug) then code.log_warning("Current:Merge itemId:", itemId, buttonKey); end
 			AutoBarSearch.sorted:Add(buttonKey, itemId, itemData.slotIndex, itemData.categoryIndex)
 		end
 	end
@@ -454,7 +456,7 @@ function Current:Purge(itemId)
 		if (searchItems and searchItems[itemId]) then
 			self:Delete(buttonKey, itemId)
 			--AutoBar:Print("Current:Purge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
-			if (debug) then AB.LogWarning("Current:Purge itemId:", itemId); end
+			if (debug) then code.log_warning("Current:Purge itemId:", itemId); end
 			AutoBarSearch.sorted:Delete(buttonKey, itemId)
 		end
 	end
@@ -463,7 +465,7 @@ end
 -- Add the found item to the list of itemIds for the given buttonKey
 function Current:Add(buttonKey, itemId)
 	local debug = false --(DEBUG_IDS[itemId])
-	if (debug) then AB.LogWarning("Current:Add", buttonKey, itemId); end
+	if (debug) then code.log_warning("Current:Add", buttonKey, itemId); end
 
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
@@ -482,7 +484,7 @@ function Current:Delete(buttonKey, itemId)
 	end
 	local buttonItems = self.dataList[buttonKey]
 	buttonItems[itemId] = nil
-	if (debug) then AB.LogWarning("Current:Delete itemId:", itemId); end
+	if (debug) then code.log_warning("Current:Delete itemId:", itemId); end
 end
 
 -- Remove all items
@@ -526,7 +528,7 @@ local Sorted  = {
 -- Add the found item to the list of itemIds for the given buttonKey
 function Sorted:Add(buttonKey, itemId, slotIndex, categoryIndex)
 	local debug = false --(DEBUG_IDS[itemId])
-	if (debug) then AB.LogWarning("Sorted:Add ", buttonKey, itemId, slotIndex, categoryIndex); end
+	if (debug) then code.log_warning("Sorted:Add ", buttonKey, itemId, slotIndex, categoryIndex); end
 
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
@@ -564,7 +566,7 @@ end
 -- ToDo: on deletion reapply lower priority ones / track them from the start?
 function Sorted:Delete(buttonKey, itemId)
 	local debug = false --(buttonKey == "AutoBarButtonHearth")
-	if (debug) then AB.LogWarning("Sorted:Delete itemId:", itemId); end
+	if (debug) then code.log_warning("Sorted:Delete itemId:", itemId); end
 
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
@@ -882,7 +884,7 @@ end
 function AutoBarSearch:RegisterToy(p_toy_id)
 	assert(type(p_toy_id) == "number")
 	local debug = false --(DEBUG_IDS[p_toy_id])
-	local toy_guid = AB.ToyGUID(p_toy_id)
+	local toy_guid = code.ToyGUID(p_toy_id)
 	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 
 	if (not toy_info) then
@@ -902,7 +904,7 @@ function AutoBarSearch:RegisterToy(p_toy_id)
 		toy_info.is_fave = is_fave
 	end
 
-	if (debug) then AB.LogWarning("RegisterToy", "ID:", p_toy_id, "Name:", toy_name); end
+	if (debug) then code.log_warning("RegisterToy", "ID:", p_toy_id, "Name:", toy_name); end
 
 	return toy_info
 end
@@ -1042,7 +1044,7 @@ end
 ---Scan all registered toys, refreshing their data and adding them to Stuff
 function AutoBarSearch:ScanRegisteredToys()
 
-	if (METHOD_DEBUG) then AB.LogWarning("AutoBarSearch:ScanRegisteredToys", AutoBar:tcount(self.registered_toys)); end
+	if (METHOD_DEBUG) then code.log_warning("AutoBarSearch:ScanRegisteredToys", AutoBar:tcount(self.registered_toys)); end
 
 	for toy_guid, toy_data in pairs(self.registered_toys) do
 		self:RegisterToy(toy_data.item_id);
@@ -1109,7 +1111,7 @@ local function add_found_item(p_item_id, p_bag, p_slot)
 
 	-- Filter out too high level items
 	local itemMinLevel = select(5, GetItemInfo(p_item_id)) or 0;
-	local usable = AB.IsUsableItem(p_item_id);
+	local usable = code.IsUsableItem(p_item_id);
 	local item_spell = GetItemSpell(p_item_id);
 	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
 		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)

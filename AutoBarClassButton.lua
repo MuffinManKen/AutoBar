@@ -394,15 +394,15 @@ function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targ
 			local itemType = self.frame:GetAttribute("type")
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
-				local isUsable = AB.IsUsableItem(itemId)
+				local isUsable = code.IsUsableItem(itemId)
 				if (isUsable) then
 					-- It is usable so we have some in inventory so switch
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)
 					if (didShuffle) then
 						local texture
-						texture = AB.GetIconForItemID(tonumber(itemId))
+						texture = code.GetIconForItemID(tonumber(itemId))
 						self.frame.icon:SetTexture(texture)
-						texture = AB.GetIconForItemID(tonumber(buttonItemId))
+						texture = code.GetIconForItemID(tonumber(buttonItemId))
 						frame.icon:SetTexture(texture)
 						return true
 	--					self:UpdateButton()
@@ -956,12 +956,12 @@ function AutoBar.Class.Button:Delete(buttonKey)
 	end
 
 	-- Delete ButtonKeys on Bars
-	AutoBar.Class.Bar:DeleteButtonKey(AutoBarDB2.account.barList, buttonKey)
+	Bar:DeleteButtonKey(AutoBarDB2.account.barList, buttonKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
-		AutoBar.Class.Bar:DeleteButtonKey(classDB.barList, buttonKey)
+		Bar:DeleteButtonKey(classDB.barList, buttonKey)
 	end
 	for _, charDB in pairs (AutoBarDB2.chars) do
-		AutoBar.Class.Bar:DeleteButtonKey(charDB.barList, buttonKey)
+		Bar:DeleteButtonKey(charDB.barList, buttonKey)
 	end
 
 	-- Delete Instantiated Buttons
@@ -1025,12 +1025,12 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 	end
 
 	-- Change ButtonKeys on Bars
-	AutoBar.Class.Bar:RenameButtonKey(AutoBarDB2.account.barList, oldKey, newKey)
+	Bar:RenameButtonKey(AutoBarDB2.account.barList, oldKey, newKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
-		AutoBar.Class.Bar:RenameButtonKey(classDB.barList, oldKey, newKey)
+		Bar:RenameButtonKey(classDB.barList, oldKey, newKey)
 	end
 	for _, charDB in pairs (AutoBarDB2.chars) do
-		AutoBar.Class.Bar:RenameButtonKey(charDB.barList, oldKey, newKey)
+		Bar:RenameButtonKey(charDB.barList, oldKey, newKey)
 	end
 end
 

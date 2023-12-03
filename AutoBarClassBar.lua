@@ -10,13 +10,16 @@
 --
 
 --GLOBALS: UIParent, CreateFrame, GameFontNormal, RegisterStateDriver, UnregisterStateDriver, InCombatLockdown, IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown
-local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _
+local AB = select(2, ...)
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 
 local _G = _G
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 
@@ -57,14 +60,14 @@ end
 
 -- Basic Bar that can do the classic AutoBar layout grid
 -- Provides snapto when dragging bars
-AutoBar.Class.Bar = AceOO.Class()
-
+AB.bar = {}
+local Bar = AB.bar ---@class Bar
 
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
-function AutoBar.Class.Bar.prototype:DropObject()
+function Bar:DropObject()
 	local fromObject = AutoBar:GetDraggingObject()
---AutoBar:Print("AutoBar.Class.Bar.prototype:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
+--AutoBar:Print("Bar:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
 	if (fromObject and AutoBar.moveButtonsMode) then
 		local targetButton = # self.buttonList + 1
 		AutoBar:ButtonMove(fromObject.parentBar.barKey, fromObject.order, self.barKey, targetButton)
@@ -74,16 +77,24 @@ function AutoBar.Class.Bar.prototype:DropObject()
 	AutoBar:SetDraggingObject(nil)
 end
 
+---@param p_bar_key string
+---@return Bar
+function Bar:new(p_bar_key)
 
-function AutoBar.Class.Bar.prototype:init(barKey)
-	AutoBar.Class.Bar.super.prototype.init(self) -- Mandatory init.
+	local obj = CreateFromMixins(self)
+	obj:init(p_bar_key)
 
-	self.barKey = barKey
+	return obj
+end
+
+function Bar:init(p_bar_key)
+
+	self.barKey = p_bar_key
 	self:UpdateShared()
-	if (not L[barKey]) then
-		L[barKey] = self.sharedLayoutDB.name
+	if (not L[p_bar_key]) then
+		L[p_bar_key] = self.sharedLayoutDB.name
 	end
-	self.barName = L[barKey]
+	self.barName = L[p_bar_key]
 --	if self.statebar and self.id == 1 then self.mainbar = true end
 
 	self:CreateBarFrame()
@@ -98,7 +109,7 @@ end
 --/script AutoBar:Print(tostring(AutoBar.buttonList["AutoBarButtonFishing"].frame:GetAttribute("state")))
 
 
-function AutoBar.Class.Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKey, Colors)
+function Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKey, Colors)
 	if (buttonKey) then
 		local buttonDB = AutoBar.buttonDBList[buttonKey]
 		buttonDB.SkinID = SkinID
@@ -112,7 +123,7 @@ function AutoBar.Class.Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKe
 		barLayoutDB.Backdrop = Backdrop
 		barLayoutDB.Colors = Colors
 	else
---AutoBar:Print("AutoBar.Class.Bar.prototype:SkinChanged SkinID " .. tostring(SkinID) .. " barKey " .. tostring(barKey) .. " buttonKey " .. tostring(buttonKey))
+--AutoBar:Print("Bar:SkinChanged SkinID " .. tostring(SkinID) .. " barKey " .. tostring(barKey) .. " buttonKey " .. tostring(buttonKey))
 		AutoBarDB2.skin.SkinID = SkinID
 		AutoBarDB2.skin.Gloss = Gloss
 		AutoBarDB2.skin.Backdrop = Backdrop
@@ -120,7 +131,7 @@ function AutoBar.Class.Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKe
 	end
 end
 
-function AutoBar.Class.Bar.prototype:CreateBarFrame()
+function Bar:CreateBarFrame()
 	local name = self.barKey .. "Driver"
 	local driver_template = "SecureHandlerStateTemplate"
 	if (BackdropTemplateMixin) then
@@ -160,7 +171,7 @@ function AutoBar.Class.Bar.prototype:CreateBarFrame()
 	end
 
 	if (Masque) then
-		local group = Masque:Group("AutoBar", self.barKey)
+		local group = Masque:Group("AutoBar", self.barKey) ---@class MasqueGroup
 		driver.MasqueGroup = group
 		group.SkinID = self.sharedLayoutDB.SkinID or "Blizzard"
 		group.Backdrop = self.sharedLayoutDB.Backdrop
@@ -175,7 +186,7 @@ end
 
 -- Refresh the Bar
 -- New buttons are added, unused ones removed
-function AutoBar.Class.Bar.prototype:UpdateShared()
+function Bar:UpdateShared()
 	self.sharedLayoutDB = AutoBar.barLayoutDBList[self.barKey]
 	self.sharedButtonDB = AutoBar.barButtonsDBList[self.barKey]
 	self.sharedPositionDB = AutoBar.barPositionDBList[self.barKey]
@@ -185,18 +196,18 @@ function AutoBar.Class.Bar.prototype:UpdateShared()
 end
 
 -- Apply the new skin
-function AutoBar.Class.Bar.prototype:UpdateSkin(SkinID)
+function Bar:UpdateSkin(SkinID)
 	if (Masque) then
 		local group = self.frame.MasqueGroup
 		group.SkinID = SkinID
 		group:Skin(group.SkinID, group.Backdrop, group.Gloss, group.Colors)
---AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateSkin SkinID " .. tostring(group.SkinID))
+--AutoBar:Print("Bar:UpdateSkin SkinID " .. tostring(group.SkinID))
 	end
 end
 
 -- Refresh the Bar
 -- New buttons are added, unused ones removed
-function AutoBar.Class.Bar.prototype:UpdateObjects()
+function Bar:UpdateObjects()
 	local buttonList = self.buttonList
 	local buttonKeyList = self.sharedButtonDB.buttonKeys
 	local buttonDB
@@ -213,18 +224,18 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 			buttonKeyList[buttonKeyIndex] = nil
 		elseif (buttonDB.enabled) then
 			-- Recover from disabled cache
-			assert(buttonDB.buttonKey == buttonKey, "AutoBar.Class.Bar.prototype:UpdateObjects mismatched keys")
+			assert(buttonDB.buttonKey == buttonKey, "Bar:UpdateObjects mismatched keys")
 			if(AutoBar.Class[buttonDB.buttonClass] == nil) then print("AutoBar ", buttonDB.buttonClass, "is nil"); end;
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
-				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
+				--if(debug) then AutoBar:Print("Bar:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
 			end
 
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
-				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				--if(debug) then AutoBar:Print("Bar:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			else
 				assert(buttonKeyIndex)
 				assert(buttonDB)
@@ -232,18 +243,18 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 				assert(AutoBar.Class[buttonDB.buttonClass], "AutoBar.Class[buttonDB.buttonClass]" .. " fails for " ..  buttonDB.buttonClass)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
-				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				--if(debug) then AutoBar:Print("Bar:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			end
 			buttonList[buttonKeyIndex].order = buttonKeyIndex
 		else
-			--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
+			--if(debug) then AutoBar:Print("Bar:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
 			-- Move to disabled cache
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 				AutoBar.buttonListDisabled[buttonKey] = AutoBar.buttonList[buttonKey]
 				AutoBar.buttonList[buttonKey] = nil
-				--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
+				--if(debug) then AutoBar:Print("Bar:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
 			elseif (AutoBar.buttonListDisabled[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
@@ -257,7 +268,7 @@ function AutoBar.Class.Bar.prototype:UpdateObjects()
 
 	-- Trim Excess
 	for buttonIndex = # buttonList, # buttonKeyList + 1, -1 do
-		--if(debug) then AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateObjects Trim " .. tostring(buttonList[buttonIndex].buttonDB.buttonKey) .. " buttonIndex " .. tostring(buttonIndex)); end
+		--if(debug) then AutoBar:Print("Bar:UpdateObjects Trim " .. tostring(buttonList[buttonIndex].buttonDB.buttonKey) .. " buttonIndex " .. tostring(buttonIndex)); end
 		buttonList[buttonIndex] = nil
 	end
 
@@ -280,7 +291,7 @@ end
 
 -- Based on the current Scan results, update the Button and Popup Attributes
 -- Create Popup Buttons as needed
-function AutoBar.Class.Bar.prototype:UpdateAttributes()
+function Bar:UpdateAttributes()
 	local buttonList = self.buttonList
 
 	-- Create or Refresh the Bar's Buttons
@@ -291,13 +302,13 @@ end
 
 
 -- The activeButtonList contains only active buttons.  Make it so.
-function AutoBar.Class.Bar.prototype:UpdateActive()
+function Bar:UpdateActive()
 	local activeButtonList = self.activeButtonList
 	local maxButtons = # self.buttonList
 	local activeIndex = 1
 	local maxActiveButtons = self.sharedLayoutDB.rows * self.sharedLayoutDB.columns
 
-	--AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive maxButtons " .. tostring(maxButtons))
+	--AutoBar:Print("Bar:UpdateActive maxButtons " .. tostring(maxButtons))
 	for index = 1, maxButtons, 1 do
 		local button = self.buttonList[index]
 		if (button and button:IsActive()) then
@@ -311,7 +322,7 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 
 			button.frame:Show()
 		elseif (button) then
-			--if (button.buttonName == "AutoBarButtonCharge") then print("AutoBar.Class.Bar.prototype:UpdateActive Inactive " .. tostring(index) .. " " .. tostring(button.buttonName)) end
+			--if (button.buttonName == "AutoBarButtonCharge") then print("Bar:UpdateActive Inactive " .. tostring(index) .. " " .. tostring(button.buttonName)) end
 			if (button.SecureStateDriverRegistered ~= false) then
 				UnregisterStateDriver(button.frame, "visibility")
 				button.SecureStateDriverRegistered = false
@@ -323,7 +334,7 @@ function AutoBar.Class.Bar.prototype:UpdateActive()
 
 	-- Ditch buttons in excess of rows * columns
 	if ((activeIndex - 1) > maxActiveButtons and not AutoBar.moveButtonsMode) then
-		--AutoBar:Print("AutoBar.Class.Bar.prototype:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
+		--AutoBar:Print("Bar:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
 		activeIndex = maxActiveButtons + 1
 	end
 
@@ -342,8 +353,8 @@ end
 -- /script AutoBar.barList["AutoBarClassBarBasic"].activeButtonList[4].frame:SetChecked(1)
 
 
-function AutoBar.Class.Bar.prototype:UpdateFadeOut()
---AutoBar:Print("AutoBar.Class.Bar.prototype:OnUpdate self.sharedLayoutDB.fadeOut " .. tostring(self.sharedLayoutDB.fadeOut))
+function Bar:UpdateFadeOut()
+--AutoBar:Print("Bar:OnUpdate self.sharedLayoutDB.fadeOut " .. tostring(self.sharedLayoutDB.fadeOut))
 	if (self.sharedLayoutDB.fadeOut) then
 		local cancelFade = InCombatLockdown() and self.sharedLayoutDB.fadeOutCancelInCombat or self.frame:IsMouseOver() or IsShiftKeyDown() and self.sharedLayoutDB.fadeOutCancelOnShift or IsControlKeyDown() and self.sharedLayoutDB.fadeOutCancelOnCtrl or IsAltKeyDown() and self.sharedLayoutDB.fadeOutCancelOnAlt
 		for _, button in pairs(self.activeButtonList) do
@@ -378,7 +389,7 @@ function AutoBar.Class.Bar.prototype:UpdateFadeOut()
 	end
 end
 
-function AutoBar.Class.Bar.prototype:SetFadeOut(fadeOut)
+function Bar:SetFadeOut(fadeOut)
 	self.sharedLayoutDB.fadeOut = fadeOut
 	self.faded = nil
 	if (fadeOut) then
@@ -390,7 +401,7 @@ function AutoBar.Class.Bar.prototype:SetFadeOut(fadeOut)
 	end
 end
 
-function AutoBar.Class.Bar.prototype:StickTo(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
+function Bar:StickTo(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
 	AB.LibStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
 	self.sharedLayoutDB.stickPoint = point
 	self.sharedLayoutDB.stickToFrameName = stickToFrame and stickToFrame:GetName() or nil
@@ -400,7 +411,7 @@ function AutoBar.Class.Bar.prototype:StickTo(frame, point, stickToFrame, stickTo
 end
 
 local colorMoveButtons = {r = 1, b = 1, g = 0, a = 0.5}
-function AutoBar.Class.Bar.prototype:ColorBars()
+function Bar:ColorBars()
 	local frame = self.frame
 	if (AutoBar.keyBoundMode or AutoBar.moveButtonsMode) then
 		-- Adjust Frame Strata
@@ -444,7 +455,7 @@ function AutoBar.Class.Bar.prototype:ColorBars()
 end
 
 
-function AutoBar.Class.Bar.prototype:SetButtonFrameStrata(frameStrata)
+function Bar:SetButtonFrameStrata(frameStrata)
 	for _, button in pairs(self.buttonList) do
 		button.frame:SetFrameStrata(frameStrata)
 		if (button.frame.popupHeader) then
@@ -453,12 +464,12 @@ function AutoBar.Class.Bar.prototype:SetButtonFrameStrata(frameStrata)
 	end
 end
 
-local oldOnReceiveDragFunc
+--local oldOnReceiveDragFunc
 
-function AutoBar.Class.Bar.prototype:MoveButtonsModeOn()
+function Bar:MoveButtonsModeOn()
 	local frame = self.frame
 	frame:EnableMouse(# self.buttonList == 0)
-	oldOnReceiveDragFunc = frame:GetScript("OnReceiveDrag")
+	--oldOnReceiveDragFunc = frame:GetScript("OnReceiveDrag")
 ---	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	self:ColorBars()
 	for _, button in pairs(self.buttonList) do
@@ -467,7 +478,7 @@ function AutoBar.Class.Bar.prototype:MoveButtonsModeOn()
 	self.dragFrame:Show()
 end
 
-function AutoBar.Class.Bar.prototype:MoveButtonsModeOff()
+function Bar:MoveButtonsModeOff()
 	local frame = self.frame
 	frame:EnableMouse(AutoBar.stickyMode)
 ---	frame:SetScript("OnReceiveDrag", oldOnReceiveDragFunc)
@@ -481,12 +492,12 @@ function AutoBar.Class.Bar.prototype:MoveButtonsModeOff()
 end
 
 
-function AutoBar.Class.Bar.prototype:CreateDragFrame()
+function Bar:CreateDragFrame()
 	if (not self.dragFrame) then
 		local name = self.barKey .. "DragFrame"
 		local frame = CreateFrame("Button", name, self.frame, "ActionButtonTemplate SecureActionButtonTemplate SecureHandlerDragTemplate")
 		frame:GetNormalTexture():Hide()
-		AB.ClearNormalTexture(frame)
+		code.ClearNormalTexture(frame)
 		self.dragFrame = frame
 	--AutoBar:Print(tostring(self.parentBar.frame) .. " ->  " .. tostring(frame) .. " button " .. tostring(name))
 
@@ -503,11 +514,11 @@ function AutoBar.Class.Bar.prototype:CreateDragFrame()
 end
 
 
-function AutoBar.Class.Bar.prototype:CreateFadeFrame()
+function Bar:CreateFadeFrame()
 	if (not self.fadeFrame) then
 		local name = self.barKey .. "FadeFrame"
 		local frame = CreateFrame("CheckButton", name, self.frame, "ActionButtonTemplate, SecureActionButtonTemplate")
-		AB.ClearNormalTexture(frame)
+		code.ClearNormalTexture(frame)
 		frame.class = self
 
 		self.fadeFrame = frame
@@ -516,7 +527,7 @@ function AutoBar.Class.Bar.prototype:CreateFadeFrame()
 end
 
 
-function AutoBar.Class.Bar.prototype:ToggleVisibilty()
+function Bar:ToggleVisibilty()
 	-- Disable during combat or Move Buttons
 	if (InCombatLockdown() or AutoBar.moveButtonsMode) then
 		return
@@ -537,7 +548,7 @@ function AutoBar.Class.Bar.prototype:ToggleVisibilty()
 	end
 end
 
-function AutoBar.Class.Bar.prototype:RefreshLayout()
+function Bar:RefreshLayout()
 	-- Disable during combat
 	if (InCombatLockdown()) then
 		return
@@ -557,17 +568,17 @@ function AutoBar.Class.Bar.prototype:RefreshLayout()
 	end
 end
 
-function AutoBar.Class.Bar.prototype:PositionLoad()
+function Bar:PositionLoad()
 	local sharedPositionDB = self.sharedPositionDB
 	local sharedLayoutDB = self.sharedLayoutDB
 	local debug = false --self.barKey == "AutoBarClassBarBasic"
 
-	if(debug) then AB.LogWarning("PositionLoad", self.barKey); end
-	if(debug) then AB.LogWarning(AB.Dump(sharedPositionDB, 1)); end
+	if(debug) then code.log_warning("PositionLoad", self.barKey); end
+	if(debug) then code.log_warning(code.Dump(sharedPositionDB, 1)); end
 	if (sharedPositionDB.stickToFrameName and _G[sharedPositionDB.stickToFrameName]) then
 		local stickToFrame = _G[sharedPositionDB.stickToFrameName]
 		AB.LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
---AutoBar:Print("AutoBar.Class.Bar.prototype:PositionLoad " .. tostring(barDB.stickToFrameName))
+--AutoBar:Print("Bar:PositionLoad " .. tostring(barDB.stickToFrameName))
 	else
 		if (not sharedLayoutDB.alignButtons) then
 			sharedLayoutDB.alignButtons = "3"
@@ -576,7 +587,7 @@ function AutoBar.Class.Bar.prototype:PositionLoad()
 			sharedPositionDB.posX = 300
 			sharedPositionDB.posY = 360
 		end
---		local alignPoint = AutoBar.Class.Bar:GetAlignPoints(sharedLayoutDB.alignButtons)
+--		local alignPoint = Bar:GetAlignPoints(sharedLayoutDB.alignButtons)
 		local x, y, s = sharedPositionDB.posX, sharedPositionDB.posY, self.frame:GetEffectiveScale()
 		x, y = x/s, y/s
 		self.frame:ClearAllPoints()
@@ -584,7 +595,7 @@ function AutoBar.Class.Bar.prototype:PositionLoad()
 	end
 end
 
-function AutoBar.Class.Bar.prototype:PositionSave()
+function Bar:PositionSave()
 	local debug = false --self.barKey == "AutoBarClassBarBasic"
 	local frame = self.frame
 	local x, y = frame:GetLeft(), frame:GetBottom()
@@ -592,14 +603,14 @@ function AutoBar.Class.Bar.prototype:PositionSave()
 	x, y = x * s, y * s
 	self.sharedPositionDB.posX = x
 	self.sharedPositionDB.posY = y
-	if(debug) then AB.LogWarning("|nPositionSave", self.barKey); end
-	if(debug) then AB.LogWarning(AB.Dump(self.sharedPositionDB, 1)); end
+	if(debug) then code.log_warning("|nPositionSave", self.barKey); end
+	if(debug) then code.log_warning(code.Dump(self.sharedPositionDB, 1)); end
 
 end
 
 
 -- Translate the alignButtons setting
-function AutoBar.Class.Bar:GetAlignPoints(alignButtons)
+function Bar:GetAlignPoints(alignButtons)
 	local alignPoint, columnRelativePoint, rowRelativePoint, signX, signY
 
 	if (alignButtons == "3") then
@@ -688,12 +699,12 @@ end
 -- Lay out the buttons in the rows, columns grid specified
 -- Collapse holes if collapseButtons is true
 -- Obey the alignment options in alignButtons
-function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
+function Bar:RefreshButtonLayout()
 	local rows = self.sharedLayoutDB.rows or 1
 	local columns = self.sharedLayoutDB.columns or 24
 	local padding = self.sharedLayoutDB.padding
 	local alignButtons = self.sharedLayoutDB.alignButtons or "3"
-	local alignPoint, _, _, signX, signY = AutoBar.Class.Bar:GetAlignPoints(alignButtons)
+	local alignPoint, _, _, signX, signY = Bar:GetAlignPoints(alignButtons)
 	local framePadding = math.max(0, padding)
 
 	self.frame:SetWidth(ABGData.default_button_width * columns + ((columns + 1) * framePadding))
@@ -728,7 +739,7 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 		frame = self.dragFrame
 		frame:ClearAllPoints()
 		local emptyColumns = columns - ((i - 1) % columns)
---AutoBar:Print("AutoBar.Class.Bar.prototype:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
+--AutoBar:Print("Bar:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
 		frame:SetWidth(pad_btn_width * emptyColumns)
 		frame:SetPoint(alignPoint, anchorFrame, alignPoint,
 						((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX,
@@ -737,13 +748,13 @@ function AutoBar.Class.Bar.prototype:RefreshButtonLayout()
 end
 
 
-function AutoBar.Class.Bar.prototype:RefreshScale()
+function Bar:RefreshScale()
 	self.frame:SetScale(self.sharedLayoutDB.scale or 1)
 	self:PositionLoad()
 end
 
 
-function AutoBar.Class.Bar.prototype:RefreshAlpha()
+function Bar:RefreshAlpha()
 	for _, button in pairs(self.buttonList) do
 		button.frame:SetAlpha(self.sharedLayoutDB.alpha or 1)
 	end
@@ -751,7 +762,7 @@ end
 
 
 -- Remove a button from the Bar
-function AutoBar.Class.Bar.prototype:ButtonRemove(buttonDB)
+function Bar:ButtonRemove(buttonDB)
 	for i, button in pairs(self.buttonList) do
 		if (button.buttonDB == buttonDB) then
 			button.frame:SetAttribute("category", nil)
@@ -778,22 +789,22 @@ end
 
 
 -- Return a unique key to use
-function AutoBar.Class.Bar:GetCustomKey(customBarName)
+function Bar:GetCustomKey(customBarName)
 	local barKey = "AutoBarCustomBar" .. customBarName
 	return barKey
 end
 
 
 -- Change name if possible.  return current name
-function AutoBar.Class.Bar.prototype:ChangeName(newName)
+function Bar:ChangeName(newName)
 	L[self.barKey] = newName
 	self.barName = newName
-	self.barKey = AutoBar.Class.Bar:GetCustomKey(newName)
+	self.barKey = Bar:GetCustomKey(newName)
 end
 
 
-function AutoBar.Class.Bar:NameExists(newName)
-	local newKey = AutoBar.Class.Bar:GetCustomKey(newName)
+function Bar:NameExists(newName)
+	local newKey = Bar:GetCustomKey(newName)
 
 	if (AutoBarDB2.account.barList[newKey]) then
 		return true
@@ -813,33 +824,24 @@ function AutoBar.Class.Bar:NameExists(newName)
 end
 
 -- Return a unique barName and barKey to use
-function AutoBar.Class.Bar:GetNewName(baseName)
+function Bar:GetNewName(baseName)
 	local newName, newKey
 	local key_seed = 0
 	while true do
 		newName = baseName .. key_seed
-		newKey = AutoBar.Class.Bar:GetCustomKey(newName)
+		newKey = Bar:GetCustomKey(newName)
 
 		key_seed = key_seed + 1
-		if (not AutoBar.Class.Bar:NameExists(newName)) then
+		if (not Bar:NameExists(newName)) then
 			break
 		end
 	end
 	return newName, newKey
 end
 
-function AutoBar.Class.Bar:Delete(barKey)
-	AutoBar.barList[barKey] = nil
-	AutoBarDB2.account.barList[barKey] = nil
-	for _, classDB in pairs(AutoBarDB2.classes) do
-		classDB.barList[barKey] = nil
-	end
-	for _, charDB in pairs(AutoBarDB2.chars) do
-		charDB.barList[barKey] = nil
-	end
-end
 
-function AutoBar.Class.Bar:DeleteButtonKey(barDBList, oldKey)
+
+function Bar:DeleteButtonKey(barDBList, oldKey)
 	for _, barDB in pairs(barDBList) do
 		local buttonKeys = barDB.buttonKeys
 		for _, buttonKey in ipairs(buttonKeys) do
@@ -852,7 +854,7 @@ function AutoBar.Class.Bar:DeleteButtonKey(barDBList, oldKey)
 	end
 end
 
-function AutoBar.Class.Bar:RenameButtonKey(barDBList, oldKey, newKey)
+function Bar:RenameButtonKey(barDBList, oldKey, newKey)
 	for _, barDB in pairs(barDBList) do
 		local buttonKeys = barDB.buttonKeys
 		for buttonIndex, buttonKey in pairs(buttonKeys) do
@@ -863,7 +865,7 @@ function AutoBar.Class.Bar:RenameButtonKey(barDBList, oldKey, newKey)
 	end
 end
 
-function AutoBar.Class.Bar:RenameKey(barDBList, oldKey, newKey, newName)
+function Bar:RenameKey(barDBList, oldKey, newKey, newName)
 	local barDB = barDBList[oldKey]
 	if (barDB) then
 		barDBList[newKey] = barDB
@@ -875,16 +877,16 @@ function AutoBar.Class.Bar:RenameKey(barDBList, oldKey, newKey, newName)
 	end
 end
 
-function AutoBar.Class.Bar:Rename(oldKey, newName)
-	local newKey = AutoBar.Class.Bar:GetCustomKey(newName)
+function Bar:Rename(oldKey, newName)
+	local newKey = Bar:GetCustomKey(newName)
 
 	-- Rename Bar for all classes and characters
-	AutoBar.Class.Bar:RenameKey(AutoBarDB2.account.barList, oldKey, newKey, newName)
+	Bar:RenameKey(AutoBarDB2.account.barList, oldKey, newKey, newName)
 	for _, classDB in pairs (AutoBarDB2.classes) do
-		AutoBar.Class.Bar:RenameKey(classDB.barList, oldKey, newKey, newName)
+		Bar:RenameKey(classDB.barList, oldKey, newKey, newName)
 	end
 	for _, charDB in pairs (AutoBarDB2.chars) do
-		AutoBar.Class.Bar:RenameKey(charDB.barList, oldKey, newKey, newName)
+		Bar:RenameKey(charDB.barList, oldKey, newKey, newName)
 	end
 
 	-- Rename instantiated Bar
@@ -896,7 +898,7 @@ function AutoBar.Class.Bar:Rename(oldKey, newName)
 end
 
 
-function AutoBar.Class.Bar:OptionsInitialize()
+function Bar:OptionsInitialize()
 	if (not AutoBarDB2.account.barList) then
 		AutoBarDB2.account.barList = {}
 	end
@@ -913,16 +915,16 @@ end
 
 
 
-function AutoBar.Class.Bar:OptionsReset()
+function Bar:OptionsReset()
 	AutoBarDB2.account.barList = {}
 end
 
-function AutoBar.Class.Bar:OptionsUpgrade()
---AutoBar:Print("AutoBar.Class.Bar:OptionsUpgrade start")
+function Bar:OptionsUpgrade()
+--AutoBar:Print("Bar:OptionsUpgrade start")
 --	if (not AutoBarDB2.account.barListVersion) then
 --		AutoBarDB2.account.barListVersion = barListVersion
 --	elseif (AutoBarDB2.account.barListVersion < barListVersion) then
---AutoBar:Print("AutoBar.Class.Bar:OptionsUpgrade AutoBarDB2.account.barListVersion " .. tostring(AutoBarDB2.account.barListVersion))
+--AutoBar:Print("Bar:OptionsUpgrade AutoBarDB2.account.barListVersion " .. tostring(AutoBarDB2.account.barListVersion))
 --		AutoBarDB2.account.barListVersion = barListVersion
 --	end
 end
@@ -932,3 +934,5 @@ end
 /script AutoBarClassBarBasicFrame:Show()
 /dump AutoBar.barList["AutoBarClassBar"]
 --]]
+
+

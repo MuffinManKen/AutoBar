@@ -8,6 +8,9 @@
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
+
 local AutoBar = AutoBar
 local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
 
@@ -632,7 +635,7 @@ local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
 local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
 local SPELL_MILL_HERB
 if(ABGData.is_mainline_wow) then
-	SPELL_MILL_HERB = AB.GetSpellNameByName("Milling")
+	SPELL_MILL_HERB = code.get_spell_name_by_name("Milling")
 end
 
 local TRINKET1_SLOT = 13
@@ -998,7 +1001,7 @@ end
 -- Add category to the end of the buttons list
 function AutoBarButton.prototype:AddCategory(p_category_name)
 	if not AutoBarCategoryList[p_category_name] then
-		AB.LogWarning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
+		code.log_warning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
 	end
 	for _, category in ipairs(self) do
 		if (category == p_category_name) then
@@ -1326,13 +1329,13 @@ if (ABGData.is_mainline_wow) then
 end
 
 --[[
-		"*", AB.GetSpellNameByName("Archaeology"),
-		"*", AB.GetSpellNameByName("Cooking Fire"),
-		"*", AB.GetSpellNameByName("Disenchant"),
-		"*", AB.GetSpellNameByName("Milling"),
-		"*", AB.GetSpellNameByName("Prospecting"),
-		"*", AB.GetSpellNameByName("Smelting"),
-		"*", AB.GetSpellNameByName("Survey"),
+		"*", code.get_spell_name_by_name("Archaeology"),
+		"*", code.get_spell_name_by_name("Cooking Fire"),
+		"*", code.get_spell_name_by_name("Disenchant"),
+		"*", code.get_spell_name_by_name("Milling"),
+		"*", code.get_spell_name_by_name("Prospecting"),
+		"*", code.get_spell_name_by_name("Smelting"),
+		"*", code.get_spell_name_by_name("Survey"),
 --]]
 
 AutoBarButtonCustom = AceOO.Class(AutoBarButton)
@@ -1812,7 +1815,7 @@ function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Potion.Rage")
 	end
 
-	if  (AB.ClassUsesMana(AutoBar.CLASS)) then
+	if  (code.class_uses_mana(AutoBar.CLASS)) then
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Endless")
 		--self:AddCategory("Consumable.Potion.Recovery.Mana.Basic")
 
@@ -2179,7 +2182,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 	if ((equippedItemId == itemId) or (not bag)) then
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
-		local macroTexture = AB.GetIconForItemID((tonumber(itemId)))
+		local macroTexture = code.GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
 
 		button.macroText = macroText
@@ -2202,7 +2205,7 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 			self:AddCategory("Spell.Mage.Conjure Water")
 	end
 
-	if (AB.ClassUsesMana(AutoBar.CLASS)) then
+	if (code.class_uses_mana(AutoBar.CLASS)) then
 		self:AddCategory("Consumable.Water.Percentage")
 		self:AddCategory("Consumable.Water.Basic")
 

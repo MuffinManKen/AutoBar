@@ -36,7 +36,10 @@
 
 -- GLOBALS: IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown, GameTooltip, InCombatLockdown, GetItemInfo, GetMacroInfo
 
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local _ABGData = AutoBarGlobalDataObject
@@ -220,8 +223,8 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 	local accountDB = AutoBarDB2.account.barList[barKey]
 	local debug = false --barKey == "AutoBarClassBarBasic"
 
-	if (debug) then AB.LogWarning("AutoBar:GetSharedBarDB(", barKey, ", ", sharedVar, ")"); end
-	if (debug) then AB.LogWarning("charDB", charDB, " classDB", classDB, " accountDB", accountDB); end
+	if (debug) then code.log_warning("AutoBar:GetSharedBarDB(", barKey, ", ", sharedVar, ")"); end
+	if (debug) then code.log_warning("charDB", charDB, " classDB", classDB, " accountDB", accountDB); end
 
 	-- Char specific db overides all others
 	if (charDB and charDB[sharedVar]) then
@@ -245,7 +248,7 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 		end
 	end
 
-	if (debug) then AB.LogWarning("accountDB", accountDB, " sharedVar", accountDB[sharedVar]); end
+	if (debug) then code.log_warning("accountDB", accountDB, " sharedVar", accountDB[sharedVar]); end
 
 	-- Default to account
 	if (accountDB and accountDB[sharedVar]) then
@@ -260,8 +263,8 @@ function AutoBar:GetSharedBarDB(barKey, sharedVar)
 
 	-- No specific setting so use the widest scope available
 	if (accountDB) then
-		if (debug) then AB.LogWarning("using accountDB"); end
-		if (debug) then AB.LogWarning(AB.Dump(accountDB, 1)); end
+		if (debug) then code.log_warning("using accountDB"); end
+		if (debug) then code.log_warning(code.Dump(accountDB, 1)); end
 
 		return accountDB
 	elseif (classDB) then
@@ -575,11 +578,11 @@ local function getCustomBarName(info)
 end
 
 local function setCustomBarName(info, value)
-	value = AB.GetValidatedName(value)
+	value = code.GetValidatedName(value)
 	if (value and value ~= "") then
 		local barKey = info.arg.barKey
 
-		if (not AutoBar.Class.Bar:NameExists(value)) then
+		if (not Bar:NameExists(value)) then
 			local customBarDB = AutoBar.barLayoutDBList[barKey]
 			customBarDB.name = value
 
@@ -588,7 +591,7 @@ local function setCustomBarName(info, value)
 				bar:ChangeName(value)
 			end
 
-			AutoBar.Class.Bar:Rename(barKey, value)
+			Bar:Rename(barKey, value)
 			AutoBar:BarsChanged()
 		end
 	end
@@ -600,7 +603,7 @@ local function getCustomButtonName(info)
 end
 
 local function setCustomButtonName(info, value)
-	value = AB.GetValidatedName(value)
+	value = code.GetValidatedName(value)
 	if (value and value ~= "") then
 		local buttonKey = info.arg.buttonKey
 		if (AutoBar.Class.Button:NameExists(value)) then
@@ -734,7 +737,7 @@ end
 
 
 local function BarNew()
-	local newBarName, barKey = AutoBar.Class.Bar:GetNewName(L["Custom"])
+	local newBarName, barKey = AB.Bar:GetNewName(L["Custom"])
 	AutoBarDB2.account.barList[barKey] = {
 		name = newBarName,
 		desc = newBarName,
@@ -793,7 +796,17 @@ local function BarDelete(info)
 		end
 	end
 
-	AutoBar.Class.Bar:Delete(barKey)
+	AutoBar.barList[barKey] = nil
+	AutoBarDB2.account.barList[barKey] = nil
+
+	for _, classDB in pairs(AutoBarDB2.classes) do
+		classDB.barList[barKey] = nil
+	end
+
+	for _, charDB in pairs(AutoBarDB2.chars) do
+		charDB.barList[barKey] = nil
+	end
+
 	AutoBar.optionsMain.args.bars.args[barKey] = nil
 	AutoBar:BarsChanged()
 end
@@ -906,7 +919,7 @@ end
 
 --[[
 local function BarReset()
-	AutoBar.Class.Bar:OptionsReset()
+	Bar:OptionsReset()
 	AutoBar:BarsChanged()
 end
 --]]
@@ -2335,7 +2348,7 @@ local function setCategoryValue(info, value)
 end
 
 local function setCategoryName(info, value)
-	value = AB.GetValidatedName(value)
+	value = code.GetValidatedName(value)
 	if (value and value ~= "") then
 		local categoryKey = info.arg.categoryKey
 		local categoryInfo = AutoBarCategoryList[categoryKey]
@@ -2411,7 +2424,7 @@ local function getCategoryMacroName(info)
 end
 
 local function setCategoryMacroName(info, value)
-	value = AB.GetValidatedName(value)
+	value = code.GetValidatedName(value)
 	if (value and value ~= "") then
 		local newName = value--categoryInfo:ChangeName(value)
 		if (newName == value) then

@@ -51,7 +51,11 @@
 --	Bar & Button visual settings are inherited AutoBar -> Bar -> Button
 --  Plugin Buttons / Bars
 
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
@@ -338,7 +342,7 @@ local function migrate_db_from_ace2()
 
 	for _i, data in ipairs(setting_migration) do
 		local l, r = data[1], data[2]
-		AutoBarDB2.settings[l] = AB.NVL(AutoBarDB2.settings[l], AutoBarDB.account[r])
+		AutoBarDB2.settings[l] = code.NVL(AutoBarDB2.settings[l], AutoBarDB.account[r])
 		AutoBarDB.account[r] = nil
 	end
 
@@ -429,21 +433,21 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2.settings = AutoBarDB2.settings or {}
 	local settings = AutoBarDB2.settings
-	settings.show_empty_buttons = AB.NVL(settings.show_empty_buttons, false)
-	settings.show_tooltip = AB.NVL(settings.show_tooltip, true)
-	settings.show_tooltip_in_combat = AB.NVL(settings.show_tooltip_in_combat, true)
-	settings.handle_spell_changed = AB.NVL(settings.handle_spell_changed, true)
-	settings.show_count = AB.NVL(settings.show_count, true)
-	settings.show_hotkey = AB.NVL(settings.show_hotkey, true)
-	settings.hack_PetActionBarFrame = AB.NVL(settings.hack_PetActionBarFrame, false)
-	settings.fade_out = AB.NVL(settings.fade_out, false)
-	settings.clamp_bars_to_screen = AB.NVL(settings.clamp_bars_to_screen, true)
-	settings.self_cast_right_click = AB.NVL(settings.self_cast_right_click, true)
-	settings.log_throttled_events = AB.NVL(settings.log_throttled_events, false)
+	settings.show_empty_buttons = code.NVL(settings.show_empty_buttons, false)
+	settings.show_tooltip = code.NVL(settings.show_tooltip, true)
+	settings.show_tooltip_in_combat = code.NVL(settings.show_tooltip_in_combat, true)
+	settings.handle_spell_changed = code.NVL(settings.handle_spell_changed, true)
+	settings.show_count = code.NVL(settings.show_count, true)
+	settings.show_hotkey = code.NVL(settings.show_hotkey, true)
+	settings.hack_PetActionBarFrame = code.NVL(settings.hack_PetActionBarFrame, false)
+	settings.fade_out = code.NVL(settings.fade_out, false)
+	settings.clamp_bars_to_screen = code.NVL(settings.clamp_bars_to_screen, true)
+	settings.self_cast_right_click = code.NVL(settings.self_cast_right_click, true)
+	settings.log_throttled_events = code.NVL(settings.log_throttled_events, false)
 	settings.throttle_event_limit = settings.throttle_event_limit or 0
-	settings.log_events = AB.NVL(settings.log_events, false)
-	settings.log_memory = AB.NVL(settings.log_memory, false)
-	settings.performance = AB.NVL(settings.performance, false)
+	settings.log_events = code.NVL(settings.log_events, false)
+	settings.log_memory = code.NVL(settings.log_memory, false)
+	settings.performance = code.NVL(settings.performance, false)
 	settings.performance_threshold = settings.performance_threshold or 100
 	if (settings.performance_threshold < 20) then settings.performance_threshold = 100; end;
 
@@ -558,8 +562,8 @@ end
 
 function AutoBar:InitializeDefaults()
 
-	AutoBar.Class.Bar:OptionsInitialize()
-	AutoBar.Class.Bar:OptionsUpgrade()
+	AB.bar:OptionsInitialize()
+	AB.bar:OptionsUpgrade()
 
 	AutoBar.Class.Button:OptionsInitialize()
 	AutoBar.Class.Button:OptionsUpgrade()
@@ -1270,7 +1274,7 @@ local renameBarList
 function AutoBar:UpgradeBar(barDB)
 	if (barDB.isCustomBar) then
 		local oldKey = barDB.barKey
-		local newName = AB.GetValidatedName(barDB.name)
+		local newName = code.GetValidatedName(barDB.name)
 		if (newName ~= barDB.name) then
 			renameBarList[oldKey] = newName
 		end
@@ -1280,7 +1284,7 @@ end
 function AutoBar:UpgradeButton(buttonDB)
 	if (buttonDB.buttonClass == "AutoBarButtonCustom") then
 		local oldKey = buttonDB.buttonKey
-		local newName = AB.GetValidatedName(buttonDB.name)
+		local newName = code.GetValidatedName(buttonDB.name)
 		if (newName ~= buttonDB.name) then
 			renameButtonList[oldKey] = newName
 		end

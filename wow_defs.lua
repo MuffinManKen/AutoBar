@@ -147,13 +147,20 @@ function GetContainerItemID(containerIndex, slotIndex) end
 function GetContainerItemLink(containerIndex, slotIndex) end
 
 
----@class AB
-AB = {}
+---@param p_quest_id number
+---@return number quest_index
+function GetQuestLogIndexByID(p_quest_id) end
 
-function AB.ClearNormalTexture(frame) end
+---@class Bar
+Bar = {}
 
----@return boolean
-function AB.NVL(p_1, p_2) end
+---@class ABCode
+ABCode = {}
+
+
+
+
+
 
 
 --#region LibKeyBound
@@ -264,7 +271,6 @@ MasqueGroup = {}
 ---@return MasqueGroup
 function Masque:Group(group_name, other_param) end
 
-
 ---@param button table
 ---@return table
 function Masque:GetBackdrop(button) end
@@ -272,6 +278,12 @@ function Masque:GetBackdrop(button) end
 ---@param button table
 ---@return table
 function Masque:GetGloss(button) end
+
+
+function MasqueGroup:Skin(p_SkinID, p_Backdrop, p_Gloss, p_Colors) end
+
+
+
 --#endregion Masque
 
 --#region C_Addons
@@ -342,6 +354,10 @@ ABSpellInfo = {}
 ---@field is_fave boolean?
 ---@field name string?
 ABToyInfo = {}
+
+
+
+
 
 
 

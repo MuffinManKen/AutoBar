@@ -6,7 +6,10 @@
 
 -- http://muffinmangames.com
 --
-local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 
@@ -105,17 +108,44 @@ InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
 --	return res;
 --end
 
+local function find_nameless_categories()
+
+	local nameless = ""
+	for key in pairs(AutoBarCategoryList) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
+
+	return nameless
+end
+
+
+local function find_nameless_buttons()
+
+	local nameless = ""
+	for key in pairs(AutoBar.Class) do
+		if(AutoBarGlobalDataObject.locale[key] == nil) then
+			nameless = nameless .. "|n" .. key
+		end
+	end
+
+	return nameless
+end
+
 local function set_nameless_category_text(p_widget)
 
 	local edit_box_cat = p_widget:GetUserData("edit_box_cat")
-	edit_box_cat:SetText(AB.FindNamelessCategories())
+	edit_box_cat:SetText(find_nameless_categories())
 
 	local edit_box_btn = p_widget:GetUserData("edit_box_btn")
-	edit_box_btn:SetText(AB.FindNamelessButtons())
+	edit_box_btn:SetText(find_nameless_buttons())
 
 --	edit_box:SetText(print_map_ids())
 
 end
+
+
 
 -- function that draws the widgets for the first tab
 local function DrawGroupNamelessCategories(container)
@@ -157,7 +187,7 @@ local function DrawGroupWarnings(container)
 	edit_box:SetLabel("")
 	container:AddChild(edit_box)
 
-	edit_box:SetText(AB.GetWarningLogString())
+	edit_box:SetText(code.get_warning_log_string())
 
 end
 

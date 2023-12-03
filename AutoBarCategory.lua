@@ -21,7 +21,10 @@
 
 -- GLOBALS: GetSpellInfo, GetMacroInfo, GetMacroIndexByName
 -- GLOBALS: C_ToyBox
-local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
@@ -306,7 +309,7 @@ end
 function MacroTextCategory:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	assert(type(p_macro_text) == "string")
 
-	local guid = AB.MacroTextGUID(p_macro_text)
+	local guid = code.MacroTextGUID(p_macro_text)
 	AutoBarSearch:RegisterMacroText(guid, p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 
 	local next_index = #self.items + 1
@@ -334,10 +337,10 @@ local SpellsCategory = AB.SpellsCategory ---@class SpellsCategory
 function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickList, p_pt_set)
 
 	if(type(p_cast_list) ~= "table" and p_cast_list ~= nil) then
-		AB.LogWarning("Category:", p_description, " is passing a bad cast_list:", p_cast_list)
+		code.log_warning("Category:", p_description, " is passing a bad cast_list:", p_cast_list)
 	end
 	if(type(rightClickList) ~= "table" and rightClickList ~= nil) then
-		AB.LogWarning("Category:", p_description, " is passing a bad rightClickList:", rightClickList)
+		code.log_warning("Category:", p_description, " is passing a bad rightClickList:", rightClickList)
 	end
 
 	local obj = CreateFromMixins(self)
@@ -347,7 +350,7 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 	-- Filter out non CLASS spells from castList and rightClickList
 	if (rightClickList) then
 		if (#rightClickList % 3 ~= 0) then
-			AB.LogWarning("Category:", p_description, " rightClickList should be divisible by 3, but isn't.")
+			code.log_warning("Category:", p_description, " rightClickList should be divisible by 3, but isn't.")
 		end
 		obj.castList, obj.rightClickList = FilterByClass(rightClickList, 3)
 	elseif (p_cast_list) then
@@ -434,7 +437,7 @@ function CustomCategory:new(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		texture = AB.GetIconForItemID(tonumber(itemId))
+		texture = code.GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
 			_, _, texture = GetSpellInfo(spellName)
