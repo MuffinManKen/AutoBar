@@ -3,6 +3,7 @@ xcopy "..\MuffinLibPTSets\bcc" ".\bcc\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_i
 xcopy "..\MuffinLibPTSets\wrath" ".\wrath\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 xcopy "..\MuffinLibPTSets\retail" ".\retail\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 
+copy "..\LibPeriodicTable\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua" ".\libs\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua"
 xcopy "..\LibPeriodicTable\LibPeriodicTable-3.1-Consumable" ".\libs\LibPeriodicTable-3.1-Consumable" /Y /S /I
 xcopy "..\LibPeriodicTable\LibPeriodicTable-3.1-Misc" ".\libs\LibPeriodicTable-3.1-Misc" /Y /S /I
 xcopy "..\LibPeriodicTable\LibPeriodicTable-3.1-Tradeskill" ".\libs\LibPeriodicTable-3.1-Tradeskill" /Y /S /I
