@@ -236,7 +236,7 @@ function AB.InitializeCategories()
 		"WARLOCK", code.get_spell_name_by_name("Summon Felguard"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Felhunter"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Imp"),
-		"WARLOCK", code.get_spell_name_by_name("Summon Succubus"),
+		"WARLOCK", code.get_spell_name_by_name("Summon Sayaad"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Voidwalker"),
 	})
 

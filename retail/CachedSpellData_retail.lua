@@ -289,7 +289,7 @@ code.cache_spell_data(29893, "Create Soulwell");	--y
 code.cache_spell_data(126, "Eye of Kilrogg");--y
 code.cache_spell_data(691, "Summon Felhunter");--y
 code.cache_spell_data(688, "Summon Imp");--y
-code.cache_spell_data(712, "Summon Succubus");--y
+code.cache_spell_data(366222, "Summon Sayaad");--y
 code.cache_spell_data(697, "Summon Voidwalker");	--y
 code.cache_spell_data(1122, "Summon Infernal");
 code.cache_spell_data(30146, "Summon Felguard");
