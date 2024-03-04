@@ -158,8 +158,9 @@ Bar = {}
 ABCode = {}
 
 
-
-
+---@class AutoBar
+---@field barList table<string, Bar>
+AutoBar = {}
 
 
 
@@ -224,16 +225,16 @@ function LibStickyFrames:SetFrameText(frame, barName) end
 --#endregion LibStickyFrames
 
 
---#region LibPeriodicTable
 ---@class LibPeriodicTable-3.1
-LibPeriodicTable = {}
-
----@param pt_set string
-function LibPeriodicTable:GetSetTable(pt_set) end
-
----@param pt_set string
-function LibPeriodicTable:IterateSet(pt_set) end
---#endregion LibPeriodicTable
+---@field ItemSearch function(item : number|string) : table
+---@field GetSetTable function(set : string) : table
+---@field GetSetString function(set : string) : string
+---@field IsSetMulti function(set : string) : boolean
+---@field IterateSet function(set : string) : function
+---@field AddData function(arg1 : string, arg2 : string|table, arg3 : table|nil)
+---@field ItemInSet function(item : number|string, set : string) : any, string
+---@field sets table
+---@field embedversions table
 
 
 ---@class GameTooltip
