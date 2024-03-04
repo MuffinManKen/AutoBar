@@ -11,7 +11,10 @@
 -- GLOBALS: SetCursor, ClearCursor, GetBindingKey, SetBinding, GetBindingText, SetOverrideBindingClick, InCombatLockdown, GameTooltip
 -- GLOBALS: RegisterStateDriver, CreateFrame, GetContainerItemInfo, GetItemCount, PickupContainerItem, IsConsumableItem, GetSpellTabInfo, GetSpellBookItemName
 -- GLOBALS: PickupItem, PickupSpellBookItem, PickupAction, PickupMacro, ItemHasRange, IsItemInRange, SpellHasRange, IsSpellInRange
-local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
+local _, AB = ...
+
+local types = AB.types	---@class ABTypes
+local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
@@ -94,7 +97,8 @@ end
 
 -- Refresh the category list
 function AutoBar.Class.Button.prototype:Refresh(parentBar, buttonDB)
-	--if(buttonDB.buttonKey == "AutoBarButtonCharge") then print("AB.C.Button.proto.Refresh", self.buttonName, self.buttonDB.hasCustomCategories, #self.buttonDB) end
+	local debug = false --(buttonDB.buttonKey == "AutoBarButtonQuest")
+	if(debug) then code.log_warning("AB.C.Button.proto.Refresh", self.buttonName, self.buttonDB.hasCustomCategories, #self.buttonDB) end
 	self.parentBar = parentBar
 	if (buttonDB ~= self.buttonDB) then
 		self.buttonDB = buttonDB

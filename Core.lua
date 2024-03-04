@@ -25,40 +25,16 @@ local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local _
 local L = AutoBarGlobalDataObject.locale
 
-local AutoBar = AutoBar
+local AutoBar = AutoBar	---@type AutoBar
 local ABGData = AutoBarGlobalDataObject
 local tick = ABGData.TickScheduler
 
 local ABSchedulerTickLength = 0.04
 
-AutoBar.inWorld = false
-AutoBar.inCombat = nil		-- For item use restrictions
-AutoBar.inBG = false		-- For battleground only items
-AutoBar.initialized = false;
-
--- List of barKey = barDB (the correct DB to use between char, class or account)
-AutoBar.barButtonsDBList = {}
-AutoBar.barLayoutDBList = {}
-AutoBar.barPositionDBList = {}
-
--- List of Bar Names
-AutoBar.barValidateList = {}
-
--- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
-AutoBar.buttonDBList = {}
-
--- List of buttonKey for Buttons not currently placed on a Bar
-AutoBar.unplacedButtonList = {}
-
--- List of buttonName = AutoBarButton
-AutoBar.buttonList = {}
-
--- List of buttonName = AutoBarButton for disabled buttons
-AutoBar.buttonListDisabled = {}
 
 AB.events = {}
 
-AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
+
 
 AutoBar.dockingFramesValidateList = {
 	["NONE"] = L["None"],
@@ -321,12 +297,12 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	local debug_me = false
 	local category = AutoBarCategoryList[p_category_name]
 
-	if(debug_me) then print("Adding", p_item_link, " to ", p_category_name, code.Dump(category)); end;
+	if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
 
 	local item_name, item_id = AutoBar.ItemLinkDecode(p_item_link)
 	category.items[#category.items + 1] = item_id
 
-	if(debug_me) then print(item_name, item_id, "Num Items:", #category.items); end;
+	if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
 end
 
 
@@ -349,7 +325,7 @@ function AB.events.QUEST_ACCEPTED(p_arg1, p_arg2)
 		code.log_warning("   ", link)
 		if(link) then
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
-			AB.ABScheduleUpdate(tick.UpdateObjectsID)
+			AB.ABScheduleUpdate(tick.UpdateItemsID)
 		end
 	end
 
@@ -360,6 +336,7 @@ if (ABGData.is_mainline_wow) then
 
 	function AB.events.QUEST_LOG_UPDATE(p_arg1)
 		AB.LogEventStart("QUEST_LOG_UPDATE")
+		code.log_warning("QUEST_LOG_UPDATE","   Idx:", p_arg1)
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
 		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
@@ -367,8 +344,9 @@ if (ABGData.is_mainline_wow) then
 			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
+					code.log_warning("   ", link)
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
-					AB.ABScheduleUpdate(tick.UpdateObjectsID)
+					AB.ABScheduleUpdate(tick.UpdateItemsID)
 				end
 			end
 		end
@@ -401,7 +379,7 @@ if (ABGData.is_mainline_wow) then
 		if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
 
 		if(p_item_id == nil or p_new == true) then
-			AB.ABScheduleUpdate(tick.ResetSearch)
+			AB.ABScheduleUpdate(tick.UpdateItemsID)
 		end
 
 		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
@@ -425,8 +403,6 @@ function AB.events.PLAYER_ENTERING_WORLD()
 
 	if (not AutoBar.inWorld) then
 		AutoBar.inWorld = true;
-
-		--AutoBar:DumpWarningLog()
 
 		AutoBarDB2.whatsnew_version = MUFFIN_WHATS_NEW_QUEUE.AddConditionalEntry({
 			addon_name = ADDON_NAME,
@@ -1156,6 +1132,8 @@ function AB.UpdateCategories(p_behaviour)
 		end
 	end
 
+	AB.UpdateObjects()
+
 	local ret = tick.UpdateCompleteID
 	if (not InCombatLockdown()) then
 		AB.UpdateCustomCategories()
@@ -1176,9 +1154,9 @@ function AB.UpdateSpells(p_behaviour)
 	AutoBarSearch:ScanRegisteredMacros()
 	AB.RefreshCategories()
 
-	local ret = tick.UpdateObjectsID;
+	local ret = tick.UpdateItemsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
-		AB.UpdateObjects();
+		AB.UpdateItems();
 		ret = tick.UpdateCompleteID;
 	end
 
@@ -1197,13 +1175,11 @@ function AB.UpdateObjects(p_behaviour)
 		--print("UpdateObjects", barKey, barDB["allowed_class"] .. " == " .. AutoBar.CLASS, matches_class)
 		if (barDB.enabled and matches_class) then
 			--print("UpdateObjects barKey " .. tostring(barKey) .. " AutoBar.CLASS " .. tostring(AutoBar.CLASS) .. " barDB[AutoBar.CLASS] " .. tostring(barDB[AutoBar.CLASS]))
-			if (AutoBar.barList[barKey]) then
-				AutoBar.barList[barKey]:UpdateObjects()
-			else
-				AutoBar.barList[barKey] = AB.bar:new(barKey) ---@class Bar
-				--print("     UpdateObjects barKey " .. tostring(barKey) .. " Name " .. tostring(AutoBar.barList[barKey].barName))
+			if (not AutoBar.barList[barKey]) then
+				AutoBar.barList[barKey] = AB.bar:new(barKey)
 			end
-			bar = AutoBar.barList[barKey]
+			bar = AutoBar.barList[barKey] ---@class Bar
+			bar:UpdateObjects()
 			AB.LibStickyFrames:SetFrameEnabled(bar.frame, true)
 			AB.LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
 			AB.LibStickyFrames:SetFrameText(bar.frame, bar.barName)
@@ -1216,7 +1192,6 @@ function AB.UpdateObjects(p_behaviour)
 		end
 	end
 
-	--tick.FullScanItemsFlag = true
 
 	local ret = tick.UpdateItemsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step
@@ -1234,6 +1209,8 @@ end
 function AB.UpdateItems(p_behaviour)
 
 	AB.LogEventStart("AB.UpdateItems")
+
+	tick.FullScanItemsFlag = true	--Temp fix for missing items
 
 	if(tick.FullScanItemsFlag) then
 		AutoBarSearch:Reset();

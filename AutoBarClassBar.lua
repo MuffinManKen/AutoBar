@@ -26,7 +26,7 @@ local Masque = LibStub("Masque", true)
 local assert, ipairs, print, pairs, math = assert, ipairs, print, pairs, math
 
 -- List of Bars for the current user
-AutoBar.barList = {}
+AutoBar.barList = {} ---@type table<string, Bar>
 
 if (not AutoBar.Class) then
 	AutoBar.Class = {}
@@ -218,7 +218,7 @@ function Bar:UpdateObjects()
 	-- Create or Refresh the Bar's Buttons
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 
-		--local debug = (buttonKey == "AutoBarButtonCharge")
+		local debug = false --(buttonKey == "AutoBarButtonQuest")
 		buttonDB = AutoBar.buttonDBList[buttonKey]
 		if (not buttonDB) then
 			buttonKeyList[buttonKeyIndex] = nil
@@ -229,13 +229,13 @@ function Bar:UpdateObjects()
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
-				--if(debug) then AutoBar:Print("Bar:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
+				if(debug) then code.log_warning("Bar:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
 			end
 
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
-				--if(debug) then AutoBar:Print("Bar:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				if(debug) then code.log_warning("Bar:UpdateObjects existing buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			else
 				assert(buttonKeyIndex)
 				assert(buttonDB)
@@ -243,18 +243,18 @@ function Bar:UpdateObjects()
 				assert(AutoBar.Class[buttonDB.buttonClass], "AutoBar.Class[buttonDB.buttonClass]" .. " fails for " ..  buttonDB.buttonClass)
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
 				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
-				--if(debug) then AutoBar:Print("Bar:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				if(debug) then code.log_warning("Bar:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
 			end
 			buttonList[buttonKeyIndex].order = buttonKeyIndex
 		else
-			--if(debug) then AutoBar:Print("Bar:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
+			if(debug) then code.log_warning("Bar:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
 			-- Move to disabled cache
 			if (AutoBar.buttonList[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonList[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 				AutoBar.buttonListDisabled[buttonKey] = AutoBar.buttonList[buttonKey]
 				AutoBar.buttonList[buttonKey] = nil
-				--if(debug) then AutoBar:Print("Bar:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
+				if(debug) then code.log_warning("Bar:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
 			elseif (AutoBar.buttonListDisabled[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
@@ -268,7 +268,6 @@ function Bar:UpdateObjects()
 
 	-- Trim Excess
 	for buttonIndex = # buttonList, # buttonKeyList + 1, -1 do
-		--if(debug) then AutoBar:Print("Bar:UpdateObjects Trim " .. tostring(buttonList[buttonIndex].buttonDB.buttonKey) .. " buttonIndex " .. tostring(buttonIndex)); end
 		buttonList[buttonIndex] = nil
 	end
 

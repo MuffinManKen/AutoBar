@@ -24,9 +24,38 @@ AB.LibStickyFrames = LibStub("LibStickyFrames-2.0") ---@type LibStickyFrames
 
 
 
-AutoBar = {}
-AutoBar.warning_log = {}
+AutoBar = {	---@class AutoBar
+	warning_log = {},
+	inWorld = false,
+	inCombat = nil,		-- For item use restrictions
+	inBG = false,		-- For battleground only items
+	initialized = false,
 
+-- List of Bars for the current user
+	barList = {}, ---@type table<string, Bar>
+
+-- List of barKey = barDB (the correct DB to use between char, class or account)
+	barButtonsDBList = {},
+	barLayoutDBList = {},
+	barPositionDBList = {},
+
+	-- List of Bar Names
+	barValidateList = {},
+
+-- List of buttonKey = buttonDB (the correct DB to use between char, class or account)
+	buttonDBList = {},
+
+-- List of buttonKey for Buttons not currently placed on a Bar
+	unplacedButtonList = {},
+
+-- List of buttonName = AutoBarButton
+	buttonList = {},
+
+-- List of buttonName = AutoBarButton for disabled buttons
+	buttonListDisabled = {},
+
+	visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show",
+}
 
 ---@param p_table table
 ---@return boolean
