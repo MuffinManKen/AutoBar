@@ -25,8 +25,6 @@ local Masque = LibStub("Masque", true)
 
 local assert, ipairs, print, pairs, math = assert, ipairs, print, pairs, math
 
--- List of Bars for the current user
-AutoBar.barList = {} ---@type table<string, Bar>
 
 if (not AutoBar.Class) then
 	AutoBar.Class = {}
