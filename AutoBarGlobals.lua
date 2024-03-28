@@ -404,6 +404,20 @@ function code.add_profile_data(p_name, p_time)
 
 end
 
+function code.GetItemCount(p_item_info, p_include_bank, p_include_uses, p_include_reagent_bank)
+
+	local item_id = tonumber(p_item_info)
+	if (not item_id) then
+		print(p_item_info, "   ", item_id)
+		return 0
+	elseif (C_Item and C_Item.GetItemCount) then
+		return C_Item.GetItemCount(item_id, p_include_bank, p_include_uses, p_include_reagent_bank) or 0
+	else
+		return GetItemCount(item_id, p_include_bank, p_include_uses, p_include_reagent_bank) or 0
+	end
+
+end
+
 
 function code.GetLogIndexForQuestID(p_quest_id)
 

@@ -291,8 +291,8 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 
 		if (itemType) then
 			if (itemType == "item") then
-				local itemId = frame:GetAttribute("itemId")
-				count1 = GetItemCount(tonumber(itemId), nil, true) or 0
+				local itemId = frame:GetAttribute("itemId") or 1
+				count1 = code.GetItemCount(tonumber(itemId), nil, true) or 0
 -- 		Toys and Macros don't have counts, though a macro of an item could.
 --			elseif (itemType == "macro") then
 --			elseif (itemType == "toy") then

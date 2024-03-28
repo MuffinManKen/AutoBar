@@ -8,9 +8,6 @@
 -- http://muffinmangames.com
 --
 
--- GLOBALS: SetCursor, ClearCursor, GetBindingKey, SetBinding, GetBindingText, SetOverrideBindingClick, InCombatLockdown, GameTooltip
--- GLOBALS: RegisterStateDriver, CreateFrame, GetContainerItemInfo, GetItemCount, PickupContainerItem, IsConsumableItem, GetSpellTabInfo, GetSpellBookItemName
--- GLOBALS: PickupItem, PickupSpellBookItem, PickupAction, PickupMacro, ItemHasRange, IsItemInRange, SpellHasRange, IsSpellInRange
 local _, AB = ...
 
 local types = AB.types	---@class ABTypes
@@ -343,7 +340,7 @@ end
 -- Return nil if not
 function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewItem)
 	local _, itemCount, _locked = GetContainerItemInfo(targetBag, targetSlot)
-	local totalCount = GetItemCount(itemId)
+	local totalCount = code.GetItemCount(itemId)
 	if (not itemCount and totalCount > 0) then
 		AutoBarSearch:ScanBagsInCombat()
 	end
@@ -637,8 +634,8 @@ function AutoBar.Class.Button.prototype:IsActive()
 		local count = 0
 
 		if (itemType == "item") then
-			local itemId = self.frame:GetAttribute("itemId")
-			count = GetItemCount(tonumber(itemId))
+			local itemId = self.frame:GetAttribute("itemId") or 1
+			count = code.GetItemCount(tonumber(itemId)) or 0
 			if (count == 0) then
 				local sortedItems = AutoBarSearch.sorted:GetList(self.buttonName)
 				if (sortedItems) then
