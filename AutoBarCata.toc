@@ -22,24 +22,24 @@ embeds.xml
 libs/muffin_ui_toolkit.lua
 libs/muffin_whats_new.lua
 
-wrath/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Food.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Gear.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Misc.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Poison.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Potions.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
-wrath/MuffinLibPTSets/LibPT-Muffin.Stones.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Food.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Misc.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Poison.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Potions.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
+cata/MuffinLibPTSets/LibPT-Muffin.Stones.lua
 
 AceGUIWidget-DragLink.lua
 
 AutoBarGlobals.lua
 
-wrath/CachedSpellData_wrath.lua
-wrath/whats_new.lua
+cata/CachedSpellData_cata.lua
+cata/whats_new.lua
 
 # Localization
 locale/Locale-enUS.lua
@@ -70,10 +70,10 @@ AutoBarClassBasicButton.lua
 AutoBarClassButton.lua
 AutoBarClassPopupButton.lua
 AutoBarButton.lua
-wrath/AutoBarButton.lua
+cata/AutoBarButton.lua
 AutoBarCategory.lua
 
-wrath/ABCategoryData_wrath.lua
+cata/ABCategoryData_cata.lua
 
 AutoBarConfig.lua
 
