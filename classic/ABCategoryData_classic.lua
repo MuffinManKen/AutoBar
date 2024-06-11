@@ -266,9 +266,6 @@ function AB.InitializeCategories()
 		"*", code.get_spell_name_by_name("Leatherworking"),
 		"*", code.get_spell_name_by_name("Smelting"),
 		"*", code.get_spell_name_by_name("Tailoring"),
-
-		"*", code.get_spell_name_by_name("Find Minerals"),
-		"*", code.get_spell_name_by_name("Find Herbs"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = SpellsCategory:new("Spell.Debuff.Multiple", spellIconList["Slow"],
@@ -306,6 +303,10 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Track Giants"),
 		"PALADIN", code.get_spell_name_by_name("Sense Undead"),
 		"WARLOCK", code.get_spell_name_by_name("Sense Demons"),
+
+		"*", code.get_spell_name_by_name("Find Minerals"),
+		"*", code.get_spell_name_by_name("Find Herbs"),
+		"*", code.get_spell_name_by_name("Find Tresure"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = SpellsCategory:new( "Spell.Trap", spellIconList["Explosive Trap"],
