@@ -69,8 +69,6 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Stealth"] = SpellsCategory:new("Spell.Stealth", spellIconList["Stealth"],
 	{
 		"DRUID", code.get_spell_name_by_name("Prowl"),
-		"MAGE", code.get_spell_name_by_name("Invisibility"),
-		"MAGE", code.get_spell_name_by_name("Lesser Invisibility"),
 		"ROGUE", code.get_spell_name_by_name("Stealth"),	--y
 		"*", code.get_spell_name_by_name("Shadowmeld"),	--y
 	})

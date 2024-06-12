@@ -21,8 +21,6 @@ code.cache_spell_data(5215, "Prowl");
 code.cache_spell_data(417141, "Berserk");
 code.cache_spell_data(22842, "Frenzied Regeneration");
 
-code.cache_spell_data(22570, "Mangle");
-
 code.cache_spell_data(1126, "Mark of the Wild");
 code.cache_spell_data(21849, "Gift of the Wild");
 code.cache_spell_data(467, "Thorns");
@@ -105,10 +103,6 @@ code.cache_spell_data(130, "Slow Fall");
 code.cache_spell_data(1008, "Amplify Magic");
 code.cache_spell_data(604, "Dampen Magic");
 
---code.cache_spell_data(42955, "Conjure Refreshment");
---code.cache_spell_data(43987, "Conjure Refreshment Table");
-code.cache_spell_data(66, "Lesser Invisibility");
-code.cache_spell_data(885, "Invisibility");
 code.cache_spell_data(27619, "Ice Block");
 code.cache_spell_data(11418, "Portal: Undercity");
 code.cache_spell_data(3563, "Teleport: Undercity");
