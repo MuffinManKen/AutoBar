@@ -1075,7 +1075,7 @@ function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 
 	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
-	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+	else
 		self:AddCategory("Muffin.Poison.Lethal")
 	end
 end
@@ -1088,7 +1088,7 @@ function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 
 	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Nonlethal")
-	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+	else
 		self:AddCategory("Muffin.Poison.Nonlethal")
 	end
 
@@ -1174,7 +1174,7 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 		self:AddCategory("Spell.Poison.Nonlethal")
-	else --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+	else
 		self:AddCategory("Muffin.Poison.Lethal")
 		self:AddCategory("Muffin.Poison.Nonlethal")
 	end
@@ -1234,12 +1234,12 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
 		self:AddCategory("Spell.Mage.Create Manastone")
-		if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+		if (not ABGData.is_mainline_wow) then
 			self:AddCategory("Spell.Mage.Conjure Water")
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
-		if (not ABGData.is_mainline_wow) then --(ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+		if (not ABGData.is_mainline_wow) then
 			self:AddCategory("Spell.Warlock.Create Soulstone")
 		end
 
@@ -2244,7 +2244,7 @@ function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
 end
 
 
-if (LE_EXPANSION_WRATH_OF_THE_LICH_KING and LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
+if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
 	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
@@ -2260,7 +2260,7 @@ end
 -- WoW Classic
 --
 -------------------------------------------------------------------
-if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
+if (not ABGData.is_mainline_wow) then
 
 	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
@@ -2293,7 +2293,7 @@ if (ABGData.is_vanilla_wow or ABGData.is_bcc_wow or ABGData.is_wrath_wow) then
 		self:AddCategory("Spell.Track")
 	end
 
-elseif (ABGData.is_mainline_wow) then
+else
 
 -------------------------------------------------------------------
 --

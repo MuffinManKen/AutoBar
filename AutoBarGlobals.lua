@@ -615,7 +615,7 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 --
 -------------------------------------------------------------------
 
-else --(AutoBarGlobalDataObject.is_vanilla_wow or AutoBarGlobalDataObject.is_bcc_wow or is_wrath_wow) then
+else
 
 	function AB.InfoFromGUID(p_guid)	---@diagnostic disable-line: duplicate-set-field
 		return AutoBarSearch.registered_macro_text[p_guid];

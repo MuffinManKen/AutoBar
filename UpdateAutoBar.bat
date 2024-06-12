@@ -1,6 +1,6 @@
 xcopy "..\MuffinLibPTSets\classic" ".\classic\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 xcopy "..\MuffinLibPTSets\bcc" ".\bcc\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
-xcopy "..\MuffinLibPTSets\wrath" ".\wrath\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
+xcopy "..\MuffinLibPTSets\cata" ".\cata\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 xcopy "..\MuffinLibPTSets\retail" ".\retail\MuffinLibPTSets" /Y /S /I /EXCLUDE:xcopy_ignore.txt
 
 copy "..\LibPeriodicTable\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua" ".\libs\LibPeriodicTable-3.1\LibPeriodicTable-3.1.lua"

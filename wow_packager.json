@@ -30,17 +30,17 @@
 		"generate_patreon_post" : true
 	}
 	],
-"wrath" :
+"cata" :
 	[
 	{
-		"toc_file" : "AutoBarWrath.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarWrath_%VER%.zip",
-		"zip_root" : "AutoBarWrath",
+		"toc_file" : "AutoBarCata.toc",
+		"zip_path" : "D:/Projects/Build/AutoBarCata_%VER%.zip",
+		"zip_root" : "AutoBarCata",
 		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarWrath.toc", "Readme.txt"],
-		"force_dirs" : ["wrath", "libs", "locale", "textures"],
-		"whats_new" : "wrath/whats_new.lua",
+		"force_files" : ["AutoBarCata.toc", "Readme.txt"],
+		"force_dirs" : ["cata", "libs", "locale", "textures"],
+		"whats_new" : "cata/whats_new.lua",
 		"skip_ftp" : true,
 		"generate_patreon_post" : true
 	}
