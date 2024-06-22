@@ -69,8 +69,6 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Stealth"] = SpellsCategory:new("Spell.Stealth", spellIconList["Stealth"],
 	{
 		"DRUID", code.get_spell_name_by_name("Prowl"),
-		"MAGE", code.get_spell_name_by_name("Invisibility"),
-		"MAGE", code.get_spell_name_by_name("Lesser Invisibility"),
 		"ROGUE", code.get_spell_name_by_name("Stealth"),	--y
 		"*", code.get_spell_name_by_name("Shadowmeld"),	--y
 	})
@@ -83,6 +81,7 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Wild"),
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Pack"),
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Beast"),
+		"HUNTER", code.get_spell_name_by_name("Aspect of the Viper"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Buff"] = SpellsCategory:new( "Spell.Class.Buff", spellIconList["Barkskin"],
@@ -104,10 +103,19 @@ function AB.InitializeCategories()
 		"PRIEST", code.get_spell_name_by_name("Power Word: Fortitude");
 		"PRIEST", code.get_spell_name_by_name("Inner Fire");
 		"PRIEST", code.get_spell_name_by_name("Shadow Protection");
+		"PRIEST", code.get_spell_name_by_name("Prayer of Fortitude");
 		"PRIEST", code.get_spell_name_by_name("Prayer of Shadow Protection");
+		"PRIEST", code.get_spell_name_by_name("Prayer of Spirit");
+		"SHAMAN", code.get_spell_name_by_name("Water Breathing"),
 		"SHAMAN", code.get_spell_name_by_name("Water Walking"),
+		"SHAMAN", code.get_spell_name_by_name("Spirit of the Alpha"),
+		"WARLOCK", code.get_spell_name_by_name("Detect Invisibility"),
+		"WARLOCK", code.get_spell_name_by_name("Detect Lesser Invisibility"),
+		"WARLOCK", code.get_spell_name_by_name("Detect Greater Invisibility"),
 		"WARLOCK", code.get_spell_name_by_name("Unending Breath"),
 		"WARRIOR", code.get_spell_name_by_name("Battle Shout"),
+		"WARRIOR", code.get_spell_name_by_name("Commanding Shout"),
+		"WARRIOR", code.get_spell_name_by_name("Vigilance"),
 	})
 
 	AutoBarCategoryList["Spell.Class.Pet"] = SpellsCategory:new( "Spell.Class.Pet", spellIconList["Call Pet 1"],
@@ -115,8 +123,10 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Call Pet"),
 		"WARLOCK", code.get_spell_name_by_name("Eye of Kilrogg"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Infernal"),
+		"WARLOCK", code.get_spell_name_by_name("Summon Felguard"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Felhunter"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Imp"),
+		"WARLOCK", code.get_spell_name_by_name("Summon Incubus"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Succubus"),
 		"WARLOCK", code.get_spell_name_by_name("Summon Voidwalker"),
 	})
@@ -152,6 +162,7 @@ function AB.InitializeCategories()
 		"MAGE", code.get_spell_name_by_name("Teleport: Orgrimmar"), code.get_spell_name_by_name("Portal: Orgrimmar"),
 		"SHAMAN", code.get_spell_name_by_name("Astral Recall"), code.get_spell_name_by_name("Astral Recall"),
 		"WARLOCK", code.get_spell_name_by_name("Ritual of Summoning"), code.get_spell_name_by_name("Ritual of Summoning"),
+		"WARLOCK", code.get_spell_name_by_name("Portal of Summoning"), code.get_spell_name_by_name("Ritual of Summoning"),
 	})
 
 
@@ -161,14 +172,19 @@ function AB.InitializeCategories()
 		"MAGE", 			code.get_spell_name_by_name("Frost Armor"), code.get_spell_name_by_name("Ice Barrier"),
 		"MAGE", 			code.get_spell_name_by_name("Ice Armor"), code.get_spell_name_by_name("Ice Barrier"),
 		"MAGE", 			code.get_spell_name_by_name("Mage Armor"), code.get_spell_name_by_name("Ice Barrier"),
+		"MAGE", 			code.get_spell_name_by_name("Molten Armor"), code.get_spell_name_by_name("Ice Barrier"),
+		"MAGE",			code.get_spell_name_by_name("Frost Ward"), code.get_spell_name_by_name("Ice Barrier"),
+		"MAGE", 		code.get_spell_name_by_name("Fire Ward"), code.get_spell_name_by_name("Ice Barrier"),
+		"MAGE", 		code.get_spell_name_by_name("Ice Barrier"), code.get_spell_name_by_name("Ice Barrier"),
 		"PALADIN", 		code.get_spell_name_by_name("Divine Protection"), code.get_spell_name_by_name("Divine Shield"),
 		"PALADIN", 		code.get_spell_name_by_name("Divine Shield"), code.get_spell_name_by_name("Divine Protection"),
 		"PRIEST", 		code.get_spell_name_by_name("Power Word: Shield"), code.get_spell_name_by_name("Power Word: Shield"),
 		"ROGUE", 		code.get_spell_name_by_name("Evasion"), 		code.get_spell_name_by_name("Evasion"),
+		"SHAMAN", 		code.get_spell_name_by_name("Lightning Shield"),		code.get_spell_name_by_name("Lightning Shield"),
+		"SHAMAN", 		code.get_spell_name_by_name("Earth Shield"),		code.get_spell_name_by_name("Lightning Shield"),
+		"SHAMAN", 		code.get_spell_name_by_name("Water Shield"),		code.get_spell_name_by_name("Lightning Shield"),
 		"WARRIOR", 		code.get_spell_name_by_name("Shield Block"), code.get_spell_name_by_name("Shield Wall"),
 		"WARRIOR", 		code.get_spell_name_by_name("Shield Wall"), code.get_spell_name_by_name("Shield Block"),
-
-
 		"WARLOCK", code.get_spell_name_by_name("Demon Skin"),  code.get_spell_name_by_name("Shadow Ward"),
 		"WARLOCK", code.get_spell_name_by_name("Demon Armor"), code.get_spell_name_by_name("Shadow Ward"),
 		"WARLOCK", code.get_spell_name_by_name("Shadow Ward"), code.get_spell_name_by_name("Shadow Ward"),
@@ -193,6 +209,7 @@ function AB.InitializeCategories()
 		"WARRIOR", code.get_spell_name_by_name("Defensive Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Battle Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Berserker Stance"),
+		"WARRIOR", code.get_spell_name_by_name("Gladiator Stance"),
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
@@ -266,20 +283,20 @@ function AB.InitializeCategories()
 		"*", code.get_spell_name_by_name("Leatherworking"),
 		"*", code.get_spell_name_by_name("Smelting"),
 		"*", code.get_spell_name_by_name("Tailoring"),
-
-		"*", code.get_spell_name_by_name("Find Minerals"),
-		"*", code.get_spell_name_by_name("Find Herbs"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = SpellsCategory:new("Spell.Debuff.Multiple", spellIconList["Slow"],
 	{
-		"DRUID",		code.get_spell_name_by_name("Disorienting Roar"),
+		"DRUID",		code.get_spell_name_by_name("Demoralizing Roar"),
+		"WARRIOR",		code.get_spell_name_by_name("Demoralizing Shout"),
+		"WARRIOR",		code.get_spell_name_by_name("Thunder Clap"),
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Single"] = SpellsCategory:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"HUNTER", code.get_spell_name_by_name("Concussive Shot"),
 		"HUNTER", code.get_spell_name_by_name("Wing Clip"),
+		"SHAMAN", code.get_spell_name_by_name("Frost Shock"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Tongues"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Recklessness"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Shadow"),
@@ -306,6 +323,10 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Track Giants"),
 		"PALADIN", code.get_spell_name_by_name("Sense Undead"),
 		"WARLOCK", code.get_spell_name_by_name("Sense Demons"),
+
+		"*", code.get_spell_name_by_name("Find Minerals"),
+		"*", code.get_spell_name_by_name("Find Herbs"),
+		"*", code.get_spell_name_by_name("Find Tresure"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = SpellsCategory:new( "Spell.Trap", spellIconList["Explosive Trap"],
@@ -327,24 +348,30 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Charge"] = SpellsCategory:new( "Spell.Charge", spellIconList["Charge"],
 	{
+		"DRUID", code.get_spell_name_by_name("Feral Charge"),
+		"DRUID", code.get_spell_name_by_name("Skull Bash"),
 		"WARRIOR", code.get_spell_name_by_name("Charge"),
 		"WARRIOR", code.get_spell_name_by_name("Intercept"),
 	})
 
 	AutoBarCategoryList["Spell.ER"] = SpellsCategory:new( "Spell.ER", spellIconList["Charge"],
 	{
+		"DRUID", code.get_spell_name_by_name("Berserk"),
 		"DRUID", code.get_spell_name_by_name("Frenzied Regeneration"),
+		"DRUID", code.get_spell_name_by_name("Survival Instincts"),
 		"HUNTER", code.get_spell_name_by_name("Feign Death"),
 		"HUNTER", code.get_spell_name_by_name("Disengage"),
 		"MAGE", code.get_spell_name_by_name("Ice Block"),
 		"PALADIN", code.get_spell_name_by_name("Lay on Hands"),
 		"ROGUE", code.get_spell_name_by_name("Vanish"),
 		"WARLOCK", code.get_spell_name_by_name("Dark Pact"),
+		"WARRIOR", code.get_spell_name_by_name("Berserker Rage"),
 		"WARRIOR", code.get_spell_name_by_name("Last Stand"),
 	})
 
 	AutoBarCategoryList["Spell.Interrupt"] = SpellsCategory:new( "Spell.Interrupt", spellIconList["Charge"],
 	{
+		"MAGE", code.get_spell_name_by_name("Counterspell"),
 		"ROGUE", code.get_spell_name_by_name("Kick"),
 		"SHAMAN", code.get_spell_name_by_name("Earth Shock"),
 	})
