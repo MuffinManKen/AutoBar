@@ -15,31 +15,17 @@
 	}
 
 	],
-"bcc" :
-	[
-	{
-		"toc_file" : "AutoBarBCC.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarBCC_%VER%.zip",
-		"zip_root" : "AutoBarBCC",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarBCC.toc", "Readme.txt"],
-		"force_dirs" : ["bcc", "libs", "locale", "textures"],
-		"whats_new" : "bcc/whats_new.lua",
-		"skip_ftp" : true,
-		"generate_patreon_post" : true
-	}
-	],
+
 "cata" :
 	[
 	{
-		"toc_file" : "AutoBarCata.toc",
+		"toc_file" : "AutoBarClassic_Cata.toc",
 		"zip_path" : "D:/Projects/Build/AutoBarCata_%VER%.zip",
 		"zip_root" : "AutoBarCata",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace"],
+		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace", "wow_defs.lua"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarCata.toc", "Readme.txt"],
-		"force_dirs" : ["cata", "libs", "locale", "textures"],
+		"force_files" : ["AutoBarClassic.toc", "AutoBarClassic_Cata.toc"],
+		"force_dirs" : ["classic", "libs", "locale", "textures", "cata"],
 		"whats_new" : "cata/whats_new.lua",
 		"skip_ftp" : true,
 		"generate_patreon_post" : true
