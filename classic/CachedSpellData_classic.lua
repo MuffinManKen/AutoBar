@@ -20,6 +20,8 @@ code.cache_spell_data(5215, "Prowl");
 
 code.cache_spell_data(417141, "Berserk");
 code.cache_spell_data(22842, "Frenzied Regeneration");
+code.cache_spell_data(408024, "Survival Instincts");
+
 
 code.cache_spell_data(1126, "Mark of the Wild");
 code.cache_spell_data(21849, "Gift of the Wild");
@@ -264,6 +266,7 @@ code.cache_spell_data(20755, "Create Soulstone");
 code.cache_spell_data(20756, "Create Soulstone (Greater)");
 code.cache_spell_data(20757, "Create Soulstone (Major)");
 
+code.cache_spell_data(437169, "Portal of Summoning");
 code.cache_spell_data(698, "Ritual of Summoning");
 
 
@@ -316,7 +319,7 @@ code.cache_spell_data(3908, "Tailoring");
 code.cache_spell_data(7620, "Fishing");
 code.cache_spell_data(2580, "Find Minerals");
 code.cache_spell_data(2383, "Find Herbs");
-code.cache_spell_data(2481, "Find Tresure");
+code.cache_spell_data(2481, "Find Treasure");
 
 
 local cache_timer_stop = debugprofilestop();

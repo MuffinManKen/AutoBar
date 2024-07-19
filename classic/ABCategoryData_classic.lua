@@ -326,7 +326,7 @@ function AB.InitializeCategories()
 
 		"*", code.get_spell_name_by_name("Find Minerals"),
 		"*", code.get_spell_name_by_name("Find Herbs"),
-		"*", code.get_spell_name_by_name("Find Tresure"),
+		"*", code.get_spell_name_by_name("Find Treasure"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = SpellsCategory:new( "Spell.Trap", spellIconList["Explosive Trap"],
