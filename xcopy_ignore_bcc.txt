@@ -1,4 +1,0 @@
-AutoBar.toc
-AutoBarClassic.toc
-retail\
-classic\

@@ -1,5 +1,5 @@
 ## Interface: 40400
-## Title: AutoBarCata
+## Title: AutoBarClassic
 ## Author: MuffinManKen, Toadkiller (Original code)
 ## Version: 4.00.4.01
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.

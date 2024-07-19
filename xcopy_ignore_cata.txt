@@ -1,6 +1,0 @@
-AutoBar.toc
-AutoBarClassic.toc
-AutoBarBCC.toc
-retail\
-classic\
-bcc\
