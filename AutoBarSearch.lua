@@ -825,13 +825,13 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	if (p_spell_link) then
 		spellInfo.spell_link = p_spell_link
 	else
-		spellInfo.spell_link = GetSpellLink(p_spell_name)
+		spellInfo.spell_link = C_Spell.GetSpellLink(p_spell_name)
 	end
 
 	if (p_spell_id) then
 		spellInfo.spell_id = p_spell_id
 	else
-		spellInfo.spell_id = select(7, GetSpellInfo(p_spell_name))
+		spellInfo.spell_id = select(7, C_Spell.GetSpellInfo(p_spell_name))
 	end
 
 	spellInfo.no_spell_check = p_no_spell_check
