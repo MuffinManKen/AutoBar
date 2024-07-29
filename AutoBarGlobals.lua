@@ -599,7 +599,7 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 
 
 	function AB.GetSpellLink(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-		local spell = GetSpellLink(p_spell, p_rank)
+		local spell = C_Spell.GetSpellLink(p_spell, p_rank)
 
 		if spell == "" then
 			spell = nil;
