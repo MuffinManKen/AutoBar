@@ -6,9 +6,6 @@ Website: http://www.wowace.com/
 -- Copyright 2007+ Toadkiller of Proudmoore.
 -- http://muffinmangames.com
 
--- GLOBALS: GetItemInfo, GetItemSpell, GetMacroInfo, GetContainerNumSlots, GetContainerItemID, GetInventoryItemLink, UnitLevel, GetSpellLink, GetSpellInfo
--- GLOBALS: UpdateAddOnMemoryUsage, GetAddOnMemoryUsage
--- GLOBALS: C_ToyBox
 
 local _, AB = ... -- Pulls back the Addon-Local Variables and store them locally.
 
@@ -815,7 +812,7 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	local spellInfo = AutoBarSearch.registered_spells[p_spell_name]
 
 	--local debug = (p_spell_name == "Wild Charge")
-	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, GetSpellLink(p_spell_name)); end
+	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, AB.GetSpellLink(p_spell_name)); end
 
 	if (not spellInfo) then
 		spellInfo = {}
@@ -825,13 +822,13 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	if (p_spell_link) then
 		spellInfo.spell_link = p_spell_link
 	else
-		spellInfo.spell_link = GetSpellLink(p_spell_name)
+		spellInfo.spell_link = AB.GetSpellLink(p_spell_name)
 	end
 
 	if (p_spell_id) then
 		spellInfo.spell_id = p_spell_id
 	else
-		spellInfo.spell_id = select(7, GetSpellInfo(p_spell_name))
+		spellInfo.spell_id = select(7, AB.GetSpellInfo(p_spell_name))
 	end
 
 	spellInfo.no_spell_check = p_no_spell_check

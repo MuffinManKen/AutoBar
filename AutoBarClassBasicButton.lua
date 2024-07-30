@@ -142,7 +142,7 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, GetSpellInfo(p_action)) or code.GetIconForItemID(p_action)
+		texture = select(3, AB.GetSpellInfo(p_action)) or code.GetIconForItemID(p_action)
 	end
 
 	--We haven't found a texture. This might be because it's just not cached yet.
@@ -222,7 +222,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			texture = code.get_spell_icon_by_name_fast(spellName) or select(3, GetSpellInfo(spellName))
+			texture = code.get_spell_icon_by_name_fast(spellName) or select(3, AB.GetSpellInfo(spellName))
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -233,7 +233,7 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 	if (not texture) then
 		local spellName = frame:GetAttribute("spell2")
 		if (spellName) then
-			_, _, texture = GetSpellInfo(spellName)
+			_, _, texture = AB.GetSpellInfo(spellName)
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue

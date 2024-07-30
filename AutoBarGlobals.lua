@@ -2,7 +2,6 @@
 -- Separate tables for code and data. Splitting the code off from the data makes it easier to inspect data objects.
 -- The names are verbose to reduce likelihood of conflict with another addon
 
--- GLOBALS: GetItemInfo, GetItemInfoInstant, GetSpellInfo, PlayerHasToy, C_ToyBox, type, GetSpellLink
 
 local _
 local AB = select(2, ...)
@@ -336,7 +335,7 @@ end
 
 function code.cache_spell_data(p_spell_id, p_spell_name)
 
-	local name, _rank, icon = GetSpellInfo(p_spell_id);
+	local name, _rank, icon = AB.GetSpellInfo(p_spell_id);
 
 	if (p_spell_id == 120145) then	-- Ancient Dalaran Port TODO: Generalize this
 		icon = 628678;
@@ -536,6 +535,7 @@ end
 AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
+AB.GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
 
 ---@diagnostic disable-next-line: deprecated
 AB.GetAddOnMetadata = GetAddOnMetadata or C_Addons.GetAddOnMetadata
@@ -599,7 +599,7 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 
 
 	function AB.GetSpellLink(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-		local spell = GetSpellLink(p_spell, p_rank)
+		local spell = C_Spell.GetSpellLink(p_spell, p_rank)
 
 		if spell == "" then
 			spell = nil;
@@ -629,7 +629,7 @@ else
 		local spell_link
 
 		if(type(p_spell) == "string") then
-			local spell_id = select(7, GetSpellInfo(p_spell))
+			local spell_id = select(7, AB.GetSpellInfo(p_spell))
 			if(spell_id) then
 				spell_link = "spell:" .. spell_id;
 			end

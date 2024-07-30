@@ -182,7 +182,7 @@ function AB.GetActionForMacroBody(p_macro_body)
 	end
 
 	if(action) then
-		icon = select(3, GetSpellInfo(action)) or code.GetIconForItemID(action)
+		icon = select(3, AB.GetSpellInfo(action)) or code.GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip
@@ -951,7 +951,7 @@ end
 
 function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
 
-	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
+	local ret_val = {AB.GetSpellInfo(p_spell_id)} --table-ify
 
 	if next(ret_val) == nil then
 		code.log_warning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));

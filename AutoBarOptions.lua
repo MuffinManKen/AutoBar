@@ -79,8 +79,14 @@ local function LDBOnClick(_clickedFrame, button)
 			AceCfgDlg:Open("AutoBar")
 		end
 	elseif (button == "RightButton") then
-		InterfaceOptionsFrame_OpenToCategory("AutoBar")
-		InterfaceOptionsFrame_OpenToCategory("AutoBar")
+		if InterfaceOptionsFrame_OpenToCategory then
+			InterfaceOptionsFrame_OpenToCategory("AutoBar")
+			InterfaceOptionsFrame_OpenToCategory("AutoBar")
+		else
+			local ABC = AB.AutoBarConfig
+			Settings.OpenToCategory(ABC.main_panel_category.ID)
+			--Settings.OpenToCategory(ABC.debug_frame_category.ID)
+		end
 	end
 end
 

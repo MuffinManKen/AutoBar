@@ -100,7 +100,7 @@ local function PTSpellIDsToSpellName(p_cast_list)
 
 	for i = 1, # p_cast_list do
 		local spell_id = p_cast_list[i] * -1
-		p_cast_list[i] = GetSpellInfo(spell_id)
+		p_cast_list[i] = AB.GetSpellInfo(spell_id)
 	end
 	return p_cast_list
 end
@@ -122,7 +122,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 	--If the spells are not known by the player, their names are replaced with nil
 	if (p_spell_name_left) then
 		if (not noSpellCheck) then
-			spellNameLeft, _, _, _, _, _, left_spell_id = GetSpellInfo(p_spell_name_left)
+			spellNameLeft, _, _, _, _, _, left_spell_id = AB.GetSpellInfo(p_spell_name_left)
 		else
 			spellNameLeft = p_spell_name_left
 		end
@@ -132,7 +132,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 	end
 	if (spellNameRight) then
 		if (not noSpellCheck) then
-			spellNameRight, _, _, _, _, _, right_spell_id  = GetSpellInfo(spellNameRight)
+			spellNameRight, _, _, _, _, _, right_spell_id  = AB.GetSpellInfo(spellNameRight)
 		end
 		if (not p_category.itemsRightClick) then
 			p_category.itemsRightClick = {}
@@ -440,7 +440,7 @@ function CustomCategory:new(customCategoriesDB)
 		texture = code.GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
-			_, _, texture = GetSpellInfo(spellName)
+			_, _, texture = AB.GetSpellInfo(spellName)
 		end
 	elseif (itemType == "macro") then
 		if (itemId) then

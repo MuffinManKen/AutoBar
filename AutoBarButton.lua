@@ -2613,7 +2613,7 @@ else
 	--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
 	--end;
 				if (mount_data.is_collected and user_selected and not qiraji_filtered) then
-					local spell_name = GetSpellInfo(mount_data.spell_id)
+					local spell_name = AB.GetSpellInfo(mount_data.spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 					if not spell_name then
 						--print("AutoBar Error: Missing spell name for", spell_id, name);
@@ -2741,7 +2741,7 @@ else
 					category:AddMacroText(summon_macro, icon, "Summon " .. name, nil)
 				end
 	--			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
-	--			spellName = GetSpellInfo(spellID)
+	--			spellName = AB.GetSpellInfo(spellID)
 	--			spellIconList[spellName] = icon
 	--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
 	--			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spellName)

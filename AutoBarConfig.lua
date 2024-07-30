@@ -22,9 +22,19 @@ local ABC = AB.AutoBarConfig
 ABC.Debug = {} --table to store stuff related to the Debug Frame
 
 
+ABC.main_panel_category = nil
+ABC.debug_frame_category = nil
+
 ABC.main_panel = CreateFrame( "Frame", "AutoBarConfig", UIParent );
 ABC.main_panel.name = "AutoBar";
-InterfaceOptions_AddCategory(ABC.main_panel);
+
+if InterfaceOptions_AddCategory then
+	InterfaceOptions_AddCategory(ABC.main_panel)
+else
+	local layout
+	ABC.main_panel_category, layout = _G.Settings.RegisterCanvasLayoutCategory(ABC.main_panel, ABC.main_panel.name)
+	_G.Settings.RegisterAddOnCategory(ABC.main_panel_category)
+end
 
 -- Categories panel
 local max_categories_in_list = 29
@@ -91,10 +101,18 @@ end)
 local AceGUI = LibStub("AceGUI-3.0")
 
 
-AutoBarConfig.DebugFrame = AceGUI:Create("BlizOptionsGroup")
-AutoBarConfig.DebugFrame:SetName("Debug", "AutoBar")
-AutoBarConfig.DebugFrame:SetLayout("Fill")
-InterfaceOptions_AddCategory(AutoBarConfig.DebugFrame.frame);
+ABC.DebugFrame = AceGUI:Create("BlizOptionsGroup")
+ABC.DebugFrame:SetName("Debug", "AutoBar")
+ABC.DebugFrame:SetLayout("Fill")
+
+
+if InterfaceOptions_AddCategory then
+	InterfaceOptions_AddCategory(ABC.DebugFrame.frame)
+else
+	local layout
+	ABC.debug_frame_category, layout = _G.Settings.RegisterCanvasLayoutSubcategory(ABC.main_panel_category, ABC.DebugFrame.frame, ABC.DebugFrame.frame.name)
+	_G.Settings.RegisterAddOnCategory(ABC.debug_frame_category)
+end
 
 --local function print_map_ids()
 --local res = "";
@@ -211,4 +229,4 @@ tab:SetCallback("OnGroupSelected", SelectGroup)
 tab:SelectTab("tab1")
 
 -- add to the frame container
-AutoBarConfig.DebugFrame:AddChild(tab)
+ABC.DebugFrame:AddChild(tab)
