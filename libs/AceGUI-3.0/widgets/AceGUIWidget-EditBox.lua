@@ -84,7 +84,7 @@ local function EditBox_OnReceiveDrag(frame)
 		if C_Spell and C_Spell.GetSpellName then
 			name = C_Spell.GetSpellName(extra)
 		else
-			name = AB.GetSpellInfo(id, info)
+			name = GetSpellInfo(id, info)
 		end
 	elseif type == "macro" then
 		name = GetMacroInfo(id)
