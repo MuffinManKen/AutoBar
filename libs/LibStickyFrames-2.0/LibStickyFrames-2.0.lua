@@ -8,7 +8,7 @@ Dependencies: none
 --]]
 
 local MAJOR = "LibStickyFrames-2.0"
-local MINOR = 90000 + tonumber(("$Revision: 37 $"):match("(%d+)"))
+local MINOR = 90000 + tonumber(("$Revision: 38 $"):match("(%d+)"))
 
 --[[
 A library to manage snappy dragging & sticking of frames across multiple mods.
@@ -183,7 +183,7 @@ local SetFramePoints
 local GetFramePoints
 local GetFrameOverlay
 local SetFrameText
-local SetFrameText
+local GetFrameText
 local SetFrameEnabled
 local IsFrameEnabled
 local SetFrameHidden
@@ -627,7 +627,13 @@ function UpdateFrameColor(frame)
 	local overlay = GetFrameOverlay(lib, frame, true)
 	if not overlay then return end
 	local color, borderColor
-	if IsFrameMoving(lib, frame) or GetMouseFocus() == overlay then
+	local focus
+	if GetMouseFoci then
+		focus = GetMouseFoci()[1]
+	else
+		focus = GetMouseFocus
+	end
+	if IsFrameMoving(lib, frame) or focus == overlay then
 		borderColor = colorBorderEnabled
 	else
 		borderColor = colorBorderDisabled
@@ -1185,7 +1191,7 @@ lib.SetFramePoints = SetFramePoints
 lib.GetFramePoints = GetFramePoints
 lib.GetFrameOverlay = GetFrameOverlay
 lib.SetFrameText = SetFrameText
-lib.SetFrameText = SetFrameText
+lib.GetFrameText = GetFrameText
 lib.SetFrameEnabled = SetFrameEnabled
 lib.IsFrameEnabled = IsFrameEnabled
 lib.SetFrameHidden = SetFrameHidden
