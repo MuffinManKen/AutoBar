@@ -18,7 +18,14 @@ License: LGPL v2.1
 ]]
 
 local MMGHACKAceLibrary_MAJOR = "MMGHACKAceLibrary"
-local MMGHACKAceLibrary_MINOR = 90000 + tonumber(("$Revision: 1091 $"):match("(%d+)"))
+local MMGHACKAceLibrary_MINOR = 90000 + tonumber(("$Revision: 1092 $"):match("(%d+)"))
+
+local ptGetAddOnInfo = (C_AddOns and C_AddOns.GetAddOnInfo) or GetAddOnInfo
+local ptIsAddOnLoadOnDemand = (C_AddOns and C_AddOns.IsAddOnLoadOnDemand) or IsAddOnLoadOnDemand
+local ptGetNumAddOns = (C_AddOns and C_AddOns.GetNumAddOns) or GetNumAddOns
+local ptGetAddOnMetadata = (C_AddOns and C_AddOns.GetAddOnMetadata) or GetAddOnMetadata
+local ptLoadAddOn = (C_AddOns and C_AddOns.LoadAddOn) or LoadAddOn
+
 
 local _G = getfenv(0)
 local previous = _G[MMGHACKAceLibrary_MAJOR]
@@ -357,11 +364,11 @@ end
 
 local function TryToEnable(addon)
 	if DONT_ENABLE_LIBRARIES then return end
-	local isondemand = IsAddOnLoadOnDemand(addon)
+	local isondemand = ptIsAddOnLoadOnDemand(addon)
 	if isondemand then
-		local _, _, _, enabled = GetAddOnInfo(addon)
+		local _, _, _, enabled = ptGetAddOnInfo(addon)
 		EnableAddOn(addon)
-		local _, _, _, _, loadable = GetAddOnInfo(addon)
+		local _, _, _, _, loadable = ptGetAddOnInfo(addon)
 		if not loadable and not enabled then
 			DisableAddOn(addon)
 		end
@@ -381,25 +388,25 @@ local function TryToLoadStandalone(major)
 
 	MMGHACKAceLibrary.scannedlibs[major] = true
 
-	local name, _, _, enabled, loadable = GetAddOnInfo(major)
+	local name, _, _, enabled, loadable = ptGetAddOnInfo(major)
 	
 	loadable = (enabled and loadable) or TryToEnable(name)
 	
 	local loaded = false
 	if loadable then
 		loaded = true
-		LoadAddOn(name)
+		ptLoadAddOn(name)
 	end
 	
 	local field = "X-MMGHACKAceLibrary-" .. major 
-	for i = 1, GetNumAddOns() do
-		if GetAddOnMetadata(i, field) then
-			name, _, _, enabled, loadable = GetAddOnInfo(i)
+	for i = 1, ptGetNumAddOns() do
+		if ptGetAddOnMetadata(i, field) then
+			name, _, _, enabled, loadable = ptGetAddOnInfo(i)
 			
 			loadable = (enabled and loadable) or TryToEnable(name)
 			if loadable then
 				loaded = true
-				LoadAddOn(name)
+				ptLoadAddOn(name)
 			end
 		end
 	end
