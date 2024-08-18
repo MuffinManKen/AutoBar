@@ -531,14 +531,38 @@ function AB.GetCategoryItemDB(p_category_key, p_item_index)
 	return AutoBarDB2.custom_categories[p_category_key].items[p_item_index]
 end
 
--- Support multiple APi versions
+
+-- Support multiple API versions
+
+local function GetSpellInfo_hack(p_identifier)
+	local si = C_Spell.GetSpellInfo(p_identifier)
+	if(not si) then
+		return nil
+	end
+
+	return si.name, nil, si.iconID, si.castTime, si.minRange, si.maxRange, si.spellID
+end
+AB.GetSpellInfo = GetSpellInfo or GetSpellInfo_hack
+
+local function GetSpellCooldown_hack(p_identifier)
+	local sc = C_Spell.GetSpellCooldown(p_identifier)
+	if(not sc) then
+		return nil
+	end
+
+	return sc.startTime, sc.duration, sc.isEnabled, sc.modRate
+end
+AB.GetSpellCooldown = GetSpellCooldown or GetSpellCooldown_hack
+
+AB.GetSpellCount = GetSpellCount or C_Spell.GetSpellCastCount
+AB.IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
+
 AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
-AB.GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
 
 ---@diagnostic disable-next-line: deprecated
-AB.GetAddOnMetadata = GetAddOnMetadata or C_Addons.GetAddOnMetadata
+AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata
 
 
 if (AutoBarGlobalDataObject.is_mainline_wow) then

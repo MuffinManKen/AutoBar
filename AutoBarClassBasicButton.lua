@@ -269,7 +269,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 --			SecureCmdOptionParse()?
 	elseif (itemType == "spell") then
 		local spellName = self.frame:GetAttribute("spell")
-		start, duration, enabled = GetSpellCooldown(spellName)
+		start, duration, enabled = AB.GetSpellCooldown(spellName)
 	end
 
 	if (start and duration and enabled and start > 0 and duration > 0) then
@@ -298,10 +298,10 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 --			elseif (itemType == "toy") then
 			elseif (itemType == "spell") then
 				local spellName = frame:GetAttribute("spell")
-				count1 = GetSpellCount(spellName) or 0
+				count1 = AB.GetSpellCount(spellName) or 0
 				local spellName2 = frame:GetAttribute("spell2")
 				if (spellName2) then
-					count2 = GetSpellCount(spellName2) or 0
+					count2 = AB.GetSpellCount(spellName2) or 0
 				end
 			end
 		end
@@ -355,7 +355,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			end
 		elseif (itemType == "spell") then
 			local spellName = frame:GetAttribute("spell")
-			isUsable, notEnoughMana = IsUsableSpell(spellName)
+			isUsable, notEnoughMana = AB.IsUsableSpell(spellName)
 		elseif (itemType == "macro") then
 			isUsable = true
 		else

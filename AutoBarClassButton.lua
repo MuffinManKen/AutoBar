@@ -574,7 +574,7 @@ function AutoBar.Class.Button.prototype:UpdateCooldown()
 		end
 	end
 end
---/script local start, duration, enabled = GetSpellCooldown("Summon Water Elemental", BOOKTYPE_SPELL); AutoBar:Print("start " .. tostring(start) .. " duration " .. tostring(duration) .. " enabled " .. tostring(enabled))
+--/script local start, duration, enabled = AB.GetSpellCooldown("Summon Water Elemental", BOOKTYPE_SPELL); AutoBar:Print("start " .. tostring(start) .. " duration " .. tostring(duration) .. " enabled " .. tostring(enabled))
 
 -- Set count for the button and popups if any
 function AutoBar.Class.Button.prototype:UpdateCount()

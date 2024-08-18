@@ -6,6 +6,8 @@ local font_spacing = 2
 local initial_delay = 4
 local interstitial_delay = 0.25
 
+local mmgGetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+
 local function table_pack(...)
   return { n = select("#", ...), ... }
 end
@@ -166,7 +168,7 @@ local function add_entry(p_q_entry)
 	assert(MUFFIN_WHATS_NEW_QUEUE.q ~= nil)
 
 	p_q_entry.addon_name = p_q_entry.addon_name or ADDON_NAME
-	p_q_entry.addon_version = p_q_entry.addon_version or GetAddOnMetadata(p_q_entry.addon_name, "Version")
+	p_q_entry.addon_version = p_q_entry.addon_version or mmgGetAddOnMetadata(p_q_entry.addon_name, "Version")
 
 	p_q_entry.body_text = gsub(p_q_entry.body_text, "`", "'")	--Replace backticks with ticks
 	p_q_entry.body_text = gsub(p_q_entry.body_text, "\t", "")	--Remove code-required indenting
@@ -182,7 +184,7 @@ local function add_conditional_entry(p_args)
 	assert(p_args.text);
 
 	local addon_name = p_args.addon_name or ADDON_NAME;	--Dumb hack
-	local this_version = GetAddOnMetadata(addon_name, "Version")
+	local this_version = mmgGetAddOnMetadata(addon_name, "Version")
 	local stored_version = p_args.version or 0
 	local force_show = p_args.force_show
 	d_print("this_version:", this_version, "stored:", stored_version, addon_name)
