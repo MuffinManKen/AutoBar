@@ -188,6 +188,9 @@ code.cache_spell_data(344597, "Portal: Oribos");
 
 code.cache_spell_data(395277, "Teleport: Valdrakken");
 code.cache_spell_data(395289, "Portal: Valdrakken");
+
+code.cache_spell_data(446540, "Teleport: Dornogal");
+code.cache_spell_data(446534, "Portal: Dornogal");
 --#endregion
 
 
