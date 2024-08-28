@@ -13,7 +13,38 @@
 		"typescript.locale": "en",
 		"Lua.diagnostics.globals": [
 			"LOW",
-			"HIGH"
+			"HIGH",
+			"Settings",
+			"SELECTED_CHAT_FRAME",
+			"DEFAULT_CHAT_FRAME",
+			"ACCEPT",
+			"CANCEL",
+			"SlashCmdList",
+			"hash_SlashCmdList",
+			"CLOSE",
+			"FONT_COLOR_CODE_CLOSE",
+			"SetDesaturation",
+			"ColorPickerFrame",
+			"NOT_BOUND",
+			"CHARACTER_SPECIFIC_KEYBINDINGS",
+			"ChatFrame_OpenChat",
+			"UIErrorsFrame",
+			"GameTooltip_Hide"
+		],
+		"Lua.runtime.version": "Lua 5.1",
+		"Lua.runtime.builtin": {
+			"basic": "disable",
+			"debug": "disable",
+			"io": "disable",
+			"math": "disable",
+			"os": "disable",
+			"package": "disable",
+			"string": "disable",
+			"table": "disable",
+			"utf8": "disable"
+		},
+		"Lua.workspace.library": [
+			"~\\.vscode\\extensions\\ketho.wow-api-0.17.4\\Annotations"
 		]
 	}
 }
