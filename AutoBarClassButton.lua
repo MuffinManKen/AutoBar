@@ -683,7 +683,7 @@ local function FindSpell(spellName, bookType)
 			break
 		end
 		for s = offset + 1, offset + numSpells do
-			local	spell = GetSpellBookItemName(s, bookType)
+			local spell = GetSpellBookItemName(s, bookType)
 			if (spell == spellName) then
 				found = true
 			end

@@ -53,8 +53,7 @@ local function AddItemToCategory(category, itemType, itemId, itemInfo)
 	}
 	itemsListDB[itemIndex] = itemDB
 	if (itemType == "spell") then
-		local spellName = GetSpellBookItemName(itemId, itemInfo)
-		itemDB.spellName = spellName
+		itemDB.spellName = AB.GetSpellInfo(itemId)
 		itemDB.spellClass = AutoBar.CLASS
 	else
 		itemDB.spellName = nil
@@ -114,7 +113,10 @@ function AutoBarButton.prototype:DropObject()
 	else
 		local buttonDB = toObject.buttonDB
 		if (buttonDB.hasCustomCategories and AutoBar.moveButtonsMode or buttonDB.drop) then
-			local itemType, itemId, itemInfo = GetCursorInfo()
+			local itemType, itemId, itemInfo, spell_id, base_spell_id = GetCursorInfo()
+			if(itemType == "spell") then
+				itemId = spell_id
+			end
 			if (itemType == "item" or itemType == "spell" or itemType == "macro") then
 --AutoBar:Print("AutoBarButton.prototype:DropObject itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
 				toObject:DropLink(itemType, itemId, itemInfo)
