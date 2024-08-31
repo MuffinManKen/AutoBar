@@ -1062,6 +1062,8 @@ function AutoBar:ABSchedulerTick()
 		return;
 	end
 
+	AB.LogEventStart("ABSchedulerTick")
+
 	if(tick.ScheduledUpdate == tick.ResetSearch) then
 		tick.ScheduledUpdate = AB.ResetSearch(tick.BehaveTicker);
 	elseif(tick.ScheduledUpdate == tick.UpdateCategoriesID) then
@@ -1087,6 +1089,7 @@ function AutoBar:ABSchedulerTick()
 		tick.ScheduledUpdate = tick.UpdateCompleteID
 	end
 
+	AB.LogEventEnd("ABSchedulerTick")
 
 end
 
