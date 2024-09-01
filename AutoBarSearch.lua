@@ -812,7 +812,7 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	local spellInfo = AutoBarSearch.registered_spells[p_spell_name]
 
 	--local debug = (p_spell_name == "Wild Charge")
-	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, AB.GetSpellLink(p_spell_name)); end
+	--if (debug) then print("AutoBarSearch:RegisterSpell", "Name:",p_spell_name, p_no_spell_check, p_spell_link, code.GetSpellLink(p_spell_name)); end
 
 	if (not spellInfo) then
 		spellInfo = {}
@@ -822,7 +822,7 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	if (p_spell_link) then
 		spellInfo.spell_link = p_spell_link
 	else
-		spellInfo.spell_link = AB.GetSpellLink(p_spell_name)
+		spellInfo.spell_link = code.GetSpellLink(p_spell_name)
 	end
 
 	if (p_spell_id) then

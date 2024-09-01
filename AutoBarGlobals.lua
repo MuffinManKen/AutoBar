@@ -263,9 +263,10 @@ end
 
 --TODO: Memoize? How often is this called?
 function code.GetIconForItemID(p_item_id)	--TODO: Calls into this seem to always tonumber, is that necessary?
-	local i_texture = select(10, GetItemInfo(p_item_id))
 
-	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
+	local i_texture = select(10, GetItemInfo(p_item_id))		---@diagnostic disable-line: deprecated
+
+	local ii_texture = select(5, GetItemInfoInstant(p_item_id))	---@diagnostic disable-line: deprecated
 
 	return ii_texture or i_texture;
 end
@@ -407,7 +408,6 @@ function code.GetItemCount(p_item_info, p_include_bank, p_include_uses, p_includ
 
 	local item_id = tonumber(p_item_info)
 	if (not item_id) then
-		print(p_item_info, "   ", item_id)
 		return 0
 	elseif (C_Item and C_Item.GetItemCount) then
 		return C_Item.GetItemCount(item_id, p_include_bank, p_include_uses, p_include_reagent_bank) or 0
@@ -542,7 +542,7 @@ local function GetSpellInfo_hack(p_identifier)
 
 	return si.name, nil, si.iconID, si.castTime, si.minRange, si.maxRange, si.spellID
 end
-AB.GetSpellInfo = GetSpellInfo or GetSpellInfo_hack
+AB.GetSpellInfo = GetSpellInfo or GetSpellInfo_hack			---@diagnostic disable-line: deprecated
 
 local function GetSpellCooldown_hack(p_identifier)
 	local sc = C_Spell.GetSpellCooldown(p_identifier)
@@ -552,17 +552,17 @@ local function GetSpellCooldown_hack(p_identifier)
 
 	return sc.startTime, sc.duration, sc.isEnabled, sc.modRate
 end
-AB.GetSpellCooldown = GetSpellCooldown or GetSpellCooldown_hack
+AB.GetSpellCooldown = GetSpellCooldown or GetSpellCooldown_hack	---@diagnostic disable-line: deprecated
 
-AB.GetSpellCount = GetSpellCount or C_Spell.GetSpellCastCount
-AB.IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
+AB.GetSpellCount = GetSpellCount or C_Spell.GetSpellCastCount	---@diagnostic disable-line: deprecated
+AB.IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable		---@diagnostic disable-line: deprecated
 
 AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
 
----@diagnostic disable-next-line: deprecated
-AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata
+AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata	---@diagnostic disable-line: deprecated
+
 
 
 if (AutoBarGlobalDataObject.is_mainline_wow) then
@@ -622,16 +622,7 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 	end
 
 
-	function AB.GetSpellLink(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-		local spell = C_Spell.GetSpellLink(p_spell, p_rank)
 
-		if spell == "" then
-			spell = nil;
-		end
-
-		return spell;
-
-	end
 
 -------------------------------------------------------------------
 --
@@ -649,24 +640,40 @@ else
 		return false;
 	end
 
-	function AB.GetSpellLink(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-		local spell_link
 
-		if(type(p_spell) == "string") then
-			local spell_id = select(7, AB.GetSpellInfo(p_spell))
-			if(spell_id) then
-				spell_link = "spell:" .. spell_id;
-			end
-		else
-			spell_link = GetSpellLink(p_spell, p_rank)
-			if spell_link == "" then
-				spell_link = nil;
-			end
+end
 
+local function GetSpellLink_deprec(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
+	local spell_link
+
+	if(type(p_spell) == "string") then
+		local spell_id = select(7, AB.GetSpellInfo(p_spell))
+		if(spell_id) then
+			spell_link = "spell:" .. spell_id;
+		end
+	else
+		spell_link = GetSpellLink(p_spell, p_rank) ---@diagnostic disable-line: deprecated
+		if spell_link == "" then
+			spell_link = nil;
 		end
 
-		return spell_link;
+	end
+
+	return spell_link;
+
+end
+
+if GetSpellLink then
+	code.GetSpellLink = GetSpellLink_deprec
+else
+	code.GetSpellLink = function (p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
+		local spell = C_Spell.GetSpellLink(p_spell, p_rank)		---@type string|nil
+
+		if spell == "" then
+			spell = nil;
+		end
+
+		return spell;
 
 	end
 end
-

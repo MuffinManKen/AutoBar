@@ -48,6 +48,7 @@ INVTYPE_TRINKET  = ""
 --#endregion Global Strings
 
 
+--#region Misc Blizz Stuff
 ---@type Frame
 PetActionBarFrame = {}
 
@@ -55,7 +56,8 @@ PetActionBarFrame = {}
 GameFontNormal = nil
 
 
-
+---@return string|nil
+function GetSpellLink(p_spell, p_rank) end
 
 ---@param n number|string|nil
 ---@param radix number?
@@ -150,6 +152,8 @@ function GetContainerItemLink(containerIndex, slotIndex) end
 ---@param p_quest_id number
 ---@return number quest_index
 function GetQuestLogIndexByID(p_quest_id) end
+
+--#endregion Misc Blizz Stuff
 
 ---@class Bar
 Bar = {}
@@ -311,8 +315,8 @@ function AceConfigRegistry:NotifyChange(name) end
 
 
 ---@class AutoBarSettings
+---@field show_empty_buttons boolean
 local AutoBarSettings = {
-    ["show_empty_buttons"] = false,
     ["fade_out"] = false,
     ["log_memory"] = false,
     ["show_tooltip"] = true,
