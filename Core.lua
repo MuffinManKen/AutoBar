@@ -582,23 +582,23 @@ function AB.events.UPDATE_BATTLEFIELD_STATUS()
 end
 
 
--- When dragging, contains { frameName, index }, otherwise nil
-AutoBar.dragging = nil;
-local draggingData = {};
+-- -- When dragging, contains { frameName, index }, otherwise nil
+-- AutoBar.dragging = nil;
+-- local draggingData = {};
 
-function AutoBar.GetDraggingIndex(frameName)
-	if (AutoBar.dragging and AutoBar.dragging.frameName == frameName) then
-		return AutoBar.dragging.index;
-	end
-	return nil;
-end
+-- function AutoBar.GetDraggingIndex(frameName)
+-- 	if (AutoBar.dragging and AutoBar.dragging.frameName == frameName) then
+-- 		return AutoBar.dragging.index;
+-- 	end
+-- 	return nil;
+-- end
 
 
-function AutoBar.SetDraggingIndex(frameName, index)
-	draggingData.frameName = frameName;
-	draggingData.index = index;
-	AutoBar.dragging = draggingData;
-end
+-- function AutoBar.SetDraggingIndex(frameName, index)
+-- 	draggingData.frameName = frameName;
+-- 	draggingData.index = index;
+-- 	AutoBar.dragging = draggingData;
+-- end
 
 
 function AutoBar.ItemLinkDecode(link)
