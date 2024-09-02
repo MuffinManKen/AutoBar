@@ -145,12 +145,6 @@ local function get_texture_for_action(p_action)
 		texture = select(3, AB.GetSpellInfo(p_action)) or code.GetIconForItemID(p_action)
 	end
 
-	--We haven't found a texture. This might be because it's just not cached yet.
-	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
-	if(texture == nil) then
-		AB.SetMissingItemFlag(p_action);
-	end
-
 	return texture;
 
 end
@@ -166,12 +160,6 @@ end
 --		print("   action:" .. action)
 --	end
 --
---	--We haven't found a texture. This might be because it's just not cached yet.
---	--So we set this flag which will update the buttons when a GET_ITEM_INFO_RECEIVED event fires
---	if(texture == nil) then
---		AutoBar.missing_items = true
---		--print("AutoBar.missing_items = true")
---	end
 --
 --	return texture
 --end
@@ -190,17 +178,11 @@ function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
 			texture = item_data.icon -- Use cached icon if we have one
 		elseif(item_data.ab_type == ABGData.TYPE_TOY) then
 			texture = code.GetIconForToyID(item_data.item_id)
-			if(texture == nil) then
-				AB.SetMissingItemFlag(item_data.item_id);
-			end
 		end
 	elseif (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
 		if (itemId) then
 			texture = code.GetIconForItemID(tonumber(itemId))
-			if(texture == nil) then
-				AB.SetMissingItemFlag(itemId);
-			end
 
 			local bag, slot = AutoBarSearch.found:GetItemData(itemId)
 			if ((not bag) and slot) then

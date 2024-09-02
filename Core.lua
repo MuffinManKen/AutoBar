@@ -117,11 +117,6 @@ AutoBar.frame:SetScript("OnEvent",
 			return
 		end
 
-		--If it's a GET_ITEM_INFO_RECEIVED and there aren't any items we don't know, ignore it
-		if(event == "GET_ITEM_INFO_RECEIVED" and not AutoBar.missing_items) then
-			return
-		end
-
 		if(AutoBarDB2.settings.throttle_event_limit > 0) then
 			local timer_name = event .. "_last_tick"
 			local now = GetTime()
@@ -282,13 +277,14 @@ end
 
 
 
-function AB.events.GET_ITEM_INFO_RECEIVED(p_item_id)
+function AB.events.GET_ITEM_INFO_RECEIVED(p_item_id, p_success)
 	AB.LogEventStart("GET_ITEM_INFO_RECEIVED")
-	--print("GET_ITEM_INFO_RECEIVED", p_item_id, GetItemInfo(p_item_id))
-	AB.ClearMissingItemFlag();
-	AB.ABScheduleUpdate(tick.UpdateItemsID)
 
-	AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id)
+	if p_success then
+		AB.ABScheduleUpdate(tick.UpdateItemsID)
+	end
+
+	AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id, p_success)
 end
 
 -- Given an item link, this adds the item to the given category
@@ -1012,21 +1008,7 @@ function AutoBar:SetDifference(p_set1, p_set2)
 	return s
 end
 
-function AB.ClearMissingItemFlag()
 
-	AutoBar.missing_items = false;
-
-end
-
-local l_missing_item_count = 0
-function AB.SetMissingItemFlag(_p_item)
-
-	AutoBar.missing_items = true;
-
-	l_missing_item_count = l_missing_item_count + 1
-	--print("AutoBar.missing_items = true, (", _p_item, ") - ", l_missing_item_count)
-
-end
 
 
 

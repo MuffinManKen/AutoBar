@@ -2482,7 +2482,7 @@ else
 	--print("toy_total:" .. toy_total .. " toy_total_learned:" .. toy_total_learned .. "  Last ToyBox Count:" .. AutoBar.last_ToyBox_count)
 
 		--If the number of known Toys has changed, do stuff
-		if ((toy_total_learned ~= AutoBar.last_ToyBox_count and not AutoBar.missing_items) or p_force_update) then
+		if ((toy_total_learned ~= AutoBar.last_ToyBox_count) or p_force_update) then
 			--print("   Gonna do toybox stuff");
 			made_update = true
 			AutoBar.last_ToyBox_count = toy_total_learned;
@@ -2503,9 +2503,7 @@ else
 					--print("  Adding ", toy_name, item_id, toy_is_fave);
 					local link = C_ToyBox.GetToyLink(item_id)
 	--				AutoBarSearch:RegisterToy(item_id, link)
-					if(not link) then
-						AB.SetMissingItemFlag(item_id)
-					end
+
 					category.all_items[#category.all_items + 1] = item_id
 				end
 			end
