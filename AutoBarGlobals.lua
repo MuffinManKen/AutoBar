@@ -531,6 +531,34 @@ function AB.GetCategoryItemDB(p_category_key, p_item_index)
 	return AutoBarDB2.custom_categories[p_category_key].items[p_item_index]
 end
 
+function code.SetDifference(p_set1, p_set2)
+	if(p_set1 == nil) then return {} end;
+	if(p_set2 == nil) then return p_set1 end;
+
+	local s = {}
+	for e in pairs(p_set1) do
+		if not p_set2[e] then s[tostring(e)] = true end
+	end
+	return s
+end
+
+
+-- tcount: count table members even if they're not indexed by numbers
+function code.tcount(p_table)
+
+	if(p_table == nil) then return nil; end
+
+	local n = #p_table
+	if (n == 0) then
+		for _k in pairs(p_table) do
+			n = n + 1;
+		end
+	end
+	return n
+end
+
+
+
 
 -- Support multiple API versions
 
@@ -565,6 +593,7 @@ AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata	---@diagnost
 
 
 
+
 if (AutoBarGlobalDataObject.is_mainline_wow) then
 -------------------------------------------------------------------
 --
@@ -572,7 +601,6 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 --
 -------------------------------------------------------------------
 
-AutoBarGlobalDataObject.player_has_toy_cache = {}
 AutoBarGlobalDataObject.is_toy_usable_cache = {}
 AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 
@@ -601,16 +629,6 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 		return AutoBarSearch.registered_macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
 	end
 
-	--Once we get a non-nil result, that's what we'll use for the rest of the session
-	--TODO: We could invalidate this cache if we get this item_id show up in a TOY_UPDATE
-	function AB.PlayerHasToy(p_item_id)	---@diagnostic disable-line: duplicate-set-field
-		local phtc = AutoBarGlobalDataObject.player_has_toy_cache
-		if(phtc[p_item_id] == nil) then
-			phtc[p_item_id] = PlayerHasToy(p_item_id);
-		end
-		return phtc[p_item_id]
-	end
-
 
 	--Once we get a non-nil result, that's what we'll use for the rest of the session
 	function AB.IsToyUsable(p_item_id)
@@ -636,12 +654,26 @@ else
 		return AutoBarSearch.registered_macro_text[p_guid];
 	end
 
-	function AB.PlayerHasToy(_p_item_id)	---@diagnostic disable-line: duplicate-set-field
-		return false;
-	end
-
-
 end
+
+--#region PlayerHasToy deprecation/wrapper
+
+local function PlayerHasToy_wrapper(p_item_id)
+	local phtc = AutoBarDB2.player_has_toy_cache
+	if(phtc[p_item_id] == true) then
+		return true
+	end
+	phtc[p_item_id] = PlayerHasToy(p_item_id) or nil;	--Don't store a bunch of falses
+	return phtc[p_item_id]
+end
+
+if PlayerHasToy then
+	code.PlayerHasToy = PlayerHasToy_wrapper
+else
+	code.PlayerHasToy = function (_p_item) return false; end
+end
+--#endregion PlayerHasToy deprecation/wrapper
+
 
 --#region GetSpellLink deprecation
 local function GetSpellLink_deprec(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field

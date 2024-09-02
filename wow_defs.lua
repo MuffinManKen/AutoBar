@@ -347,6 +347,7 @@ local AutoBarSettings = {
 ---@field account table
 ---@field classes table
 ---@field chars table
+---@field player_has_toy_cache table persistent cache of which toys the player has
 AutoBarDB2 = {}
 
 

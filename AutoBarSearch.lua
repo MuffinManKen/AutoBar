@@ -1041,7 +1041,7 @@ end
 ---Scan all registered toys, refreshing their data and adding them to Stuff
 function AutoBarSearch:ScanRegisteredToys()
 
-	if (METHOD_DEBUG) then code.log_warning("AutoBarSearch:ScanRegisteredToys", AutoBar:tcount(self.registered_toys)); end
+	if (METHOD_DEBUG) then code.log_warning("AutoBarSearch:ScanRegisteredToys", code.tcount(self.registered_toys)); end
 
 	for toy_guid, toy_data in pairs(self.registered_toys) do
 		self:RegisterToy(toy_data.item_id);

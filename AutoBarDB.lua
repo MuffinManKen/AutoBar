@@ -410,10 +410,12 @@ function AutoBar.InitializeDB()
 
 	AutoBarDB2 = AutoBarDB2 or {}
 
-
 	migrate_db_from_ace2()
 
 	upgrade_db_version()
+
+	AutoBarDB2.player_has_toy_cache = AutoBarDB2.player_has_toy_cache or {}
+
 
 	-- TODO: Move to AutoBar:InitializeDefaults() change to data
 	AutoBarDB2.account = AutoBarDB2.account or {}

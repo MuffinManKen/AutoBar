@@ -28,10 +28,8 @@ function ToyCategory:new(p_description, p_short_texture, p_pt_name)
 	obj.all_items = {}
 
 	if(p_pt_name) then
-		--print("pt_name", p_pt_name);
 		local raw_list = AB.AddPTSetToRawList({}, p_pt_name, false)
 		obj.all_items = AB.RawListToItemIDList(raw_list)
-		--print("all_items", code.Dump(obj.all_items))
 	end
 
 	obj:Refresh()
@@ -56,8 +54,9 @@ function ToyCategory:Refresh()
 	for _, toy_id in ipairs(self.all_items) do
 		local toy_info = AutoBarSearch:RegisterToy(toy_id)
 		local user_selected = (self.only_favourites and toy_info.is_fave) or not self.only_favourites
-		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, toy_info.name, "HasToy:", AB.PlayerHasToy(toy_id), "Usable:", AB.IsToyUsable(toy_id), "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
-		if (toy_id and AB.PlayerHasToy(toy_id) and AB.IsToyUsable(toy_id) and user_selected) then
+		local has_toy = code.PlayerHasToy(toy_id)
+		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, toy_info.name, "HasToy:", has_toy, "Usable:", AB.IsToyUsable(toy_id), "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
+		if (toy_id and has_toy and AB.IsToyUsable(toy_id) and user_selected) then
 			self.items[list_index] = code.ToyGUID(toy_id)
 			list_index = list_index + 1
 		end
