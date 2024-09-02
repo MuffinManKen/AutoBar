@@ -42,7 +42,6 @@ local types = AB.types	---@class ABTypes
 local code = AB.code	---@class ABCode
 
 local AutoBar = AutoBar
-local _ABGData = AutoBarGlobalDataObject
 
 local L = AutoBarGlobalDataObject.locale
 local LDB = LibStub("LibDataBroker-1.1", true)
@@ -52,6 +51,7 @@ local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local AceCfgCmd = LibStub("AceConfigCmd-3.0")
 
 
+--TODO: Add all Bartender frames here?
 local dockingFramesValidateList = {
 	["NONE"] = L["None"],
 	["BT3Bar1"] = L["AUTOBAR_CONFIG_BT3BAR"]..1,
