@@ -135,7 +135,7 @@ end
 function AutoBar:InitializeZero()
 
 	AutoBar.player_faction_name = UnitFactionGroup("player")
-	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
+	AutoBar.current_player = UnitName("player") .. " - " .. GetRealmName();
 	AutoBar.CLASS = UnitClassBase("player")
 	AutoBar.NiceClass = string.sub(AutoBar.CLASS, 1, 1) .. string.lower(string.sub(AutoBar.CLASS, 2))
 

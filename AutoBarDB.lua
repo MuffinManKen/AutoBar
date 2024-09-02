@@ -423,8 +423,8 @@ function AutoBar.InitializeDB()
 	AutoBar.class = AutoBarDB2.classes[AutoBar.CLASS]
 
 	AutoBarDB2.chars = AutoBarDB2.chars or {}
-	AutoBarDB2.chars[AutoBar.currentPlayer] = AutoBarDB2.chars[AutoBar.currentPlayer] or {["barList"] = {}, ["buttonList"] = {}, ["buttonDataList"] = {}}
-	AutoBar.char = AutoBarDB2.chars[AutoBar.currentPlayer]
+	AutoBarDB2.chars[AutoBar.current_player] = AutoBarDB2.chars[AutoBar.current_player] or {["barList"] = {}, ["buttonList"] = {}, ["buttonDataList"] = {}}
+	AutoBar.char = AutoBarDB2.chars[AutoBar.current_player]
 
 
 	AutoBarDB2.custom_categories = AutoBarDB2.custom_categories or {}
