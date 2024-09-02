@@ -264,9 +264,9 @@ end
 --TODO: Memoize? How often is this called?
 function code.GetIconForItemID(p_item_id)	--TODO: Calls into this seem to always tonumber, is that necessary?
 
-	local i_texture = select(10, GetItemInfo(p_item_id))		---@diagnostic disable-line: deprecated
+	local i_texture = select(10, code.GetItemInfo(p_item_id))
 
-	local ii_texture = select(5, GetItemInfoInstant(p_item_id))	---@diagnostic disable-line: deprecated
+	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
 
 	return ii_texture or i_texture;
 end
@@ -643,6 +643,7 @@ else
 
 end
 
+--#region GetSpellLink deprecation
 local function GetSpellLink_deprec(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
 	local spell_link
 
@@ -677,3 +678,14 @@ else
 
 	end
 end
+
+--#endregion GetSpellLink deprecation
+
+
+--#region GetItemInfo deprecation
+if GetItemInfo then 		---@diagnostic disable-line: deprecated
+	code.GetItemInfo = GetItemInfo		---@diagnostic disable-line: deprecated
+else
+	code.GetItemInfo = C_Item.GetItemInfo
+end
+--#endregion GetItemInfo deprecation

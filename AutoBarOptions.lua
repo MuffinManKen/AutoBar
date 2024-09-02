@@ -34,7 +34,7 @@
 --  Deleted Buttons can be added back to a Bar
 --  Plugin & Custom Buttons are added here & must have non-clashing names
 
--- GLOBALS: IsShiftKeyDown, IsControlKeyDown, IsAltKeyDown, GameTooltip, InCombatLockdown, GetItemInfo, GetMacroInfo
+
 
 local _, AB = ...
 
@@ -2569,7 +2569,7 @@ function AutoBar:CreateCustomCategoryOptions(options)
 			local name
 			if (itemDB.itemType == "item") then
 				if (itemDB.itemId and itemDB.itemId ~= 0) then
-					name = GetItemInfo(itemDB.itemId)
+					name = code.GetItemInfo(itemDB.itemId)
 				end
 			elseif (itemDB.itemType == "spell") then
 				if (itemDB.spellName) then
