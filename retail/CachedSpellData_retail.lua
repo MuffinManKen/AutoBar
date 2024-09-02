@@ -306,7 +306,6 @@ code.cache_spell_data(698, "Ritual of Summoning");
 code.cache_spell_data(6673, "Battle Shout");
 code.cache_spell_data(100, "Charge");
 code.cache_spell_data(97462, "Rallying Cry");
-code.cache_spell_data(197690, "Defensive Stance");
 code.cache_spell_data(1160, "Demoralizing Shout");
 code.cache_spell_data(184364, "Enraged Regeneration");
 code.cache_spell_data(3411, "Intervene");

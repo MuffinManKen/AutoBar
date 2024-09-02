@@ -358,7 +358,6 @@ function AB.InitializeCategories()
 		"PALADIN", code.get_spell_name_by_name("Crusader Aura"),
 		"PALADIN", code.get_spell_name_by_name("Devotion Aura"),
 		"PALADIN", code.get_spell_name_by_name("Retribution Aura"),
-		"WARRIOR", code.get_spell_name_by_name("Defensive Stance"),
 	})
 
 
