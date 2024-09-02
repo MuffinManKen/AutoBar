@@ -202,7 +202,7 @@ function AutoBar:InitializeZero()
 
 	AutoBar.player_faction_name = UnitFactionGroup("player")
 	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
-	_, AutoBar.CLASS = UnitClass("player")
+	AutoBar.CLASS = UnitClassBase("player")
 	AutoBar.NiceClass = string.sub(AutoBar.CLASS, 1, 1) .. string.lower(string.sub(AutoBar.CLASS, 2))
 
 	AutoBar.version = AB.GetAddOnMetadata(ADDON_NAME, "Version")
