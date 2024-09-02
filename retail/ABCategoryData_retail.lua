@@ -11,6 +11,7 @@ local ItemsCategory = AB.ItemsCategory
 local MacroTextCategory = AB.MacroTextCategory
 local SpellsCategory = AB.SpellsCategory
 
+--#region ToyCategory
 AB.ToyCategory = CreateFromMixins(AB.CategoryClass)
 local ToyCategory = AB.ToyCategory
 
@@ -62,11 +63,11 @@ function ToyCategory:Refresh()
 		end
 	end
 
-
-
 	if(debug) then code.log_warning("After Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "|n"); end
 
 end
+
+--#endregion ToyCategory
 
 function AB.InitializeCategories()
 

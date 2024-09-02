@@ -195,6 +195,7 @@ function AB.RefreshCategories()
 end
 
 
+--#region CategoryClass
 
 -- Mandatory attributes:
 --		description - localized description
@@ -261,6 +262,11 @@ end
 function CategoryClass:Refresh() -- luacheck: no unused args
 end
 
+--#endregion CategoryClass
+
+
+--#region ItemsCategory
+
 ---@class ItemsCategory: CategoryClass
 ---@field pt_items table
 ---@field ptPriorityItems table
@@ -291,6 +297,9 @@ function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_prio
 	return obj
 end
 
+--#endregion ItemsCategory
+
+--#region MacroTextCategory
 ---@class MacroTextCategory: CategoryClass
 
 AB.MacroTextCategory = CreateFromMixins(CategoryClass)
@@ -316,7 +325,9 @@ function MacroTextCategory:AddMacroText(p_macro_text, p_macro_icon_override, p_t
 	self.items[next_index] = guid
 end
 
+--#endregion MacroTextCategory
 
+--#region SpellsCategory
 -- Category consisting of spells
 ---@class SpellsCategory: CategoryClass
 ---@field castList table
@@ -403,8 +414,9 @@ function SpellsCategory:Refresh()
 	end
 end
 
+--#endregion SpellsCategory
 
-
+--#region CustomCategory
 -- Custom Category
 ---@class CustomCategory: CategoryClass
 ---@field customCategoriesDB table
@@ -537,7 +549,8 @@ function CustomCategory:Refresh()
 		self.items[index] = nil
 	end
 end
--- /dump AutoBarCategoryList["CustomArrangeTest"]
+
+--#endregion CustomCategory
 
 
 -- Create category list using PeriodicTable data.
