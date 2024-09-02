@@ -51,7 +51,21 @@ local AceCfgReg = LibStub("AceConfigRegistry-3.0")
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local AceCfgCmd = LibStub("AceConfigCmd-3.0")
 
-local dewdrop = nil
+
+local dockingFramesValidateList = {
+	["NONE"] = L["None"],
+	["BT3Bar1"] = L["AUTOBAR_CONFIG_BT3BAR"]..1,
+	["BT3Bar2"] = L["AUTOBAR_CONFIG_BT3BAR"]..2,
+	["BT3Bar3"] = L["AUTOBAR_CONFIG_BT3BAR"]..3,
+	["BT3Bar4"] = L["AUTOBAR_CONFIG_BT3BAR"]..4,
+	["BT3Bar6"] = L["AUTOBAR_CONFIG_BT3BAR"]..6,
+	["BT3Bar10"] = L["AUTOBAR_CONFIG_BT3BAR"]..10,
+	["MainMenuBarArtFrame"] = L["AUTOBAR_CONFIG_DOCKTOMAIN"],
+	["ChatFrame1"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAME"],
+	["ChatFrameMenuButton"] = L["AUTOBAR_CONFIG_DOCKTOCHATFRAMEMENU"],
+	["MainMenuBar"] = L["AUTOBAR_CONFIG_DOCKTOACTIONBAR"],
+	["CharacterMicroButton"] = L["AUTOBAR_CONFIG_DOCKTOMENUBUTTONS"],
+}
 
 local hintString = "|cffffffff%s:|r %s"
 local hintText = {
@@ -63,9 +77,6 @@ local hintText = {
 }
 local function LDBOnClick(_clickedFrame, button)
 	if (button == "LeftButton") then
-		if (dewdrop and dewdrop:GetOpenedParent()) then
-			dewdrop:Close()
-		end
 		if (IsShiftKeyDown()) then
 			AutoBar:MoveBarModeToggle()
 		elseif (IsControlKeyDown()) then
@@ -102,9 +113,6 @@ function AutoBar:InitializeOptions()
 			label = "AutoBar",
 			OnClick = LDBOnClick,
 			OnTooltipShow = function(tooltip)
-				if (dewdrop and dewdrop:GetOpenedParent()) then
-					GameTooltip:Hide()
-				end
 				if (tooltip and tooltip.AddLine) then
 					for _i, text in ipairs(hintText) do
 						tooltip:AddLine(text)
@@ -1786,7 +1794,7 @@ function AutoBar:CreateBarOptions(barKey, existingOptions)
 					order = 71,
 					name = L["Docked to"],
 					desc = L["Docked to"],
-				    values = AutoBar.dockingFramesValidateList,
+				    values = dockingFramesValidateList,
 					get = getDocking,
 					set = setDocking,
 					arg = passValue,
