@@ -633,9 +633,11 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 	--Once we get a non-nil result, that's what we'll use for the rest of the session
 	function AB.IsToyUsable(p_item_id)
 		local ituc = AutoBarGlobalDataObject.is_toy_usable_cache
-		if(ituc[p_item_id] == nil) then
-			ituc[p_item_id] = C_ToyBox.IsToyUsable(p_item_id);
+
+		if(ituc[p_item_id] == true) then
+			return true
 		end
+		ituc[p_item_id] = C_ToyBox.IsToyUsable(p_item_id) or nil;	--Don't store a bunch of falses
 		return ituc[p_item_id]
 	end
 
