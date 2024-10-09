@@ -18,6 +18,6 @@ copy "..\MuffinWhatsNew\muffin_whats_new.lua" ".\libs\"
 copy "..\MuffinIcons\muffin.tga" ".\textures\"
 
 
-REM xcopy "..\libs\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
+xcopy "..\libs\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
 
 pause
