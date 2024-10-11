@@ -10,7 +10,8 @@
 		"force_files" : ["AutoBarClassic.toc", "AutoBarClassic_Cata.toc"],
 		"force_dirs" : ["classic", "libs", "locale", "textures", "cata"],
 		"whats_new" : "classic/whats_new.lua",
-		"skip_ftp" : true
+		"skip_ftp" : false,
+		"curse_project_id" : 340094
 	}
 
 	],
