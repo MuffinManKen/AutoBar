@@ -1708,19 +1708,20 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	end
 	self:AddCategory("Misc.Hearth")
 
-	if (ABGData.is_mainline_wow) then
+	if (AutoBarCategoryList["Muffin.Toys.Hearth"]) then
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
-		AutoBarCategoryList["Muffin.Toys.Portal"].only_favourites = false
-
-		self:AddCategory("Muffin.Toys.Hearth")
-		self:AddCategory("Muffin.Toys.Portal")
-
-
-		if(buttonDB.hearth_include_challenge_portals) then
-			self:AddCategory("Spell.ChallengePortals")
-		end
-
+		self:AddCategory("Muffin.Toys.Hearth")		
 	end
+
+	if (AutoBarCategoryList["Muffin.Toys.Portal"]) then
+		AutoBarCategoryList["Muffin.Toys.Portal"].only_favourites = false
+		self:AddCategory("Muffin.Toys.Portal")
+	end
+
+	if(AutoBarCategoryList["Spell.ChallengePortals"] and buttonDB.hearth_include_challenge_portals) then
+		self:AddCategory("Spell.ChallengePortals")
+	end
+
 end
 
 if (ABGData.is_mainline_wow) then
