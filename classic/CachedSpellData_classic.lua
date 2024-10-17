@@ -227,6 +227,7 @@ code.cache_spell_data(8166, "Poison Cleansing Totem");
 --Warlock
 code.cache_spell_data(687, "Demon Skin");
 code.cache_spell_data(706, "Demon Armor");
+code.cache_spell_data(403619, "Fel Armor");
 
 code.cache_spell_data(6201, "Create Healthstone (Minor)");
 code.cache_spell_data(6202, "Create Healthstone (Lesser)");
