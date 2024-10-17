@@ -106,6 +106,8 @@ function AB.InitializeCategories()
 		"PRIEST", code.get_spell_name_by_name("Prayer of Fortitude");
 		"PRIEST", code.get_spell_name_by_name("Prayer of Shadow Protection");
 		"PRIEST", code.get_spell_name_by_name("Prayer of Spirit");
+		"PRIEST", code.get_spell_name_by_name("Levitate");
+		"PRIEST", code.get_spell_name_by_name("Divine Spirit");
 		"SHAMAN", code.get_spell_name_by_name("Water Breathing"),
 		"SHAMAN", code.get_spell_name_by_name("Water Walking"),
 		"SHAMAN", code.get_spell_name_by_name("Spirit of the Alpha"),

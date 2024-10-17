@@ -159,6 +159,8 @@ code.cache_spell_data(976, "Shadow Protection");
 code.cache_spell_data(21562, "Prayer of Fortitude");
 code.cache_spell_data(27683, "Prayer of Shadow Protection");
 code.cache_spell_data(27681, "Prayer of Spirit");
+code.cache_spell_data(1706, "Levitate");
+code.cache_spell_data(14752, "Divine Spirit");
 
 --Rogue
 code.cache_spell_data(1842, "Disarm Trap");
