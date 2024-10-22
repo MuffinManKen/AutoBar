@@ -751,7 +751,7 @@ end
 
 
 local function BarNew()
-	local newBarName, barKey = AB.Bar:GetNewName(L["Custom"])
+	local newBarName, barKey = AB.bar:GetNewName(L["Custom"])
 	AutoBarDB2.account.barList[barKey] = {
 		name = newBarName,
 		desc = newBarName,
