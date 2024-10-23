@@ -3,8 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Warlock: Added Fel Armor
- - Added Beacon of Hydraxis to Hearth button
- - Improved datamining of food and drinks
+ - Priest: Added Levitate and Divine Spirit
+ - Fixed error when creating a new bar
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
