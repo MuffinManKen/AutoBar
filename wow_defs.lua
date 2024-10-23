@@ -170,6 +170,8 @@ ABCode = {}
 ---@field frame Frame Frame used for keybinding and event handling
 ---@field current_player string Formatted as "Player - Realm"
 ---@field version string Version string of Addon as given by the TOC
+---@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
+---@field ConfigToggle function Open the Config window if we're not in combat
 AutoBar = {}
 
 
@@ -235,16 +237,6 @@ function LibStickyFrames:SetFrameText(frame, barName) end
 --#endregion LibStickyFrames
 
 
----@class LibPeriodicTable-3.1
----@field ItemSearch function(item : number|string) : table
----@field GetSetTable function(set : string) : table
----@field GetSetString function(set : string) : string
----@field IsSetMulti function(set : string) : boolean
----@field IterateSet function(set : string) : function
----@field AddData function(arg1 : string, arg2 : string|table, arg3 : table|nil)
----@field ItemInSet function(item : number|string, set : string) : any, string
----@field sets table
----@field embedversions table
 
 
 ---@class GameTooltip
