@@ -6,7 +6,7 @@ local font_spacing = 2
 local initial_delay = 4
 local interstitial_delay = 0.25
 
-local mmgGetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+local mmgGetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata 	---@diagnostic disable-line: deprecated
 
 local function table_pack(...)
   return { n = select("#", ...), ... }
