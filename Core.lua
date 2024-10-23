@@ -229,7 +229,7 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 
 	if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
 
-	local item_name, item_id = AutoBar.ItemLinkDecode(p_item_link)
+	local item_name, item_id = AB.ItemLinkDecode(p_item_link)
 	category.items[#category.items + 1] = item_id
 
 	if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
@@ -601,7 +601,7 @@ end
 -- end
 
 
-function AutoBar.ItemLinkDecode(link)
+function AB.ItemLinkDecode(link)
 	if (link) then
 		local id, name = string.match(link,"item:(%d+):.+%[(.*)%]")
 		if (id and name) then

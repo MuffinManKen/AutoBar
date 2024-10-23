@@ -731,7 +731,7 @@ function Sorted:SetBest(buttonKey)
 
 	local buttonDB = AutoBar.buttonDBList[buttonKey]
 	if (buttonDB.equipped) then
-		local _name, item_id = AutoBar.ItemLinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
+		local _name, item_id = AB.ItemLinkDecode(GetInventoryItemLink("player", buttonDB.equipped))
 		if (self:SwapToFront(sortedItems, item_id)) then
 			return
 		else
