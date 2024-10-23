@@ -1109,7 +1109,7 @@ local function add_found_item(p_item_id, p_bag, p_slot)
 	-- Filter out too high level items
 	local itemMinLevel = select(5, code.GetItemInfo(p_item_id)) or 0;
 	local usable = code.IsUsableItem(p_item_id);
-	local item_spell = GetItemSpell(p_item_id);
+	local item_spell = AB.GetItemSpell(p_item_id);
 	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
 		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
 	end

@@ -591,6 +591,7 @@ AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLi
 
 AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata	---@diagnostic disable-line: deprecated
 
+AB.GetItemSpell = GetItemSpell or C_Item.GetItemSpell
 
 
 
