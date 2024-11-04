@@ -1050,7 +1050,7 @@ function AB.UpdateSpells(p_behaviour)
 
 	AutoBarSearch:ScanRegisteredSpells()
 	AutoBarSearch:ScanRegisteredMacros()
-	AB.RefreshCategories()
+	code.RefreshCategories()
 
 	local ret = tick.UpdateItemsID;
 	if(p_behaviour ~= tick.BehaveTicker) then	-- Run sequentially instead of letting the ticker get the next step

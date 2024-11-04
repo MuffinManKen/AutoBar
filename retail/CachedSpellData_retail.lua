@@ -247,6 +247,7 @@ code.cache_spell_data(36554, "Shadowstep");
 code.cache_spell_data(1784, "Stealth");
 code.cache_spell_data(1856, "Vanish");
 code.cache_spell_data(271877, "Blade Rush");
+code.cache_spell_data(1804, "Pick Lock");
 --#endregion
 
 

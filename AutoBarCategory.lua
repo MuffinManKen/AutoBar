@@ -60,7 +60,7 @@ end
 
 -- Add items from set to rawList
 -- If priority is true, the items will have priority over non-priority items with the same values
-function AB.AddPTSetToRawList(p_raw_list, p_set, p_priority)
+function code.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 	if (not p_raw_list) then
 		p_raw_list = {}
 	end
@@ -84,7 +84,7 @@ function AB.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 end
 
 -- Convert rawList to a simple array of itemIds, ordered by their value in the set, and priority if any
-function AB.RawListToItemIDList(p_raw_list)
+function code.RawListToItemIDList(p_raw_list)
 	local itemArray = {}
 	table.sort(p_raw_list, sortList)
 	for i, j in ipairs(p_raw_list) do
@@ -188,7 +188,7 @@ local function FilterByClass(castList, p_items_per_line)
 end
 
 -- Learned new spells etc.  Refresh all categories
-function AB.RefreshCategories()
+function code.RefreshCategories()
 	for _, categoryInfo in pairs(AutoBarCategoryList) do
 		categoryInfo:Refresh()
 	end
@@ -206,10 +206,11 @@ end
 ---@field categoryKey string
 ---@field description string	localized name
 ---@field texture string|number
----@field targeted boolean
+---@field targeted boolean|string
 ---@field nonCombat boolean
 ---@field battleground boolean
 ---@field noSpellCheck boolean
+---@field castSpell number	spell override
 ---@field items table
 AB.CategoryClass = {}
 local CategoryClass = AB.CategoryClass ---@class CategoryClass
@@ -228,6 +229,7 @@ function CategoryClass:init(description, texture)
 end
 
 -- True if items can be targeted
+---@param p_targeted boolean|string
 function CategoryClass:SetTargeted(p_targeted)
 	assert(type(p_targeted) == "boolean" or type(p_targeted) == "string")
 	self.targeted = p_targeted
@@ -288,11 +290,11 @@ function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_prio
 	obj.pt_items = p_pt_items
 	obj.ptPriorityItems = p_pt_priority_items
 
-	local raw_list = AB.AddPTSetToRawList({}, p_pt_items, false)
+	local raw_list = code.AddPTSetToRawList({}, p_pt_items, false)
 	if (p_pt_priority_items) then
-		raw_list = AB.AddPTSetToRawList(raw_list, p_pt_priority_items, true)
+		raw_list = code.AddPTSetToRawList(raw_list, p_pt_priority_items, true)
 	end
-	obj.items = AB.RawListToItemIDList(raw_list)
+	obj.items = code.RawListToItemIDList(raw_list)
 
 	return obj
 end
@@ -332,6 +334,7 @@ end
 ---@class SpellsCategory: CategoryClass
 ---@field castList table
 ---@field rightClickList table
+---@field itemsRightClick table
 
 AB.SpellsCategory = CreateFromMixins(CategoryClass)
 local SpellsCategory = AB.SpellsCategory ---@class SpellsCategory
@@ -372,8 +375,8 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 	if (p_pt_set) then
 		assert(p_cast_list == nil)
 		assert(rightClickList == nil)
-		local raw_list = AB.AddPTSetToRawList({}, p_pt_set, false)
-		local id_list = AB.RawListToItemIDList(raw_list)
+		local raw_list = code.AddPTSetToRawList({}, p_pt_set, false)
+		local id_list = code.RawListToItemIDList(raw_list)
 		obj.castList = PTSpellIDsToSpellName(id_list)
 	end
 
@@ -420,6 +423,7 @@ end
 -- Custom Category
 ---@class CustomCategory: CategoryClass
 ---@field customCategoriesDB table
+---@field customKey string
 
 AB.CustomCategory = CreateFromMixins(CategoryClass)
 local CustomCategory = AB.CustomCategory	---@class CustomCategory
@@ -674,37 +678,35 @@ function AB.InitializeAllCategories()
 	AutoBarCategoryList["Consumable.Food.Combo Percent"] = ItemsCategory:new("Consumable.Food.Combo Percent", "INV_Food_ChristmasFruitCake_01", "Consumable.Food.Combo Percent")
 	AutoBarCategoryList["Consumable.Food.Combo Percent"]:SetNonCombat(true)
 
+	local SPELL_FEED_PET = code.get_spell_name_by_name("Feed Pet")
 
 	AutoBarCategoryList["Consumable.Food.Bread"] = ItemsCategory:new("Consumable.Food.Bread", "INV_Misc_Food_35", "Consumable.Food.Edible.Bread.Basic", "Consumable.Food.Edible.Basic.Conjured")
 	AutoBarCategoryList["Consumable.Food.Bread"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Bread"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
+	AutoBarCategoryList["Consumable.Food.Bread"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Cheese"] = ItemsCategory:new( "Consumable.Food.Cheese", "INV_Misc_Food_37", "Consumable.Food.Edible.Cheese.Basic")
 	AutoBarCategoryList["Consumable.Food.Cheese"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Cheese"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
-
+	AutoBarCategoryList["Consumable.Food.Cheese"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Fish"] = ItemsCategory:new("Consumable.Food.Fish", "INV_Misc_Fish_22", "Consumable.Food.Inedible.Fish", "Consumable.Food.Edible.Fish.Basic")
 	AutoBarCategoryList["Consumable.Food.Fish"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Fish"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
-
+	AutoBarCategoryList["Consumable.Food.Fish"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Fruit"] = ItemsCategory:new( "Consumable.Food.Fruit", "INV_Misc_Food_19", "Consumable.Food.Edible.Fruit.Basic")
 	AutoBarCategoryList["Consumable.Food.Fruit"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Fruit"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
-
+	AutoBarCategoryList["Consumable.Food.Fruit"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Fungus"] = ItemsCategory:new("Consumable.Food.Fungus", "INV_Mushroom_05", "Consumable.Food.Edible.Fungus.Basic")
 	AutoBarCategoryList["Consumable.Food.Fungus"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Fungus"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
+	AutoBarCategoryList["Consumable.Food.Fungus"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Meat"] = ItemsCategory:new("Consumable.Food.Meat", "INV_Misc_Food_14", "Consumable.Food.Inedible.Meat", "Consumable.Food.Edible.Meat.Basic")
 	AutoBarCategoryList["Consumable.Food.Meat"]:SetNonCombat(true)
-	AutoBarCategoryList["Consumable.Food.Meat"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
+	AutoBarCategoryList["Consumable.Food.Meat"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Buff Pet"] = ItemsCategory:new("Consumable.Buff Pet", "INV_Misc_Food_87_SporelingSnack", "Consumable.Buff Pet")
 	AutoBarCategoryList["Consumable.Buff Pet"]:SetTargeted("PET")
-	AutoBarCategoryList["Consumable.Buff Pet"]:SetCastSpell(AutoBar:LoggedGetSpellInfo(6991, "Feed Pet"))
+	AutoBarCategoryList["Consumable.Buff Pet"]:SetCastSpell(SPELL_FEED_PET)
 
 	AutoBarCategoryList["Consumable.Food.Bonus"] = ItemsCategory:new("Consumable.Food.Bonus", "INV_Misc_Food_47", "Consumable.Food.Bonus")
 	AutoBarCategoryList["Consumable.Food.Bonus"]:SetNonCombat(true)

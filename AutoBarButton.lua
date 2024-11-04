@@ -633,8 +633,8 @@ local function ClearButtonAttributes(frame)
 	frame:SetAttribute("itemId", nil)
 end
 
-local SPELL_FEED_PET = AutoBar:LoggedGetSpellInfo(6991) -- Feed Pet
-local SPELL_PICK_LOCK = AutoBar:LoggedGetSpellInfo(1804) -- Pick Lock
+local SPELL_FEED_PET = code.get_spell_name_by_name("Feed Pet")
+local SPELL_PICK_LOCK = code.get_spell_name_by_name("Pick Lock")
 local SPELL_MILL_HERB
 if(ABGData.is_mainline_wow) then
 	SPELL_MILL_HERB = code.get_spell_name_by_name("Milling")
