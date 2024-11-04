@@ -879,17 +879,6 @@ function AutoBar:DumpWarningLog()
 
 end
 
-function AutoBar:LoggedGetSpellInfo(p_spell_id, p_spell_name)
-
-	local ret_val = {AB.GetSpellInfo(p_spell_id)} --table-ify
-
-	if next(ret_val) == nil then
-		code.log_warning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
-	end
-
-	return unpack(ret_val)
-
-end
 
 function AutoBar:DebugItemCategory(p_category_name)
 
