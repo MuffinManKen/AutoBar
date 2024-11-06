@@ -3,6 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Datamined Items
+ - TOC Bump
+ - Code Refresh
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
