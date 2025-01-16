@@ -671,9 +671,9 @@ local function PlayerHasToy_wrapper(p_item_id)
 end
 
 if PlayerHasToy then
-	code.PlayerHasToy = PlayerHasToy_wrapper
+	AB.PlayerHasToy = PlayerHasToy_wrapper
 else
-	code.PlayerHasToy = function (_p_item) return false; end
+	AB.PlayerHasToy = function (_p_item) return false; end
 end
 --#endregion PlayerHasToy deprecation/wrapper
 
