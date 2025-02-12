@@ -208,6 +208,7 @@ local quick_sets =
 	"Muffin.Toys.Hearth",
 	"Muffin.Toys.Pet Battle",
 	"Muffin.Toys.Portal",
+	"Muffin.Toys.Engineering",
 	"Muffin.Toys.Companion Pet.Ornamental",
 	"Spell.Charge",
 	"Spell.ER",

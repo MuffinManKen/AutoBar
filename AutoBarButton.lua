@@ -1766,6 +1766,10 @@ function AutoBarButtonMiscFun.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Usable.Permanent")
 	self:AddCategory("Misc.Usable.Fun")
 	self:AddCategory("Misc.Usable.Replenished")
+	if (AutoBarCategoryList["Muffin.Toys.Engineering"]) then
+		AutoBarCategoryList["Muffin.Toys.Engineering"].only_favourites = false
+		self:AddCategory("Muffin.Toys.Engineering")
+	end
 end
 
 local AutoBarButtonReputation = AceOO.Class(AutoBarButton)
