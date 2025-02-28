@@ -316,6 +316,10 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	frame.ClearBindings = AutoBar.Class.Button.ClearBindings
 	frame.GetBindings = AutoBar.Class.Button.GetBindings
 
+	if frame.Arrow then
+		frame.Arrow:Hide()
+	end
+
 	self:UpdateButton()
 	self:EventsEnable()
 
