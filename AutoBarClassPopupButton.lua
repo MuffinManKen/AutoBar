@@ -124,6 +124,10 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 	end
 
 	frame.border = _G[("%sBorder"):format(popupButtonName)]
+	
+	if frame.Arrow then
+		frame.Arrow:Hide()
+	end
 end
 
 
