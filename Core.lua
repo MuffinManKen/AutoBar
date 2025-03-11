@@ -227,12 +227,13 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	local debug_me = false
 	local category = AutoBarCategoryList[p_category_name]
 
-	if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
+	if (category) then
+		if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
+		local item_name, item_id = AB.ItemLinkDecode(p_item_link)
+		category.items[#category.items + 1] = item_id
+		if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
+	end
 
-	local item_name, item_id = AB.ItemLinkDecode(p_item_link)
-	category.items[#category.items + 1] = item_id
-
-	if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
 end
 
 
