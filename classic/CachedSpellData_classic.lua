@@ -170,6 +170,7 @@ code.cache_spell_data(1784, "Stealth");
 code.cache_spell_data(1856, "Vanish");
 code.cache_spell_data(2094, "Blind");
 code.cache_spell_data(6770, "Sap");
+code.cache_spell_data(1804, "Pick Lock");
 
 
 --Shaman
