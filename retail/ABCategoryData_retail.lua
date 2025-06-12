@@ -134,6 +134,7 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Muffin.ItemEnchant.Permanent"] = ItemsCategory:new("Muffin.ItemEnchant.Permanent", "archaeology_5_0_mogucoin", "Muffin.ItemEnchant.Permanent")
 	AutoBarCategoryList["Muffin.ItemEnchant.Temporary"] = ItemsCategory:new("Muffin.ItemEnchant.Temporary", "archaeology_5_0_mogucoin", "Muffin.ItemEnchant.Temporary")
 
+	AutoBarCategoryList["Muffin.Misc.Hearth"] = ItemsCategory:new("Muffin.Misc.Hearth", "INV_Misc_Rune_01", "Muffin.Misc.Hearth")
 
 	AutoBarCategoryList["Spell.Warlock.Create Healthstone"] = SpellsCategory:new( "Spell.Warlock.Create Healthstone", spellIconList["Create Healthstone"], nil,
 	{
