@@ -20,7 +20,7 @@ code.cache_spell_data(5215, "Prowl");
 code.cache_spell_data(22842, "Frenzied Regeneration");
 code.cache_spell_data(22570, "Mangle");
 code.cache_spell_data(1126, "Mark of the Wild");
-code.cache_spell_data(467, "Thorns");
+-- [MoP] removed: code.cache_spell_data(467, "Thorns");
 code.cache_spell_data(5487, "Bear Form");
 code.cache_spell_data(768, "Cat Form");
 code.cache_spell_data(1066, "Aquatic Form");
@@ -57,7 +57,7 @@ code.cache_spell_data(50977, "Death Gate");
 --#region Hunter
 code.cache_spell_data(5118, "Aspect of the Cheetah");
 code.cache_spell_data(13165, "Aspect of the Hawk");
-code.cache_spell_data(20043, "Aspect of the Wild");
+-- [MoP] removed: code.cache_spell_data(20043, "Aspect of the Wild");
 code.cache_spell_data(13159, "Aspect of the Pack");
 
 code.cache_spell_data(1462, "Beast Lore");
@@ -146,7 +146,7 @@ code.cache_spell_data(642, "Divine Shield");
 
 code.cache_spell_data(19740, "Blessing of Might");
 code.cache_spell_data(20217, "Blessing of Kings");
-code.cache_spell_data(20911, "Blessing of Sanctuary");
+-- [MoP] removed: code.cache_spell_data(20911, "Blessing of Sanctuary");
 
 code.cache_spell_data(633, "Lay on Hands");
 
@@ -157,16 +157,16 @@ code.cache_spell_data(1038, "Hand of Salvation");
 
 code.cache_spell_data(32223, "Crusader Aura");
 code.cache_spell_data(465, "Devotion Aura");
-code.cache_spell_data(7294, "Retribution Aura");
-code.cache_spell_data(19746, "Concentration Aura");
-code.cache_spell_data(19891, "Fire Resistance Aura");
+-- [MoP] removed: code.cache_spell_data(7294, "Retribution Aura");
+-- [MoP] removed: code.cache_spell_data(19746, "Concentration Aura");
+-- [MoP] removed: code.cache_spell_data(19891, "Fire Resistance Aura");
 
 code.cache_spell_data(5502, "Sense Undead");
 
-code.cache_spell_data(20164, "Seal of Justice");
-code.cache_spell_data(20165, "Seal of Light");
+-- [MoP] removed: code.cache_spell_data(20164, "Seal of Justice");
+-- [MoP] removed: code.cache_spell_data(20165, "Seal of Light");
 code.cache_spell_data(20154, "Seal of Righteousness");
-code.cache_spell_data(31801, "Seal of Vengeance");
+-- [MoP] removed: code.cache_spell_data(31801, "Seal of Vengeance");
 --#endregion
 
 --#region Priest
@@ -174,7 +174,7 @@ code.cache_spell_data(588, "Inner Fire");
 code.cache_spell_data(21562, "Prayer of Fortitude");
 code.cache_spell_data(17, "Power Word: Shield");
 code.cache_spell_data(15487, "Silence");
-code.cache_spell_data(27683, "Prayer of Shadow Protection");
+-- [MoP] removed: code.cache_spell_data(27683, "Prayer of Shadow Protection");
 code.cache_spell_data(34433, "Shadowfiend");
 code.cache_spell_data(6346, "Fear Ward");
 code.cache_spell_data(15286, "Vampiric Embrace");
@@ -203,15 +203,15 @@ code.cache_spell_data(8042, "Earth Shock");
 --Air totems
 code.cache_spell_data(8177, "Grounding Totem");
 code.cache_spell_data(8512, "Windfury Totem");
-code.cache_spell_data(3738, "Wrath of Air Totem");
+-- [MoP] removed: code.cache_spell_data(3738, "Wrath of Air Totem");
 
 
 --Earth totems
 code.cache_spell_data(2484, "Earthbind Totem");
 code.cache_spell_data(2062, "Earth Elemental Totem");
 code.cache_spell_data(5730, "Stoneclaw Totem");
-code.cache_spell_data(8071, "Stoneskin Totem");
-code.cache_spell_data(8075, "Strength of Earth Totem");
+-- [MoP] removed: code.cache_spell_data(8071, "Stoneskin Totem");
+-- [MoP] removed: code.cache_spell_data(8075, "Strength of Earth Totem");
 code.cache_spell_data(8143, "Tremor Totem");
 
 --Fire totems
@@ -220,7 +220,7 @@ code.cache_spell_data(3599, "Searing Totem");
 
 --Water totems
 code.cache_spell_data(5394, "Healing Stream Totem");
-code.cache_spell_data(5675, "Mana Spring Totem");
+-- [MoP] removed: code.cache_spell_data(5675, "Mana Spring Totem");
 code.cache_spell_data(16190, "Mana Tide Totem");
 
 code.cache_spell_data(546, "Water Walking");
@@ -264,7 +264,7 @@ code.cache_spell_data(6673, "Battle Shout");
 code.cache_spell_data(469, "Commanding Shout");
 code.cache_spell_data(100, "Charge");
 code.cache_spell_data(1160, "Demoralizing Shout");
-code.cache_spell_data(20252, "Intercept");
+-- [MoP] removed: code.cache_spell_data(20252, "Intercept");
 code.cache_spell_data(2565, "Shield Block");
 code.cache_spell_data(871, "Shield Wall");
 code.cache_spell_data(12975, "Last Stand");
@@ -293,6 +293,11 @@ code.cache_spell_data(25229, "Jewelcrafting");
 code.cache_spell_data(31252, "Prospecting");
 code.cache_spell_data(45357, "Inscription");
 code.cache_spell_data(51005, "Milling");
+code.cache_spell_data(20165, "Seal of Insight"); -- new added in mop
+code.cache_spell_data(31801, "Seal of Truth"); -- new added in mop
+code.cache_spell_data(31821, "Devotion Aura"); -- new added in mop
+code.cache_spell_data(108280, "Healing Tide Totem"); -- new added in mop
+code.cache_spell_data(108269, "Capacitor Totem"); -- new added in mop
 --#endregion
 
 local cache_timer_stop = debugprofilestop();

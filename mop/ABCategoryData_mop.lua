@@ -59,7 +59,7 @@ function AB.InitializeCategories()
 	{
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Cheetah"),
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Hawk"),
-		"HUNTER", code.get_spell_name_by_name("Aspect of the Wild"),
+-- [MoP] removed: 		"HUNTER", code.get_spell_name_by_name("Aspect of the Wild"),
 		"HUNTER", code.get_spell_name_by_name("Aspect of the Pack"),
 	})
 
@@ -67,20 +67,20 @@ function AB.InitializeCategories()
 	{
 		"MAGE", code.get_spell_name_by_name("Slow Fall"), code.get_spell_name_by_name("Slow Fall"),
 		"MAGE", code.get_spell_name_by_name("Arcane Intellect"), code.get_spell_name_by_name("Arcane Intellect"),
-		"DRUID", code.get_spell_name_by_name("Thorns"), code.get_spell_name_by_name("Thorns"),
+-- [MoP] removed: 		"DRUID", code.get_spell_name_by_name("Thorns"), code.get_spell_name_by_name("Thorns"),
 		"DRUID", code.get_spell_name_by_name("Mark of the Wild"), code.get_spell_name_by_name("Mark of the Wild"),
 		"DEATHKNIGHT", code.get_spell_name_by_name("Horn of Winter"), code.get_spell_name_by_name("Horn of Winter"),
 		"PALADIN", code.get_spell_name_by_name("Hand of Salvation"), code.get_spell_name_by_name("Hand of Salvation"),
 		"PALADIN", code.get_spell_name_by_name("Hand of Sacrifice"), code.get_spell_name_by_name("Hand of Sacrifice"),
 		"PALADIN", code.get_spell_name_by_name("Hand of Freedom"), code.get_spell_name_by_name("Hand of Freedom"),
 		"PALADIN", code.get_spell_name_by_name("Hand of Protection"), code.get_spell_name_by_name("Hand of Protection"),
-		"PALADIN", code.get_spell_name_by_name("Blessing of Sanctuary"), code.get_spell_name_by_name("Blessing of Sanctuary"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Blessing of Sanctuary"), code.get_spell_name_by_name("Blessing of Sanctuary"),
 		"PALADIN", code.get_spell_name_by_name("Blessing of Might"), code.get_spell_name_by_name("Blessing of Might"),
 		"PALADIN", code.get_spell_name_by_name("Blessing of Kings"), code.get_spell_name_by_name("Blessing of Kings"),
 		"PRIEST", code.get_spell_name_by_name("Fear Ward"), code.get_spell_name_by_name("Fear Ward"),
 		"PRIEST", code.get_spell_name_by_name("Vampiric Embrace"), code.get_spell_name_by_name("Vampiric Embrace"),
 		"PRIEST", code.get_spell_name_by_name("Inner Fire"), code.get_spell_name_by_name("Inner Fire"),
-		"PRIEST", code.get_spell_name_by_name("Prayer of Shadow Protection"), code.get_spell_name_by_name("Prayer of Shadow Protection"),
+-- [MoP] removed: 		"PRIEST", code.get_spell_name_by_name("Prayer of Shadow Protection"), code.get_spell_name_by_name("Prayer of Shadow Protection"),
 		"PRIEST", code.get_spell_name_by_name("Prayer of Fortitude"), code.get_spell_name_by_name("Prayer of Fortitude"),
 		"SHAMAN", code.get_spell_name_by_name("Water Walking"), code.get_spell_name_by_name("Water Walking"),
 		"WARLOCK", code.get_spell_name_by_name("Unending Breath"), code.get_spell_name_by_name("Unending Breath"),
@@ -180,9 +180,9 @@ function AB.InitializeCategories()
 		"DRUID", code.get_spell_name_by_name("Swift Flight Form"),
 		"PALADIN", code.get_spell_name_by_name("Crusader Aura"),
 		"PALADIN", code.get_spell_name_by_name("Devotion Aura"),
-		"PALADIN", code.get_spell_name_by_name("Retribution Aura"),
-		"PALADIN", code.get_spell_name_by_name("Concentration Aura"),
-		"PALADIN", code.get_spell_name_by_name("Fire Resistance Aura"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Retribution Aura"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Concentration Aura"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Fire Resistance Aura"),
 		"WARRIOR", code.get_spell_name_by_name("Defensive Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Battle Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Berserker Stance"),
@@ -190,10 +190,13 @@ function AB.InitializeCategories()
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
-		"PALADIN", code.get_spell_name_by_name("Seal of Justice"),
-		"PALADIN", code.get_spell_name_by_name("Seal of Light"),
-		"PALADIN", code.get_spell_name_by_name("Seal of Vengeance"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Justice"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Light"),
+-- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Vengeance"),
 		"PALADIN", code.get_spell_name_by_name("Seal of Righteousness"),
+	
+		"PALADIN", code.get_spell_name_by_name("Seal of Insight"), -- new added in mop
+		"PALADIN", code.get_spell_name_by_name("Seal of Truth"), -- new added in mop
 	})
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = SpellsCategory:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
@@ -201,8 +204,8 @@ function AB.InitializeCategories()
 		"SHAMAN", code.get_spell_name_by_name("Earthbind Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Earth Elemental Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Stoneclaw Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Stoneskin Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Strength of Earth Totem"),
+-- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Stoneskin Totem"),
+-- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Strength of Earth Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Tremor Totem"),
 	})
 
@@ -211,7 +214,9 @@ function AB.InitializeCategories()
 	{
 		"SHAMAN", code.get_spell_name_by_name("Grounding Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Windfury Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Wrath of Air Totem"),
+-- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Wrath of Air Totem"),
+	
+		"SHAMAN", code.get_spell_name_by_name("Capacitor Totem"), -- new added in mop
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
@@ -223,8 +228,10 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Totem.Water"] = SpellsCategory:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
 		"SHAMAN", code.get_spell_name_by_name("Healing Stream Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Mana Spring Totem"),
+-- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Mana Spring Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Mana Tide Totem"),
+	
+		"SHAMAN", code.get_spell_name_by_name("Healing Tide Totem"), -- new added in mop
 	})
 
 
@@ -317,7 +324,7 @@ function AB.InitializeCategories()
 		"DEATHKNIGHT", code.get_spell_name_by_name("Death Grip"),
 		"ROGUE", code.get_spell_name_by_name("Shadowstep"),
 		"WARRIOR", code.get_spell_name_by_name("Charge"),
-		"WARRIOR", code.get_spell_name_by_name("Intercept"),
+-- [MoP] removed: 		"WARRIOR", code.get_spell_name_by_name("Intercept"),
 
 	})
 
