@@ -527,7 +527,7 @@ function AB.events.PLAYER_REGEN_DISABLED(p_arg1)
 		AB.LibKeyBound:Deactivate()
 	end
 
-	--AB.UpdateActive()
+	AB.ABScheduleUpdate(tick.UpdateActiveID)
 	AceCfgDlg:Close("AutoBar")
 
 	AB.LogEventEnd("PLAYER_REGEN_DISABLED", p_arg1)
@@ -796,7 +796,7 @@ function AutoBar:MoveButtonsModeOn()
 			bar:MoveButtonsModeOn()
 		end
 	end
-	AB.UpdateActive()
+	AB.ABScheduleUpdate(tick.UpdateActiveID)
 end
 
 function AutoBar:MoveButtonsModeOff()
@@ -806,7 +806,7 @@ function AutoBar:MoveButtonsModeOff()
 			bar:MoveButtonsModeOff()
 		end
 	end
-	AB.UpdateActive()
+	AB.ABScheduleUpdate(tick.UpdateActiveID)
 end
 
 
@@ -926,6 +926,11 @@ end
 -- AutoBar Scheduler
 --
 -------------------------------------------------------------------------
+
+function AutoBar:PrintSchedulerStatus()
+	print("ABSchedulerActive:", ABSchedulerActive, "ScheduledUpdate:", tick.ScheduledUpdate)
+end
+
 
 function AB.ABScheduleUpdate(p_update_id)
 
