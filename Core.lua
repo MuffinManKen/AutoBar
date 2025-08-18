@@ -147,7 +147,7 @@ function AutoBar:InitializeZero()
 	AutoBar:InitializeOptions()
 	AutoBar.Initialize()
 
-	AB.UpdateCategories()
+	AB.UpdateAllLinear()
 	AB.RegisterOverrideBindings()
 	AutoBar.frame:RegisterEvent("UPDATE_BINDINGS")
 
@@ -1002,7 +1002,7 @@ function AB.ResetSearch()
 
 		AutoBar:BarButtonChanged()
 
-		AB.UpdateCategories();
+		AB.UpdateAllLinear();
 
 		ret = tick.UpdateCompleteID
 	end
@@ -1012,6 +1012,17 @@ function AB.ResetSearch()
 	return ret;
 end
 
+function AB.UpdateAllLinear()
+
+	AB.UpdateCategories()
+	AB.UpdateSpells()
+	AB.UpdateObjects()
+	AB.UpdateItems()
+	AB.UpdateAttributes()
+	AB.UpdateActive()
+	AB.UpdateButtons()
+
+end
 
 
 
