@@ -23,9 +23,8 @@ function ToyCategory:new(p_description, p_short_texture, p_pt_name)
 	obj:init(p_description, "Interface\\Icons\\" .. p_short_texture)
 
 	obj.is_toy = true
-
-	--All items in the category
-	obj.all_items = {}
+	obj.all_items = {} --All items in the category
+	obj.items = {}
 
 	if(p_pt_name) then
 		local raw_list = code.AddPTSetToRawList({}, p_pt_name, false)
@@ -39,26 +38,26 @@ end
 
 -- Reset the item list in case the player learned new toys
 function ToyCategory:Refresh()
-	local list_index = 1
+	wipe(self.items)
+
+  -- OPTIONAL (debug-only) validator to catch bad PT entries:
+  -- for i, id in ipairs(self.all_items) do
+  --   if type(id) ~= "number" then code.log_warning("Toy PT entry not itemID:", tostring(id)) end
+  -- end
+
 	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
 	if(debug) then code.log_warning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items); end
 
-	wipe(self.items)
-
-	if(self.only_favourites == nil) then
-		if(debug) then code.log_warning("Exiting Toy Refresh, button settings aren't loaded|n"); end
-		return
-	end
+	local list_index = 1
 	local DEBUG_IDS = code.make_set{182773, 172179}
 
 	for _, toy_id in ipairs(self.all_items) do
-		local toy_info = AutoBarSearch:RegisterToy(toy_id)
-		local user_selected = (self.only_favourites and toy_info.is_fave) or not self.only_favourites
-		local has_toy = AB.PlayerHasToy(toy_id)
+        local has_toy = AB.PlayerHasToy(toy_id)
 		local is_usable = AB.IsToyUsable(toy_id)
-		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, toy_info.name, "HasToy:", has_toy, "Usable:", is_usable, "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
-		if (toy_id and has_toy and is_usable and user_selected) then
-			self.items[list_index] = code.ToyGUID(toy_id)
+		--if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, toy_info.name, "HasToy:", has_toy, "Usable:", is_usable, "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
+		if (toy_id and has_toy and is_usable) then
+			local toy_info = AutoBarSearch:RegisterToy(toy_id)
+			self.items[list_index] = toy_info.guid
 			list_index = list_index + 1
 		end
 	end

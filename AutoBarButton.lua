@@ -296,6 +296,8 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 	local barKey = self.parentBar.barKey
 	local layoutDB = AutoBar.barLayoutDBList[barKey]
 
+	local debug = false --(buttonKey == "AutoBarButtonHearth")
+
 	local padding = layoutDB.padding
 	local hitRectPadding = -math.max(4, padding)
 	local popupDirection = layoutDB.popupDirection
@@ -357,6 +359,9 @@ function AutoBarButton.prototype:SetupPopups(nItems)
 	end
 
 	local buttonItems = AutoBarSearch.items:GetList(buttonKey)
+
+	if debug then code.log_warning("SetupPopups|n", code.Dump(buttonItems, 1)) end;
+
 	local relativePoint = popupHeader
 	for popupButtonIndex = popupIndexStart, nItems, 1 do
 		local popupButton = AutoBar.Class.PopupButton:GetPopupButton(self, popupButtonIndex, popupHeader, popupKeyHandler)
@@ -1709,12 +1714,10 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Hearth")
 
 	if (AutoBarCategoryList["Muffin.Toys.Hearth"]) then
-		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
-		self:AddCategory("Muffin.Toys.Hearth")		
+		self:AddCategory("Muffin.Toys.Hearth")
 	end
 
 	if (AutoBarCategoryList["Muffin.Toys.Portal"]) then
-		AutoBarCategoryList["Muffin.Toys.Portal"].only_favourites = false
 		self:AddCategory("Muffin.Toys.Portal")
 	end
 
@@ -1727,15 +1730,14 @@ end
 if (ABGData.is_mainline_wow) then
 	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
-		self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
+		--self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_challenge_portals", L["HearthIncludeChallengePortals"])
 	end
 
-	function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
-		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
+	-- function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
 
-		AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
-	end
+	-- 	AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
+	-- end
 
 end
 

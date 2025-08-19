@@ -244,11 +244,16 @@ end
 -- Re-Populate a  button
 function Items:RePopulate(p_button_key)
 	if(METHOD_DEBUG) then code.log_warning("Items:RePopulate", p_button_key); end
+	if (not self.dataList[p_button_key]) then
+		return
+	end
 	local button = AutoBar.buttonList[p_button_key]
 	if (button and button[1]) then
+		wipe(self.dataList[p_button_key])
+
 		for slotIndex = 1, # button, 1 do
 			local category, itemList = get_items(button[slotIndex])
-			if(button[slotIndex] == "Muffin.Toys.Hearth") then code.log_warning("   ", category, code.Dump(itemList)) end
+			--if(button[slotIndex] == "Muffin.Toys.Hearth") then code.log_warning("   ", category, code.Dump(itemList)) end
 			if (itemList) then
 				self:Add(itemList, p_button_key, category, slotIndex)
 			end

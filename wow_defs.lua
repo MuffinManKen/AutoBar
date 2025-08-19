@@ -94,6 +94,11 @@ function GetBuildInfo() end
 ---@return number count
 function GetItemCount(itemInfo, includeBank, includeUses, includeReagentBank) end
 
+---comment
+---@param bagID number
+---@param slot number
+---@return number icon, number itemCount, boolean locked, number quality, boolean readable, boolean lootable, string itemLink, boolean isFiltered, boolean noValue, number itemID, boolean isBound
+function GetContainerItemInfo(bagID, slot) end
 
 ---@param itemID number
 ---@return number, number, number

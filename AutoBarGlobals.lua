@@ -266,6 +266,7 @@ function code.GetIconForItemID(p_item_id)	--TODO: Calls into this seem to always
 
 	local i_texture = select(10, code.GetItemInfo(p_item_id))
 
+---@diagnostic disable-next-line: deprecated
 	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
 
 	return ii_texture or i_texture;
@@ -602,10 +603,8 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 --
 -------------------------------------------------------------------
 
-AutoBarGlobalDataObject.is_toy_usable_cache = {}
-AutoBarGlobalDataObject.mount_data_cache_by_id = {}
-
-
+	AutoBarGlobalDataObject.is_toy_usable_cache = {}
+	AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 
 
 	function AB.GetMountInfoByID(p_id)
@@ -630,19 +629,33 @@ AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 		return AutoBarSearch.registered_macro_text[p_guid] or AutoBarSearch.registered_toys[p_guid];
 	end
 
+	do
+		local cache   = AutoBarGlobalDataObject.is_toy_usable_cache
+		local IsUsable = C_ToyBox and C_ToyBox.IsToyUsable
 
-	--Once we get a non-nil result, that's what we'll use for the rest of the session
-	function AB.IsToyUsable(p_item_id)
-		local ituc = AutoBarGlobalDataObject.is_toy_usable_cache
+		--Once we get a non-nil result, that's what we'll use for the rest of the session
+		function AB.IsToyUsable(p_item_id)
 
-		if(ituc[p_item_id] == true) then
-			return true
+			local cached = cache[p_item_id]
+			if(cached ~= nil) then
+				return cached
+			end
+
+
+			local usable = IsUsable(p_item_id)                -- r ∈ {true,false,nil}
+			if usable == nil then
+				return nil
+			end
+
+			cache[p_item_id] = usable
+
+			return usable
 		end
-		ituc[p_item_id] = C_ToyBox.IsToyUsable(p_item_id) or nil;	--Don't store a bunch of falses
-		return ituc[p_item_id]
-	end
 
-
+		function AB.WipeToyUsablePendingCache()
+			wipe(AutoBarGlobalDataObject.is_toy_usable_pending)
+		end
+	end --do
 
 
 -------------------------------------------------------------------

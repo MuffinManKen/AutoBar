@@ -269,7 +269,7 @@ if (ABGData.is_mainline_wow) then
 
 	function AB.events.QUEST_LOG_UPDATE(p_arg1)
 		AB.LogEventStart("QUEST_LOG_UPDATE")
-		code.log_warning("QUEST_LOG_UPDATE","   Idx:", p_arg1)
+		--code.log_warning("QUEST_LOG_UPDATE","   Idx:", p_arg1)
 		local needs_item_update = false
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
@@ -314,11 +314,16 @@ if (ABGData.is_mainline_wow) then
 	function AB.events.TOYS_UPDATED(p_item_id, p_new)
 		AB.LogEventStart("TOYS_UPDATED")
 
-		if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
+		--if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
 
-		if(p_item_id == nil or p_new == true) then
+		--if(p_item_id == nil or p_new == true) then
+
 			AB.ABScheduleUpdate(tick.UpdateItemsID)
-		end
+			local button = AutoBar.buttonList["AutoBarButtonHearth"]
+			if (button) then
+				button:Refresh(button.parentBar, button.buttonDB, true)
+			end
+		--end
 
 		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
 
