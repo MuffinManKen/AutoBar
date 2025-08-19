@@ -212,16 +212,64 @@ function AB.RegisterOverrideBindings()
 end
 
 
+do
+	local GetTime = GetTime
+	local RECHECK_MIN = 0.1  -- smaller step to reduce overshoot
+	--local QUIET = AutoBarDB2 and AutoBarDB2.settings and AutoBarDB2.settings.get_item_info_quiet or 0.5
+	local QUIET = 0.6
+	local get_item_ticker_active = false
+	local last_t = GetTime()
 
-function AB.events.GET_ITEM_INFO_RECEIVED(p_item_id, p_success)
-	AB.LogEventStart("GET_ITEM_INFO_RECEIVED")
-
-	if p_success then
-		AB.ABScheduleUpdate(tick.UpdateItemsID)
+	local function get_item_info_tick()
+		local elapsed = GetTime() - last_t
+		if elapsed >= QUIET then
+			AB.ABScheduleUpdate(tick.UpdateItemsID)
+			get_item_ticker_active = false
+		else
+			-- sleep just the remaining time, but not less than RECHECK_MIN
+    		local remain = QUIET - elapsed
+			C_Timer.After(remain > RECHECK_MIN and remain or RECHECK_MIN, get_item_info_tick)
+		end
 	end
 
-	AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id, p_success)
+	local function ticker_delay()
+		last_t = GetTime()
+		if (not get_item_ticker_active) then
+			get_item_ticker_active = true
+			C_Timer.After(RECHECK_MIN, get_item_info_tick)
+			AB.ABScheduleUpdate(tick.UpdateButtonsID)
+		end
+	end
+
+	function AB.events.GET_ITEM_INFO_RECEIVED(p_item_id, p_success)
+		AB.LogEventStart("GET_ITEM_INFO_RECEIVED")
+
+		if p_success then
+			--print("GET_ITEM_INFO_RECEIVED", p_item_id, get_item_ticker_active)
+			ticker_delay()
+		end
+
+		AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id, p_success)
+	end
+
+	function AB.events.TOYS_UPDATED(p_item_id, p_new)
+		AB.LogEventStart("TOYS_UPDATED")
+
+		--if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
+
+		--if(p_item_id == nil or p_new == true) then
+			--print("TOYS_UPDATED", p_item_id, p_new, get_item_ticker_active)
+
+			ticker_delay()
+		--end
+
+		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
+
+	end
 end
+
+
+
 
 -- Given an item link, this adds the item to the given category
 -- NOTE: No effort is made to avoid adding an item that as already been added. As long as the list is small, this isn't worth worrying about.
@@ -311,23 +359,7 @@ if (ABGData.is_mainline_wow) then
 	end
 
 
-	function AB.events.TOYS_UPDATED(p_item_id, p_new)
-		AB.LogEventStart("TOYS_UPDATED")
 
-		--if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
-
-		--if(p_item_id == nil or p_new == true) then
-
-			AB.ABScheduleUpdate(tick.UpdateItemsID)
-			local button = AutoBar.buttonList["AutoBarButtonHearth"]
-			if (button) then
-				button:Refresh(button.parentBar, button.buttonDB, true)
-			end
-		--end
-
-		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
-
-	end
 
 end
 
@@ -1149,7 +1181,8 @@ function AB.UpdateActive()
 
 	AB.LogEventEnd("AB.UpdateActive")
 
-	return tick.UpdateButtonsID;
+	return AB.UpdateButtons();
+	--return tick.UpdateButtonsID;
 
 end
 
