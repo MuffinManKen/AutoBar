@@ -182,7 +182,7 @@ function AB.InitializeCategories()
 		"PALADIN", 		code.get_spell_name_by_name("Divine Shield"), code.get_spell_name_by_name("Divine Protection"),
 		"PRIEST", 		code.get_spell_name_by_name("Power Word: Shield"), code.get_spell_name_by_name("Power Word: Shield"),
 		"ROGUE", 		code.get_spell_name_by_name("Evasion"), 		code.get_spell_name_by_name("Evasion"),
-		"SHAMAN", 		code.get_spell_name_by_name("Lightning Shield"),		code.get_spell_name_by_name("Lightning Shield"),
+		"SHAMAN", 		code.get_spell_name_by_name("Lightning Shield"),		code.get_spell_name_by_name("Earth Shield"),
 		"SHAMAN", 		code.get_spell_name_by_name("Earth Shield"),		code.get_spell_name_by_name("Lightning Shield"),
 		"SHAMAN", 		code.get_spell_name_by_name("Water Shield"),		code.get_spell_name_by_name("Lightning Shield"),
 		"WARRIOR", 		code.get_spell_name_by_name("Shield Block"), code.get_spell_name_by_name("Shield Wall"),

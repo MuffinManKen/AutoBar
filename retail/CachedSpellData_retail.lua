@@ -257,6 +257,7 @@ code.cache_spell_data(198103, "Earth Elemental");
 code.cache_spell_data(51533, "Feral Spirit");
 code.cache_spell_data(198067, "Fire Elemental");
 code.cache_spell_data(2645, "Ghost Wolf");
+code.cache_spell_data(462854, "Skyfury");
 code.cache_spell_data(192249, "Storm Elemental");
 code.cache_spell_data(546, "Water Walking");
 code.cache_spell_data(57994, "Wind Shear");
@@ -264,6 +265,11 @@ code.cache_spell_data(57994, "Wind Shear");
 code.cache_spell_data(318038, "Flametongue Weapon");
 code.cache_spell_data(33757, "Windfury Weapon");
 code.cache_spell_data(462757, "Thunderstrike Ward");
+
+code.cache_spell_data(974, "Earth Shield");
+code.cache_spell_data(192106, "Lightning Shield");
+code.cache_spell_data(52127, "Water Shield");
+
 
 code.cache_spell_data(207399, "Ancestral Protection Totem");
 code.cache_spell_data(157153, "Cloudburst Totem");

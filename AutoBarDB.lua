@@ -226,6 +226,8 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonTotemFire", },
 		{button_name = "AutoBarButtonTotemWater", },
 		{button_name = "AutoBarButtonTravel", },
+		{button_name = "AutoBarButtonClassBuff", },
+		{button_name = "AutoBarButtonShields", project_id = WOW_PROJECT_MAINLINE},
 	},
 	WARLOCK =
 	{
