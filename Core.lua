@@ -396,7 +396,7 @@ function AB.events.PLAYER_ENTERING_WORLD()
 
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-	AB.ABScheduleUpdate(tick.UpdateCategoriesID);
+	AB.UpdateAllLinear()
 
 end
 
@@ -1088,9 +1088,16 @@ function AB.UpdateCategories()
 		end
 	end
 
+	local ret = tick.UpdateSpellsID
+	if (not InCombatLockdown()) then
+		AB.UpdateCustomCategories()
+	else
+		ret = tick.UpdateCategoriesID
+	end
+
 	AB.LogEventEnd("UpdateCategories")
 
-	return tick.UpdateSpellsID
+	return ret
 
 end
 
