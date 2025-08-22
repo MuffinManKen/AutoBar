@@ -261,6 +261,10 @@ code.cache_spell_data(192249, "Storm Elemental");
 code.cache_spell_data(546, "Water Walking");
 code.cache_spell_data(57994, "Wind Shear");
 
+code.cache_spell_data(318038, "Flametongue Weapon");
+code.cache_spell_data(33757, "Windfury Weapon");
+code.cache_spell_data(462757, "Thunderstrike Ward");
+
 code.cache_spell_data(207399, "Ancestral Protection Totem");
 code.cache_spell_data(157153, "Cloudburst Totem");
 code.cache_spell_data(192058, "Capacitor Totem");

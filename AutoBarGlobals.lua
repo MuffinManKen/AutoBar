@@ -641,8 +641,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 				return cached
 			end
 
-
-			local usable = IsUsable(p_item_id)                -- r ∈ {true,false,nil}
+			local usable = IsUsable(p_item_id)
 			if usable == nil then
 				return nil
 			end
@@ -652,9 +651,6 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 			return usable
 		end
 
-		function AB.WipeToyUsablePendingCache()
-			wipe(AutoBarGlobalDataObject.is_toy_usable_pending)
-		end
 	end --do
 
 
