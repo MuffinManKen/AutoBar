@@ -1714,10 +1714,12 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Hearth")
 
 	if (AutoBarCategoryList["Muffin.Toys.Hearth"]) then
+		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
 		self:AddCategory("Muffin.Toys.Hearth")
 	end
 
 	if (AutoBarCategoryList["Muffin.Toys.Portal"]) then
+		AutoBarCategoryList["Muffin.Toys.Portal"].only_favourites = false
 		self:AddCategory("Muffin.Toys.Portal")
 	end
 
@@ -1730,14 +1732,14 @@ end
 if (ABGData.is_mainline_wow) then
 	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
-		--self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
+		self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_challenge_portals", L["HearthIncludeChallengePortals"])
 	end
 
-	-- function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
-
-	-- 	AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
-	-- end
+	 function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
+		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
+	 	AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
+	 end
 
 end
 

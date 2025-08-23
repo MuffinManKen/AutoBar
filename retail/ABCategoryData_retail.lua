@@ -23,6 +23,7 @@ function ToyCategory:new(p_description, p_short_texture, p_pt_name)
 	obj:init(p_description, "Interface\\Icons\\" .. p_short_texture)
 
 	obj.is_toy = true
+	obj.only_favourites = false
 	obj.all_items = {} --All items in the category
 	obj.items = {}
 
@@ -45,24 +46,31 @@ function ToyCategory:Refresh()
   --   if type(id) ~= "number" then code.log_warning("Toy PT entry not itemID:", tostring(id)) end
   -- end
 
-	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
-	if(debug) then code.log_warning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items); end
+  	local only_faves = self.only_favourites == true
 
-	local list_index = 1
+	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
+	if(debug) then code.log_warning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "OnlyFaves:", only_faves); end
+
 	local DEBUG_IDS = code.make_set{182773, 172179}
+	local list_index = 1
 
 	for _, toy_id in ipairs(self.all_items) do
         local has_toy = AB.PlayerHasToy(toy_id)
-		local is_usable = AB.IsToyUsable(toy_id)
-		--if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, toy_info.name, "HasToy:", has_toy, "Usable:", is_usable, "fave:", toy_info.is_fave, "select:", user_selected, "OnlyFave:", self.only_favourites); end
-		if (toy_id and has_toy and is_usable) then
+		local selected = (not only_faves or AutoBarSearch:IsToyFavourite(toy_id))
+		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, "HasToy:", has_toy); end
+
+		if (toy_id and has_toy and selected) then
 			local toy_info = AutoBarSearch:RegisterToy(toy_id)
 			self.items[list_index] = toy_info.guid
 			list_index = list_index + 1
 		end
 	end
 
-	if(debug) then code.log_warning("After Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "|n"); end
+	if AutoBarSearch.items then
+		AutoBarSearch.items:RePopulateByCategory(self.categoryKey)
+	end
+
+	if(debug) then code.log_warning("After Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "OnlyFaves:", only_faves, "|n"); end
 
 end
 

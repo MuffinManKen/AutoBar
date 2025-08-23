@@ -252,23 +252,24 @@ do
 		AB.LogEventEnd("GET_ITEM_INFO_RECEIVED", p_item_id, p_success)
 	end
 
-	function AB.events.TOYS_UPDATED(p_item_id, p_new)
-		AB.LogEventStart("TOYS_UPDATED")
 
-		--if(false) then code.log_warning("|nTOYS_UPDATED", p_item_id, p_new); end
 
-		--if(p_item_id == nil or p_new == true) then
-			--print("TOYS_UPDATED", p_item_id, p_new, get_item_ticker_active)
-
-			ticker_delay()
-		--end
-
-		AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
-
-	end
 end
 
+function AB.events.TOYS_UPDATED(p_item_id, p_new)
+	AB.LogEventStart("TOYS_UPDATED")
 
+	AutoBarSearch:MarkToyBoxDirty()
+
+	if AutoBarSearch:RebuildToyFavorites() then
+		AB.ABScheduleUpdate(tick.UpdateCategoriesID)
+	else
+		AB.ABScheduleUpdate(tick.UpdateButtonsID)
+	end
+
+	AB.LogEventEnd("TOYS_UPDATED", p_item_id, p_new)
+
+end
 
 
 -- Given an item link, this adds the item to the given category
@@ -395,6 +396,9 @@ function AB.events.PLAYER_ENTERING_WORLD()
 	end
 
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
+	AutoBarSearch:RebuildToyFavorites()
+
 
 	AB.UpdateAllLinear()
 

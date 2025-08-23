@@ -22,6 +22,10 @@ AutoBarSearch = {
 
 	---@type table<string, ABToyInfo >
 	registered_toys = {},
+	---@type table<number, boolean>
+	fave_toy_cache = {},
+
+	favorite_toys_generation = 0,
 
 	registered_macros = {},
 	registered_macro_text = {},
@@ -165,12 +169,14 @@ end
 
 -- Add a list of itemIds for the given buttonKey
 function Items:Add(itemList, buttonKey, category, slotIndex)
---AutoBar:Print("Items:Add    category " .. tostring(category) .. " itemList " .. tostring(itemList))
+	-- if buttonKey == "AutoBarButtonHearth" then
+	-- 	code.log_warning("Items:Add    category " .. tostring(category) .. " itemList ", code.Dump(itemList, 1))
+	-- end
 	if (not self.dataList[buttonKey]) then
 		self.dataList[buttonKey] = {}
 	end
 	local buttonItems = self.dataList[buttonKey]
-	for i, itemId in pairs(itemList) do
+	for i, itemId in ipairs(itemList) do
 		local itemData = buttonItems[itemId]
 		if (not itemData) then
 			itemData = {}
@@ -262,6 +268,72 @@ function Items:RePopulate(p_button_key)
 
 end
 --/dump AutoBarSearch.sorted["AutoBarCustomButton7"]
+
+-- Rebuild all buttons that reference a given category key.
+-- Keeps SearchSpace, Current, and Sorted in sync for those buttons only.
+function Items:RePopulateByCategory(catKey)
+	if not catKey then return end
+
+	-- Walk all buttons and find those that use this category
+	for buttonKey, button in pairs(AutoBar.buttonList) do
+		if button and button[1] then
+			local usesCat = false
+			for slotIndex = 1, #button do
+				if button[slotIndex] == catKey then
+					usesCat = true
+					break
+				end
+			end
+			if usesCat then
+				-- 1) Clean old SearchSpace entries for this button (so we don't leave stale interest)
+				local oldItems = self.dataList[buttonKey]
+				if oldItems then
+					for itemId in pairs(oldItems) do
+						AutoBarSearch.space:Delete(itemId, buttonKey)
+					end
+				else
+					self.dataList[buttonKey] = {}
+				end
+
+				-- 2) Rebuild this button's Items from ALL its configured categories (preserves priority ordering)
+				wipe(self.dataList[buttonKey])
+				for slotIndex = 1, #button do
+					local category, itemList = get_items(button[slotIndex])
+					if itemList then
+						self:Add(itemList, buttonKey, category, slotIndex)
+					end
+				end
+
+				-- 3) Reconcile Current/Sorted for this button WITHOUT a full rescan
+				--    - remove items no longer searched by this button
+				--    - add items now searched and already found
+				local foundList   = AutoBarSearch.found:GetList()
+				local newSearch   = self.dataList[buttonKey] or {}
+				local currentList = AutoBarSearch.current:GetList(buttonKey) or {}
+
+				-- 3a) purge stale present items for this button
+				for itemId in pairs(currentList) do
+					if not newSearch[itemId] then
+						AutoBarSearch.current:Delete(buttonKey, itemId)
+						AutoBarSearch.sorted:Delete(buttonKey, itemId)
+					end
+				end
+
+				-- 3b) add new present items (already in bags/inventory) to Current + Sorted
+				for itemId, itemData in pairs(newSearch) do
+					if foundList[itemId] and not currentList[itemId] then
+						AutoBarSearch.current:Add(buttonKey, itemId)
+						AutoBarSearch.sorted:Add(buttonKey, itemId, itemData.slotIndex, itemData.categoryIndex)
+					end
+				end
+
+				-- 4) Mark this button dirty so sort + visuals refresh
+				AutoBarSearch.sorted:SetDirty(buttonKey)
+			end
+		end
+	end
+end
+
 
 -- Return the buttons search list.
 -- Do not manipulate the list.  It is only for performance when checking if an itemId is searched for
@@ -539,7 +611,7 @@ function Sorted:Add(buttonKey, itemId, slotIndex, categoryIndex)
 	local bFound = nil
 
 	if (not itemId) then
-		AutoBar:Print("Sorted:Add   bad itemId  " .. tostring(itemId))
+		print("Sorted:Add   bad itemId  " .. tostring(itemId))
 	end
 
 	for _i, sortedItemData in ipairs(buttonItems) do
@@ -800,6 +872,37 @@ end
 
 --#endregion Current
 
+function AutoBarSearch:IsToyFavourite(p_item_id)
+	return self.fave_toy_cache[p_item_id]
+end
+
+function AutoBarSearch:RebuildToyFavorites()
+	local GetIsFavorite = C_ToyBox and C_ToyBox.GetIsFavorite
+	local faves = self.fave_toy_cache
+	local changed = false
+
+   -- drop no-longer-favorite
+	for id in pairs(faves) do
+		if not GetIsFavorite(id) then
+			faves[id] = nil;
+			changed = true
+		end
+    end
+
+	for _, toy_data in pairs(self.registered_toys) do
+		local id = toy_data.item_id
+		if C_ToyBox.GetIsFavorite(id) and not faves[id] then
+			faves[id] = true
+			changed = true
+		end
+	end
+	if changed then
+		self.favorite_toys_generation = self.favorite_toys_generation + 1
+	end
+
+	return changed
+end
+
 
 -- Register a spell, and figure out its spellbook index for use in tooltip
 -- Multiple calls refresh current state of the spell
@@ -906,7 +1009,7 @@ function AutoBarSearch:RegisterToy(p_toy_id)
 		toy_info.is_fave = is_fave
 	end
 
-	if (debug) then code.log_warning("RegisterToy", "ID:", p_toy_id, "Name:", toy_name); end
+	if (debug) then code.log_warning("RegisterToy", "ID:", p_toy_id, "Name:", toy_info.name, "isFave:", toy_info.is_fave); end
 
 	return toy_info
 end
@@ -1000,7 +1103,6 @@ function AutoBarSearch:UpdateScan()
 		AutoBarSearch.dirty.bags[i] = true
 	end
 
-	AutoBarSearch.dirty.toybox = true
 	AutoBarSearch.dirty.spells = true
 	AutoBarSearch.dirty.macros = true
 
@@ -1019,6 +1121,10 @@ end
 
 function AutoBarSearch:MarkInventoryDirty()
 	self.dirty.inventory = true
+end
+
+function AutoBarSearch:MarkToyBoxDirty()
+	self.dirty.toybox = true
 end
 
 
@@ -1050,7 +1156,11 @@ function AutoBarSearch:ScanRegisteredToys()
 
 	for toy_guid, toy_data in pairs(self.registered_toys) do
 		self:RegisterToy(toy_data.item_id);
-		self.found:Add(toy_guid, nil, nil, toy_guid)
+		if AB.PlayerHasToy(toy_data.item_id) and AB.IsToyUsable(toy_data.item_id) then
+			self.found:Add(toy_guid, nil, nil, toy_guid)
+		else
+			delete_found_item(toy_guid, nil, nil, toy_guid)
+		end
 	end
 
 end
