@@ -232,7 +232,6 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 		return;
 	end
 
-
 	local start, duration, enabled = 0, 0, 0
 
 	if (itemType == "item") then
@@ -265,105 +264,97 @@ end
 -- Set count based on the type and type2 settings
 function AutoBar.Class.BasicButton.prototype:UpdateCount()
 	local frame = self.frame
-	if (AutoBarDB2.settings.show_count) then
-		frame.count:Show()
-		local count1 = 0
-		local count2 = 0
-		local itemType = frame:GetAttribute("type")
+	if (not AutoBarDB2.settings.show_count) then
+		frame.count:Hide()
+		return
+	end
 
-		if (itemType) then
-			if (itemType == "item") then
-				local itemId = frame:GetAttribute("itemId") or 1
-				count1 = code.GetItemCount(tonumber(itemId), nil, true) or 0
+	frame.count:Show()
+	local count1 = 0
+	local count2 = 0
+	local itemType = frame:GetAttribute("type")
+
+	if (itemType) then
+		if (itemType == "item") then
+			local itemId = frame:GetAttribute("itemId") or 1
+			count1 = code.GetItemCount(tonumber(itemId), nil, true) or 0
 -- 		Toys and Macros don't have counts, though a macro of an item could.
 --			elseif (itemType == "macro") then
 --			elseif (itemType == "toy") then
-			elseif (itemType == "spell") then
-				local spellName = frame:GetAttribute("spell")
-				count1 = AB.GetSpellCount(spellName) or 0
-				local spellName2 = frame:GetAttribute("spell2")
-				if (spellName2) then
-					count2 = AB.GetSpellCount(spellName2) or 0
-				end
+		elseif (itemType == "spell") then
+			local spellName = frame:GetAttribute("spell")
+			count1 = AB.GetSpellCount(spellName) or 0
+			local spellName2 = frame:GetAttribute("spell2")
+			if (spellName2) then
+				count2 = AB.GetSpellCount(spellName2) or 0
 			end
 		end
+	end
 
-		local displayCount1 = count1
-		local displayCount2 = count2
-		if (count1 > 999) then
-			displayCount1 = "*"
-		end
-		if (count2 > 999) then
-			displayCount2 = "*"
-		end
+	local displayCount1 = (count1 > 999) and "*" or tostring(count1)
+	local displayCount2 = (count2 > 999) and "*" or tostring(count2)
 
-		if (itemType == "spell") then
-			if (count1 > 1 and count2 > 0) then
-				frame.count:SetText(displayCount1 .. "/" .. displayCount2)
-			elseif (count2 > 0) then
-				frame.count:SetText("/" .. displayCount2)
-			elseif (count1 > 0) then
-				frame.count:SetText(displayCount1)
-			else
-				frame.count:SetText("")
-			end
-		elseif (count1 > 1) then
+	if (itemType == "spell") then
+		if (count1 > 1 and count2 > 0) then
+			frame.count:SetText(displayCount1 .. "/" .. displayCount2)
+		elseif (count2 > 0) then
+			frame.count:SetText("/" .. displayCount2)
+		elseif (count1 > 0) then
 			frame.count:SetText(displayCount1)
 		else
 			frame.count:SetText("")
 		end
+	elseif (count1 > 1) then
+		frame.count:SetText(displayCount1)
 	else
-		frame.count:Hide()
+		frame.count:SetText("")
 	end
+
 end
 
 
 function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 	local frame = self.frame
+	if not (frame and frame:IsShown()) then
+		return
+	end
+
 	local itemType = frame:GetAttribute("type")
-	local category = frame:GetAttribute("category")
-	if (itemType) then
-		local isUsable, notEnoughMana
 
-		if (itemType == "item") then
-			local itemId = frame:GetAttribute("itemId")
-			isUsable, notEnoughMana = code.IsUsableItem(itemId)
-			if (isUsable) then
-				-- Single use in combat potion hack
-				local _, _, enabled = C_Container.GetItemCooldown(itemId)
-				if (not enabled) then
-					isUsable = false
-				end
-			end
-		elseif (itemType == "spell") then
-			local spellName = frame:GetAttribute("spell")
-			isUsable, notEnoughMana = AB.IsUsableSpell(spellName)
-		elseif (itemType == "macro") then
-			isUsable = true
-		else
-			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-			return
-		end
+	if (not itemType) then
+		return
+	end
 
-		local oor = AutoBarDB2.settings.outOfRange or "none"
-		if (isUsable and (not frame.outOfRange or not (oor ~= "none"))) then
-			frame.icon:SetVertexColor(1.0, 1.0, 1.0)
-			frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-		elseif ((oor ~= "none") and frame.outOfRange) then
-			print("AutoBar.Class.BasicButton.prototype:UpdateUsable", oor)
-			if (oor == "button") then
-				frame.icon:SetVertexColor(0.8, 0.1, 0.1)
-				frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
-			else
-				frame.hotKey:SetVertexColor(0.8, 0.1, 0.1)
-				frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+	local isUsable
+
+	if (itemType == "item") then
+		local itemId = frame:GetAttribute("itemId")
+		isUsable = code.IsUsableItem(itemId)
+		if (isUsable) then
+			-- Single use in combat potion hack
+			local _, _, enabled = C_Container.GetItemCooldown(itemId)
+			if (not enabled) then
+				isUsable = false
 			end
-		elseif ((oor ~= "none") and notEnoughMana) then
-			frame.icon:SetVertexColor(0.1, 0.3, 1.0)
-		else
-			frame.icon:SetVertexColor(0.4, 0.4, 0.4)
 		end
+	elseif (itemType == "spell") then
+		local spellName = frame:GetAttribute("spell")
+		local notEnoughMana
+		isUsable, notEnoughMana = AB.IsUsableSpell(spellName)
+		isUsable = isUsable and (not notEnoughMana)
+	elseif (itemType == "macro") then
+		isUsable = true
+	else
+		frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+		frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+		return
+	end
+
+	if (isUsable) then
+		frame.icon:SetVertexColor(1.0, 1.0, 1.0)
+		frame.hotKey:SetVertexColor(1.0, 1.0, 1.0)
+	else
+		frame.icon:SetVertexColor(0.4, 0.4, 0.4)
 	end
 end
 
