@@ -891,9 +891,6 @@ end
 --/script DEFAULT_CHAT_FRAME:AddMessage("" .. tostring())
 --/print GetMouseFocus():GetName()
 
-function AutoBar.Print(_self, ...)
-	print(...)
-end
 
 local StupidLogEnabled = false
 
@@ -916,10 +913,10 @@ function AutoBar:DumpWarningLog()
 		return
 	end
 
-	AutoBar:Print("Warnings/Errors occured in AutoBar:")
+	print("Warnings/Errors occured in AutoBar:")
 
 	for _i, v in ipairs(AutoBar.warning_log) do
-		AutoBar:Print(v)
+		print(v)
 	end
 
 end

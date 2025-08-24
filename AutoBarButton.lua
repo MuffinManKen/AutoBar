@@ -37,11 +37,11 @@ local function AddItemToCategory(category, itemType, itemId, itemInfo)
 	local categoryInfo = AutoBarCategoryList[category]
 	local itemsListDB = categoryInfo.customCategoriesDB.items
 	local itemIndex = # itemsListDB + 1
---AutoBar:Print("AutoBarButton.prototype:DropLink " .. tostring(categoryInfo.description) .. "itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
+--print("AutoBarButton.prototype:DropLink " .. tostring(categoryInfo.description) .. "itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
 
 	for index = # itemsListDB, 1, -1 do
 		if(itemsListDB[index].itemId == itemId) then
-			AutoBar:Print("AutoBar: Item " .. itemInfo .. " already exists in Category " .. tostring(categoryInfo.description) .. " not adding it again");
+			print("AutoBar: Item " .. itemInfo .. " already exists in Category " .. tostring(categoryInfo.description) .. " not adding it again");
 			return
 		end
 	end
@@ -67,7 +67,7 @@ end
 function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
 
 	if(itemType == "item" and AB.PlayerHasToy(itemId)) then
-		AutoBar:Print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
+		print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
 		return;
 	end
 
@@ -105,7 +105,7 @@ function AutoBarButton.prototype:DropObject()
 	local toObject = self
 	local fromObject = AutoBar:GetDraggingObject()
 	local refreshNeeded
---AutoBar:Print("AutoBarButton.prototype:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
+--print("AutoBarButton.prototype:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
 	if (fromObject and fromObject ~= toObject and AutoBar.moveButtonsMode) then
 		AutoBar:ButtonMove(fromObject.parentBar.barKey, fromObject.order, toObject.parentBar.barKey, toObject.order)
 		AutoBar:BarButtonChanged()
@@ -118,7 +118,7 @@ function AutoBarButton.prototype:DropObject()
 				itemId = spell_id
 			end
 			if (itemType == "item" or itemType == "spell" or itemType == "macro") then
---AutoBar:Print("AutoBarButton.prototype:DropObject itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
+--print("AutoBarButton.prototype:DropObject itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
 				toObject:DropLink(itemType, itemId, itemInfo)
 				refreshNeeded = true
 				ClearCursor()
@@ -744,7 +744,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 					frame:SetAttribute("spell2", SPELL_FEED_PET)
 					frame:SetAttribute("target-bag2", bag)
 					frame:SetAttribute("target-slot2", slot)
---AutoBar:Print("AutoBarButton.prototype:SetupAttributes buttonKey " .. tostring(buttonKey) .. " bag ".. tostring(bag).. " slot " .. tostring(slot))
+--print("AutoBarButton.prototype:SetupAttributes buttonKey " .. tostring(buttonKey) .. " bag ".. tostring(bag).. " slot " .. tostring(slot))
 				else
 					frame:SetAttribute("unit2", "pet")
 				end
@@ -761,7 +761,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		if (itemsRightClick and itemsRightClick[itemId]) then
 			castSpell = itemsRightClick[itemId]
 			selfCastRightClick = false
---AutoBar:Print("AutoBarButton.prototype:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
+--print("AutoBarButton.prototype:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
 		end
 		-- Special spell to cast on RightClick
 		if (castSpell) then
@@ -840,7 +840,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			end
 		elseif (castSpell) then
 			-- Set castSpell as default if nothing else is available
---AutoBar:Print("AutoBarButton.prototype:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
+--print("AutoBarButton.prototype:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
 			frame:SetAttribute("type", "spell")
 			frame:SetAttribute("spell", castSpell)
 
@@ -879,7 +879,7 @@ end
 --
 
 --function AutoBarButton:SetTooltip(button)
---AutoBar:Print("SetTooltip " .. tostring(self.needsTooltip) .. " button " .. tostring(button) .. " button " .. tostring(button) .. " showTooltip " .. tostring(AutoBarDB2.settings.show_tooltip) .. " self.needsTooltip " .. tostring(self.needsTooltip))
+--print("SetTooltip " .. tostring(self.needsTooltip) .. " button " .. tostring(button) .. " button " .. tostring(button) .. " showTooltip " .. tostring(AutoBarDB2.settings.show_tooltip) .. " self.needsTooltip " .. tostring(self.needsTooltip))
 --	local isAutoBarButton = self.class and self.class.buttonDB
 --
 --	if (isAutoBarButton and self.GetHotkey) then
@@ -938,7 +938,7 @@ end
 --				print("GameTooltip_ShowCompareItem")
 --				GameTooltip_ShowCompareItem()
 --			end
----- /script local bag, slot = strmatch("3,4", "^(%d+)%s+(%d+)$"); AutoBar:Print("bag " .. tostring(bag).." slot " .. tostring(slot))
+---- /script local bag, slot = strmatch("3,4", "^(%d+)%s+(%d+)$"); print("bag " .. tostring(bag).." slot " .. tostring(slot))
 --		elseif (buttonType == "spell") then
 --			local spellName = self:GetAttribute("spell")
 --
@@ -1038,7 +1038,7 @@ function AutoBarButton.prototype:AddMacro(macroText, macroTexture)
 	self.macroText = macroText
 	self.macroTexture = macroTexture
 	local buttonKey = self.buttonDB.buttonKey
---AutoBar:Print("AutoBarButton.prototype:AddMacro RegisterMacro " .. tostring(buttonKey))
+--print("AutoBarButton.prototype:AddMacro RegisterMacro " .. tostring(buttonKey))
 	AutoBarSearch:RegisterMacro(buttonKey, nil, L[buttonKey], macroText)
 end
 
@@ -1054,7 +1054,7 @@ end
 --	local frame = self.frame
 --
 --	if (self.macroText and self.buttonDB.enabled) then
-----AutoBar:Print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
+----print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
 --		frame:Show()
 ----- ToDo, disable popup
 --		self:SetupAttributes(self, nil, nil, nil, self.buttonDB.buttonKey)
@@ -2183,7 +2183,7 @@ end
 
 local equipTrinket2String = "/equipslot " .. TRINKET2_SLOT .. " "
 function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
---AutoBar:Print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
+--print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
 
 	local _, equippedItemId = AB.ItemLinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 
@@ -2197,7 +2197,7 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 		button.macroTexture = macroTexture
 		local macroId = macroText
 		AutoBarSearch:RegisterMacro(macroId, nil, L["AutoBarButtonTrinket2"], macroText)
---AutoBar:Print("AutoBarButtonTrinket2.prototype:SetupAttributes macroId " .. tostring(macroId))
+--print("AutoBarButtonTrinket2.prototype:SetupAttributes macroId " .. tostring(macroId))
 		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, nil, nil, nil, macroId)
 	end
 end

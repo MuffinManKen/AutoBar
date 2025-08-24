@@ -123,7 +123,7 @@ function AutoBar.Class.Button.prototype:Disable()
 --	self.frame:SetAttribute("category", nil)
 --	self.frame:SetAttribute("itemId", nil)
 --	self.frame:Hide()
---AutoBar:Print("AutoBar.Class.Button.prototype:Disable " .. tostring(self.buttonName))
+--print("AutoBar.Class.Button.prototype:Disable " .. tostring(self.buttonName))
 end
 
 -- Return the name of the global frame of the button.  Keybinds are made to it.
@@ -144,7 +144,7 @@ function AutoBar.Class.Button:GetHotkey()
 	local frame = self
 	local key1 = GetBindingKey(frame.class.buttonName .. "_X")
 	local key = AB.LibKeyBound:ToShortKey(key1)
---AutoBar:Print("AutoBar.Class.Button.prototype:GetHotkey key1 " .. tostring(key1) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button.prototype:GetHotkey key1 " .. tostring(key1) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
 	return key
 end
 
@@ -162,9 +162,9 @@ function AutoBar.Class.Button:SetKey(key)
 --		SetOverrideBindingClick(AutoBar.frame, false, key, buttonFrameName)
 		local buttonBinding = button:GetButtonBinding()
 		if (buttonBinding) then
---AutoBar:Print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
 			SetBinding(key, buttonBinding)
---AutoBar:Print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " <- " .. tostring(GetBindingKey(buttonBinding)))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " <- " .. tostring(GetBindingKey(buttonBinding)))-- .. " buttonName " .. tostring(frame.class.buttonName))
 		end
 		button:BindingsUpdate()
 	end
@@ -203,10 +203,10 @@ function AutoBar.Class.Button.prototype:BindingsUpdate()
 	local buttonBinding = self:GetButtonBinding()
 	for i = 1, select('#', GetBindingKey(buttonBinding)) do
 		local hotKey = select(i, GetBindingKey(buttonBinding))
---AutoBar:Print("AutoBar.Class.Button.prototype:BindingsUpdate hotKey " .. tostring(hotKey) .. " buttonFrameName " .. tostring(buttonFrameName))
+--print("AutoBar.Class.Button.prototype:BindingsUpdate hotKey " .. tostring(hotKey) .. " buttonFrameName " .. tostring(buttonFrameName))
 		SetOverrideBindingClick(AutoBar.frame, false, hotKey, buttonFrameName)
 	end
---AutoBar:Print("AutoBar.Class.Button.prototype:BindingsUpdate -> buttonFrameName " .. tostring(buttonFrameName))
+--print("AutoBar.Class.Button.prototype:BindingsUpdate -> buttonFrameName " .. tostring(buttonFrameName))
 	self:UpdateHotkeys()
 end
 
@@ -218,7 +218,7 @@ end
 function AutoBar.Class.Button:UpdateBindings(buttonName, buttonFrameName)
 	local key1, key2 = GetBindingKey(buttonName .. "_X")
 	if (key1) then
---AutoBar:Print("AutoBar.Class.Button.prototype:UpdateBindings key1 " .. tostring(key1) .. " key2 " .. tostring(key2) .. " buttonName " .. tostring(buttonName))
+--print("AutoBar.Class.Button.prototype:UpdateBindings key1 " .. tostring(key1) .. " key2 " .. tostring(key2) .. " buttonName " .. tostring(buttonName))
 		SetOverrideBindingClick(AutoBar.frame, false, key1, buttonFrameName)
 	end
 	if (key2) then
@@ -328,7 +328,7 @@ end
 -- Handle a click on a popped up button
 function AutoBar.Class.Button.prototype.OnClick(object, button, down)
 	local self = object.class
---AutoBar:Print("OnClick " .. self.buttonName .. " " .. tostring(object) .. " object.class " .. tostring(object.class) .. " button " .. tostring(button) .. " down " .. tostring(down))
+--print("OnClick " .. self.buttonName .. " " .. tostring(object) .. " object.class " .. tostring(object.class) .. " button " .. tostring(button) .. " down " .. tostring(down))
 	if (down) then
 		object:SetChecked(1)
 		return true
@@ -350,17 +350,17 @@ function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewIt
 	end
 
 --	if (isNewItem) then
---AutoBar:Print("ShuffleItem isNewItem " .. " itemId " .. tostring(itemId) .. " itemCount " .. tostring(itemCount) .. " locked " .. tostring(locked))
+--print("ShuffleItem isNewItem " .. " itemId " .. tostring(itemId) .. " itemCount " .. tostring(itemCount) .. " locked " .. tostring(locked))
 --	end
 
 	if ((itemCount == 1 and totalCount > 1) or (not itemCount and totalCount > 0) or (isNewItem and totalCount > 0)) then
 		-- Shuffle in another stack
 		local index = AutoBarSearch.found:GetTotalSlots(itemId)
---AutoBar:Print("ShuffleItem start index " .. tostring(self.class.buttonName) .. " itemId " .. tostring(itemId) .. " index " .. tostring(index))
+--print("ShuffleItem start index " .. tostring(self.class.buttonName) .. " itemId " .. tostring(itemId) .. " index " .. tostring(index))
 		if (index and index > 0) then
 			repeat
 				local bag, slot, spell = AutoBarSearch.found:GetItemData(itemId, index)
---AutoBar:Print("ShuffleItem checking  index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
+--print("ShuffleItem checking  index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
 				if (bag and slot) then
 					local _, itemCount, locked = GetContainerItemInfo(bag, slot)
 					if (itemCount and itemCount > 0) then
@@ -368,12 +368,12 @@ function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewIt
 						PickupContainerItem(bag, slot)
 						PickupContainerItem(targetBag, targetSlot)
 						AutoBarSearch.found:ClearItemData(itemId, index)
---AutoBar:Print("ShuffleItem actually swapped index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " locked " .. tostring(locked) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
+--print("ShuffleItem actually swapped index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " locked " .. tostring(locked) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 						return true
 					end
 				end
 				index = index - 1
---AutoBar:Print("ShuffleItem done with  index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
+--print("ShuffleItem done with  index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
 			until index <= 0
 		else
 			-- Redo scan for item only then call ShuffleItem again
@@ -433,10 +433,10 @@ function AutoBar.Class.Button.prototype:PostClick(mouseButton, down)
 			if (IsConsumableItem(itemId) and targetBag and targetSlot) then
 				local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot)
 				if (not didShuffle) then
---AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick did not shuffle, switchItem itemId " .. tostring(itemId) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
+--print("\nAutoBar.Class.PopupButton.prototype:PostClick did not shuffle, switchItem itemId " .. tostring(itemId) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 					-- Switch to next item
 					--[[local didSwitch = ]] self:SwitchItem(itemId, targetBag, targetSlot)
---AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick didSwitch " .. tostring(didSwitch) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
+--print("\nAutoBar.Class.PopupButton.prototype:PostClick didSwitch " .. tostring(didSwitch) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 				end
 			end
 		end
@@ -578,7 +578,7 @@ function AutoBar.Class.Button.prototype:UpdateCooldown()
 		end
 	end
 end
---/script local start, duration, enabled = AB.GetSpellCooldown("Summon Water Elemental", BOOKTYPE_SPELL); AutoBar:Print("start " .. tostring(start) .. " duration " .. tostring(duration) .. " enabled " .. tostring(enabled))
+--/script local start, duration, enabled = AB.GetSpellCooldown("Summon Water Elemental", BOOKTYPE_SPELL); print("start " .. tostring(start) .. " duration " .. tostring(duration) .. " enabled " .. tostring(enabled))
 
 -- Set count for the button and popups if any
 function AutoBar.Class.Button.prototype:UpdateCount()
@@ -647,7 +647,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 					local nItems = # sortedItems
 					if (nItems > 1 and not noPopup) then
 						count = 1
---AutoBar:Print("AutoBar.Class.Button.prototype:IsActive nItems " .. tostring(nItems))
+--print("AutoBar.Class.Button.prototype:IsActive nItems " .. tostring(nItems))
 					end
 				end
 				if (self.frame:GetAttribute("type2") == "spell") then
@@ -883,7 +883,7 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOff()
 	if (self.buttonDB.hide or self.parentBar.sharedLayoutDB.hide) then
 		frame:Hide()
 	elseif (self:IsActive()) then
---AutoBar:Print("AutoBar.Class.Button.prototype:MoveButtonsModeOff self:IsActive() " .. tostring(self:IsActive()) .. " self.buttonName " .. tostring(self.buttonName))
+--print("AutoBar.Class.Button.prototype:MoveButtonsModeOff self:IsActive() " .. tostring(self:IsActive()) .. " self.buttonName " .. tostring(self.buttonName))
 		frame:Show()
 	else
 		frame:Hide()

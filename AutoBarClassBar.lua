@@ -32,14 +32,14 @@ end
 
 --local function onReceiveDragFunc(bar)
 --	local toObject = bar.class
-----AutoBar:Print("onReceiveDragFunc " .. tostring(toObject.barKey) .. " arg1 " .. tostring(arg1) .. " arg2 " .. tostring(arg2))
+----print("onReceiveDragFunc " .. tostring(toObject.barKey) .. " arg1 " .. tostring(arg1) .. " arg2 " .. tostring(arg2))
 --	toObject:DropObject()
 --end
 
 local FADEOUT_UPDATE_TIME = 0.1
 local function onUpdateFunc(button, elapsed)
 	local self = button.class
---AutoBar:Print("onUpdateFunc " .. tostring(self.barName) .. " elapsed " .. tostring(elapsed) .. " self.elapsed " .. tostring(self.elapsed))
+--print("onUpdateFunc " .. tostring(self.barName) .. " elapsed " .. tostring(elapsed) .. " self.elapsed " .. tostring(self.elapsed))
 	self.elapsed = self.elapsed + elapsed
 	if (self.fadeOutDelay) then
 		if (self.elapsed < self.fadeOutDelay) then
@@ -65,7 +65,7 @@ local Bar = AB.bar ---@class Bar
 -- Handle rearranging of buttons when buttonLock is off
 function Bar:DropObject()
 	local fromObject = AutoBar:GetDraggingObject()
---AutoBar:Print("Bar:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
+--print("Bar:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
 	if (fromObject and AutoBar.moveButtonsMode) then
 		local targetButton = # self.buttonList + 1
 		AutoBar:ButtonMove(fromObject.parentBar.barKey, fromObject.order, self.barKey, targetButton)
@@ -103,8 +103,8 @@ function Bar:init(p_bar_key)
 	self:UpdateObjects()
 end
 
---/script AutoBar:Print(tostring(AutoBar.barList["AutoBarClassBarExtras"].frame:GetAttribute("state")))
---/script AutoBar:Print(tostring(AutoBar.buttonList["AutoBarButtonFishing"].frame:GetAttribute("state")))
+--/script print(tostring(AutoBar.barList["AutoBarClassBarExtras"].frame:GetAttribute("state")))
+--/script print(tostring(AutoBar.buttonList["AutoBarButtonFishing"].frame:GetAttribute("state")))
 
 
 function Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKey, Colors)
@@ -121,7 +121,7 @@ function Bar:SkinChanged(SkinID, Gloss, Backdrop, barKey, buttonKey, Colors)
 		barLayoutDB.Backdrop = Backdrop
 		barLayoutDB.Colors = Colors
 	else
---AutoBar:Print("Bar:SkinChanged SkinID " .. tostring(SkinID) .. " barKey " .. tostring(barKey) .. " buttonKey " .. tostring(buttonKey))
+--print("Bar:SkinChanged SkinID " .. tostring(SkinID) .. " barKey " .. tostring(barKey) .. " buttonKey " .. tostring(buttonKey))
 		AutoBarDB2.skin.SkinID = SkinID
 		AutoBarDB2.skin.Gloss = Gloss
 		AutoBarDB2.skin.Backdrop = Backdrop
@@ -199,7 +199,7 @@ function Bar:UpdateSkin(SkinID)
 		local group = self.frame.MasqueGroup
 		group.SkinID = SkinID
 		group:Skin(group.SkinID, group.Backdrop, group.Gloss, group.Colors)
---AutoBar:Print("Bar:UpdateSkin SkinID " .. tostring(group.SkinID))
+--print("Bar:UpdateSkin SkinID " .. tostring(group.SkinID))
 	end
 end
 
@@ -305,7 +305,7 @@ function Bar:UpdateActive()
 	local activeIndex = 1
 	local maxActiveButtons = self.sharedLayoutDB.rows * self.sharedLayoutDB.columns
 
-	--AutoBar:Print("Bar:UpdateActive maxButtons " .. tostring(maxButtons))
+	--print("Bar:UpdateActive maxButtons " .. tostring(maxButtons))
 	for index = 1, maxButtons, 1 do
 		local button = self.buttonList[index]
 		if (button and button:IsActive()) then
@@ -331,7 +331,7 @@ function Bar:UpdateActive()
 
 	-- Ditch buttons in excess of rows * columns
 	if ((activeIndex - 1) > maxActiveButtons and not AutoBar.moveButtonsMode) then
-		--AutoBar:Print("Bar:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
+		--print("Bar:UpdateActive activeIndex " .. tostring(activeIndex - 1) .. " maxActiveButtons " .. tostring(maxActiveButtons) .. " = rows " .. tostring(self.sharedLayoutDB.rows) .. " columns " .. tostring(self.sharedLayoutDB.columns))
 		activeIndex = maxActiveButtons + 1
 	end
 
@@ -351,7 +351,7 @@ end
 
 
 function Bar:UpdateFadeOut()
---AutoBar:Print("Bar:OnUpdate self.sharedLayoutDB.fadeOut " .. tostring(self.sharedLayoutDB.fadeOut))
+--print("Bar:OnUpdate self.sharedLayoutDB.fadeOut " .. tostring(self.sharedLayoutDB.fadeOut))
 	if (self.sharedLayoutDB.fadeOut) then
 		local cancelFade = InCombatLockdown() and self.sharedLayoutDB.fadeOutCancelInCombat or self.frame:IsMouseOver() or IsShiftKeyDown() and self.sharedLayoutDB.fadeOutCancelOnShift or IsControlKeyDown() and self.sharedLayoutDB.fadeOutCancelOnCtrl or IsAltKeyDown() and self.sharedLayoutDB.fadeOutCancelOnAlt
 		for _, button in pairs(self.activeButtonList) do
@@ -496,7 +496,7 @@ function Bar:CreateDragFrame()
 		frame:GetNormalTexture():Hide()
 		code.ClearNormalTexture(frame)
 		self.dragFrame = frame
-	--AutoBar:Print(tostring(self.parentBar.frame) .. " ->  " .. tostring(frame) .. " button " .. tostring(name))
+	--print(tostring(self.parentBar.frame) .. " ->  " .. tostring(frame) .. " button " .. tostring(name))
 
 		frame.class = self
 		frame:EnableMouse(true)
@@ -575,7 +575,7 @@ function Bar:PositionLoad()
 	if (sharedPositionDB.stickToFrameName and _G[sharedPositionDB.stickToFrameName]) then
 		local stickToFrame = _G[sharedPositionDB.stickToFrameName]
 		AB.LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
---AutoBar:Print("Bar:PositionLoad " .. tostring(barDB.stickToFrameName))
+--print("Bar:PositionLoad " .. tostring(barDB.stickToFrameName))
 	else
 		if (not sharedLayoutDB.alignButtons) then
 			sharedLayoutDB.alignButtons = "3"
@@ -736,7 +736,7 @@ function Bar:RefreshButtonLayout()
 		frame = self.dragFrame
 		frame:ClearAllPoints()
 		local emptyColumns = columns - ((i - 1) % columns)
---AutoBar:Print("Bar:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
+--print("Bar:RefreshButtonLayout columns  " .. tostring(columns) .. " i  " .. tostring(i) .. " emptyColumns  " .. tostring(emptyColumns))
 		frame:SetWidth(pad_btn_width * emptyColumns)
 		frame:SetPoint(alignPoint, anchorFrame, alignPoint,
 						((i - 1) % columns) * signX * pad_btn_width + signX * padding + centerShiftX,
@@ -917,11 +917,11 @@ function Bar:OptionsReset()
 end
 
 function Bar:OptionsUpgrade()
---AutoBar:Print("Bar:OptionsUpgrade start")
+--print("Bar:OptionsUpgrade start")
 --	if (not AutoBarDB2.account.barListVersion) then
 --		AutoBarDB2.account.barListVersion = barListVersion
 --	elseif (AutoBarDB2.account.barListVersion < barListVersion) then
---AutoBar:Print("Bar:OptionsUpgrade AutoBarDB2.account.barListVersion " .. tostring(AutoBarDB2.account.barListVersion))
+--print("Bar:OptionsUpgrade AutoBarDB2.account.barListVersion " .. tostring(AutoBarDB2.account.barListVersion))
 --		AutoBarDB2.account.barListVersion = barListVersion
 --	end
 end

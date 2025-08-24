@@ -982,7 +982,7 @@ function AutoBar:RefreshButtonDBList()
 		buttonDBList[buttonKey] = AutoBar:GetButtonDB(buttonKey)
 	end
 end
---AutoBar:Print("AutoBar:RefreshButtonDBList<-- " .. tostring(buttonKey) .. " buttonDBList[buttonKey] " .. tostring(buttonDBList[buttonKey]))
+--print("AutoBar:RefreshButtonDBList<-- " .. tostring(buttonKey) .. " buttonDBList[buttonKey] " .. tostring(buttonDBList[buttonKey]))
 
 -- Populate AutoBar.unplacedButtonList with buttons that are not on a bar
 function AutoBar:RefreshUnplacedButtonList()
@@ -1141,9 +1141,9 @@ end
 function AutoBar:ButtonInsertNew(barDB, buttonDB)
 	for buttonDBIndex, buttonKey in ipairs(barDB.buttonKeys) do
 		if (buttonKey == buttonDB.defaultButtonIndex) then
---AutoBar:Print("AutoBar:ButtonInsertNew buttonDBIndex + 1 " .. tostring(buttonDBIndex + 1) .. " " .. tostring(buttonDB.buttonKey) .. " # barDB.buttonKeys " .. tostring(# barDB.buttonKeys))
+--print("AutoBar:ButtonInsertNew buttonDBIndex + 1 " .. tostring(buttonDBIndex + 1) .. " " .. tostring(buttonDB.buttonKey) .. " # barDB.buttonKeys " .. tostring(# barDB.buttonKeys))
 			table.insert(barDB.buttonKeys, buttonDBIndex + 1, buttonDB.buttonKey)
---AutoBar:Print("AutoBar:ButtonInsertNew # barDB.Buttons " .. tostring(# barDB.buttons))
+--print("AutoBar:ButtonInsertNew # barDB.Buttons " .. tostring(# barDB.buttons))
 			return nil
 		end
 	end
@@ -1153,7 +1153,7 @@ end
 -- /script AutoBar:BarsCompact()
 function AutoBar:BarsCompact()
 	for _bar_key, barDB in pairs(AutoBar.barButtonsDBList) do
---AutoBar:Print("AutoBar:BarsCompact barKey " .. tostring(barKey) .. " AutoBar.barLayoutDBList[barKey].buttonKeys " .. tostring(AutoBar.barLayoutDBList[barKey].buttonKeys))
+--print("AutoBar:BarsCompact barKey " .. tostring(barKey) .. " AutoBar.barLayoutDBList[barKey].buttonKeys " .. tostring(AutoBar.barLayoutDBList[barKey].buttonKeys))
 		local buttonKeys = barDB.buttonKeys
 		local badIndexMax = nil
 		local nKeys = 0
@@ -1208,7 +1208,7 @@ function AutoBar:ButtonPopulateNew(buttonDB)
 	end
 	newButtonDB.barKey = nil
 	newButtonDB.defaultButtonIndex = nil
---AutoBar:Print("AutoBar:ButtonPopulateNew " .. tostring(newButtonDB.buttonKey))
+--print("AutoBar:ButtonPopulateNew " .. tostring(newButtonDB.buttonKey))
 	return newButtonDB
 end
 
@@ -1239,7 +1239,7 @@ function AutoBar:PopulateBars()
 			elseif (type(buttonDB.defaultButtonIndex) == "string") then
 				-- "*" append, "~" do not place, "buttonKey" insert after the button
 				if (buttonDB.defaultButtonIndex == "*") then
---AutoBar:Print("AutoBar:PopulateBars # appendList + 1 " .. tostring(# appendList + 1) .. " " .. tostring(buttonDB.buttonKey) .. " buttonKey " .. tostring(buttonKey))
+--print("AutoBar:PopulateBars # appendList + 1 " .. tostring(# appendList + 1) .. " " .. tostring(buttonDB.buttonKey) .. " buttonKey " .. tostring(buttonKey))
 					appendList[# appendList + 1] = buttonDB
 				elseif (buttonDB.defaultButtonIndex == "~") then
 				else

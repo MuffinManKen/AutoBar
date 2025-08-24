@@ -3,7 +3,7 @@ function SearchSpace.prototype:Contains(id)
 	for itemId, _clientButtons in pairs(self.dataList) do
 		if (itemId == id) then
 			if (not AutoBarSearch.trace) then
-				AutoBar:Print("SearchSpace.prototype:Contains    itemId " .. tostring(itemId))
+				print("SearchSpace.prototype:Contains    itemId " .. tostring(itemId))
 			end
 			return true
 		end
@@ -17,7 +17,7 @@ function Items.prototype:Contains(id)
 		for itemId, _itemData in pairs(buttonItems) do
 			if (itemId == id) then
 				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Items.prototype:Contains    itemId " .. tostring(itemId))
+					print("Items.prototype:Contains    itemId " .. tostring(itemId))
 				end
 				return true
 			end
@@ -36,7 +36,7 @@ function CStuff:Contains(id)
 			if (itemId == id) then
 				contains = true
 				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Stuff.prototype:Contains    itemId " .. tostring(itemId).." at bag/slot " .. tostring(bag).." / " .. tostring(i))
+					print("Stuff.prototype:Contains    itemId " .. tostring(itemId).." at bag/slot " .. tostring(bag).." / " .. tostring(i))
 				end
 			end
 		end
@@ -46,7 +46,7 @@ function CStuff:Contains(id)
 		if (itemId == id) then
 			contains = true
 			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Stuff.prototype:Contains inventory    itemId " .. tostring(itemId))
+				print("Stuff.prototype:Contains inventory    itemId " .. tostring(itemId))
 			end
 		end
 	end
@@ -55,7 +55,7 @@ function CStuff:Contains(id)
 		if (itemId == id) then
 			contains = true
 			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Stuff.prototype:Contains spells    itemId " .. tostring(itemId))
+				print("Stuff.prototype:Contains spells    itemId " .. tostring(itemId))
 			end
 		end
 	end
@@ -67,7 +67,7 @@ function Found.prototype:Contains(id, count)
 	for itemId, itemData in pairs(self.dataList) do
 		if (itemId == id) then
 			if (not AutoBarSearch.trace) then
-				AutoBar:Print("Found.prototype:Contains    itemId " .. tostring(itemId))
+				print("Found.prototype:Contains    itemId " .. tostring(itemId))
 			end
 			if (count) then
 				local nItems = # itemData
@@ -97,7 +97,7 @@ function Current.prototype:Contains(id)
 		for itemId, itemData in pairs(buttonItems) do
 			if (itemId == id) then
 				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Current.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
+					print("Current.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
 				end
 				return true
 			end
@@ -112,7 +112,7 @@ function Sorted.prototype:Contains(itemId)
 		for _i, sortedItemData in ipairs(buttonItems) do
 			if (itemId == sortedItemData.itemId) then
 				if (not AutoBarSearch.trace) then
-					AutoBar:Print("Sorted.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
+					print("Sorted.prototype:Contains    itemId " .. tostring(itemId).." at buttonKey " .. tostring(buttonKey))
 				end
 				return true
 			end
@@ -124,7 +124,7 @@ end
 -- Testing & Debug function only
 function AutoBarSearch:Contains(itemId)
 	if (not AutoBarSearch.trace) then
-		AutoBar:Print("\n\n   AutoBarSearch:Contains: " .. tostring(itemId))
+		print("\n\n   AutoBarSearch:Contains: " .. tostring(itemId))
 	end
 	local contains = nil
 
@@ -171,7 +171,7 @@ function AutoBarSearch:Test()
 		assert(not AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Delete failed")
 		assert(not AutoBarSearch.space:Contains(4536), "AutoBarSearch.space:Delete failed")
 		AutoBarSearch.items:Add({4536, 6948, 4757}, 1, nil, 1)
---		AutoBar:Print("\n\n Items Added [1]")
+--		print("\n\n Items Added [1]")
 --		DevTools_Dump(AutoBarSearch.items:GetList(1))
 		assert(AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Add {4536, 6948, 4757} failed")
 		assert(AutoBarSearch.items:Contains(6948), "AutoBarSearch.items:Add {4536, 6948, 4757} failed")
@@ -298,35 +298,35 @@ function AutoBarSearch:Test()
 		assert(not AutoBarSearch.space:Contains(6948), "AutoBarSearch.space:Delete {4536, 6948, 4757} failed")
 
 --		AutoBarSearch.items:Populate()
---		AutoBar:Print("\n\n SearchSpace")
+--		print("\n\n SearchSpace")
 --		DevTools_Dump(AutoBarSearch.space:GetList())
 
 --		AutoBarSearch.items:Add({BS["Conjure Food"]}, 24, nil, 1)
 --		AutoBarSearch.stuff:ScanSpells()
---		AutoBar:Print("\n\n SearchSpace")
+--		print("\n\n SearchSpace")
 --		DevTools_Dump(AutoBarSearch.space:GetList())
 
 --		local bag0, bag1, bag2, bag3, bag4 = true, true, true, true, true
 --		AutoBarSearch.stuff:Scan(bag0, bag1, bag2, bag3, bag4)
 
---		AutoBar:Print("\n\n Stuff")
+--		print("\n\n Stuff")
 --		DevTools_Dump(AutoBarSearch.stuff:GetList())
 --
---		AutoBar:Print("\n\n Found")
+--		print("\n\n Found")
 --		DevTools_Dump(AutoBarSearch.found:GetList())
 --
---		AutoBar:Print("\n\n Current")
+--		print("\n\n Current")
 --		DevTools_Dump(AutoBarSearch.current:GetList(1))
 --
 --		AutoBarSearch.sorted:Update()
---		AutoBar:Print("\n\n Sorted")
+--		print("\n\n Sorted")
 --		DevTools_Dump(AutoBarSearch.sorted:GetList())
 
-		AutoBar:Print("AutoBarSearch:Test successful")
+		print("AutoBarSearch:Test successful")
 		AutoBarSearch:Reset()
 		UpdateAddOnMemoryUsage()
 		usedKB = GetAddOnMemoryUsage("AutoBar")
-		AutoBar:Print("usedKB = " .. usedKB)
+		print("usedKB = " .. usedKB)
 	end
 end
 --]]

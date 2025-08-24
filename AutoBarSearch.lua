@@ -361,7 +361,7 @@ function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 	if (debug) then code.log_warning("Found:Add", itemId, bag, slot, spell, "-->foundData:", code.Dump(self.dataList[itemId], 1), "space:", search_list[itemId]); end
 
 	local itemData = self.dataList[itemId]
---AutoBar:Print("Found:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell ")
+--print("Found:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell ")
 	if (not itemData) then
 		if (debug) then code.log_warning("   no itemData", search_list[itemId]); end
 		itemData = {}
@@ -397,7 +397,7 @@ function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 			itemData[i] = bag
 			itemData[i + 1] = slot
 			itemData[i + 2] = spell
---AutoBar:Print("Found:Add    itemId " .. tostring(itemId) .. " i " .. tostring(i) .. " bag " .. tostring(itemData[i]) .. " slot " .. tostring(itemData[i + 1]) .. " spell " .. tostring(itemData[i + 2]))
+--print("Found:Add    itemId " .. tostring(itemId) .. " i " .. tostring(i) .. " bag " .. tostring(itemData[i]) .. " slot " .. tostring(itemData[i + 1]) .. " spell " .. tostring(itemData[i + 2]))
 		end
 	end
 end
@@ -411,7 +411,7 @@ function AutoBarSearch.found:Delete(itemId, bag, slot, spell)
 		local i = 1
 		repeat
 			if (itemData[i] == bag and itemData[i + 1] == slot and itemData[i + 2] == spell) then
-				--AutoBar:Print("Found:Delete    itemData[i] " .. tostring(itemData[i]) .. " itemData[i + 1] " .. tostring(itemData[i + 1]) .. " itemData[i + 2] " .. tostring(itemData[i + 2]) .. " i " .. tostring(i))
+				--print("Found:Delete    itemData[i] " .. tostring(itemData[i]) .. " itemData[i + 1] " .. tostring(itemData[i + 1]) .. " itemData[i + 2] " .. tostring(itemData[i + 2]) .. " i " .. tostring(i))
 				-- Move rest back
 				local j = i
 				repeat
@@ -529,7 +529,7 @@ function Current:Purge(itemId)
 		local debug = false --(buttonKey == "AutoBarButtonHearth")
 		if (searchItems and searchItems[itemId]) then
 			self:Delete(buttonKey, itemId)
-			--AutoBar:Print("Current:Purge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
+			--print("Current:Purge    itemId " .. tostring(itemId) .. " buttonKey " .. tostring(buttonKey))
 			if (debug) then code.log_warning("Current:Purge itemId:", itemId); end
 			AutoBarSearch.sorted:Delete(buttonKey, itemId)
 		end
@@ -1082,7 +1082,7 @@ end
 
 -- Completely reset everything and then rescan.
 function AutoBarSearch:Reset()
---AutoBar:Print("AutoBarSearch:Reset Start")
+--print("AutoBarSearch:Reset Start")
 
 	AutoBarSearch:Empty()
 
@@ -1092,12 +1092,12 @@ function AutoBarSearch:Reset()
 	AutoBarSearch:ScanAll()
 	AutoBarSearch.sorted:Update()
 
---AutoBar:Print("AutoBarSearch:Reset End")
+--print("AutoBarSearch:Reset End")
 end
 
 -- Scan & sort based on current dirty lists
 function AutoBarSearch:UpdateScan()
---AutoBar:Print("AutoBarSearch:Reset Start")
+--print("AutoBarSearch:Reset Start")
 	-- ToDo: reimplement the dirty code and remove the below auto-dirtying stuff since it defeats the purpose
 	for i = 0, NUM_BAG_SLOTS, 1 do
 		AutoBarSearch.dirty.bags[i] = true
@@ -1110,7 +1110,7 @@ function AutoBarSearch:UpdateScan()
 
 	AutoBarSearch.sorted:DirtyButtons()
 	AutoBarSearch.sorted:Update()
---AutoBar:Print("AutoBarSearch:Reset End")
+--print("AutoBarSearch:Reset End")
 end
 
 
@@ -1228,7 +1228,7 @@ local function add_found_item(p_item_id, p_bag, p_slot)
 	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
 		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
 	end
---AutoBar:Print("Stuff:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
+--print("Stuff:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
 
 

@@ -488,7 +488,7 @@ function CustomCategory:ChangeName(newName)
 	if (not AutoBarCategoryList[newCategoryKey]) then
 		local oldCustomKey = self.customKey
 		self.customKey = newCategoryKey
---AutoBar:Print("CustomCategory:ChangeName oldCustomKey " .. tostring(oldCustomKey) .. " newCategoryKey " .. tostring(newCategoryKey))
+--print("CustomCategory:ChangeName oldCustomKey " .. tostring(oldCustomKey) .. " newCategoryKey " .. tostring(newCategoryKey))
 		AutoBarCategoryList[newCategoryKey] = AutoBarCategoryList[oldCustomKey]
 		AutoBarCategoryList[oldCustomKey] = nil
 		-- Update categoryValidateList
@@ -527,7 +527,7 @@ function CustomCategory:Refresh()
 				itemsIndex = AddSpellToCategory(self, itemDB.spellName, nil, itemsIndex)
 			end
 		elseif (itemType == "macro") then
---AutoBar:Print("CustomCategory:Refresh --> itemDB.itemInfo " .. tostring(itemDB.itemInfo) .. " itemDB.itemId " .. tostring(itemDB.itemId))
+--print("CustomCategory:Refresh --> itemDB.itemInfo " .. tostring(itemDB.itemInfo) .. " itemDB.itemId " .. tostring(itemDB.itemId))
 			if (not itemDB.itemInfo) then
 				itemDB.itemInfo = GetMacroInfo(itemId)
 			end
@@ -535,7 +535,7 @@ function CustomCategory:Refresh()
 				itemDB.itemId = GetMacroIndexByName(itemDB.itemInfo)
 				itemId = itemDB.itemId
 			end
---AutoBar:Print("CustomCategory:Refresh <-- itemDB.itemInfo " .. tostring(itemDB.itemInfo) .. " itemDB.itemId " .. tostring(itemDB.itemId))
+--print("CustomCategory:Refresh <-- itemDB.itemInfo " .. tostring(itemDB.itemInfo) .. " itemDB.itemId " .. tostring(itemDB.itemId))
 			local macroId = "macro" .. itemId
 			self.items[itemsIndex] = macroId
 			itemsIndex = itemsIndex + 1
@@ -988,5 +988,5 @@ end
 /dump AutoBarCategoryList["Spell.Crafting"].castList
 /dump AutoBarCategoryList["Consumable.Buff Group.Caster.Self"]
 /dump LibStub("LibPeriodicTable-3.1"):GetSetTable("Muffin.Elixir.Guardian")
-/script for itemId, value in LibStub("LibPeriodicTable-3.1"):IterateSet("Consumable.Buff Group.Caster.Self") do AutoBar:Print(itemId .. " " .. value); end
+/script for itemId, value in LibStub("LibPeriodicTable-3.1"):IterateSet("Consumable.Buff Group.Caster.Self") do print(itemId .. " " .. value); end
 --]]
