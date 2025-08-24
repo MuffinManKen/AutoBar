@@ -175,8 +175,12 @@ ABCode = {}
 ---@field frame Frame Frame used for keybinding and event handling
 ---@field current_player string Formatted as "Player - Realm"
 ---@field version string Version string of Addon as given by the TOC
----@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
+---@field moveButtonsMode boolean
+---@field char table The DB settings for the active character
+---@field class table The DB settings for the active character class
+---@field Class table This is where the various class definitions live.  TODO: Move it to AB.types
 ---@field ConfigToggle function Open the Config window if we're not in combat
+---@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
 AutoBar = {}
 
 
@@ -319,6 +323,7 @@ function AceConfigRegistry:NotifyChange(name) end
 
 ---@class AutoBarSettings
 ---@field show_empty_buttons boolean
+---@field self_cast_right_click boolean SelfCast using Right click
 local AutoBarSettings = {
     ["fade_out"] = false,
     ["log_memory"] = false,
