@@ -1275,6 +1275,7 @@ end
 
 if (ABGData.is_mainline_wow) then
 	--TODO: Clean up all this crap once I know it's working
+	--TODO: Would this nonsense be fixed by using IsSpellKnownOrOverridesKnown?
 	local function find_known_spell(p_list)
 		for _i, id in ipairs(p_list) do
 			if IsSpellKnown(id) then
