@@ -101,6 +101,25 @@ local function LDBOnClick(_clickedFrame, button)
 	end
 end
 
+function AutoBar_AddonCompartmentClick(_clickedFrame, button)
+	LDBOnClick(_clickedFrame, button)
+end
+
+function AutoBar_AddonCompartmentOnEnter(self, button)
+	GameTooltip:SetOwner(type(self) ~= "string" and self or button, "ANCHOR_LEFT");
+	GameTooltip:ClearLines();
+
+	for _i, text in ipairs(hintText) do
+		GameTooltip:AddLine(text)
+	end
+
+	GameTooltip:Show();
+end
+
+function AutoBar_AddonCompartmentOnLeave()
+	GameTooltip:Hide();
+end
+
 function AutoBar:InitializeOptions()
 
 	self:CreateOptionsAce3()

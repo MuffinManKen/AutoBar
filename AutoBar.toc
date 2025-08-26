@@ -17,6 +17,9 @@
 ## OptionalDeps: Ace3, LibKeyBound-1.0, LibPeriodicTable-3.1, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
 ## X-Embeds: LibKeyBound-1.0,  LibPeriodicTable-3.1, MuffinLibPTSets
 ## SavedVariables: AutoBarDB, AutoBarDB2
+## AddonCompartmentFunc: AutoBar_AddonCompartmentClick
+## AddonCompartmentFuncOnEnter: AutoBar_AddonCompartmentOnEnter
+## AddonCompartmentFuncOnLeave: AutoBar_AddonCompartmentOnLeave
 
 # Libraries
 embeds.xml
