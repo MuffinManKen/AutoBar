@@ -1,0 +1,79 @@
+## Interface: 50500
+## Title: AutoBarClassic
+## Author: MuffinManKen, Toadkiller (Original code)
+## Version: 4.04.2.00
+## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
+## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
+## Notes-koKR: 자동으로 물약, 음료, 음식등이 포함된 버튼을 제공하며 슬롯에 사용할 아이템을 별도로 추가할 수 있습니다. 이것은 액션 슬롯에 여유를 가져다 줄것입니다.
+## Notes-zhCN: 一组可配置的按钮，能自动从背包中寻找设定的物品供方便使用。
+## Notes-zhTW: 一組可配置的按鈕，能自動從背包中尋找設定的物品供方便使用。
+## Notes-esES: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
+## Notes-esMX: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
+## DefaultState: enabled
+## X-Category: Action Bars
+## X-Credits: Diablo for teaching us how to guzzle potions. Saien for first enabling guzzling in WoW.  Sayclub (Korean) | PDI175, lostcup (Chinese traditional and simplified) | Teodred, curexx (German), Cinedelle (French), shiftos (Spanish), StingerSoft (Russian)
+## OptionalDeps: Ace3, Ace2, LibKeyBound-1.0, LibPeriodicTable-3.1, LibStickyFrames-2.0, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
+## X-Embeds: Ace2, LibKeyBound-1.0,  LibPeriodicTable-3.1, LibStickyFrames-2.0, MuffinLibPTSets
+## SavedVariables: AutoBarDB, AutoBarDB2
+
+# Libraries
+embeds.xml
+
+libs/muffin_ui_toolkit.lua
+libs/muffin_whats_new.lua
+
+mop/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Food.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Misc.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Poison.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Potions.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
+mop/MuffinLibPTSets/LibPT-Muffin.Stones.lua
+
+AceGUIWidget-DragLink.lua
+
+AutoBarGlobals.lua
+
+mop/CachedSpellData_mop.lua
+mop/whats_new.lua
+
+# Localization
+locale/Locale-enUS.lua
+locale/Locale-deDE.lua
+locale/Locale-esES.lua
+locale/Locale-esMX.lua
+locale/Locale-frFR.lua
+locale/Locale-itIT.lua
+locale/Locale-koKR.lua
+locale/Locale-ptBR.lua
+locale/Locale-ruRU.lua
+locale/Locale-zhCN.lua
+locale/Locale-zhTW.lua
+locale/Locale-default.lua
+
+Bindings.lua
+
+
+Core.lua
+
+
+AutoBarDB.lua
+AutoBarOptions.lua
+AutoBarSearchUtil.lua
+AutoBarSearch.lua
+AutoBarClassBar.lua
+AutoBarClassBasicButton.lua
+AutoBarClassButton.lua
+AutoBarClassPopupButton.lua
+AutoBarButton.lua
+mop/AutoBarButton.lua
+AutoBarCategory.lua
+
+mop/ABCategoryData_mop.lua
+
+AutoBarConfig.lua
+
