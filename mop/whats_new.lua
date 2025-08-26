@@ -3,6 +3,5 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - TOC Bump
- - MoP: Adding Items.
+ - Initial MoP release (mostly thanks to Domekologe)
 ]] .. "|n"
