@@ -7,7 +7,7 @@
 		"zip_root" : "AutoBarClassic",
 		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace", "wow_defs.lua"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "AutoBarClassic_Cata.toc"],
+		"force_files" : ["AutoBarClassic.toc", "AutoBarClassic_Mists.toc"],
 		"force_dirs" : ["classic", "libs", "locale", "textures", "cata"],
 		"whats_new" : "classic/whats_new.lua",
 		"skip_ftp" : false,
@@ -15,31 +15,15 @@
 	}
 
 	],
-
-"cata" :
-	[
-	{
-		"toc_file" : "AutoBarClassic_Cata.toc",
-		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%.zip",
-		"zip_root" : "AutoBarClassic",
-		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace", "wow_defs.lua"],
-		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc", "AutoBarClassic_Cata.toc"],
-		"force_dirs" : ["classic", "libs", "locale", "textures", "cata"],
-		"whats_new" : "cata/whats_new.lua",
-		"skip_ftp" : false,
-		"curse_project_id" : 340094
-	}
-	],
 "mop" :
 	[
 	{
-		"toc_file" : "AutoBarClassic_mop.toc",
+		"toc_file" : "AutoBarClassic_Mists.toc",
 		"zip_path" : "D:/Projects/Build/AutoBarClassic_%VER%.zip",
 		"zip_root" : "AutoBarClassic",
 		"ignored_files" : [".gitignore", ".luacheckrc", "autobar.code-workspace", "wow_defs.lua"],
 		"ignored_suffixes" : [".bat", ".txt", ".json", ".md", ".toc", ".py", ".csv"],
-		"force_files" : ["AutoBarClassic.toc","AutoBarClassic_mop.toc"],
+		"force_files" : ["AutoBarClassic.toc","AutoBarClassic_Mists.toc"],
 		"force_dirs" : ["classic", "libs", "locale", "textures", "mop"],
 		"whats_new" : "mop/whats_new.lua",
 		"skip_ftp" : false,
