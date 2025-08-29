@@ -140,6 +140,8 @@ function AB.InitializeCategories()
 		"MAGE", code.get_spell_name_by_name("Teleport: Shattrath - Alliance"), code.get_spell_name_by_name("Portal: Shattrath - Alliance"),
 		"MAGE", code.get_spell_name_by_name("Teleport: Shattrath - Horde"), code.get_spell_name_by_name("Portal: Shattrath - Horde"),
 		"MAGE", code.get_spell_name_by_name("Teleport: Dalaran"), code.get_spell_name_by_name("Portal: Dalaran"),
+		"MAGE", code.get_spell_name_by_name("Teleport: Tol Barad - Alliance"), code.get_spell_name_by_name("Portal: Tol Barad - Alliance"),
+		"MAGE", code.get_spell_name_by_name("Teleport: Tol Barad - Horde"), code.get_spell_name_by_name("Portal: Tol Barad - Horde"),
 		"SHAMAN", code.get_spell_name_by_name("Astral Recall"), code.get_spell_name_by_name("Astral Recall"),
 		"WARLOCK", code.get_spell_name_by_name("Ritual of Summoning"), code.get_spell_name_by_name("Ritual of Summoning"),
 

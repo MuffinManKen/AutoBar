@@ -138,6 +138,14 @@ code.cache_spell_data(33690, "Teleport: Shattrath - Alliance");
 code.cache_spell_data(35715, "Teleport: Shattrath - Horde");
 code.cache_spell_data(53140, "Teleport: Dalaran");
 code.cache_spell_data(53142, "Portal: Dalaran");
+code.cache_spell_data(88342, "Teleport: Tol Barad - Alliance");
+code.cache_spell_data(88344, "Teleport: Tol Barad - Horde");
+code.cache_spell_data(88345, "Portal: Tol Barad - Alliance");
+code.cache_spell_data(88346, "Portal: Tol Barad - Horde");
+code.cache_spell_data(132621, "Teleport: Vale of Eternal Blossoms - Alliance");
+code.cache_spell_data(132627, "Teleport: Vale of Eternal Blossoms - Horde");
+code.cache_spell_data(132620, "Portal: Vale of Eternal Blossoms - Alliance");
+code.cache_spell_data(132626, "Portal: Vale of Eternal Blossoms - Horde");
 --#endregion
 
 --#region Paladin
