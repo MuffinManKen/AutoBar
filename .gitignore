@@ -2,3 +2,8 @@ autobar.ZIGGY.Ken.pui
 autobar.ctag
 __pycache__/
 locale.csv
+tools/miner_*.log
+tools/wowhead_cache_*.json
+tools/wowhead_cache_*.pkl
+tools/wowhead_tooltip_cache_*.json
+tools/wowhead_tooltip_cache_*.pkl

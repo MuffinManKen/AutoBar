@@ -1,0 +1,440 @@
+<SetFile data_path="D:/Projects/Current/WoW/MuffinLibPTSets/mop" url_root="https://www.wowhead.com/mop-classic/">
+
+	<Set name="Muffin.Battle Pet Items.Level">
+		<Inclusion ftype="wowhead" url="consumable-items/name:battle-training+stone" />
+	</Set>
+	<Set name="Muffin.Battle Pet Items.Upgrade">
+		<Inclusion ftype="wowhead" url="consumable-items/name:battle-stone" />
+	</Set>
+	<Set name="Muffin.Battle Pet Items.Bandages">
+		<Inclusion ftype="wowhead" url="consumable-items/name:pet+bandage" />
+	</Set>
+	<Set name="Muffin.Battle Pet Items.Pet Treat">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;battle+pet+experience+gained+is+increased" />
+	</Set>
+
+	<Set name="Muffin.Drum.Haste">
+		<Inclusion ftype="wowhead" url="items/consumables/other/name:drum/quality:2?filter=107;0;haste" />
+	</Set>
+
+
+	<Set name="Muffin.Elixir.Battle">
+		<Inclusion ftype="wowhead" url="battle-elixirs" />
+	</Set>
+	<Set name="Muffin.Elixir.Guardian">
+		<Inclusion ftype="wowhead" url="guardian-elixirs" />
+	</Set>
+
+
+	<Set name="Muffin.Explosives">
+		<Inclusion ftype="wowhead" url="consumables/name:bomb" />
+		<Inclusion ftype="wowhead" url="consumables/name:dynamite" />
+		<Inclusion ftype="wowhead" url="consumables/name:charge" />
+		<Inclusion ftype="wowhead" url="consumables/name:explosive" />
+		<Inclusion ftype="wowhead" url="consumables/name:grenade" />
+		<Inclusion ftype="wowhead" url="consumables/name:land+mine" />
+		<Inclusion ftype="wowhead" url="consumables/name:mortar" />
+		<Inclusion ftype="wowhead" url="consumables/name:big+one" />
+		<Inclusion ftype="wowhead" url="consumables/name:blastpack" />
+		<Inclusion ftype="wowhead" url="consumables/name:big+daddy" />
+		<Inclusion ftype="wowhead" url="consumables/name:landshark" />
+		<Inclusion ftype="wowhead" url="consumables/name:rocket" />
+		<Inclusion ftype="wowhead" url="consumables/name:powderkeg" />
+		<Inclusion ftype="wowhead" url="consumables/name:seaforium" />
+	</Set>
+
+	<Set name="Muffin.Flask">
+		<Inclusion ftype="wowhead" url="flasks" />
+		<Inclusion ftype="wowhead" url="potions?filter=107;0;counts+as+both" />
+	</Set>
+
+	<Set name="Muffin.Food.Health.Basic">
+		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+	</Set>
+	<Set name="Muffin.Food.Mana.Basic">
+		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+	</Set>
+	<Set name="Muffin.Food.Combo.Basic">
+		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health+mana" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
+	</Set>
+	<Set name="Muffin.Food.Health.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health:well+fed" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+	</Set>
+	<Set name="Muffin.Food.Mana.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;mana:well+fed" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+	</Set>
+	<Set name="Muffin.Food.Combo.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health+mana:well+fed" />
+	</Set>
+
+	<Set name="Muffin.Garrison.Misc">
+		<Inclusion ftype="static">
+			<Item id="118897" name="Miner's Coffee" />			<Item id="118903" name="Preserved Mining Pick" />
+			<Item id="114120" name="Big Crate of Salvage" />	<Item id="114119" name="Crate of Salvage" />
+			<Item id="114116" name="Bag of Salvaged Goods" />	<Item id="139593" name=" Sack of Salvaged Goods" />
+			<Item id="140590" name=" Large Crate of Salvage"/>	<Item id="139594" name=" Salvage Crate" />
+			<Item id="113991" name="Iron Trap" />					<Item id="115009" name="Improved Iron Trap" />
+			<Item id="115010" name="Deadly Iron Trap" />
+			<Item id="120302" name="Weapon Enhancement Token" /><Item id="120301" name="Armor Enhancement Token" />
+			<Item id="128313" name="Huge Ogre Cache" />			<Item id="128316" name="Bulging Barrel of Oil" />
+			<Item id="122514" name=" Mission Completion Orders" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Garrison.Gearworks">
+		<Inclusion ftype="static">
+			<Item id="115530" name="NUKULAR Target Painter" />		<Item id="114983" name="Sticky Grenade Launcher" />
+			<Item id="119158" name="Robo-Rooster" />
+			<Item id="114246" name="Skyterror" />						<Item id="114744" name="Sentry Turret" />
+			<Item id="114924" name="Chopper" />							<Item id="114925" name="Hog" />
+			<Item id="114244" name="Jetpack" />							<Item id="114633" name="Guided Rocket" />
+			<Item id="119436" name="Siege Engine" />					<Item id="119437" name="Demolisher" />
+			<Item id="114974" name="Pneumatic Gauntlet" />			<Item id="114975" name="Pneumatic Gauntlet" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Garrison.Rush Order">
+		<Inclusion ftype="wowhead" url="other-miscellaneous-items/name:rush+order" />
+	</Set>
+
+	<Set name="Muffin.Gear.Trinket.Usable">
+		<Inclusion ftype="wowhead" url="items/armor/trinkets?filter=62;1;0"/>
+	</Set>
+	<Set name="Muffin.Gear.Trinket.Nonusable">
+		<Inclusion ftype="wowhead" url="trinkets"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" />
+	</Set>
+
+	<Set name="Muffin.Misc.Hearth">
+		<Inclusion ftype="wowhead" url="items/miscellaneous?filter=107;0;hearthstone+location" />
+	</Set>
+	
+	<Set name="Muffin.Misc.Openable">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="items/miscellaneous/quality:0:1?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="items/miscellaneous/quality:2:3:4:5:6:7:8?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="trade-goods?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="quest-items?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="miscellaneous-armor?filter=11;1;0" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+container" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+nightmare+pod" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+bag" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+clam" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+soulbound+item" />
+		<Inclusion ftype="wowhead" url="items/name:cache+of+treasures" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+class+set+item" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+broken+isles+item" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;create+an+uncommon" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+soulbound+relic" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;what+is+inside" />
+	</Set>
+	<Set name="Muffin.Misc.Quest">
+		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="(use:|equip:)" />
+		<Exclusion ftype="static">
+			<Item id="180817" name="Cypher of Relocation" />
+		</Exclusion>
+		<Inclusion ftype="static">
+			<Item id="180008" name="Resonating Anima Core" />
+			<Item id="180009" name="Resonating Anima Mote" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Misc.StartsQuest">
+		<Inclusion ftype="wowhead" url="items/min-level:1/max-level:1?filter=6;1;0" />
+		<Inclusion ftype="wowhead" url="items/min-level:2?filter=6;1;0" />
+	</Set>
+	<Set name="Muffin.Misc.Reputation">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;grants+reputation" />
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increase+your+reputation" />
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increase+reputation+with" />
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increasing+reputation+with" />
+	</Set>
+	<Set name="Muffin.Misc.Repair">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+target+item" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+a+piece" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repairs+equipment" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+damaged+item" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+their+gear" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repairing+for_anyone" />
+	</Set>
+
+	<Set name="Muffin.Mounts.Deathknight">
+		<Inclusion ftype="static">
+			<Spell id="48778" name="Acherus Deathcharger" />
+			<Spell id="54729" name="Winged Steed of the Ebon Blade" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Mounts.Demonhunter"/>
+	<Set name="Muffin.Mounts.Druid"/>
+	<Set name="Muffin.Mounts.Evoker"/>
+	<Set name="Muffin.Mounts.Hunter"/>
+	<Set name="Muffin.Mounts.Mage"/>
+	<Set name="Muffin.Mounts.Monk"/>
+	<Set name="Muffin.Mounts.Paladin">
+		<Inclusion ftype="static">
+			<Spell id="23214" name="Summon Charger" />
+			<Spell id="73629" name="Summon Exarch's Elekk" />
+			<Spell id="73630" name="Summon Great Exarch's Elekk" />
+			<Spell id="69826" name="Summon Great Sunwalker Kodo" />
+			<Spell id="69820" name="Summon Sunwalker Kodo" />
+			<Spell id="34767" name="Summon Thalassian Charger" />
+			<Spell id="34769" name="Summon Thalassian Warhorse" />
+			<Spell id="13819" name="Summon Warhorse" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Mounts.Priest">
+		<Inclusion ftype="static">
+			<Spell id="229377" name="High Priest's Lightsworn Seeker" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Mounts.Rogue"/>
+	<Set name="Muffin.Mounts.Shaman"/>
+	<Set name="Muffin.Mounts.Warlock">
+		<Inclusion ftype="static">
+			<Spell id="5784" name="Felsteed" />
+			<Spell id="23161" name="Dreadsteed" />
+			<Spell id="238452" name="Netherlord's Brimstone Wrathsteed" />
+			<Spell id="238454" name="Netherlord's Accursed Wrathsteed" />
+			<Spell id="232412" name="Netherlord's Chaotic Wrathsteed" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Mounts.Warrior"/>
+
+	<Set name="Muffin.Order Hall.Ancient Mana">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;ancient+mana" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="(gain \d+ ancient mana|Increase the maximum amount of Ancient Mana)" />
+	</Set>
+	<Set name="Muffin.Order Hall.Artifact Power">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;granting+artifact+power" />
+		<Inclusion ftype="wowhead" url="other-consumables?filter=107;0;read+to+gain+new+knowledge+about+your+artifact" />
+	</Set>
+	<Set name="Muffin.Order Hall.Buff">
+		<Inclusion ftype="static">
+			<Item id="139447" name="Vial of Pure Light" />		<Item id="139459" name="Blessing of the Light" />
+			<Item id="139449" name="Essence of the Naaru" />	<Item id="139452" name="Essence of the Light" />
+			<Item id="139448" name="Vial of Dark Shadows" />	<Item id="139450" name="Void Sphere" />
+			<Item id="139451" name="Swirling Void Potion" />	<Item id="139461" name="Rune of Darkness" />
+
+			<Item id="141964" name="Flaming Demonheart" />		<Item id="141965" name="Shadowy Demonheart" />
+			<Item id="141966" name="Coercive Demonheart" />		<Item id="141967" name="Whispering Demonheart" />
+			<Item id="141968" name="Immense Demonheart" />
+
+			<Item id="140295" name="Badgercharm Brew" />			<Item id="140293" name="Exploding Cask" />
+			<Item id="140282" name="Tumblerun Brew" />			<Item id="140291" name="Featherfoot Brew" />
+			<Item id="140290" name="Seastrider Brew" />			<Item id="140289" name="Lungfiller Brew" />
+			<Item id="140288" name="Bubblebelly Brew" />			<Item id="140256" name="Skysinger Brew" />
+			<Item id="140253" name="Swiftpad Brew" />
+
+			<Item id="141961" name="Soul Flame of Rejuvenation" />	<Item id="141962" name="Soul Flame of Castigation" />
+			<Item id="141958" name="Soul Flame of Fortification" />	<Item id="141960" name="Soul Flame of Insight" />
+			<Item id="141959" name="Soul Flame of Alacrity" />
+
+			<Item id="139502" name="Reins of the Deathcharger" />
+
+			<Item id="139505" name="Reins of the Charger" />
+
+			<Item id="140439" name="Sunblossom Pollen" />			<Item id="140397" name=" G'Hanir's Blossom " />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Order Hall.Champion">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;increases+a+champion%27s+power+level+by" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;set+a+champion%27s+power+level+to" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;use+this+item+to+grant+xp+directly+to+a+champion" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;equip+a+champion+with" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;target+one+of+your+troops" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;target+one+of+your+champions" />
+	</Set>
+	<Set name="Muffin.Order Hall.Nethershard">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;gain+nethershards" />
+	</Set>
+	<Set name="Muffin.Order Hall.Order Resources">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;gain+order+resources" />
+	</Set>
+	<Set name="Muffin.Order Hall.Troop Recruit">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;to+accompany+your+champions+on+missions" />
+	</Set>
+
+	<Set name="Muffin.Stones.Health">
+		<Inclusion ftype="wowhead" url="items/consumables/other/name:healthstone" />
+	</Set>
+	<Set name="Muffin.Stones.Mana">
+		<Inclusion ftype="static">
+			<Item id="36799" name="Mana Gem" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Potion.Health">
+		<Inclusion ftype="wowhead" url="potions?filter=107;0;restores+health" />
+		<Inclusion ftype="wowhead" url="potions?filter=107;0;heals+you+for" />
+		<Exclusion ftype="wowhead" url="potions?filter=107;0;mana" />
+	</Set>
+	<Set name="Muffin.Potion.Mana">
+		<Inclusion ftype="wowhead" url="potions?filter=107;0;restores+mana" />
+		<Exclusion ftype="wowhead" url="potions?filter=107;0;health" />
+	</Set>
+	<Set name="Muffin.Potion.Combo">
+		<Inclusion ftype="wowhead" url="potions?filter=107;0;restores+health" />
+		<Intersect  ftype="wowhead" url="potions?filter=107;0;restores+mana" />
+	</Set>
+	<Set name="Muffin.Potion.Buff">
+		<Inclusion ftype="wowhead" url="potions" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="increases{0,1} your" />
+	</Set>
+	<Set name="Muffin.Potion.Rage">
+		<Inclusion ftype="wowhead" url="potions/name:rage" />
+	</Set>
+	<Set name="Muffin.Potion.Water Breathing">
+		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;breathe+water" />
+	</Set>
+
+	<Set name="Muffin.Skill.Archaeology.Crate">
+		<Inclusion ftype="wowhead" url="other-miscellaneous-items?filter=107;0;carefully+crate+the+restored+artifact" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="this item begins a quest" />
+	</Set>
+	<Set name="Muffin.Skill.Archaeology.Lodestone">
+		<Inclusion ftype="wowhead" url="other-miscellaneous-items?filter=107;0;digsite" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="teleports you" />
+	</Set>
+	<Set name="Muffin.Skill.Archaeology.Map">
+		<Inclusion ftype="wowhead" url="other-miscellaneous-items?filter=107;0;digsite" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="randomizes your" />
+	</Set>
+	<Set name="Muffin.Skill.Archaeology.Mission">
+		<Inclusion ftype="static">
+			<Item id="122606" name="Explorer's Notebook" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Skill.Archaeology.Summon">
+		<Inclusion ftype="static">
+			<Item id="146328" name="Petrified Wyrmtongue" />
+		</Inclusion>
+	</Set>
+
+
+	<Set name="Muffin.Skill.Fishing.Bait">
+		<Inclusion ftype="wowhead" url="items/consumables/name:bait"/>
+		<Inclusion ftype="wowhead" url="items/consumables?filter=107;0;fish+coins"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use:" />
+	</Set>
+	<Set name="Muffin.Skill.Fishing.Lure">
+		<Inclusion ftype="wowhead" url="items/consumables/item-enhancements-temporary?filter=107;0;increases+fishing"/>
+	</Set>
+	<Set name="Muffin.Skill.Fishing.Pole">
+		<Inclusion ftype="wowhead" url="items/weapons/fishing-poles"/>
+	</Set>
+	<Set name="Muffin.Skill.Fishing.Misc">
+		<Inclusion ftype="static">
+			<Item id="141975" name="Mark of Aquaos" />
+			<Item id="138448" name="emblem of margoss" />
+			<Item id="133723" name="stunned angry shark" />
+			<Item id="133704" name="Rusty Queenfish Brooch" />
+			<Item id="133719" name="Sleeping Murloc" />
+			<Item id="133708" name="Drowned Thistleleaf" />
+			<Item id="133703" name="Pearlescent Conch" />
+			<Item id="133711" name="Swollen Murloc Egg" />
+			<Item id="133702" name="Aromatic murloc slime" />
+			<Item id="133715" name="Ancient Vrykul Ring" />
+			<Item id="133716" name="Soggy Drakescale" />
+			<Item id="133705" name="Rotten Fishbone" />
+			<Item id="133713" name="Moosehorn Hook" />
+			<Item id="107950" name="Bipsi's Bobbing Berg" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Herbs.Millable">
+		<Inclusion ftype="wowhead" url="items/trade-goods/herbs"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" /> <!-- Ignore "usables" since those are fragments that need to be combined -->
+	</Set>
+
+	<Set name="Muffin.Covenant.Anima">
+		<Inclusion ftype="wowhead" url="items/miscellaneous/other?filter=107;0;infuse+stored+anima"/>
+	</Set>
+	<Set name="Muffin.Covenant.Conduit">
+		<Inclusion ftype="wowhead" url="items/consumables/other?filter=107;0;Add+this+Conduit+to+your+collection"/>
+	</Set>
+	<Set name="Muffin.Covenant.Wildseed">
+		<Inclusion ftype="wowhead" url="items/consumables?filter=107;0;Infuse+a+Wildseed+of+Regrowth"/>
+	</Set>
+
+
+	<Set name="Muffin.Toys.Portal.Engineer">
+		<Inclusion ftype="wowhead" url="items/name:wormhole?filter=216;1;0"/>
+		<Inclusion ftype="wowhead" url="items/name:wyrmhole?filter=216;1;0"/>
+		<Inclusion ftype="wowhead" url="items/name:transporter?filter=216;1;0"/>
+		<Inclusion ftype="wowhead" url="items/name:dimensional+ripper?filter=216;1;0"/>
+	</Set>
+	<Set name="Muffin.Toys.Hearth">
+		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:hearthstone+location"/>
+		<Inclusion ftype="static">
+			<Item id="140192" name="Dalaran Hearthstone" />
+			<Item id="110560" name="Garrison Hearthstone" />
+		</Inclusion>
+
+	</Set>
+	<Set name="Muffin.Toys.Fishing.Bobbers">
+		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:bobber"/>
+	</Set>
+	<Set name="Muffin.Toys.Everything">
+		<Inclusion ftype="wowhead" url="items/min-level:1/max-level:1?filter=216;1;0"/>
+		<Inclusion ftype="wowhead" url="items/min-level:2?filter=216;1;0"/>
+	</Set>
+
+
+	<Set name="Muffin.Achievements.Source.PvP">
+		<Inclusion ftype="wowhead" url="achievements/character-achievements?filter=2;1;0"/>
+	</Set>
+
+
+	<Set name="Muffin.ItemEnchant.Permanent">
+		<Inclusion ftype="wowhead" url="items/consumables/item-enhancements-permanent"/>
+		<Inclusion ftype="wowhead" url="items/name:enchant+bracer">
+			<Test field="name" pattern="Enchant Bracers?" />
+		</Inclusion>
+		<Inclusion ftype="wowhead" url="items/name:enchant+ring">
+			<Test field="name" pattern="Enchant Ring" />
+		</Inclusion>
+		<Inclusion ftype="wowhead" url="items/name:enchant+chest">
+			<Test field="name" pattern="Enchant Chest" />
+		</Inclusion>
+		<Inclusion ftype="wowhead" url="items/name:enchant+weapon">
+			<Test field="name" pattern="Enchant Weapon" />
+		</Inclusion>
+
+		<Inclusion ftype="wowhead" url="items/name:enchant+tool">
+			<Test field="name" pattern="Enchant Tool" />
+		</Inclusion>
+		<Exclusion ftype="wowhead" url="items/recipes/enchanting" />
+	</Set>
+	<Set name="Muffin.ItemEnchant.Temporary">
+		<Inclusion ftype="wowhead" url="items/consumables/item-enhancements-temporary"/>
+	</Set>
+
+	<Set name="Muffin.Bandages.Basic">
+		<Inclusion ftype="wowhead" url="items/consumables/bandages"/>
+	</Set>
+
+</SetFile>
+
+
+
+
+<!-- Patterns to convert static definition from C# miner to this one
+new t_item_tuple\(\-?([0-9]+)\),\s*\/\*([\-a-zA-Z ']+)\*\/
+<Item id="\1" name="\2" />
+-->
+
+<!--
+
+Hearth item: Cypher of Relocation (180817) (Maw-only)
+
+
+-->
+

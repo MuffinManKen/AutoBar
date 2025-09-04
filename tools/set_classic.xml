@@ -1,0 +1,154 @@
+<SetFile url_root="https://classic.wowhead.com/">
+
+	<Set name="Muffin.Elixir.Battle">
+		<Inclusion ftype="wowhead" url="battle-elixirs" />
+	</Set>
+	<Set name="Muffin.Elixir.Guardian">
+		<Inclusion ftype="wowhead" url="guardian-elixirs" />
+	</Set>
+	<Set name="Muffin.Flask">
+		<Inclusion ftype="wowhead" url="flasks" />
+		<Exclusion ftype="static">
+			<Item id="2593" name="Flask of Stormwind Tawny" />
+		</Exclusion>
+	</Set>
+
+	<Set name="Muffin.Explosives">
+		<Inclusion ftype="wowhead" url="explosives" />
+	</Set>
+
+	<Set name="Muffin.Misc.Hearth">
+		<Inclusion ftype="wowhead" url="items/miscellaneous?filter=107;0;hearthstone+location" />
+		<Exclusion ftype="static">
+			<Item id="2593" name="Flask of Stormwind Tawny" />
+		</Exclusion>
+		<Inclusion ftype="static">
+			<Item id="227925" name="Beacon of Hydraxis" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Misc.Quest">
+		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use" />
+	</Set>
+
+	<Set name="Muffin.Misc.StartsQuest">
+		<Inclusion ftype="wowhead" url="items?filter=6;1;0" />
+	</Set>
+	<Set name="Muffin.Misc.Reputation">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;reputation" />
+	</Set>
+	<Set name="Muffin.Misc.Openable">
+		<Inclusion ftype="wowhead" url="items?filter=11;1;0" />
+	</Set>
+
+	<Set name="Muffin.Food.Health.Basic">
+		<Inclusion ftype="wowhead" url="consumables?filter=107;0;must+remain+seated"/>
+		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+		<Exclusion ftype="wowhead" url="consumables?filter=107;0;mana"/>
+		<Exclusion ftype="wowhead" url="consumables?filter=107;0;become+well+fed"/>
+	</Set>
+	<Set name="Muffin.Food.Mana.Basic">
+		<Inclusion ftype="wowhead" url="consumables?filter=107;0;must+remain+seated"/>
+		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;must+remain+seated" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;become+well+fed" />
+		<Exclusion ftype="wowhead" url="consumables?filter=107;0;become+well+fed"/>
+		<Exclusion ftype="wowhead" url="consumables?filter=107;0;health"/>
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+	</Set>
+	<Set name="Muffin.Food.Combo.Basic">
+		<Inclusion ftype="wowhead" url="consumables?filter=107;0;must+remain+seated"/>
+		<Inclusion ftype="wowhead" url="food-and-drinks" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;become+well+fed" />
+	</Set>
+
+	<Set name="Muffin.Food.Health.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health:well+fed" />
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health:increases+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+	</Set>
+	
+	<Set name="Muffin.Food.Mana.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;mana:well+fed" />
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;mana:increases+your" />
+		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+	</Set>
+	
+	<Set name="Muffin.Food.Combo.Buff">
+		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health+mana:well+fed" />
+	</Set>
+
+	<Set name="Muffin.Stones.Mana">
+		<Inclusion ftype="static">
+			<Item id="5514" name="Mana Agate" />
+			<Item id="5513" name="Mana Jade" />
+			<Item id="8007" name="Mana Citrine" />
+			<Item id="8008" name="Mana Ruby" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Stones.Health">
+		<Inclusion ftype="wowhead" url="items/name:healthstone" />
+	</Set>
+	<Set name="Muffin.Mounts.Item">
+		<Inclusion ftype="wowhead" url="mount-items" />
+	</Set>
+
+	<Set name="Muffin.Mounts.Paladin">
+		<Inclusion ftype="static">
+			<Spell id="23214" name="Summon Charger" />
+			<Spell id="13819" name="Summon Warhorse" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Mounts.Warlock">
+		<Inclusion ftype="static">
+			<Spell id="23161" name="Summon Dreadsteed" />
+			<Spell id="5784" name="Summon Felsteed" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Poison.Lethal">
+		<Inclusion ftype="wowhead" url="temporary-item-enhancements/name:poison">
+			<Test field="name" pattern="Deadly|Instant" />
+		</Inclusion>
+	</Set>
+	<Set name="Muffin.Poison.Nonlethal">
+		<Inclusion ftype="wowhead" url="temporary-item-enhancements/name:poison">
+			<Test field="name" pattern="Crippling|wound|mind-numbing" />
+		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Gear.Trinket.Usable">
+		<Inclusion ftype="wowhead" url="trinkets"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use:" />
+	</Set>
+	<Set name="Muffin.Gear.Trinket.Nonusable">
+		<Inclusion ftype="wowhead" url="trinkets"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" />
+	</Set>
+
+	<Set name="Muffin.Skill.Fishing.Pole">
+		<Inclusion ftype="wowhead" url="items/weapons/fishing-poles"/>
+	</Set>
+	<Set name="Muffin.Skill.Fishing.Rare Fish.Legion">
+		<Inclusion ftype="static">
+		</Inclusion>
+	</Set>
+
+</SetFile>
+
+
+<!--
+Regex test data:
+Use: Restores 4410 mana over 30 sec.  Must remain seated while drinking. Also increases your Spirit by 10 for 10 min.
+Use: Restores 874.8 health over 27 sec.  Must remain seated while eating.
+Use: Restores 4410 health and 4410 mana over 30 sec.  Must remain seated while eating.
+Use: Restores 874.8 health over 27 sec.   Must remain seated while eating.   If you eat for 10 seconds will also increase your Agility by 10 for 10 min.
+Use: Restores 1933.2 health over 27 sec.  Must remain seated while eating. Also increases your Strength by 10 for 10 min.
+Use: Restores 2148 health over 30 sec.  Must remain seated while eating.  If you spend at least 10 seconds eating you will become well fed and gain 20 Strength for 15 min.
+-->
