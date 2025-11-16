@@ -54,17 +54,16 @@ lib.events = lib.events or _G.LibStub("CallbackHandler-1.0"):New(lib)
 lib.group = lib.group or false
 -- Embeded Frames
 lib.registered = lib.registered or {}
-lib.registered[_G.MainMenuBar] = true
-lib.registered[_G.CharacterMicroButton] = true
-lib.registered[_G.ChatFrameMenuButton] = true
---lib.registered[_G.MainMenuBar] = true
-lib.registered[_G.ChatFrame1] = true
+if _G.MainMenuBar then lib.registered[_G.MainMenuBar] = true end
+if _G.CharacterMicroButton then lib.registered[_G.CharacterMicroButton] = true end
+if _G.ChatFrameMenuButton then lib.registered[_G.ChatFrameMenuButton] = true end
+if _G.ChatFrame1 then lib.registered[_G.ChatFrame1] = true end
 -- Frame Insets
 lib.insets = lib.insets or {}
-lib.insets[_G.CharacterMicroButton] = { 3, 23, -181, 1 }
-lib.insets[_G.ChatFrameMenuButton] = { 3, 3, 3, -91 }
-lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 }
-lib.insets[_G.ChatFrame1] = { -2, -4, -2, -6, }
+if _G.CharacterMicroButton then lib.insets[_G.CharacterMicroButton] = { 3, 23, -181, 1 } end
+if _G.ChatFrameMenuButton then lib.insets[_G.ChatFrameMenuButton] = { 3, 3, 3, -91 } end
+if _G.MainMenuBar then lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 } end
+if _G.ChatFrame1 then lib.insets[_G.ChatFrame1] = { -2, -4, -2, -6, } end
 -- Enabled Frames
 lib.enabled = lib.enabled or {}
 -- Hidden Frames
