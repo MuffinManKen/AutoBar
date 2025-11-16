@@ -155,7 +155,7 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
+	-- AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
 	AutoBar.frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
 
 	if(AutoBarDB2.settings.handle_spell_changed) then
