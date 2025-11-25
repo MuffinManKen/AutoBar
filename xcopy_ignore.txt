@@ -9,6 +9,7 @@
 .luacheckrc
 docs
 CVS
+tools
 ChangeList.txt
 media
 notes.txt
