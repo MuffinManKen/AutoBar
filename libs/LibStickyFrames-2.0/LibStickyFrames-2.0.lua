@@ -54,16 +54,16 @@ lib.events = lib.events or _G.LibStub("CallbackHandler-1.0"):New(lib)
 lib.group = lib.group or false
 -- Embeded Frames
 lib.registered = lib.registered or {}
-lib.registered[_G.MainMenuBar] = true
+lib.registered[_G.MainActionBar] = true
 lib.registered[_G.CharacterMicroButton] = true
 lib.registered[_G.ChatFrameMenuButton] = true
---lib.registered[_G.MainMenuBar] = true
+--lib.registered[_G.MainActionBar] = true
 lib.registered[_G.ChatFrame1] = true
 -- Frame Insets
 lib.insets = lib.insets or {}
 lib.insets[_G.CharacterMicroButton] = { 3, 23, -181, 1 }
 lib.insets[_G.ChatFrameMenuButton] = { 3, 3, 3, -91 }
-lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 }
+lib.insets[_G.MainActionBar] = { 7, 0, 40, 0 }
 lib.insets[_G.ChatFrame1] = { -2, -4, -2, -6, }
 -- Enabled Frames
 lib.enabled = lib.enabled or {}
