@@ -48,7 +48,7 @@ AutoBarSearch = {
 }
 
 local METHOD_DEBUG = false
---local DEBUG_IDS = code.make_set{182773, 172179}
+local DEBUG_IDS = code.make_set{182773, 172179, 141605}
 --local DEBUG_GUIDS = code.make_set{code.ToyGUID(182773), code.ToyGUID(172179)}
 
 
@@ -988,7 +988,7 @@ end
 ---@return ABToyInfo
 function AutoBarSearch:RegisterToy(p_toy_id)
 	assert(type(p_toy_id) == "number")
-	local debug = false --(DEBUG_IDS[p_toy_id])
+	local debug = (DEBUG_IDS[p_toy_id])
 	local toy_guid = code.ToyGUID(p_toy_id)
 	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 
