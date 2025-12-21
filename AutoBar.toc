@@ -14,8 +14,8 @@
 ## X-Category: Action Bars
 ## Category: Action Bars
 ## X-Credits: Diablo for teaching us how to guzzle potions. Saien for first enabling guzzling in WoW.  Sayclub (Korean) | PDI175, lostcup (Chinese traditional and simplified) | Teodred, curexx (German), Cinedelle (French), shiftos (Spanish), StingerSoft (Russian)
-## OptionalDeps: Ace3, LibKeyBound-1.0, LibPeriodicTable-3.1, LibStickyFrames-2.0, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
-## X-Embeds: LibKeyBound-1.0,  LibPeriodicTable-3.1, LibStickyFrames-2.0, MuffinLibPTSets
+## OptionalDeps: Ace3, LibKeyBound-1.0, LibPeriodicTable-3.1, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
+## X-Embeds: LibKeyBound-1.0,  LibPeriodicTable-3.1, MuffinLibPTSets
 ## SavedVariables: AutoBarDB, AutoBarDB2
 
 # Libraries

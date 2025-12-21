@@ -1,5 +1,5 @@
 --[[
-Name: LibStickyFrames-2.0
+Name: LibMMStickyFrames-2.0
 Revision: $Rev: 37 $
 Author(s): Sorata,Toadkiller,Cladhaire,Tuller,Shadowed,JoshBorke,rophy123,Tekkub
 Website: http://www.wowace.com/wiki/LibStickyFrames-2.0
@@ -7,7 +7,7 @@ Description: A library to manage snappy dragging & sticking of frames across mul
 Dependencies: none
 --]]
 
-local MAJOR = "LibStickyFrames-2.0"
+local MAJOR = "LibMMStickyFrames-2.0"
 local MINOR = 90000 + tonumber(("$Revision: 38 $"):match("(%d+)"))
 
 --[[
@@ -39,7 +39,7 @@ This is based on code from:
 [http://www.wowinterface.com/downloads/info4674-StickyFrames.html StickyFrames] by Cladhaire.
 [http://www.wowwiki.com/LegoBlock LegoBlock] by Tekkub & JoshBorke.
 FlyPaper by Tuller.
-All mushed together in a terrible transporter accident producing the thing otherwise known as LibStickyFrames by Toadkiller enhanced by Sorata.
+All mushed together in a terrible transporter accident producing the thing otherwise known as LibMMStickyFrames by Toadkiller enhanced by Sorata.
 --]]
 
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
@@ -54,16 +54,19 @@ lib.events = lib.events or _G.LibStub("CallbackHandler-1.0"):New(lib)
 lib.group = lib.group or false
 -- Embeded Frames
 lib.registered = lib.registered or {}
-lib.registered[_G.MainMenuBar] = true
+lib.insets = lib.insets or {}
+
+if _G.MainMenuBar then
+	lib.registered[_G.MainMenuBar] = true;
+	lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 }
+end
 lib.registered[_G.CharacterMicroButton] = true
 lib.registered[_G.ChatFrameMenuButton] = true
 --lib.registered[_G.MainMenuBar] = true
 lib.registered[_G.ChatFrame1] = true
 -- Frame Insets
-lib.insets = lib.insets or {}
 lib.insets[_G.CharacterMicroButton] = { 3, 23, -181, 1 }
 lib.insets[_G.ChatFrameMenuButton] = { 3, 3, 3, -91 }
-lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 }
 lib.insets[_G.ChatFrame1] = { -2, -4, -2, -6, }
 -- Enabled Frames
 lib.enabled = lib.enabled or {}

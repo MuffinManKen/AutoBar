@@ -19,7 +19,7 @@ local print, select, ipairs, tostring, pairs, tonumber, string, next = print, se
 AB.LibKeyBound = LibStub("LibKeyBound-1.0")	---@type LibKeyBound
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-AB.LibStickyFrames = LibStub("LibStickyFrames-2.0") ---@type LibStickyFrames
+AB.LibMMStickyFrames = LibStub("LibMMStickyFrames-2.0") ---@type LibMMStickyFrames
 
 
 

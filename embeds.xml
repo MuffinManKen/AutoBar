@@ -18,6 +18,6 @@
 	<Script file="libs\LibPeriodicTable-3.1-Consumable\LibPeriodicTable-3.1-Consumable.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Misc\LibPeriodicTable-3.1-Misc.lua"/>
 	<Script file="libs\LibPeriodicTable-3.1-Tradeskill\LibPeriodicTable-3.1-Tradeskill.lua"/>
-	<Script file="libs\LibStickyFrames-2.0\LibStickyFrames-2.0.lua"/>
+	<Script file="libs\LibMMStickyFrames\LibMMStickyFrames.lua"/>
 
 </Ui>

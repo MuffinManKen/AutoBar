@@ -189,11 +189,11 @@ function AutoBar:InitializeZero()
 	AB.LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_DISABLED")
 	AB.LibKeyBound.RegisterCallback(self, "LIBKEYBOUND_MODE_COLOR_CHANGED")
 
-	AB.LibStickyFrames.RegisterCallback(self, "OnSetGroup")
-	AB.LibStickyFrames.RegisterCallback(self, "OnClick")
-	--	AB.LibStickyFrames.RegisterCallback(self, "OnStartFrameMoving")
-	AB.LibStickyFrames.RegisterCallback(self, "OnStopFrameMoving")
-	AB.LibStickyFrames.RegisterCallback(self, "OnStickToFrame")
+	AB.LibMMStickyFrames.RegisterCallback(self, "OnSetGroup")
+	AB.LibMMStickyFrames.RegisterCallback(self, "OnClick")
+	--	AB.LibMMStickyFrames.RegisterCallback(self, "OnStartFrameMoving")
+	AB.LibMMStickyFrames.RegisterCallback(self, "OnStopFrameMoving")
+	AB.LibMMStickyFrames.RegisterCallback(self, "OnStickToFrame")
 end
 
 
@@ -745,7 +745,7 @@ end
 
 function AutoBar:MoveBarModeToggle()
 --print("AutoBar:MoveBarModeToggle")
-	if (AB.LibStickyFrames:GetGroup()) then
+	if (AB.LibMMStickyFrames:GetGroup()) then
 		AutoBar:MoveBarModeOff()
 	else
 		AutoBar:MoveBarModeOn()
@@ -753,14 +753,14 @@ function AutoBar:MoveBarModeToggle()
 end
 
 function AutoBar:MoveBarModeOff()
-	AB.LibStickyFrames:SetGroup(nil)
+	AB.LibMMStickyFrames:SetGroup(nil)
 	AutoBar.stickyMode = false
 end
 
 function AutoBar:MoveBarModeOn()
 	AB.LibKeyBound:Deactivate()
 	AutoBar:MoveButtonsModeOff()
-	AB.LibStickyFrames:SetGroup(true)
+	AB.LibMMStickyFrames:SetGroup(true)
 	AutoBar.stickyMode = true
 end
 
@@ -771,7 +771,7 @@ function AutoBar.OnSetGroup(group)
 		AutoBar.stickyMode = true
 	elseif (type(group) == "table") then
 		for _, bar in pairs(AutoBar.barList) do
-			if (bar.sharedLayoutDB.enabled and AB.LibStickyFrames:InFrameGroup(bar.frame, group)) then
+			if (bar.sharedLayoutDB.enabled and AB.LibMMStickyFrames:InFrameGroup(bar.frame, group)) then
 				AutoBar.stickyMode = true
 				break
 			end
@@ -1079,7 +1079,7 @@ function AB.UpdateCategories()
 		for _index, stickyFrame in pairs(tick.OtherStickyFrames) do
 			if (_G[stickyFrame]) then
 				--print("     AB.UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
-				AB.LibStickyFrames:RegisterFrame(_G[stickyFrame])
+				AB.LibMMStickyFrames:RegisterFrame(_G[stickyFrame])
 			else
 				delete = false
 			end
@@ -1129,15 +1129,15 @@ function AB.UpdateObjects()
 			end
 			bar = AutoBar.barList[barKey] ---@class Bar
 			bar:UpdateObjects()
-			AB.LibStickyFrames:SetFrameEnabled(bar.frame, true)
-			AB.LibStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
-			AB.LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+			AB.LibMMStickyFrames:SetFrameEnabled(bar.frame, true)
+			AB.LibMMStickyFrames:SetFrameHidden(bar.frame, bar.sharedLayoutDB.hide)
+			AB.LibMMStickyFrames:SetFrameText(bar.frame, bar.barName)
 		elseif (AutoBar.barList[barKey]) then
 			--print("UpdateObjects barKey " .. tostring(barKey) .. " Hide " .. tostring(AutoBar.barList[barKey].barName))
 			bar = AutoBar.barList[barKey]
 			bar.frame:Hide()
-			AB.LibStickyFrames:SetFrameEnabled(bar.frame)
-			AB.LibStickyFrames:SetFrameText(bar.frame, bar.barName)
+			AB.LibMMStickyFrames:SetFrameEnabled(bar.frame)
+			AB.LibMMStickyFrames:SetFrameText(bar.frame, bar.barName)
 		end
 	end
 
