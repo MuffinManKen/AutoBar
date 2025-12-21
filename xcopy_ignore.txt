@@ -7,11 +7,12 @@
 .py
 .json
 .luacheckrc
-docs
-CVS
-tools
+docs\
+CVS\
+tools\
+.github
 ChangeList.txt
-media
+media\
 notes.txt
 wow_defs.lua
 xcopy_ignore_classic.txt

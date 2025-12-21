@@ -2,3 +2,6 @@ AutoBarClassic.toc
 classic\
 AutoBarWrath.toc
 wrath\
+mop\
+bcc\
+cata\
