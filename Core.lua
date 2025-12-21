@@ -137,6 +137,11 @@ end
 function AutoBar:InitializeZero()
 
 	AutoBar.player_faction_name = UnitFactionGroup("player")
+	if AutoBar.player_faction_name == "Alliance" then
+		AutoBar.player_faction_id = 1
+	elseif AutoBar.player_faction_name == "Horde" then
+		AutoBar.player_faction_id = 0
+	end
 	AutoBar.current_player = UnitName("player") .. " - " .. GetRealmName();
 	AutoBar.CLASS = UnitClassBase("player")
 	AutoBar.NiceClass = string.sub(AutoBar.CLASS, 1, 1) .. string.lower(string.sub(AutoBar.CLASS, 2))
