@@ -172,6 +172,7 @@ ABCode = {}
 ---@field CLASS string The player's class in all caps without whitespace. Locale-independent.
 ---@field NiceClass string The player's class with the first letter capitalized and the rest lower without whitespace. Locale-independent.
 ---@field player_faction_name string The player's faction name (Alliance/Horde/Neutral).  Mixed-case and locale-independent.
+---@field player_faction_id number 0 == Horde, 1 == Alliance
 ---@field frame Frame Frame used for keybinding and event handling
 ---@field current_player string Formatted as "Player - Realm"
 ---@field version string Version string of Addon as given by the TOC
