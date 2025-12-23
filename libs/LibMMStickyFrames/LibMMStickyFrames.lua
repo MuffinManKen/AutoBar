@@ -60,9 +60,12 @@ if _G.MainMenuBar then
 	lib.registered[_G.MainMenuBar] = true;
 	lib.insets[_G.MainMenuBar] = { 7, 0, 40, 0 }
 end
+if _G.MainActionBar then
+	lib.registered[_G.MainActionBar] = true;
+	lib.insets[_G.MainActionBar] = { 7, 0, 40, 0 }
+end
 lib.registered[_G.CharacterMicroButton] = true
 lib.registered[_G.ChatFrameMenuButton] = true
---lib.registered[_G.MainMenuBar] = true
 lib.registered[_G.ChatFrame1] = true
 -- Frame Insets
 lib.insets[_G.CharacterMicroButton] = { 3, 23, -181, 1 }
