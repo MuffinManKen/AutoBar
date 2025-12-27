@@ -988,7 +988,7 @@ end
 ---@return ABToyInfo
 function AutoBarSearch:RegisterToy(p_toy_id)
 	assert(type(p_toy_id) == "number")
-	local debug = (DEBUG_IDS[p_toy_id])
+	local debug = false --(DEBUG_IDS[p_toy_id])
 	local toy_guid = code.ToyGUID(p_toy_id)
 	local toy_info = AutoBarSearch.registered_toys[toy_guid]
 
