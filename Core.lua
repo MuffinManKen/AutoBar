@@ -369,6 +369,19 @@ if (ABGData.is_mainline_wow) then
 
 end
 
+local function register_sticky_frames()
+	--TODO: Review sticky frame handling. This code could be cleaned up
+	--TODO: Split this out to its own function
+	if (tick.OtherStickyFrames) then
+		for _index, stickyFrame in pairs(tick.OtherStickyFrames) do
+			if (_G[stickyFrame]) then
+				--print("     AB.UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
+				AB.LibMMStickyFrames:RegisterFrame(_G[stickyFrame])
+			end
+		end
+	end
+
+end
 
 function AB.events.PLAYER_ENTERING_WORLD()
 	code.log_warning("* PLAYER_ENTERING_WORLD")
@@ -403,6 +416,8 @@ function AB.events.PLAYER_ENTERING_WORLD()
 	AutoBar.frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	AutoBarSearch:RebuildToyFavorites()
+
+	register_sticky_frames()
 
 
 	AB.UpdateAllLinear()
@@ -1076,23 +1091,6 @@ end
 
 function AB.UpdateCategories()
 	AB.LogEventStart("UpdateCategories")
-
-	--TODO: Review sticky frame handling. This code could be cleaned up
-	--TODO: Split this out to its own function
-	if (tick.OtherStickyFrames) then
-		local delete = true
-		for _index, stickyFrame in pairs(tick.OtherStickyFrames) do
-			if (_G[stickyFrame]) then
-				--print("     AB.UpdateCategories " .. tostring(_index) .. "  " .. tostring(stickyFrame))
-				AB.LibMMStickyFrames:RegisterFrame(_G[stickyFrame])
-			else
-				delete = false
-			end
-		end
-		if (delete) then
-			tick.OtherStickyFrames = nil
-		end
-	end
 
 	local ret = tick.UpdateSpellsID
 	if (not InCombatLockdown()) then

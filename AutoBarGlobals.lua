@@ -154,6 +154,16 @@ AutoBarGlobalDataObject.TickScheduler =
 	OtherStickyFrames = {
 		"GridLayoutFrame",
 		"Grid2LayoutFrame",
+		"MicroMenu",
+		"MainActionBar",
+		"MultiBarBottomLeft",
+		"StanceBar",
+		"MultiBarBottomRight",
+		"MultiBar5",
+		"MultiBar6",
+		"MultiBar7",
+		"MultiBarLeft",
+		"MultiBarRight",
 	}
 }
 
