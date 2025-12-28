@@ -305,11 +305,11 @@ function AB.events.QUEST_ACCEPTED(p_arg1, p_arg2)
 	end
 
 
-	code.log_warning("QUEST_ACCEPTED","   Idx:", quest_idx)
+	--code.log_warning("QUEST_ACCEPTED","   Idx:", quest_idx)
 
 	if(quest_idx) then
 		local link = GetQuestLogSpecialItemInfo(quest_idx)
-		code.log_warning("   ", link)
+		--code.log_warning("   ", link)
 		if(link) then
 			add_item_to_dynamic_category(link, "Dynamic.Quest")
 			AB.ABScheduleUpdate(tick.UpdateItemsID)
