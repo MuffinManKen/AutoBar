@@ -61,7 +61,7 @@ local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 local L = ABGData.locale
 
-local CLASS_COLUMN_DEFAULT = 10
+local CLASS_COLUMN_DEFAULT = 11
 
 local CURRENT_DB_VERSION = 1
 
