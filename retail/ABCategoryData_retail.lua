@@ -391,7 +391,6 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Totem.Air"] = SpellsCategory:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
-		"SHAMAN", code.get_spell_name_by_name("Cloudburst Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Wind Rush Totem"),
 	})
 

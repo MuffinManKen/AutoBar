@@ -272,7 +272,6 @@ code.cache_spell_data(52127, "Water Shield");
 
 
 code.cache_spell_data(207399, "Ancestral Protection Totem");
-code.cache_spell_data(157153, "Cloudburst Totem");
 code.cache_spell_data(192058, "Capacitor Totem");
 code.cache_spell_data(2484, "Earthbind Totem");
 code.cache_spell_data(198838, "Earthen Wall Totem");
