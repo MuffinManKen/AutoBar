@@ -348,7 +348,7 @@ if (ABGData.is_mainline_wow) then
 	end
 
 	function AB.events.COMPANION_LEARNED()
-		local need_update = false;
+		local need_update = true;
 
 		AB.LogEventStart("COMPANION_LEARNED")
 

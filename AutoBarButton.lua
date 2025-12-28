@@ -2536,13 +2536,16 @@ else
 		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
 	--print("AutoBarButtonMount.prototype:init");
 
+		--code.log_warning("AutoBarButtonMount:init", "\n", debugstack(1, 6, 6))
+
 		local buttonData = AutoBar.char.buttonDataList[buttonDB.buttonKey]
 		if (not buttonData) then
 			buttonData = {}
 			AutoBar.char.buttonDataList[buttonDB.buttonKey] = buttonData
 		end
 
-		if(buttonDB.mount_show_qiraji == nil) then buttonDB.mount_show_qiraji = false end
+		self.is_mount_data_missing = true
+
 		if(buttonDB.mount_show_favourites == nil) then buttonDB.mount_show_favourites = true end
 		if(buttonDB.mount_show_nonfavourites == nil) then buttonDB.mount_show_nonfavourites = false end
 		if(buttonDB.mount_show_class == nil) then buttonDB.mount_show_class = true end
@@ -2569,7 +2572,8 @@ else
 	function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
 		AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
 
-		if (not AutoBarCategoryList["Spell.Mount"]) then
+		--code.log_warning("AutoBarButtonMount:Refresh DataMissing:", self.is_mount_data_missing, " ", debugstack(1, 6, 6))
+		if (not AutoBarCategoryList["Spell.Mount"] or (self.is_mount_data_missing == nil)) then
 			--AutoBarButtonMount.prototype:init hasn't run, so skip
 			--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
 			return true;
@@ -2592,8 +2596,9 @@ else
 
 		local mount_ids = C_MountJournal.GetMountIDs()
 		local num_mounts = #mount_ids
-		local needs_update = (num_mounts > AutoBar.last_mount_count) or buttonDB.is_dirty
+		local needs_update = (num_mounts > AutoBar.last_mount_count) or buttonDB.is_dirty or self.is_mount_data_missing
 
+		--code.log_warning("\nAutoBarButtonMount:Refresh ", "is_dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update, ", MissingData:", self.is_mount_data_missing )
 	--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
 	--print(debugstack(1, 3, 3));
 
@@ -2601,6 +2606,7 @@ else
 		if (needs_update) then
 	--print("   Gonna do stuff");
 			AutoBar.last_mount_count = num_mounts;
+			self.is_mount_data_missing = false
 			buttonDB.is_dirty = false
 
 			category.castList = {}
@@ -2609,29 +2615,27 @@ else
 
 			for _k, id in ipairs(mount_ids) do
 				local mount_data = AB.GetMountInfoByID(id)
-				--local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
-				local faction_available = (AutoBar.player_faction_id == mount_data.faction_id) or mount_data.faction_id == nil
 				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
-				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[mount_data.spell_id]) or false;
-	-- local name = mount_data.name
-	-- local is_collected = mount_data.is_collected
-	-- if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
-	-- 	print(string.format("%5s  %5s  Usable:%5s", id, mount_data.spell_id, tostring(mount_data.faction_id)), name)
-	-- 	print("   Faction:", mount_data.faction_id, "Collected:", is_collected)
-	-- 	print("   ", AutoBar.player_faction_name, AutoBar.player_faction_id, mount_data.faction_id, faction_available)
-	-- end
-				if (mount_data.is_collected and faction_available and user_selected and not qiraji_filtered) then
-					local spell_name = AB.GetSpellInfo(mount_data.spell_id)
-					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
-					if not spell_name then
-						--print("AutoBar Error: Missing spell name for", spell_id, name);
-					else
-						spellIconList[spell_name] = mount_data.icon
-						AutoBarSearch:RegisterSpell(spell_name, mount_data.spell_id, true)
-						local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
-						spellInfo.spell_link = "spell:" .. mount_data.spell_id
-						category.castList[# category.castList + 1] = spell_name
-					end
+	--  local name = mount_data.name
+	--  local is_collected = mount_data.is_collected
+	--  if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
+	--  	code.log_warning(string.format("\n%5s  %5s  Usable:%5s", id, mount_data.spell_id, tostring(mount_data.is_usable)), name)
+	--  	code.log_warning("   Faction:", mount_data.faction_id, "Collected:", is_collected)
+	--  	code.log_warning("   Player FaName:", AutoBar.player_faction_name, "FacID:", AutoBar.player_faction_id, "MountFacID:", mount_data.faction_id, faction_available)
+	--  end
+	 			if (mount_data.is_usable and mount_data.is_collected and user_selected) then
+						local spell_name = AB.GetSpellInfo(mount_data.spell_id)
+						--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+						if spell_name then
+							spellIconList[spell_name] = mount_data.icon
+							AutoBarSearch:RegisterSpell(spell_name, mount_data.spell_id, true)
+							local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
+							spellInfo.spell_link = "spell:" .. mount_data.spell_id
+							category.castList[# category.castList + 1] = spell_name
+						end
+				elseif (mount_data.is_usable == nil) then
+					--code.log_warning("Missing data :(")
+					self.is_mount_data_missing = true
 				end
 
 			end
@@ -2644,6 +2648,8 @@ else
 			end
 
 			category.initialized = true
+
+			--code.log_warning("\nNumMounts:", num_mounts, "#CastList:", #category.castList)
 
 			AutoBarCategoryList["Spell.Mount"]:Refresh()
 		end
@@ -2659,7 +2665,6 @@ else
 
 
 	function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
-		self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
 		self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 		self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 		self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])

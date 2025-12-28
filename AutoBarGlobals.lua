@@ -105,8 +105,6 @@ AutoBarGlobalDataObject = {
 
 	profile = {},
 
-	QirajiMounts = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1},
-
 	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE),
 	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
@@ -610,7 +608,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 	function AB.GetMountInfoByID(p_id)
 		local mdc = AutoBarGlobalDataObject.mount_data_cache_by_id
 		if(mdc[p_id] == nil) then
-			local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, faction_id, _is_hidden, is_collected, _mount_id =
+			local name, spell_id, icon, _active, is_usable, _src, is_favourite, _faction_specific, faction_id, _is_hidden, is_collected, _mount_id =
 						 C_MountJournal.GetMountInfoByID(p_id)
 			local data = {}
 			data.name = name
@@ -619,6 +617,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 			data.is_favourite = is_favourite
 			data.is_collected = is_collected
 			data.faction_id = faction_id
+			data.is_usable = is_usable
 
 			mdc[p_id] = data;
 		end

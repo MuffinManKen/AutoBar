@@ -842,7 +842,6 @@ function AutoBar:InitializeDefaults()
 			defaultButtonIndex = "*",
 			enabled = true,
 			arrangeOnUse = true,
-			mount_show_qiraji = false,
 			mount_show_favourites = true,
 			mount_show_nonfavourites = false,
 			mount_show_class = true,
