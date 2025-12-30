@@ -132,6 +132,7 @@ atl("Muffin.Food.Combo", "Muffin.Food.Combo")
 atl("Muffin.Potion.Combo", "Muffin.Potion.Combo")
 atl("Consumable.Buff.Water Breathing", "Consumable.Buff.Water Breathing")
 
+atl("AutoBarButtonHousing", "Housing Items")
 atl("AutoBarButtonOrderHallResource", "Order Hall Resources")
 atl("AutoBarButtonOrderHallTroop", "Order Hall Troops")
 atl("AutoBarButtonReputation", "Reputation")
@@ -246,6 +247,7 @@ local quick_sets =
 	"Muffin.ItemEnchant.Permanent",
 	"Muffin.ItemEnchant.Temporary",
 	"Muffin.Bandages.Basic",
+	"Muffin.Misc.Housing",
 }
 
 atl_table(quick_sets);

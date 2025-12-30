@@ -113,6 +113,8 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Muffin.Misc.Repair"] = ItemsCategory:new( "Muffin.Misc.Repair", "INV_Misc_HERB_01", "Muffin.Misc.Repair")
 
+	AutoBarCategoryList["Muffin.Misc.Housing"] = ItemsCategory:new("Muffin.Misc.Housing", "INV_Potion_76", "Muffin.Misc.Housing")
+
 	AutoBarCategoryList["Muffin.Bandages.Basic"] = ItemsCategory:new( "Muffin.Bandages.Basic", "INV_Misc_Bandage_Netherweave_Heavy", "Muffin.Bandages.Basic")
 
 	AutoBarCategoryList["Muffin.Skill.Archaeology.Crate"] = ItemsCategory:new( "Muffin.Skill.Archaeology.Crate", "INV_Misc_Food_26", "Muffin.Skill.Archaeology.Crate")

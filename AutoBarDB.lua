@@ -798,6 +798,17 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
+		if (not AutoBarDB2.account.buttonList["AutoBarButtonHousing"]) then
+			AutoBarDB2.account.buttonList["AutoBarButtonHousing"] = {
+				buttonKey = "AutoBarButtonHousing",
+				buttonClass = "AutoBarButtonHousing",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = "*",
+				enabled = true,
+				arrangeOnUse = true,
+			}
+		end
+
 		if (not AutoBarDB2.account.buttonList["AutoBarButtonBattlePetItems"]) then
 			AutoBarDB2.account.buttonList["AutoBarButtonBattlePetItems"] = {
 				buttonKey = "AutoBarButtonBattlePetItems",

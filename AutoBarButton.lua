@@ -2405,6 +2405,17 @@ else
 
 	end
 
+	local AutoBarButtonHousing = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonHousing"] = AutoBarButtonHousing
+
+	function AutoBarButtonHousing.prototype:init(parentBar, buttonDB)
+		AutoBarButtonHousing.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Muffin.Misc.Housing")
+
+
+	end
+
 	local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
 
