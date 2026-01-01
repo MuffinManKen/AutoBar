@@ -250,15 +250,15 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 --			SecureCmdOptionParse()?
 	elseif (itemType == "spell") then
 		local spellName = self.frame:GetAttribute("spell")
-		start, duration, enabled = AB.GetSpellCooldown(spellName)
+		start, duration = AB.GetSpellCooldown(spellName)
 	end
 
-	if (start and duration and enabled and start > 0 and duration > 0) then
-		CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
-		self.frame.cooldown:SetSwipeColor(0, 0, 0);
-	else
-		CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
-	end
+	-- if (start and duration and start > 0 and duration > 0) then
+	 	CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
+	-- 	self.frame.cooldown:SetSwipeColor(0, 0, 0);
+	-- else
+	-- 	CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
+	-- end
 end
 
 -- Set count based on the type and type2 settings
