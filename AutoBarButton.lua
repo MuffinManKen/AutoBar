@@ -1261,6 +1261,20 @@ function AutoBarButtonOpenable.prototype:init(parentBar, buttonDB)
 	AutoBarButtonOpenable.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Misc.Openable")
+
+	if(buttonDB.openable_include_craft_knowledge == nil) then buttonDB.openable_include_craft_knowledge = true end
+
+
+	if (buttonDB.openable_include_craft_knowledge) then
+		self:AddCategory("Muffin.Misc.CraftingKnowledge")
+	end
+end
+
+if (ABGData.is_mainline_wow) then
+	function AutoBarButtonOpenable.prototype:AddOptions(optionList, passValue)
+		self:SetOptionBoolean(optionList, passValue, "openable_include_craft_knowledge", L["OpenableIncludeCraftKnowledge"])
+
+	end
 end
 
 

@@ -164,6 +164,7 @@ atl("Raid 7","Raid X")
 atl("Raid 8","Raid Skull")
 
 atl("OnlyFavouriteHearth", "Only show favourite Hearth toys")
+atl("OpenableIncludeCraftKnowledge", "Include Craft Knowledge Items")
 local quick_sets =
 {
 	--Categories

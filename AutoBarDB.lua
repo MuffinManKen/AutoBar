@@ -685,6 +685,7 @@ function AutoBar:InitializeDefaults()
 			defaultButtonIndex = 7,
 			enabled = true,
 			drag = true,
+			openable_include_craft_knowledge = true,
 		}
 	end
 	if (not AutoBarDB2.account.buttonList["AutoBarButtonMiscFun"]) then
