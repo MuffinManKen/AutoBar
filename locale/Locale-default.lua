@@ -249,6 +249,7 @@ local quick_sets =
 	"Muffin.Bandages.Basic",
 	"Muffin.Misc.Housing",
 	"Muffin.Misc.CraftingKnowledge",
+	"Muffin.Misc.Hearth",
 }
 
 atl_table(quick_sets);

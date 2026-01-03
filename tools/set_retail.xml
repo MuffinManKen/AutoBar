@@ -113,6 +113,13 @@
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" />
 	</Set>
 
+	<Set name="Muffin.Misc.CraftingKnowledge">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;study+to+increase+knowledge"/>
+	</Set>
+
+	<Set name="Muffin.Misc.Hearth">
+		<Inclusion ftype="wowhead" url="items?filter=107:216;0:2;teleports+the+caster:0"/>
+	</Set>
 
 	<Set name="Muffin.Misc.Openable">
 		<Inclusion ftype="wowhead" url="consumable-items?filter=11;1;0" />
@@ -354,9 +361,6 @@
 		</Inclusion>
 	</Set>
 
-	<Set name="Muffin.Misc.CraftingKnowledge">
-		<Inclusion ftype="wowhead" url="items?filter=107;0;study+to+increase+knowledge"/>
-	</Set>
 
 	<Set name="Muffin.Herbs.Millable">
 		<Inclusion ftype="wowhead" url="items/trade-goods/herbs"/>
