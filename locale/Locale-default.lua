@@ -248,6 +248,7 @@ local quick_sets =
 	"Muffin.ItemEnchant.Temporary",
 	"Muffin.Bandages.Basic",
 	"Muffin.Misc.Housing",
+	"Muffin.Misc.CraftingKnowledge",
 }
 
 atl_table(quick_sets);

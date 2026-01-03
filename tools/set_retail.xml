@@ -140,7 +140,7 @@
 		<Inclusion ftype="wowhead" url="items/housing/quality:2?filter=92;2;0" />
 		<Inclusion ftype="wowhead" url="items/housing/quality:3:4:5:6:7:8" />
 	</Set>
-	
+
 	<Set name="Muffin.Misc.Quest">
 		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
 		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="(use:|equip:)" />
@@ -352,6 +352,10 @@
 			<Item id="133713" name="Moosehorn Hook" />
 			<Item id="107950" name="Bipsi's Bobbing Berg" />
 		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Misc.CraftingKnowledge">
+		<Inclusion ftype="wowhead" url="items?filter=107;0;study+to+increase+knowledge"/>
 	</Set>
 
 	<Set name="Muffin.Herbs.Millable">
