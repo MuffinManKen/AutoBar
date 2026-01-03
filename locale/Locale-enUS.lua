@@ -32,6 +32,7 @@ if (GetLocale() == "enUS") then
 		["Category"] = "Category",
 		["Categories"] = "Categories",
 		["Categories for %s"] = "Categories for %s",
+		["Knowledge"] = "Knowledge",
 		["Clamp Bars to screen"] = "Clamp Bars to screen",
 		["Clamped Bars can not be positioned off screen"] = "Clamped Bars can not be positioned off screen",
 		["Collapse Buttons"] = "Collapse Buttons",

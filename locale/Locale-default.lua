@@ -46,6 +46,8 @@ L["AutoBarClassBarEvoker"] = get_class_name(13)
 
 atl("ResetCategoryDescription", "Removes ALL custom categories")
 
+atl("Knowledge", "Knowledge")
+
 atl("AutoBar.Food.Health.Basic", L["Consumable.Food.Edible.Basic.Non-Conjured"]);
 atl("AutoBar.Food.Mana.Basic", L["Consumable.Water.Basic"]);
 atl("AutoBar.Food.Combo.Basic", L["Consumable.Food.Edible.Combo.Non-Conjured"]);

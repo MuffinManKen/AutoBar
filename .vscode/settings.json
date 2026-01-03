@@ -34,6 +34,8 @@
         "ChatFrame_OpenChat",
         "UIErrorsFrame",
         "SOUNDKIT",
-        "GameTooltip_Hide"
-    ]
+        "GameTooltip_Hide",
+        "ARTISANS_CONSORTIUM"
+    ],
+    "Lua.type.weakUnionCheck": true
 }

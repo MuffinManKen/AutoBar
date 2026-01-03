@@ -87,6 +87,7 @@ AutoBarButton.lua
 AutoBarCategory.lua
 
 retail/ABCategoryData_retail.lua
+retail/ABCategoryData_Knowledge.lua
 
 AutoBarConfig.lua
 
