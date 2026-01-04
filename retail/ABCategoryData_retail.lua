@@ -51,13 +51,13 @@ function ToyCategory:Refresh()
 	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
 	if(debug) then code.log_warning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "OnlyFaves:", only_faves); end
 
-	local DEBUG_IDS = code.make_set{182773, 172179}
+	local DEBUG_IDS = code.make_set{182773, 172179, 141605}
 	local list_index = 1
 
 	for _, toy_id in ipairs(self.all_items) do
         local has_toy = AB.PlayerHasToy(toy_id)
 		local selected = (not only_faves or AutoBarSearch:IsToyFavourite(toy_id))
-		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, "HasToy:", has_toy); end
+		if(debug and DEBUG_IDS[toy_id]) then code.log_warning(toy_id, "HasToy:", has_toy, "Selectied:", selected); end
 
 		if (toy_id and has_toy and selected) then
 			local toy_info = AutoBarSearch:RegisterToy(toy_id)

@@ -3,10 +3,11 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Added Hearth favourites-only back in
- - Check out my new game |cFFD100FFThe Map Is The Thing|r on Steam!
- - Seriously. Check it out.  I need to feed my cats.
- - I'm not playing WoW, so if things are missing or broken make sure you report them with as much detail as you can.
+AutoBar needs your help to survive the Midnight expansion!
+Blizzard's upcoming changes will break AutoBar. Because I no longer play WoW myself, continued support depends on community interest.
+
+A Kickstarter is now live to fund a full Midnight update + one year of support.
+https://www.kickstarter.com/projects/2075655491/autobar-midnight-update-world-of-warcraft
 ]] .. "|n"
 
 

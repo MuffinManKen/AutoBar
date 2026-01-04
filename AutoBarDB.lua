@@ -182,6 +182,12 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonER", },
 		{button_name = "AutoBarButtonClassBuff", },
 	},
+	MONK =
+	{
+		{button_name = "AutoBarButtonClassPet" },
+		{button_name = "AutoBarButtonInterrupt", },
+		{button_name = "AutoBarButtonShields", },
+	},
 	PALADIN =
 	{
 		{button_name = "AutoBarButtonShields", },

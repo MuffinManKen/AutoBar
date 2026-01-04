@@ -48,7 +48,7 @@ AutoBarSearch = {
 }
 
 local METHOD_DEBUG = false
---local DEBUG_IDS = code.make_set{182773, 172179}
+local DEBUG_IDS = code.make_set{182773, 172179, 141605}
 --local DEBUG_GUIDS = code.make_set{code.ToyGUID(182773), code.ToyGUID(172179)}
 
 
