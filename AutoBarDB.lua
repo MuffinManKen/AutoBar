@@ -809,6 +809,28 @@ function AutoBar:InitializeDefaults()
 			}
 		end
 
+		if (not AutoBarDB2.account.buttonList["AutoBarButtonKnowledge"]) then
+			AutoBarDB2.account.buttonList["AutoBarButtonKnowledge"] = {
+				buttonKey = "AutoBarButtonKnowledge",
+				buttonClass = "AutoBarButtonKnowledge",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = "*",
+				enabled = true,
+				arrangeOnUse = true,
+			}
+		end
+
+		if (not AutoBarDB2.account.buttonList["AutoBarButtonCrests"]) then
+			AutoBarDB2.account.buttonList["AutoBarButtonCrests"] = {
+				buttonKey = "AutoBarButtonCrests",
+				buttonClass = "AutoBarButtonCrests",
+				barKey = "AutoBarClassBarExtras",
+				defaultButtonIndex = "*",
+				enabled = true,
+				arrangeOnUse = true,
+			}
+		end
+
 		-- if (not AutoBarDB2.account.buttonList["AutoBarButtonToyBox"]) then
 		-- 	AutoBarDB2.account.buttonList["AutoBarButtonToyBox"] = {
 		-- 		buttonKey = "AutoBarButtonToyBox",

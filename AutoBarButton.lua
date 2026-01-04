@@ -2781,4 +2781,22 @@ else
 		end
 	end
 
+	local AutoBarButtonKnowledge = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonKnowledge"] = AutoBarButtonKnowledge
+
+	function AutoBarButtonKnowledge.prototype:init(parentBar, buttonDB)
+		AutoBarButtonKnowledge.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Knowledge")
+	end
+
+	local AutoBarButtonCrests = AceOO.Class(AutoBarButton)
+	AutoBar.Class["AutoBarButtonCrests"] = AutoBarButtonCrests
+
+	function AutoBarButtonCrests.prototype:init(parentBar, buttonDB)
+		AutoBarButtonCrests.super.prototype.init(self, parentBar, buttonDB)
+
+		self:AddCategory("Crests")
+	end
+
 end
