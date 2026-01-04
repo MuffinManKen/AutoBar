@@ -39,6 +39,8 @@
 	<Binding name="AutoBarButtonStealth_X"						category="AutoBar "/>
 	<Binding name="AutoBarButtonSunsongRanch_X"				category="AutoBar "/>
 	<Binding name="AutoBarButtonGarrison_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonKnowledge_X"					category="AutoBar "/>
+	<Binding name="AutoBarButtonCrests_X"						category="AutoBar "/>
 
 	<Binding name="AutoBarButtonDebuff_X"						category="AutoBar " header="AutoBarClassBarHeader"/>
 	<Binding name="AutoBarButtonBear_X"							category="AutoBar " header="AutoBarClassBarDruid"/>

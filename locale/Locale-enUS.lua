@@ -239,6 +239,8 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonTrinket2"] = "Trinket 2",
 		["AutoBarButtonWater"] = "Water",
 		["AutoBarButtonWaterBuff"] = "Water Buff",
+		["AutoBarButtonKnowledge"] = "Knowledge",
+		["AutoBarButtonCrests"] = "Crests",
 
 
 		["AutoBarButtonBear"] = "Bear",

@@ -575,5 +575,45 @@ function AB.InitializeCategories()
 		"SHAMAN", code.get_spell_name_by_name("Ghost Wolf"),
 	})
 
+	-- Knowledge Items Category
+	local KNOWLEDGE_ITEMS = {
+		-- Add your knowledge item IDs here, one per line
+		-- Example:
+		-- 192131,  -- Item Name
+		224835, --Deepgrove Roots
+	}
+
+	AB.KnowledgeCategory = CreateFromMixins(AB.CategoryClass)
+	local KnowledgeCategory = AB.KnowledgeCategory
+
+	function KnowledgeCategory:new()
+		local obj = CreateFromMixins(self)
+		obj:init("Knowledge", "Interface\\Icons\\INV_Misc_Book_08")
+		obj.items = KNOWLEDGE_ITEMS
+		return obj
+	end
+
+	AutoBarCategoryList["Knowledge"] = KnowledgeCategory:new()
+
+	-- Crests Category
+	local CRESTS_ITEMS = {
+		-- Add your crest item IDs here, one per line
+		-- Example:
+		-- 240931,  -- Item Name
+		240931, -- Triumphant Satchel of Carved Ethereal Crests
+	}
+
+	AB.CrestsCategory = CreateFromMixins(AB.CategoryClass)
+	local CrestsCategory = AB.CrestsCategory
+
+	function CrestsCategory:new()
+		local obj = CreateFromMixins(self)
+		obj:init("Crests", "Interface\\Icons\\INV_10_gearupgrade_awakenedseal")
+		obj.items = CRESTS_ITEMS
+		return obj
+	end
+
+	AutoBarCategoryList["Crests"] = CrestsCategory:new()
+
 end
 

@@ -35,5 +35,6 @@
         "UIErrorsFrame",
         "SOUNDKIT",
         "GameTooltip_Hide"
-    ]
+    ],
+    "Lua.type.weakUnionCheck": true
 }
