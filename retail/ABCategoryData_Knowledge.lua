@@ -80,6 +80,7 @@ local KNOWLEDGE_ITEMS = {
     224780, -- Toughened Tempest Pelt
     224781, -- Abyssal Fur
     227407, -- Faded Blacksmith's Diagrams
+    225234, -- Alchemical Sediment
     227408, -- Faded Scribe's Runic Drawings
     227409, -- Faded Alchemist's Research
     227410, -- Faded Tailor's Diagrams
@@ -117,6 +118,7 @@ local KNOWLEDGE_ITEMS = {
     227662, -- Shimmering Dust
     228738, -- Flicker of Tailoring Knowledge
     228739, -- Glimmer of Tailoring Knowledge
+    224835, -- Deepgrove Roots
     232499, -- Undermine Treatise on Alchemy
     232500, -- Undermine Treatise on Blacksmithing
     232501, -- Undermine Treatise on Enchanting
