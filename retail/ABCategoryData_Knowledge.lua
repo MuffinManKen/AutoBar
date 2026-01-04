@@ -15,347 +15,130 @@ local ItemsCategory = AB.ItemsCategory
 
 -- EDIT THIS TABLE: Add item IDs for Knowledge items
 local KNOWLEDGE_ITEMS = {
-    -- Add your crafting knowledge item IDs here, one per line
-    200974,
-    201270,
-    201281,
-    205353,
-    205429,
-    205440,
-    198663,
-    198685,
-    198710,
-    198599,
-    198712,
-    203471,
-    198697,
-    205211,
-    205212,
-    205213,
-    210184,
-    210185,
-    210190,
-    200972,
-    201268,
-    201279,
-    205352,
-    205428,
-    205439,
-    198791,
-    201007,
-    201008,
-    201010,
-    201005,
-    201004,
-    201009,
-    201011,
-    201006,
-    205986,
-    205987,
-    205988,
-    210464,
-    210465,
-    210466,
-    200976,
-    201272,
-    201283,
-    205351,
-    205427,
-    205438,
-    201012,
-    198675,
-    198798,
-    198689,
-    201013,
-    198694,
-    198799,
-    198800,
-    204990,
-    204999,
-    205001,
-    210228,
-    210231,
-    210234,
-    200977,
-    201273,
-    201284,
-    205349,
-    205425,
-    205436,
-    201014,
-    198789,
-    204469,
-    204470,
-    204471,
-    204475,
-    204480,
-    204850,
-    204853,
-    204855,
-    210193,
-    210194,
-    210197,
-    200980,
-    201276,
-    201287,
-    205358,
-    205434,
-    205445,
-    200973,
-    201269,
-    201280,
-    205354,
-    205430,
-    205441,
-    198704,
-    198703,
-    198686,
-    198693,
-    198659,
-    201015,
-    198669,
-    206031,
-    206034,
-    206035,
-    210458,
-    210459,
-    210460,
-    200978,
-    201274,
-    201285,
-    205348,
-    205424,
-    205435,
-    201017,
-    198687,
-    198660,
-    198670,
-    201016,
-    198664,
-    198656,
-    198682,
-    205214,
-    205216,
-    205219,
-    210200,
-    210201,
-    210202,
-    200979,
-    201275,
-    201286,
-    198613,
-    205426,
-    205437,
-    198667,
-    198711,
-    198658,
-    201018,
-    198683,
-    198696,
-    198690,
-    204986,
-    204987,
-    204988,
-    210208,
-    210211,
-    210215,
-    200981,
-    201277,
-    201288,
-    205356,
-    205432,
-    205443,
-    200982,
-    201278,
-    201289,
-    205357,
-    205433,
-    205444,
-    200975,
-    201271,
-    201282,
-    205355,
-    205431,
-    205442,
-    198699,
-    198702,
-    198692,
-    201020,
-    198662,
-    198680,
-    198684,
-    201019,
-    206019,
-    206025,
-    206030,
-    210461,
-    210462,
-    210463,
-    227409,
-    227420,
-    227431,
-    224645,
-    224024,
-    232499,
-    235865,
-    226265,
-    226266,
-    226267,
-    226268,
-    226269,
-    226270,
-    226272,
-    226271,
-    227407,
-    227418,
-    227429,
-    224647,
-    224038,
-    232500,
-    235864,
-    226277,
-    226276,
-    226278,
-    226279,
-    226280,
-    226281,
-    226283,
-    226282,
-    227411,
-    227422,
-    227433,
-    224652,
-    224050,
-    232501,
-    235863,
-    226285,
-    226284,
-    226286,
-    226287,
-    226288,
-    226289,
-    226291,
-    226290,
-    227412,
-    227423,
-    227434,
-    224653,
-    224052,
-    232507,
-    235862,
-    226293,
-    226292,
-    226294,
-    226295,
-    226296,
-    226297,
-    226298,
-    226299,
-    227415,
-    227426,
-    227437,
-    224656,
-    224023,
-    232503,
-    235861,
-    226301,
-    226300,
-    226302,
-    226303,
-    226304,
-    226305,
-    226306,
-    226307,
-    227408,
-    227419,
-    227430,
-    224654,
-    224053,
-    232508,
-    235860,
-    226308,
-    226309,
-    226310,
-    226311,
-    226312,
-    226313,
-    226314,
-    226315,
-    227413,
-    227424,
-    227435,
-    224655,
-    224054,
-    232504,
-    235859,
-    226317,
-    226316,
-    226318,
-    226319,
-    226320,
-    226321,
-    226323,
-    226322,
-    227414,
-    227425,
-    227436,
-    224658,
-    224056,
-    232505,
-    235858,
-    226325,
-    226324,
-    226326,
-    226327,
-    226328,
-    226329,
-    226331,
-    226330,
-    227416,
-    227427,
-    227438,
-    224651,
-    224055,
-    232509,
-    235857,
-    226333,
-    226332,
-    226334,
-    226335,
-    226336,
-    226337,
-    226339,
-    226338,
-    227417,
-    227428,
-    227439,
-    224657,
-    224007,
-    232506,
-    235856,
-    226341,
-    226340,
-    226342,
-    226343,
-    226344,
-    226345,
-    226347,
-    226346,
-    227410,
-    227421,
-    227432,
-    224648,
-    224036,
-    232502,
-    235855,
-    226348,
-    226349,
-    226350,
-    226351,
-    226352,
-    226353,
-    226354,
-    226355,
+    192131, -- Valdrakken Weapon Chain
+    192132, -- Draconium Blade Sharpener
+    193891, -- Experimental Substance
+    193897, -- Reawakened Catalyst
+    193898, -- Umbral Bone Needle
+    193899, -- Primalweave Spindle
+    193900, -- Prismatic Focusing Shard
+    193901, -- Primal Dust
+    193902, -- Eroded Titan Gizmo
+    193903, -- Watcher Power Core
+    193904, -- Phoenix Feather Quill
+    193905, -- Iskaaran Trading Ledger
+    193907, -- Chipped Tyrstone
+    193909, -- Ancient Gem Fragments
+    193910, -- Molted Dragon Scales
+    193913, -- Preserved Animal Parts
+    194039, -- Heated Ore Sample
+    194062, -- Unyielding Stone Chunk
+    198837, -- Curious Hide Scraps
+    198963, -- Decaying Phlegm
+    198964, -- Elementious Splinter
+    198965, -- Primeval Earth Fragment
+    198966, -- Molten Globule
+    198967, -- Primordial Aether
+    198968, -- Primalist Charm
+    198969, -- Keeper's Mark
+    198970, -- Infinitely Attachable Pair o' Docks
+    198971, -- Curious Djaradin Rune
+    198972, -- Draconic Glamour
+    198973, -- Incandescent Curio
+    198974, -- Elegantly Engraved Embellishment
+    198975, -- Ossified Hide
+    198976, -- Exceedingly Soft Skin
+    198977, -- Ohn'arhan Weave
+    198978, -- Stupidly Effective Stitchery
+    200677, -- Dreambloom Petal
+    200678, -- Dreambloom
+    201300, -- Iridescent Ore Fragments
+    201301, -- Iridescent Ore
+    201356, -- Glimmer of Fire
+    201357, -- Glimmer of Frost
+    201358, -- Glimmer of Air
+    201359, -- Glimmer of Earth
+    202011, -- Elementally-Charged Stone
+    202014, -- Infused Pollen
+    222552, -- Algari Treatise on Herbalism
+    222621, -- Algari Treatise on Engineering
+    224007, -- Uses for Leftover Husks (How to Take Them Apart)
+    224023, -- Herbal Embalming Techniques
+    224024, -- Theories of Bodily Transmutation, Chapter 8
+    224036, -- And That's A Web-Wrap!
+    224038, -- Smithing After Saronite
+    224050, -- Web Sparkles: Pretty and Powerful
+    224052, -- Clocks, Gears, Sprockets, and Legs
+    224053, -- Eight Views on Defense against Hostile Runes
+    224054, -- Emergent Crystals of the Surface-Dwellers
+    224055, -- A Rocky Start
+    224056, -- Uses for Leftover Husks (After You Take Them Apart)
+    224264, -- Deepgrove Petal
+    224265, -- Deepgrove Rose
+    224583, -- Slab of Slate
+    224584, -- Erosion-Polished Slate
+    224780, -- Toughened Tempest Pelt
+    224781, -- Abyssal Fur
+    227407, -- Faded Blacksmith's Diagrams
+    227408, -- Faded Scribe's Runic Drawings
+    227409, -- Faded Alchemist's Research
+    227410, -- Faded Tailor's Diagrams
+    227411, -- Faded Enchanter's Research
+    227412, -- Faded Engineer's Scribblings
+    227413, -- Faded Jeweler's Illustrations
+    227414, -- Faded Leatherworker's Diagrams
+    227415, -- Faded Herbalist's Notes
+    227416, -- Faded Miner's Notes
+    227417, -- Faded Skinner's Notes
+    227418, -- Exceptional Blacksmith's Diagrams
+    227419, -- Exceptional Scribe's Runic Drawings
+    227420, -- Exceptional Alchemist's Research
+    227421, -- Exceptional Tailor's Diagrams
+    227422, -- Exceptional Enchanter's Research
+    227423, -- Exceptional Engineer's Scribblings
+    227424, -- Exceptional Jeweler's Illustrations
+    227425, -- Exceptional Leatherworker's Diagrams
+    227426, -- Exceptional Herbalist's Notes
+    227427, -- Exceptional Miner's Notes
+    227428, -- Exceptional Skinner's Notes
+    227429, -- Pristine Blacksmith's Diagrams
+    227430, -- Pristine Scribe's Runic Drawings
+    227431, -- Pristine Alchemist's Research
+    227432, -- Pristine Tailor's Diagrams
+    227433, -- Pristine Enchanter's Research
+    227434, -- Pristine Engineer's Scribblings
+    227435, -- Pristine Jeweler's Illustrations
+    227436, -- Pristine Leatherworker's Diagrams
+    227437, -- Pristine Herbalist's Notes
+    227438, -- Pristine Miner's Notes
+    227439, -- Pristine Skinner's Notes
+    227659, -- Fleeting Arcane Manifestation
+    227661, -- Gleaming Telluric Crystal
+    227662, -- Shimmering Dust
+    228738, -- Flicker of Tailoring Knowledge
+    228739, -- Glimmer of Tailoring Knowledge
+    232499, -- Undermine Treatise on Alchemy
+    232500, -- Undermine Treatise on Blacksmithing
+    232501, -- Undermine Treatise on Enchanting
+    232502, -- Undermine Treatise on Tailoring
+    232503, -- Undermine Treatise on Herbalism
+    232504, -- Undermine Treatise on Jewelcrafting
+    232505, -- Undermine Treatise on Leatherworking
+    232506, -- Undermine Treatise on Skinning
+    232507, -- Undermine Treatise on Engineering
+    232508, -- Undermine Treatise on Inscription
+    232509, -- Undermine Treatise on Mining
+    235855, -- Ethereal Tome of Tailoring Knowledge
+    235856, -- Ethereal Tome of Skinning Knowledge
+    235857, -- Ethereal Tome of Mining Knowledge
+    235858, -- Ethereal Tome of Leatherworking Knowledge
+    235859, -- Ethereal Tome of Jewelcrafting Knowledge
+    235860, -- Ethereal Tome of Inscription Knowledge
+    235861, -- Ethereal Tome of Herbalism Knowledge
+    235862, -- Ethereal Tome of Engineering Knowledge
+    235863, -- Ethereal Tome of Enchanting Knowledge
+    235864, -- Ethereal Tome of Blacksmithing Knowledge
+    235865, -- Ethereal Tome of Alchemy Knowledge
 }
 
 AB.KnowledgeCategory = CreateFromMixins(AB.CategoryClass)
@@ -365,7 +148,7 @@ function KnowledgeCategory:new()
     local obj = CreateFromMixins(self)
     obj:init("Knowledge", "Interface\\Icons\\INV_Misc_Book_08")
 
-    obj.items = KNOWLEDGE_ITEMS  -- Direct assignment - items should be an array
+    obj.items = KNOWLEDGE_ITEMS -- Direct assignment - items should be an array
 
     return obj
 end
