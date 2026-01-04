@@ -172,6 +172,7 @@ ABCode = {}
 ---@field CLASS string The player's class in all caps without whitespace. Locale-independent.
 ---@field NiceClass string The player's class with the first letter capitalized and the rest lower without whitespace. Locale-independent.
 ---@field player_faction_name string The player's faction name (Alliance/Horde/Neutral).  Mixed-case and locale-independent.
+---@field player_faction_id number 0 == Horde, 1 == Alliance
 ---@field frame Frame Frame used for keybinding and event handling
 ---@field current_player string Formatted as "Player - Realm"
 ---@field version string Version string of Addon as given by the TOC
@@ -212,38 +213,38 @@ function LibKeyBound:ToShortKey(key) end
 --#endregion LibKeyBound
 
 
---#region LibStickyFrames
----@class LibStickyFrames
-local LibStickyFrames = {}
+--#region LibMMStickyFrames
+---@class LibMMStickyFrames
+local LibMMStickyFrames = {}
 
 ---@param target table
 ---@param RegisterName string
 ---@param UnregisterName string?
 ---@param UnregisterAllName string?
-function LibStickyFrames.RegisterCallback(target, RegisterName, UnregisterName, UnregisterAllName) end
+function LibMMStickyFrames.RegisterCallback(target, RegisterName, UnregisterName, UnregisterAllName) end
 
 
 ---@param frame Frame
-function LibStickyFrames:RegisterFrame(frame) end
+function LibMMStickyFrames:RegisterFrame(frame) end
 
-function LibStickyFrames.Deactivate() end
+function LibMMStickyFrames.Deactivate() end
 
-function LibStickyFrames.GetGroup() end
+function LibMMStickyFrames.GetGroup() end
 
 ---@param x any?
-function LibStickyFrames:SetGroup(x) end
+function LibMMStickyFrames:SetGroup(x) end
 
-function LibStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY) end
+function LibMMStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY) end
 
-function LibStickyFrames:GetColorHidden() end
+function LibMMStickyFrames:GetColorHidden() end
 
-function LibStickyFrames:InFrameGroup(frame, group) end
+function LibMMStickyFrames:InFrameGroup(frame, group) end
 
-function LibStickyFrames:SetFrameEnabled(frame, b) end
-function LibStickyFrames:SetFrameHidden(frame, should_hide) end
-function LibStickyFrames:SetFrameText(frame, barName) end
+function LibMMStickyFrames:SetFrameEnabled(frame, b) end
+function LibMMStickyFrames:SetFrameHidden(frame, should_hide) end
+function LibMMStickyFrames:SetFrameText(frame, barName) end
 
---#endregion LibStickyFrames
+--#endregion LibMMStickyFrames
 
 
 

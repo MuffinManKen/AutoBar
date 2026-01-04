@@ -19,7 +19,7 @@ local print, select, ipairs, tostring, pairs, tonumber, string, next = print, se
 AB.LibKeyBound = LibStub("LibKeyBound-1.0")	---@type LibKeyBound
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-AB.LibStickyFrames = LibStub("LibStickyFrames-2.0") ---@type LibStickyFrames
+AB.LibMMStickyFrames = LibStub("LibMMStickyFrames-2.0") ---@type LibMMStickyFrames
 
 
 
@@ -610,7 +610,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 	function AB.GetMountInfoByID(p_id)
 		local mdc = AutoBarGlobalDataObject.mount_data_cache_by_id
 		if(mdc[p_id] == nil) then
-			local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id =
+			local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, faction_id, _is_hidden, is_collected, _mount_id =
 						 C_MountJournal.GetMountInfoByID(p_id)
 			local data = {}
 			data.name = name
@@ -618,6 +618,7 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 			data.icon = icon
 			data.is_favourite = is_favourite
 			data.is_collected = is_collected
+			data.faction_id = faction_id
 
 			mdc[p_id] = data;
 		end

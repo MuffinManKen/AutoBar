@@ -373,6 +373,7 @@
 		<Inclusion ftype="static">
 			<Item id="140192" name="Dalaran Hearthstone" />
 			<Item id="110560" name="Garrison Hearthstone" />
+			<Item id="141605" name="Flight Master's Whistle" />
 		</Inclusion>
 
 	</Set>

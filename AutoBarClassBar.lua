@@ -160,7 +160,7 @@ function Bar:CreateBarFrame()
 	end
 	self.frame = driver
 
-	AB.LibStickyFrames:RegisterFrame(self.frame)
+	AB.LibMMStickyFrames:RegisterFrame(self.frame)
 
 	self.elapsed = 0
 	if (self.sharedLayoutDB.fadeOut) then
@@ -399,7 +399,7 @@ function Bar:SetFadeOut(fadeOut)
 end
 
 function Bar:StickTo(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
-	AB.LibStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
+	AB.LibMMStickyFrames:SetFramePoints(frame, point, stickToFrame, stickToPoint, stickToX, stickToY)
 	self.sharedLayoutDB.stickPoint = point
 	self.sharedLayoutDB.stickToFrameName = stickToFrame and stickToFrame:GetName() or nil
 	self.sharedLayoutDB.stickToPoint = stickToPoint
@@ -426,7 +426,7 @@ function Bar:ColorBars()
 			frame:SetBackdropColor(AB.LibKeyBound:GetColorKeyBoundMode())
 		elseif (AutoBar.moveButtonsMode) then
 			if (self.sharedLayoutDB.hide) then
-				frame:SetBackdropColor(AB.LibStickyFrames:GetColorHidden())
+				frame:SetBackdropColor(AB.LibMMStickyFrames:GetColorHidden())
 			else
 				frame:SetBackdropColor(colorMoveButtons.r, colorMoveButtons.g, colorMoveButtons.b, colorMoveButtons.a)
 			end
@@ -574,7 +574,7 @@ function Bar:PositionLoad()
 	if(debug) then code.log_warning(code.Dump(sharedPositionDB, 1)); end
 	if (sharedPositionDB.stickToFrameName and _G[sharedPositionDB.stickToFrameName]) then
 		local stickToFrame = _G[sharedPositionDB.stickToFrameName]
-		AB.LibStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
+		AB.LibMMStickyFrames:SetFramePoints(self.frame, sharedPositionDB.stickPoint, stickToFrame, sharedPositionDB.stickToPoint, sharedPositionDB.stickToX, sharedPositionDB.stickToY)
 --print("Bar:PositionLoad " .. tostring(barDB.stickToFrameName))
 	else
 		if (not sharedLayoutDB.alignButtons) then

@@ -2610,15 +2610,17 @@ else
 			for _k, id in ipairs(mount_ids) do
 				local mount_data = AB.GetMountInfoByID(id)
 				--local name, spell_id, icon, _active, _usable, _src, is_favourite, _faction_specific, _faction, _is_hidden, is_collected, _mount_id = C_MountJournal.GetDisplayedMountInfo(idx)
+				local faction_available = (AutoBar.player_faction_id == mount_data.faction_id) or mount_data.faction_id == nil
 				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
 				local qiraji_filtered = (not buttonDB.mount_show_qiraji and ABGData.QirajiMounts[mount_data.spell_id]) or false;
-	--if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
-	--if (is_collected and is_hidden ) then
-	--	print(string.format("%5s  %5s  Usable:%5s", mount_id, spell_id, tostring(usable)), name)
-	--	print("   FacSpecific:",faction_specific, "Faction:", faction, "Hidden:", is_hidden, "Collected:", is_collected)
-	--	print("   ", AutoBar.player_faction_name, faction_id, "==", faction, "=>", faction_ok)
-	--end;
-				if (mount_data.is_collected and user_selected and not qiraji_filtered) then
+	-- local name = mount_data.name
+	-- local is_collected = mount_data.is_collected
+	-- if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
+	-- 	print(string.format("%5s  %5s  Usable:%5s", id, mount_data.spell_id, tostring(mount_data.faction_id)), name)
+	-- 	print("   Faction:", mount_data.faction_id, "Collected:", is_collected)
+	-- 	print("   ", AutoBar.player_faction_name, AutoBar.player_faction_id, mount_data.faction_id, faction_available)
+	-- end
+				if (mount_data.is_collected and faction_available and user_selected and not qiraji_filtered) then
 					local spell_name = AB.GetSpellInfo(mount_data.spell_id)
 					--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
 					if not spell_name then
