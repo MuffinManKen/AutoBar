@@ -262,6 +262,7 @@ code.cache_spell_data(192249, "Storm Elemental");
 code.cache_spell_data(546, "Water Walking");
 code.cache_spell_data(57994, "Wind Shear");
 
+code.cache_spell_data(382021, "Earthliving Weapon");
 code.cache_spell_data(318038, "Flametongue Weapon");
 code.cache_spell_data(33757, "Windfury Weapon");
 code.cache_spell_data(462757, "Thunderstrike Ward");

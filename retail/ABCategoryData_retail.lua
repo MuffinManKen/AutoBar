@@ -419,6 +419,7 @@ function AB.InitializeCategories()
 		"ROGUE", code.get_spell_name_by_name("Deadly Poison"),
 		"ROGUE", code.get_spell_name_by_name("Wound Poison"),
 		"ROGUE", code.get_spell_name_by_name("Crippling Poison"),
+		"SHAMAN", code.get_spell_name_by_name("Earthliving Weapon"),
 		"SHAMAN", code.get_spell_name_by_name("Flametongue Weapon"),
 		"SHAMAN", code.get_spell_name_by_name("Thunderstrike Ward"),
 		"SHAMAN", code.get_spell_name_by_name("Windfury Weapon"),
