@@ -376,6 +376,9 @@ function AB.InitializeCategories()
 		"PALADIN", code.get_spell_name_by_name("Crusader Aura"),
 		"PALADIN", code.get_spell_name_by_name("Devotion Aura"),
 		"PALADIN", code.get_spell_name_by_name("Retribution Aura"),
+		"WARRIOR", code.get_spell_name_by_name("Battle Stance"),
+		"WARRIOR", code.get_spell_name_by_name("Berserker Stance"),
+		"WARRIOR", code.get_spell_name_by_name("Defensive Stance"),
 	})
 
 
@@ -531,8 +534,8 @@ function AB.InitializeCategories()
 		"PRIEST", code.get_spell_name_by_name("Pain Suppression"),
 		"ROGUE", code.get_spell_name_by_name("Vanish"),
 		"WARLOCK", code.get_spell_name_by_name("Dark Pact"),
-		"WARRIOR", code.get_spell_name_by_name("Last Stand"),
 		"WARRIOR", code.get_spell_name_by_name("Enraged Regeneration"),
+		"WARRIOR", code.get_spell_name_by_name("Ignore Pain"),
 	})
 
 	AutoBarCategoryList["Spell.Interrupt"] = SpellsCategory:new( "Spell.Interrupt", spellIconList["Charge"],

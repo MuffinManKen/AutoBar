@@ -314,16 +314,20 @@ code.cache_spell_data(698, "Ritual of Summoning");
 
 
 --#region Warrior
+code.cache_spell_data(386164, "Battle Stance");
+code.cache_spell_data(386196, "Berserker Stance");
+code.cache_spell_data(386208, "Defensive Stance");
 code.cache_spell_data(6673, "Battle Shout");
 code.cache_spell_data(100, "Charge");
 code.cache_spell_data(97462, "Rallying Cry");
 code.cache_spell_data(1160, "Demoralizing Shout");
 code.cache_spell_data(184364, "Enraged Regeneration");
 code.cache_spell_data(3411, "Intervene");
-code.cache_spell_data(12975, "Last Stand");
 code.cache_spell_data(6552, "Pummel");
 code.cache_spell_data(2565, "Shield Block");
 code.cache_spell_data(871, "Shield Wall");
+code.cache_spell_data(190456, "Ignore Pain");
+
 --#endregion
 
 
