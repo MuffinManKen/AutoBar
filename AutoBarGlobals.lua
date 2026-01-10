@@ -343,6 +343,9 @@ end
 end
  ]]
 
+
+---@param p_spell_id number
+---@param p_spell_name string
 function code.cache_spell_data(p_spell_id, p_spell_name)
 
 	local name, _rank, icon = AB.GetSpellInfo(p_spell_id);
@@ -354,6 +357,13 @@ function code.cache_spell_data(p_spell_id, p_spell_name)
 	if(name == nil) then
 		code.log_warning("Invalid Spell ID:" .. p_spell_id .. " : " .. (p_spell_name or "Unknown"));
 	else
+		local is_passive = C_Spell.IsSpellPassive(p_spell_id)
+		if (is_passive) then
+			code.log_warning("Passive Spell:", p_spell_id, " ", (p_spell_name or "Unknown"))
+		elseif (is_passive == nil) then
+			code.log_warning("Passive Spell is null:", p_spell_id, " ", (p_spell_name or "Unknown"))
+		end
+
 		AutoBarGlobalDataObject.spell_name_list[p_spell_name] = name;
 		AutoBarGlobalDataObject.spell_icon_list[p_spell_name] = icon;
 	end
