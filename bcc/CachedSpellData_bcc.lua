@@ -187,7 +187,7 @@ code.cache_spell_data(1856, "Vanish");
 code.cache_spell_data(2094, "Blind");
 code.cache_spell_data(6770, "Sap");
 code.cache_spell_data(36554, "Shadowstep");
-
+code.cache_spell_data(1804, "Pick Lock");
 
 --#region Shaman
 code.cache_spell_data(8024, "Flametongue Weapon");

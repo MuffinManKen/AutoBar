@@ -160,8 +160,12 @@ function AutoBar:InitializeZero()
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_SKILL_LINE")
 	AutoBar.frame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
+
+	local ok = pcall(AutoBar.frame.RegisterEvent, AutoBar.frame, "LEARNED_SPELL_IN_TAB")
+    if not ok then code.log_warning("Event does not exist:", "LEARNED_SPELL_IN_TAB") end
+    ok = pcall(AutoBar.frame.RegisterEvent, AutoBar.frame, "LEARNED_SPELL_IN_SKILL_LINE")
+    if not ok then code.log_warning("Event does not exist:", "LEARNED_SPELL_IN_SKILL_LINE") end
 
 	if(AutoBarDB2.settings.handle_spell_changed) then
 		AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
@@ -535,6 +539,11 @@ function AB.events.LEARNED_SPELL_IN_SKILL_LINE(p_arg1)
 	AB.LogEventStart("LEARNED_SPELL_IN_SKILL_LINE")
 	AB.ABScheduleUpdate(tick.UpdateSpellsID)
 	AB.LogEventEnd("LEARNED_SPELL_IN_SKILL_LINE", p_arg1)
+end
+function AB.events.LEARNED_SPELL_IN_TAB(p_arg1)
+	AB.LogEventStart("LEARNED_SPELL_IN_TAB")
+	AB.ABScheduleUpdate(tick.UpdateSpellsID)
+	AB.LogEventEnd("LEARNED_SPELL_IN_TAB", p_arg1)
 end
 
 function AB.events.UNIT_SPELLCAST_SUCCEEDED(p_unit, p_guid, p_spell_id)
