@@ -1265,7 +1265,7 @@ function AutoBarButtonOpenable.prototype:init(parentBar, buttonDB)
 	if(buttonDB.openable_include_craft_knowledge == nil) then buttonDB.openable_include_craft_knowledge = true end
 
 
-	if (buttonDB.openable_include_craft_knowledge) then
+	if (AutoBarCategoryList["Muffin.Misc.CraftingKnowledge"] and buttonDB.openable_include_craft_knowledge) then
 		self:AddCategory("Muffin.Misc.CraftingKnowledge")
 	end
 end
