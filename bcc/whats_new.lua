@@ -3,5 +3,5 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Update for TBC Anniversary
+ - Fixed buttons not working. Really, really this time.
 ]] .. "|n"
