@@ -180,7 +180,7 @@ code.cache_spell_data(6346, "Fear Ward");
 
 --Rogue
 code.cache_spell_data(1842, "Disarm Trap");
-code.cache_spell_data(4086, "Evasion");
+code.cache_spell_data(5277, "Evasion");
 code.cache_spell_data(1766, "Kick");
 code.cache_spell_data(1784, "Stealth");
 code.cache_spell_data(1856, "Vanish");

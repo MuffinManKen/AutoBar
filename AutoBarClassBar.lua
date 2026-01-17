@@ -500,7 +500,7 @@ function Bar:CreateDragFrame()
 
 		frame.class = self
 		frame:EnableMouse(true)
-		if (AutoBarGlobalDataObject.is_mainline_wow) then
+		if (ABGData.is_mainline_wow or ABGData.is_bcc_wow) then
 			frame:RegisterForClicks("AnyUp", "AnyDown")
 		else
 			frame:RegisterForClicks("AnyUp")

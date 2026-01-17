@@ -267,7 +267,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	if (AutoBarGlobalDataObject.is_mainline_wow) then
+	if (AutoBarGlobalDataObject.is_mainline_wow or ABGData.is_bcc_wow) then
 		frame:RegisterForClicks("AnyUp", "AnyDown")
 	else
 		frame:RegisterForClicks("AnyUp")
