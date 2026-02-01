@@ -284,9 +284,11 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 		elseif (itemType == "spell") then
 			local spellName = frame:GetAttribute("spell")
 			count1 = AB.GetSpellCount(spellName) or 0
+			if issecretvalue(count1) then count1 = 0; end
 			local spellName2 = frame:GetAttribute("spell2")
 			if (spellName2) then
 				count2 = AB.GetSpellCount(spellName2) or 0
+				if issecretvalue(count2) then count2 = 0; end
 			end
 		end
 	end
