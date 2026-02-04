@@ -1378,12 +1378,24 @@ function AutoBar:CreateOptionsAce3()
 					args = {
 						header0 = {
 							type = "header",
-							order = 0,
+							order = 1,
+							name = "Midnight Patrons",
+						},
+						midnight_patron_text = {
+						    type = "description",
+							order = 2,
+						    name = "Sam Warters, JimPhoenix, Lucid Rooster, Puffybits, Boven, Kirothius, Dustin Fetroe, Starshifter, Gazmik Fizzwidget, Dan Fine",
+						    desc = "Awesome people",
+						    fontSize = "medium",
+						},
+						header3 = {
+							type = "header",
+							order = 9,
 							name = "AutoBar Supporters",
 						},
 						supp_text = {
 						    type = "description",
-							order = 1,
+							order = 10,
 						    name = "Schaufel-Shandris & Thana|n|nFlashback of Shandris, IShiftMyself and Arrtard (Alexstraza), CrzyKidd, Solarious, Nurgle the Wonder Hamster, Joe Jamp, Dahn-Silvermoon, MrUzagi",
 						    desc = "Awesome people",
 						    fontSize = "medium",
