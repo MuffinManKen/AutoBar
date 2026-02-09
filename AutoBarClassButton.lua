@@ -961,12 +961,12 @@ function AutoBar.Class.Button:Delete(buttonKey)
 	end
 
 	-- Delete ButtonKeys on Bars
-	Bar:DeleteButtonKey(AutoBarDB2.account.barList, buttonKey)
+	AB.bar:DeleteButtonKey(AutoBarDB2.account.barList, buttonKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
-		Bar:DeleteButtonKey(classDB.barList, buttonKey)
+		AB.bar:DeleteButtonKey(classDB.barList, buttonKey)
 	end
 	for _, charDB in pairs (AutoBarDB2.chars) do
-		Bar:DeleteButtonKey(charDB.barList, buttonKey)
+		AB.bar:DeleteButtonKey(charDB.barList, buttonKey)
 	end
 
 	-- Delete Instantiated Buttons
@@ -1030,12 +1030,12 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 	end
 
 	-- Change ButtonKeys on Bars
-	Bar:RenameButtonKey(AutoBarDB2.account.barList, oldKey, newKey)
+	AB.bar:RenameButtonKey(AutoBarDB2.account.barList, oldKey, newKey)
 	for _, classDB in pairs (AutoBarDB2.classes) do
-		Bar:RenameButtonKey(classDB.barList, oldKey, newKey)
+		AB.bar:RenameButtonKey(classDB.barList, oldKey, newKey)
 	end
 	for _, charDB in pairs (AutoBarDB2.chars) do
-		Bar:RenameButtonKey(charDB.barList, oldKey, newKey)
+		AB.bar:RenameButtonKey(charDB.barList, oldKey, newKey)
 	end
 end
 
