@@ -49,7 +49,7 @@ function UITK.show_tooltip(self)
 
 	if(self.tooltip_title) then
 		GameTooltip:SetText(self.tooltip_title, 1, 1, 0.5, 1.0, 1)
-		GameTooltip:AddLine(self.tooltip_text, 1, 1, 1, 1.0, 1)
+		GameTooltip:AddLine(self.tooltip_text, 1, 1, 1, true)
 	elseif(self.tooltip_text) then
 		GameTooltip:SetText(self.tooltip_text, nil, nil, nil, nil, 1);
 	end
