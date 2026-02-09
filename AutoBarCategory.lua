@@ -504,6 +504,9 @@ function CustomCategory:ChangeName(newName)
 		local customCategories = AutoBarDB2.custom_categories
 		customCategories[newCategoryKey] = customCategories[oldCustomKey]
 		customCategories[oldCustomKey] = nil
+
+		-- Keep all Button category references in sync with the renamed Custom Category.
+		AutoBar.Class.Button:RenameCategory(oldCustomKey, newCategoryKey)
 	end
 	return self.customCategoriesDB.name
 end
