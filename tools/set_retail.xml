@@ -1,4 +1,4 @@
-<SetFile url_root="https://www.wowhead.com/beta/">
+<SetFile url_root="https://www.wowhead.com/">
 
 	<Set name="Muffin.Battle Pet Items.Level">
 		<Inclusion ftype="wowhead" url="consumable-items/name:battle-training+stone" />
