@@ -1384,7 +1384,19 @@ function AutoBar:CreateOptionsAce3()
 						midnight_patron_text = {
 						    type = "description",
 							order = 2,
-						    name = "Sam Warters, JimPhoenix, Lucid Rooster, Puffybits, Boven, Kirothius, Dustin Fetroe, Starshifter, Gazmik Fizzwidget, Dan Fine",
+						    name = "Sam Warters, JimPhoenix, Lucid Rooster, Puffybits, Boven, Kirothius, Dustin Fetroe, Starshifter, Gazmik\194\160Fizzwidget, Dan Fine",
+						    desc = "Awesome people",
+						    fontSize = "medium",
+						},
+						header_midnight_supporters = {
+							type = "header",
+							order = 3,
+							name = "Midnight Supporters",
+						},
+						midnight_supporter_text = {
+						    type = "description",
+							order = 4,
+						    name = "Wayofthebob, Dashfyra - Executus EU, Bethany S, Mul, Angel Lyqwyd, A. Klein, Darkurvar, Longsocks, Asjaskan, Redorkulated, Brian G., Yuxans Yao, Pernvandamme, Emmaleah, Dimiter, Captain WhyNot, Jodou Kast, Mike, scb, Gruubar @ Proudmoore-US, Finnegan of Antonidas, Kevin Brott, Brem, Esmer\226\128\147Gilneas, Aleveria, Maradia, Ztid - Dragonmaw, Oegaboega, Olindra, anticow, Chaz Trotter, James\194\160(Kakotan), Steve M, Erwin Versluis, Andromaxe, NeoTron",
 						    desc = "Awesome people",
 						    fontSize = "medium",
 						},
@@ -1396,7 +1408,7 @@ function AutoBar:CreateOptionsAce3()
 						supp_text = {
 						    type = "description",
 							order = 10,
-						    name = "Schaufel-Shandris & Thana|n|nFlashback of Shandris, IShiftMyself and Arrtard (Alexstraza), CrzyKidd, Solarious, Nurgle the Wonder Hamster, Joe Jamp, Dahn-Silvermoon, MrUzagi",
+						    name = "Schaufel-Shandris & Thana|n|nFlashback of Shandris, IShiftMyself and Arrtard (Alexstraza), CrzyKidd, Solarious, |WNurgle the Wonder Hamster|w, Joe Jamp, Dahn-Silvermoon, MrUzagi",
 						    desc = "Awesome people",
 						    fontSize = "medium",
 						}
