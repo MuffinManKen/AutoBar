@@ -3,5 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Fixed buttons not working. Really, really this time.
+ - Updated data mining
+ - Priest: Added Divine Spirit buff
 ]] .. "|n"
