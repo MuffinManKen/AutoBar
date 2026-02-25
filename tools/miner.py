@@ -521,7 +521,7 @@ def my_upper(p_string):
 arg_parser = argparse.ArgumentParser(description='Mine WoW Data')
 arg_parser.add_argument('-f', '--file', nargs='?', const = "", type = my_upper)
 arg_parser.add_argument('-s', '--set', nargs='?', const = "", type = my_upper)
-arg_parser.add_argument('xpac', choices=["classic", "wrath", "cata", "mop", "retail"])
+arg_parser.add_argument('xpac', choices=["classic", "bcc", "wrath", "cata", "mop", "retail"])
 
 parsed_args = arg_parser.parse_args()
 file_override = parsed_args.file

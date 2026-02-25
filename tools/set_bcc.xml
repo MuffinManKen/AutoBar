@@ -1,4 +1,4 @@
-<SetFile url_root="https://tbc.wowhead.com/">
+<SetFile url_root="https://wowhead.com/tbc/">
 
 	<Set name="Muffin.Elixir.Battle">
 		<Inclusion ftype="wowhead" url="battle-elixirs" />
