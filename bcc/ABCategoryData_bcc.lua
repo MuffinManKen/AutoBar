@@ -107,6 +107,7 @@ function AB.InitializeCategories()
 		"PRIEST", code.get_spell_name_by_name("Elune's Grace"), code.get_spell_name_by_name("Elune's Grace"),
 		"PRIEST", code.get_spell_name_by_name("Shadowguard"), code.get_spell_name_by_name("Shadowguard"),
 		"PRIEST", code.get_spell_name_by_name("Touch of Weakness"), code.get_spell_name_by_name("Touch of Weakness"),
+		"PRIEST", code.get_spell_name_by_name("Divine Spirit"), code.get_spell_name_by_name("Divine Spirit"),
 		"SHAMAN", code.get_spell_name_by_name("Water Walking"), code.get_spell_name_by_name("Water Walking"),
 		"WARLOCK", code.get_spell_name_by_name("Unending Breath"), code.get_spell_name_by_name("Unending Breath"),
 		"WARRIOR", code.get_spell_name_by_name("Battle Shout"), code.get_spell_name_by_name("Battle Shout"),
