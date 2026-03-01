@@ -192,6 +192,9 @@ code.cache_spell_data(395289, "Portal: Valdrakken");
 
 code.cache_spell_data(446540, "Teleport: Dornogal");
 code.cache_spell_data(446534, "Portal: Dornogal");
+
+code.cache_spell_data(1259190, "Teleport: Silvermoon City");
+code.cache_spell_data(1259194, "Portal: Silvermoon City");
 --#endregion
 
 

@@ -320,6 +320,7 @@ function AB.InitializeCategories()
 		"MAGE", code.get_spell_name_by_name("Teleport: Oribos"), code.get_spell_name_by_name("Portal: Oribos"),
 		"MAGE", code.get_spell_name_by_name("Teleport: Valdrakken"), code.get_spell_name_by_name("Portal: Valdrakken"),
 		"MAGE", code.get_spell_name_by_name("Teleport: Dornogal"), code.get_spell_name_by_name("Portal: Dornogal"),
+		"MAGE", code.get_spell_name_by_name("Teleport: Silvermoon City"), code.get_spell_name_by_name("Portal: Silvermoon City"),
 		"MONK", code.get_spell_name_by_name("Zen Pilgrimage"), code.get_spell_name_by_name("Zen Pilgrimage"),
 		"MONK", code.get_spell_name_by_name("Zen Pilgrimage: Return"), code.get_spell_name_by_name("Zen Pilgrimage: Return"),
 		"DEATHKNIGHT", code.get_spell_name_by_name("Death Gate"), code.get_spell_name_by_name("Death Gate"),
