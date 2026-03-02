@@ -504,32 +504,37 @@ end
 
 
 
+local usable_update_pending = false
+local function flush_usable_update()
+	usable_update_pending = false
+	for _button_name, button in pairs(AutoBar.buttonList) do
+		button:UpdateUsable()
+	end
+end
+
 function AB.events.ACTIONBAR_UPDATE_USABLE(p_arg1)
 	AB.LogEventStart("ACTIONBAR_UPDATE_USABLE")
-
 	if (InCombatLockdown()) then
-		for _button_name, button in pairs(AutoBar.buttonList) do
-			button:UpdateUsable()
+		if not usable_update_pending then
+			usable_update_pending = true
+			C_Timer.After(0.05, flush_usable_update)
 		end
 	else
 		AB.ABScheduleUpdate(tick.UpdateObjectsID)
 	end
-
 	AB.LogEventEnd("ACTIONBAR_UPDATE_USABLE", p_arg1)
 end
 
 
 function AB.events.UPDATE_SHAPESHIFT_FORMS(p_arg1)
 	AB.LogEventStart("UPDATE_SHAPESHIFT_FORMS")
-
 	if (InCombatLockdown()) then
-		for _button_name, button in pairs(AutoBar.buttonList) do
-			button:UpdateUsable()
+		if not usable_update_pending then
+			usable_update_pending = true
+			C_Timer.After(0.05, flush_usable_update)
 		end
 	end
-
 	AB.ABScheduleUpdate(tick.UpdateSpellsID)
-
 	AB.LogEventEnd("UPDATE_SHAPESHIFT_FORMS", p_arg1)
 end
 
@@ -620,15 +625,14 @@ end
 
 function AB.events.UNIT_AURA(p_arg1)
 	AB.LogEventStart("UNIT_AURA")
-
 	if (AutoBar:IsInLockDown()) then
-		for _button_name, button in pairs(AutoBar.buttonList) do
-			button:UpdateUsable()
+		if not usable_update_pending then
+			usable_update_pending = true
+			C_Timer.After(0.05, flush_usable_update)
 		end
 	else
 		AB.ABScheduleUpdate(tick.UpdateButtonsID)
 	end
-
 	AB.LogEventEnd("UNIT_AURA", p_arg1)
 end
 
