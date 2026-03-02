@@ -474,25 +474,32 @@ end
 
 
 
-function AB.events.BAG_UPDATE_COOLDOWN(p_arg1)
-	AB.LogEventStart("BAG_UPDATE_COOLDOWN")
-
-	for _button_name, button in pairs(AutoBar.buttonList) do
-		button:UpdateCooldown()
+do
+	local cooldown_update_pending = false
+	local function flush_cooldown_update()
+		cooldown_update_pending = false
+		for _button_name, button in pairs(AutoBar.buttonList) do
+			button:UpdateCooldown()
+		end
 	end
 
-	AB.LogEventEnd("BAG_UPDATE_COOLDOWN", p_arg1)
-end
-
-
-function AB.events.SPELL_UPDATE_COOLDOWN(arg1)
-	AB.LogEventStart("SPELL_UPDATE_COOLDOWN")
-
-	for _button_name, button in pairs(AutoBar.buttonList) do
-		button:UpdateCooldown()
+	function AB.events.BAG_UPDATE_COOLDOWN(p_arg1)
+		AB.LogEventStart("BAG_UPDATE_COOLDOWN")
+		if not cooldown_update_pending then
+			cooldown_update_pending = true
+			C_Timer.After(0.05, flush_cooldown_update)
+		end
+		AB.LogEventEnd("BAG_UPDATE_COOLDOWN", p_arg1)
 	end
 
-	AB.LogEventEnd("SPELL_UPDATE_COOLDOWN", arg1)
+	function AB.events.SPELL_UPDATE_COOLDOWN(arg1)
+		AB.LogEventStart("SPELL_UPDATE_COOLDOWN")
+		if not cooldown_update_pending then
+			cooldown_update_pending = true
+			C_Timer.After(0.05, flush_cooldown_update)
+		end
+		AB.LogEventEnd("SPELL_UPDATE_COOLDOWN", arg1)
+	end
 end
 
 
