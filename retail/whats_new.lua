@@ -3,9 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - TOC bump
- - Added remaining Kickstarter supporter names
- - Datamining
+ - Added new Mage Portal and Teleport. Thanks Daniel!
 ]] .. "|n"
 
 
