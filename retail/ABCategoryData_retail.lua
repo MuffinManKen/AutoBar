@@ -293,6 +293,7 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Portals"] = SpellsCategory:new( "Spell.Portals", "spell_arcane_portalironforge", nil,
 	{
+		"DEATHKNIGHT", code.get_spell_name_by_name("Death Gate"), code.get_spell_name_by_name("Death Gate"),
 		"DRUID", code.get_spell_name_by_name("Teleport: Moonglade"), code.get_spell_name_by_name("Teleport: Moonglade"),
 		"DRUID", code.get_spell_name_by_name("Dreamwalk"), code.get_spell_name_by_name("Dreamwalk"),
 		"MAGE", code.get_spell_name_by_name("Teleport: Stonard"), code.get_spell_name_by_name("Portal: Stonard"),
@@ -323,7 +324,6 @@ function AB.InitializeCategories()
 		"MAGE", code.get_spell_name_by_name("Teleport: Silvermoon City"), code.get_spell_name_by_name("Portal: Silvermoon City"),
 		"MONK", code.get_spell_name_by_name("Zen Pilgrimage"), code.get_spell_name_by_name("Zen Pilgrimage"),
 		"MONK", code.get_spell_name_by_name("Zen Pilgrimage: Return"), code.get_spell_name_by_name("Zen Pilgrimage: Return"),
-		"DEATHKNIGHT", code.get_spell_name_by_name("Death Gate"), code.get_spell_name_by_name("Death Gate"),
 		"SHAMAN", code.get_spell_name_by_name("Astral Recall"), code.get_spell_name_by_name("Astral Recall"),
 		"WARLOCK", code.get_spell_name_by_name("Ritual of Summoning"), code.get_spell_name_by_name("Ritual of Summoning"),
 		"*", code.get_spell_name_by_name("Mole Machine"), code.get_spell_name_by_name("Mole Machine"),
