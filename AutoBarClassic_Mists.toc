@@ -1,5 +1,5 @@
 ## Interface: 50500
-## Title: AutoBarClassic
+## Title: AutoBarClassicMoP
 ## Author: MuffinManKen, Toadkiller (Original code)
 ## Version: 5.05.0.02
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
