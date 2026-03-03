@@ -14,7 +14,7 @@ local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
+local Class = AutoBar.Class.new_class
 local L = AutoBarGlobalDataObject.locale
 
 local reverse_sort_func = function( a,b ) return a > b end
@@ -25,12 +25,12 @@ local forward_sort_func = function( a,b ) return a < b end
 
 
 
-local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+local AutoBarButtonMount = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
 
-function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
---print("AutoBarButtonMount.prototype:init");
+function AutoBarButtonMount:init(parentBar, buttonDB)
+	AutoBarButtonMount.super.init(self, parentBar, buttonDB)
+--print("AutoBarButtonMount:init");
 
 	local buttonData = AutoBar.char.buttonDataList[buttonDB.buttonKey]
 	if (not buttonData) then
@@ -58,12 +58,12 @@ function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
 
 end
 
-function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
-	AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
+function AutoBarButtonMount:Refresh(parentBar, buttonDB)
+	AutoBarButtonMount.super.Refresh(self, parentBar, buttonDB)
 
 	if (not AutoBarCategoryList["Spell.Mount"]) then
-		--AutoBarButtonMount.prototype:init hasn't run, so skip
-		--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+		--AutoBarButtonMount:init hasn't run, so skip
+		--print("Skipping AutoBarButtonMount:Refresh  UpdateMount:" .. tostring(updateMount));
 		return true;
 	end
 
@@ -124,7 +124,7 @@ end
 
 
 
-function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
+function AutoBarButtonMount:AddOptions(optionList, passValue)
 	self:SetOptionBoolean(optionList, passValue, "mount_show_qiraji", L["MountShowQiraji"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 	self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
@@ -143,7 +143,7 @@ end
 --]]
 
 --- Temporary until Blizzard makes their code work for mounts & critters
-function AutoBarButtonMount.prototype:UpdateUsable()
+function AutoBarButtonMount:UpdateUsable()
 	local frame = self.frame
 	local itemType = frame:GetAttribute("type")
 	if (itemType) then

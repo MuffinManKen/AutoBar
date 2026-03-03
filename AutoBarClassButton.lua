@@ -17,7 +17,7 @@ local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 
 
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
+local Class = AutoBar.Class.new_class
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local _
@@ -26,7 +26,7 @@ local _G = _G
 local print, select, assert, ipairs, pairs, tonumber, strmatch = print, select, assert, ipairs, pairs, tonumber, strmatch
 
 -- Basic Button with textures, highlighting, keybindText, tooltips etc.
-AutoBar.Class.Button = AceOO.Class(AutoBar.Class.BasicButton)
+AutoBar.Class.Button = Class(AutoBar.Class.BasicButton)
 
 
 local function onAttributeChangedFunc(button)
@@ -69,8 +69,8 @@ local function OnUpdateFunc(button, elapsed)
 end
 
 
-function AutoBar.Class.Button.prototype:init(parentBar, buttonDB)
-	AutoBar.Class.Button.super.prototype.init(self)
+function AutoBar.Class.Button:init(parentBar, buttonDB)
+	AutoBar.Class.Button.super.init(self)
 
 	self.showgrid = 0
 	self.flashing = 0
@@ -93,13 +93,13 @@ function AutoBar.Class.Button.prototype:init(parentBar, buttonDB)
 end
 
 -- Refresh the category list
-function AutoBar.Class.Button.prototype:Refresh(parentBar, buttonDB)
+function AutoBar.Class.Button:Refresh(parentBar, buttonDB)
 	local debug = false --(buttonDB.buttonKey == "AutoBarButtonQuest")
 	if(debug) then code.log_warning("AB.C.Button.proto.Refresh", self.buttonName, self.buttonDB.hasCustomCategories, #self.buttonDB) end
 	self.parentBar = parentBar
 	if (buttonDB ~= self.buttonDB) then
 		self.buttonDB = buttonDB
-		assert(self.buttonName == buttonDB.buttonKey, "AutoBar.Class.Button.prototype:Refresh Button Name changed")
+		assert(self.buttonName == buttonDB.buttonKey, "AutoBar.Class.Button:Refresh Button Name changed")
 		self.buttonDBIndex = buttonDB.order
 	end
 
@@ -119,19 +119,19 @@ end
 
 
 -- Disable the Button
-function AutoBar.Class.Button.prototype:Disable()
+function AutoBar.Class.Button:Disable()
 --	self.frame:SetAttribute("category", nil)
 --	self.frame:SetAttribute("itemId", nil)
 --	self.frame:Hide()
---print("AutoBar.Class.Button.prototype:Disable " .. tostring(self.buttonName))
+--print("AutoBar.Class.Button:Disable " .. tostring(self.buttonName))
 end
 
 -- Return the name of the global frame of the button.  Keybinds are made to it.
-function AutoBar.Class.Button.prototype:GetButtonFrameName()
+function AutoBar.Class.Button:GetButtonFrameName()
 	return self.buttonDB.buttonKey .. "Frame"
 end
 
-function AutoBar.Class.Button.prototype:GetButtonBinding()
+function AutoBar.Class.Button:GetButtonBinding()
 	return self.buttonDB.buttonKey .. "_X"
 end
 
@@ -144,7 +144,7 @@ function AutoBar.Class.Button:GetHotkey()
 	local frame = self
 	local key1 = GetBindingKey(frame.class.buttonName .. "_X")
 	local key = AB.LibKeyBound:ToShortKey(key1)
---print("AutoBar.Class.Button.prototype:GetHotkey key1 " .. tostring(key1) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button:GetHotkey key1 " .. tostring(key1) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
 	return key
 end
 
@@ -162,9 +162,9 @@ function AutoBar.Class.Button:SetKey(key)
 --		SetOverrideBindingClick(AutoBar.frame, false, key, buttonFrameName)
 		local buttonBinding = button:GetButtonBinding()
 		if (buttonBinding) then
---print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button:SetKey buttonBinding " .. tostring(buttonBinding) .. " -> " .. tostring(key))-- .. " buttonName " .. tostring(frame.class.buttonName))
 			SetBinding(key, buttonBinding)
---print("AutoBar.Class.Button.prototype:SetKey buttonBinding " .. tostring(buttonBinding) .. " <- " .. tostring(GetBindingKey(buttonBinding)))-- .. " buttonName " .. tostring(frame.class.buttonName))
+--print("AutoBar.Class.Button:SetKey buttonBinding " .. tostring(buttonBinding) .. " <- " .. tostring(GetBindingKey(buttonBinding)))-- .. " buttonName " .. tostring(frame.class.buttonName))
 		end
 		button:BindingsUpdate()
 	end
@@ -198,15 +198,15 @@ function AutoBar.Class.Button:GetBindings()
 end
 --/dump _G["AutoBarButtonTrinket2_X"]
 
-function AutoBar.Class.Button.prototype:BindingsUpdate()
+function AutoBar.Class.Button:BindingsUpdate()
 	local buttonFrameName = self:GetButtonFrameName()
 	local buttonBinding = self:GetButtonBinding()
 	for i = 1, select('#', GetBindingKey(buttonBinding)) do
 		local hotKey = select(i, GetBindingKey(buttonBinding))
---print("AutoBar.Class.Button.prototype:BindingsUpdate hotKey " .. tostring(hotKey) .. " buttonFrameName " .. tostring(buttonFrameName))
+--print("AutoBar.Class.Button:BindingsUpdate hotKey " .. tostring(hotKey) .. " buttonFrameName " .. tostring(buttonFrameName))
 		SetOverrideBindingClick(AutoBar.frame, false, hotKey, buttonFrameName)
 	end
---print("AutoBar.Class.Button.prototype:BindingsUpdate -> buttonFrameName " .. tostring(buttonFrameName))
+--print("AutoBar.Class.Button:BindingsUpdate -> buttonFrameName " .. tostring(buttonFrameName))
 	self:UpdateHotkeys()
 end
 
@@ -218,7 +218,7 @@ end
 function AutoBar.Class.Button:UpdateBindings(buttonName, buttonFrameName)
 	local key1, key2 = GetBindingKey(buttonName .. "_X")
 	if (key1) then
---print("AutoBar.Class.Button.prototype:UpdateBindings key1 " .. tostring(key1) .. " key2 " .. tostring(key2) .. " buttonName " .. tostring(buttonName))
+--print("AutoBar.Class.Button:UpdateBindings key1 " .. tostring(key1) .. " key2 " .. tostring(key2) .. " buttonName " .. tostring(buttonName))
 		SetOverrideBindingClick(AutoBar.frame, false, key1, buttonFrameName)
 	end
 	if (key2) then
@@ -252,7 +252,7 @@ local function funcOnLeave(self)
 	GameTooltip:Hide()
 end
 
-function AutoBar.Class.Button.prototype:CreateButtonFrame()
+function AutoBar.Class.Button:CreateButtonFrame()
 	local name = self:GetButtonFrameName()
 	local frame = CreateFrame("Button", name, self.parentBar.frame, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerBaseTemplate")
 	self.frame = frame
@@ -326,7 +326,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 end
 
 -- Handle a click on a popped up button
-function AutoBar.Class.Button.prototype.OnClick(object, button, down)
+function AutoBar.Class.Button.OnClick(object, button, down)
 	local self = object.class
 --print("OnClick " .. self.buttonName .. " " .. tostring(object) .. " object.class " .. tostring(object.class) .. " button " .. tostring(button) .. " down " .. tostring(down))
 	if (down) then
@@ -391,7 +391,7 @@ end
 -- Return true if successful
 -- Return nil if not
 --TODO: Is this ever called???
-function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targetSlot)
+function AutoBar.Class.Button:SwitchItem(buttonItemId, targetBag, targetSlot)
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
 		for _, popupButton in pairs(popupHeader.popupButtonList) do
@@ -421,7 +421,7 @@ function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targ
 end
 
 -- Handle shuffle buttons
-function AutoBar.Class.Button.prototype:PostClick(mouseButton, down)
+function AutoBar.Class.Button:PostClick(mouseButton, down)
 	local self = self.class
 
 	if (self.buttonDB.shuffle and InCombatLockdown()) then
@@ -454,9 +454,9 @@ local borderMoveEmpty = {r = 0, g = 0, b = 1.0, a = 1.0}
 
 -- Returns Icon texture, borderColor
 -- Nil borderColor hides border
-function AutoBar.Class.Button.prototype:GetIconTexture()
+function AutoBar.Class.Button:GetIconTexture()
 	local frame = self.frame
-	local texture, borderColor = AutoBar.Class.Button.super.prototype.GetIconTexture(self, frame)
+	local texture, borderColor = AutoBar.Class.Button.super.GetIconTexture(self, frame)
 
 	local category = frame:GetAttribute("category")
 	if (AutoBar.moveButtonsMode) then
@@ -485,7 +485,7 @@ end
 --/dump AutoBar.buttonList["AutoBarButtonTrinket1"].frame.icon:GetTexture()
 --/script AutoBar.buttonList["AutoBarButtonTrinket1"]:UpdateIcon()
 
-function AutoBar.Class.Button.prototype:UpdateIcon()
+function AutoBar.Class.Button:UpdateIcon()
 	local frame = self.frame
 	local texture, borderColor = self:GetIconTexture()
 
@@ -506,7 +506,7 @@ function AutoBar.Class.Button.prototype:UpdateIcon()
 end
 
 
-function AutoBar.Class.Button.prototype:UpdateButton()
+function AutoBar.Class.Button:UpdateButton()
 	local frame = self.frame
 	self:UpdateIcon()
 	self:UpdateCount()
@@ -544,7 +544,7 @@ function AutoBar.Class.Button.prototype:UpdateButton()
 	end
 end
 
-function AutoBar.Class.Button.prototype:UpdateHotkeys()
+function AutoBar.Class.Button:UpdateHotkeys()
 	if (AutoBarDB2.settings.show_hotkey) then
 		self.frame.hotKey:Show()
 	else
@@ -568,8 +568,8 @@ end
 
 
 -- Set cooldown for the button and popups if any
-function AutoBar.Class.Button.prototype:UpdateCooldown()
-	AutoBar.Class.Button.super.prototype.UpdateCooldown(self)
+function AutoBar.Class.Button:UpdateCooldown()
+	AutoBar.Class.Button.super.UpdateCooldown(self)
 
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
@@ -581,8 +581,8 @@ end
 --/script local start, duration, enabled = AB.GetSpellCooldown("Summon Water Elemental", BOOKTYPE_SPELL); print("start " .. tostring(start) .. " duration " .. tostring(duration) .. " enabled " .. tostring(enabled))
 
 -- Set count for the button and popups if any
-function AutoBar.Class.Button.prototype:UpdateCount()
-	AutoBar.Class.Button.super.prototype.UpdateCount(self)
+function AutoBar.Class.Button:UpdateCount()
+	AutoBar.Class.Button.super.UpdateCount(self)
 	if (AutoBarDB2.settings.show_count) then
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
@@ -593,11 +593,11 @@ function AutoBar.Class.Button.prototype:UpdateCount()
 	end
 end
 
-function AutoBar.Class.Button.prototype:UpdateUsable()
+function AutoBar.Class.Button:UpdateUsable()
 	local itemType = self.frame:GetAttribute("type")
 	local category = self.frame:GetAttribute("category")
 	if (itemType) then
-		AutoBar.Class.Button.super.prototype.UpdateUsable(self)
+		AutoBar.Class.Button.super.UpdateUsable(self)
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
@@ -617,7 +617,7 @@ end
 
 --/dump AutoBar.buttonList["AutoBarButtonCat"]:IsActive()
 
-function AutoBar.Class.Button.prototype:IsActive()
+function AutoBar.Class.Button:IsActive()
 	local debug_me = false; --("AutoBarButtonPets" == self.buttonName)
 	if (debug_me) then print("AutoBar.Class.Button:IsActive", self.buttonName); end;
 	if (not self.buttonDB.enabled) then
@@ -628,7 +628,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 	end
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
-		if (debug_me) then print("AutoBar.Class.Button.prototype:IsActive itemId ", self.frame:GetAttribute("itemId"), "itemtype:", itemType); end;
+		if (debug_me) then print("AutoBar.Class.Button:IsActive itemId ", self.frame:GetAttribute("itemId"), "itemtype:", itemType); end;
 		local category = self.frame:GetAttribute("category")
 		local categoryInfo = AutoBarCategoryList[category]
 		if (categoryInfo and categoryInfo.battleground and not AutoBar.inBG) then
@@ -647,7 +647,7 @@ function AutoBar.Class.Button.prototype:IsActive()
 					local nItems = # sortedItems
 					if (nItems > 1 and not noPopup) then
 						count = 1
---print("AutoBar.Class.Button.prototype:IsActive nItems " .. tostring(nItems))
+--print("AutoBar.Class.Button:IsActive nItems " .. tostring(nItems))
 					end
 				end
 				if (self.frame:GetAttribute("type2") == "spell") then
@@ -703,7 +703,7 @@ local function FindSpell(spellName, bookType)
 end
 
 -- Set Cursor based on the type settings
-function AutoBar.Class.Button.prototype:SetDragCursor()
+function AutoBar.Class.Button:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
 		if (itemType == "item") then
@@ -724,7 +724,7 @@ end
 
 local ATTACK_BUTTON_FLASH_TIME = ATTACK_BUTTON_FLASH_TIME
 
-function AutoBar.Class.Button.prototype:OnUpdate(elapsed)
+function AutoBar.Class.Button:OnUpdate(elapsed)
 	if (not self.frame.tex) then
 		self:UpdateIcon()
 	end
@@ -779,17 +779,17 @@ function AutoBar.Class.Button.prototype:OnUpdate(elapsed)
 	end
 end
 
-function AutoBar.Class.Button.prototype:StartFlash()
+function AutoBar.Class.Button:StartFlash()
 	self.flashing = 1
 	self.flashtime = 0
 end
 
-function AutoBar.Class.Button.prototype:StopFlash()
+function AutoBar.Class.Button:StopFlash()
 	self.flashing = 0
 	self.frame.flash:Hide()
 end
 
-function AutoBar.Class.Button.prototype:ShowButton()
+function AutoBar.Class.Button:ShowButton()
 
 	if (Masque) then
 		local frame = self.frame
@@ -815,7 +815,7 @@ function AutoBar.Class.Button.prototype:ShowButton()
 	end
 end
 
-function AutoBar.Class.Button.prototype:HideButton()
+function AutoBar.Class.Button:HideButton()
 	local frame = self.frame
 
 
@@ -843,7 +843,7 @@ function AutoBar.Class.Button.prototype:HideButton()
 	end
 end
 
-function AutoBar.Class.Button.prototype:ShowGrid(override)
+function AutoBar.Class.Button:ShowGrid(override)
 --	local frame = self.frame
 --	if not override then
 --		self.showgrid = self.showgrid + 1
@@ -852,7 +852,7 @@ function AutoBar.Class.Button.prototype:ShowGrid(override)
 --	frame.normalTexture:Show()
 end
 
-function AutoBar.Class.Button.prototype:HideGrid(override)
+function AutoBar.Class.Button:HideGrid(override)
 --	local frame = self.frame
 --	if (not override) then
 --		self.showgrid = self.showgrid - 1
@@ -866,7 +866,7 @@ function AutoBar.Class.Button.prototype:HideGrid(override)
 --	frame.icon:Show()
 end
 
-function AutoBar.Class.Button.prototype:MoveButtonsModeOn()
+function AutoBar.Class.Button:MoveButtonsModeOn()
 	local frame = self.frame
 	frame:SetScript("OnDragStart", onDragStartFunc)
 	frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
@@ -874,7 +874,7 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOn()
 	frame:Show()
 end
 
-function AutoBar.Class.Button.prototype:MoveButtonsModeOff()
+function AutoBar.Class.Button:MoveButtonsModeOff()
 	local frame = self.frame
 	frame:SetScript("OnDragStart", nil)
 	frame:SetScript("OnReceiveDrag", nil)
@@ -883,7 +883,7 @@ function AutoBar.Class.Button.prototype:MoveButtonsModeOff()
 	if (self.buttonDB.hide or self.parentBar.sharedLayoutDB.hide) then
 		frame:Hide()
 	elseif (self:IsActive()) then
---print("AutoBar.Class.Button.prototype:MoveButtonsModeOff self:IsActive() " .. tostring(self:IsActive()) .. " self.buttonName " .. tostring(self.buttonName))
+--print("AutoBar.Class.Button:MoveButtonsModeOff self:IsActive() " .. tostring(self:IsActive()) .. " self.buttonName " .. tostring(self.buttonName))
 		frame:Show()
 	else
 		frame:Hide()
@@ -892,7 +892,7 @@ end
 
 
 -- Show grid feedback for droppable buttons
-function AutoBar.Class.Button.prototype:ACTIONBAR_SHOWGRID()
+function AutoBar.Class.Button:ACTIONBAR_SHOWGRID()
 --print(self.frame:GetName(), "ShowGrid")
 	local frame = self.frame
 	frame.icon:Hide()
@@ -900,7 +900,7 @@ function AutoBar.Class.Button.prototype:ACTIONBAR_SHOWGRID()
 end
 
 -- Hide grid feedback for droppable buttons
-function AutoBar.Class.Button.prototype:ACTIONBAR_HIDEGRID()
+function AutoBar.Class.Button:ACTIONBAR_HIDEGRID()
 --print(self.frame:GetName(), "HideGrid")
 	local frame = self.frame
 	frame.icon:Show()

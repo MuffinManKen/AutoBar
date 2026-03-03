@@ -8,9 +8,6 @@
 	<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>
 	<Include file="libs\AceConfig-3.0\AceConfig-3.0.xml"/>
 
-	<Script file="libs\MMGHACKAceLibrary\MMGHACKAceLibrary.lua"/>
-	<Script file="libs\AceOO-2.0\AceOO-2.0.lua"/>
-
 	<Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
 
 	<Script file="libs\LibDBIcon-1.0\LibDBIcon-1.0.lua"/>

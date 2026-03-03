@@ -17,16 +17,16 @@ local AutoBarSearch = AutoBarSearch  --TODO: This shouldn't be a global at all
 local ABGData = AutoBarGlobalDataObject
 local spellIconList = ABGData.spell_icon_list
 
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
+local Class = AutoBar.Class.new_class
 local L = AutoBarGlobalDataObject.locale
 
 
-AutoBarButton = AceOO.Class(AutoBar.Class.Button)
+AutoBarButton = Class(AutoBar.Class.Button)
 AutoBarButton.dirtyButton = {}
 
 
-function AutoBarButton.prototype:init(parentBar, buttonDB)
-	AutoBarButton.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButton:init(parentBar, buttonDB)
+	AutoBarButton.super.init(self, parentBar, buttonDB)
 end
 
 
@@ -37,7 +37,7 @@ local function AddItemToCategory(category, itemType, itemId, itemInfo)
 	local categoryInfo = AutoBarCategoryList[category]
 	local itemsListDB = categoryInfo.customCategoriesDB.items
 	local itemIndex = # itemsListDB + 1
---print("AutoBarButton.prototype:DropLink " .. tostring(categoryInfo.description) .. "itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
+--print("AutoBarButton:DropLink " .. tostring(categoryInfo.description) .. "itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
 
 	for index = # itemsListDB, 1, -1 do
 		if(itemsListDB[index].itemId == itemId) then
@@ -64,7 +64,7 @@ end
 
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
-function AutoBarButton.prototype:DropLink(itemType, itemId, itemInfo)
+function AutoBarButton:DropLink(itemType, itemId, itemInfo)
 
 	if(itemType == "item" and AB.PlayerHasToy(itemId)) then
 		print("AutoBar: Item " .. itemInfo .. " looks like a Toy, so I'm not adding it. Toys are not currently supported in Drag and Drop.");
@@ -101,11 +101,11 @@ end
 
 -- Handle dragging of items, macros, spells to the button
 -- Handle rearranging of buttons when buttonLock is off
-function AutoBarButton.prototype:DropObject()
+function AutoBarButton:DropObject()
 	local toObject = self
 	local fromObject = AutoBar:GetDraggingObject()
 	local refreshNeeded
---print("AutoBarButton.prototype:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
+--print("AutoBarButton:DropObject " .. tostring(fromObject and fromObject.buttonDB.buttonKey or "none") .. " --> " .. tostring(toObject.buttonDB.buttonKey))
 	if (fromObject and fromObject ~= toObject and AutoBar.moveButtonsMode) then
 		AutoBar:ButtonMove(fromObject.parentBar.barKey, fromObject.order, toObject.parentBar.barKey, toObject.order)
 		AutoBar:BarButtonChanged()
@@ -118,7 +118,7 @@ function AutoBarButton.prototype:DropObject()
 				itemId = spell_id
 			end
 			if (itemType == "item" or itemType == "spell" or itemType == "macro") then
---print("AutoBarButton.prototype:DropObject itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
+--print("AutoBarButton:DropObject itemType " .. tostring(itemType) .. " itemId " .. tostring(itemId) .. " itemInfo " .. tostring(itemInfo))
 				toObject:DropLink(itemType, itemId, itemInfo)
 				refreshNeeded = true
 				ClearCursor()
@@ -288,7 +288,7 @@ end
 local MAX_POPUP_HEIGHT = 8
 
 -- Lay out the popups
-function AutoBarButton.prototype:SetupPopups(nItems)
+function AutoBarButton:SetupPopups(nItems)
 	local buttonKey = self.buttonDB.buttonKey
 	local frame = self.frame
 	local popupHeader = frame.popupHeader
@@ -449,7 +449,7 @@ end
 
 
 -- Set the state attributes of the button
-function AutoBarButton.prototype:GetHierarchicalSetting(setting)
+function AutoBarButton:GetHierarchicalSetting(setting)
 	local db = self.buttonDB
 	if (db[setting] ~= nil) then
 		return db[setting]
@@ -478,7 +478,7 @@ local snippetOnAttributeChanged = [[
 local popupHandler = CreateFrame("Frame", "AutoBarPopupHandler", nil, "SecureHandlerEnterLeaveTemplate")
 
 -- Set the state attributes of the button
-function AutoBarButton.prototype:SetupButton()
+function AutoBarButton:SetupButton()
 	local buttonKey = self.buttonDB.buttonKey
 	local frame = self.frame
 
@@ -649,7 +649,7 @@ local TRINKET1_SLOT = 13
 local TRINKET2_SLOT = 14
 
 -- Set the state attributes of the button
-function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButton:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	local frame = button.frame
 	ClearButtonAttributes(frame)
 
@@ -744,7 +744,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 					frame:SetAttribute("spell2", SPELL_FEED_PET)
 					frame:SetAttribute("target-bag2", bag)
 					frame:SetAttribute("target-slot2", slot)
---print("AutoBarButton.prototype:SetupAttributes buttonKey " .. tostring(buttonKey) .. " bag ".. tostring(bag).. " slot " .. tostring(slot))
+--print("AutoBarButton:SetupAttributes buttonKey " .. tostring(buttonKey) .. " bag ".. tostring(bag).. " slot " .. tostring(slot))
 				else
 					frame:SetAttribute("unit2", "pet")
 				end
@@ -761,7 +761,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 		if (itemsRightClick and itemsRightClick[itemId]) then
 			castSpell = itemsRightClick[itemId]
 			selfCastRightClick = false
---print("AutoBarButton.prototype:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
+--print("AutoBarButton:SetupAttributes category " .. category .. " castSpell " .. tostring(castSpell))
 		end
 		-- Special spell to cast on RightClick
 		if (castSpell) then
@@ -840,7 +840,7 @@ function AutoBarButton.prototype:SetupAttributes(button, bag, slot, spell, macro
 			end
 		elseif (castSpell) then
 			-- Set castSpell as default if nothing else is available
---print("AutoBarButton.prototype:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
+--print("AutoBarButton:SetupAttributes-castspell buttonKey " .. buttonKey .. " castSpell " .. tostring(castSpell))
 			frame:SetAttribute("type", "spell")
 			frame:SetAttribute("spell", castSpell)
 
@@ -965,7 +965,7 @@ end
 -- Add your Button custom options to the optionlist
 -- optionList[myCustomOptionKey]
 -- Call specific SetOption<Type> methods to do the actual setting
-function AutoBarButton.prototype.AddOptions(_self, _option_list, _pass_value)
+function AutoBarButton.AddOptions(_self, _option_list, _pass_value)
 end
 
 
@@ -981,7 +981,7 @@ local function set_button_option(p_info, p_value)
 end
 
 -- Call specific option type methods to do the actual setting
-function AutoBarButton.prototype:SetOptionBoolean(optionList, passValue, valueName, name, desc)
+function AutoBarButton:SetOptionBoolean(optionList, passValue, valueName, name, desc)
 	if (not optionList.headerCustomOptions) then
 		optionList.headerCustomOptions = {
 			type = "header",
@@ -1006,7 +1006,7 @@ end
 
 
 -- Add category to the end of the buttons list
-function AutoBarButton.prototype:AddCategory(p_category_name)
+function AutoBarButton:AddCategory(p_category_name)
 	if not AutoBarCategoryList[p_category_name] then
 		code.log_warning("AutoBar: Attempted to add nonexistent Category:", p_category_name)
 	end
@@ -1021,7 +1021,7 @@ function AutoBarButton.prototype:AddCategory(p_category_name)
 end
 
 -- Delete category from the buttons list
-function AutoBarButton.prototype:DeleteCategory(categoryName)
+function AutoBarButton:DeleteCategory(categoryName)
 	for i, category in ipairs(self) do
 		if (category == categoryName) then
 			for j = i, # self do
@@ -1034,27 +1034,27 @@ function AutoBarButton.prototype:DeleteCategory(categoryName)
 end
 
 -- Register the Macro
-function AutoBarButton.prototype:AddMacro(macroText, macroTexture)
+function AutoBarButton:AddMacro(macroText, macroTexture)
 	self.macroText = macroText
 	self.macroTexture = macroTexture
 	local buttonKey = self.buttonDB.buttonKey
---print("AutoBarButton.prototype:AddMacro RegisterMacro " .. tostring(buttonKey))
+--print("AutoBarButton:AddMacro RegisterMacro " .. tostring(buttonKey))
 	AutoBarSearch:RegisterMacro(buttonKey, nil, L[buttonKey], macroText)
 end
 
 
---AutoBarButtonMacro = AceOO.Class(AutoBarButton)
+--AutoBarButtonMacro = Class(AutoBarButton)
 --
---function AutoBarButtonMacro.prototype:init(parentBar, buttonDB)
---	AutoBarButtonMacro.super.prototype.init(self, parentBar, buttonDB)
+--function AutoBarButtonMacro:init(parentBar, buttonDB)
+--	AutoBarButtonMacro.super.init(self, parentBar, buttonDB)
 --end
 --
 ---- Set the state attributes of the button
---function AutoBarButtonMacro.prototype:SetupButton()
+--function AutoBarButtonMacro:SetupButton()
 --	local frame = self.frame
 --
 --	if (self.macroText and self.buttonDB.enabled) then
-----print("AutoBarButtonMacro.prototype:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
+----print("AutoBarButtonMacro:SetupButton buttonKey " .. tostring(self.buttonDB.buttonKey) .. " frame " .. tostring(frame))
 --		frame:Show()
 ----- ToDo, disable popup
 --		self:SetupAttributes(self, nil, nil, nil, self.buttonDB.buttonKey)
@@ -1064,21 +1064,21 @@ end
 --end
 
 
-local AutoBarButtonAspect = AceOO.Class(AutoBarButton)
+local AutoBarButtonAspect = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonAspect"] = AutoBarButtonAspect
 
-function AutoBarButtonAspect.prototype:init(parentBar, buttonDB)
-	AutoBarButtonAspect.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonAspect:init(parentBar, buttonDB)
+	AutoBarButtonAspect.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Aspect")
 end
 
 
-local AutoBarButtonPoisonLethal = AceOO.Class(AutoBarButton)
+local AutoBarButtonPoisonLethal = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 
-function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPoisonLethal.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonPoisonLethal:init(parentBar, buttonDB)
+	AutoBarButtonPoisonLethal.super.init(self, parentBar, buttonDB)
 
 	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
@@ -1087,11 +1087,11 @@ function AutoBarButtonPoisonLethal.prototype:init(parentBar, buttonDB)
 	end
 end
 
-local AutoBarButtonPoisonNonlethal = AceOO.Class(AutoBarButton)
+local AutoBarButtonPoisonNonlethal = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 
-function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPoisonNonlethal.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonPoisonNonlethal:init(parentBar, buttonDB)
+	AutoBarButtonPoisonNonlethal.super.init(self, parentBar, buttonDB)
 
 	if (ABGData.is_mainline_wow) then
 		self:AddCategory("Spell.Poison.Nonlethal")
@@ -1101,11 +1101,11 @@ function AutoBarButtonPoisonNonlethal.prototype:init(parentBar, buttonDB)
 
 end
 
-local AutoBarButtonBandages = AceOO.Class(AutoBarButton)
+local AutoBarButtonBandages = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBandages"] = AutoBarButtonBandages
 
-function AutoBarButtonBandages.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBandages.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonBandages:init(parentBar, buttonDB)
+	AutoBarButtonBandages.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Bandage.Basic")
 	self:AddCategory("Consumable.Bandage.Battleground.Alterac Valley")
@@ -1121,11 +1121,11 @@ function AutoBarButtonBandages.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonBattleStandards = AceOO.Class(AutoBarButton)
+local AutoBarButtonBattleStandards = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBattleStandards"] = AutoBarButtonBattleStandards
 
-function AutoBarButtonBattleStandards.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBattleStandards.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonBattleStandards:init(parentBar, buttonDB)
+	AutoBarButtonBattleStandards.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Misc.Battle Standard.Battleground")
 	self:AddCategory("Misc.Battle Standard.Alterac Valley")
@@ -1133,11 +1133,11 @@ function AutoBarButtonBattleStandards.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonBuff = AceOO.Class(AutoBarButton)
+local AutoBarButtonBuff = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBuff"] = AutoBarButtonBuff
 
-function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBuff.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonBuff:init(parentBar, buttonDB)
+	AutoBarButtonBuff.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Buff.Chest")
 	self:AddCategory("Consumable.Buff.Shield")
@@ -1169,11 +1169,11 @@ function AutoBarButtonBuff.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonBuffWeapon = AceOO.Class(AutoBarButton)
+local AutoBarButtonBuffWeapon = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBuffWeapon"] = AutoBarButtonBuffWeapon
 
-function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBuffWeapon.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonBuffWeapon:init(parentBar, buttonDB)
+	AutoBarButtonBuffWeapon.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
@@ -1189,54 +1189,54 @@ function AutoBarButtonBuffWeapon.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonClassBuff = AceOO.Class(AutoBarButton)
+local AutoBarButtonClassBuff = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonClassBuff"] = AutoBarButtonClassBuff
 
-function AutoBarButtonClassBuff.prototype:init(parentBar, buttonDB)
-	AutoBarButtonClassBuff.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonClassBuff:init(parentBar, buttonDB)
+	AutoBarButtonClassBuff.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Class.Buff")
 end
 
-function AutoBarButtonClassBuff.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButtonClassBuff:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	local selfCastRightClick = AutoBarDB2.settings.self_cast_right_click
 	AutoBarDB2.settings.self_cast_right_click = nil
-	AutoBarButtonClassBuff.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonClassBuff.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	AutoBarDB2.settings.self_cast_right_click = selfCastRightClick
 end
 
-local AutoBarButtonClassPets2 = AceOO.Class(AutoBarButton)
+local AutoBarButtonClassPets2 = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonClassPets2"] = AutoBarButtonClassPets2
 
-function AutoBarButtonClassPets2.prototype:init(parentBar, buttonDB)
-	AutoBarButtonClassPets2.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonClassPets2:init(parentBar, buttonDB)
+	AutoBarButtonClassPets2.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Class.Pets2")
 end
 
-local AutoBarButtonClassPet = AceOO.Class(AutoBarButton)
+local AutoBarButtonClassPet = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonClassPet"] = AutoBarButtonClassPet
 
-function AutoBarButtonClassPet.prototype:init(parentBar, buttonDB)
-	AutoBarButtonClassPet.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonClassPet:init(parentBar, buttonDB)
+	AutoBarButtonClassPet.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Class.Pet")
 end
 
-local AutoBarButtonClassPets3 = AceOO.Class(AutoBarButton)
+local AutoBarButtonClassPets3 = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonClassPets3"] = AutoBarButtonClassPets3
 
-function AutoBarButtonClassPets3.prototype:init(parentBar, buttonDB)
-	AutoBarButtonClassPets3.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonClassPets3:init(parentBar, buttonDB)
+	AutoBarButtonClassPets3.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Class.Pets3")
 end
 
-local AutoBarButtonConjure = AceOO.Class(AutoBarButton)
+local AutoBarButtonConjure = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonConjure"] = AutoBarButtonConjure
 
-function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
-	AutoBarButtonConjure.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonConjure:init(parentBar, buttonDB)
+	AutoBarButtonConjure.super.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE") then
 		self:AddCategory("Spell.Mage.Conjure Food")
@@ -1254,11 +1254,11 @@ function AutoBarButtonConjure.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonOpenable = AceOO.Class(AutoBarButton)
+local AutoBarButtonOpenable = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonOpenable"] = AutoBarButtonOpenable
 
-function AutoBarButtonOpenable.prototype:init(parentBar, buttonDB)
-	AutoBarButtonOpenable.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonOpenable:init(parentBar, buttonDB)
+	AutoBarButtonOpenable.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Misc.Openable")
 
@@ -1271,18 +1271,18 @@ function AutoBarButtonOpenable.prototype:init(parentBar, buttonDB)
 end
 
 if (ABGData.is_mainline_wow) then
-	function AutoBarButtonOpenable.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonOpenable:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "openable_include_craft_knowledge", L["OpenableIncludeCraftKnowledge"])
 
 	end
 end
 
 
-local AutoBarButtonCrafting = AceOO.Class(AutoBarButton)
+local AutoBarButtonCrafting = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCrafting"] = AutoBarButtonCrafting
 
-function AutoBarButtonCrafting.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCrafting.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCrafting:init(parentBar, buttonDB)
+	AutoBarButtonCrafting.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Crafting")
 end
@@ -1308,7 +1308,7 @@ if (ABGData.is_mainline_wow) then
 	local tailor_spell_id
 	local eng_spell_id
 
-	function AutoBarButtonCrafting.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	function AutoBarButtonCrafting:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 		local debug = false --= true or (spell == "Cooking")
 
@@ -1345,7 +1345,7 @@ if (ABGData.is_mainline_wow) then
 
 		if (debug) then print("Spell:", spell, "ItemId:", itemId, ABGData.spell_name_list[spell], ABGData.spell_name_list["Cooking"]); end
 
-		AutoBarButtonCrafting.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+		AutoBarButtonCrafting.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 	end
 end
@@ -1360,20 +1360,20 @@ end
 		"*", code.get_spell_name_by_name("Survey"),
 --]]
 
-AutoBarButtonCustom = AceOO.Class(AutoBarButton)
+AutoBarButtonCustom = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCustom"] = AutoBarButtonCustom
 
-function AutoBarButtonCustom.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCustom.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCustom:init(parentBar, buttonDB)
+	AutoBarButtonCustom.super.init(self, parentBar, buttonDB)
 	self.frame.SetKey = nil
 end
 
-function AutoBarButtonCustom.prototype:GetButtonBinding()
+function AutoBarButtonCustom:GetButtonBinding()
 	return nil
 end
 
-function AutoBarButtonCustom.prototype:CreateButtonFrame()
-	AutoBarButtonCustom.super.prototype.CreateButtonFrame(self)
+function AutoBarButtonCustom:CreateButtonFrame()
+	AutoBarButtonCustom.super.CreateButtonFrame(self)
 	self.frame.GetActionName = nil
 	self.frame.SetKey = nil
 	self.frame.ClearBindings = nil
@@ -1381,145 +1381,145 @@ function AutoBarButtonCustom.prototype:CreateButtonFrame()
 end
 
 
-local AutoBarButtonBear = AceOO.Class(AutoBarButton)
+local AutoBarButtonBear = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonBear"] = AutoBarButtonBear
 
-function AutoBarButtonBear.prototype:init(parentBar, buttonDB)
-	AutoBarButtonBear.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonBear:init(parentBar, buttonDB)
+	AutoBarButtonBear.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.BearForm")
 
 end
 
-local AutoBarButtonMoonkin = AceOO.Class(AutoBarButton)
+local AutoBarButtonMoonkin = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonMoonkin"] = AutoBarButtonMoonkin
 
-function AutoBarButtonMoonkin.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMoonkin.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonMoonkin:init(parentBar, buttonDB)
+	AutoBarButtonMoonkin.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.MoonkinForm")
 
 end
 
-local AutoBarButtonTreeForm = AceOO.Class(AutoBarButton)
+local AutoBarButtonTreeForm = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTreeForm"] = AutoBarButtonTreeForm
 
-function AutoBarButtonTreeForm.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTreeForm.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTreeForm:init(parentBar, buttonDB)
+	AutoBarButtonTreeForm.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.TreeForm")
 
 end
 
 
-local AutoBarButtonCat = AceOO.Class(AutoBarButton)
+local AutoBarButtonCat = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCat"] = AutoBarButtonCat
 
-function AutoBarButtonCat.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCat.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCat:init(parentBar, buttonDB)
+	AutoBarButtonCat.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.CatForm")
 
 end
 
 
-local AutoBarButtonCharge = AceOO.Class(AutoBarButton)
+local AutoBarButtonCharge = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCharge"] = AutoBarButtonCharge
 
-function AutoBarButtonCharge.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCharge.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCharge:init(parentBar, buttonDB)
+	AutoBarButtonCharge.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Charge")
 
 end
 
-local AutoBarButtonInterrupt = AceOO.Class(AutoBarButton)
+local AutoBarButtonInterrupt = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonInterrupt"] = AutoBarButtonInterrupt
 
-function AutoBarButtonInterrupt.prototype:init(parentBar, buttonDB)
-	AutoBarButtonInterrupt.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonInterrupt:init(parentBar, buttonDB)
+	AutoBarButtonInterrupt.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Interrupt")
 
 end
 
-local AutoBarButtonTravel = AceOO.Class(AutoBarButton)
+local AutoBarButtonTravel = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTravel"] = AutoBarButtonTravel
 
-function AutoBarButtonTravel.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTravel.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTravel:init(parentBar, buttonDB)
+	AutoBarButtonTravel.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Travel")
 
 end
 
 
-local AutoBarButtonDebuff = AceOO.Class(AutoBarButton)
+local AutoBarButtonDebuff = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonDebuff"] = AutoBarButtonDebuff
 
-function AutoBarButtonDebuff.prototype:init(parentBar, buttonDB)
-	AutoBarButtonDebuff.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonDebuff:init(parentBar, buttonDB)
+	AutoBarButtonDebuff.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Debuff.Single")
 	self:AddCategory("Spell.Debuff.Multiple")
 end
 
 
-local AutoBarButtonElixirBattle = AceOO.Class(AutoBarButton)
+local AutoBarButtonElixirBattle = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonElixirBattle"] = AutoBarButtonElixirBattle
 
-function AutoBarButtonElixirBattle.prototype:init(parentBar, buttonDB)
-	AutoBarButtonElixirBattle.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonElixirBattle:init(parentBar, buttonDB)
+	AutoBarButtonElixirBattle.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Elixir.Battle")
 end
 
 
-local AutoBarButtonElixirGuardian = AceOO.Class(AutoBarButton)
+local AutoBarButtonElixirGuardian = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonElixirGuardian"] = AutoBarButtonElixirGuardian
 
-function AutoBarButtonElixirGuardian.prototype:init(parentBar, buttonDB)
-	AutoBarButtonElixirGuardian.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonElixirGuardian:init(parentBar, buttonDB)
+	AutoBarButtonElixirGuardian.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Elixir.Guardian")
 end
 
 
-local AutoBarButtonElixirBoth = AceOO.Class(AutoBarButton)
+local AutoBarButtonElixirBoth = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonElixirBoth"] = AutoBarButtonElixirBoth
 
-function AutoBarButtonElixirBoth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonElixirBoth.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonElixirBoth:init(parentBar, buttonDB)
+	AutoBarButtonElixirBoth.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Flask")
 end
 
-local AutoBarButtonER = AceOO.Class(AutoBarButton)
+local AutoBarButtonER = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonER"] = AutoBarButtonER
 
-function AutoBarButtonER.prototype:init(parentBar, buttonDB)
-	AutoBarButtonER.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonER:init(parentBar, buttonDB)
+	AutoBarButtonER.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.ER")
 
 end
 
 
-local AutoBarButtonExplosive = AceOO.Class(AutoBarButton)
+local AutoBarButtonExplosive = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonExplosive"] = AutoBarButtonExplosive
 
-function AutoBarButtonExplosive.prototype:init(parentBar, buttonDB)
-	AutoBarButtonExplosive.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonExplosive:init(parentBar, buttonDB)
+	AutoBarButtonExplosive.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Explosives")
 end
 
 
-local AutoBarButtonFishing = AceOO.Class(AutoBarButton)
+local AutoBarButtonFishing = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFishing"] = AutoBarButtonFishing
 
-function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFishing.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFishing:init(parentBar, buttonDB)
+	AutoBarButtonFishing.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Skill.Fishing.Bait")
 	self:AddCategory("Muffin.Skill.Fishing.Lure")
@@ -1539,11 +1539,11 @@ function AutoBarButtonFishing.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Fishing")
 end
 
-local AutoBarButtonFood = AceOO.Class(AutoBarButton)
+local AutoBarButtonFood = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFood"] = AutoBarButtonFood
 
-function AutoBarButtonFood.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFood.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFood:init(parentBar, buttonDB)
+	AutoBarButtonFood.super.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure) then
 		self:AddCategory("Spell.Mage.Conjure Food")
@@ -1565,8 +1565,8 @@ end
 --	AutoBar:CategoriesChanged()
 --end
 
---function AutoBarButtonFood.prototype:Refresh(parentBar, buttonDB)
---	AutoBarButtonFood.super.prototype.Refresh(self, parentBar, buttonDB)
+--function AutoBarButtonFood:Refresh(parentBar, buttonDB)
+--	AutoBarButtonFood.super.Refresh(self, parentBar, buttonDB)
 --	if (AutoBar.CLASS == "MAGE") then
 --		if (buttonDB.disableConjure) then
 --			self:DeleteCategory("Consumable.Food.Conjure")
@@ -1578,7 +1578,7 @@ end
 --	end
 --end
 
-function AutoBarButtonFood.prototype:AddOptions(optionList, passValue)
+function AutoBarButtonFood:AddOptions(optionList, passValue)
 	if (AutoBar.CLASS == "MAGE") then
 		self:SetOptionBoolean(optionList, passValue, "disableConjure", L["Disable Conjure Button"])
 	end
@@ -1588,11 +1588,11 @@ function AutoBarButtonFood.prototype:AddOptions(optionList, passValue)
 end
 
 
-local AutoBarButtonFoodBuff = AceOO.Class(AutoBarButton)
+local AutoBarButtonFoodBuff = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFoodBuff"] = AutoBarButtonFoodBuff
 
-function AutoBarButtonFoodBuff.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFoodBuff.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFoodBuff:init(parentBar, buttonDB)
+	AutoBarButtonFoodBuff.super.init(self, parentBar, buttonDB)
 
 --	self:AddCategory("Consumable.Food.Buff.Stamina")
 --	self:AddCategory("Consumable.Food.Buff.HP Regen")
@@ -1653,11 +1653,11 @@ function AutoBarButtonFoodBuff.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonFoodCombo = AceOO.Class(AutoBarButton)
+local AutoBarButtonFoodCombo = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFoodCombo"] = AutoBarButtonFoodCombo
 
-function AutoBarButtonFoodCombo.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFoodCombo.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFoodCombo:init(parentBar, buttonDB)
+	AutoBarButtonFoodCombo.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Food.Combo.Basic")
 	self:AddCategory("Muffin.Food.Combo.Buff")
@@ -1665,11 +1665,11 @@ function AutoBarButtonFoodCombo.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonFoodPet = AceOO.Class(AutoBarButton)
+local AutoBarButtonFoodPet = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFoodPet"] = AutoBarButtonFoodPet
 
-function AutoBarButtonFoodPet.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFoodPet.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFoodPet:init(parentBar, buttonDB)
+	AutoBarButtonFoodPet.super.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "HUNTER") then
 		self:AddCategory("Consumable.Food.Bread")
@@ -1685,21 +1685,21 @@ function AutoBarButtonFoodPet.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonFreeAction = AceOO.Class(AutoBarButton)
+local AutoBarButtonFreeAction = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonFreeAction"] = AutoBarButtonFreeAction
 
-function AutoBarButtonFreeAction.prototype:init(parentBar, buttonDB)
-	AutoBarButtonFreeAction.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonFreeAction:init(parentBar, buttonDB)
+	AutoBarButtonFreeAction.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Buff.Free Action")
 end
 
 
-local AutoBarButtonHeal = AceOO.Class(AutoBarButton)
+local AutoBarButtonHeal = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonHeal"] = AutoBarButtonHeal
 
-function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
-	AutoBarButtonHeal.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonHeal:init(parentBar, buttonDB)
+	AutoBarButtonHeal.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Stones.Health")
 	self:AddCategory("Muffin.Potion.Health")
@@ -1707,11 +1707,11 @@ function AutoBarButtonHeal.prototype:init(parentBar, buttonDB)
 
 end
 
-local AutoBarButtonHearth = AceOO.Class(AutoBarButton)
+local AutoBarButtonHearth = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonHearth"] = AutoBarButtonHearth
 
-function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonHearth.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonHearth:init(parentBar, buttonDB)
+	AutoBarButtonHearth.super.init(self, parentBar, buttonDB)
 
 	local class = AutoBar.CLASS
 
@@ -1745,15 +1745,15 @@ function AutoBarButtonHearth.prototype:init(parentBar, buttonDB)
 end
 
 if (ABGData.is_mainline_wow) then
-	function AutoBarButtonHearth.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonHearth:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_ancient_dalaran", L["HearthIncludeAncientDalaran"])
 		self:SetOptionBoolean(optionList, passValue, "only_favourite_hearth", L["OnlyFavouriteHearth"])
 		self:SetOptionBoolean(optionList, passValue, "hearth_include_challenge_portals", L["HearthIncludeChallengePortals"])
 	end
 
-	 function AutoBarButtonHearth.prototype:Refresh(parentBar, buttonDB)
+	 function AutoBarButtonHearth:Refresh(parentBar, buttonDB)
 		AutoBarCategoryList["Muffin.Toys.Hearth"].only_favourites = buttonDB.only_favourite_hearth
-	 	AutoBarButtonHearth.super.prototype.Refresh(self, parentBar, buttonDB)
+	 	AutoBarButtonHearth.super.Refresh(self, parentBar, buttonDB)
 	 end
 
 end
@@ -1764,22 +1764,22 @@ end
 
 
 
-local AutoBarButtonPickLock = AceOO.Class(AutoBarButton)
+local AutoBarButtonPickLock = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonPickLock"] = AutoBarButtonPickLock
 
-function AutoBarButtonPickLock.prototype:init(parentBar, buttonDB)
-	AutoBarButtonPickLock.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonPickLock:init(parentBar, buttonDB)
+	AutoBarButtonPickLock.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
 end
 
 
-local AutoBarButtonMiscFun = AceOO.Class(AutoBarButton)
+local AutoBarButtonMiscFun = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonMiscFun"] = AutoBarButtonMiscFun
 
-function AutoBarButtonMiscFun.prototype:init(parentBar, buttonDB)
-	AutoBarButtonMiscFun.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonMiscFun:init(parentBar, buttonDB)
+	AutoBarButtonMiscFun.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Food.Feast")
 	self:AddCategory("Misc.Usable.Permanent")
@@ -1787,21 +1787,21 @@ function AutoBarButtonMiscFun.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Misc.Usable.Replenished")
 end
 
-local AutoBarButtonReputation = AceOO.Class(AutoBarButton)
+local AutoBarButtonReputation = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonReputation"] = AutoBarButtonReputation
 
-function AutoBarButtonReputation.prototype:init(parentBar, buttonDB)
-	AutoBarButtonReputation.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonReputation:init(parentBar, buttonDB)
+	AutoBarButtonReputation.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Misc.Reputation")
 end
 
 
-local AutoBarButtonQuest = AceOO.Class(AutoBarButton)
+local AutoBarButtonQuest = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonQuest"] = AutoBarButtonQuest
 
-function AutoBarButtonQuest.prototype:init(parentBar, buttonDB)
-	AutoBarButtonQuest.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonQuest:init(parentBar, buttonDB)
+	AutoBarButtonQuest.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Misc.Usable.StartsQuest")
 	self:AddCategory("Muffin.Misc.Quest")
@@ -1812,21 +1812,21 @@ function AutoBarButtonQuest.prototype:init(parentBar, buttonDB)
 	end
 end
 
-local AutoBarButtonRaidTarget = AceOO.Class(AutoBarButton)
+local AutoBarButtonRaidTarget = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonRaidTarget"] = AutoBarButtonRaidTarget
 
-function AutoBarButtonRaidTarget.prototype:init(parentBar, buttonDB)
-	AutoBarButtonRaidTarget.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonRaidTarget:init(parentBar, buttonDB)
+	AutoBarButtonRaidTarget.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Macro.Raid Target")
 end
 
 
-local AutoBarButtonRecovery = AceOO.Class(AutoBarButton)
+local AutoBarButtonRecovery = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonRecovery"] = AutoBarButtonRecovery
 
-function AutoBarButtonRecovery.prototype:init(parentBar, buttonDB)
-	AutoBarButtonRecovery.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonRecovery:init(parentBar, buttonDB)
+	AutoBarButtonRecovery.super.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "ROGUE") then
 		self:AddCategory("Consumable.Buff.Energy")
@@ -1858,11 +1858,11 @@ end
 
 
 
-local AutoBarButtonDrums = AceOO.Class(AutoBarButton)
+local AutoBarButtonDrums = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonDrums"] = AutoBarButtonDrums
 
-function AutoBarButtonDrums.prototype:init(parentBar, buttonDB)
-	AutoBarButtonDrums.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonDrums:init(parentBar, buttonDB)
+	AutoBarButtonDrums.super.init(self, parentBar, buttonDB)
 
 	if (AutoBarCategoryList["Muffin.Drum"]) then
 		self:AddCategory("Muffin.Drum")
@@ -1873,33 +1873,33 @@ function AutoBarButtonDrums.prototype:init(parentBar, buttonDB)
 end
 
 
-local AutoBarButtonCooldownPotionCombat = AceOO.Class(AutoBarButton)
+local AutoBarButtonCooldownPotionCombat = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionCombat"] = AutoBarButtonCooldownPotionCombat
 
-function AutoBarButtonCooldownPotionCombat.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownPotionCombat.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCooldownPotionCombat:init(parentBar, buttonDB)
+	AutoBarButtonCooldownPotionCombat.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Cooldown.Potion.Combat")
 end
 
 
 
-local AutoBarButtonCooldownPotionRejuvenation = AceOO.Class(AutoBarButton)
+local AutoBarButtonCooldownPotionRejuvenation = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownPotionRejuvenation"] = AutoBarButtonCooldownPotionRejuvenation
 
-function AutoBarButtonCooldownPotionRejuvenation.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownPotionRejuvenation.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCooldownPotionRejuvenation:init(parentBar, buttonDB)
+	AutoBarButtonCooldownPotionRejuvenation.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
 end
 
 
 
-local AutoBarButtonCooldownStoneRejuvenation = AceOO.Class(AutoBarButton)
+local AutoBarButtonCooldownStoneRejuvenation = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonCooldownStoneRejuvenation"] = AutoBarButtonCooldownStoneRejuvenation
 
-function AutoBarButtonCooldownStoneRejuvenation.prototype:init(parentBar, buttonDB)
-	AutoBarButtonCooldownStoneRejuvenation.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonCooldownStoneRejuvenation:init(parentBar, buttonDB)
+	AutoBarButtonCooldownStoneRejuvenation.super.init(self, parentBar, buttonDB)
 
 --	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 --		self:AddCategory("Consumable.Cooldown.Potion.Rejuvenation")
@@ -1907,55 +1907,55 @@ function AutoBarButtonCooldownStoneRejuvenation.prototype:init(parentBar, button
 end
 
 
-local AutoBarButtonShields = AceOO.Class(AutoBarButton)
+local AutoBarButtonShields = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonShields"] = AutoBarButtonShields
 
-function AutoBarButtonShields.prototype:init(parentBar, buttonDB)
-	AutoBarButtonShields.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonShields:init(parentBar, buttonDB)
+	AutoBarButtonShields.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Shields")
 end
 
 
-local AutoBarButtonSpeed = AceOO.Class(AutoBarButton)
+local AutoBarButtonSpeed = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonSpeed"] = AutoBarButtonSpeed
 
-function AutoBarButtonSpeed.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSpeed.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonSpeed:init(parentBar, buttonDB)
+	AutoBarButtonSpeed.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Consumable.Buff.Speed")
 end
 
-local AutoBarButtonSeal = AceOO.Class(AutoBarButton)
+local AutoBarButtonSeal = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonSeal"] = AutoBarButtonSeal
 
-function AutoBarButtonSeal.prototype:init(parentBar, buttonDB)
-	AutoBarButtonSeal.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonSeal:init(parentBar, buttonDB)
+	AutoBarButtonSeal.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.Seal")
 end
 
-local AutoBarButtonStance = AceOO.Class(AutoBarButton)
+local AutoBarButtonStance = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonStance"] = AutoBarButtonStance
 
-function AutoBarButtonStance.prototype:init(parentBar, buttonDB)
-	AutoBarButtonStance.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonStance:init(parentBar, buttonDB)
+	AutoBarButtonStance.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.Stance")
 end
 
-function AutoBarButtonStance.prototype:GetLastUsed()
+function AutoBarButtonStance:GetLastUsed()
 	local nStance = GetShapeshiftForm(true)
 	local _, name = GetShapeshiftFormInfo(nStance)
 	return name
 end
 
 
-local AutoBarButtonStealth = AceOO.Class(AutoBarButton)
+local AutoBarButtonStealth = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonStealth"] = AutoBarButtonStealth
 
-function AutoBarButtonStealth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonStealth.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonStealth:init(parentBar, buttonDB)
+	AutoBarButtonStealth.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Stealth")
 end
@@ -1980,23 +1980,23 @@ local function DestroyTotem(frame, totemType)
 	frame:SetAttribute("macrotext2", destroyMacro[totemType])
 end
 
-local AutoBarButtonTotemAir = AceOO.Class(AutoBarButton)
+local AutoBarButtonTotemAir = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTotemAir"] = AutoBarButtonTotemAir
 
-function AutoBarButtonTotemAir.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTotemAir.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTotemAir:init(parentBar, buttonDB)
+	AutoBarButtonTotemAir.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Totem.Air")
 end
 
-function AutoBarButtonTotemAir.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemAir.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButtonTotemAir:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemAir.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemAir)
 end
 
 -- Set cooldown based on the deployed totem
-function AutoBarButtonTotemAir.prototype:UpdateCooldown()
+function AutoBarButtonTotemAir:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
 		local enabled = true
@@ -2019,23 +2019,23 @@ function AutoBarButtonTotemAir.prototype:UpdateCooldown()
 end
 -- /script CooldownFrame_Set(AutoBarButtonTotemAirFrame.cooldown, 0, 0, 0)
 
-local AutoBarButtonTotemEarth = AceOO.Class(AutoBarButton)
+local AutoBarButtonTotemEarth = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTotemEarth"] = AutoBarButtonTotemEarth
 
-function AutoBarButtonTotemEarth.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTotemEarth.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTotemEarth:init(parentBar, buttonDB)
+	AutoBarButtonTotemEarth.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Totem.Earth")
 end
 
-function AutoBarButtonTotemEarth.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemEarth.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButtonTotemEarth:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemEarth.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemEarth)
 end
 
 -- Set cooldown based on the deployed totem
-function AutoBarButtonTotemEarth.prototype:UpdateCooldown()
+function AutoBarButtonTotemEarth:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
 		local enabled = true
@@ -2058,23 +2058,23 @@ function AutoBarButtonTotemEarth.prototype:UpdateCooldown()
 end
 
 
-local AutoBarButtonTotemFire = AceOO.Class(AutoBarButton)
+local AutoBarButtonTotemFire = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTotemFire"] = AutoBarButtonTotemFire
 
-function AutoBarButtonTotemFire.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTotemFire.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTotemFire:init(parentBar, buttonDB)
+	AutoBarButtonTotemFire.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Totem.Fire")
 end
 
-function AutoBarButtonTotemFire.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemFire.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButtonTotemFire:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemFire.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemFire)
 end
 
 -- Set cooldown based on the deployed totem
-function AutoBarButtonTotemFire.prototype:UpdateCooldown()
+function AutoBarButtonTotemFire:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
 		local enabled = true
@@ -2097,23 +2097,23 @@ function AutoBarButtonTotemFire.prototype:UpdateCooldown()
 end
 
 
-local AutoBarButtonTotemWater = AceOO.Class(AutoBarButton)
+local AutoBarButtonTotemWater = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTotemWater"] = AutoBarButtonTotemWater
 
-function AutoBarButtonTotemWater.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTotemWater.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTotemWater:init(parentBar, buttonDB)
+	AutoBarButtonTotemWater.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Totem.Water")
 end
 
-function AutoBarButtonTotemWater.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemWater.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+function AutoBarButtonTotemWater:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemWater.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
 	DestroyTotem(self.frame, totemWater)
 end
 
 -- Set cooldown based on the deployed totem
-function AutoBarButtonTotemWater.prototype:UpdateCooldown()
+function AutoBarButtonTotemWater:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
 		local enabled = true
@@ -2136,33 +2136,33 @@ function AutoBarButtonTotemWater.prototype:UpdateCooldown()
 end
 
 
-local AutoBarButtonTrap = AceOO.Class(AutoBarButton)
+local AutoBarButtonTrap = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTrap"] = AutoBarButtonTrap
 
-function AutoBarButtonTrap.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTrap.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTrap:init(parentBar, buttonDB)
+	AutoBarButtonTrap.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Trap")
 end
 
 
-local AutoBarButtonTrinket1 = AceOO.Class(AutoBarButton)
+local AutoBarButtonTrinket1 = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTrinket1"] = AutoBarButtonTrinket1
 
-function AutoBarButtonTrinket1.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTrinket1.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTrinket1:init(parentBar, buttonDB)
+	AutoBarButtonTrinket1.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Gear.Trinket")
 	buttonDB.targeted = TRINKET1_SLOT
 	buttonDB.equipped = TRINKET1_SLOT
 end
 
-function AutoBarButtonTrinket1.prototype:GetLastUsed()
+function AutoBarButtonTrinket1:GetLastUsed()
 	local _, itemId = AB.ItemLinkDecode(GetInventoryItemLink("player", TRINKET1_SLOT))
 	return itemId
 end
 
-function AutoBarButtonTrinket1.prototype:SetDragCursor()
+function AutoBarButtonTrinket1:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType) then
 		if (itemType == "item") then
@@ -2171,23 +2171,23 @@ function AutoBarButtonTrinket1.prototype:SetDragCursor()
 	end
 end
 
-local AutoBarButtonTrinket2 = AceOO.Class(AutoBarButton)
+local AutoBarButtonTrinket2 = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonTrinket2"] = AutoBarButtonTrinket2
 
-function AutoBarButtonTrinket2.prototype:init(parentBar, buttonDB)
-	AutoBarButtonTrinket2.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonTrinket2:init(parentBar, buttonDB)
+	AutoBarButtonTrinket2.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Gear.Trinket")
 	buttonDB.targeted = TRINKET2_SLOT
 	buttonDB.equipped = TRINKET2_SLOT
 end
 
-function AutoBarButtonTrinket2.prototype:GetLastUsed()
+function AutoBarButtonTrinket2:GetLastUsed()
 	local _, itemId = AB.ItemLinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 	return itemId
 end
 
-function AutoBarButtonTrinket2.prototype:SetDragCursor()
+function AutoBarButtonTrinket2:SetDragCursor()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and itemType == "item") then
 		PickupInventoryItem(TRINKET2_SLOT)
@@ -2196,13 +2196,13 @@ end
 
 
 local equipTrinket2String = "/equipslot " .. TRINKET2_SLOT .. " "
-function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
---print("AutoBarButtonTrinket2.prototype:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
+function AutoBarButtonTrinket2:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+--print("AutoBarButtonTrinket2:SetupAttributes " .. tostring(bag) .. "|" .. tostring(slot) .. "|" .. tostring(itemId))
 
 	local _, equippedItemId = AB.ItemLinkDecode(GetInventoryItemLink("player", TRINKET2_SLOT))
 
 	if ((equippedItemId == itemId) or (not bag)) then
-		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+		AutoBarButtonTrinket2.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 	else
 		local macroTexture = code.GetIconForItemID((tonumber(itemId)))
 		local macroText = equipTrinket2String .. bag .." " .. slot -- "/equipslot [button:2] Z X Y" to do right click filtering
@@ -2211,17 +2211,17 @@ function AutoBarButtonTrinket2.prototype:SetupAttributes(button, bag, slot, spel
 		button.macroTexture = macroTexture
 		local macroId = macroText
 		AutoBarSearch:RegisterMacro(macroId, nil, L["AutoBarButtonTrinket2"], macroText)
---print("AutoBarButtonTrinket2.prototype:SetupAttributes macroId " .. tostring(macroId))
-		AutoBarButtonTrinket2.super.prototype.SetupAttributes(self, button, nil, nil, nil, macroId)
+--print("AutoBarButtonTrinket2:SetupAttributes macroId " .. tostring(macroId))
+		AutoBarButtonTrinket2.super.SetupAttributes(self, button, nil, nil, nil, macroId)
 	end
 end
 
 
-local AutoBarButtonWater = AceOO.Class(AutoBarButton)
+local AutoBarButtonWater = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonWater"] = AutoBarButtonWater
 
-function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
-	AutoBarButtonWater.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonWater:init(parentBar, buttonDB)
+	AutoBarButtonWater.super.init(self, parentBar, buttonDB)
 
 	if (AutoBar.CLASS == "MAGE" and not buttonDB.disableConjure and not ABGData.is_mainline_wow) then
 			self:AddCategory("Spell.Mage.Conjure Water")
@@ -2235,8 +2235,8 @@ function AutoBarButtonWater.prototype:init(parentBar, buttonDB)
 	end
 end
 
---function AutoBarButtonWater.prototype:Refresh(parentBar, buttonDB)
---	AutoBarButtonWater.super.prototype.Refresh(self, parentBar, buttonDB)
+--function AutoBarButtonWater:Refresh(parentBar, buttonDB)
+--	AutoBarButtonWater.super.Refresh(self, parentBar, buttonDB)
 --	if (AutoBar.CLASS == "MAGE") then
 --		if (buttonDB.disableConjure) then
 --			self:DeleteCategory("Spell.Mage.Conjure Water")
@@ -2248,18 +2248,18 @@ end
 --	end
 --end
 
-function AutoBarButtonWater.prototype:AddOptions(optionList, passValue)
+function AutoBarButtonWater:AddOptions(optionList, passValue)
 	if (AutoBar.CLASS == "MAGE") then
 		self:SetOptionBoolean(optionList, passValue, "disableConjure", L["Disable Conjure Button"])
 	end
 end
 
 
-local AutoBarButtonWaterBuff = AceOO.Class(AutoBarButton)
+local AutoBarButtonWaterBuff = Class(AutoBarButton)
 AutoBar.Class["AutoBarButtonWaterBuff"] = AutoBarButtonWaterBuff
 
-function AutoBarButtonWaterBuff.prototype:init(parentBar, buttonDB)
-	AutoBarButtonWaterBuff.super.prototype.init(self, parentBar, buttonDB)
+function AutoBarButtonWaterBuff:init(parentBar, buttonDB)
+	AutoBarButtonWaterBuff.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Food.Mana.Buff")
 
@@ -2268,11 +2268,11 @@ end
 
 if (LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_WRATH_OF_THE_LICH_KING) then
 
-	local AutoBarButtonMillHerbs = AceOO.Class(AutoBarButton)
+	local AutoBarButtonMillHerbs = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMillHerbs"] = AutoBarButtonMillHerbs
 
-	function AutoBarButtonMillHerbs.prototype:init(parentBar, buttonDB)
-		AutoBarButtonMillHerbs.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonMillHerbs:init(parentBar, buttonDB)
+		AutoBarButtonMillHerbs.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Herbs.Millable")
 	end
@@ -2284,11 +2284,11 @@ end
 -------------------------------------------------------------------
 if (not ABGData.is_mainline_wow) then
 
-	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+	local AutoBarButtonMount = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
 
-	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
-		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonMount:init(parentBar, buttonDB)
+		AutoBarButtonMount.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Mounts.Item")
 		self:AddCategory("Muffin.Mounts.Paladin")
@@ -2296,21 +2296,21 @@ if (not ABGData.is_mainline_wow) then
 	end
 
 
-	local AutoBarButtonAquatic = AceOO.Class(AutoBarButton)
+	local AutoBarButtonAquatic = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonAquatic"] = AutoBarButtonAquatic
 
-	function AutoBarButtonAquatic.prototype:init(parentBar, buttonDB)
-		AutoBarButtonAquatic.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonAquatic:init(parentBar, buttonDB)
+		AutoBarButtonAquatic.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.AquaticForm")
 
 	end
 
-	local AutoBarButtonTrack = AceOO.Class(AutoBarButton)
+	local AutoBarButtonTrack = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonTrack"] = AutoBarButtonTrack
 
-	function AutoBarButtonTrack.prototype:init(parentBar, buttonDB)
-		AutoBarButtonTrack.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonTrack:init(parentBar, buttonDB)
+		AutoBarButtonTrack.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.Track")
 	end
@@ -2323,11 +2323,11 @@ else
 --
 -------------------------------------------------------------------
 
-	local AutoBarButtonArchaeology = AceOO.Class(AutoBarButton)
+	local AutoBarButtonArchaeology = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonArchaeology"] = AutoBarButtonArchaeology
 
-	function AutoBarButtonArchaeology.prototype:init(parentBar, buttonDB)
-		AutoBarButtonArchaeology.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonArchaeology:init(parentBar, buttonDB)
+		AutoBarButtonArchaeology.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Skill.Archaeology.Crate")
 		self:AddCategory("Muffin.Skill.Archaeology.Lodestone")
@@ -2342,12 +2342,12 @@ else
 
 	end
 
-	function AutoBarButtonArchaeology.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonArchaeology:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "archbtn_show_spells", L["ArchBtnShowSpells"])
 	end
 
-	function AutoBarButtonArchaeology.prototype:Refresh(parentBar, buttonDB)
-		AutoBarButtonArchaeology.super.prototype.Refresh(self, parentBar, buttonDB)
+	function AutoBarButtonArchaeology:Refresh(parentBar, buttonDB)
+		AutoBarButtonArchaeology.super.Refresh(self, parentBar, buttonDB)
 
 		if(buttonDB.archbtn_show_spells == false) then
 			self:DeleteCategory("Spell.Archaeology")
@@ -2358,59 +2358,59 @@ else
 	end
 
 
-	local AutoBarButtonStagForm = AceOO.Class(AutoBarButton)
+	local AutoBarButtonStagForm = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonStagForm"] = AutoBarButtonStagForm
 
-	function AutoBarButtonStagForm.prototype:init(parentBar, buttonDB)
-		AutoBarButtonStagForm.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonStagForm:init(parentBar, buttonDB)
+		AutoBarButtonStagForm.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.StagForm")
 
 	end
 
-	local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
+	local AutoBarButtonGuildSpell = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
 
-	function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
-		AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonGuildSpell:init(parentBar, buttonDB)
+		AutoBarButtonGuildSpell.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Spell.Guild")
 	end
 
-	local AutoBarButtonSunsongRanch = AceOO.Class(AutoBarButton)
+	local AutoBarButtonSunsongRanch = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonSunsongRanch"] = AutoBarButtonSunsongRanch
 
-	function AutoBarButtonSunsongRanch.prototype:init(parentBar, buttonDB)
-		AutoBarButtonSunsongRanch.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonSunsongRanch:init(parentBar, buttonDB)
+		AutoBarButtonSunsongRanch.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.SunSongRanch")
 	end
 
-	local AutoBarButtonGarrison = AceOO.Class(AutoBarButton)
+	local AutoBarButtonGarrison = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonGarrison"] = AutoBarButtonGarrison
 
-	function AutoBarButtonGarrison.prototype:init(parentBar, buttonDB)
-		AutoBarButtonGarrison.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonGarrison:init(parentBar, buttonDB)
+		AutoBarButtonGarrison.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Garrison")
 	end
 
-	local AutoBarButtonOrderHallTroop = AceOO.Class(AutoBarButton)
+	local AutoBarButtonOrderHallTroop = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonOrderHallTroop"] = AutoBarButtonOrderHallTroop
 
-	function AutoBarButtonOrderHallTroop.prototype:init(parentBar, buttonDB)
-		AutoBarButtonOrderHallTroop.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonOrderHallTroop:init(parentBar, buttonDB)
+		AutoBarButtonOrderHallTroop.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Order Hall.Troop Recruit")
 		self:AddCategory("Muffin.Order Hall.Champion")
 
 	end
 
-	local AutoBarButtonOrderHallResource = AceOO.Class(AutoBarButton)
+	local AutoBarButtonOrderHallResource = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonOrderHallResource"] = AutoBarButtonOrderHallResource
 
-	function AutoBarButtonOrderHallResource.prototype:init(parentBar, buttonDB)
-		AutoBarButtonOrderHallResource.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonOrderHallResource:init(parentBar, buttonDB)
+		AutoBarButtonOrderHallResource.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Order Hall.Artifact Power")
 		self:AddCategory("Muffin.Order Hall.Ancient Mana")
@@ -2419,22 +2419,22 @@ else
 
 	end
 
-	local AutoBarButtonHousing = AceOO.Class(AutoBarButton)
+	local AutoBarButtonHousing = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonHousing"] = AutoBarButtonHousing
 
-	function AutoBarButtonHousing.prototype:init(parentBar, buttonDB)
-		AutoBarButtonHousing.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonHousing:init(parentBar, buttonDB)
+		AutoBarButtonHousing.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Muffin.Misc.Housing")
 
 
 	end
 
-	local AutoBarButtonBattlePetItems = AceOO.Class(AutoBarButton)
+	local AutoBarButtonBattlePetItems = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonBattlePetItems"] = AutoBarButtonBattlePetItems
 
-	function AutoBarButtonBattlePetItems.prototype:init(parentBar, buttonDB)
-		AutoBarButtonBattlePetItems.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonBattlePetItems:init(parentBar, buttonDB)
+		AutoBarButtonBattlePetItems.super.init(self, parentBar, buttonDB)
 
 		if(buttonDB.show_ornamental == nil) then buttonDB.show_ornamental = true end
 
@@ -2454,7 +2454,7 @@ else
 
 	end
 
-	function AutoBarButtonBattlePetItems.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonBattlePetItems:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "show_ornamental", L["Muffin.Toys.Pet Battle_ShowOrnamental"])
 	end
 
@@ -2463,12 +2463,12 @@ else
 
 --[[
 	-------------------------- AutoBarButtonToyBox ---------------------
-	local AutoBarButtonToyBox = AceOO.Class(AutoBarButton)
+	local AutoBarButtonToyBox = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonToyBox"] = AutoBarButtonToyBox
 
-	function AutoBarButtonToyBox.prototype:init(parentBar, buttonDB)
-		AutoBarButtonToyBox.super.prototype.init(self, parentBar, buttonDB)
-	--print("AutoBarButtonToyBox.prototype:init", buttonDB.buttonKey);
+	function AutoBarButtonToyBox:init(parentBar, buttonDB)
+		AutoBarButtonToyBox.super.init(self, parentBar, buttonDB)
+	--print("AutoBarButtonToyBox:init", buttonDB.buttonKey);
 
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
 			AutoBarCategoryList["Toys.ToyBox"] = AB.ToyCategory:new( "Toys.ToyBox", "inv_jewelcrafting_goldenhare")
@@ -2488,11 +2488,11 @@ else
 	end
 
 
-	function AutoBarButtonToyBox.prototype:Refresh(parentBar, buttonDB, p_force_update)
-		AutoBarButtonToyBox.super.prototype.Refresh(self, parentBar, buttonDB)
+	function AutoBarButtonToyBox:Refresh(parentBar, buttonDB, p_force_update)
+		AutoBarButtonToyBox.super.Refresh(self, parentBar, buttonDB)
 
 		if (not AutoBarCategoryList["Toys.ToyBox"]) then
-			--print("Skipping AutoBarButtonToyBox.prototype:Refresh  UpdateToyBox:" .. tostring(p_force_update));
+			--print("Skipping AutoBarButtonToyBox:Refresh  UpdateToyBox:" .. tostring(p_force_update));
 			return true;
 		end
 
@@ -2548,18 +2548,18 @@ else
 		return made_update
 	end
 
-	function AutoBarButtonToyBox.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonToyBox:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "toybox_only_show_favourites", L["ToyBoxOnlyFavourites"])
 	end
  ]]
 	-------------------------- AutoBarButtonMount ---------------------
 
-	local AutoBarButtonMount = AceOO.Class(AutoBarButton)
+	local AutoBarButtonMount = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonMount"] = AutoBarButtonMount
 
-	function AutoBarButtonMount.prototype:init(parentBar, buttonDB)
-		AutoBarButtonMount.super.prototype.init(self, parentBar, buttonDB)
-	--print("AutoBarButtonMount.prototype:init");
+	function AutoBarButtonMount:init(parentBar, buttonDB)
+		AutoBarButtonMount.super.init(self, parentBar, buttonDB)
+	--print("AutoBarButtonMount:init");
 
 		--code.log_warning("AutoBarButtonMount:init", "\n", debugstack(1, 6, 6))
 
@@ -2594,13 +2594,13 @@ else
 
 	end
 
-	function AutoBarButtonMount.prototype:Refresh(parentBar, buttonDB, updateMount)
-		AutoBarButtonMount.super.prototype.Refresh(self, parentBar, buttonDB)
+	function AutoBarButtonMount:Refresh(parentBar, buttonDB)
+		AutoBarButtonMount.super.Refresh(self, parentBar, buttonDB)
 
 		--code.log_warning("AutoBarButtonMount:Refresh DataMissing:", self.is_mount_data_missing, " ", debugstack(1, 6, 6))
 		if (not AutoBarCategoryList["Spell.Mount"] or (self.is_mount_data_missing == nil)) then
-			--AutoBarButtonMount.prototype:init hasn't run, so skip
-			--print("Skipping AutoBarButtonMount.prototype:Refresh  UpdateMount:" .. tostring(updateMount));
+			--AutoBarButtonMount:init hasn't run, so skip
+			--print("Skipping AutoBarButtonMount:Refresh  UpdateMount:" .. tostring(updateMount));
 			return true;
 		end
 
@@ -2689,7 +2689,7 @@ else
 
 
 
-	function AutoBarButtonMount.prototype:AddOptions(optionList, passValue)
+	function AutoBarButtonMount:AddOptions(optionList, passValue)
 		self:SetOptionBoolean(optionList, passValue, "mount_show_favourites", L["MountShowFavourites"])
 		self:SetOptionBoolean(optionList, passValue, "mount_show_nonfavourites", L["MountShowNonFavourites"])
 		self:SetOptionBoolean(optionList, passValue, "mount_show_class", L["MountShowClass"])
@@ -2707,7 +2707,7 @@ else
 	--]]
 
 	--- Temporary until Blizzard makes their code work for mounts & critters
-	function AutoBarButtonMount.prototype:UpdateUsable()
+	function AutoBarButtonMount:UpdateUsable()
 		local frame = self.frame
 		local itemType = frame:GetAttribute("type")
 		if (itemType) then
@@ -2733,11 +2733,11 @@ else
 		end
 	end
 
-	local AutoBarButtonPets = AceOO.Class(AutoBarButton)
+	local AutoBarButtonPets = Class(AutoBarButton)
 	AutoBar.Class["AutoBarButtonPets"] = AutoBarButtonPets
 
-	function AutoBarButtonPets.prototype:init(parentBar, buttonDB)
-		AutoBarButtonPets.super.prototype.init(self, parentBar, buttonDB)
+	function AutoBarButtonPets:init(parentBar, buttonDB)
+		AutoBarButtonPets.super.init(self, parentBar, buttonDB)
 
 		self:AddCategory("Battle Pet.Favourites")
 
@@ -2748,8 +2748,8 @@ else
 		self:Refresh(parentBar, buttonDB)
 	end
 
-	function AutoBarButtonPets.prototype:Refresh(parentBar, buttonDB)
-		AutoBarButtonPets.super.prototype.Refresh(self, parentBar, buttonDB)
+	function AutoBarButtonPets:Refresh(parentBar, buttonDB)
+		AutoBarButtonPets.super.Refresh(self, parentBar, buttonDB)
 
 		local category = AutoBarCategoryList["Battle Pet.Favourites"]
 
@@ -2793,7 +2793,7 @@ else
 
 
 	--- Temporary until Blizzard makes their code work for mounts & critters
-	function AutoBarButtonPets.prototype:UpdateUsable()
+	function AutoBarButtonPets:UpdateUsable()
 		local frame = self.frame
 		local itemType = frame:GetAttribute("type")
 		if (itemType) then

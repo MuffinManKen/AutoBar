@@ -16,7 +16,6 @@ local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 
 
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
 local L = AutoBarGlobalDataObject.locale
 local _G = _G
 local _
@@ -25,11 +24,26 @@ if (not AutoBar.Class) then
 	AutoBar.Class = {}
 end
 
--- Basic Button with textures, highlighting, keybindText, tooltips etc.
-AutoBar.Class.BasicButton = AceOO.Class()
+local function class_new(cls, ...)
+	local instance = setmetatable({}, cls)
+	instance:init(...)
+	return instance
+end
 
-function AutoBar.Class.BasicButton.prototype:init(parentBar, buttonDB)
-	AutoBar.Class.BasicButton.super.prototype.init(self)
+local function Class(parent)
+	local c = parent and setmetatable({}, {__index = parent}) or {}
+	c.__index = c
+	c.super = parent
+	c.new = class_new
+	return c
+end
+
+AutoBar.Class.new_class = Class
+
+-- Basic Button with textures, highlighting, keybindText, tooltips etc.
+AutoBar.Class.BasicButton = Class()
+
+function AutoBar.Class.BasicButton:init(parentBar, buttonDB)
 end
 
 
@@ -167,7 +181,7 @@ end
 local borderBlue = {r = 0, g = 0, b = 1.0, a = 0.35}
 local borderGreen = {r = 0, g = 1.0, b = 0, a = 0.35}
 
-function AutoBar.Class.BasicButton.prototype:GetIconTexture(frame)
+function AutoBar.Class.BasicButton:GetIconTexture(frame)
 	local texture, borderColor
 	local itemType = frame:GetAttribute("type")
 	local item_guid = frame:GetAttribute("AutoBarGUID")
@@ -226,7 +240,7 @@ end
 
 
 -- Set cooldown based on the type settings
-function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
+function AutoBar.Class.BasicButton:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (not itemType) then-- and not self.parentBar.faded
 		return;
@@ -262,7 +276,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCooldown()
 end
 
 -- Set count based on the type and type2 settings
-function AutoBar.Class.BasicButton.prototype:UpdateCount()
+function AutoBar.Class.BasicButton:UpdateCount()
 	local frame = self.frame
 	if (not AutoBarDB2.settings.show_count) then
 		frame.count:Hide()
@@ -315,7 +329,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateCount()
 end
 
 
-function AutoBar.Class.BasicButton.prototype:UpdateUsable()
+function AutoBar.Class.BasicButton:UpdateUsable()
 	local frame = self.frame
 	if not (frame and frame:IsShown()) then
 		return
@@ -365,7 +379,7 @@ local function scriptOnEvent(self, event, ...)
 	self.class[event](self.class, ...)
 end
 
-function AutoBar.Class.BasicButton.prototype:EventsEnable()
+function AutoBar.Class.BasicButton:EventsEnable()
 	self.frame:SetScript("OnEvent", scriptOnEvent)
 end
 

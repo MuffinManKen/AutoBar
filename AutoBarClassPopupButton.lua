@@ -12,7 +12,7 @@
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 
-local AceOO = MMGHACKAceLibrary("AceOO-2.0")
+local Class = AutoBar.Class.new_class
 local L = AutoBarGlobalDataObject.locale
 local Masque = LibStub("Masque", true)
 local _G = _G
@@ -21,7 +21,7 @@ local _
 
 -- Basic Button with textures, highlighting, keybindText, tooltips etc.
 -- Bound to the underlying AutoBarButton which provides its state information, icon etc.
-AutoBar.Class.PopupButton = AceOO.Class(AutoBar.Class.BasicButton)
+AutoBar.Class.PopupButton = Class(AutoBar.Class.BasicButton)
 
 function AutoBar.Class.PopupButton:GetPopupButton(parentButton, popupButtonIndex, popupHeader, popupKeyHandler)
 	local popupButtonList = popupHeader.popupButtonList
@@ -36,8 +36,8 @@ end
 
 
 
-function AutoBar.Class.PopupButton.prototype:init(parentButton, popupButtonIndex, popupHeader, popupKeyHandler)
-	AutoBar.Class.PopupButton.super.prototype.init(self)
+function AutoBar.Class.PopupButton:init(parentButton, popupButtonIndex, popupHeader, popupKeyHandler)
+	AutoBar.Class.PopupButton.super.init(self)
 
 	self.parentBar = parentButton.parentBar
 	self.parentButton = parentButton
@@ -51,7 +51,7 @@ function AutoBar.Class.PopupButton.prototype:init(parentButton, popupButtonIndex
 end
 
 
-function AutoBar.Class.PopupButton.prototype:Refresh(parentButton, popupButtonIndex, popupHeader)
+function AutoBar.Class.PopupButton:Refresh(parentButton, popupButtonIndex, popupHeader)
 end
 
 
@@ -72,11 +72,11 @@ local function funcOnLeave(self)
 end
 
 -- Return the name of the global frame for the button.  Keybinds are made to it.
-function AutoBar.Class.PopupButton.prototype:GetButtonFrameName(popupButtonIndex)
+function AutoBar.Class.PopupButton:GetButtonFrameName(popupButtonIndex)
 	return self.parentButton:GetButtonFrameName() .. "Popup" .. popupButtonIndex
 end
 
-function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
+function AutoBar.Class.PopupButton:CreateButtonFrame()
 	local popupButtonIndex = self.popupButtonIndex
 	local popupHeader = self.popupHeader
 	local popupKeyHandler = self.popupKeyHandler
@@ -131,7 +131,7 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 end
 
 
-function AutoBar.Class.PopupButton.prototype:UpdateIcon()
+function AutoBar.Class.PopupButton:UpdateIcon()
 	local frame = self.frame
 	local texture, borderColor = self:GetIconTexture(frame)
 	frame:SetAttribute("icon", texture)
@@ -156,7 +156,7 @@ function AutoBar.Class.PopupButton.prototype:UpdateIcon()
 end
 
 
-function AutoBar.Class.PopupButton.prototype:IsActive()
+function AutoBar.Class.PopupButton:IsActive()
 	return self.frame:GetAttribute("type")
 end
 

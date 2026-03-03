@@ -358,7 +358,7 @@ if (ABGData.is_mainline_wow) then
 
 		local button = AutoBar.buttonList["AutoBarButtonMount"]
 		if (button) then
-			button:Refresh(button.parentBar, button.buttonDB, true)
+			button:Refresh(button.parentBar, button.buttonDB)
 		end
 
 		if(need_update) then
