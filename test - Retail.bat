@@ -2,6 +2,8 @@
 set SRC="."
 set DST="%WOW_INSTALL_DIR%\_retail_\Interface\Addons\AutoBar"
 
+rmdir %DST%
+
 robocopy %SRC% %DST%  /E ^
   /XF ^
     *.bat ^
