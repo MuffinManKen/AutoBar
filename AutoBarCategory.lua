@@ -391,28 +391,21 @@ end
 
 -- Reset the item list based on changed settings.
 function SpellsCategory:Refresh()
-
+	wipe(self.items)
 	local itemsIndex = 1
 
 	if (self.castList and self.rightClickList) then
-		self.itemsRightClick = {}
+		wipe(self.itemsRightClick)
 
 		for i = 1, # self.castList, 1 do
 			local spellNameLeft, spellNameRight = self.castList[i], self.rightClickList[i]
 			itemsIndex = AddSpellToCategory(self, spellNameLeft, spellNameRight, itemsIndex)
-		end
-		for i = itemsIndex, # self.items, 1 do
-			self.items[i] = nil
 		end
 	elseif (self.castList) then
 		for _, spellName in ipairs(self.castList) do
 			if (spellName) then
 				itemsIndex = AddSpellToCategory(self, spellName, nil, itemsIndex)
 			end
-		end
-
-		for i = itemsIndex, # self.items, 1 do
-			self.items[i] = nil
 		end
 	end
 end
@@ -518,6 +511,7 @@ function CustomCategory:Refresh()
 	local itemList = self.customCategoriesDB.items
 	local itemType, itemId
 	local itemsIndex = 1
+	wipe(self.items)
 
 	for _, itemDB in ipairs(itemList) do
 		itemType = itemDB.itemType
@@ -549,11 +543,6 @@ function CustomCategory:Refresh()
 			itemsIndex = itemsIndex + 1
 			AutoBarSearch:RegisterMacro(macroId, nil, itemId, itemDB.itemInfo)
 		end
-	end
-
-	-- Trim excess
-	for index = itemsIndex, # self.items, 1 do
-		self.items[index] = nil
 	end
 end
 
