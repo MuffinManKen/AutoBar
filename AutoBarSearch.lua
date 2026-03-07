@@ -66,7 +66,6 @@ end
 
 local function delete_inventory_item(p_item_id, p_slot)
 
-	AutoBarSearch.found:Delete(p_item_id, nil, p_slot, nil)
 	delete_found_item(p_item_id, nil, p_slot)
 	AutoBarSearch.inventory_cache[p_slot] = nil
 
@@ -554,7 +553,7 @@ end
 function Current:Delete(buttonKey, itemId)
 	local debug = false --(buttonKey == "AutoBarButtonHearth")
 	if (not self.dataList[buttonKey]) then
-		self.dataList[buttonKey] = {}
+		return;
 	end
 	local buttonItems = self.dataList[buttonKey]
 	buttonItems[itemId] = nil
@@ -848,15 +847,19 @@ function Sorted:SetBest(buttonKey)
 	for sortedIndex, sortedItemData in ipairs(sortedItems) do
 		local good = true
 		itemId = sortedItemData.itemId
-		category = searchItems[itemId].category
-		categoryInfo = AutoBarCategoryList[category]
+		local itemSearchData = searchItems[itemId]
+		if (not itemSearchData) then good = false end
+		if (good) then
+			category = itemSearchData.category
+			categoryInfo = AutoBarCategoryList[category]
 -- n = { itemId, slotIndex, categoryIndex}, ... }
-		if (categoryInfo) then
-			if (categoryInfo.battleground and not AutoBar.inBG) then
-				good = false
-			else
-				if (categoryInfo.nonCombat and AutoBar.inCombat) then
+			if (categoryInfo) then
+				if (categoryInfo.battleground and not AutoBar.inBG) then
 					good = false
+				else
+					if (categoryInfo.nonCombat and AutoBar.inCombat) then
+						good = false
+					end
 				end
 			end
 		end
