@@ -39,6 +39,9 @@ local _
 -- List of categoryKey, category.description pairs for button categories
 AutoBar.categoryValidateList = {}
 
+---@param a {[1]: any, [2]: string|number, [3]: boolean|nil}
+---@param b {[1]: any, [2]: string|number, [3]: boolean|nil}
+---@return boolean
 local function sortList(a, b)
 	local x = tonumber(a[2]);
 	local y = tonumber(b[2]);
@@ -60,6 +63,10 @@ end
 
 -- Add items from set to rawList
 -- If priority is true, the items will have priority over non-priority items with the same values
+---@param p_raw_list table
+---@param p_set string
+---@param p_priority boolean
+---@return table
 function code.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 	if (not p_raw_list) then
 		p_raw_list = {}
@@ -84,6 +91,8 @@ function code.AddPTSetToRawList(p_raw_list, p_set, p_priority)
 end
 
 -- Convert rawList to a simple array of itemIds, ordered by their value in the set, and priority if any
+---@param p_raw_list table
+---@return table
 function code.RawListToItemIDList(p_raw_list)
 	local itemArray = {}
 	table.sort(p_raw_list, sortList)
@@ -95,6 +104,8 @@ end
 
 
 -- Convert list of negative numbered spell_id to spellName.
+---@param p_cast_list integer[]  negated spell IDs from PeriodicTable
+---@return string[]
 local function PTSpellIDsToSpellName(p_cast_list)
 --print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
 
@@ -110,6 +121,11 @@ end
 -- Add a spell to the list.
 -- spellNameRight specifies a separate spell to cast on right click
 -- If the spell is known (or noSpellCheck is active), copy it to the items list
+---@param p_category CategoryClass
+---@param p_spell_name_left string|nil
+---@param spellNameRight string|nil
+---@param itemsIndex integer
+---@return integer
 local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight, itemsIndex)
 	local noSpellCheck = p_category.noSpellCheck
 	local spellNameLeft = nil
@@ -144,7 +160,7 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 		p_category.items[itemsIndex] = p_spell_name_left
 		if (spellNameRight) then
 			AutoBarSearch:RegisterSpell(spellNameRight, right_spell_id, noSpellCheck)
-			p_category.itemsRightClick[p_spell_name_left] = spellNameRight
+			p_category.itemsRightClick[p_spell_name_left --[[@as string]]] = spellNameRight
 		end
 		itemsIndex = itemsIndex + 1
 	elseif (spellNameRight) then
@@ -160,6 +176,9 @@ end
 -- Return nil or list of spells matching player class
 -- itemsPerLine defaults to 2 (class type, spell).
 -- Only supports 2 & 3 for now.
+---@param castList table
+---@param p_items_per_line integer?
+---@return table|nil, table|nil
 local function FilterByClass(castList, p_items_per_line)
 	local spellName, index, filteredList2, filteredList3
 	local items_per_line = p_items_per_line or 2
@@ -212,6 +231,7 @@ end
 ---@field noSpellCheck boolean
 ---@field castSpell number	spell override
 ---@field items table
+---@field itemsRightClick table|nil	right-click spell map, present only on categories that use it
 AB.CategoryClass = {}
 local CategoryClass = AB.CategoryClass ---@class CategoryClass
 
@@ -236,24 +256,28 @@ function CategoryClass:SetTargeted(p_targeted)
 end
 
 -- True if only usable outside combat
+---@param p_non_combat boolean
 function CategoryClass:SetNonCombat(p_non_combat)
 	assert(type(p_non_combat) == "boolean")
 	self.nonCombat = p_non_combat
 end
 
 -- True if item is for battlegrounds only
+---@param p_battleground boolean
 function CategoryClass:SetBattleground(p_battleground)
 	assert(type(p_battleground) == "boolean")
 	self.battleground = p_battleground
 end
 
 -- True if item the spell check should be skipped, used for things like Mounts(?) where the spell check would otherwise fail
+---@param p_no_spell_check boolean
 function CategoryClass:SetNoSpellCheck(p_no_spell_check)
 	assert(type(p_no_spell_check) == "boolean")
 	self.noSpellCheck = p_no_spell_check
 end
 
 -- Sets an override castSpell value
+---@param p_cast_spell number
 function CategoryClass:SetCastSpell(p_cast_spell)
 	self.castSpell = p_cast_spell
 end
@@ -270,14 +294,19 @@ end
 --#region ItemsCategory
 
 ---@class ItemsCategory: CategoryClass
----@field pt_items table
----@field ptPriorityItems table
+---@field pt_items string|nil	PeriodicTable set name
+---@field ptPriorityItems string|nil	PeriodicTable set name for higher-priority items
 -- Category consisting of regular items, defined by PeriodicTable sets
 AB.ItemsCategory = CreateFromMixins(CategoryClass)
 local ItemsCategory = AB.ItemsCategory ---@class ItemsCategory
 
 -- p_pt_items, p_pt_priority_items are PeriodicTable sets
 -- p_pt_priority_items sort higher than items at the same value
+---@param p_description string
+---@param p_short_texture string  icon name relative to Interface\Icons\
+---@param p_pt_items string|nil
+---@param p_pt_priority_items string|nil
+---@return ItemsCategory
 function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_priority_items)
 	assert(type(p_description) == "string")
 	assert(type(p_short_texture) == "string")
@@ -307,6 +336,9 @@ end
 AB.MacroTextCategory = CreateFromMixins(CategoryClass)
 local MacroTextCategory = AB.MacroTextCategory	---@class MacroTextCategory
 
+---@param p_description string
+---@param p_short_texture string  icon name relative to Interface\Icons\
+---@return MacroTextCategory
 function MacroTextCategory:new(p_description, p_short_texture)
 	assert(type(p_description) == "string")
 	assert(type(p_short_texture) == "string")
@@ -317,6 +349,10 @@ function MacroTextCategory:new(p_description, p_short_texture)
 	return obj
 end
 
+---@param p_macro_text string
+---@param p_macro_icon_override string|nil
+---@param p_tooltip_override string|nil
+---@param p_hyperlink_override string|nil
 function MacroTextCategory:AddMacroText(p_macro_text, p_macro_icon_override, p_tooltip_override, p_hyperlink_override)
 	assert(type(p_macro_text) == "string")
 
@@ -347,7 +383,11 @@ local SpellsCategory = AB.SpellsCategory ---@class SpellsCategory
 -- Icon from castList is used unless not available but rightClickList is
 -- NOTE: Muffin.Mounts is the only SpellsCategory with a PT Set
 ---@param p_description string
----@param p_cast_list table
+---@param p_texture string
+---@param p_cast_list table|nil
+---@param rightClickList table|nil
+---@param p_pt_set string|nil  PeriodicTable set of spell IDs (mutually exclusive with p_cast_list/rightClickList)
+---@return SpellsCategory
 function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickList, p_pt_set)
 
 	if(type(p_cast_list) ~= "table" and p_cast_list ~= nil) then
@@ -424,6 +464,8 @@ local CustomCategory = AB.CustomCategory	---@class CustomCategory
 
 -- Select an Icon to use
 -- Add description verbatim to localization
+---@param customCategoriesDB table
+---@return CustomCategory
 function CustomCategory:new(customCategoriesDB)
 	local description = customCategoriesDB.name
 	if (not L[description]) then
@@ -476,6 +518,8 @@ end
 
 -- If not used yet, change name to newName
 -- Return the name in use either way
+---@param newName string
+---@return string
 function CustomCategory:ChangeName(newName)
 	local newCategoryKey = AB.GetCustomCategoryKey(newName)
 	if (not AutoBarCategoryList[newCategoryKey]) then
@@ -620,8 +664,9 @@ function AB.InitializeAllCategories()
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = ItemsCategory:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
 	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
-	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = ItemsCategory:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
-	AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
+	--TODO:Was this intended to be Conjured instead of Non-Conjured?
+	--AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"] = ItemsCategory:new( "Consumable.Food.Edible.Basic.Non-Conjured", "INV_Misc_Food_23", "Consumable.Food.Edible.Basic.Non-Conjured")
+	--AutoBarCategoryList["Consumable.Food.Edible.Basic.Non-Conjured"]:SetNonCombat(true)
 
 	AutoBarCategoryList["Muffin.Food.Health.Basic"] = ItemsCategory:new( "Muffin.Food.Health.Basic", "INV_Misc_Food_23", "Muffin.Food.Health.Basic")
 	AutoBarCategoryList["Muffin.Food.Health.Basic"]:SetNonCombat(true)
