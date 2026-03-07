@@ -666,7 +666,7 @@ local function SortBySlotCategory(a, b)
 			return a.slotIndex > b.slotIndex
 		end
 	else
-		return true
+		return false
 	end
 end
 
@@ -702,7 +702,9 @@ function Sorted:Update(p_button_key)
 				AutoBarButton.dirtyButton[buttonKey] = true
 			end
 		end
-		self.dirty = oldDirty
+		if (p_button_key) then
+			self.dirty = oldDirty
+		end
 	end
 end
 --/dump AutoBarSearch.sorted.dirtyList["AutoBarCustomButton7"]
@@ -1247,6 +1249,7 @@ function AutoBarSearch:ScanInventory()
 			if (old_item_id and old_item_id ~= item_id) then
 				delete_inventory_item(old_item_id, slot)
 			end
+			inventory[slot] = item_id
 			self.found:Add(item_id, nil, slot )
 		elseif (old_item_id) then
 			delete_inventory_item(old_item_id, slot)
