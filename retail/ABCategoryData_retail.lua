@@ -12,6 +12,8 @@ local MacroTextCategory = AB.MacroTextCategory
 local SpellsCategory = AB.SpellsCategory
 
 --#region ToyCategory
+local DEBUG_IDS = code.make_set{182773, 172179, 141605}
+
 AB.ToyCategory = CreateFromMixins(AB.CategoryClass)
 local ToyCategory = AB.ToyCategory
 
@@ -51,7 +53,6 @@ function ToyCategory:Refresh()
 	local debug = false --(self.categoryKey == "Muffin.Toys.Hearth")
 	if(debug) then code.log_warning("Refreshing Toy Category", self.categoryKey, "Items:", #self.items, "All:", #self.all_items, "OnlyFaves:", only_faves); end
 
-	local DEBUG_IDS = code.make_set{182773, 172179, 141605}
 	local list_index = 1
 
 	for _, toy_id in ipairs(self.all_items) do
