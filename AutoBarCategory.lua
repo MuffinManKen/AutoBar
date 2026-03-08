@@ -424,6 +424,8 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 		obj.itemsRightClick = {}
 	end
 
+	obj.castList = obj.castList or {}
+
 	obj:Refresh()
 
 	return obj

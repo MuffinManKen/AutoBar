@@ -2601,43 +2601,43 @@ else
 		if (not AutoBarCategoryList["Spell.Mount"] or (self.is_mount_data_missing == nil)) then
 			--AutoBarButtonMount:init hasn't run, so skip
 			--print("Skipping AutoBarButtonMount:Refresh  UpdateMount:" .. tostring(updateMount));
-			return true;
+			return;
 		end
 
-		local thisIsSpam = true
 		local category = AutoBarCategoryList["Spell.Mount"]
 
-		AutoBar.last_mount_count = AutoBar.last_mount_count or 0;
 
-		-- Get the player's current mount filter settings
-		local setting_filter_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED);
-		local setting_filter_not_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED);
-		local setting_filter_unusable = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE);
+		local needs_update = buttonDB.is_dirty or self.is_mount_data_missing
 
-		--Set the mount filter settings the way we want
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true);
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
-
-		local mount_ids = C_MountJournal.GetMountIDs()
-		local num_mounts = #mount_ids
-		local needs_update = (num_mounts > AutoBar.last_mount_count) or buttonDB.is_dirty or self.is_mount_data_missing
-
-		--code.log_warning("\nAutoBarButtonMount:Refresh ", "is_dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update, ", MissingData:", self.is_mount_data_missing )
-	--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) .. "  Last Count:" .. AutoBar.last_mount_count, "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
-	--print(debugstack(1, 3, 3));
+		code.log_warning("\nAutoBarButtonMount:Refresh ", "is_dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update, ", MissingData:", self.is_mount_data_missing )
+		--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) , "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
+		--print(debugstack(1, 3, 3));
 
 		--If the number of known mounts has changed, do stuff
 		if (needs_update) then
-	--print("   Gonna do stuff");
-			AutoBar.last_mount_count = num_mounts;
+			--print("   Gonna do stuff");
+
+			-- Get the player's current mount filter settings
+			local setting_filter_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED);
+			local setting_filter_not_collected = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED);
+			local setting_filter_unusable = C_MountJournal.GetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE);
+
+			--Set the mount filter settings the way we want
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, true);
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, false);
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, false);
+
+			if buttonDB.is_dirty then
+				AB.EraseMountInfoCache()
+			end
+
+			local mount_ids = C_MountJournal.GetMountIDs()
 			self.is_mount_data_missing = false
 			buttonDB.is_dirty = false
 
-			category.castList = {}
+			wipe(category.castList)
 
-			thisIsSpam = category.initialized --or (# category.castList ~= count)
-
+			local cast_list_next_index = 1
 			for _k, id in ipairs(mount_ids) do
 				local mount_data = AB.GetMountInfoByID(id)
 				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
@@ -2656,7 +2656,8 @@ else
 							AutoBarSearch:RegisterSpell(spell_name, mount_data.spell_id, true)
 							local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spell_name)
 							spellInfo.spell_link = "spell:" .. mount_data.spell_id
-							category.castList[# category.castList + 1] = spell_name
+							category.castList[cast_list_next_index] = spell_name
+							cast_list_next_index = cast_list_next_index + 1
 						end
 				elseif (mount_data.is_usable == nil) then
 					--code.log_warning("Missing data :(")
@@ -2672,19 +2673,18 @@ else
 				table.sort(category.castList, reverse_sort_func)
 			end
 
-			category.initialized = true
-
-			--code.log_warning("\nNumMounts:", num_mounts, "#CastList:", #category.castList)
+			--code.log_warning("\nNumMounts:", #mount_ids, "#CastList:", #category.castList)
 
 			AutoBarCategoryList["Spell.Mount"]:Refresh()
+
+			-- Reset the player's current mount filter settings to their original settings
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, setting_filter_collected);
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, setting_filter_not_collected);
+			C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, setting_filter_unusable);
 		end
 
-		-- Reset the player's current mount filter settings to their original settings
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_COLLECTED, setting_filter_collected);
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED, setting_filter_not_collected);
-		C_MountJournal.SetCollectedFilterSetting(LE_MOUNT_JOURNAL_FILTER_UNUSABLE, setting_filter_unusable);
 
-		return thisIsSpam
+
 	end
 
 

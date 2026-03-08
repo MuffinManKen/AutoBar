@@ -167,6 +167,11 @@ function AutoBar:InitializeZero()
     ok = pcall(AutoBar.frame.RegisterEvent, AutoBar.frame, "LEARNED_SPELL_IN_SKILL_LINE")
     if not ok then code.log_warning("Event does not exist:", "LEARNED_SPELL_IN_SKILL_LINE") end
 
+	ok = pcall(AutoBar.frame.RegisterEvent, AutoBar.frame, "COMPANION_LEARNED")
+	if not ok then code.log_warning("Event does not exist:", "COMPANION_LEARNED") end
+	ok = pcall(AutoBar.frame.RegisterEvent, AutoBar.frame, "NEW_MOUNT_ADDED")
+	if not ok then code.log_warning("Event does not exist:", "NEW_MOUNT_ADDED") end
+
 	if(AutoBarDB2.settings.handle_spell_changed) then
 		AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	end
@@ -174,8 +179,8 @@ function AutoBar:InitializeZero()
 
 	AutoBar.frame:RegisterEvent("QUEST_ACCEPTED")
 
+
 	if (ABGData.is_mainline_wow) then
-		AutoBar.frame:RegisterEvent("COMPANION_LEARNED")
 		AutoBar.frame:RegisterEvent("QUEST_LOG_UPDATE")
 		AutoBar.frame:RegisterEvent("TOYS_UPDATED")
 	end
@@ -351,27 +356,24 @@ if (ABGData.is_mainline_wow) then
 
 	end
 
-	function AB.events.COMPANION_LEARNED()
-		local need_update = true;
+end
 
-		AB.LogEventStart("COMPANION_LEARNED")
+function AB.events.COMPANION_LEARNED()
 
-		local button = AutoBar.buttonList["AutoBarButtonMount"]
-		if (button) then
-			button:Refresh(button.parentBar, button.buttonDB)
-		end
+	AB.LogEventStart("COMPANION_LEARNED")
 
-		if(need_update) then
-			AB.ABScheduleUpdate(tick.UpdateCategoriesID);
-		end
-
-		AB.LogEventEnd("COMPANION_LEARNED")
+	local button = AutoBar.buttonList["AutoBarButtonMount"]
+	if button then
+		button.buttonDB.is_dirty = true
+		AB.ABScheduleUpdate(tick.UpdateCategoriesID);
 	end
 
 
-
-
+	AB.LogEventEnd("COMPANION_LEARNED")
 end
+
+AB.events.NEW_MOUNT_ADDED = AB.events.COMPANION_LEARNED
+
 
 local function register_sticky_frames()
 	--TODO: Review sticky frame handling. This code could be cleaned up

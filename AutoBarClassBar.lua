@@ -216,7 +216,7 @@ function Bar:UpdateObjects()
 	-- Create or Refresh the Bar's Buttons
 	for buttonKeyIndex, buttonKey in ipairs(buttonKeyList) do
 
-		local debug = false --(buttonKey == "AutoBarButtonQuest")
+		local debug = false --(buttonKey == "AutoBarButtonMount")
 		buttonDB = AutoBar.buttonDBList[buttonKey]
 		if (not buttonDB) then
 			buttonKeyList[buttonKeyIndex] = nil
@@ -227,6 +227,8 @@ function Bar:UpdateObjects()
 			if (AutoBar.buttonListDisabled[buttonKey]) then
 				AutoBar.buttonList[buttonKey] = AutoBar.buttonListDisabled[buttonKey]
 				AutoBar.buttonListDisabled[buttonKey] = nil
+				buttonDB.is_dirty = true
+				ABGData.TickScheduler.FullScanItemsFlag = true
 				if(debug) then code.log_warning("Bar:UpdateObjects Thaw " .. tostring(buttonKey) .. " <-- buttonListDisabled") end
 			end
 
@@ -255,7 +257,6 @@ function Bar:UpdateObjects()
 				if(debug) then code.log_warning("Bar:UpdateObjects Freeze " .. tostring(buttonKey) .. " --> buttonListDisabled") end
 			elseif (AutoBar.buttonListDisabled[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
-				buttonList[buttonKeyIndex]:Refresh(self, buttonDB)
 			else
 				assert(AutoBar.Class[buttonDB.buttonClass] ~= nil, buttonDB.buttonClass  .. " is nil")
 				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)

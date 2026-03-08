@@ -624,10 +624,13 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 	AutoBarGlobalDataObject.is_toy_usable_cache = {}
 	AutoBarGlobalDataObject.mount_data_cache_by_id = {}
 
+	function AB.EraseMountInfoCache()
+		wipe(AutoBarGlobalDataObject.mount_data_cache_by_id)
+	end
 
 	function AB.GetMountInfoByID(p_id)
 		local mdc = AutoBarGlobalDataObject.mount_data_cache_by_id
-		if(mdc[p_id] == nil) then
+		if (mdc[p_id] == nil or mdc[p_id].is_usable == nil) then
 			local name, spell_id, icon, _active, is_usable, _src, is_favourite, _faction_specific, faction_id, _is_hidden, is_collected, _mount_id =
 						 C_MountJournal.GetMountInfoByID(p_id)
 			local data = {}
