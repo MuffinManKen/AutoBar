@@ -374,10 +374,6 @@ function AutoBarSearch.found:Add(itemId, bag, slot, spell)
 			AutoBarSearch.current:Merge(itemId)
 		end
 
-		-- Remove possible old entries left over from a Reset
-		for i = # itemData, 4, -1 do
-			itemData[i] = nil
-		end
 	else
 		-- Item previously found so just record additional location
 		local bFound = nil
@@ -1268,7 +1264,13 @@ function AutoBarSearch:ScanBag(p_bag)
 	local itemId, oldItemId
 	local nSlots = AB.GetContainerNumSlots(p_bag)
 
-	-- ToDo: Clear out excess slots if bag got smaller
+	for slot = nSlots + 1, #slotList do
+		oldItemId = slotList[slot]
+		if (oldItemId) then
+			delete_found_item(oldItemId, p_bag, slot)
+			slotList[slot] = nil
+		end
+	end
 
 	for slot = 1, nSlots, 1 do
 		itemId = AB.GetContainerItemID(p_bag, slot)
