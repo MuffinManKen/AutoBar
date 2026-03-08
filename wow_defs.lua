@@ -172,7 +172,7 @@ ABCode = {}
 ---@field CLASS string The player's class in all caps without whitespace. Locale-independent.
 ---@field NiceClass string The player's class with the first letter capitalized and the rest lower without whitespace. Locale-independent.
 ---@field player_faction_name string The player's faction name (Alliance/Horde/Neutral).  Mixed-case and locale-independent.
----@field player_faction_id number 0 == Horde, 1 == Alliance
+---@field player_faction_id integer 0 == Horde, 1 == Alliance
 ---@field frame Frame Frame used for keybinding and event handling
 ---@field current_player string Formatted as "Player - Realm"
 ---@field version string Version string of Addon as given by the TOC
@@ -182,6 +182,7 @@ ABCode = {}
 ---@field Class table This is where the various class definitions live.  TODO: Move it to AB.types
 ---@field ConfigToggle function Open the Config window if we're not in combat
 ---@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
+---@field player_level integer Current player level for item filtering
 AutoBar = {}
 
 
