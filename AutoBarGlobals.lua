@@ -608,9 +608,9 @@ AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlo
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
 AB.GetContainerItemLink = GetContainerItemLink or C_Container.GetContainerItemLink
 
-AB.GetAddOnMetadata = GetAddOnMetadata or C_AddOns.GetAddOnMetadata	---@diagnostic disable-line: deprecated
+AB.GetAddOnMetadata = C_AddOns.GetAddOnMetadata
 
-AB.GetItemSpell = GetItemSpell or C_Item.GetItemSpell
+AB.GetItemSpell = GetItemSpell or C_Item.GetItemSpell	---@diagnostic disable-line: deprecated
 
 
 
