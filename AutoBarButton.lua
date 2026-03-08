@@ -2609,7 +2609,7 @@ else
 
 		local needs_update = buttonDB.is_dirty or self.is_mount_data_missing
 
-		code.log_warning("\nAutoBarButtonMount:Refresh ", "is_dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update, ", MissingData:", self.is_mount_data_missing )
+		--code.log_warning("\nAutoBarButtonMount:Refresh ", "is_dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update, ", MissingData:", self.is_mount_data_missing )
 		--print("NumMounts:" .. num_mounts .. " UpdateMount:" .. tostring(updateMount) , "Dirty:", buttonDB.is_dirty, "NeedsUpdate:", needs_update)
 		--print(debugstack(1, 3, 3));
 
