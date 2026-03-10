@@ -3,9 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Another attempt to smooth out some performance issues
- - Removed a dependency on AceOO and AceLibrary (Old unsupported stuff)
- - Added support for AddonCompartment
+ - More work on performance. Notably related to the Mount button.
+ - Updated datamining
 ]] .. "|n"
 
 
