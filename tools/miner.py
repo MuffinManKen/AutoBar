@@ -354,8 +354,8 @@ def get_set_from_json(p_json, p_filters):
 	for filter_key, filter_data in p_filters.items():
 		for entry in p_json:
 			if entry[filter_key] == filter_data:
-				id = entry['id']
-				new_set.add(id)
+				item_id = entry['id']
+				new_set.add(item_id)
 
 	print(new_set)
 
@@ -465,7 +465,7 @@ def get_listview_from_page(p_page):
 
 def load_muffin_data(p_xpac):
 	global g_muffin_data
-	
+
 	file_name = f"D:/Projects/Current/WoW/WoWData/ItemData/items_{p_xpac}.pkl"
 	if os.path.isfile(file_name):
 		with open(file_name,"rb") as f:

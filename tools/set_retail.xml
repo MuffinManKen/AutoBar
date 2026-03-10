@@ -149,6 +149,7 @@
 	</Set>
 
 	<Set name="Muffin.Misc.Quest">
+		<Inclusion ftype="wowhead" url="items/quest?filter=107;0;use%3A" />
 		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
 		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="(use:|equip:)" />
 		<Exclusion ftype="static">
@@ -160,8 +161,8 @@
 		</Inclusion>
 	</Set>
 	<Set name="Muffin.Misc.StartsQuest">
-		<Inclusion ftype="wowhead" url="items/min-level:1/max-level:1?filter=6;1;0" />
-		<Inclusion ftype="wowhead" url="items/min-level:2?filter=6;1;0" />
+		<Inclusion ftype="wowhead" url="items/quality:0:1?filter=6;1;0" />
+		<Inclusion ftype="wowhead" url="items/quality:2:3:4:5:6:7:8?filter=6;1;0" />
 	</Set>
 	<Set name="Muffin.Misc.Reputation">
 		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;grants+reputation" />
