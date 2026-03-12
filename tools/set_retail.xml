@@ -391,8 +391,9 @@
 			<Item id="140192" name="Dalaran Hearthstone" />
 			<Item id="110560" name="Garrison Hearthstone" />
 			<Item id="141605" name="Flight Master's Whistle" />
+			<Item id="230850" name="Delve-O-Bot 7001" />
+			<Item id="253629" name="Personal Key to the Arcantina" />
 		</Inclusion>
-
 	</Set>
 	<Set name="Muffin.Toys.Fishing.Bobbers">
 		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:bobber"/>
