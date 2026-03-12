@@ -33,6 +33,7 @@
 	<Set name="Muffin.Food.Health.Basic">
 		<Inclusion ftype="wowhead" url="consumables?filter=107;0;must+remain+seated"/>
 		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;must+remain+seated" />
+		<Inclusion ftype="wowhead" url="items/consumables/other/name:injector?filter=107;0;restores+health" />
 		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
 		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;become+well+fed" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="mana" />
@@ -41,6 +42,7 @@
 	<Set name="Muffin.Food.Mana.Basic">
 		<Inclusion ftype="wowhead" url="consumables?filter=107;0;must+remain+seated"/>
 		<Inclusion ftype="wowhead" url="food-and-drinks" />
+		<Inclusion ftype="wowhead" url="items/consumables/other/name:injector?filter=107;0;restores+mana" />
 		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
 		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;become+well+fed" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="health" />
