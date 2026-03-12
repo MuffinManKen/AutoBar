@@ -177,6 +177,7 @@ code.cache_spell_data(2651, "Elune's Grace");
 code.cache_spell_data(2652, "Touch of Weakness");
 code.cache_spell_data(6346, "Fear Ward");
 code.cache_spell_data(14752, "Divine Spirit");
+code.cache_spell_data(27681, "Prayer of Spirit");
 --#endregion
 
 --Rogue
