@@ -13,24 +13,35 @@ code.cache_spell_data(20580, "Shadowmeld");
 
 --Druid
 code.cache_spell_data(22812, "Barkskin");
-code.cache_spell_data(99, "Disorienting Roar");
-code.cache_spell_data(5215, "Prowl");
-code.cache_spell_data(22842, "Frenzied Regeneration");
-code.cache_spell_data(22570, "Mangle");
 code.cache_spell_data(1126, "Mark of the Wild");
 code.cache_spell_data(21849, "Gift of the Wild");
 code.cache_spell_data(467, "Thorns");
-code.cache_spell_data(5487, "Bear Form");
-code.cache_spell_data(9634, "Dire Bear Form");
-code.cache_spell_data(768, "Cat Form");
+code.cache_spell_data(16864, "Omen of Clarity");
 code.cache_spell_data(1066, "Aquatic Form");
-code.cache_spell_data(24858, "Moonkin Form");
---code.cache_spell_data(775, "Tree Form");
 code.cache_spell_data(783, "Travel Form");
 code.cache_spell_data(33943, "Flight Form");
 code.cache_spell_data(40120, "Swift Flight Form");
 code.cache_spell_data(18960, "Teleport: Moonglade");
+code.cache_spell_data(16689, "Natures Grasp");
+code.cache_spell_data(20484, "Rebirth"); --Added
+code.cache_spell_data(22570, "Maim");
 
+--Druid(bear)
+code.cache_spell_data(5487, "Bear Form");
+code.cache_spell_data(9634, "Dire Bear Form");
+code.cache_spell_data(99, "Disorienting Roar");
+code.cache_spell_data(22842, "Frenzied Regeneration");
+code.cache_spell_data(16979, "Feral Charge");
+
+--Druid(cat)
+code.cache_spell_data(768, "Cat Form");
+code.cache_spell_data(5215, "Prowl");
+
+--Druid(Boonkin)
+code.cache_spell_data(24858, "Moonkin Form");
+
+--Druid(Tree)
+code.cache_spell_data(775, "Tree Form");
 
 --#region Hunter
 code.cache_spell_data(5118, "Aspect of the Cheetah");
@@ -42,19 +53,31 @@ code.cache_spell_data(13161, "Aspect of the Beast");
 code.cache_spell_data(34074, "Aspect of the Viper");
 
 code.cache_spell_data(1462, "Beast Lore");
-code.cache_spell_data(19574, "Bestial Wrath");
+code.cache_spell_data(1515, "Tame Beast");
 code.cache_spell_data(883, "Call Pet");
-code.cache_spell_data(5116, "Concussive Shot");
-code.cache_spell_data(781, "Disengage");
+code.cache_spell_data(982, "Revive Pet");
 code.cache_spell_data(2641, "Dismiss Pet");
 code.cache_spell_data(6197, "Eagle Eye");
 code.cache_spell_data(6991, "Feed Pet");
-code.cache_spell_data(5384, "Feign Death");
-code.cache_spell_data(19577, "Intimidation");
+
 code.cache_spell_data(136, "Mend Pet");
-code.cache_spell_data(982, "Revive Pet");
-code.cache_spell_data(1515, "Tame Beast");
+code.cache_spell_data(19574, "Bestial Wrath");
+code.cache_spell_data(19577, "Intimidation");
+code.cache_spell_data(34026, "Kill Command"); --Added
+
+code.cache_spell_data(5384, "Feign Death");
+code.cache_spell_data(781, "Disengage");
+code.cache_spell_data(19263, "Deterrence"); --Added
+code.cache_spell_data(34477, "Misdirection"); --Added
+
+
+code.cache_spell_data(5116, "Concussive Shot");
 code.cache_spell_data(2974, "Wing Clip");
+
+code.cache_spell_data(20736, "Distracting Shot"); --Added
+code.cache_spell_data(19801, "Tranquilizing Shot"); --Added
+code.cache_spell_data(19386, "Wyvern Sting"); --Added
+code.cache_spell_data(19503, "Scatter Shot"); --Added
 
 code.cache_spell_data(19883, "Track Humanoids");
 code.cache_spell_data(19884, "Track Undead");
@@ -77,17 +100,22 @@ code.cache_spell_data(168, "Frost Armor");
 code.cache_spell_data(7302, "Ice Armor");
 code.cache_spell_data(6117, "Mage Armor");
 code.cache_spell_data(30482, "Molten Armor");
+code.cache_spell_data(6143, "Frost Ward"); --added
 code.cache_spell_data(27619, "Ice Block");
 code.cache_spell_data(11426, "Ice Barrier");
+code.cache_spell_data(543, "Fire Ward"); --Added
+code.cache_spell_data(1463, "Mana Shield"); --Added
 
 code.cache_spell_data(1459, "Arcane Intellect");
 code.cache_spell_data(23028, "Arcane Brilliance");
 code.cache_spell_data(130, "Slow Fall");
 code.cache_spell_data(1008, "Amplify Magic");
 code.cache_spell_data(604, "Dampen Magic");
-
-code.cache_spell_data(5504, "Conjure Water");
-code.cache_spell_data(587, "Conjure Food");
+code.cache_spell_data(2139, "Counterspell"); --added
+code.cache_spell_data(30449, "Spellsteal"); --Added
+code.cache_spell_data(7870, "Lesser Invisibility");
+code.cache_spell_data(66, "Invisibility"); --added 
+code.cache_spell_data(31589, "Slow"); --Added
 
 code.cache_spell_data(759, "Conjure Mana Agate");
 code.cache_spell_data(10054, "Conjure Mana Ruby");
@@ -97,10 +125,9 @@ code.cache_spell_data(27101, "Conjure Mana Emerald");
 
 code.cache_spell_data(31687, "Summon Water Elemental");
 
---code.cache_spell_data(42955, "Conjure Refreshment");
---code.cache_spell_data(43987, "Conjure Refreshment Table");
-code.cache_spell_data(7870, "Lesser Invisibility");
-code.cache_spell_data(66, "Invisibility");
+code.cache_spell_data(5504, "Conjure Water");
+code.cache_spell_data(587, "Conjure Food");
+code.cache_spell_data(43987, "Ritual of Refreshment"); --Updated
 
 code.cache_spell_data(11418, "Portal: Undercity");
 code.cache_spell_data(3563, "Teleport: Undercity");
@@ -131,16 +158,24 @@ code.cache_spell_data(35715, "Teleport: Shattrath - Horde");
 --#region Paladin
 code.cache_spell_data(498, "Divine Protection");
 code.cache_spell_data(642, "Divine Shield");
+
 code.cache_spell_data(1044, "Blessing of Freedom");
 code.cache_spell_data(1022, "Blessing of Protection");
 code.cache_spell_data(6940, "Blessing of Sacrifice");
 code.cache_spell_data(1038, "Blessing of Salvation");
-code.cache_spell_data(25898, "Greater Blessing of Kings");
 code.cache_spell_data(19742, "Blessing of Wisdom");
-code.cache_spell_data(25894, "Greater Blessing of Wisdom");
-code.cache_spell_data(633, "Lay on Hands");
-
+code.cache_spell_data(20217, "Blessing of Kings");														   
 code.cache_spell_data(19740, "Blessing of Might");
+code.cache_spell_data(20911, "Blessing of Sanctuary"); --Added
+code.cache_spell_data(25782, "Greater Blessing of Might"); --Added
+code.cache_spell_data(25895, "Greater Blessing of Salvation");														  
+code.cache_spell_data(25898, "Greater Blessing of Kings");
+code.cache_spell_data(25894, "Greater Blessing of Wisdom");
+code.cache_spell_data(25899, "Greater Blessing of Sanctuary"); --Added
+
+code.cache_spell_data(633, "Lay on Hands");
+code.cache_spell_data(5502, "Sense Undead");
+code.cache_spell_data(31884, "Avenging Wrath");--Added
 
 code.cache_spell_data(32223, "Crusader Aura");
 code.cache_spell_data(465, "Devotion Aura");
@@ -148,10 +183,8 @@ code.cache_spell_data(7294, "Retribution Aura");
 code.cache_spell_data(19746, "Concentration Aura");
 code.cache_spell_data(19891, "Fire Resistance Aura");
 code.cache_spell_data(19888, "Frost Resistance Aura");
-code.cache_spell_data(20218, "Sanctity Aura");
+code.cache_spell_data(20218, "Sanctity Aura"); --Added
 code.cache_spell_data(19876, "Shadow Resistance Aura");
-
-code.cache_spell_data(5502, "Sense Undead");
 
 code.cache_spell_data(20375, "Seal of Command");
 code.cache_spell_data(20164, "Seal of Justice");
@@ -160,24 +193,42 @@ code.cache_spell_data(20154, "Seal of Righteousness");
 code.cache_spell_data(21082, "Seal of the Crusader");
 code.cache_spell_data(348700, "Seal of the Martyr");
 code.cache_spell_data(20166, "Seal of Wisdom");
+code.cache_spell_data(348704, "Seal of Corruption"); --Added
 --#endregion
 
 --#region Priest
 code.cache_spell_data(588, "Inner Fire");
 code.cache_spell_data(1243, "Power Word: Fortitude");
-code.cache_spell_data(21562, "Prayer of Fortitude");
 code.cache_spell_data(17, "Power Word: Shield");
-code.cache_spell_data(15487, "Silence");
+code.cache_spell_data(14752, "Divine Spirit");
 code.cache_spell_data(976, "Shadow Protection");
+
 code.cache_spell_data(27683, "Prayer of Shadow Protection");
-code.cache_spell_data(34433, "Shadowfiend");
+code.cache_spell_data(21562, "Prayer of Fortitude");
+code.cache_spell_data(27681, "Prayer of Spirit"); --added
+
+code.cache_spell_data(15487, "Silence");
+code.cache_spell_data(34433, "Shadowfiend");--added
+code.cache_spell_data(6346, "Fear Ward");
+code.cache_spell_data(724, "Lightwell"); --added
+code.cache_spell_data(32375, "Mass Dispell"); --added
+code.cache_spell_data(453, "Mind Soothe"); --added
+code.cache_spell_data(33206, "Pain Suppression"); --added
+code.cache_spell_data(10060, "Power Infusion"); --added
+
 code.cache_spell_data(18137, "Shadowguard");
 code.cache_spell_data(13896, "Feedback");
 code.cache_spell_data(2651, "Elune's Grace");
 code.cache_spell_data(2652, "Touch of Weakness");
-code.cache_spell_data(6346, "Fear Ward");
-code.cache_spell_data(14752, "Divine Spirit");
-code.cache_spell_data(27681, "Prayer of Spirit");
+
+code.cache_spell_data(44041, "Chastise"); --added
+code.cache_spell_data(13908, "Desperate Prayer"); --added
+code.cache_spell_data(28880, "Gift of the Naaru"); --added
+
+code.cache_spell_data(9035, "Hex of Weakness"); --added
+code.cache_spell_data(2944, "Devouring Plague"); --added
+code.cache_spell_data(10797, "Starshards"); --added
+
 --#endregion
 
 --Rogue
@@ -190,6 +241,11 @@ code.cache_spell_data(2094, "Blind");
 code.cache_spell_data(6770, "Sap");
 code.cache_spell_data(36554, "Shadowstep");
 code.cache_spell_data(1804, "Pick Lock");
+code.cache_spell_data(31224, "Cloak of Shadows"); --added
+code.cache_spell_data(14185, "Preparation"); --added
+code.cache_spell_data(921, "Pick Pocket"); --added
+
+
 
 --#region Shaman
 code.cache_spell_data(8024, "Flametongue Weapon");
@@ -197,7 +253,20 @@ code.cache_spell_data(8033, "Frostbrand Weapon");
 code.cache_spell_data(8017, "Rockbiter Weapon");
 code.cache_spell_data(8232, "Windfury Weapon");
 
+code.cache_spell_data(8056, "Frost Shock");
 code.cache_spell_data(8042, "Earth Shock");
+code.cache_spell_data(8050, "Flame Shock"); --added
+
+code.cache_spell_data(974, "Earth Shield");
+code.cache_spell_data(324, "Lightning Shield");
+code.cache_spell_data(24398, "Water Shield"); --updated
+--code.cache_spell_data(408696, "Spirit of the Alpha"); -remove not tbc
+code.cache_spell_data(131, "Water Breathing");
+code.cache_spell_data(546, "Water Walking");
+code.cache_spell_data(2645, "Ghost Wolf");
+code.cache_spell_data(556, "Astral Recall");
+code.cache_spell_data(2825, "Bloodlust"); --added
+code.cache_spell_data(32182, "Heroism"); --added
 
 --Air totems
 code.cache_spell_data(8835, "Grace of Air Totem");
@@ -208,7 +277,6 @@ code.cache_spell_data(25908, "Tranquil Air Totem");
 code.cache_spell_data(8512, "Windfury Totem");
 code.cache_spell_data(15107, "Windwall Totem");
 code.cache_spell_data(3738, "Wrath of Air Totem");
-
 
 --Earth totems
 code.cache_spell_data(2484, "Earthbind Totem");
@@ -225,6 +293,7 @@ code.cache_spell_data(8181, "Frost Resistance Totem");
 code.cache_spell_data(8190, "Magma Totem");
 code.cache_spell_data(3599, "Searing Totem");
 code.cache_spell_data(30706, "Totem of Wrath");
+code.cache_spell_data(2062, "Fire Elemental Totem"); --added
 
 --Water totems
 code.cache_spell_data(8170, "Disease Cleansing Totem");
@@ -233,10 +302,6 @@ code.cache_spell_data(5394, "Healing Stream Totem");
 code.cache_spell_data(5675, "Mana Spring Totem");
 code.cache_spell_data(16190, "Mana Tide Totem");
 code.cache_spell_data(8166, "Poison Cleansing Totem");
-
-code.cache_spell_data(546, "Water Walking");
-code.cache_spell_data(2645, "Ghost Wolf");
-code.cache_spell_data(556, "Astral Recall");
 --#endregion
 
 --#region Warlock
@@ -249,22 +314,32 @@ code.cache_spell_data(6202, "Create Healthstone (Lesser)");
 code.cache_spell_data(5699, "Create Healthstone");
 code.cache_spell_data(11729, "Create Healthstone (Greater)");
 code.cache_spell_data(11730, "Create Healthstone (Major)");
+code.cache_spell_data(27230, "Create Healthstone (Master)"); --Added
+code.cache_spell_data(29893, "Ritual of Souls"); --Added
 
---code.cache_spell_data(00000, "XXX");
+code.cache_spell_data(6366, "Create Firestone (Lesser)"); --Added this to a category
+code.cache_spell_data(17951, "Create Firestone"); -- Added this to a category
+code.cache_spell_data(17952, "Create Firestone (Greater)"); -- Added this to a category
+code.cache_spell_data(17953, "Create Firestone (Major)"); -- Added this to a category
+code.cache_spell_data(27250, "Create Firestone (Master)"); --Added
 
+code.cache_spell_data(2362, "Create Spellstone"); --Added this to a category
+code.cache_spell_data(17727, "Create Spellstone (Greater)"); -- Added this to a category
+code.cache_spell_data(17728, "Create Spellstone (Major)"); --Added
+code.cache_spell_data(28172, "Create Spellstone (Master)"); --Added
+
+code.cache_spell_data(132, "Detect Invisibility");	
 code.cache_spell_data(6229, "Shadow Ward");
-
-code.cache_spell_data(6366, "Create Firestone (Lesser)");--TODO: Add this to a category
-code.cache_spell_data(17951, "Create Firestone");--TODO: Add this to a category
-code.cache_spell_data(17952, "Create Firestone (Greater)");--TODO: Add this to a category
-code.cache_spell_data(17953, "Create Firestone (Major)");--TODO: Add this to a category
-
-code.cache_spell_data(2362, "Create Spellstone");--TODO: Add this to a category
-code.cache_spell_data(17727, "Create Spellstone (Greater)");--TODO: Add this to a category
-
-code.cache_spell_data(132, "Detect Invisibility");	--TODO: Add this to a category
-
 code.cache_spell_data(5500, "Sense Demons");
+code.cache_spell_data(698, "Ritual of Summoning");
+code.cache_spell_data(437169, "Portal of Summoning");
+code.cache_spell_data(18220, "Dark Pact");
+code.cache_spell_data(5697, "Unending Breath");
+code.cache_spell_data(30283, "Shadowfury");	--Added
+code.cache_spell_data(29858, "Soulshatter"); --Added
+code.cache_spell_data(18788, "Demonic Sacrifice"); --Added
+code.cache_spell_data(19028, "Soul Link"); --Added
+
 
 code.cache_spell_data(704, "Curse of Recklessness");
 code.cache_spell_data(1714, "Curse of Tongues");
@@ -278,34 +353,45 @@ code.cache_spell_data(20752, "Create Soulstone (Lesser)");
 code.cache_spell_data(20755, "Create Soulstone");
 code.cache_spell_data(20756, "Create Soulstone (Greater)");
 code.cache_spell_data(20757, "Create Soulstone (Major)");
+code.cache_spell_data(27238, "Create Soulstone (Master)");
 
-code.cache_spell_data(698, "Ritual of Summoning");
-
-
-code.cache_spell_data(18220, "Dark Pact");
-code.cache_spell_data(5697, "Unending Breath");
 code.cache_spell_data(126, "Eye of Kilrogg");
+code.cache_spell_data(688, "Summon Imp");										 
 code.cache_spell_data(691, "Summon Felhunter");
-code.cache_spell_data(688, "Summon Imp");   -- y
-code.cache_spell_data(712, "Summon Succubus");
 code.cache_spell_data(697, "Summon Voidwalker");
+code.cache_spell_data(712, "Summon Succubus")
+code.cache_spell_data(713, "Summon Incubus"); --added
+code.cache_spell_data(30146, "Summon Felguard"); --added
 code.cache_spell_data(1122, "Summon Infernal");
-code.cache_spell_data(30146, "Summon Felguard");
+
+--Warlock Pet
+code.cache_spell_data(7812, "Sacrifice(Voildwalker)");
+code.cache_spell_data(19505, "Devour Magic");
+code.cache_spell_data(30153, "Intercept(Felgaurd)");
+
+
 --#endregion
 
 --Warrior
 code.cache_spell_data(6673, "Battle Shout");
+code.cache_spell_data(403215, "Commanding Shout");											  
+code.cache_spell_data(1160, "Demoralizing Shout");												  
+code.cache_spell_data(6343, "Thunder Clap");
+
 code.cache_spell_data(100, "Charge");
-code.cache_spell_data(1160, "Demoralizing Shout");
 code.cache_spell_data(20252, "Intercept");
-code.cache_spell_data(2565, "Shield Block");
+code.cache_spell_data(3411, "Intervene");--added
+
+
+--code.cache_spell_data(2565, "Shield Block"); --removed
+code.cache_spell_data(72, "Shield Bash"); --added
 code.cache_spell_data(871, "Shield Wall");
 code.cache_spell_data(12975, "Last Stand");
+code.cache_spell_data(23920, "Spell Reflect"); --added
+
 code.cache_spell_data(71, "Defensive Stance");
 code.cache_spell_data(2457, "Battle Stance");
 code.cache_spell_data(2458, "Berserker Stance");
-
-
 
 --Skills
 code.cache_spell_data(3273, "First Aid");
@@ -329,3 +415,5 @@ code.cache_spell_data(31252, "Prospecting");
 local cache_timer_stop = debugprofilestop();
 
 ABGData.timing["CacheSpellData.lua"] = cache_timer_stop - cache_timer_start;
+
+--code.cache_spell_data(00000, "XXX");
