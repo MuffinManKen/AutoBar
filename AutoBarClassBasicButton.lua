@@ -252,23 +252,30 @@ function AutoBar.Class.BasicButton:UpdateCooldown()
 		local item_id = self.frame:GetAttribute("itemId")
 		if (item_id) then
 			start, duration, enabled = C_Container.GetItemCooldown(item_id)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		end
 	elseif (itemType == "toy") then
 		local item_guid = self.frame:GetAttribute("AutoBarGUID")
 		local item_data = AB.InfoFromGUID(item_guid)
 		if (item_data) then
 			start, duration, enabled = C_Container.GetItemCooldown(item_data.item_id)
+			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 		end
 --	elseif (itemType == "macro") then --ToDo some day
 --			local macroText = self.frame:GetAttribute("macrotext")
 --			SecureCmdOptionParse()?
 	elseif (itemType == "spell") then
 		local spellName = self.frame:GetAttribute("spell")
-		start, duration = AB.GetSpellCooldown(spellName)
+		local sc = C_Spell.GetSpellCooldown(spellName)
+		if(issecrettable and issecrettable(sc)) then
+			--NOP
+		elseif sc then -- Make sure sc isn't nil
+			self.frame.cooldown:SetCooldown(sc.startTime, sc.duration, sc.modRate);
+		end
 	end
 
 	-- if (start and duration and start > 0 and duration > 0) then
-	 	CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
+	 	--CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
 	-- 	self.frame.cooldown:SetSwipeColor(0, 0, 0);
 	-- else
 	-- 	CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
