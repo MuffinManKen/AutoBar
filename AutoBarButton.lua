@@ -1292,7 +1292,7 @@ if (ABGData.is_mainline_wow) then
 	--TODO: Would this nonsense be fixed by using IsSpellKnownOrOverridesKnown?
 	local function find_known_spell(p_list)
 		for _i, id in ipairs(p_list) do
-			if IsSpellKnown(id) then
+			if C_SpellBook.IsSpellInSpellBook(id) then
 				return id
 			end
 		end
