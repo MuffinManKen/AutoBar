@@ -139,6 +139,7 @@
 		<Inclusion ftype="wowhead" url="items?filter=107;0;create+an+uncommon" />
 		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+soulbound+relic" />
 		<Inclusion ftype="wowhead" url="items?filter=107;0;what+is+inside" />
+		<Inclusion ftype="wowhead" url="items/miscellaneous?filter=107;0;collect+crests" />
 	</Set>
 
 	<Set name="Muffin.Misc.Housing">
