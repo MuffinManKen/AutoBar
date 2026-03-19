@@ -3,6 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Updated data mining
- - Priest: Added Prayer of Spirit buff
+ - Mana/Health Injectors should be Potions, not Food
+ - Lots of class abilities and hearths and stuff
 ]] .. "|n"
