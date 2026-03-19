@@ -3,8 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - More work on performance. Notably related to the Mount button.
- - Updated datamining
+ - Added Crests as Openables
+ - Hopefully improved the handling of Cooldowns
 ]] .. "|n"
 
 
