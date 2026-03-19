@@ -251,6 +251,9 @@ local quick_sets =
 	"Muffin.Misc.Housing",
 	"Muffin.Misc.CraftingKnowledge",
 	"Muffin.Misc.Hearth",
+	"Spell.Rogue.Thief",
+	"Spell.Warlock.Create Spellstone",
+	"Spell.Warlock.Create Firestone",
 }
 
 atl_table(quick_sets);
