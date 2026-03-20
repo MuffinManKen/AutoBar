@@ -480,10 +480,10 @@ function AB.InitializeCategories()
 	})
 
 
-	AutoBarCategoryList["Spell.Fishing"] = SpellsCategory:new("Spell.Fishing", spellIconList["Fishing"],
+	AutoBarCategoryList["Spell.Fishing"] = SpellsCategory:new("Spell.Fishing", spellIconList["Fishing"], nil,
 	{
-		"*", code.get_spell_name_by_name("Fishing"),
-		"*", code.get_spell_name_by_name("Undercurrent"),
+		"*", code.get_spell_name_by_name("Fishing"), code.get_spell_name_by_name("Fishing Journal"),
+		"*", code.get_spell_name_by_name("Undercurrent"), code.get_spell_name_by_name("Undercurrent"),
 	})
 
 

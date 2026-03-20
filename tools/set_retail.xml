@@ -360,7 +360,9 @@
 			<Item id="133705" name="Rotten Fishbone" />
 			<Item id="133713" name="Moosehorn Hook" />
 			<Item id="107950" name="Bipsi's Bobbing Berg" />
+			<Item id="93732" name="Darkmoon Fishing Cap" />			
 		</Inclusion>
+		<Inclusion ftype="wowhead" url="items/name:bobber?filter=216;2;0"/>
 	</Set>
 
 
@@ -386,13 +388,30 @@
 		<Inclusion ftype="wowhead" url="items/name:transporter?filter=216;1;0"/>
 		<Inclusion ftype="wowhead" url="items/name:dimensional+ripper?filter=216;1;0"/>
 	</Set>
+	
+	<Set name="Muffin.Toys.Portal.Other">
+		<Inclusion ftype="static">
+			<Item id="95567" name="Kirin Tor Beacon" />
+			<Item id="95568" name="Sunreaver Beacon" />
+			<Item id="136849" name="Nature's Beacon" />
+			<Item id="140324" name="Mobile Telemancy Beacon" />
+			<Item id="43824" name="The Schools of Arcane Magic - Mastery" />
+			<Item id="129929" name="Ever-Shifting Mirror" />
+			<Item id="151016" name="Fractured Necrolyte Skull" />
+			<Item id="169297" name="Stormpike Insignia" />
+			<Item id="169298" name="Frostwolf Insignia" />
+			<Item id="205255" name="Niffen Diggin' Mitts" />
+			<Item id="211788" name="Tess's Peacebloom" />
+			<Item id="230850" name="Delve-O-Bot 7001" />
+		</Inclusion>
+	</Set>
+	
 	<Set name="Muffin.Toys.Hearth">
 		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:hearthstone+location"/>
 		<Inclusion ftype="static">
 			<Item id="140192" name="Dalaran Hearthstone" />
 			<Item id="110560" name="Garrison Hearthstone" />
 			<Item id="141605" name="Flight Master's Whistle" />
-			<Item id="230850" name="Delve-O-Bot 7001" />
 			<Item id="253629" name="Personal Key to the Arcantina" />
 		</Inclusion>
 	</Set>
