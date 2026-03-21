@@ -1079,6 +1079,11 @@ end
 local function setAutoBarValue(info, value)
 	local setting_name = info[# info]
 	AutoBarDB2.settings[setting_name] = value
+	if setting_name == "clamp_bars_to_screen" then
+		for _barKey, bar in pairs(AutoBar.barList) do
+			bar.frame:SetClampedToScreen(value)
+		end
+	end
 	AutoBarChanged()
 end
 
