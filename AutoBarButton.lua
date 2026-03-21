@@ -53,7 +53,7 @@ local function AddItemToCategory(category, itemType, itemId, itemInfo)
 	}
 	itemsListDB[itemIndex] = itemDB
 	if (itemType == "spell") then
-		itemDB.spellName = AB.GetSpellInfo(itemId)
+		itemDB.spellName = C_Spell.GetSpellName(itemId)
 		itemDB.spellClass = AutoBar.CLASS
 	else
 		itemDB.spellName = nil
@@ -2038,7 +2038,7 @@ end
 function AutoBarButtonTotemEarth:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local enabled = true
+		local enabled = 1
 		local _, _totemName, start, duration = GetTotemInfo(totemEarth)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
@@ -2077,7 +2077,7 @@ end
 function AutoBarButtonTotemFire:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local enabled = true
+		local enabled = 1
 		local _, _totemName, start, duration = GetTotemInfo(totemFire)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
@@ -2116,7 +2116,7 @@ end
 function AutoBarButtonTotemWater:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local enabled = true
+		local enabled = 1
 		local _, _totemName, start, duration = GetTotemInfo(totemWater)
 
 		if (start and duration and enabled and start > 0 and duration > 0) then
@@ -2641,16 +2641,8 @@ else
 			for _k, id in ipairs(mount_ids) do
 				local mount_data = AB.GetMountInfoByID(id)
 				local user_selected = (mount_data.is_favourite and buttonDB.mount_show_favourites) or (not mount_data.is_favourite and buttonDB.mount_show_nonfavourites)
-	--  local name = mount_data.name
-	--  local is_collected = mount_data.is_collected
-	--  if (name == "Emerald Raptor" or name=="Albino Drake" or name == "Creeping Carpet" or name == "Dreadsteed" ) then
-	--  	code.log_warning(string.format("\n%5s  %5s  Usable:%5s", id, mount_data.spell_id, tostring(mount_data.is_usable)), name)
-	--  	code.log_warning("   Faction:", mount_data.faction_id, "Collected:", is_collected)
-	--  	code.log_warning("   Player FaName:", AutoBar.player_faction_name, "FacID:", AutoBar.player_faction_id, "MountFacID:", mount_data.faction_id, faction_available)
-	--  end
 	 			if (mount_data.is_usable and mount_data.is_collected and user_selected) then
-						local spell_name = AB.GetSpellInfo(mount_data.spell_id)
-						--print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id, "Usable:", usable);
+						local spell_name = C_Spell.GetSpellName(mount_data.spell_id)
 						if spell_name then
 							spellIconList[spell_name] = mount_data.icon
 							AutoBarSearch:RegisterSpell(spell_name, mount_data.spell_id, true)
@@ -2699,8 +2691,6 @@ else
 
 
 	--[[
-	/dump GetSpellInfo(43688)
-	/dump GetSpellInfo("Amani War Bear")
 	/dump AutoBarCategoryList["Spell.Mount"]
 	/script AutoBarSearch.sorted:Update("AutoBarButtonMount")
 	/dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")
@@ -2778,13 +2768,6 @@ else
 					local summon_macro = "/summonpet " .. pet_id
 					category:AddMacroText(summon_macro, icon, "Summon " .. name, nil)
 				end
-	--			creatureID, creatureName, spellID, icon, active = GetCompanionInfo(companionType, index)
-	--			spellName = AB.GetSpellInfo(spellID)
-	--			spellIconList[spellName] = icon
-	--			AutoBarSearch:RegisterSpell(spellName, spellID, true)
-	--			local spellInfo = AutoBarSearch.GetRegisteredSpellInfo(spellName)
-	--			spellInfo.spell_link = "spell:" .. spellID
-	--			category.castList[index] = spellName
 			end
 		end
 

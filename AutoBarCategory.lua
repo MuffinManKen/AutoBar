@@ -19,8 +19,6 @@
 --		spell
 --		limit
 
--- GLOBALS: GetSpellInfo, GetMacroInfo, GetMacroIndexByName
--- GLOBALS: C_ToyBox
 local _, AB = ...
 
 local types = AB.types	---@class ABTypes
@@ -108,12 +106,12 @@ end
 ---@return string[]
 local function PTSpellIDsToSpellName(p_cast_list)
 --print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
-
+	local spell_name = {} ---@type string[]
 	for i = 1, # p_cast_list do
 		local spell_id = p_cast_list[i] * -1
-		p_cast_list[i] = AB.GetSpellInfo(spell_id)
+		spell_name[i] = C_Spell.GetSpellName(spell_id)
 	end
-	return p_cast_list
+	return spell_name
 end
 
 
@@ -493,7 +491,7 @@ function CustomCategory:new(customCategoriesDB)
 		texture = code.GetIconForItemID(tonumber(itemId))
 	elseif (itemType == "spell") then
 		if (spellName) then
-			_, _, texture = AB.GetSpellInfo(spellName)
+			texture = C_Spell.GetSpellTexture(spellName)
 		end
 	elseif (itemType == "macro") then
 		if (itemId) then

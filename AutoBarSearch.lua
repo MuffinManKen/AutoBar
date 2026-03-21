@@ -937,7 +937,7 @@ function AutoBarSearch:RegisterSpell(p_spell_name, p_spell_id, p_no_spell_check,
 	if (p_spell_id) then
 		spellInfo.spell_id = p_spell_id
 	else
-		spellInfo.spell_id = select(7, AB.GetSpellInfo(p_spell_name))
+		spellInfo.spell_id = C_Spell.GetSpellIDForSpellIdentifier(p_spell_name)
 	end
 
 	spellInfo.no_spell_check = p_no_spell_check

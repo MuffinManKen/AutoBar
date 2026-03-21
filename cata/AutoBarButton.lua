@@ -95,8 +95,7 @@ function AutoBarButtonMount:Refresh(parentBar, buttonDB)
 			if (is_collected and not should_hide_on_char) then
 				-- print("Collected mount:", mount_id, name, spell_id, icon, is_favourite)
 
-				local spell_name = AB.GetSpellInfo(spell_id)
-				-- print("Name:", name, "SpellName:", spell_name, "SpellID:", spell_id);
+				local spell_name = C_Spell.GetSpellName(spell_id)
 				if not spell_name then print("AutoBar Error: Missing spell name for", spell_id, name); end
 				spellIconList[spell_name] = icon
 				AutoBarSearch:RegisterSpell(spell_name, spell_id, true)
@@ -135,8 +134,6 @@ end
 
 
 --[[
-/dump GetSpellInfo(43688)
-/dump GetSpellInfo("Amani War Bear")
 /dump AutoBarCategoryList["Spell.Mount"]
 /script AutoBarSearch.sorted:Update("AutoBarButtonMount")
 /dump AutoBarSearch.sorted:GetList("AutoBarButtonMount")

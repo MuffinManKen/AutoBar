@@ -113,7 +113,7 @@ function AB.GetActionForMacroBody(p_macro_body)
 	end
 
 	if(action) then
-		icon = select(3, AB.GetSpellInfo(action)) or code.GetIconForItemID(action)
+		icon = C_Spell.GetSpellTexture(action) or code.GetIconForItemID(action)
 	end
 
 	return action, icon, tooltip

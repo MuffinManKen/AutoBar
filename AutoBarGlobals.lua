@@ -581,7 +581,7 @@ end
 
 -- Support multiple API versions
 
-local function GetSpellInfo_hack(p_identifier)
+AB.GetSpellInfo = function (p_identifier)
 	local si = C_Spell.GetSpellInfo(p_identifier)
 	if(not si) then
 		return nil
@@ -589,7 +589,6 @@ local function GetSpellInfo_hack(p_identifier)
 
 	return si.name, nil, si.iconID, si.castTime, si.minRange, si.maxRange, si.spellID
 end
-AB.GetSpellInfo = GetSpellInfo or GetSpellInfo_hack			---@diagnostic disable-line: deprecated
 
 local function GetSpellCooldown_hack(p_identifier)
 	local sc = C_Spell.GetSpellCooldown(p_identifier)
@@ -601,8 +600,6 @@ local function GetSpellCooldown_hack(p_identifier)
 end
 AB.GetSpellCooldown = GetSpellCooldown or GetSpellCooldown_hack	---@diagnostic disable-line: deprecated
 
-AB.GetSpellCount = GetSpellCount or C_Spell.GetSpellCastCount	---@diagnostic disable-line: deprecated
-AB.IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable		---@diagnostic disable-line: deprecated
 
 AB.GetContainerNumSlots = GetContainerNumSlots or C_Container.GetContainerNumSlots
 AB.GetContainerItemID = GetContainerItemID or C_Container.GetContainerItemID
@@ -710,43 +707,9 @@ end
 --#endregion PlayerHasToy deprecation/wrapper
 
 
---#region GetSpellLink deprecation
-local function GetSpellLink_deprec(p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-	local spell_link
+--TODO: Remove this
+code.GetSpellLink = C_Spell.GetSpellLink
 
-	if(type(p_spell) == "string") then
-		local spell_id = select(7, AB.GetSpellInfo(p_spell))
-		if(spell_id) then
-			spell_link = "spell:" .. spell_id;
-		end
-	else
-		spell_link = GetSpellLink(p_spell, p_rank) ---@diagnostic disable-line: deprecated
-		if spell_link == "" then
-			spell_link = nil;
-		end
-
-	end
-
-	return spell_link;
-
-end
-
-if GetSpellLink then
-	code.GetSpellLink = GetSpellLink_deprec
-else
-	code.GetSpellLink = function (p_spell, p_rank)	---@diagnostic disable-line: duplicate-set-field
-		local spell = C_Spell.GetSpellLink(p_spell, p_rank)		---@type string|nil
-
-		if spell == "" then
-			spell = nil;
-		end
-
-		return spell;
-
-	end
-end
-
---#endregion GetSpellLink deprecation
 
 
 --#region GetItemInfo deprecation

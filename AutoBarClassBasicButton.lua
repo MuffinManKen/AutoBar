@@ -156,7 +156,7 @@ local function get_texture_for_action(p_action)
 
 	local texture
 	if (p_action) then
-		texture = select(3, AB.GetSpellInfo(p_action)) or code.GetIconForItemID(p_action)
+		texture = C_Spell.GetSpellTexture(p_action) or code.GetIconForItemID(p_action)
 	end
 
 	return texture;
@@ -218,7 +218,7 @@ function AutoBar.Class.BasicButton:GetIconTexture(frame)
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		if (spellName) then
-			texture = code.get_spell_icon_by_name_fast(spellName) or select(3, AB.GetSpellInfo(spellName))
+			texture = code.get_spell_icon_by_name_fast(spellName) or C_Spell.GetSpellTexture(spellName)
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -229,7 +229,7 @@ function AutoBar.Class.BasicButton:GetIconTexture(frame)
 	if (not texture) then
 		local spellName = frame:GetAttribute("spell2")
 		if (spellName) then
-			_, _, texture = AB.GetSpellInfo(spellName)
+			texture = C_Spell.GetSpellTexture(spellName)
 
 			-- Add a blue border if button is a spell
 			borderColor = borderBlue
@@ -304,11 +304,11 @@ function AutoBar.Class.BasicButton:UpdateCount()
 --			elseif (itemType == "toy") then
 		elseif (itemType == "spell") then
 			local spellName = frame:GetAttribute("spell")
-			count1 = AB.GetSpellCount(spellName) or 0
+			count1 = C_Spell.GetSpellCastCount(spellName) or 0
 			if issecretvalue and issecretvalue(count1) then count1 = 0; end
 			local spellName2 = frame:GetAttribute("spell2")
 			if (spellName2) then
-				count2 = AB.GetSpellCount(spellName2) or 0
+				count2 = C_Spell.GetSpellCastCount(spellName2) or 0
 				if issecretvalue and issecretvalue(count2) then count2 = 0; end
 			end
 		end
@@ -363,7 +363,7 @@ function AutoBar.Class.BasicButton:UpdateUsable()
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
 		local notEnoughMana
-		isUsable, notEnoughMana = AB.IsUsableSpell(spellName)
+		isUsable, notEnoughMana = C_Spell.IsSpellUsable(spellName)
 		isUsable = isUsable and (not notEnoughMana)
 	elseif (itemType == "macro") then
 		isUsable = true
