@@ -266,7 +266,10 @@ local function UpdateHandlers(frame)
 		if (itemType == "item") then
 			itemId = frame:GetAttribute("itemId")
 		elseif (itemType == "spell") then
-			itemId = frame:GetAttribute("spell")
+			-- Use "itemId" not "spell": per-button SetupAttributes overrides may replace the
+			-- spell attribute with a numeric ID (e.g. AutoBarButtonCrafting), but "itemId"
+			-- always holds the original sorted key (spell name) needed for SwapToFront.
+			itemId = frame:GetAttribute("itemId")
 		elseif (itemType == "macro") then
 			itemId = frame:GetAttribute("macroId")
 		else
