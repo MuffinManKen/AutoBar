@@ -242,6 +242,21 @@ local snippetOnClick = [[
 
 	-- Arrange on Use source popup button
 	anchorButton:SetAttribute("sourceButton", self)
+
+	-- If Ctrl is held, set as default without using the item/spell
+	if IsControlKeyDown() then
+		self:SetAttribute("abSavedType", self:GetAttribute("type"))
+		self:SetAttribute("type", nil)
+	end
+]]
+
+-- Restore the type suppressed by Ctrl+click (set as default without using)
+local snippetPostClick = [[
+	local savedType = self:GetAttribute("abSavedType")
+	if savedType then
+		self:SetAttribute("type", savedType)
+		self:SetAttribute("abSavedType", nil)
+	end
 ]]
 
 -- Clicking on a popup changes the anchor button spell.  This updates the icon texture to match
@@ -370,15 +385,20 @@ function AutoBarButton:SetupPopups(nItems)
 		local popupButton = AutoBar.Class.PopupButton:GetPopupButton(self, popupButtonIndex, popupHeader, popupKeyHandler)
 		local popupButtonFrame = popupButton.frame
 
-		-- Wrap OnClick with the Arrange on use code
+		-- Wrap OnClick/PostClick with the Arrange on use code
 		local wrapped = popupButtonFrame.snippetOnClick
 		if (wrapped and (not arrangeOnUse)) then
 			local _header, preBody, _post_body = popupHeader:UnwrapScript(popupButtonFrame, "OnClick")
 			assert(wrapped == preBody, "wrapped ~= preBody in UnwrapScript")
 			-- ToDo: Are we the only wrapping people?  Maybe add some recursive unwrapping of our exact script.
+			popupHeader:UnwrapScript(popupButtonFrame, "PostClick")
+			popupButtonFrame.snippetOnClick = nil
+			popupButtonFrame.snippetPostClick = nil
 		elseif ((not wrapped) and arrangeOnUse) then
 			SecureHandlerWrapScript(popupButtonFrame, "OnClick", popupHeader, snippetOnClick)
 			popupButtonFrame.snippetOnClick = snippetOnClick
+			SecureHandlerWrapScript(popupButtonFrame, "PostClick", popupHeader, snippetPostClick)
+			popupButtonFrame.snippetPostClick = snippetPostClick
 		end
 
 		-- Attach to edge of previous popupButtonFrame or the popupHeader
