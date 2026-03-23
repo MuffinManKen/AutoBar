@@ -1472,6 +1472,7 @@ function AutoBar:CreateOptionsAce3()
 	end
 
 	AceCfgReg:RegisterOptionsTable("AutoBar", AutoBar.optionsMain)
+	AceCfgDlg:SetDefaultSize("AutoBar", 885, 600)
 	AceCfgCmd:CreateChatCommand(L["SLASHCMD_SHORT"], "AutoBar")
 	AceCfgCmd:CreateChatCommand(L["SLASHCMD_LONG"], "AutoBar")
 
