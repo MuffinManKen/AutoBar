@@ -172,15 +172,6 @@ popupNaziHandler:SetAttribute("_onattributechanged", [[
 ]])
 
 
--- The basic idea is to have an intervening handler frame that is Shown / Hidden if popupOnModifier is true / nil
-local snippetPopupKey = [[
-	if (newstate == "1") then
-		self:Show()
-	else
-		self:Hide()
-	end
-]]
-local popupKeyStates = "[modifier:shift] 1; 0"
 
 -- Clone the popup into the anchorButton
 local snippetOnClick = [[
@@ -544,11 +535,8 @@ function AutoBarButton:SetupButton()
 					-- Note that it is made a child of popupHeader, and later becomes parent to the popup buttons
 					-- Hiding it will thus hide the popup buttons as well, even if popupHeader is shown
 					local popupKeyHandler = CreateFrame("Frame", buttonKey .. "HandlerPopupKey", popupHeader, "SecureHandlerStateTemplate")
-					popupKeyHandler:SetAttribute("_onstate-modifier", snippetPopupKey)
 					popupKeyHandler:SetAllPoints(popupHeader)
-					RegisterStateDriver(popupKeyHandler, "modifier", popupKeyStates)
-					popupKeyHandler:SetAttribute("_onenter", [[ self:GetParent():Show() ]])
-					popupKeyHandler:SetAttribute("_onleave", [[ self:GetParent():Hide() ]])
+					RegisterStateDriver(popupKeyHandler, "visibility", "[modifier:shift]show;hide")
 					frame.popupKeyHandler = popupKeyHandler
 				end
 

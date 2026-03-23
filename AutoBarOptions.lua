@@ -2106,15 +2106,16 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 					disabled = getCombatLockdown,
 					width = 1.25,
 				},
---				popupOnShift = {
---					type = "toggle",
---					order = 16,
---					name = L["Popup on Shift Key"],
---					desc = L["Popup while Shift key is pressed for %s"]:format(name),
---					arg = passValue,
---					disabled = getCombatLockdown,
---					width = 1.25,
---				},
+			popupOnShift = {
+					type = "toggle",
+					order = 16,
+					name = L["Popup on Shift Key"],
+					-- Note: takes effect after UI reload if the button's popup was already created this session.
+					desc = L["Popup while Shift key is pressed for %s"]:format(name),
+					arg = passValue,
+					disabled = getCombatLockdown,
+					width = 1.25,
+				},
 				noPopup = {
 					type = "toggle",
 					order = 17,
