@@ -1816,6 +1816,7 @@ function AutoBarButtonQuest:init(parentBar, buttonDB)
 	AutoBarButtonQuest.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Misc.Usable.StartsQuest")
+	self:AddCategory("Misc.Usable.Quest")
 	self:AddCategory("Muffin.Misc.Quest")
 	self:AddCategory("Muffin.Misc.StartsQuest")
 	self:AddCategory("Misc.Usable.BossItem")

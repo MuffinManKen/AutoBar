@@ -295,6 +295,9 @@ local function add_item_to_dynamic_category(p_item_link, p_category_name)
 	if (category) then
 		if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
 		local item_name, item_id = AB.ItemLinkDecode(p_item_link)
+		for _, existing_id in ipairs(category.items) do
+			if (existing_id == item_id) then return end
+		end
 		category.items[#category.items + 1] = item_id
 		if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
 	end
@@ -303,9 +306,9 @@ end
 
 
 function AB.events.QUEST_ACCEPTED(p_arg1, p_arg2)
+	-- At some point, the event payload was changed from (Index, ID) to (ID, null)
 	AB.LogEventStart("QUEST_ACCEPTED", p_arg1, p_arg2)
 
-	-- At some point, the event payload was changed from (Index, ID) to (ID, null)
 	local quest_idx
 	if (p_arg2) then
 		quest_idx = p_arg1
@@ -314,7 +317,7 @@ function AB.events.QUEST_ACCEPTED(p_arg1, p_arg2)
 	end
 
 
-	--code.log_warning("QUEST_ACCEPTED","   Idx:", quest_idx)
+	--code.log_warning("QUEST_ACCEPTED","   Idx:", quest_idx, " ID: ", p_arg1)
 
 	if(quest_idx) then
 		local link = GetQuestLogSpecialItemInfo(quest_idx)
@@ -330,23 +333,26 @@ end
 
 if (ABGData.is_mainline_wow) then
 
-	function AB.events.QUEST_LOG_UPDATE(p_arg1)
+	function AB.events.QUEST_LOG_UPDATE()
 		AB.LogEventStart("QUEST_LOG_UPDATE")
-		--code.log_warning("QUEST_LOG_UPDATE","   Idx:", p_arg1)
+		--code.log_warning("QUEST_LOG_UPDATE")
 		local needs_item_update = false
 
 		--Make sure we're in the world. Should always be the case, but stuff loads in odd orders
 		if(AutoBar.inWorld and AutoBarCategoryList["Dynamic.Quest"]) then
 			local num_entries, _num_quests = AB.GetNumQuestLogEntries()	--TODO: Remove this after Shadowlands and Classic no longer need the shim
+			--code.log_warning(num_entries, " ",  _num_quests)
 			for i = 1, num_entries do
 				local link = GetQuestLogSpecialItemInfo(i)
 				if(link) then
 					--code.log_warning("   ", link)
 					add_item_to_dynamic_category(link, "Dynamic.Quest")
+					needs_item_update = true
 				end
 			end
 
 			if needs_item_update then
+				ABGData.TickScheduler.FullScanItemsFlag = true
 				AB.ABScheduleUpdate(tick.UpdateItemsID)
 			end
 		end
