@@ -267,10 +267,11 @@ function AutoBar.Class.BasicButton:UpdateCooldown()
 	elseif (itemType == "spell") then
 		local spellName = self.frame:GetAttribute("spell")
 		local sc = C_Spell.GetSpellCooldown(spellName)
-		if(issecrettable and issecrettable(sc)) then
-			--NOP
-		elseif sc then -- Make sure sc isn't nil
-			self.frame.cooldown:SetCooldown(sc.startTime, sc.duration, sc.modRate);
+		if(sc and sc.isActive) then
+			local cool_duration = C_Spell.GetSpellCooldownDuration(spellName)
+			self.frame.cooldown:SetCooldownFromDurationObject(cool_duration)
+		else
+			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
 		end
 	end
 
