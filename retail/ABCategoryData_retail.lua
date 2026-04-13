@@ -94,6 +94,9 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Macro.BattlePet.SummonRandom"] = MacroTextCategory:new( "Macro.BattlePet.SummonRandom", "INV_MISC_QUESTIONMARK")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandom"]:AddMacroText("/randompet",  "Interface/Icons/INV_MISC_QUESTIONMARK", L["Summon A Random Pet"])
 
+	AutoBarCategoryList["Macro.BattlePet.Journal"] = MacroTextCategory:new( "Macro.BattlePet.Journal", "INV_MISC_QUESTIONMARK")
+	AutoBarCategoryList["Macro.BattlePet.Journal"]:AddMacroText("/run ToggleCollectionsJournal(2)",  "Interface/Icons/petjournalportrait", L["View BattlePet Journal"])
+
 	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"] = MacroTextCategory:new( "Macro.BattlePet.SummonRandomFave", "PetBattle_Health")
 	AutoBarCategoryList["Macro.BattlePet.SummonRandomFave"]:AddMacroText("/randomfavoritepet",  "Interface/Icons/PetBattle_Health", L["Summon A Random Fave Pet"])
 

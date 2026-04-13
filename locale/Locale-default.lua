@@ -153,6 +153,7 @@ atl("Summon A Random Pet", "Summon Random Pet|n|cFFFFD100Summon a random pet fro
 atl("Summon A Random Fave Pet", "Summon Favourite Pet|n|cFFFFD100Summon a random pet|nfrom your list of favourites|nin the pet journal|r")
 atl("Dismiss Battle Pet", "Dismiss Battle Pet|n|cFFFFD100Dismiss your current battle pet|r")
 atl("Summon A Random Favourite Mount", "Summon Favourite Mount|n|cFFFFD100Summon a random mount from your list of favourites in the mount journal|r")
+atl("View BattlePet Journal", "View Battle Pet Journal")
 
 atl("Raid 1","Raid Star")
 atl("Raid 2","Raid Circle")
@@ -180,6 +181,7 @@ local quick_sets =
 	"Macro.BattlePet.SummonRandom",
 	"Macro.BattlePet.DismissPet",
 	"Macro.BattlePet.SummonRandomFave",
+	"Macro.BattlePet.Journal",
 	"Macro.Raid Target",
 	"Muffin.Battle Pet Items.Bandages",
 	"Muffin.Battle Pet Items.Level",

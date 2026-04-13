@@ -2461,6 +2461,10 @@ else
 		self:AddCategory("Muffin.Battle Pet Items.Bandages")
 		self:AddCategory("Muffin.Battle Pet Items.Pet Treat")
 
+		if AutoBarCategoryList["Macro.BattlePet.Journal"] then
+			self:AddCategory("Macro.BattlePet.Journal")
+		end
+
 		AutoBarCategoryList["Muffin.Toys.Pet Battle"].only_favourites = false
 		self:AddCategory("Muffin.Toys.Pet Battle")
 		self:AddCategory("Spell.Pet Battle")
