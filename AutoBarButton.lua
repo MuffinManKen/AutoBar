@@ -2451,6 +2451,11 @@ else
 
 		if(buttonDB.show_ornamental == nil) then buttonDB.show_ornamental = true end
 
+		if(buttonDB.show_ornamental == true) then
+			AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"].only_favourites = false
+			self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
+		end
+
 		self:AddCategory("Muffin.Battle Pet Items.Level")
 		self:AddCategory("Muffin.Battle Pet Items.Upgrade")
 		self:AddCategory("Muffin.Battle Pet Items.Bandages")
@@ -2459,11 +2464,6 @@ else
 		AutoBarCategoryList["Muffin.Toys.Pet Battle"].only_favourites = false
 		self:AddCategory("Muffin.Toys.Pet Battle")
 		self:AddCategory("Spell.Pet Battle")
-
-		if(buttonDB.show_ornamental == true) then
-			AutoBarCategoryList["Muffin.Toys.Companion Pet.Ornamental"].only_favourites = false
-			self:AddCategory("Muffin.Toys.Companion Pet.Ornamental")
-		end
 
 	end
 
