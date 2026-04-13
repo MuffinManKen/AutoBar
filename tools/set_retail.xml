@@ -299,8 +299,7 @@
 		<Intersect  ftype="wowhead" url="potions?filter=107;0;restores+mana" />
 	</Set>
 	<Set name="Muffin.Potion.Buff">
-		<Inclusion ftype="wowhead" url="potions" />
-		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="increases{0,1} your" />
+		<Inclusion ftype="wowhead" url="items/consumables/potions?filter=107;0;increases+your" />
 	</Set>
 	<Set name="Muffin.Potion.Rage">
 		<Inclusion ftype="wowhead" url="potions/name:rage" />
