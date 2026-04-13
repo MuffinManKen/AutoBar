@@ -3,10 +3,10 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Made the default Config window a bit bigger since no one ever notices the options at the bottom.
- - Fixed and re-enabled PopupOnShift option.
- - Improved the Quest button.
- - More fixes for Blizzard cooldown nonsense.
+ - Improved Potion.Buff datamining
+ - Ornamental Pet stuff defaults to lower priority in the Battle Pet sorting
+ - Added View Pet Journal to Battle Pet button
+ - Have you checked out Lexomancer on Itch.io? You should!
 ]] .. "|n"
 
 
