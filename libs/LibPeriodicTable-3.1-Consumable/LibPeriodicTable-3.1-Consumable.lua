@@ -1,13 +1,13 @@
 -- (c) 2007 Nymbia.  see LGPLv2.1.txt for full details.
 --DO NOT MAKE CHANGES TO THIS FILE BEFORE READING THE WIKI PAGE REGARDING CHANGING THESE FILES
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 673 $", "(%d+)", function(n) return n+90000 end), {
+LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 674 $", "(%d+)", function(n) return n+90000 end), {
 	["Consumable.Anti-Venom"]="6452:25,6453:35,13462:60,2633:60,19440:60,12586:60,9030:60,3386:60,31437:70,25550:70",
 	["Consumable.Artifact Power"]="",
-	["Consumable.Bandage.Basic"]="1251:50,2581:86,3530:121,3531:226,6450:300,8545:336,14529:420,14530:476,6451:480,8544:600,21990:1000,53049:1040,34721:1067,53050:1120,21991:1130,53051:1200,34722:1290,72985:1540,142332:1575,72986:1760,111603:2720,133940:4200,136653:5400,158381:5600,133942:6600,158382:8800,173192:25200,173191:39600",
-	["Consumable.Bandage.Battleground.Alterac Valley"]="19307:1200",
-	["Consumable.Bandage.Battleground.Arathi Basin"]="20065:364,20232:364,20237:364,20067:370,20235:370,20244:370,20066:924,20234:924,20243:924",
-	["Consumable.Bandage.Battleground.Warsong Gulch"]="19067:336,19068:344,19066:912",
+	["Consumable.Bandage.Basic"]="72985:0,142332:2,21990:3,34721:3,53049:3,34722:4,53050:4,53051:4,133940:4,158381:4,21991:5,72986:5,111603:5,173192:5,136653:6,133942:7,158382:7,173191:9,1251:132,2581:228,3530:322,3531:602,6450:800,8545:960,14529:1200,6451:1280,14530:1360,8544:1600",
+	["Consumable.Bandage.Battleground.Alterac Valley"]="19307:3360",
+	["Consumable.Bandage.Battleground.Arathi Basin"]="20065:1040,20232:1040,20237:1040,20067:1056,20235:1056,20244:1056,20066:2772,20234:2772,20243:2772",
+	["Consumable.Bandage.Battleground.Warsong Gulch"]="19067:960,19068:984,19066:2736",
 
 	--NOT AUTOGENNED Self buffs are on caster only, target buffs are on target
 	--Under no circumstances do you add food buffs here, nor weapon buffs for now.  These are applied differently / noncombat
@@ -229,7 +229,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("Consumable", gsub("$Rev: 673 $", "(%d+)
 	["Consumable.Water.Percentage"]="19997:60,21241:60",
 
 	--!!Add to miner
-	["Consumable.Weapon Buff.Misc"]="3824,3829,31535,23123,34538,34539,44065,171286",
+	["Consumable.Weapon Buff.Misc"]="3824,3829,31535,23123,34538,34539,44065,171286,243733,243734",
 	["Consumable.Weapon Buff.Oil.Mana"]="20745:4,20747:8,20748:12,22521:14",
 	["Consumable.Weapon Buff.Oil.Wizard"]="20744:8,20746:16,20750:24,20749:36,22522:42",
 	["Consumable.Weapon Buff.Stone.Sharpening Stone"]="23122,2862:2,2863:3,2871:4,7964:6,12404:8,18262,23528:12,23529:14,171436:16,171437:20,172038:12",
