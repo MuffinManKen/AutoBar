@@ -1993,29 +1993,30 @@ local function DestroyTotem(frame, totemType)
 	frame:SetAttribute("macrotext2", destroyMacro[totemType])
 end
 
-local AutoBarButtonTotemAir = Class(AutoBarButton)
-AutoBar.Class["AutoBarButtonTotemAir"] = AutoBarButtonTotemAir
-
-function AutoBarButtonTotemAir:init(parentBar, buttonDB)
-	AutoBarButtonTotemAir.super.init(self, parentBar, buttonDB)
-
-	self:AddCategory("Spell.Totem.Air")
+local function ABGetTotemCooldown(p_totem_slot)
+	local _, _totemName, start, duration = GetTotemInfo(p_totem_slot)
+	if issecretvalue(start) or issecretvalue(duration) then
+		start = 0
+		duration = 0
+	end
+	return start, duration
 end
 
-function AutoBarButtonTotemAir:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemAir.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+local AutoBarButtonTotemBase = Class(AutoBarButton)
 
-	DestroyTotem(self.frame, totemAir)
+function AutoBarButtonTotemBase:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+	AutoBarButtonTotemBase.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
+
+	DestroyTotem(self.frame, self.totemSlot)
 end
 
 -- Set cooldown based on the deployed totem
-function AutoBarButtonTotemAir:UpdateCooldown()
+function AutoBarButtonTotemBase:UpdateCooldown()
 	local itemType = self.frame:GetAttribute("type")
 	if (itemType and not self.parentBar.faded) then
-		local enabled = true
-		local _, _totemName, start, duration = GetTotemInfo(totemAir)
+		local start, duration = ABGetTotemCooldown(self.totemSlot)
 
-		if (start and duration and enabled and start > 0 and duration > 0) then
+		if (start and duration and start > 0 and duration > 0) then
 			self.frame.cooldown:Show() -- ToDo: necessary?
 			CooldownFrame_Set(self.frame.cooldown, start, duration, 1)
 		else
@@ -2030,122 +2031,45 @@ function AutoBarButtonTotemAir:UpdateCooldown()
 		end
 	end
 end
--- /script CooldownFrame_Set(AutoBarButtonTotemAirFrame.cooldown, 0, 0, 0)
 
-local AutoBarButtonTotemEarth = Class(AutoBarButton)
+
+local AutoBarButtonTotemAir = Class(AutoBarButtonTotemBase)
+AutoBar.Class["AutoBarButtonTotemAir"] = AutoBarButtonTotemAir
+
+function AutoBarButtonTotemAir:init(parentBar, buttonDB)
+	AutoBarButtonTotemAir.super.init(self, parentBar, buttonDB)
+	self.totemSlot = totemAir
+	self:AddCategory("Spell.Totem.Air")
+end
+
+
+local AutoBarButtonTotemEarth = Class(AutoBarButtonTotemBase)
 AutoBar.Class["AutoBarButtonTotemEarth"] = AutoBarButtonTotemEarth
 
 function AutoBarButtonTotemEarth:init(parentBar, buttonDB)
 	AutoBarButtonTotemEarth.super.init(self, parentBar, buttonDB)
-
+	self.totemSlot = totemEarth
 	self:AddCategory("Spell.Totem.Earth")
 end
 
-function AutoBarButtonTotemEarth:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemEarth.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
-	DestroyTotem(self.frame, totemEarth)
-end
-
--- Set cooldown based on the deployed totem
-function AutoBarButtonTotemEarth:UpdateCooldown()
-	local itemType = self.frame:GetAttribute("type")
-	if (itemType and not self.parentBar.faded) then
-		local enabled = 1
-		local _, _totemName, start, duration = GetTotemInfo(totemEarth)
-
-		if (start and duration and enabled and start > 0 and duration > 0) then
-			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
-		else
-			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
-		end
-
-		local popupHeader = self.frame.popupHeader
-		if (popupHeader) then
-			for _, popupButton in pairs(popupHeader.popupButtonList) do
-				popupButton:UpdateCooldown()
-			end
-		end
-	end
-end
-
-
-local AutoBarButtonTotemFire = Class(AutoBarButton)
+local AutoBarButtonTotemFire = Class(AutoBarButtonTotemBase)
 AutoBar.Class["AutoBarButtonTotemFire"] = AutoBarButtonTotemFire
 
 function AutoBarButtonTotemFire:init(parentBar, buttonDB)
 	AutoBarButtonTotemFire.super.init(self, parentBar, buttonDB)
-
+	self.totemSlot = totemFire
 	self:AddCategory("Spell.Totem.Fire")
 end
 
-function AutoBarButtonTotemFire:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemFire.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
 
-	DestroyTotem(self.frame, totemFire)
-end
-
--- Set cooldown based on the deployed totem
-function AutoBarButtonTotemFire:UpdateCooldown()
-	local itemType = self.frame:GetAttribute("type")
-	if (itemType and not self.parentBar.faded) then
-		local enabled = 1
-		local _, _totemName, start, duration = GetTotemInfo(totemFire)
-
-		if (start and duration and enabled and start > 0 and duration > 0) then
-			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
-		else
-			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
-		end
-
-		local popupHeader = self.frame.popupHeader
-		if (popupHeader) then
-			for _, popupButton in pairs(popupHeader.popupButtonList) do
-				popupButton:UpdateCooldown()
-			end
-		end
-	end
-end
-
-
-local AutoBarButtonTotemWater = Class(AutoBarButton)
+local AutoBarButtonTotemWater = Class(AutoBarButtonTotemBase)
 AutoBar.Class["AutoBarButtonTotemWater"] = AutoBarButtonTotemWater
 
 function AutoBarButtonTotemWater:init(parentBar, buttonDB)
 	AutoBarButtonTotemWater.super.init(self, parentBar, buttonDB)
-
+	self.totemSlot = totemWater
 	self:AddCategory("Spell.Totem.Water")
-end
-
-function AutoBarButtonTotemWater:SetupAttributes(button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-	AutoBarButtonTotemWater.super.SetupAttributes(self, button, bag, slot, spell, macroId, p_type_id, p_info_data, itemId, itemData)
-
-	DestroyTotem(self.frame, totemWater)
-end
-
--- Set cooldown based on the deployed totem
-function AutoBarButtonTotemWater:UpdateCooldown()
-	local itemType = self.frame:GetAttribute("type")
-	if (itemType and not self.parentBar.faded) then
-		local enabled = 1
-		local _, _totemName, start, duration = GetTotemInfo(totemWater)
-
-		if (start and duration and enabled and start > 0 and duration > 0) then
-			self.frame.cooldown:Show() -- ToDo: necessary?
-			CooldownFrame_Set(self.frame.cooldown, start, duration, enabled)
-		else
-			CooldownFrame_Set(self.frame.cooldown, 0, 0, 0)
-		end
-
-		local popupHeader = self.frame.popupHeader
-		if (popupHeader) then
-			for _, popupButton in pairs(popupHeader.popupButtonList) do
-				popupButton:UpdateCooldown()
-			end
-		end
-	end
 end
 
 
