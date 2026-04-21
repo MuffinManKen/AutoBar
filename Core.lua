@@ -69,6 +69,7 @@ AutoBar.frame:SetScript("OnEvent",
 	end)
 
 AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+AutoBar.frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 
 
 -- Process a macro to determine what its "action" is:
@@ -393,6 +394,15 @@ local function register_sticky_frames()
 		end
 	end
 
+end
+
+function AB.events.ZONE_CHANGED_NEW_AREA()
+	AB.LogEventStart("ZONE_CHANGED_NEW_AREA")
+	-- Toy usability can change between zones (e.g. Flight Master's Whistle).
+	-- Clear the cache so ScanRegisteredToys re-evaluates usability in the new zone.
+	AB.ResetToyUsableCache()
+	AB.ABScheduleUpdate(tick.UpdateItemsID)
+	AB.LogEventEnd("ZONE_CHANGED_NEW_AREA")
 end
 
 function AB.events.PLAYER_ENTERING_WORLD()

@@ -671,6 +671,10 @@ if (AutoBarGlobalDataObject.is_mainline_wow) then
 			return usable
 		end
 
+		function AB.ResetToyUsableCache()
+			wipe(cache)
+		end
+
 	end --do
 
 
