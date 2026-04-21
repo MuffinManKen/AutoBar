@@ -8,12 +8,12 @@ xcopy "..\libs\ace3\AceConfig-3.0" ".\libs\AceConfig-3.0"  /Y /S /I
 xcopy "..\libs\ace3\AceConsole-3.0" ".\libs\AceConsole-3.0"  /Y /S /I
 xcopy "..\libs\ace3\AceGUI-3.0" ".\libs\AceGUI-3.0"  /Y /S /I
 
-copy "..\MuffinUIToolkit\muffin_ui_toolkit.lua" ".\libs\"
+REM copy "..\MuffinUIToolkit\muffin_ui_toolkit.lua" ".\libs\"
 REM copy "..\MuffinWhatsNew\muffin_whats_new.lua" ".\libs\"
 
-copy "..\MuffinIcons\muffin.tga" ".\textures\"
+REM copy "..\MuffinIcons\muffin.tga" ".\textures\"
 
 
-xcopy "..\libs\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
+REM xcopy "..\libs\libkeybound-1-0\LibKeyBound-1.0" ".\libs\LibKeyBound-1.0" /Y /S /I
 
 pause
