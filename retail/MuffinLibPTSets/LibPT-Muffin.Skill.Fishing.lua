@@ -2,9 +2,9 @@
 -- LibPT-Muffin.Skill.Fishing
 --
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("Muffin.Skill.Fishing", "Rev: 44",
+LibStub("LibPeriodicTable-3.1"):AddData("Muffin.Skill.Fishing", "Rev: 45",
 {
-	["Muffin.Skill.Fishing.Bait"] = "11141",
+	["Muffin.Skill.Fishing.Bait"] = "11141, 271182",
 	["Muffin.Skill.Fishing.Lure"] = "6529, 6530, 6532, 6533, 6811, 7307, 34861, 46006, 62673, 67404, 68049, 118391, 124674, 177036, 223979, 262650, 262651",
 	["Muffin.Skill.Fishing.Misc"] = "67404, 93732, 107950, 133688, 133702, 133703, 133704, 133705, 133708, 133711, 133713, 133715, 133716, 133719, 133723, 136373, 136374, 136375, 136376, 136377, 138448, 141975",
 	["Muffin.Skill.Fishing.Pole"] = "",
