@@ -166,6 +166,11 @@ atl("Raid 8","Raid Skull")
 
 atl("OnlyFavouriteHearth", "Only show favourite Hearth toys")
 atl("OpenableIncludeCraftKnowledge", "Include Craft Knowledge Items")
+atld("Empty Slot")
+atld("Click with an item or spell on your cursor to add it.")
+atld("Ctrl-click to delete this slot.")
+atld("Ctrl-click to remove.")
+atld("AutoBar: '%s' is not supported here.")
 local quick_sets =
 {
 	--Categories

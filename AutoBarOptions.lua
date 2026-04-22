@@ -995,7 +995,7 @@ local function CategoryItemNew(info)
 	local categoryKey = info.arg.categoryKey
 	local itemsListDB = AutoBarDB2.custom_categories[categoryKey].items
 	local itemIndex = # itemsListDB + 1
-	itemsListDB[itemIndex] = {}
+	itemsListDB[itemIndex] = { itemType = "item" }
 	AutoBar:CategoriesChanged()
 end
 
@@ -2430,7 +2430,9 @@ local function getCategoryItem(info)
 	local value
 	local itemType = itemDB.itemType
 	if (itemType == "item") then
-		value = itemDB.value or ("item:" .. itemDB.itemId)
+		if (itemDB.itemId) then
+			value = itemDB.value or ("item:" .. itemDB.itemId)
+		end
 	elseif (itemType == "spell") then
 		value = itemDB.value or itemDB.spellName
 	elseif (itemType == "macro") then
@@ -2469,7 +2471,7 @@ local function setCategoryItem(info, value, ...)
 		elseif (value:find("item:%d+")) then
 			itemDB.itemType = "item"
 			itemDB.value = value
-			itemDB.itemId = value:match("item:(%d+)")
+			itemDB.itemId = tonumber(value:match("item:(%d+)"))
 		elseif (strsub(value, 1, 6) == "macro:") then
 			itemDB.itemType = "macro"
 			itemDB.value = value
@@ -2477,6 +2479,8 @@ local function setCategoryItem(info, value, ...)
 		elseif (value ~= "") then
 			itemDB.itemType = "spell"
 			itemDB.value = value
+			itemDB.spellName = value
+			itemDB.spellClass = AutoBar.CLASS
 		end
 	end
 	AutoBar:CategoriesChanged()
@@ -2596,13 +2600,14 @@ function AutoBar:CreateCustomCategoryOptions(options)
 						type = "group",
 						name = L["Items"],
 						args = {
---							newCategoryItem = {
---							    type = "execute",
---								order = 0,
---							    name = L["New"],
---							    func = CategoryItemNew,
---								arg = passValue,
---							},
+							newCategoryItem = {
+							    type = "execute",
+								order = 0,
+							    name = L["New"],
+							    func = CategoryItemNew,
+								arg = passValue,
+								disabled = getCombatLockdown,
+							},
 							newCategoryMacro = {
 							    type = "execute",
 								order = 1,

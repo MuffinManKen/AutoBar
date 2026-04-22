@@ -488,7 +488,9 @@ function CustomCategory:new(customCategoriesDB)
 		end
 	end
 	if (itemType == "item") then
-		texture = code.GetIconForItemID(tonumber(itemId))
+		if (itemId) then
+			texture = code.GetIconForItemID(tonumber(itemId))
+		end
 	elseif (itemType == "spell") then
 		if (spellName) then
 			texture = C_Spell.GetSpellTexture(spellName)
