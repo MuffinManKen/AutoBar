@@ -842,11 +842,13 @@ end
 function Bar:DeleteButtonKey(barDBList, oldKey)
 	for _, barDB in pairs(barDBList) do
 		local buttonKeys = barDB.buttonKeys
-		for _, buttonKey in ipairs(buttonKeys) do
+		for i, buttonKey in ipairs(buttonKeys) do
 			if (buttonKey == oldKey) then
-				for index = buttonKey, # buttonKeys - 1, 1 do
+				for index = i, #buttonKeys - 1, 1 do
 					buttonKeys[index] = buttonKeys[index + 1]
 				end
+				buttonKeys[#buttonKeys] = nil
+				break
 			end
 		end
 	end
