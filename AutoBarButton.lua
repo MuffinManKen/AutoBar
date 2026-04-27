@@ -142,17 +142,11 @@ end
 
 --	1) Rapid movement or movement off the window breaks the Blizzard code.  We use a sensible timer to fix this - popupNaziSnippet
 local popupNaziSnippet = [[
-	local flag = self:IsUnderMouse(true)
-	if (flag) then
-		local queued = control:SetTimer(1, "hoverCheck")
+	local anchorButton = self:GetFrameRef("anchorButton")
+	if self:IsUnderMouse(true) or anchorButton:IsUnderMouse() then
+		self:SetTimer(1)
 	else
-		local anchorButton = self:GetFrameRef("anchorButton")
-		x, y = anchorButton:GetMousePosition()
-		if (x and y) then
-			local queued = control:SetTimer(1, "hoverCheck")
-		else
-			self:Hide()
-		end
+		self:Hide()
 	end
 ]]
 
@@ -526,7 +520,7 @@ function AutoBarButton:SetupButton()
 			if (not popupHeader) then
 				local name = buttonKey .. "PopupHeader"
 				popupHeader = CreateFrame("Frame", name, frame, "SecureHandlerEnterLeaveTemplate")
-				popupHeader:SetAttribute("_onenter", [[self:Show()]])
+				popupHeader:SetAttribute("_onenter", [[self:Show(); control:SetTimer(1)]])
 				popupHeader:SetAttribute("_onleave", [[self:Hide()]])
 				popupHeader:SetFrameStrata("DIALOG")
 
@@ -571,7 +565,6 @@ function AutoBarButton:SetupButton()
 
 				-- Deal with rare irritating cases where Popups remain open incorrectly
 				popupHeader:SetFrameRef("popupNaziHandler", popupNaziHandler)
-				popupHeader:SetFrameRef("popupHeader", popupHeader)
 				popupHeader:SetFrameRef("anchorButton", frame)
 				popupHeader:SetAttribute("_ontimer", popupNaziSnippet)
 			end
