@@ -359,7 +359,7 @@ if (ABGData.is_mainline_wow) then
 		end
 
 
-		AB.LogEventEnd("QUEST_LOG_UPDATE", p_arg1)
+		AB.LogEventEnd("QUEST_LOG_UPDATE")
 
 	end
 

@@ -365,8 +365,8 @@ function AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, isNewIt
 					local _, itemCount, locked = GetContainerItemInfo(bag, slot)
 					if (itemCount and itemCount > 0) then
 						ClearCursor()
-						PickupContainerItem(bag, slot)
-						PickupContainerItem(targetBag, targetSlot)
+						C_Container.PickupContainerItem(bag, slot)
+						C_Container.PickupContainerItem(targetBag, targetSlot)
 						AutoBarSearch.found:ClearItemData(itemId, index)
 --print("ShuffleItem actually swapped index " .. tostring(index) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " locked " .. tostring(locked) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 						return true
@@ -430,7 +430,7 @@ function AutoBar.Class.Button:PostClick(mouseButton, down)
 			local itemId = self.frame:GetAttribute("itemId")
 			local itemLink = self.frame:GetAttribute("item")
 			local targetBag, targetSlot = strmatch(itemLink, "^(%d+)%s+(%d+)$")
-			if (IsConsumableItem(itemId) and targetBag and targetSlot) then
+			if (C_Item.IsConsumableItem(itemId) and targetBag and targetSlot) then
 				local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot)
 				if (not didShuffle) then
 --print("\nAutoBar.Class.PopupButton.prototype:PostClick did not shuffle, switchItem itemId " .. tostring(itemId) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
@@ -560,7 +560,7 @@ function AutoBar.Class.Button:UpdateHotkeys()
 		key = AB.LibKeyBound.Binder:GetBindings(frame)
 	end
 	if (key) then
-		frame.hotKey:SetText(AB.LibKeyBound:ToShortKey(GetBindingText(key, "KEY_", 1)))
+		frame.hotKey:SetText(AB.LibKeyBound:ToShortKey(GetBindingText(key, "KEY_", true)))
 	else
 		frame.hotKey:SetText("")
 	end
@@ -678,29 +678,29 @@ function AutoBar.Class.Button:IsActive()
 end
 
 
-local function FindSpell(spellName, bookType)
-	local s
-	local found = false;
-	for i = 1, MAX_SKILLLINE_TABS do
-		local name, _, offset, numSpells = GetSpellTabInfo(i)
-		if (not name) then
-			break
-		end
-		for s = offset + 1, offset + numSpells do
-			local spell = GetSpellBookItemName(s, bookType)
-			if (spell == spellName) then
-				found = true
-			end
-			if (found and spell ~=spellName) then
-				return s-1
-			end
-		end
-	end
-	if (found) then
-		return s
-	end
-	return nil
-end
+-- local function FindSpell(spellName, bookType)
+-- 	local s
+-- 	local found = false;
+-- 	for i = 1, MAX_SKILLLINE_TABS do
+-- 		local name, _, offset, numSpells = GetSpellTabInfo(i)
+-- 		if (not name) then
+-- 			break
+-- 		end
+-- 		for s = offset + 1, offset + numSpells do
+-- 			local spell = GetSpellBookItemName(s, bookType)
+-- 			if (spell == spellName) then
+-- 				found = true
+-- 			end
+-- 			if (found and spell ~=spellName) then
+-- 				return s-1
+-- 			end
+-- 		end
+-- 	end
+-- 	if (found) then
+-- 		return s
+-- 	end
+-- 	return nil
+-- end
 
 -- Set Cursor based on the type settings
 function AutoBar.Class.Button:SetDragCursor()
@@ -708,10 +708,10 @@ function AutoBar.Class.Button:SetDragCursor()
 	if (itemType) then
 		if (itemType == "item") then
 			local itemLink = self.frame:GetAttribute("item")
-			PickupItem(itemLink)
+			C_Item.PickupItem(itemLink)
 		elseif (itemType == "action") then
 			local action = self.frame:GetAttribute("action1")
-			PickupAction(action)
+			PickupAction(tonumber(action))
 		elseif (itemType == "macro") then
 			local macroIndex = self.frame:GetAttribute("macro")
 			PickupMacro(macroIndex)
@@ -749,20 +749,20 @@ function AutoBar.Class.Button:OnUpdate(elapsed)
 
 	local frame = self.frame
 	local itemType = frame:GetAttribute("type")
-	local inRange = 1
+	local inRange = false
 	if (itemType == "item") then
 		local itemId = frame:GetAttribute("itemId")
-		if (ItemHasRange(itemId)) then
-			inRange = IsItemInRange(itemId, "target")
+		if (C_Item.ItemHasRange(itemId)) then
+			inRange = C_Item.IsItemInRange(itemId, "target")
 		end
 	elseif (itemType == "spell") then
 		local spellName = frame:GetAttribute("spell")
-		if (SpellHasRange(spellName)) then
-			inRange = IsSpellInRange(spellName, "target")
+		if (C_Spell.SpellHasRange(spellName)) then
+			inRange = C_Spell.IsSpellInRange(spellName, "target")
 		end
 	end
 
-	if (frame.outOfRange ~= (inRange == 0)) then
+	if (frame.outOfRange ~= (!inRange)) then
 		frame.outOfRange = not frame.outOfRange
 		print(frame:GetName(), frame.outOfRange)
 		self:UpdateUsable()

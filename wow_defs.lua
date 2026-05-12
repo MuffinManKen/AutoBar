@@ -183,6 +183,8 @@ ABCode = {}
 ---@field ConfigToggle function Open the Config window if we're not in combat
 ---@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
 ---@field player_level integer Current player level for item filtering
+---@field stickyMode boolean
+---@field keyBoundMode boolean
 AutoBar = {}
 
 
