@@ -34,8 +34,6 @@ cata/MuffinLibPTSets/LibPT-Muffin.Potions.lua
 cata/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
 cata/MuffinLibPTSets/LibPT-Muffin.Stones.lua
 
-AceGUIWidget-DragLink.lua
-
 AutoBarGlobals.lua
 
 cata/CachedSpellData_cata.lua
@@ -55,11 +53,11 @@ locale/Locale-zhCN.lua
 locale/Locale-zhTW.lua
 locale/Locale-default.lua
 
+AceGUIWidget-DragLink.lua
+
 Bindings.lua
 
-
 Core.lua
-
 
 AutoBarDB.lua
 AutoBarOptions.lua
