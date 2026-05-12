@@ -762,9 +762,8 @@ function AutoBar.Class.Button:OnUpdate(elapsed)
 		end
 	end
 
-	if (frame.outOfRange ~= (!inRange)) then
-		frame.outOfRange = not frame.outOfRange
-		print(frame:GetName(), frame.outOfRange)
+	if (frame.outOfRange ~= (not inRange)) then
+		frame.outOfRange = not inRange
 		self:UpdateUsable()
 	end
 
