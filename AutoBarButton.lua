@@ -1988,7 +1988,7 @@ end
 
 local function ABGetTotemCooldown(p_totem_slot)
 	local _, _totemName, start, duration = GetTotemInfo(p_totem_slot)
-	if issecretvalue(start) or issecretvalue(duration) then
+	if issecretvalue and (issecretvalue(start) or issecretvalue(duration)) then
 		start = 0
 		duration = 0
 	end
