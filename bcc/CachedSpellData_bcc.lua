@@ -247,8 +247,7 @@ code.cache_spell_data(8050, "Flame Shock");
 
 code.cache_spell_data(974, "Earth Shield");
 code.cache_spell_data(324, "Lightning Shield");
-code.cache_spell_data(24398, "Water Shield"); --updated
---code.cache_spell_data(408696, "Spirit of the Alpha"); -remove not tbc
+code.cache_spell_data(24398, "Water Shield");
 code.cache_spell_data(131, "Water Breathing");
 code.cache_spell_data(546, "Water Walking");
 code.cache_spell_data(2645, "Ghost Wolf");
@@ -276,16 +275,16 @@ code.cache_spell_data(8143, "Tremor Totem");
 
 --Fire totems
 code.cache_spell_data(1535, "Fire Nova Totem");
-code.cache_spell_data(16387, "Flametongue Totem");
+code.cache_spell_data(8227, "Flametongue Totem");
 code.cache_spell_data(8181, "Frost Resistance Totem");
 code.cache_spell_data(8190, "Magma Totem");
 code.cache_spell_data(3599, "Searing Totem");
 code.cache_spell_data(30706, "Totem of Wrath");
-code.cache_spell_data(2062, "Fire Elemental Totem");
+code.cache_spell_data(2894, "Fire Elemental Totem");
 
 --Water totems
 code.cache_spell_data(8170, "Disease Cleansing Totem");
-code.cache_spell_data(10538, "Fire Resistance Totem");
+code.cache_spell_data(8184, "Fire Resistance Totem");
 code.cache_spell_data(5394, "Healing Stream Totem");
 code.cache_spell_data(5675, "Mana Spring Totem");
 code.cache_spell_data(16190, "Mana Tide Totem");
