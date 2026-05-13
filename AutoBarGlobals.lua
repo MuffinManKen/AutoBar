@@ -690,6 +690,9 @@ else
 		return AutoBarSearch.registered_macro_text[p_guid];
 	end
 
+	function AB.ResetToyUsableCache()
+		-- Nothing to do
+	end
 end
 
 --#region PlayerHasToy deprecation/wrapper
