@@ -373,6 +373,9 @@ function AB.InitializeCategories()
 
 		"*", code.get_spell_name_by_name("Find Minerals"),
 		"*", code.get_spell_name_by_name("Find Herbs"),
+
+		"ROGUE", code.get_spell_name_by_name("Poisons"),
+
 	})
 
 	AutoBarCategoryList["Spell.Debuff.Multiple"] = SpellsCategory:new("Spell.Debuff.Multiple", spellIconList["Slow"],

@@ -218,7 +218,7 @@ code.cache_spell_data(9035, "Hex of Weakness");
 
 --#endregion
 
---Rogue
+--#region Rogue
 code.cache_spell_data(1842, "Disarm Trap");
 code.cache_spell_data(5277, "Evasion");
 code.cache_spell_data(1766, "Kick");
@@ -231,7 +231,8 @@ code.cache_spell_data(1804, "Pick Lock");
 code.cache_spell_data(31224, "Cloak of Shadows");
 code.cache_spell_data(14185, "Preparation");
 code.cache_spell_data(921, "Pick Pocket");
-
+code.cache_spell_data(2842, "Poisons");
+--#endregion
 
 
 --#region Shaman
