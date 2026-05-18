@@ -14,5 +14,6 @@ AB.WHATSNEW_TEXT = "" ..
  - New method for managing Custom Categories
  - Fixed a bug with Deleting a Button
  - Improved issue with popups staying up when you move the mouse too fast.
+ - Fixed issue with Totems and secret values in Classic
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
