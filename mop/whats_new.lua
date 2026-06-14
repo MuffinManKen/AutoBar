@@ -3,5 +3,5 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - TOC Bump
+ - Cleaned up some warnings from spells that don't exist in MoP
 ]] .. "|n"
