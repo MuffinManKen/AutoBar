@@ -31,7 +31,7 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = SpellsCategory:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone"],
 	{
-		"WARLOCK", code.get_spell_name_by_name("Create Soulstone (Minor)"),
+		"WARLOCK", code.get_spell_name_by_name("Soulstone"),
 	})
 
 	AutoBarCategoryList["Spell.Mage.Create Manastone"] = SpellsCategory:new( "Spell.Mage.Create Manastone", spellIconList["Conjure Mana Gem"],
@@ -40,11 +40,11 @@ function AB.InitializeCategories()
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Food"] = SpellsCategory:new( "Spell.Mage.Conjure Food", spellIconList["Conjure Food"], nil, {
-		"MAGE", code.get_spell_name_by_name("Conjure Food"), code.get_spell_name_by_name("Ritual of Refreshment")
+		"MAGE", code.get_spell_name_by_name("Conjure Refreshment"), code.get_spell_name_by_name("Conjure Refreshment Table")
 	})
 
 	AutoBarCategoryList["Spell.Mage.Conjure Water"] = SpellsCategory:new("Spell.Mage.Conjure Water", spellIconList["Conjure Water"], nil, {
-		"MAGE", code.get_spell_name_by_name("Conjure Water"), code.get_spell_name_by_name("Ritual of Refreshment")
+		"MAGE", code.get_spell_name_by_name("Conjure Refreshment"), code.get_spell_name_by_name("Conjure Refreshment Table")
 	})
 
 	AutoBarCategoryList["Spell.Stealth"] = SpellsCategory:new("Spell.Stealth", spellIconList["Stealth"],
@@ -163,8 +163,6 @@ function AB.InitializeCategories()
 		"ROGUE", 		code.get_spell_name_by_name("Evasion"), 		code.get_spell_name_by_name("Evasion"),
 		"WARRIOR", 		code.get_spell_name_by_name("Shield Block"), code.get_spell_name_by_name("Shield Wall"),
 		"WARRIOR", 		code.get_spell_name_by_name("Shield Wall"), code.get_spell_name_by_name("Shield Block"),
-		"WARLOCK", code.get_spell_name_by_name("Demon Skin"),  code.get_spell_name_by_name("Shadow Ward"),
-		"WARLOCK", code.get_spell_name_by_name("Fel Armor"), code.get_spell_name_by_name("Shadow Ward"),
 		"WARLOCK", code.get_spell_name_by_name("Shadow Ward"), code.get_spell_name_by_name("Shadow Ward"),
 
 
@@ -182,11 +180,7 @@ function AB.InitializeCategories()
 		"DRUID", code.get_spell_name_by_name("Travel Form"),
 		"DRUID", code.get_spell_name_by_name("Flight Form"),
 		"DRUID", code.get_spell_name_by_name("Swift Flight Form"),
-		"PALADIN", code.get_spell_name_by_name("Crusader Aura"),
 		"PALADIN", code.get_spell_name_by_name("Devotion Aura"),
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Retribution Aura"),
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Concentration Aura"),
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Fire Resistance Aura"),
 		"WARRIOR", code.get_spell_name_by_name("Defensive Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Battle Stance"),
 		"WARRIOR", code.get_spell_name_by_name("Berserker Stance"),
@@ -194,22 +188,15 @@ function AB.InitializeCategories()
 	})
 
 	AutoBarCategoryList["Spell.Seal"] = SpellsCategory:new( "Spell.Seal", spellIconList["Seal of the Crusader"], {
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Justice"),
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Light"),
--- [MoP] removed: 		"PALADIN", code.get_spell_name_by_name("Seal of Vengeance"),
 		"PALADIN", code.get_spell_name_by_name("Seal of Righteousness"),
-	
-		"PALADIN", code.get_spell_name_by_name("Seal of Insight"), -- new added in mop
-		"PALADIN", code.get_spell_name_by_name("Seal of Truth"), -- new added in mop
+		"PALADIN", code.get_spell_name_by_name("Seal of Insight"),
+		"PALADIN", code.get_spell_name_by_name("Seal of Truth"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Earth"] = SpellsCategory:new("Spell.Totem.Earth", spellIconList["Earthgrab Totem"],
 	{
 		"SHAMAN", code.get_spell_name_by_name("Earthbind Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Earth Elemental Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Stoneclaw Totem"),
--- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Stoneskin Totem"),
--- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Strength of Earth Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Tremor Totem"),
 	})
 
@@ -217,10 +204,7 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Totem.Air"] = SpellsCategory:new("Spell.Totem.Air", spellIconList["Wind Rush Totem"],
 	{
 		"SHAMAN", code.get_spell_name_by_name("Grounding Totem"),
-		"SHAMAN", code.get_spell_name_by_name("Windfury Totem"),
--- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Wrath of Air Totem"),
-	
-		"SHAMAN", code.get_spell_name_by_name("Capacitor Totem"), -- new added in mop
+		"SHAMAN", code.get_spell_name_by_name("Capacitor Totem"),
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
@@ -232,10 +216,9 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Totem.Water"] = SpellsCategory:new("Spell.Totem.Water", spellIconList["Healing Stream Totem"],
 	{
 		"SHAMAN", code.get_spell_name_by_name("Healing Stream Totem"),
--- [MoP] removed: 		"SHAMAN", code.get_spell_name_by_name("Mana Spring Totem"),
 		"SHAMAN", code.get_spell_name_by_name("Mana Tide Totem"),
-	
-		"SHAMAN", code.get_spell_name_by_name("Healing Tide Totem"), -- new added in mop
+
+		"SHAMAN", code.get_spell_name_by_name("Healing Tide Totem"),
 	})
 
 
@@ -278,10 +261,7 @@ function AB.InitializeCategories()
 	AutoBarCategoryList["Spell.Debuff.Single"] = SpellsCategory:new("Spell.Debuff.Single", spellIconList["Slow"],
 	{
 		"HUNTER", code.get_spell_name_by_name("Concussive Shot"),
-		"HUNTER", code.get_spell_name_by_name("Wing Clip"),
-		"WARLOCK", code.get_spell_name_by_name("Curse of Tongues"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of the Elements"),
-		"WARLOCK", code.get_spell_name_by_name("Curse of Weakness"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Exhaustion"),
 	})
 
@@ -302,7 +282,6 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Track Demons"),
 		"HUNTER", code.get_spell_name_by_name("Track Dragonkin"),
 		"HUNTER", code.get_spell_name_by_name("Track Giants"),
-		"PALADIN", code.get_spell_name_by_name("Sense Undead"),
 	})
 
 	AutoBarCategoryList["Spell.Trap"] = SpellsCategory:new( "Spell.Trap", spellIconList["Explosive Trap"],

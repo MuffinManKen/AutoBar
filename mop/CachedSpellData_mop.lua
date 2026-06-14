@@ -73,7 +73,6 @@ code.cache_spell_data(19577, "Intimidation");
 code.cache_spell_data(136, "Mend Pet");
 code.cache_spell_data(982, "Revive Pet");
 code.cache_spell_data(1515, "Tame Beast");
-code.cache_spell_data(2974, "Wing Clip");
 
 code.cache_spell_data(19883, "Track Humanoids");
 code.cache_spell_data(19884, "Track Undead");
@@ -101,12 +100,11 @@ code.cache_spell_data(11426, "Ice Barrier");
 code.cache_spell_data(1459, "Arcane Intellect");
 code.cache_spell_data(130, "Slow Fall");
 
-code.cache_spell_data(5504, "Conjure Water");
-code.cache_spell_data(587, "Conjure Food");
+
 
 code.cache_spell_data(759, "Conjure Mana Gem");
-
-code.cache_spell_data(43987, "Ritual of Refreshment");
+code.cache_spell_data(42955, "Conjure Refreshment")
+code.cache_spell_data(43987, "Conjure Refreshment Table");
 
 code.cache_spell_data(31687, "Summon Water Elemental");
 
@@ -154,7 +152,6 @@ code.cache_spell_data(642, "Divine Shield");
 
 code.cache_spell_data(19740, "Blessing of Might");
 code.cache_spell_data(20217, "Blessing of Kings");
--- [MoP] removed: code.cache_spell_data(20911, "Blessing of Sanctuary");
 
 code.cache_spell_data(633, "Lay on Hands");
 
@@ -163,18 +160,10 @@ code.cache_spell_data(1022, "Hand of Protection");
 code.cache_spell_data(6940, "Hand of Sacrifice");
 code.cache_spell_data(1038, "Hand of Salvation");
 
-code.cache_spell_data(32223, "Crusader Aura");
-code.cache_spell_data(465, "Devotion Aura");
--- [MoP] removed: code.cache_spell_data(7294, "Retribution Aura");
--- [MoP] removed: code.cache_spell_data(19746, "Concentration Aura");
--- [MoP] removed: code.cache_spell_data(19891, "Fire Resistance Aura");
+code.cache_spell_data(31821, "Devotion Aura");
 
-code.cache_spell_data(5502, "Sense Undead");
 
--- [MoP] removed: code.cache_spell_data(20164, "Seal of Justice");
--- [MoP] removed: code.cache_spell_data(20165, "Seal of Light");
 code.cache_spell_data(20154, "Seal of Righteousness");
--- [MoP] removed: code.cache_spell_data(31801, "Seal of Vengeance");
 --#endregion
 
 --#region Priest
@@ -182,7 +171,6 @@ code.cache_spell_data(588, "Inner Fire");
 code.cache_spell_data(21562, "Prayer of Fortitude");
 code.cache_spell_data(17, "Power Word: Shield");
 code.cache_spell_data(15487, "Silence");
--- [MoP] removed: code.cache_spell_data(27683, "Prayer of Shadow Protection");
 code.cache_spell_data(34433, "Shadowfiend");
 code.cache_spell_data(6346, "Fear Ward");
 code.cache_spell_data(15286, "Vampiric Embrace");
@@ -190,13 +178,15 @@ code.cache_spell_data(15286, "Vampiric Embrace");
 
 --#region Rogue
 code.cache_spell_data(1842, "Disarm Trap");
-code.cache_spell_data(4086, "Evasion");
+code.cache_spell_data(5277, "Evasion");
 code.cache_spell_data(1766, "Kick");
 code.cache_spell_data(1784, "Stealth");
 code.cache_spell_data(1856, "Vanish");
 code.cache_spell_data(2094, "Blind");
 code.cache_spell_data(6770, "Sap");
 code.cache_spell_data(36554, "Shadowstep");
+code.cache_spell_data(1804, "Pick Lock");
+
 --#endregion
 
 --#region Shaman
@@ -210,16 +200,11 @@ code.cache_spell_data(8042, "Earth Shock");
 
 --Air totems
 code.cache_spell_data(8177, "Grounding Totem");
-code.cache_spell_data(8512, "Windfury Totem");
--- [MoP] removed: code.cache_spell_data(3738, "Wrath of Air Totem");
 
 
 --Earth totems
 code.cache_spell_data(2484, "Earthbind Totem");
 code.cache_spell_data(2062, "Earth Elemental Totem");
-code.cache_spell_data(5730, "Stoneclaw Totem");
--- [MoP] removed: code.cache_spell_data(8071, "Stoneskin Totem");
--- [MoP] removed: code.cache_spell_data(8075, "Strength of Earth Totem");
 code.cache_spell_data(8143, "Tremor Totem");
 
 --Fire totems
@@ -228,7 +213,6 @@ code.cache_spell_data(3599, "Searing Totem");
 
 --Water totems
 code.cache_spell_data(5394, "Healing Stream Totem");
--- [MoP] removed: code.cache_spell_data(5675, "Mana Spring Totem");
 code.cache_spell_data(16190, "Mana Tide Totem");
 
 code.cache_spell_data(546, "Water Walking");
@@ -237,8 +221,6 @@ code.cache_spell_data(556, "Astral Recall");
 --#endregion
 
 --#region Warlock
-code.cache_spell_data(687, "Demon Skin");
-code.cache_spell_data(28176, "Fel Armor");
 
 code.cache_spell_data(6201, "Create Healthstone");
 
@@ -247,12 +229,10 @@ code.cache_spell_data(29893, "Ritual of Souls");
 
 code.cache_spell_data(6229, "Shadow Ward");
 
-code.cache_spell_data(1714, "Curse of Tongues");
-code.cache_spell_data(702, "Curse of Weakness");
 code.cache_spell_data(1490, "Curse of the Elements");
 code.cache_spell_data(18223, "Curse of Exhaustion");
 
-code.cache_spell_data(693, "Create Soulstone (Minor)");
+code.cache_spell_data(20707, "Soulstone");
 
 
 code.cache_spell_data(698, "Ritual of Summoning");
