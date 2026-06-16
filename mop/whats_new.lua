@@ -3,5 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Cleaned up some warnings from spells that don't exist in MoP
+ - Fixed button issue after Blizzard broke it.
+ - Check out Lexomancer demo on Steam!
+ - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
