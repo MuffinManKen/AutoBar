@@ -501,11 +501,7 @@ function Bar:CreateDragFrame()
 
 		frame.class = self
 		frame:EnableMouse(true)
-		if (ABGData.is_mainline_wow or ABGData.is_bcc_wow) then
-			frame:RegisterForClicks("AnyUp", "AnyDown")
-		else
-			frame:RegisterForClicks("AnyUp")
-		end
+		code.RegisterForClicks(frame)
 		frame:RegisterForDrag("LeftButton", "RightButton")
 ---		frame:SetScript("OnReceiveDrag", onReceiveDragFunc)
 	end

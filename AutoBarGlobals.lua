@@ -109,6 +109,7 @@ AutoBarGlobalDataObject = {
 	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
 	is_wrath_wow = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC),
+	is_mop_wow = (WOW_PROJECT_ID == WOW_PROJECT_MISTS_CLASSIC),
 
 	default_button_width = 36,
 	default_button_height = 36,
@@ -422,6 +423,15 @@ function code.add_profile_data(p_name, p_time)
 	prof[p_name].avg_time = prof[p_name].total_time / prof[p_name].calls
 
 end
+
+function code.RegisterForClicks(p_frame)
+	if (AutoBarGlobalDataObject.is_vanilla_wow) then
+		p_frame:RegisterForClicks("AnyUp")
+	else
+		p_frame:RegisterForClicks("AnyUp", "AnyDown")
+	end
+end
+
 
 function code.GetItemCount(p_item_info, p_include_bank, p_include_uses, p_include_reagent_bank)
 

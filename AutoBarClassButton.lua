@@ -267,11 +267,7 @@ function AutoBar.Class.Button:CreateButtonFrame()
 
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	if (AutoBarGlobalDataObject.is_mainline_wow or ABGData.is_bcc_wow) then
-		frame:RegisterForClicks("AnyUp", "AnyDown")
-	else
-		frame:RegisterForClicks("AnyUp")
-	end	frame:RegisterForDrag("LeftButton", "RightButton")
+	code.RegisterForClicks(frame)
 
 	frame:SetScript("OnUpdate", OnUpdateFunc)
 

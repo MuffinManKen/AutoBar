@@ -8,9 +8,11 @@
 --
 
 --GLOBALS: InCombatLockdown, GameTooltip, CreateFrame, SecureHandlerWrapScript
+local _, AB = ...
 
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
+local code = AB.code	---@class ABCode
 
 local Class = AutoBar.Class.new_class
 local L = AutoBarGlobalDataObject.locale
@@ -85,11 +87,8 @@ function AutoBar.Class.PopupButton:CreateButtonFrame()
 	self.frame = frame
 	frame.class = self
 	frame:SetMouseClickEnabled()
-	if (AutoBarGlobalDataObject.is_mainline_wow or ABGData.is_bcc_wow) then
-		frame:RegisterForClicks("AnyUp", "AnyDown")
-	else
-		frame:RegisterForClicks("AnyUp")
-	end
+	code.RegisterForClicks(frame)
+
 	frame:SetFrameRef("popupHeader", popupHeader)
 	frame.popupHeader = popupHeader
 	frame:SetScript("OnEnter", funcOnEnter)
@@ -124,7 +123,7 @@ function AutoBar.Class.PopupButton:CreateButtonFrame()
 	end
 
 	frame.border = _G[("%sBorder"):format(popupButtonName)]
-	
+
 	if frame.Arrow then
 		frame.Arrow:Hide()
 	end
