@@ -425,11 +425,7 @@ function code.add_profile_data(p_name, p_time)
 end
 
 function code.RegisterForClicks(p_frame)
-	if (AutoBarGlobalDataObject.is_vanilla_wow) then
-		p_frame:RegisterForClicks("AnyUp")
-	else
-		p_frame:RegisterForClicks("AnyUp", "AnyDown")
-	end
+	p_frame:RegisterForClicks("AnyUp", "AnyDown")
 end
 
 
