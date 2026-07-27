@@ -115,6 +115,9 @@
 
 	<Set name="Muffin.Misc.CraftingKnowledge">
 		<Inclusion ftype="wowhead" url="items?filter=107;0;study+to+increase+knowledge"/>
+		<Inclusion ftype="static">
+			<Item id="246331" />
+		</Inclusion>
 	</Set>
 
 	<Set name="Muffin.Misc.Hearth">
@@ -472,4 +475,3 @@ Hearth item: Cypher of Relocation (180817) (Maw-only)
 
 
 -->
-

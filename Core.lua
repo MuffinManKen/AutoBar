@@ -455,7 +455,12 @@ end
 function AB.events.BAG_UPDATE(p_bag_idx)
 	AB.LogEventStart("BAG_UPDATE")
 
-	if (AutoBar.inWorld and p_bag_idx <= NUM_BAG_SLOTS) then
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (AutoBarGlobalDataObject.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	if (AutoBar.inWorld and p_bag_idx <= maxBagIndex) then
 		AutoBarSearch:MarkBagDirty(p_bag_idx)
 	end
 

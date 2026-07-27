@@ -1037,8 +1037,12 @@ end
 
 
 local function init_dirty_flags()
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
 
-	for i = 0, NUM_BAG_SLOTS, 1 do
+	for i = 0, maxBagIndex, 1 do
 		AutoBarSearch.dirty.bags[i] = true
 	end
 
@@ -1060,7 +1064,12 @@ function AutoBarSearch:Initialize()
 
 	init_dirty_flags()
 
-	for bag = 0, NUM_BAG_SLOTS, 1 do
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	for bag = 0, maxBagIndex, 1 do
 		self.bag_cache[bag] = {}
 	end
 end
@@ -1075,7 +1084,12 @@ function AutoBarSearch:Empty()
 
 	wipe(self.inventory_cache)
 
-	for bag = 0, NUM_BAG_SLOTS, 1 do
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	for bag = 0, maxBagIndex, 1 do
 		wipe(self.bag_cache[bag])
 	end
 
@@ -1100,7 +1114,12 @@ end
 function AutoBarSearch:UpdateScan()
 --print("AutoBarSearch:Reset Start")
 	-- ToDo: reimplement the dirty code and remove the below auto-dirtying stuff since it defeats the purpose
-	for i = 0, NUM_BAG_SLOTS, 1 do
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	for i = 0, maxBagIndex, 1 do
 		AutoBarSearch.dirty.bags[i] = true
 	end
 
@@ -1131,7 +1150,12 @@ end
 
 -- Scan all of the bags
 function AutoBarSearch:ScanDirtyBags()
-	for bag = 0, NUM_BAG_SLOTS, 1 do
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	for bag = 0, maxBagIndex, 1 do
 		if (AutoBarSearch.dirty.bags[bag]) then
 			self:ScanBag(bag)
 			AutoBarSearch.dirty.bags[bag] = nil
@@ -1143,7 +1167,12 @@ end
 -- Scan bags only to support shuffling of bag items manually added or moved during combat.
 function AutoBarSearch:ScanBagsInCombat()
 	AB.LogEventStart("Stuff:ScanCombat")
-	for bag = 0, NUM_BAG_SLOTS, 1 do
+	local maxBagIndex = NUM_BAG_SLOTS
+	if (ABGData.is_mainline_wow and Enum and Enum.BagIndex and Enum.BagIndex.ReagentBag) then
+		maxBagIndex = Enum.BagIndex.ReagentBag
+	end
+
+	for bag = 0, maxBagIndex, 1 do
 		self:ScanBag(bag)
 	end
 	AB.LogEventEnd("Stuff:ScanCombat")
