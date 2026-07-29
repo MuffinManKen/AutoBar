@@ -1,3 +1,6 @@
+local ABGData = AutoBarGlobalDataObject
+
+
 -- Testing & Debug function only
 function SearchSpace.prototype:Contains(id)
 	for itemId, _clientButtons in pairs(self.dataList) do
@@ -30,7 +33,7 @@ end
 function CStuff:Contains(id)
 	local slotList
 	local contains = nil
-	for bag = 0, NUM_BAG_SLOTS, 1 do
+	for bag = 0, ABGData.MAX_BAG_SLOTS, 1 do
 		slotList = self.dataList[bag]
 		for i, itemId in pairs(slotList) do
 			if (itemId == id) then

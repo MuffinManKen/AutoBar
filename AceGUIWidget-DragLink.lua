@@ -1,6 +1,7 @@
 ---@diagnostic disable
 local AceGUI = LibStub("AceGUI-3.0")
-local L = AutoBarGlobalDataObject.locale
+local ABGData = AutoBarGlobalDataObject
+local L = ABGData.locale
 
 --------------
 -- DragLink --
@@ -32,7 +33,7 @@ do
 
 	-- Scan bags for an item with the given item ID and place it on the cursor
 	local function PickupItemByID(itemId)
-		for bag = 0, NUM_BAG_SLOTS do
+		for bag = 0, ABGData.MAX_BAG_SLOTS do
 			for slot = 1, C_Container.GetContainerNumSlots(bag) do
 				local info = C_Container.GetContainerItemInfo(bag, slot)
 				if info and info.itemID == itemId then

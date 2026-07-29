@@ -455,7 +455,7 @@ end
 function AB.events.BAG_UPDATE(p_bag_idx)
 	AB.LogEventStart("BAG_UPDATE")
 
-	if (AutoBar.inWorld and p_bag_idx <= NUM_BAG_SLOTS) then
+	if (AutoBar.inWorld and p_bag_idx <= ABGData.MAX_BAG_SLOTS) then
 		AutoBarSearch:MarkBagDirty(p_bag_idx)
 	end
 

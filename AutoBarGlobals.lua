@@ -114,6 +114,7 @@ AutoBarGlobalDataObject = {
 	default_button_width = 36,
 	default_button_height = 36,
 
+	MAX_BAG_SLOTS = Constants.InventoryConstants.NumBagSlots + (Constants.InventoryConstants.NumReagentBagSlots or 0)
 }
 
 local ver_string = GetBuildInfo()
