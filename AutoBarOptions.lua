@@ -615,7 +615,7 @@ local function setCustomBarName(info, value)
 	if (value and value ~= "") then
 		local barKey = info.arg.barKey
 
-		if (not Bar:NameExists(value)) then
+		if (not AB.bar:NameExists(value)) then
 			local customBarDB = AutoBar.barLayoutDBList[barKey]
 			customBarDB.name = value
 
@@ -624,7 +624,7 @@ local function setCustomBarName(info, value)
 				bar:ChangeName(value)
 			end
 
-			Bar:Rename(barKey, value)
+			AB.bar:Rename(barKey, value)
 			AutoBar:BarsChanged()
 		end
 	end
