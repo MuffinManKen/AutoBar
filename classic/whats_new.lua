@@ -3,7 +3,6 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Totem fixes
- - Fixed issue with Toy cache being referenced in Classic
+ - Fixed issue with buttons not responding thanks to Daniel Shookowsky
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
