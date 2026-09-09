@@ -598,16 +598,26 @@ do
 				overlay:SetScript("OnLeave", onLeave)
 				overlay:SetScript("OnDragStart", onDragStart)
 				overlay:SetScript("OnDragStop", onDragStop)
+				-- Only draggable frames (the caller's own, e.g. AutoBar's bars) need to catch
+				-- the mouse. Passive snap-target overlays must stay click-through so they never
+				-- block interaction with a draggable frame they happen to sit on top of.
+				overlay:EnableMouse(true)
 			else
 				overlay:SetScript("OnEnter", nil)
 				overlay:SetScript("OnLeave", nil)
 				overlay:SetScript("OnDragStart", nil)
 				overlay:SetScript("OnDragStop", nil)
+				overlay:EnableMouse(false)
 			end
 
 			if not frame:IsShown() then
-				SetFrameHidden(lib, frame, true)
-				frame:Show()
+				-- Frames the caller registered just as optional snap targets (e.g. Blizzard's
+				-- default action bars/microbuttons) are commonly hidden on purpose by bar addons
+				-- like Bartender4/Dominos/ElvUI. Forcing them visible flooded the screen with
+				-- overlays and could crash (Blizzard's MicroMenuContainer layout throws if forced
+				-- shown before its buttons are positioned) -- so leave hidden frames alone. Any
+				-- frame that genuinely needs to be visible during move mode (e.g. AutoBar's own
+				-- bars) is already shown by its owner before this runs.
 			elseif overlay:IsShown() then
 				UpdateFrameColor(frame)
 			else
