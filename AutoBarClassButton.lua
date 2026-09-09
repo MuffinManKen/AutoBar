@@ -713,7 +713,7 @@ function AutoBar.Class.Button:SetDragCursor()
 			PickupMacro(macroIndex)
 		elseif (itemType == "spell") then
 			local spellName = self.frame:GetAttribute("spell")
-			PickupSpellBookItem(spellName)
+			C_Spell.PickupSpell(spellName)
 		end
 	end
 end

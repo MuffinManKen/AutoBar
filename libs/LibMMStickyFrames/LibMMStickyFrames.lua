@@ -172,7 +172,7 @@ local SetColorSnapDisabled
 local GetColorSnapDisabled
 local SetColorBorderEnabled
 local GetColorBorderEnabled
-local GetColorBorderDisabled
+local SetColorBorderDisabled
 local GetColorBorderDisabled
 
 local RegisterFrame
@@ -226,7 +226,8 @@ function RetrieveOverlay(frame)
 		overlay:RegisterForDrag("LeftButton")
 		overlay:RegisterForClicks("LeftButtonUp", "LeftButtonDown", "RightButtonUp", "RightButtonDown")
 		overlay:SetToplevel(true)
-		overlay:SetBackdrop({ bgFile = [[Interface\Tooltips\UI-Tooltip-Background]], tile = true, tileSize = 16, edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], edgeSize = 16, insets = {}, })
+		local null_insets = {} ---@diagnostic disable-line: missing-fields
+		overlay:SetBackdrop({ bgFile = [[Interface\Tooltips\UI-Tooltip-Background]], tile = true, tileSize = 16, edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], edgeSize = 16, insets = null_insets, })
 		overlay:Hide()
 		local anchor = overlay:CreateTexture(nil, "ARTWORK")
 		anchor:SetTexture([[Interface\Tooltips\UI-Tooltip-Background]])
@@ -616,7 +617,7 @@ do
 		else
 			StoreOverlay(frame)
 			if IsFrameMoving(lib, frame) then
-				StopFrameMoving(lib, frame)
+				StopFrameMoving(lib)
 			end
 			if IsFrameHidden(lib, frame) then
 				frame:Hide()
@@ -633,13 +634,7 @@ function UpdateFrameColor(frame)
 	local overlay = GetFrameOverlay(lib, frame, true)
 	if not overlay then return end
 	local color, borderColor
-	local focus
-	if GetMouseFoci then
-		focus = GetMouseFoci()[1]
-	else
-		focus = GetMouseFocus
-	end
-	if IsFrameMoving(lib, frame) or focus == overlay then
+	if IsFrameMoving(lib, frame) or overlay:IsMouseMotionFocus() then
 		borderColor = colorBorderEnabled
 	else
 		borderColor = colorBorderDisabled
@@ -924,10 +919,10 @@ function SetFrameInsets(self, frame, left, top, right, bottom)
 	local overlay = GetFrameOverlay(lib, frame, true)
 	if overlay then
 		overlay:ClearAllPoints()
-		overlay:SetPoint("left", frame, "left", left, 0)
-		overlay:SetPoint("top", frame, "top", 0, 0 - top)
-		overlay:SetPoint("right", frame, "right", 0 - right, 0)
-		overlay:SetPoint("bottom", frame, "bottom", 0, bottom)
+		overlay:SetPoint("LEFT", frame, "LEFT", left, 0)
+		overlay:SetPoint("TOP", frame, "TOP", 0, 0 - top)
+		overlay:SetPoint("RIGHT", frame, "RIGHT", 0 - right, 0)
+		overlay:SetPoint("BOTTOM", frame, "BOTTOM", 0, bottom)
 	end
 end
 
@@ -938,10 +933,6 @@ in this order
 function GetFrameInsets(self, frame)
 	local frameInset = insets[frame]
 	if frameInset then
-		if frameInset[1] or frameInset[2] or frameInset[3] or frameInset[4] then
-		else
-			Poppins:Print(true)
-		end
 		return unpack(frameInset)
 	else
 		return 0, 0, 0, 0
@@ -1004,9 +995,9 @@ do
 	function SetFramePoints(self, frame, pointA, frameB, pointB, x, y)
 		if pointA and frameB and pointB and not IsDependentOnFrame(frameB, frame) then
 			pointA, pointB = pointA:lower(), pointB:lower()
-			local xOffset, yOffset = GetInsetOffset(frame, pointA, frameB, pointB, x, y)
+			local xOffset, yOffset = GetInsetOffset(frame, pointA, frameB, pointB)
 			frame:ClearAllPoints()
-			frame:SetPoint(pointA, frameB, pointB, (x or 0) + xOffset, (y or 0) + yOffset)
+			frame:SetPoint(pointA:upper(), frameB, pointB:upper(), (x or 0) + xOffset, (y or 0) + yOffset)
 
 			points[frame] = new(pointA, frameB, pointB, x, y)
 		else
@@ -1019,13 +1010,13 @@ do
 		if pointA then
 			local relPoint = relPoints[pointA]
 			anchor:ClearAllPoints()
-			anchor:SetPoint(pointA, overlay, pointA, 0, 0)
-			anchor:SetPoint(relPoint, overlay, "center", 0, 0)
+			anchor:SetPoint(pointA:upper(), overlay, pointA:upper(), 0, 0)
+			anchor:SetPoint(relPoint:upper(), overlay, "CENTER", 0, 0)
 			local rotPoint = rotPoints[pointA]
 			if rotPoint then
 				local rotRelPoint = rotPoints[relPoint]
-				anchor:SetPoint(rotPoint, overlay, rotPoint, 0, 0)
-				anchor:SetPoint(rotRelPoint, overlay, rotRelPoint, 0, 0)
+				anchor:SetPoint(rotPoint:upper(), overlay, rotPoint:upper(), 0, 0)
+				anchor:SetPoint(rotRelPoint:upper(), overlay, rotRelPoint:upper(), 0, 0)
 			end
 			anchor:Show()
 		else
@@ -1121,7 +1112,7 @@ the mouse and snaps to the frames its grouped with.
 --]]
 function StartFrameMoving(self, frame)
 	if lib.frame then
-		StopFrameMoving(lib, lib.frame)
+		StopFrameMoving(lib)
 	end
 	lib.frame = frame
 	for frameB in pairs(registered) do
@@ -1180,7 +1171,7 @@ lib.SetColorHidden = SetColorHidden
 lib.GetColorHidden = GetColorHidden
 lib.SetColorBorderEnabled = SetColorBorderEnabled
 lib.GetColorBorderEnabled = GetColorBorderEnabled
-lib.GetColorBorderDisabled = GetColorBorderDisabled
+lib.SetColorBorderDisabled = SetColorBorderDisabled
 lib.GetColorBorderDisabled = GetColorBorderDisabled
 
 lib.RegisterFrame = RegisterFrame

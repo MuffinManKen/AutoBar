@@ -11,6 +11,7 @@ LE_EXPANSION_LEVEL_CURRENT = 99
 
 ---@type integer
 WOW_PROJECT_WRATH_CLASSIC = 11
+WOW_PROJECT_MISTS_CLASSIC = 19
 
 ---@type integer
 LE_MOUNT_JOURNAL_FILTER_COLLECTED = -1
@@ -51,6 +52,14 @@ INVTYPE_TRINKET  = ""
 --#region Misc Blizz Stuff
 ---@type Frame
 PetActionBarFrame = {}
+---@type Frame
+MainMenuBar = {}
+---@type Frame
+MainActionBar = {}
+
+CharacterMicroButton = {} ---@type Frame
+ChatFrameMenuButton = {} ---@type Frame
+ChatFrame1 = {} ---@type Frame
 
 ---@type FontObject
 GameFontNormal = nil
@@ -180,11 +189,13 @@ ABCode = {}
 ---@field char table The DB settings for the active character
 ---@field class table The DB settings for the active character class
 ---@field Class table This is where the various class definitions live.  TODO: Move it to AB.types
----@field ConfigToggle function Open the Config window if we're not in combat
----@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
 ---@field player_level integer Current player level for item filtering
 ---@field stickyMode boolean
 ---@field keyBoundMode boolean
+---@field ConfigToggle function Open the Config window if we're not in combat
+---@field IsInLockDown function Test if the character is in combat, a pet battle, or in a vehicle
+---@field SetDraggingObject function
+---@field GetButtonDB function(p_button_key : string) : table
 AutoBar = {}
 
 
