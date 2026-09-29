@@ -105,7 +105,8 @@ AutoBarGlobalDataObject = {
 
 	profile = {},
 
-	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE),
+	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) and (LE_EXPANSION_LEVEL_CURRENT ~= LE_EXPANSION_CLASSIC),
+	is_forever_wow =  (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) and (LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC),
 	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
 	is_wrath_wow = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC),
@@ -122,7 +123,7 @@ local api_version_temp = strsplittable(".", ver_string)
 AutoBarGlobalDataObject.API_VERSION = tonumber(api_version_temp[1])
 AutoBarGlobalDataObject.API_SUBVERSION = tonumber(api_version_temp[2])
 
-if(AutoBarGlobalDataObject.API_VERSION >= 10) then	-- Dragonflight+
+if(AutoBarGlobalDataObject.is_mainline_wow or AutoBarGlobalDataObject.is_forever_wow) then	-- Dragonflight+
 	AutoBarGlobalDataObject.default_button_width = 45
 	AutoBarGlobalDataObject.default_button_height = 45
 end
@@ -277,7 +278,7 @@ function code.GetIconForItemID(p_item_id)	--TODO: Calls into this seem to always
 	local i_texture = select(10, code.GetItemInfo(p_item_id))
 
 ---@diagnostic disable-next-line: deprecated
-	local ii_texture = select(5, GetItemInfoInstant(p_item_id))
+	local ii_texture = GetItemInfoInstant and select(5, GetItemInfoInstant(p_item_id))
 
 	return ii_texture or i_texture;
 end
