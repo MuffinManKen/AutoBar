@@ -1,7 +1,7 @@
-## Interface: 120100
-## Title: AutoBar
-## Author: MuffinManKen, Maggz,  Toadkiller (Original code)
-## Version: 12.1.0.00
+## Interface: 16001
+## Title: AutoBar[Game]
+## Author: MuffinManKen, Toadkiller (Original code)
+## Version: 1.60.1.00
 ## Notes: Dynamic bars with buttons that automatically add potions, water, food and other items you specify into a button for use. Does not use action slots.
 ## Notes-ruRU: Динамические панели с кнопками, которые автоматически добавляют зелья, воду, пищу и другие предметы для котрых вы определяете кнопки для использования. Не использует слоты на панеле команд.
 ## Notes-koKR: 자동으로 물약, 음료, 음식등이 포함된 버튼을 제공하며 슬롯에 사용할 아이템을 별도로 추가할 수 있습니다. 이것은 액션 슬롯에 여유를 가져다 줄것입니다.
@@ -9,17 +9,24 @@
 ## Notes-zhTW: 一組可配置的按鈕，能自動從背包中尋找設定的物品供方便使用。
 ## Notes-esES: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
 ## Notes-esMX: Provee hasta 24 botones en una barra que anyade automaticamente cualquier pocion, agua, comida u otro objeto que especifiques en una casilla. No usa ninguna casilla de tus barras, as럱ue puedes guardar ese espacio para tus hechizos y habilidades.
+## Category: Action Bars
+## Category-deDE: Aktionsleisten
+## Category-esES: Barras de acción
+## Category-esMX: Barras de acción
+## Category-frFR: Barres d’action
+## Category-itIT: Barre delle azioni
+## Category-koKR: 액션 바
+## Category-ptBR: Barras de ação
+## Category-ruRU: Панели команд
+## Category-zhCN: 动作条
+## Category-zhTW: 快捷列
 ## IconTexture: Interface\Icons\INV_Ingot_Eternium
 ## DefaultState: enabled
 ## X-Category: Action Bars
-## Category: Action Bars
 ## X-Credits: Diablo for teaching us how to guzzle potions. Saien for first enabling guzzling in WoW.  Sayclub (Korean) | PDI175, lostcup (Chinese traditional and simplified) | Teodred, curexx (German), Cinedelle (French), shiftos (Spanish), StingerSoft (Russian)
-## OptionalDeps: Ace3, LibKeyBound-1.0, LibPeriodicTable-3.1, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
-## X-Embeds: LibKeyBound-1.0,  LibPeriodicTable-3.1, MuffinLibPTSets
+## OptionalDeps: Ace3, Ace2, LibKeyBound-1.0, LibPeriodicTable-3.1, LibMMStickyFrames-2.0, LibDBIcon-1.0, OmniCC, Masque, MuffinLibPTSets
+## X-Embeds: Ace2, LibKeyBound-1.0,  LibPeriodicTable-3.1, LibMMStickyFrames-2.0, MuffinLibPTSets
 ## SavedVariables: AutoBarDB, AutoBarDB2
-## AddonCompartmentFunc: AutoBar_AddonCompartmentClick
-## AddonCompartmentFuncOnEnter: AutoBar_AddonCompartmentOnEnter
-## AddonCompartmentFuncOnLeave: AutoBar_AddonCompartmentOnLeave
 ## X-Family: [Family]
 ## X-Game: [Game]
 
@@ -29,34 +36,23 @@ embeds.xml
 libs/muffin_ui_toolkit.lua
 libs/muffin_whats_new.lua
 
-retail/MuffinLibPTSets/LibPT-Muffin.BattlePet.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Bandages.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Drum.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Food.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Garrison.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Gear.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Herbs.lua
-retail/MuffinLibPTSets/LibPT-Muffin.ItemEnchant.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Misc.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
-retail/MuffinLibPTSets/LibPT-Muffin.OrderHall.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Covenant.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Potions.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Skill.Archaeology.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Stones.lua
-retail/MuffinLibPTSets/LibPT-Muffin.SunsongRanch.lua
-retail/MuffinLibPTSets/LibPT-Muffin.Toys.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Elixirs.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Explosives.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Flasks.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Food.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Gear.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Misc.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Mounts.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Poison.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Potions.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Skill.Fishing.lua
+[Game]/MuffinLibPTSets/LibPT-Muffin.Stones.lua
+
 
 AutoBarGlobals.lua
 
-
-retail/CachedSpellData_retail.lua
-retail/whats_new.lua
-
+[Game]/CachedSpellData_[Game].lua
+[Game]/whats_new.lua
 
 # Localization
 locale/Locale-enUS.lua
@@ -72,10 +68,9 @@ locale/Locale-zhCN.lua
 locale/Locale-zhTW.lua
 locale/Locale-default.lua
 
-AceGUIWidget-DragLink.lua
-
 Bindings.lua
 
+AceGUIWidget-DragLink.lua
 
 Core.lua
 
@@ -91,7 +86,7 @@ AutoBarClassPopupButton.lua
 AutoBarButton.lua
 AutoBarCategory.lua
 
-retail/ABCategoryData_retail.lua
+[Game]/ABCategoryData_[Game].lua
 
 AutoBarConfig.lua
 
