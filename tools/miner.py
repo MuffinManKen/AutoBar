@@ -14,6 +14,13 @@ import os.path
 import json
 
 AGENT_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'}
+WOWHEAD_REQUEST_TIMEOUT_SECONDS = 30
+
+# Maps this script's xpac slug to the WoWData repo's items_<slug>.pkl slug, for the
+# (rare) cases where they differ.
+XPAC_TO_MUFFIN_DATA_NAME = {
+	"camelot": "forever",
+}
 
 g_json_cache = {}
 g_wowhead_cache = {}
@@ -128,6 +135,11 @@ def load_miner_data(p_set_override, p_xpac):
 			if ftype == "wowhead":
 				new_rule = parse_rule(child, url_root)
 				current_set['intersect'].append(new_rule)
+			elif ftype == 'muffin_data':
+				field = child.attrib['field']
+				pattern = child.attrib.get('pattern')
+				value = child.attrib.get('value')
+				current_set['intersect'].append({'ftype' : 'muffin_data', 'field' : field, 'pattern' : pattern, 'value' : value})
 			else:
 				print(f"Intersect rules: What's a {ftype}??")
 				exit()
@@ -339,6 +351,14 @@ def get_set_data(p_set_name, p_set_data, p_all_sets):
 				g_logger.warning("\t~url: {url} returned {items} items".format(url = url, items = len(i_set)))
 			new_set = set_data.intersection(i_set)
 			set_data = new_set
+		elif ftype == 'muffin_data':
+			field = f['field']
+			pattern = f.get('pattern')
+			value = f.get('value')
+			i_set = search_muffin_data(field, pattern, value)
+			g_logger.debug("\t~muffin: returned {items} items".format(items = len(i_set)))
+			new_set = set_data.intersection(i_set)
+			set_data = new_set
 		else:
 			g_logger.warning(f"unknown intersect filter: {ftype}")
 			continue
@@ -376,13 +396,12 @@ def get_set_from_wowhead_url(p_url, p_tests):
 		#print(*lview_data, sep="\n")
 
 	else:
-		page = requests.get(p_url, headers=AGENT_HEADERS)
+		page = requests.get(p_url, headers=AGENT_HEADERS, timeout=WOWHEAD_REQUEST_TIMEOUT_SECONDS)
 		soup = BeautifulSoup(page.content, 'html.parser')
 		str_data = soup.prettify()
 		lview = get_listview_from_page(str_data)
 		if (not lview):
-			#print("No listview found")
-			return new_set
+			raise RuntimeError(f"No listview found for {p_url} -- the URL is likely wrong or wowhead blocked/changed the request")
 		#print(lview)
 
 		lview_data = demjson3.decode(lview)
@@ -417,6 +436,9 @@ def get_set_from_wowhead_url(p_url, p_tests):
 	for j in lview_data_tmp:
 		#print (j['name'], j['id'])
 		new_set.add(int(j['id']))
+
+	if not new_set:
+		raise RuntimeError(f"0 items found for {p_url} with tests {p_tests} -- a category should never be empty, so the URL or test patterns are likely wrong")
 
 	return new_set
 
@@ -466,7 +488,10 @@ def get_listview_from_page(p_page):
 def load_muffin_data(p_xpac):
 	global g_muffin_data
 
-	file_name = f"D:/Projects/Current/WoW/WoWData/ItemData/items_{p_xpac}.pkl"
+	# The AutoBar/miner.py xpac slug doesn't always match the WoWData repo's item-pickle
+	# slug -- e.g. "camelot" here is "forever" over there.
+	muffin_xpac = XPAC_TO_MUFFIN_DATA_NAME.get(p_xpac, p_xpac)
+	file_name = f"D:/Projects/Current/WoW/WoWData/ItemData/items_{muffin_xpac}.pkl"
 	if os.path.isfile(file_name):
 		with open(file_name,"rb") as f:
 			g_muffin_data = pickle.load(f)
@@ -511,6 +536,23 @@ def load_wowhead_cache(p_xpac):
 		g_logger.debug("Wowhead Item cache is empty\n")
 
 
+def save_wowhead_caches(p_xpac):
+	# Called from a finally block so cached wowhead responses survive a mid-run error
+	# (e.g. the RuntimeErrors raised in get_set_from_wowhead_url) instead of being thrown
+	# away and forcing a full, slow re-scrape next run.
+	with open(f"wowhead_cache_{p_xpac}.pkl", "wb") as f:
+		pickle.dump(g_wowhead_cache, f)
+
+	with open(f"wowhead_cache_{p_xpac}.json", 'w') as f:
+		json.dump(g_wowhead_cache, f)
+
+	with open(f"wowhead_tooltip_cache_{p_xpac}.pkl", "wb") as f:
+		pickle.dump(g_wowhead_tooltip_cache, f)
+
+	with open(f"wowhead_tooltip_cache_{p_xpac}.json", 'w') as f:
+		json.dump(g_wowhead_tooltip_cache, f)
+
+
 def my_upper(p_string):
 	if not p_string:
 		raise argparse.ArgumentTypeError()
@@ -521,7 +563,7 @@ def my_upper(p_string):
 arg_parser = argparse.ArgumentParser(description='Mine WoW Data')
 arg_parser.add_argument('-f', '--file', nargs='?', const = "", type = my_upper)
 arg_parser.add_argument('-s', '--set', nargs='?', const = "", type = my_upper)
-arg_parser.add_argument('xpac', choices=["classic", "bcc", "wrath", "cata", "mop", "retail"])
+arg_parser.add_argument('xpac', choices=["classic", "bcc", "wrath", "cata", "mop", "retail", "camelot"])
 
 parsed_args = arg_parser.parse_args()
 file_override = parsed_args.file
@@ -560,22 +602,10 @@ all_lib_files = find_lib_files(libpt_path, file_override)
 
 #pprint.pprint(all_lib_files, width=4)
 
-for f in all_lib_files:
-	update_lib_file(f, all_sets)
-
-
-
-f = open(f"wowhead_cache_{g_xpac}.pkl","wb")
-pickle.dump(g_wowhead_cache,f)
-f.close()
-
-with open(f"wowhead_cache_{g_xpac}.json", 'w') as f:
-    json.dump(g_wowhead_cache, f)
-
-
-f = open(f"wowhead_tooltip_cache_{g_xpac}.pkl","wb")
-pickle.dump(g_wowhead_tooltip_cache,f)
-f.close()
-
-with open(f"wowhead_tooltip_cache_{g_xpac}.json", 'w') as f:
-    json.dump(g_wowhead_tooltip_cache, f)
+try:
+	for f in all_lib_files:
+		update_lib_file(f, all_sets)
+finally:
+	# Save whatever was fetched even if update_lib_file raised partway through,
+	# so a failed run doesn't force re-scraping everything it already cached.
+	save_wowhead_caches(g_xpac)

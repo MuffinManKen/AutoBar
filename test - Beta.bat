@@ -78,6 +78,34 @@ robocopy %SRC% %DST%  /E ^
 
 robocopy %SRC% %DST% AutoBar.toc
 
+
+set DST="%WOW_INSTALL_DIR%\_classic_beta_\Interface\Addons\AutoBar"
+
+robocopy %SRC% %DST%  /E ^
+  /XF ^
+    *.bat ^
+    .gitignore .luacheckrc ^
+    autobar.code-workspace ^
+    AutoBar*.toc ^
+    *.py ^
+    *.txt ^
+	 *.json ^
+	 wow_defs.lua ^
+	 *_*.tga ^
+  /XD ^
+    .github ^
+    .git ^
+    .vscode ^
+    bcc ^
+	 cata ^
+	 classic^
+	 docs ^
+	 mop ^
+	 retail ^
+	 tools
+
+robocopy %SRC% %DST% AutoBar_camelot.toc
+
 pause
 exit
 
