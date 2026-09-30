@@ -121,6 +121,13 @@ AutoBarGlobalDataObject = {
 }
 AutoBarGlobalDataObject.is_forever_wow = (AutoBarGlobalDataObject.game_name == "Camelot")
 
+-- A built-in button (buttonDB.custom ~= true) whose AutoBar.Class[buttonDB.buttonClass] isn't
+-- registered on this client is considered deprecated for this client (whether because the
+-- feature doesn't apply here, or because of a bug). It's removed automatically once its class
+-- has been missing for this many consecutive logins -- see AutoBar:InitializeDefaults in
+-- AutoBarDB.lua. Kept here so the threshold is easy to find and tweak.
+AutoBarGlobalDataObject.DEPRECATED_BUTTON_LOGIN_THRESHOLD = 3
+
 local ver_string = GetBuildInfo()
 local api_version_temp = strsplittable(".", ver_string)
 AutoBarGlobalDataObject.API_VERSION = tonumber(api_version_temp[1])

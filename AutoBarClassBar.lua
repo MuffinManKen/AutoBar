@@ -240,12 +240,22 @@ function Bar:UpdateObjects()
 				assert(buttonKeyIndex)
 				assert(buttonDB)
 				assert(buttonDB.buttonClass)
-				assert(AutoBar.Class[buttonDB.buttonClass], "AutoBar.Class[buttonDB.buttonClass]" .. " fails for " ..  buttonDB.buttonClass)
-				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
-				AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
-				if(debug) then code.log_warning("Bar:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				local buttonClass = AutoBar.Class[buttonDB.buttonClass]
+				if (not buttonClass) then
+					-- No class registered for this buttonClass on this client -- either deprecated
+					-- for this xpac/client, or a bug. Skip it rather than crash; AutoBar:InitializeDefaults
+					-- (AutoBarDB.lua) tracks and eventually removes buttonDB entries stuck like this.
+					code.log_warning("Bar:UpdateObjects: no class registered for buttonKey=" .. tostring(buttonKey) .. " buttonClass=" .. tostring(buttonDB.buttonClass) .. " -- skipping")
+					buttonKeyList[buttonKeyIndex] = nil
+				else
+					buttonList[buttonKeyIndex] = buttonClass:new(self, buttonDB)
+					AutoBar.buttonList[buttonKey] = buttonList[buttonKeyIndex]
+					if(debug) then code.log_warning("Bar:UpdateObjects new buttonKeyIndex " .. tostring(buttonKeyIndex) .. " buttonKey " .. tostring(buttonKey)) end
+				end
 			end
-			buttonList[buttonKeyIndex].order = buttonKeyIndex
+			if (buttonList[buttonKeyIndex]) then
+				buttonList[buttonKeyIndex].order = buttonKeyIndex
+			end
 		else
 			if(debug) then code.log_warning("Bar:UpdateObjects Disabled " .. tostring(buttonKey) .. " --> buttonListDisabled ?") end
 			-- Move to disabled cache
@@ -258,9 +268,15 @@ function Bar:UpdateObjects()
 			elseif (AutoBar.buttonListDisabled[buttonKey]) then
 				buttonList[buttonKeyIndex] = AutoBar.buttonListDisabled[buttonKey]
 			else
-				assert(AutoBar.Class[buttonDB.buttonClass] ~= nil, buttonDB.buttonClass  .. " is nil")
-				buttonList[buttonKeyIndex] = AutoBar.Class[buttonDB.buttonClass]:new(self, buttonDB)
-				AutoBar.buttonListDisabled[buttonKey] = buttonList[buttonKeyIndex]
+				local buttonClass = AutoBar.Class[buttonDB.buttonClass]
+				if (not buttonClass) then
+					-- See the matching comment in the enabled branch above.
+					code.log_warning("Bar:UpdateObjects: no class registered for buttonKey=" .. tostring(buttonKey) .. " buttonClass=" .. tostring(buttonDB.buttonClass) .. " -- skipping")
+					buttonKeyList[buttonKeyIndex] = nil
+				else
+					buttonList[buttonKeyIndex] = buttonClass:new(self, buttonDB)
+					AutoBar.buttonListDisabled[buttonKey] = buttonList[buttonKeyIndex]
+				end
 			end
 		end
 	end

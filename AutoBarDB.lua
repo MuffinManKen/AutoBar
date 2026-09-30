@@ -912,51 +912,46 @@ function AutoBar:InitializeDefaults()
 
 
 
-	--classic-only: "AutoBarButtonTrack",
-	local deprecated_buttons
+	-- A built-in (non-custom) buttonDB entry whose AutoBar.Class[buttonClass] isn't registered
+	-- on this client is deprecated for this client -- either the feature doesn't apply here, or
+	-- it's a bug. Rather than maintaining a manual per-xpac list of names (which is exactly what
+	-- let the AutoBarButtonPets bug slip through -- its class is mainline-only, but that button
+	-- wasn't on every non-mainline branch's deprecation list), track how many consecutive logins
+	-- each one has been missing and remove it once it hits ABGData.DEPRECATED_BUTTON_LOGIN_THRESHOLD.
+	-- Bar:UpdateObjects (AutoBarClassBar.lua) already refuses to crash on a missing class
+	-- regardless of this threshold -- this loop is cleanup, not the safety net.
+	AutoBarDB2.account.buttonClassMissCounts = AutoBarDB2.account.buttonClassMissCounts or {}
+	local miss_counts = AutoBarDB2.account.buttonClassMissCounts
 
-	if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
-		deprecated_buttons =
-		{
-			"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
-			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
-			"AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
-			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
-			"AutoBarButtonGuildSpell", "AutoBarButtonStagForm", "AutoBarButtonCooldownStoneHealth",
-			"AutoBarButtonCooldownPotionHealth", "AutoBarButtonMillHerbs", "AutoBarButtonCooldownStoneMana",
-			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
-			"AutoBarButtonCooldownDrums",
-		}
-	elseif (ABGData.is_mainline_wow) then
-
-		deprecated_buttons =
-		{
-			"AutoBarButtonWarlockStones", "AutoBarButtonSting", "AutoBarButtonAura",
-			"AutoBarButtonRotationDrums", "AutoBarButtonAmmo",
-			"AutoBarButtonSeal", "AutoBarButtonOrderHall", "AutoBarButtonPowerShift",
-			"AutoBarButtonCooldownStoneCombat", "AutoBarButtonBoomkinTree",
-			"AutoBarButtonTrack", "AutoBarButtonCooldownPotionHealth", "AutoBarButtonCooldownStoneHealth",
-			"AutoBarButtonCooldownStoneMana", "AutoBarButtonAquatic",
-			"AutoBarButtonMana", "AutoBarButtonCooldownPotionMana",
-			"AutoBarButtonCooldownDrums", "AutoBarButtonToyBox",
-		}
-	else
-		deprecated_buttons = {
-			"AutoBarButtonCooldownDrums",
-		}
+	local button_scopes = { AutoBarDB2.account.buttonList, AutoBar.class.buttonList, AutoBar.char.buttonList }
+	local seen_button_keys = {}
+	for _, scope in ipairs(button_scopes) do
+		for buttonKey in pairs(scope) do
+			seen_button_keys[buttonKey] = true
+		end
 	end
 
-	for _, dep in ipairs(deprecated_buttons) do
-		if (AutoBarDB2.account.buttonList[dep]) then
-			AutoBarDB2.account.buttonList[dep] = nil
+	for buttonKey in pairs(seen_button_keys) do
+		local buttonDB = AutoBarDB2.account.buttonList[buttonKey] or AutoBar.class.buttonList[buttonKey] or AutoBar.char.buttonList[buttonKey]
+		-- User-created custom buttons all share the single generic "AutoBarButtonCustom" class
+		-- (AutoBarButton.lua), registered unconditionally on every client -- never candidates
+		-- for deprecation.
+		if (buttonDB.buttonClass ~= "AutoBarButtonCustom") then
+			if (AutoBar.Class[buttonDB.buttonClass]) then
+				miss_counts[buttonKey] = nil
+			else
+				miss_counts[buttonKey] = (miss_counts[buttonKey] or 0) + 1
+				if (miss_counts[buttonKey] >= ABGData.DEPRECATED_BUTTON_LOGIN_THRESHOLD) then
+					code.log_warning("AutoBar: removing '" .. buttonKey .. "' (buttonClass '" .. tostring(buttonDB.buttonClass) .. "') -- no class registered for it on this client for " .. miss_counts[buttonKey] .. " consecutive logins")
+					AutoBarDB2.account.buttonList[buttonKey] = nil
+					AutoBar.class.buttonList[buttonKey] = nil
+					AutoBar.char.buttonList[buttonKey] = nil
+					miss_counts[buttonKey] = nil
+				else
+					code.log_warning("AutoBar: '" .. buttonKey .. "' (buttonClass '" .. tostring(buttonDB.buttonClass) .. "') has no registered class on this client (" .. miss_counts[buttonKey] .. "/" .. ABGData.DEPRECATED_BUTTON_LOGIN_THRESHOLD .. " logins) -- will be removed if this persists")
+				end
+			end
 		end
-		if (AutoBar.class.buttonList[dep]) then
-			AutoBar.class.buttonList[dep] = nil
-		end
-		if (AutoBar.char.buttonList[dep]) then
-			AutoBar.char.buttonList[dep] = nil
-		end
-
 	end
 
 	if(AutoBar.CLASS == "WARLOCK" and AutoBar.class.buttonList["AutoBarButtonInterrupt"]) then
