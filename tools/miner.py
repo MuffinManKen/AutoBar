@@ -14,7 +14,7 @@ import os.path
 import json
 
 AGENT_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'}
-WOWHEAD_REQUEST_TIMEOUT_SECONDS = 30
+WOWHEAD_REQUEST_TIMEOUT_SECONDS = (60 * 5)
 
 # Maps this script's xpac slug to the WoWData repo's items_<slug>.pkl slug, for the
 # (rare) cases where they differ.
@@ -401,8 +401,9 @@ def get_set_from_wowhead_url(p_url, p_tests):
 		str_data = soup.prettify()
 		lview = get_listview_from_page(str_data)
 		if (not lview):
+			if ("Your criteria did not match any items." in str_data):
+				raise RuntimeError(f"No listview found for {p_url} -- wowhead reported \"Your criteria did not match any items.\" (likely a typo in the URL's filter keywords)")
 			raise RuntimeError(f"No listview found for {p_url} -- the URL is likely wrong or wowhead blocked/changed the request")
-		#print(lview)
 
 		lview_data = demjson3.decode(lview)
 		g_wowhead_cache[p_url] = lview_data

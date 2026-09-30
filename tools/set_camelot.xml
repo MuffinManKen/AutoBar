@@ -43,41 +43,41 @@
 	</Set>
 
 	<Set name="Muffin.Food.Health.Basic">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="mana" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 	<Set name="Muffin.Food.Mana.Basic">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ mana over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
-		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over|heals? [\d,]+ damage" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 	<Set name="Muffin.Food.Combo.Basic">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over|heals? [\d,]+ damage" />
-		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ mana over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 
 	<Set name="Muffin.Food.Health.Buff">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="mana" />
 	</Set>
 
 	<Set name="Muffin.Food.Mana.Buff">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ mana over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
-		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over|heals? [\d,]+ damage" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
 	</Set>
 
 	<Set name="Muffin.Food.Combo.Buff">
-		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ health over|heals? [\d,]+ damage" />
-		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ mana over" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
 		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
@@ -111,7 +111,7 @@
 		</Inclusion>
 	</Set>
 
-	<Set name="Muffin.Poison.Lethal">
+	<!--Set name="Muffin.Poison.Lethal">
 		<Inclusion ftype="wowhead" url="temporary-item-enhancements/name:poison">
 			<Test field="name" pattern="Deadly|Instant" />
 		</Inclusion>
@@ -120,7 +120,7 @@
 		<Inclusion ftype="wowhead" url="temporary-item-enhancements/name:poison">
 			<Test field="name" pattern="Crippling|wound|mind-numbing" />
 		</Inclusion>
-	</Set>
+	</Set-->
 
 	<Set name="Muffin.Gear.Trinket.Usable">
 		<Inclusion ftype="wowhead" url="trinkets"/>

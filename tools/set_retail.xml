@@ -49,33 +49,45 @@
 	</Set>
 
 	<Set name="Muffin.Food.Health.Basic">
-		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="mana" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 	<Set name="Muffin.Food.Mana.Basic">
-		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 	<Set name="Muffin.Food.Combo.Basic">
-		<Inclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health+mana" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;increase+your" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;you+will+become" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
+
 	<Set name="Muffin.Food.Health.Buff">
-		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health:well+fed" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;mana" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="mana" />
 	</Set>
+
 	<Set name="Muffin.Food.Mana.Buff">
-		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;mana:well+fed" />
-		<Exclusion ftype="wowhead" url="food-and-drinks?filter=107;0;health" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
 	</Set>
+
 	<Set name="Muffin.Food.Combo.Buff">
-		<Inclusion ftype="wowhead" url="items/consumables/food-and-drinks?filter=107:107;0:0;health+mana:well+fed" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:health(?: and [\d,]+ mana)?|mana and [\d,]+ health) over|heals? [\d,]+ damage" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="restores? [\d,]+ (?:mana(?: and [\d,]+ health)?|health and [\d,]+ mana) over" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
+
 
 	<Set name="Muffin.Garrison.Misc">
 		<Inclusion ftype="static">
@@ -177,7 +189,7 @@
 		<Inclusion ftype="wowhead" url="items?filter=107;0;repairs+equipment" />
 		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+damaged+item" />
 		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+their+gear" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;repairing+for_anyone" />
+		<Inclusion ftype="wowhead" url="items?filter=107;0;repairing+for+anyone" />
 	</Set>
 
 	<Set name="Muffin.Mounts.Deathknight">
@@ -423,9 +435,9 @@
 	</Set>
 
 
-	<Set name="Muffin.Achievements.Source.PvP">
+	<!--Set name="Muffin.Achievements.Source.PvP">
 		<Inclusion ftype="wowhead" url="achievements/character-achievements?filter=2;1;0"/>
-	</Set>
+	</Set-->
 
 
 	<Set name="Muffin.ItemEnchant.Permanent">
