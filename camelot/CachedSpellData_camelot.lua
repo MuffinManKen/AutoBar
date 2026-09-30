@@ -11,7 +11,7 @@ local cache_timer_start = debugprofilestop();
 code.cache_spell_data(20580, "Shadowmeld");
 
 
---Druid
+--#region Druid
 code.cache_spell_data(22812, "Barkskin");
 
 code.cache_spell_data(99, "Demoralizing Roar");
@@ -39,8 +39,9 @@ code.cache_spell_data(18960, "Teleport: Moonglade");
 
 code.cache_spell_data(16979, "Feral Charge");
 code.cache_spell_data(410176, "Skull Bash");
+--#endregion
 
---Hunter
+--#region Hunter
 code.cache_spell_data(5118, "Aspect of the Cheetah");
 code.cache_spell_data(13165, "Aspect of the Hawk");
 code.cache_spell_data(13163, "Aspect of the Monkey");
@@ -77,7 +78,7 @@ code.cache_spell_data(1499, "Freezing Trap");
 code.cache_spell_data(13809, "Frost Trap");
 code.cache_spell_data(13813, "Explosive Trap");
 code.cache_spell_data(13795, "Immolation Trap");
-
+--#endregion
 
 --Mage
 code.cache_spell_data(2139, "Counterspell");
