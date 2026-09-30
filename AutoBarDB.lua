@@ -125,12 +125,14 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonClassPet" },
 		{button_name = "AutoBarButtonClassPets2" },
 		{button_name = "AutoBarButtonER" },
+		{button_name = "AutoBarButtonShields", },
 	},
 	DEMONHUNTER =
 	{
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonCharge" },
 		{button_name = "AutoBarButtonTrap",},
+		{button_name = "AutoBarButtonShields", },
 	},
 	DRUID =
 	{
@@ -169,6 +171,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonClassPets2" },
 		{button_name = "AutoBarButtonClassPets3" },
 		{button_name = "AutoBarButtonER" },
+		{button_name = "AutoBarButtonShields", },
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
@@ -873,17 +876,6 @@ function AutoBar:InitializeDefaults()
 		}
 	end
 
-
-	if (not AutoBar.class.buttonList["AutoBarButtonShields"]) then
-		AutoBar.class.buttonList["AutoBarButtonShields"] = {
-			buttonKey = "AutoBarButtonShields",
-			buttonClass = "AutoBarButtonShields",
-			barKey = AutoBar.classBar,
-			defaultButtonIndex = "*",
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
 
 	if (AutoBar.CLASS ~= "MONK") then
 		if (not AutoBar.class.buttonList["AutoBarButtonER"]) then
