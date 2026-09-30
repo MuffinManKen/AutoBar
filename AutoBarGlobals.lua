@@ -4,6 +4,7 @@
 
 
 local _
+local ADDON_NAME = select(1, ...)	---@type string
 local AB = select(2, ...)
 
 local code = {}	---@class ABCode
@@ -105,8 +106,9 @@ AutoBarGlobalDataObject = {
 
 	profile = {},
 
+	game_name = C_AddOns.GetAddOnMetadata(ADDON_NAME, "X-Game"),
+
 	is_mainline_wow = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) and (LE_EXPANSION_LEVEL_CURRENT ~= LE_EXPANSION_CLASSIC),
-	is_forever_wow =  (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE) and (LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC),
 	is_vanilla_wow = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC),
 	is_bcc_wow = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC),
 	is_wrath_wow = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC),
@@ -117,6 +119,7 @@ AutoBarGlobalDataObject = {
 
 	MAX_BAG_SLOTS = Constants.InventoryConstants.NumBagSlots + (Constants.InventoryConstants.NumReagentBagSlots or 0)
 }
+AutoBarGlobalDataObject.is_forever_wow = (AutoBarGlobalDataObject.game_name == "Camelot")
 
 local ver_string = GetBuildInfo()
 local api_version_temp = strsplittable(".", ver_string)
