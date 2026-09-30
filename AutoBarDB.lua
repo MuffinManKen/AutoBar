@@ -60,6 +60,7 @@ local code = AB.code	---@class ABCode
 local AutoBar = AutoBar
 local ABGData = AutoBarGlobalDataObject
 local L = ABGData.locale
+local PROJECT = ABGData.PROJECT
 
 local CLASS_COLUMN_DEFAULT = 11
 
@@ -141,18 +142,14 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonBear", },
 		{button_name = "AutoBarButtonCat", },
 		{button_name = "AutoBarButtonTravel", },
-		{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonAquatic", project_id = WOW_PROJECT_WRATH_CLASSIC},
-		{button_name = "AutoBarButtonStagForm", project_id = WOW_PROJECT_MAINLINE},
+		{button_name = "AutoBarButtonAquatic", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
+		{button_name = "AutoBarButtonStagForm", project_ids = code.make_set{PROJECT.MAINLINE}},
 		{button_name = "AutoBarButtonMoonkin", },
 		{button_name = "AutoBarButtonTreeForm", },
 		{button_name = "AutoBarButtonStealth", },
 		{button_name = "AutoBarButtonDebuff", },
 		{button_name = "AutoBarButtonClassBuff", },
-		{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonStance", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		{button_name = "AutoBarButtonStance", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
 		{button_name = "AutoBarButtonShields", },
 		{button_name = "AutoBarButtonInterrupt", },
 		{button_name = "AutoBarButtonER", },
@@ -175,9 +172,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonShields", },
 		{button_name = "AutoBarButtonInterrupt", },
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		{button_name = "AutoBarButtonTrack", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
 	},
 	MAGE =
 	{
@@ -202,12 +197,8 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonInterrupt", },
 		{button_name = "AutoBarButtonER", },
 		{button_name = "AutoBarButtonStance", },
-		{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonSeal", project_id = WOW_PROJECT_WRATH_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		{button_name = "AutoBarButtonSeal", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
+		{button_name = "AutoBarButtonTrack", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
 	},
 	PRIEST =
 	{
@@ -227,9 +218,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonCharge", },
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonPickLock", additional_args = {targeted = "Lockpicking"} },
-		{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonTrap", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		{button_name = "AutoBarButtonTrap", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
 	},
 	SHAMAN =
 	{
@@ -239,7 +228,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonTotemWater", },
 		{button_name = "AutoBarButtonTravel", },
 		{button_name = "AutoBarButtonClassBuff", },
-		{button_name = "AutoBarButtonShields", project_id = WOW_PROJECT_MAINLINE},
+		{button_name = "AutoBarButtonShields", project_ids = code.make_set{PROJECT.MAINLINE}},
 		{button_name = "AutoBarButtonInterrupt", },
 	},
 	WARLOCK =
@@ -250,9 +239,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonConjure", },
 		{button_name = "AutoBarButtonClassBuff", },
 		{button_name = "AutoBarButtonDebuff", },
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
-		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
+		{button_name = "AutoBarButtonTrack", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
 		{button_name = "AutoBarButtonClassPet" },
 	},
 	WARRIOR =
@@ -263,7 +250,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonStance" },
 		{button_name = "AutoBarButtonClassBuff" },
-		{button_name = "AutoBarButtonDebuff", project_id = WOW_PROJECT_MAINLINE},
+		{button_name = "AutoBarButtonDebuff", project_ids = code.make_set{PROJECT.MAINLINE}},
 	},
 }
 
@@ -493,7 +480,7 @@ end
 local function create_buttons_from_template(p_template_db, p_button_list, p_bar_key)
 
 	for idx, button_def in ipairs(p_template_db) do
-		if(button_def.project_id == nil) or (button_def.project_id == WOW_PROJECT_ID) then
+		if(button_def.project_ids == nil) or (button_def.project_ids[ABGData.project_id]) then
 			local button_name = button_def.button_name
 			if (not p_button_list[button_name]) then
 				p_button_list[button_name] = {

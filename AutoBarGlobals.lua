@@ -121,6 +121,38 @@ AutoBarGlobalDataObject = {
 }
 AutoBarGlobalDataObject.is_forever_wow = (AutoBarGlobalDataObject.game_name == "Camelot")
 
+-- AutoBar's own project identifiers, resolved from the client-native "X-Game" TOC template
+-- variable ([Game], substituted by the client itself -- see the TOC files' "## X-Game: [Game]"
+-- line). Used by CLASS_BUTTON_MAP (AutoBarDB.lua) instead of comparing against WOW_PROJECT_ID
+-- directly, so a ruleset like Forever (which shares WOW_PROJECT_MAINLINE with true retail but
+-- doesn't necessarily have the same abilities) gets its own distinct identity rather than being
+-- silently bucketed with mainline.
+AutoBarGlobalDataObject.PROJECT = {
+	MAINLINE = "mainline",
+	VANILLA = "vanilla",
+	FOREVER = "forever",
+	BCC = "bcc",
+	WRATH = "wrath",
+	CATA = "cata",
+	MOP = "mop",
+}
+
+do
+	local PROJECT = AutoBarGlobalDataObject.PROJECT
+	-- [Game] expands to one of: Standard, Vanilla, Camelot, TBC, Wrath, Cata, Mists,
+	-- Plunderstorm, WoWLabs, WoWHack (added in client patch 11.1.5).
+	local GAME_NAME_TO_PROJECT = {
+		Standard = PROJECT.MAINLINE,
+		Vanilla = PROJECT.VANILLA,
+		Camelot = PROJECT.FOREVER,
+		TBC = PROJECT.BCC,
+		Wrath = PROJECT.WRATH,
+		Cata = PROJECT.CATA,
+		Mists = PROJECT.MOP,
+	}
+	AutoBarGlobalDataObject.project_id = GAME_NAME_TO_PROJECT[AutoBarGlobalDataObject.game_name]
+end
+
 -- A built-in button (buttonDB.custom ~= true) whose AutoBar.Class[buttonDB.buttonClass] isn't
 -- registered on this client is considered deprecated for this client (whether because the
 -- feature doesn't apply here, or because of a bug). It's removed automatically once its class
