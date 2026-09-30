@@ -126,6 +126,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonClassPets2" },
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonShields", },
+		{button_name = "AutoBarButtonInterrupt", },
 	},
 	DEMONHUNTER =
 	{
@@ -133,6 +134,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonCharge" },
 		{button_name = "AutoBarButtonTrap",},
 		{button_name = "AutoBarButtonShields", },
+		{button_name = "AutoBarButtonInterrupt", },
 	},
 	DRUID =
 	{
@@ -172,6 +174,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonClassPets3" },
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonShields", },
+		{button_name = "AutoBarButtonInterrupt", },
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_CLASSIC},
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_BURNING_CRUSADE_CLASSIC},
 		{button_name = "AutoBarButtonTrack", project_id = WOW_PROJECT_WRATH_CLASSIC},
@@ -237,6 +240,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonTravel", },
 		{button_name = "AutoBarButtonClassBuff", },
 		{button_name = "AutoBarButtonShields", project_id = WOW_PROJECT_MAINLINE},
+		{button_name = "AutoBarButtonInterrupt", },
 	},
 	WARLOCK =
 	{
@@ -877,29 +881,6 @@ function AutoBar:InitializeDefaults()
 	end
 
 
-	if (AutoBar.CLASS ~= "MONK") then
-		if (not AutoBar.class.buttonList["AutoBarButtonER"]) then
-			AutoBar.class.buttonList["AutoBarButtonER"] = {
-				buttonKey = "AutoBarButtonER",
-				buttonClass = "AutoBarButtonER",
-				barKey = AutoBar.classBar,
-				defaultButtonIndex = "*",
-				enabled = true,
-				noPopup = true,
-			}
-		end
-	end
-
-	if (not AutoBar.class.buttonList["AutoBarButtonInterrupt"]) then
-		AutoBar.class.buttonList["AutoBarButtonInterrupt"] = {
-			buttonKey = "AutoBarButtonInterrupt",
-			buttonClass = "AutoBarButtonInterrupt",
-			barKey = AutoBar.classBar,
-			defaultButtonIndex = "*",
-			enabled = true,
-			arrangeOnUse = true,
-		}
-	end
 
 
 
@@ -946,10 +927,12 @@ function AutoBar:InitializeDefaults()
 		end
 	end
 
-	if(AutoBar.CLASS == "WARLOCK" and AutoBar.class.buttonList["AutoBarButtonInterrupt"]) then
-		AutoBar.class.buttonList["AutoBarButtonInterrupt"] = nil
-	end
-
+	-- TODO: This is one-time migration cleanup for buttonKeys that were only ever wrong for a
+	-- specific character's class (not deprecated on this client generally -- AutoBar.Class[...]
+	-- is still registered here, so the general miss-count deprecation above never sees these).
+	-- Need a general process for deprecating per-class buttons -- e.g. checking CLASS_BUTTON_MAP
+	-- membership for AutoBar.CLASS, not just class registration -- instead of hand-written
+	-- one-off removals like this that only fix already-affected characters once.
 	if (ABGData.is_mainline_wow) then
 
 		if(AutoBar.CLASS == "ROGUE" and AutoBar.class.buttonList["AutoBarButtonTrap"]) then
