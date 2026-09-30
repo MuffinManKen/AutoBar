@@ -339,22 +339,21 @@ function AceConfigRegistry:NotifyChange(name) end
 ---@class AutoBarSettings
 ---@field show_empty_buttons boolean
 ---@field self_cast_right_click boolean SelfCast using Right click
+---@field handle_spell_changed boolean Process the SPELLS_CHANGED event
+---@field show_tooltip boolean
+---@field show_tooltip_in_combat boolean
+---@field show_count boolean Show the number of charges the item or spell has
+---@field show_hotkey boolean Show the assigned hotkey
+---@field clamp_bars_to_screen boolean Keep bars from leaving the screen
+---@field hack_PetActionBarFrame boolean Disable mouse on the PetActionBarFrame since it can extend far beyond it's visuals
 local AutoBarSettings = {
     ["fade_out"] = false,
     ["log_memory"] = false,
-    ["show_tooltip"] = true,
     ["throttle_event_limit"] = 0,
     ["log_throttled_events"] = false,
-    ["show_hotkey"] = true,
     ["performance"] = false,
     ["log_events"] = false,
-    ["handle_spell_changed"] = true,
-    ["show_count"] = true,
-    ["self_cast_right_click"] = true,
-    ["clamp_bars_to_screen"] = true,
     ["performance_threshold"] = 100,
-    ["hack_PetActionBarFrame"] = false,
-    ["show_tooltip_in_combat"] = true,
 }
 
 ---@class AutoBarDB2
