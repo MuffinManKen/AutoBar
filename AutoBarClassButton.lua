@@ -268,6 +268,10 @@ function AutoBar.Class.Button:CreateButtonFrame()
 	frame.class = self
 	frame:SetMouseClickEnabled()
 	code.RegisterForClicks(frame)
+	-- OnDragStart (below) only fires if the frame is registered for drag. This used to be
+	-- inherited from ActionButtonTemplate/SecureActionButtonTemplate's own OnLoad, but a
+	-- client update stopped that from happening -- register explicitly rather than rely on it.
+	frame:RegisterForDrag("LeftButton")
 
 	frame:SetScript("OnUpdate", OnUpdateFunc)
 
