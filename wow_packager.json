@@ -73,7 +73,8 @@
 		"force_dirs" : ["camelot", "libs", "locale"],
 		"renames" : {"textures/muffin.tga" : "textures/muffin.tga"},
 		"whats_new" : "camelot/whats_new.lua",
-		"skip_ftp" : true
+		"skip_ftp" : false,
+		"curse_project_id" : 5121
 	}
 	]
 
