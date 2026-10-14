@@ -1403,7 +1403,7 @@ function AutoBar:CreateOptionsAce3()
 						midnight_supporter_text = {
 						    type = "description",
 							order = 4,
-						    name = "Wayofthebob, Dashfyra - Executus EU, Bethany S, Mul, Angel Lyqwyd, A. Klein, Darkurvar, Longsocks, Asjaskan, Redorkulated, Brian G., Yuxans Yao, Pernvandamme, Emmaleah, Dimiter, Captain WhyNot, Jodou Kast, Mike, scb, Gruubar @ Proudmoore-US, Finnegan of Antonidas, Kevin Brott, Brem, Esmer\226\128\147Gilneas, Aleveria, Maradia, Ztid - Dragonmaw, Oegaboega, Olindra, anticow, Chaz Trotter, James\194\160(Kakotan), Steve M, Erwin Versluis, Andromaxe, NeoTron",
+						    name = "Wayofthebob, Dashfyra - Executus EU, Bethany S, Mul, Angel Lyqwyd, A. Klein, Darkurvar, Longsocks, Asjaskan, Redorkulated, Brian G., Yuxans Yao, Pernvandamme, Emmaleah, Dimiter, Captain WhyNot, Jodou Kast, Mike, scb, Gruubar @ Proudmoore-US, Finnegan of Antonidas, Kevin Brott, Brem, Esmer\226\128\147Gilneas, Aleveria, Maradia, Ztid - Dragonmaw, Oegaboega, Olindra, anticow, Chaz Trotter, James\194\160(Kakotan), Steve M, Erwin Versluis, Andromaxe, NeoTron, Baranoir",
 						    desc = "Awesome people",
 						    fontSize = "medium",
 						},
