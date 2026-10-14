@@ -107,6 +107,7 @@ atl("HearthIncludeAncientDalaran", "Include Ancient Dalaran");
 atl("HearthIncludeChallengePortals", "Include Challenge Portals");
 
 atl("Include Basic Combo Food", "Include Basic Combo Food");
+atl("Disable Feast Food", "Disable Feast Food");
 
 atl("Supporters", "Supporters");
 
@@ -198,6 +199,7 @@ local quick_sets =
 	"Muffin.Food.Health.Buff",
 	"Muffin.Food.Mana.Basic",
 	"Muffin.Food.Mana.Buff",
+	"Muffin.Food.Feast",
 	"Muffin.Garrison",
 	"Muffin.Misc.Openable",
 	"Muffin.Order Hall.Ancient Mana",

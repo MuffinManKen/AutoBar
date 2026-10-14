@@ -88,6 +88,13 @@
 		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 
+	<Set name="Muffin.Food.Feast">
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="set out a [\D]+ feast" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="place a [\D]+ feast" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="feed up to [\d]+ people" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+	</Set>
+
 
 	<Set name="Muffin.Garrison.Misc">
 		<Inclusion ftype="static">
@@ -371,7 +378,7 @@
 			<Item id="133705" name="Rotten Fishbone" />
 			<Item id="133713" name="Moosehorn Hook" />
 			<Item id="107950" name="Bipsi's Bobbing Berg" />
-			<Item id="93732" name="Darkmoon Fishing Cap" />			
+			<Item id="93732" name="Darkmoon Fishing Cap" />
 		</Inclusion>
 		<Inclusion ftype="wowhead" url="items/name:bobber?filter=216;2;0"/>
 	</Set>
@@ -399,7 +406,7 @@
 		<Inclusion ftype="wowhead" url="items/name:transporter?filter=216;1;0"/>
 		<Inclusion ftype="wowhead" url="items/name:dimensional+ripper?filter=216;1;0"/>
 	</Set>
-	
+
 	<Set name="Muffin.Toys.Portal.Other">
 		<Inclusion ftype="static">
 			<Item id="95567" name="Kirin Tor Beacon" />
@@ -416,7 +423,7 @@
 			<Item id="230850" name="Delve-O-Bot 7001" />
 		</Inclusion>
 	</Set>
-	
+
 	<Set name="Muffin.Toys.Hearth">
 		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:hearthstone+location"/>
 		<Inclusion ftype="static">

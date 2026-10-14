@@ -1560,6 +1560,10 @@ function AutoBarButtonFood:init(parentBar, buttonDB)
 		self:AddCategory("Muffin.Food.Combo.Basic")
 	end
 
+	if (not buttonDB.disableFeast and AutoBarCategoryList["Muffin.Food.Feast"]) then
+		self:AddCategory("Muffin.Food.Feast")
+	end
+
 	self:AddCategory("Consumable.Food.Percent.Basic")
 end
 
@@ -1589,6 +1593,10 @@ function AutoBarButtonFood:AddOptions(optionList, passValue)
 	end
 
 	self:SetOptionBoolean(optionList, passValue, "include_combo_basic", L["Include Basic Combo Food"])
+
+	if (AutoBarCategoryList["Muffin.Food.Feast"]) then
+		self:SetOptionBoolean(optionList, passValue, "disableFeast", L["Disable Feast Food"])
+	end
 
 end
 
