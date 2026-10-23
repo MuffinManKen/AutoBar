@@ -604,7 +604,7 @@ function AB.InitializeAllCategories()
 
 	AutoBarCategoryList["Macro.Raid Target"] = MacroTextCategory:new( "Raid Target", "Spell_BrokenHeart")
 	for index = 1, 8 do
-		AutoBarCategoryList["Macro.Raid Target"]:AddMacroText('/run SetRaidTarget("target", ' .. index .. ')',  "Interface/targetingframe/UI-RaidTargetingIcon_" .. index, L["Raid " .. index])
+		AutoBarCategoryList["Macro.Raid Target"]:AddMacroText('/tm ' .. index ,  "Interface/targetingframe/UI-RaidTargetingIcon_" .. index, L["Raid " .. index])
 	end
 
 	AutoBarCategoryList["Battle Pet.Favourites"] = MacroTextCategory:new( "Battle Pet.Favourites", "inv_misc_pheonixpet_01")
