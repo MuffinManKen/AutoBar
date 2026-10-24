@@ -137,7 +137,7 @@
 	</Set>
 
 	<Set name="Muffin.Misc.Hearth">
-		<Inclusion ftype="wowhead" url="items?filter=107:216;0:2;teleports+the+caster:0"/>
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="teleports the caster|returns you to.*hearthstone location|recalls you to" />
 	</Set>
 
 	<Set name="Muffin.Misc.Openable">
@@ -421,17 +421,16 @@
 			<Item id="205255" name="Niffen Diggin' Mitts" />
 			<Item id="211788" name="Tess's Peacebloom" />
 			<Item id="230850" name="Delve-O-Bot 7001" />
-		</Inclusion>
-	</Set>
-
-	<Set name="Muffin.Toys.Hearth">
-		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:hearthstone+location"/>
-		<Inclusion ftype="static">
+			<Item id="243056" name="Delver's Mana-Bound Ethergate" />
 			<Item id="140192" name="Dalaran Hearthstone" />
 			<Item id="110560" name="Garrison Hearthstone" />
 			<Item id="141605" name="Flight Master's Whistle" />
 			<Item id="253629" name="Personal Key to the Arcantina" />
 		</Inclusion>
+	</Set>
+
+	<Set name="Muffin.Toys.Hearth">
+		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:hearthstone+location"/>
 	</Set>
 	<Set name="Muffin.Toys.Fishing.Bobbers">
 		<Inclusion ftype="wowhead" url="items?filter=216:107;1:0;0:bobber"/>
