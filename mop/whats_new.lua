@@ -4,6 +4,5 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 AB.WHATSNEW_TEXT = "" ..
 [[
  - Fixed button issue after Blizzard broke it.
- - Check out Lexomancer demo on Steam!
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
