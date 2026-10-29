@@ -3,9 +3,8 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Fixed taint issue with Raid Marks
- - Updated datamining
- - TOC bump
+ - Updated food datamining
+ - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
 
 
