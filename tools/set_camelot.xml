@@ -1,45 +1,35 @@
 <SetFile url_root="https://www.wowhead.com/forever/">
 
+	<Set name="Muffin.Drum.Haste">
+		<Inclusion ftype="muffin_data" field="item_name" pattern="drum" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="haste" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+	</Set>
+
+
 	<Set name="Muffin.Elixir.Battle">
-		<Inclusion ftype="wowhead" url="items/consumables/elixirs/battle" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="battle elixir" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="counts as" />
 	</Set>
 	<Set name="Muffin.Elixir.Guardian">
-		<Inclusion ftype="wowhead" url="items/consumables/elixirs/guardian" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="guardian elixir" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="counts as" />
 	</Set>
-	<Set name="Muffin.Flask">
-		<Inclusion ftype="wowhead" url="items/consumables/flasks" />
-		<Exclusion ftype="static">
-			<Item id="2593" name="Flask of Stormwind Tawny" />
-		</Exclusion>
-	</Set>
+
 
 	<Set name="Muffin.Explosives">
-		<Inclusion ftype="wowhead" url="explosives" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="bomb|dynamite|\bcharge\b|explosive|grenade|land mine|mortar|big one|bigger one|blastpack|big daddy|landshark|\brocket\b|powderkeg|seaforium" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="curio|recipe|alcoholic beverage|adds this toy|champion equipment|restores? [\d,]+%? (?:of your )?(?:maximum )?(?:health|mana)|add the explosive affix|quest item|\bequip\b|unlocks the|summons the assistance|launch yourself|gain \d+.*mana|firework|carousel|mohawk|party favor|guided rocket kit|cluster launcher" />
 	</Set>
 
-	<Set name="Muffin.Misc.Hearth">
-		<Inclusion ftype="wowhead" url="items/miscellaneous?filter=107;0;hearthstone+location" />
-		<Exclusion ftype="static">
-			<Item id="2593" name="Flask of Stormwind Tawny" />
-		</Exclusion>
-		<Inclusion ftype="static">
-			<Item id="227925" name="Beacon of Hydraxis" />
-		</Inclusion>
-	</Set>
-
-	<Set name="Muffin.Misc.Quest">
-		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
-		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use" />
-	</Set>
-
-	<Set name="Muffin.Misc.StartsQuest">
-		<Inclusion ftype="wowhead" url="items?filter=6;1;0" />
-	</Set>
-	<Set name="Muffin.Misc.Reputation">
-		<Inclusion ftype="wowhead" url="items?filter=107;0;reputation" />
-	</Set>
-	<Set name="Muffin.Misc.Openable">
-		<Inclusion ftype="wowhead" url="items?filter=11;1;0" />
+	<Set name="Muffin.Flask">
+		<Inclusion ftype="muffin_data" field="item_sub_type" value="Flasks &amp; Phials" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="counts as both" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 
 	<Set name="Muffin.Food.Health.Basic">
@@ -82,6 +72,52 @@
 		<Intersect ftype="muffin_data" field="tooltip_single" pattern="well fed|increase|gain " />
 	</Set>
 
+	<Set name="Muffin.Food.Feast">
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="set out a [\D]+ feast" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="place a [\D]+ feast" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="feed up to [\d]+ people" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+	</Set>
+
+	<Set name="Muffin.Gear.Trinket.Usable">
+		<Inclusion ftype="muffin_data" field="item_equip_location" value="INVTYPE_TRINKET" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="item_name" pattern="boss x loot x|\btest item\b" />
+	</Set>
+	<Set name="Muffin.Gear.Trinket.Nonusable">
+		<Inclusion ftype="muffin_data" field="item_equip_location" value="INVTYPE_TRINKET" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="item_name" pattern="boss x loot x|\btest item\b" />
+	</Set>
+
+	<Set name="Muffin.Misc.Hearth">
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="teleports the caster|returns you to.*hearthstone location|recalls you to" />
+	</Set>
+
+	<Set name="Muffin.Misc.Openable">
+		<!-- This only catches items that self-describe their open/create effect in their tooltip. Plain lockboxes/loot -->
+		<!-- sacks have no such text (and no static signal at all); those are instead caught live by Dynamic.Openable, -->
+		<!-- which AutoBarSearch:ScanBag() grows from C_Container.GetContainerItemInfo().hasLoot as the player encounters them. -->
+		<Inclusion ftype="muffin_data" field="item_name" pattern="cache of treasures" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="open the container|open the nightmare pod|open the bag|open the clam|create a soulbound|create a class set item|create a broken isles item|create an uncommon|what(?:'s| is) inside|collect \d+[\s\w']*crests?" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="adds this toy" />
+	</Set>
+
+	<Set name="Muffin.Misc.Quest">
+		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use" />
+	</Set>
+
+	<Set name="Muffin.Misc.StartsQuest">
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="This Item Begins a Quest" />
+	</Set>
+	<Set name="Muffin.Misc.Reputation">
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="use:.*reputation" />
+	</Set>
+
+
+
 	<Set name="Muffin.Stones.Mana">
 		<Inclusion ftype="static">
 			<Item id="5514" name="Mana Agate" />
@@ -122,14 +158,7 @@
 		</Inclusion>
 	</Set-->
 
-	<Set name="Muffin.Gear.Trinket.Usable">
-		<Inclusion ftype="wowhead" url="trinkets"/>
-		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="use:" />
-	</Set>
-	<Set name="Muffin.Gear.Trinket.Nonusable">
-		<Inclusion ftype="wowhead" url="trinkets"/>
-		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" />
-	</Set>
+
 
 	<Set name="Muffin.Skill.Fishing.Pole">
 		<Inclusion ftype="wowhead" url="items/weapons/fishing-poles"/>
