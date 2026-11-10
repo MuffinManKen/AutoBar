@@ -1266,6 +1266,7 @@ function AutoBarButtonOpenable:init(parentBar, buttonDB)
 	AutoBarButtonOpenable.super.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Muffin.Misc.Openable")
+	self:AddCategory("Dynamic.Openable")
 
 	if(buttonDB.openable_include_craft_knowledge == nil) then buttonDB.openable_include_craft_knowledge = true end
 

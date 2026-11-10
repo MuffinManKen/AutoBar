@@ -288,21 +288,9 @@ end
 
 
 -- Given an item link, this adds the item to the given category
--- NOTE: No effort is made to avoid adding an item that as already been added. As long as the list is small, this isn't worth worrying about.
 local function add_item_to_dynamic_category(p_item_link, p_category_name)
-	local debug_me = false
-	local category = AutoBarCategoryList[p_category_name]
-
-	if (category) then
-		if(debug_me) then code.log_warning("Adding", p_item_link, " to ", p_category_name, code.Dump(category.items, 1)); end;
-		local item_name, item_id = AB.ItemLinkDecode(p_item_link)
-		for _, existing_id in ipairs(category.items) do
-			if (existing_id == item_id) then return end
-		end
-		category.items[#category.items + 1] = item_id
-		if(debug_me) then code.log_warning(item_name, item_id, "Num Items:", #category.items); end;
-	end
-
+	local _, item_id = AB.ItemLinkDecode(p_item_link)
+	AutoBarSearch:AddItemToDynamicCategory(item_id, p_category_name)
 end
 
 

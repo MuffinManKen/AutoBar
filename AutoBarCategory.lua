@@ -308,8 +308,7 @@ local ItemsCategory = AB.ItemsCategory ---@class ItemsCategory
 function ItemsCategory:new(p_description, p_short_texture, p_pt_items, p_pt_priority_items)
 	assert(type(p_description) == "string")
 	assert(type(p_short_texture) == "string")
-	assert(type(p_pt_items) == "string" or (p_pt_items == nil and p_description == "Dynamic.Quest"), "p_pt_items is a " .. type(p_pt_items) .. " " .. p_description)
-	--TODO: The above handling of dynamic categories is fugly
+	assert(type(p_pt_items) == "string" or (p_pt_items == nil and p_description:match("^Dynamic%.")), "p_pt_items is a " .. type(p_pt_items) .. " " .. p_description)
 
 	local obj = CreateFromMixins(self)
 	obj:init(p_description, "Interface\\Icons\\" .. p_short_texture)
@@ -808,6 +807,10 @@ function AB.InitializeAllCategories()
 
 
 	AutoBarCategoryList["Muffin.Misc.Openable"] = ItemsCategory:new("Muffin.Misc.Openable", "INV_Misc_Bag_17", "Muffin.Misc.Openable")
+
+	-- Populated live by AutoBarSearch:ScanBag() checking C_Container.GetContainerItemInfo().hasLoot --
+	-- catches openable containers (lockboxes, loot sacks, etc) that have no reliable static signal to mine. --
+	AutoBarCategoryList["Dynamic.Openable"] = ItemsCategory:new("Dynamic.Openable", "INV_Misc_Bag_17", nil)
 
 	AutoBarCategoryList["Consumable.Cooldown.Potion.Rejuvenation"] = ItemsCategory:new("Consumable.Cooldown.Potion.Rejuvenation", "INV_Potion_47", "Consumable.Cooldown.Potion.Rejuvenation")
 

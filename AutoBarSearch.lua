@@ -1212,6 +1212,21 @@ function AutoBarSearch:ScanRegisteredMacroText()
 
 end
 
+-- Adds p_item_id to the named dynamic category (eg "Dynamic.Quest", "Dynamic.Openable") if it isn't already there.
+-- NOTE: No effort is made to use anything smarter than a linear scan. As long as the list is small, this isn't worth worrying about.
+---@param p_item_id integer
+---@param p_category_name string
+function AutoBarSearch:AddItemToDynamicCategory(p_item_id, p_category_name)
+	local category = AutoBarCategoryList[p_category_name]
+
+	if (category) then
+		for _, existing_id in ipairs(category.items) do
+			if (existing_id == p_item_id) then return end
+		end
+		category.items[#category.items + 1] = p_item_id
+	end
+end
+
 ---@param p_item_id integer
 ---@param p_bag integer|nil
 ---@param p_slot integer
@@ -1228,6 +1243,15 @@ local function add_found_item(p_item_id, p_bag, p_slot)
 	local item_spell = AB.GetItemSpell(p_item_id);
 	if (itemMinLevel <= AutoBar.player_level and (usable or item_spell)) then
 		AutoBarSearch.found:Add(p_item_id, p_bag, p_slot, nil)
+	end
+
+	-- Containers (lockboxes, loot sacks, etc) have no reliable static "openable" signal to mine,
+	-- so Dynamic.Openable is grown live here from whatever the player actually encounters.
+	local itemInfo = C_Container.GetContainerItemInfo(p_bag, p_slot)
+	if (itemInfo and itemInfo.hasLoot) then
+		AutoBarSearch:AddItemToDynamicCategory(p_item_id, "Dynamic.Openable")
+		ABGData.TickScheduler.FullScanItemsFlag = true
+		AB.ABScheduleUpdate(ABGData.TickScheduler.UpdateItemsID)
 	end
 --print("Stuff:Add bag " .. tostring(bag) .. " slot " .. tostring(slot))
 end
