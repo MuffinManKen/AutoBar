@@ -1,51 +1,52 @@
 <SetFile url_root="https://www.wowhead.com/">
 
 	<Set name="Muffin.Battle Pet Items.Level">
-		<Inclusion ftype="wowhead" url="consumable-items/name:battle-training+stone" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="battle-training stone" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 	<Set name="Muffin.Battle Pet Items.Upgrade">
-		<Inclusion ftype="wowhead" url="consumable-items/name:battle-stone" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="battle-stone" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 	<Set name="Muffin.Battle Pet Items.Bandages">
-		<Inclusion ftype="wowhead" url="consumable-items/name:pet+bandage" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="pet bandage" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 	<Set name="Muffin.Battle Pet Items.Pet Treat">
-		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;battle+pet+experience+gained+is+increased" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="battle pet experience gained is increased" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 
 	<Set name="Muffin.Drum.Haste">
-		<Inclusion ftype="wowhead" url="items/consumables/other/name:drum/quality:2?filter=107;0;haste" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="drum" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="haste" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 
 
 	<Set name="Muffin.Elixir.Battle">
-		<Inclusion ftype="wowhead" url="battle-elixirs" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="battle elixir" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="counts as" />
 	</Set>
 	<Set name="Muffin.Elixir.Guardian">
-		<Inclusion ftype="wowhead" url="guardian-elixirs" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="guardian elixir" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="counts as" />
 	</Set>
 
 
 	<Set name="Muffin.Explosives">
-		<Inclusion ftype="wowhead" url="consumables/name:bomb" />
-		<Inclusion ftype="wowhead" url="consumables/name:dynamite" />
-		<Inclusion ftype="wowhead" url="consumables/name:charge" />
-		<Inclusion ftype="wowhead" url="consumables/name:explosive" />
-		<Inclusion ftype="wowhead" url="consumables/name:grenade" />
-		<Inclusion ftype="wowhead" url="consumables/name:land+mine" />
-		<Inclusion ftype="wowhead" url="consumables/name:mortar" />
-		<Inclusion ftype="wowhead" url="consumables/name:big+one" />
-		<Inclusion ftype="wowhead" url="consumables/name:blastpack" />
-		<Inclusion ftype="wowhead" url="consumables/name:big+daddy" />
-		<Inclusion ftype="wowhead" url="consumables/name:landshark" />
-		<Inclusion ftype="wowhead" url="consumables/name:rocket" />
-		<Inclusion ftype="wowhead" url="consumables/name:powderkeg" />
-		<Inclusion ftype="wowhead" url="consumables/name:seaforium" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="bomb|dynamite|\bcharge\b|explosive|grenade|land mine|mortar|big one|bigger one|blastpack|big daddy|landshark|\brocket\b|powderkeg|seaforium" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="curio|recipe|alcoholic beverage|adds this toy|champion equipment|restores? [\d,]+%? (?:of your )?(?:maximum )?(?:health|mana)|add the explosive affix|quest item|\bequip\b|unlocks the|summons the assistance|launch yourself|gain \d+.*mana|firework|carousel|mohawk|party favor|guided rocket kit|cluster launcher" />
 	</Set>
 
 	<Set name="Muffin.Flask">
-		<Inclusion ftype="wowhead" url="flasks" />
-		<Inclusion ftype="wowhead" url="potions?filter=107;0;counts+as+both" />
+		<Inclusion ftype="muffin_data" field="item_sub_type" value="Flasks &amp; Phials" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="counts as both" />
+		<Intersect ftype="muffin_data" field="item_type" value="Consumable" />
 	</Set>
 
 	<Set name="Muffin.Food.Health.Basic">
@@ -100,13 +101,13 @@
 		<Inclusion ftype="static">
 			<Item id="118897" name="Miner's Coffee" />			<Item id="118903" name="Preserved Mining Pick" />
 			<Item id="114120" name="Big Crate of Salvage" />	<Item id="114119" name="Crate of Salvage" />
-			<Item id="114116" name="Bag of Salvaged Goods" />	<Item id="139593" name=" Sack of Salvaged Goods" />
-			<Item id="140590" name=" Large Crate of Salvage"/>	<Item id="139594" name=" Salvage Crate" />
-			<Item id="113991" name="Iron Trap" />					<Item id="115009" name="Improved Iron Trap" />
+			<Item id="114116" name="Bag of Salvaged Goods" />	<Item id="139593" name="Sack of Salvaged Goods" />
+			<Item id="140590" name="Large Crate of Salvage"/>	<Item id="139594" name="Salvage Crate" />
+			<Item id="113991" name="Iron Trap" />				<Item id="115009" name="Improved Iron Trap" />
 			<Item id="115010" name="Deadly Iron Trap" />
 			<Item id="120302" name="Weapon Enhancement Token" /><Item id="120301" name="Armor Enhancement Token" />
 			<Item id="128313" name="Huge Ogre Cache" />			<Item id="128316" name="Bulging Barrel of Oil" />
-			<Item id="122514" name=" Mission Completion Orders" />
+			<Item id="122514" name="Mission Completion Orders" />
 		</Inclusion>
 	</Set>
 	<Set name="Muffin.Garrison.Gearworks">
@@ -121,19 +122,24 @@
 		</Inclusion>
 	</Set>
 	<Set name="Muffin.Garrison.Rush Order">
-		<Inclusion ftype="wowhead" url="other-miscellaneous-items/name:rush+order" />
+		<Inclusion ftype="muffin_data" field="item_name" pattern="rush order" />
+		<Intersect ftype="muffin_data" field="item_type" value="Miscellaneous" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
 	</Set>
 
 	<Set name="Muffin.Gear.Trinket.Usable">
-		<Inclusion ftype="wowhead" url="items/armor/trinkets?filter=62;1;0"/>
+		<Inclusion ftype="muffin_data" field="item_equip_location" value="INVTYPE_TRINKET" />
+		<Intersect ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="item_name" pattern="boss x loot x|\btest item\b" />
 	</Set>
 	<Set name="Muffin.Gear.Trinket.Nonusable">
-		<Inclusion ftype="wowhead" url="trinkets"/>
-		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="use:" />
+		<Inclusion ftype="muffin_data" field="item_equip_location" value="INVTYPE_TRINKET" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="item_name" pattern="boss x loot x|\btest item\b" />
 	</Set>
 
 	<Set name="Muffin.Misc.CraftingKnowledge">
-		<Inclusion ftype="wowhead" url="items?filter=107;0;study+to+increase+knowledge"/>
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="study to increase" />
 	</Set>
 
 	<Set name="Muffin.Misc.Hearth">
@@ -141,35 +147,20 @@
 	</Set>
 
 	<Set name="Muffin.Misc.Openable">
-		<Inclusion ftype="wowhead" url="consumable-items?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="items/miscellaneous/quality:0:1?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="items/miscellaneous/quality:2:3:4:5:6:7:8?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="trade-goods?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="quest-items?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="miscellaneous-armor?filter=11;1;0" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+container" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+nightmare+pod" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+bag" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;open+the+clam" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+soulbound+item" />
-		<Inclusion ftype="wowhead" url="items/name:cache+of+treasures" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+class+set+item" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+broken+isles+item" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;create+an+uncommon" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;create+a+soulbound+relic" />
-		<Inclusion ftype="wowhead" url="items?filter=107;0;what+is+inside" />
-		<Inclusion ftype="wowhead" url="items/miscellaneous?filter=107;0;collect+crests" />
+		<!-- This only catches items that self-describe their open/create effect in their tooltip. Plain lockboxes/loot -->
+		<!-- sacks have no such text (and no static signal at all); those are instead caught live by Dynamic.Openable, -->
+		<!-- which AutoBarSearch:ScanBag() grows from C_Container.GetContainerItemInfo().hasLoot as the player encounters them. -->
+		<Inclusion ftype="muffin_data" field="item_name" pattern="cache of treasures" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="open the container|open the nightmare pod|open the bag|open the clam|create a soulbound|create a class set item|create a broken isles item|create an uncommon|what(?:'s| is) inside|collect \d+[\s\w']*crests?" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="\buse:" />
+		<Exclusion ftype="muffin_data" field="tooltip_single" pattern="adds this toy" />
 	</Set>
 
 	<Set name="Muffin.Misc.Housing">
-		<Inclusion ftype="wowhead" url="items/housing/quality:0:1" />
-		<Inclusion ftype="wowhead" url="items/housing/quality:2?filter=92;1;0" />
-		<Inclusion ftype="wowhead" url="items/housing/quality:2?filter=92;2;0" />
-		<Inclusion ftype="wowhead" url="items/housing/quality:3:4:5:6:7:8" />
+		<Inclusion ftype="muffin_data" field="item_type" value="Housing" />
 	</Set>
 
 	<Set name="Muffin.Misc.Quest">
-		<Inclusion ftype="wowhead" url="items/quest?filter=107;0;use%3A" />
 		<Inclusion ftype="muffin_data" field="item_type" pattern="Quest"/>
 		<Exclusion ftype="muffin_data" field="tooltip_single" neg_pattern="(use:|equip:)" />
 		<Exclusion ftype="static">
@@ -181,14 +172,10 @@
 		</Inclusion>
 	</Set>
 	<Set name="Muffin.Misc.StartsQuest">
-		<Inclusion ftype="wowhead" url="items/quality:0:1?filter=6;1;0" />
-		<Inclusion ftype="wowhead" url="items/quality:2:3:4:5:6:7:8?filter=6;1;0" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="This Item Begins a Quest" />
 	</Set>
 	<Set name="Muffin.Misc.Reputation">
-		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;grants+reputation" />
-		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increase+your+reputation" />
-		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increase+reputation+with" />
-		<Inclusion ftype="wowhead" url="consumable-items?filter=107;0;increasing+reputation+with" />
+		<Inclusion ftype="muffin_data" field="tooltip_single" pattern="use:.*reputation" />
 	</Set>
 	<Set name="Muffin.Misc.Repair">
 		<Inclusion ftype="wowhead" url="items?filter=107;0;repair+target+item" />

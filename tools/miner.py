@@ -13,13 +13,13 @@ import logging
 import os.path
 import json
 
-AGENT_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'}
+AGENT_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'}
 WOWHEAD_REQUEST_TIMEOUT_SECONDS = (60 * 5)
 
 # Maps this script's xpac slug to the WoWData repo's items_<slug>.pkl slug, for the
 # (rare) cases where they differ.
 XPAC_TO_MUFFIN_DATA_NAME = {
-	"camelot": "forever",
+#	"camelot": "forever",
 }
 
 g_json_cache = {}
@@ -28,6 +28,12 @@ g_wowhead_item_cache = {}
 g_wowhead_tooltip_cache = {}
 g_muffin_data = {}
 g_quiet_mode = False
+
+# wowhead is currently unreachable (bot-blocked), so ftype="wowhead" rules are a NOP for now --
+# see get_set_data(). Set True by get_set_data() whenever a set's result depended on one of
+# those skipped rules, so update_lib_file() knows not to overwrite that set's existing (good)
+# data with an incomplete result.
+g_set_used_unconverted_wowhead = False
 g_xpac = "retail"
 g_logged_url = None # "https://www.wowhead.com/items/trade-goods/herbs"
 g_logged_set_name = "Muffin.Food.Mana.Basic"
@@ -164,6 +170,8 @@ def find_lib_files(p_data_path, p_file_override):
 
 
 def update_lib_file(p_lib_file_name, p_all_sets):
+	global g_set_used_unconverted_wowhead
+
 	data_regex = r"^\s*\[\"([a-zA-Z .]+)\"\]\s*=\s*\"([\-0-9,: ]*)\""  #"
 	rev_regex = r"LibStub\(\"LibPeriodicTable-3.1\"\):AddData\(\"([a-zA-Z. ]+)\", \"Rev: ([0-9]+)" #"
 	rev_fmt = 'LibStub("LibPeriodicTable-3.1"):AddData("{lib_name}", "Rev: {rev}",\n'
@@ -203,6 +211,10 @@ def update_lib_file(p_lib_file_name, p_all_sets):
 
 			new_set_data = get_set_data(set_name, set_data, p_all_sets)
 
+			if (g_set_used_unconverted_wowhead):
+				g_logger.info(f"\tSkipping {set_name} -- still has unconverted wowhead rule(s); leaving its existing data untouched\n\n")
+				continue
+
 #			if not new_set_data:
 #				continue
 			#pprint.pprint(set_data)
@@ -241,6 +253,9 @@ def update_lib_file(p_lib_file_name, p_all_sets):
 
 def get_set_data(p_set_name, p_set_data, p_all_sets):
 	global g_json_cache
+	global g_set_used_unconverted_wowhead
+
+	g_set_used_unconverted_wowhead = False
 
 	#pprint.pprint(p_all_sets[p_set_name])
 	inc_filters = p_all_sets[p_set_name]['inclusion']
@@ -255,14 +270,11 @@ def get_set_data(p_set_name, p_set_data, p_all_sets):
 		#pprint.pprint(f)
 		g_logger.debug(f)
 		if ftype == 'wowhead':
-			url = f['url']
-			new_set = get_set_from_wowhead_url(url, f['tests'])
-			g_logger.debug("\t+url: {url} returned {items} items".format(url = url, items = len(new_set)))
-			if p_set_name == g_logged_set_name:
-				g_logger.debug("\t\tAdding: {items}".format(items = new_set))
-			if (len(new_set) == 1000):
-				g_logger.warning("\t+url: {url} returned {items} items".format(url = url, items = len(new_set)))
-			set_data.update(new_set)
+			# wowhead is currently bot-blocked -- NOP this rule rather than crash, and flag
+			# the set so update_lib_file() won't overwrite its existing data with this
+			# incomplete result.
+			g_set_used_unconverted_wowhead = True
+			g_logger.debug(f"\t+url: {f['url']} -- SKIPPED (wowhead rules are a NOP right now)")
 
 		elif ftype == 'json':
 			file_name = f['file_name']
@@ -316,11 +328,9 @@ def get_set_data(p_set_name, p_set_data, p_all_sets):
 			print("\t-json: returned {items} items".format(items = len(ex_set_data)))
 
 		elif ftype == 'wowhead':
-			url = f['url']
-			ex_set_data = get_set_from_wowhead_url(url, f['tests'])
-			g_logger.debug("\t-url: {url} returned {items} items".format(url = url, items = len(ex_set_data)))
-			if p_set_name == g_logged_set_name:
-				g_logger.debug("\t\tRemoving: {items}".format(items = ex_set_data))
+			# See the matching comment in the inclusion loop above.
+			g_set_used_unconverted_wowhead = True
+			g_logger.debug(f"\t-url: {f['url']} -- SKIPPED (wowhead rules are a NOP right now)")
 
 		elif ftype == 'muffin_data':
 			field = f['field']
@@ -344,13 +354,11 @@ def get_set_data(p_set_name, p_set_data, p_all_sets):
 		ftype = f['ftype']
 		g_logger.debug(f)
 		if ftype == 'wowhead':
-			url = f['url']
-			i_set = get_set_from_wowhead_url(url, f['tests'])
-			g_logger.debug("\t~url: {url} returned {items} items".format(url = url, items = len(i_set)))
-			if (len(i_set) == 1000):
-				g_logger.warning("\t~url: {url} returned {items} items".format(url = url, items = len(i_set)))
-			new_set = set_data.intersection(i_set)
-			set_data = new_set
+			# See the matching comment in the inclusion loop above. For Intersect specifically,
+			# a NOP must mean "don't narrow set_data at all" -- intersecting with an empty set
+			# would wipe it out entirely, which is not what skipping this rule should do.
+			g_set_used_unconverted_wowhead = True
+			g_logger.debug(f"\t~url: {f['url']} -- SKIPPED (wowhead rules are a NOP right now)")
 		elif ftype == 'muffin_data':
 			field = f['field']
 			pattern = f.get('pattern')
@@ -397,6 +405,8 @@ def get_set_from_wowhead_url(p_url, p_tests):
 
 	else:
 		page = requests.get(p_url, headers=AGENT_HEADERS, timeout=WOWHEAD_REQUEST_TIMEOUT_SECONDS)
+		if (len(page.content) == 0):
+			raise RuntimeError(f"Empty response (HTTP {page.status_code}) for {p_url} -- wowhead is likely rate-limiting/blocking this client right now. Not a URL or parsing problem; wait a while and retry.")
 		soup = BeautifulSoup(page.content, 'html.parser')
 		str_data = soup.prettify()
 		lview = get_listview_from_page(str_data)
@@ -493,12 +503,14 @@ def load_muffin_data(p_xpac):
 	# slug -- e.g. "camelot" here is "forever" over there.
 	muffin_xpac = XPAC_TO_MUFFIN_DATA_NAME.get(p_xpac, p_xpac)
 	file_name = f"D:/Projects/Current/WoW/WoWData/ItemData/items_{muffin_xpac}.pkl"
+	print(file_name)
 	if os.path.isfile(file_name):
 		with open(file_name,"rb") as f:
 			g_muffin_data = pickle.load(f)
-			g_logger.debug(f"Muffin Data length:{len(g_muffin_data)}\n")
 	else:
 		g_muffin_data = {}
+
+	g_logger.debug(f"Muffin Data length:{len(g_muffin_data)}\n")
 
 def load_wowhead_cache(p_xpac):
 	global g_wowhead_cache
