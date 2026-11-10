@@ -103,7 +103,7 @@ end
 
 -- Convert list of negative numbered spell_id to spellName.
 ---@param p_cast_list integer[]  negated spell IDs from PeriodicTable
----@return string[]
+---@return string[], integer
 local function PTSpellIDsToSpellName(p_cast_list)
 --print("PTSpellIDsToSpellName castList " .. tostring(p_cast_list))
 	local spell_name = {} ---@type string[]
@@ -111,7 +111,7 @@ local function PTSpellIDsToSpellName(p_cast_list)
 		local spell_id = p_cast_list[i] * -1
 		spell_name[i] = C_Spell.GetSpellName(spell_id)
 	end
-	return spell_name
+	return spell_name, # p_cast_list
 end
 
 
@@ -171,12 +171,12 @@ local function AddSpellToCategory(p_category, p_spell_name_left, spellNameRight,
 end
 
 
--- Return nil or list of spells matching player class
+-- Return the lists of spells matching player class, plus how many rows were filled in.
 -- itemsPerLine defaults to 2 (class type, spell).
 -- Only supports 2 & 3 for now.
 ---@param castList table
 ---@param p_items_per_line integer?
----@return table|nil, table|nil
+---@return table, table|nil, integer
 local function FilterByClass(castList, p_items_per_line)
 	local spellName, index
 	local items_per_line = p_items_per_line or 2
@@ -197,7 +197,7 @@ local function FilterByClass(castList, p_items_per_line)
 			index = index + 1
 		end
 	end
-	return filteredList2, filteredList3
+	return filteredList2, filteredList3, index - 1
 end
 
 -- Learned new spells etc.  Refresh all categories
@@ -362,6 +362,7 @@ end
 -- Category consisting of spells
 ---@class SpellsCategory: CategoryClass
 ---@field castList table
+---@field castCount integer
 ---@field rightClickList table
 ---@field itemsRightClick table
 
@@ -399,9 +400,9 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 		if (#rightClickList % 3 ~= 0) then
 			code.log_warning("Category:", p_description, " rightClickList should be divisible by 3, but isn't.")
 		end
-		obj.castList, obj.rightClickList = FilterByClass(rightClickList, 3)
+		obj.castList, obj.rightClickList, obj.castCount = FilterByClass(rightClickList, 3)
 	elseif (p_cast_list) then
-		obj.castList = FilterByClass(p_cast_list)
+		obj.castList, _, obj.castCount = FilterByClass(p_cast_list)
 	end
 
 	--Convert a PT set to a list of localized spell names
@@ -410,7 +411,7 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 		assert(rightClickList == nil)
 		local raw_list = code.AddPTSetToRawList({}, p_pt_set, false)
 		local id_list = code.RawListToItemIDList(raw_list)
-		obj.castList = PTSpellIDsToSpellName(id_list)
+		obj.castList, obj.castCount = PTSpellIDsToSpellName(id_list)
 	end
 
 	if (obj.rightClickList and not obj.itemsRightClick) then
@@ -418,6 +419,7 @@ function SpellsCategory:new(p_description, p_texture, p_cast_list, rightClickLis
 	end
 
 	obj.castList = obj.castList or {}
+	obj.castCount = obj.castCount or 0
 
 	obj:Refresh()
 
@@ -428,18 +430,18 @@ end
 function SpellsCategory:Refresh()
 	wipe(self.items)
 	local itemsIndex = 1
+	local count = self.castCount or 0
 
-	if (self.castList and self.rightClickList) then
+	if (self.rightClickList) then
 		wipe(self.itemsRightClick)
 
-		for i = 1, # self.castList, 1 do
-			local spellNameLeft, spellNameRight = self.castList[i], self.rightClickList[i]
-			itemsIndex = AddSpellToCategory(self, spellNameLeft, spellNameRight, itemsIndex)
+		for i = 1, count do
+			itemsIndex = AddSpellToCategory(self, self.castList[i], self.rightClickList[i], itemsIndex)
 		end
-	elseif (self.castList) then
-		for _, spellName in ipairs(self.castList) do
-			if (spellName) then
-				itemsIndex = AddSpellToCategory(self, spellName, nil, itemsIndex)
+	else
+		for i = 1, count do
+			if (self.castList[i]) then
+				itemsIndex = AddSpellToCategory(self, self.castList[i], nil, itemsIndex)
 			end
 		end
 	end
