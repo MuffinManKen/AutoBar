@@ -172,7 +172,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonShields", },
 		{button_name = "AutoBarButtonInterrupt", },
-		{button_name = "AutoBarButtonTrack", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
+		{button_name = "AutoBarButtonTrack", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH, PROJECT.FOREVER}},
 	},
 	MAGE =
 	{
