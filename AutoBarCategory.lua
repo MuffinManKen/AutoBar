@@ -178,8 +178,10 @@ end
 ---@param p_items_per_line integer?
 ---@return table|nil, table|nil
 local function FilterByClass(castList, p_items_per_line)
-	local spellName, index, filteredList2, filteredList3
+	local spellName, index
 	local items_per_line = p_items_per_line or 2
+	local filteredList2 = {}
+	local filteredList3 = (items_per_line == 3) and {} or nil
 
 	--TODO: verify that each entry starts with either a proper class name or a "*"
 	-- Filter out CLASS spells from castList
@@ -187,12 +189,6 @@ local function FilterByClass(castList, p_items_per_line)
 	for i = 1, # castList, items_per_line do
 		if (AutoBar.CLASS == castList[i] or "*" == castList[i]) then
 			spellName = castList[i + 1]
-			if (not filteredList2) then
-				filteredList2 = {}
-			end
-			if (items_per_line == 3 and not filteredList3) then
-				filteredList3 = {}
-			end
 			filteredList2[index] = spellName
 			if (items_per_line == 3) then
 				spellName = castList[i + 2]
