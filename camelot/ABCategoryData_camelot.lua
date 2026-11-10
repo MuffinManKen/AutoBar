@@ -97,7 +97,6 @@ function AB.InitializeCategories()
 		"PALADIN", code.get_spell_name_by_name("Blessing of Might"),
 		"PALADIN", code.get_spell_name_by_name("Blessing of Protection"),
 		"PALADIN", code.get_spell_name_by_name("Blessing of Sacrifice"),
-		"PALADIN", code.get_spell_name_by_name("Blessing of Salvation"),
 		"PALADIN", code.get_spell_name_by_name("Greater Blessing of Kings"),
 		"PALADIN", code.get_spell_name_by_name("Greater Blessing of Wisdom"),
 		"PRIEST", code.get_spell_name_by_name("Power Word: Fortitude");
@@ -239,14 +238,12 @@ function AB.InitializeCategories()
 		"SHAMAN", code.get_spell_name_by_name("Grounding Totem");
 		"SHAMAN", code.get_spell_name_by_name("Nature Resistance Totem");
 		"SHAMAN", code.get_spell_name_by_name("Sentry Totem");
-		"SHAMAN", code.get_spell_name_by_name("Tranquil Air Totem");
 		"SHAMAN", code.get_spell_name_by_name("Windfury Totem");
 		"SHAMAN", code.get_spell_name_by_name("Windwall Totem");
 	})
 
 	AutoBarCategoryList["Spell.Totem.Fire"] = SpellsCategory:new("Spell.Totem.Fire", spellIconList["Liquid Magma Totem"],
 	{
-		"SHAMAN", code.get_spell_name_by_name("Fire Nova Totem");
 		"SHAMAN", code.get_spell_name_by_name("Flametongue Totem");
 		"SHAMAN", code.get_spell_name_by_name("Frost Resistance Totem");
 		"SHAMAN", code.get_spell_name_by_name("Magma Totem");
@@ -301,9 +298,8 @@ function AB.InitializeCategories()
 		"SHAMAN", code.get_spell_name_by_name("Frost Shock"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Tongues"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of Recklessness"),
-		"WARLOCK", code.get_spell_name_by_name("Curse of Shadow"),
 		"WARLOCK", code.get_spell_name_by_name("Curse of the Elements"),
-		"WARLOCK", code.get_spell_name_by_name("Curse of Weakness"),	--y
+		"WARLOCK", code.get_spell_name_by_name("Curse of Weakness"),
 	})
 
 
@@ -366,7 +362,6 @@ function AB.InitializeCategories()
 		"MAGE", code.get_spell_name_by_name("Ice Block"),
 		"PALADIN", code.get_spell_name_by_name("Lay on Hands"),
 		"ROGUE", code.get_spell_name_by_name("Vanish"),
-		"WARLOCK", code.get_spell_name_by_name("Dark Pact"),
 		"WARRIOR", code.get_spell_name_by_name("Berserker Rage"),
 		"WARRIOR", code.get_spell_name_by_name("Last Stand"),
 	})
