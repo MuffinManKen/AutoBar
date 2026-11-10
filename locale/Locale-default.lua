@@ -232,6 +232,7 @@ local quick_sets =
 	"Muffin.Skill.Archaeology.Mission",
 	"Spell.Archaeology",
 	"Dynamic.Quest",
+	"Dynamic.Openable",
 	"Macro.Mount.SummonRandomFave",
 	"Muffin.Order Hall.Nethershard",
 	"Spell.AquaticForm",
