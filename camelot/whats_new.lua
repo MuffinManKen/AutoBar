@@ -3,7 +3,7 @@ local _ADDON_NAME, AB = ... -- Pulls back the Addon-Local Variables and store th
 
 AB.WHATSNEW_TEXT = "" ..
 [[
- - Fixed broken Move Buttons mode
- - Have you checked out Lexomancer on Steam or Itch.io? You should! Free demo...
+ - Added Tracking button for Hunters
+ - Fixed issue that caused some spells to not appear on the Class bar
  - I'm not playing WoW, so if things are missing make sure you report them.
 ]] .. "|n"
