@@ -1257,6 +1257,9 @@ function AutoBarButtonConjure:init(parentBar, buttonDB)
 		if (AutoBarCategoryList["Spell.Warlock.Create Firestone"]) then
 			self:AddCategory("Spell.Warlock.Create Firestone")
 		end
+		if (AutoBarCategoryList["Spell.Warlock.Create Spellstone"]) then
+			self:AddCategory("Spell.Warlock.Create Spellstone")
+		end
 	end
 end
 
