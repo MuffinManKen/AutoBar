@@ -218,7 +218,7 @@ local CLASS_BUTTON_MAP = {
 		{button_name = "AutoBarButtonCharge", },
 		{button_name = "AutoBarButtonER" },
 		{button_name = "AutoBarButtonPickLock", additional_args = {targeted = "Lockpicking"} },
-		{button_name = "AutoBarButtonTrap", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH}},
+		{button_name = "AutoBarButtonTrap", project_ids = code.make_set{PROJECT.VANILLA, PROJECT.BCC, PROJECT.WRATH, PROJECT.FOREVER}},
 	},
 	SHAMAN =
 	{

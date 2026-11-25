@@ -361,6 +361,7 @@ function AB.InitializeCategories()
 	{
 		"DRUID", code.get_spell_name_by_name("Feral Charge"),
 		"DRUID", code.get_spell_name_by_name("Skull Bash"),
+		"ROGUE", code.get_spell_name_by_name("Sprint"),
 		"WARRIOR", code.get_spell_name_by_name("Charge"),
 		"WARRIOR", code.get_spell_name_by_name("Intercept"),
 	})
