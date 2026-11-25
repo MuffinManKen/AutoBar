@@ -277,8 +277,12 @@ end
 GetFramePointsPosition(frame) - Returns the position of the frames points with insets taken into account
 --]]
 function GetFramePointsPosition(frame)
+	local left, top, right, bottom = frame:GetLeft(), frame:GetTop(), frame:GetRight(), frame:GetBottom()
+	if not (left and top and right and bottom) then
+		return nil
+	end
 	local l, t, r, b = GetFrameInsets(lib, frame)
-	return frame:GetLeft() + l, frame:GetTop() - t, frame:GetRight() - r, frame:GetBottom() + b
+	return left + l, top - t, right - r, bottom + b
 end
 
 --[[
@@ -292,6 +296,9 @@ frameB: frame that is being overlapped
 function IsOverlapping(frameA, frameB)
 	local lA, tA, rA, bA = GetFramePointsPosition(frameA)
 	local lB, tB, rB, bB = GetFramePointsPosition(frameB)
+	if not (lA and lB) then
+		return false
+	end
 	local sA, sB = frameA:GetEffectiveScale(), frameB:GetEffectiveScale()
 	return  ((lA * sA) < (rB * sB))
 		and ((lB * sB) < (rA * sA))
@@ -391,15 +398,22 @@ return true. If there is no sticky point collision, it returns nil so we can tes
 frames for stickyness.
 --]]
 function CanSnapFrame(frameA, frameB)
+	-- Grab the points of each frame, for easier comparison
+	local lA, tA, rA, bA = GetFramePointsPosition(frameA)
+	local lB, tB, rB, bB = GetFramePointsPosition(frameB)
+	if not (lA and lB) then
+		return nil
+	end
+
 	local sA, sB = frameA:GetEffectiveScale(), frameB:GetEffectiveScale()
 	local xA, yA = frameA:GetCenter()
 	local xB, yB = frameB:GetCenter()
+	if not (xA and xB) then
+		return nil
+	end
 	xA, yA, xB, yB = xA * sA, yA * sA, xB * sB, yB * sB
 
-	-- Grab the points of each frame, for easier comparison
-	local lA, tA, rA, bA = GetFramePointsPosition(frameA)
 	lA, tA, rA, bA = lA * sA, tA * sA, rA * sA, bA * sA
-	local lB, tB, rB, bB = GetFramePointsPosition(frameB)
 	lB, tB, rB, bB = lB * sB, tB * sB, rB * sB, bB * sB
 
 	local snapRange = lib.snapRange
