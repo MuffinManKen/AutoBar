@@ -1251,10 +1251,12 @@ function AutoBarButtonConjure:init(parentBar, buttonDB)
 		end
 	elseif (AutoBar.CLASS == "WARLOCK") then
 		self:AddCategory("Spell.Warlock.Create Healthstone")
-		if (not ABGData.is_mainline_wow) then
+		if (AutoBarCategoryList["Spell.Warlock.Create Soulstone"]) then
 			self:AddCategory("Spell.Warlock.Create Soulstone")
 		end
-
+		if (AutoBarCategoryList["Spell.Warlock.Create Firestone"]) then
+			self:AddCategory("Spell.Warlock.Create Firestone")
+		end
 	end
 end
 

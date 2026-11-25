@@ -242,10 +242,7 @@ code.cache_spell_data(11730, "Create Healthstone (Major)");
 
 code.cache_spell_data(6229, "Shadow Ward");
 
-code.cache_spell_data(6366, "Create Firestone (Lesser)");--TODO: Add this to a category
-code.cache_spell_data(17951, "Create Firestone");--TODO: Add this to a category
-code.cache_spell_data(17952, "Create Firestone (Greater)");--TODO: Add this to a category
-code.cache_spell_data(17953, "Create Firestone (Major)");--TODO: Add this to a category
+code.cache_spell_data(6366, "Create Firestone");
 
 code.cache_spell_data(2362, "Create Spellstone");--TODO: Add this to a category
 code.cache_spell_data(17727, "Create Spellstone (Greater)");--TODO: Add this to a category
