@@ -16,6 +16,9 @@ function AB.InitializeCategories()
 
 	AutoBarCategoryList["Muffin.Poison.Lethal"] = ItemsCategory:new("Muffin.Poison.Lethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Lethal")
 	AutoBarCategoryList["Muffin.Poison.Nonlethal"] = ItemsCategory:new("Muffin.Poison.Nonlethal", "INV_Misc_Food_95_Grainbread", "Muffin.Poison.Nonlethal")
+	-- Poisons are applied to a weapon: left click = main hand, right click = off hand
+	AutoBarCategoryList["Muffin.Poison.Lethal"]:SetTargeted("WEAPON")
+	AutoBarCategoryList["Muffin.Poison.Nonlethal"]:SetTargeted("WEAPON")
 
 	AutoBarCategoryList["Muffin.Mounts.Item"] = ItemsCategory:new("Muffin.Mounts.Item", "ability_mount_ridinghorse", "Muffin.Mounts.Item")
 	AutoBarCategoryList["Muffin.Mounts.Item"]:SetNonCombat(true)
@@ -358,6 +361,7 @@ function AB.InitializeCategories()
 	{
 		"DRUID", code.get_spell_name_by_name("Feral Charge"),
 		"DRUID", code.get_spell_name_by_name("Skull Bash"),
+		"ROGUE", code.get_spell_name_by_name("Sprint"),
 		"WARRIOR", code.get_spell_name_by_name("Charge"),
 		"WARRIOR", code.get_spell_name_by_name("Intercept"),
 	})

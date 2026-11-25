@@ -1085,7 +1085,7 @@ AutoBar.Class["AutoBarButtonPoisonLethal"] = AutoBarButtonPoisonLethal
 function AutoBarButtonPoisonLethal:init(parentBar, buttonDB)
 	AutoBarButtonPoisonLethal.super.init(self, parentBar, buttonDB)
 
-	if (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow and not ABGData.is_forever_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 	else
 		self:AddCategory("Muffin.Poison.Lethal")
@@ -1098,7 +1098,7 @@ AutoBar.Class["AutoBarButtonPoisonNonlethal"] = AutoBarButtonPoisonNonlethal
 function AutoBarButtonPoisonNonlethal:init(parentBar, buttonDB)
 	AutoBarButtonPoisonNonlethal.super.init(self, parentBar, buttonDB)
 
-	if (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow and not ABGData.is_forever_wow) then
 		self:AddCategory("Spell.Poison.Nonlethal")
 	else
 		self:AddCategory("Muffin.Poison.Nonlethal")
@@ -1183,7 +1183,7 @@ function AutoBarButtonBuffWeapon:init(parentBar, buttonDB)
 	self:AddCategory("Consumable.Weapon Buff")
 	self:AddCategory("Spell.Buff.Weapon")
 
-	if (ABGData.is_mainline_wow) then
+	if (ABGData.is_mainline_wow and not ABGData.is_forever_wow) then
 		self:AddCategory("Spell.Poison.Lethal")
 		self:AddCategory("Spell.Poison.Nonlethal")
 	else
