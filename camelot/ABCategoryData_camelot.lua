@@ -40,6 +40,11 @@ function AB.InitializeCategories()
 		"WARLOCK", code.get_spell_name_by_name("Create Firestone"),
 	})
 
+	AutoBarCategoryList["Spell.Warlock.Create Spellstone"] = SpellsCategory:new( "Spell.Warlock.Create Spellstone", spellIconList["Create Spellstone"],
+	{
+		"WARLOCK", code.get_spell_name_by_name("Create Spellstone"),
+	})
+
 	AutoBarCategoryList["Spell.Warlock.Create Soulstone"] = SpellsCategory:new( "Spell.Warlock.Create Soulstone", spellIconList["Create Soulstone"],
 	{
 		"WARLOCK", code.get_spell_name_by_name("Create Soulstone (Minor)"),

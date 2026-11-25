@@ -244,8 +244,7 @@ code.cache_spell_data(6229, "Shadow Ward");
 
 code.cache_spell_data(6366, "Create Firestone");
 
-code.cache_spell_data(2362, "Create Spellstone");--TODO: Add this to a category
-code.cache_spell_data(17727, "Create Spellstone (Greater)");--TODO: Add this to a category
+code.cache_spell_data(2362, "Create Spellstone");
 
 code.cache_spell_data(132, "Detect Lesser Invisibility");	--TODO: Add this to a category
 code.cache_spell_data(2970, "Detect Invisibility");	--TODO: Add this to a category
