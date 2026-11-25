@@ -264,6 +264,7 @@ local quick_sets =
 	"Spell.Rogue.Thief",
 	"Spell.Warlock.Create Spellstone",
 	"Spell.Warlock.Create Firestone",
+	"Spell.Rogue.Pick Lock",
 }
 
 atl_table(quick_sets);

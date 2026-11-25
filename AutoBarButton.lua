@@ -1788,6 +1788,9 @@ function AutoBarButtonPickLock:init(parentBar, buttonDB)
 
 	self:AddCategory("Misc.Unlock")
 	self:AddCategory("Misc.Lockboxes")
+	if (AutoBarCategoryList["Spell.Rogue.Pick Lock"]) then
+		self:AddCategory("Spell.Rogue.Pick Lock")
+	end
 end
 
 

@@ -157,6 +157,11 @@ function AB.InitializeCategories()
 		"HUNTER", code.get_spell_name_by_name("Beast Lore"),
 	})
 
+	AutoBarCategoryList["Spell.Rogue.Pick Lock"] = SpellsCategory:new("Spell.Rogue.Pick Lock", spellIconList["Feed Pet"],
+	{
+		"ROGUE", code.get_spell_name_by_name("Pick Lock"),
+	})
+
 	AutoBarCategoryList["Spell.Portals"] = SpellsCategory:new( "Spell.Portals", "spell_arcane_portalironforge", nil,
 	{
 		"DRUID", code.get_spell_name_by_name("Teleport: Moonglade"), code.get_spell_name_by_name("Teleport: Moonglade"),
