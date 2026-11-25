@@ -555,11 +555,13 @@ end
 
 function AB.events.LEARNED_SPELL_IN_SKILL_LINE(p_arg1)
 	AB.LogEventStart("LEARNED_SPELL_IN_SKILL_LINE")
+	ABGData.TickScheduler.FullScanItemsFlag = true
 	AB.ABScheduleUpdate(tick.UpdateSpellsID)
 	AB.LogEventEnd("LEARNED_SPELL_IN_SKILL_LINE", p_arg1)
 end
 function AB.events.LEARNED_SPELL_IN_TAB(p_arg1)
 	AB.LogEventStart("LEARNED_SPELL_IN_TAB")
+	ABGData.TickScheduler.FullScanItemsFlag = true
 	AB.ABScheduleUpdate(tick.UpdateSpellsID)
 	AB.LogEventEnd("LEARNED_SPELL_IN_TAB", p_arg1)
 end
